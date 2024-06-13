@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    internal static class BulletUtils
+    public static class BulletUtils
     {
         internal static void DealDamage(Bullet bullet, GameObject other)
         {
