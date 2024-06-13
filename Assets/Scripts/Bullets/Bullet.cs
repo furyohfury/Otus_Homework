@@ -7,8 +7,8 @@ namespace ShootEmUp
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
-        [NonSerialized] private bool isPlayer; //todo what is this field
-        [NonSerialized] private int damage;
+        private bool isPlayer; //todo what is this field
+        private int damage;
 
         [SerializeField]
         private new Rigidbody2D rigidbody2D;

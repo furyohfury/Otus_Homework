@@ -20,6 +20,10 @@ namespace ShootEmUp
         {
             this.character.GetComponent<HitPointsComponent>().hpEmpty -= this.OnCharacterDeath;
         }
+        private void OnValidate()
+        {
+            this.gameObject.layer = (int)PhysicsLayer.CHARACTER;
+        }
 
         private void OnCharacterDeath(GameObject _) => this.gameManager.FinishGame();
 
@@ -35,7 +39,7 @@ namespace ShootEmUp
         private void OnFlyBullet()
         {
             var weapon = this.character.GetComponent<WeaponComponent>();
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
+            _bulletSystem.FireBullet(new BulletArgs
             {
                 isPlayer = true,
                 physicsLayer = (int) this._bulletConfig.physicsLayer,

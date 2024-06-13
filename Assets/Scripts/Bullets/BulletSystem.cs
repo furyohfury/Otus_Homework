@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -14,32 +15,22 @@ namespace ShootEmUp
         }
         private void CheckActiveBulletsInBounds()
         {
-            this.m_cache.Clear();
-            this.m_cache.AddRange(this.m_activeBullets);
+            var bulletsOutOfBounds = _bulletFactory.ActiveBullets.Where(
+                b => !levelBounds.InBounds(b.transform.position));
 
-            for (int i = 0, count = this.m_cache.Count; i < count; i++)
-            {
-                var bullet = this.m_cache[i];
-                if (!this.levelBounds.InBounds(bullet.transform.position))
-                {
-                    this.RemoveBullet(bullet);
-                }
-            }
+            foreach(var bullet in bulletsOutOfBounds)
+                _bulletFactory.RemoveBullet(bullet);
         }
 
         public void FireBullet(BulletArgs args)
         {
             Bullet bullet = _bulletFactory.GetBullet(args);
-            
-            if (this.m_activeBullets.Add(bullet))
-            {
-                bullet.OnCollisionEntered += this.OnBulletCollision;
-            }
         }
         
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
             BulletUtils.DealDamage(bullet, collision.gameObject);
+            bullet.OnCollisionEntered -= this.OnBulletCollision;
             _bulletFactory.RemoveBullet(bullet);
         }
     }
