@@ -30,6 +30,10 @@ namespace ShootEmUp
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
             BulletUtils.DealDamage(bullet, collision.gameObject);
+            if (collision.TryGetComponent(out IDamagable damagable))
+            {
+                IDamagable.TakeDamage(bullet.damage);
+            }
             bullet.OnCollisionEntered -= this.OnBulletCollision;
             _bulletFactory.RemoveBullet(bullet);
         }

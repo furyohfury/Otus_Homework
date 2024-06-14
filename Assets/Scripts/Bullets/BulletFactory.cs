@@ -38,7 +38,7 @@ namespace ShootEmUp
             ConstructBullet(bullet, args);
             if (ActiveBullets.Add(bullet))
             {
-                bullet.OnCollisionEntered += OnBulletCollision;
+                bullet.OnCollisionEntered += OnBulletCollision; //todo mb in observer/listener
             }
             return bullet;
         }

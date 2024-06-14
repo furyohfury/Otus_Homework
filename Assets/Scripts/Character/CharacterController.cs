@@ -4,6 +4,8 @@ namespace ShootEmUp
 {
     public sealed class CharacterController : MonoBehaviour
     {
+        public event Action OnCharacterDeath;
+
         [SerializeField] private GameObject character; 
         [SerializeField] private GameManager gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
@@ -13,19 +15,17 @@ namespace ShootEmUp
 
         private void OnEnable()
         {
-            this.character.GetComponent<HitPointsComponent>().hpEmpty += this.OnCharacterDeath;
+            this.character.GetComponent<HitPointsComponent>().hpEmpty += OnCharacterDeath;
         }
 
         private void OnDisable()
         {
-            this.character.GetComponent<HitPointsComponent>().hpEmpty -= this.OnCharacterDeath;
+            this.character.GetComponent<HitPointsComponent>().hpEmpty -= OnCharacterDeath;
         }
         private void OnValidate()
         {
             this.gameObject.layer = (int)PhysicsLayer.CHARACTER;
         }
-
-        private void OnCharacterDeath(GameObject _) => this.gameManager.FinishGame();
 
         private void FixedUpdate()
         {
