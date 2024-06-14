@@ -2,11 +2,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterController : MonoBehaviour
+    public sealed class CharacterController : MonoBehaviour, IDamagable
     {
         public event Action OnCharacterDeath;
 
-        [SerializeField] private GameObject character; 
+        [SerializeField] private HitPointsComponent _hpComponent; // needs to be serializable?
+
+        [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private BulletConfig _bulletConfig;
@@ -15,12 +17,12 @@ namespace ShootEmUp
 
         private void OnEnable()
         {
-            this.character.GetComponent<HitPointsComponent>().hpEmpty += OnCharacterDeath;
+            _hpComponent.hpEmpty += OnCharacterDeath;
         }
 
         private void OnDisable()
         {
-            this.character.GetComponent<HitPointsComponent>().hpEmpty -= OnCharacterDeath;
+            _hpComponent.hpEmpty -= OnCharacterDeath;
         }
         private void OnValidate()
         {
@@ -38,16 +40,20 @@ namespace ShootEmUp
 
         private void OnFlyBullet()
         {
-            var weapon = this.character.GetComponent<WeaponComponent>();
             _bulletSystem.FireBullet(new BulletArgs
             {
                 isPlayer = true,
                 physicsLayer = (int) this._bulletConfig.physicsLayer,
                 color = this._bulletConfig.color,
                 damage = this._bulletConfig.damage,
-                position = weapon.Position,
-                velocity = weapon.Rotation * Vector3.up * this._bulletConfig.speed
+                position = _weaponComponent.Position,
+                velocity = _weaponComponent.Rotation * Vector3.up * this._bulletConfig.speed
             });
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _hpComponent.TakeDamage(damage);
         }
     }
 }

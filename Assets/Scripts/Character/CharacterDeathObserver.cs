@@ -1,6 +1,6 @@
 namespace ShootEmUp
 {
-    public class CharacterDeathObserver : MonoBehaviour // redo w/ DI
+    public class CharacterDeathObserver : MonoBehaviour // redo w/ DI next homework
     {
         [SerializeField] private CharacterController _character;
         [SerializeField] private GameManager _gameManager;

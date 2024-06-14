@@ -7,11 +7,7 @@ namespace ShootEmUp
     {
         public event Action OnHPEnded;
         
-        [SerializeField] private int hitPoints;
-        
-        public bool IsHitPointsExists() {
-            return this.hitPoints > 0;
-        }
+        [SerializeField] private int hitPoints;        
 
         public void TakeDamage(int damage)
         {

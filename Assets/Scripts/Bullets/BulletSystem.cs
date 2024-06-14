@@ -13,7 +13,7 @@ namespace ShootEmUp
         {
             CheckActiveBulletsInBounds();
         }
-        private void CheckActiveBulletsInBounds()
+        private void CheckActiveBulletsInBounds() // todo separate component? Otherwise it's just factory
         {
             var bulletsOutOfBounds = _bulletFactory.ActiveBullets.Where(
                 b => !levelBounds.InBounds(b.transform.position));
@@ -22,18 +22,13 @@ namespace ShootEmUp
                 _bulletFactory.RemoveBullet(bullet);
         }
 
-        public void FireBullet(BulletArgs args)
+        public Bullet FireBullet(BulletArgs args)
         {
-            Bullet bullet = _bulletFactory.GetBullet(args);
+            return _bulletFactory.GetBullet(args);
         }
         
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
-        {
-            BulletUtils.DealDamage(bullet, collision.gameObject);
-            if (collision.TryGetComponent(out IDamagable damagable))
-            {
-                IDamagable.TakeDamage(bullet.damage);
-            }
+        {            
             bullet.OnCollisionEntered -= this.OnBulletCollision;
             _bulletFactory.RemoveBullet(bullet);
         }

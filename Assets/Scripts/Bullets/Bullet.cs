@@ -18,6 +18,10 @@ namespace ShootEmUp
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (collision.TryGetComponent(out IDamagable damagable))
+            {
+                IDamagable.TakeDamage(bullet.damage);
+            }
             this.OnCollisionEntered?.Invoke(this, collision);
         }
 
