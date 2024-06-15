@@ -7,7 +7,6 @@ namespace ShootEmUp
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
-        private bool isPlayer; //todo what is this field
         private int damage;
 
         [SerializeField]
@@ -18,9 +17,9 @@ namespace ShootEmUp
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.TryGetComponent(out IDamagable damagable))
+            if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
             {
-                IDamagable.TakeDamage(bullet.damage);
+                hpComponent.TakeDamage(damage);
             }
             this.OnCollisionEntered?.Invoke(this, collision);
         }
@@ -28,11 +27,6 @@ namespace ShootEmUp
         public void SetDamage(int damage)
         {
             this.damage = damage;
-        }
-
-        public void SetIsPlayer(bool v)
-        {
-            isPlayer = v;
         }
 
         public void SetVelocity(Vector2 velocity)

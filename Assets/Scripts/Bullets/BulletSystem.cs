@@ -6,25 +6,15 @@ namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour
     {
-        [SerializeField] private LevelBounds levelBounds;
         [SerializeField] private BulletFactory _bulletFactory;
-        
-        private void FixedUpdate()
-        {
-            CheckActiveBulletsInBounds();
-        }
-        private void CheckActiveBulletsInBounds() // todo separate component? Otherwise it's just factory
-        {
-            var bulletsOutOfBounds = _bulletFactory.ActiveBullets.Where(
-                b => !levelBounds.InBounds(b.transform.position));
 
-            foreach(var bullet in bulletsOutOfBounds)
-                _bulletFactory.RemoveBullet(bullet);
-        }
-
-        public Bullet FireBullet(BulletArgs args)
+        public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
-            return _bulletFactory.GetBullet(args);
+            Bullet bullet = _bulletFactory.GetBullet(config);
+            bullet.SetPosition(position);
+            bullet.SetVelocity(velocity);
+            bullet.OnCollisionEntered += OnBulletCollision;
+            return bullet;
         }
         
         private void OnBulletCollision(Bullet bullet, Collision2D collision)

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    [System.Serializable]
     public sealed class BulletFactory : MonoBehaviour
     {
         [SerializeField]
@@ -25,7 +24,7 @@ namespace ShootEmUp
             }
         }
 
-        public Bullet GetBullet(BulletArgs args)
+        public Bullet GetBullet(BulletConfig config)
         {
             if (this.m_bulletPool.TryDequeue(out var bullet))
             {
@@ -35,18 +34,9 @@ namespace ShootEmUp
             {
                 bullet = Instantiate(this.prefab, this.worldTransform);
             }
-            ConstructBullet(bullet, args);
-            if (ActiveBullets.Add(bullet))
-            {
-                bullet.OnCollisionEntered += OnBulletCollision; //todo mb in observer/listener
-            }
+            ConstructBullet(bullet, config);
+            ActiveBullets.Add(bullet);
             return bullet;
-        }
-
-        public void OnBulletCollision(Bullet bullet, Collision2D collision)
-        {
-            bullet.OnCollisionEntered -= OnBulletCollision;
-            RemoveBullet(bullet);
         }
 
         public void RemoveBullet(Bullet bullet)
@@ -58,14 +48,11 @@ namespace ShootEmUp
             }
         }       
 
-        private void ConstructBullet(Bullet bullet, BulletArgs args)
+        private void ConstructBullet(Bullet bullet, BulletConfig config)
         {
-            bullet.SetPosition(args.position);
-            bullet.SetColor(args.color);
-            bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet.SetDamage(args.damage);
-            bullet.SetIsPlayer(args.isPlayer);
-            bullet.SetVelocity(args.velocity);
+            bullet.SetColor(config.color);
+            bullet.SetPhysicsLayer((int)config.physicsLayer);
+            bullet.SetDamage(config.damage);
         }
     }
 }
