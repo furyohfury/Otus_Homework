@@ -163,6 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 178513672}
+  - component: {fileID: 178513673}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -185,6 +186,19 @@ Transform:
   m_Father: {fileID: 562298204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &178513673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178513671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bdcdf257e0242258e7a67fe13d80e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 178513672}
 --- !u!1 &196756140
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,10 +290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f03abb1d6a19948a6035e4923da72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialCount: 50
-  container: {fileID: 1831741369}
-  prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  _pool: {fileID: 1831741370}
+  _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   worldTransform: {fileID: 1683128698}
+  _initialCount: 50
 --- !u!114 &363245579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,8 +401,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562298204}
-  - component: {fileID: 562298207}
   - component: {fileID: 562298205}
+  - component: {fileID: 562298206}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
@@ -424,9 +438,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPool: {fileID: 562298207}
+  _enemyFactory: {fileID: 562298206}
   _bulletSystem: {fileID: 363245577}
---- !u!114 &562298207
+  _maxEnemies: 7
+--- !u!114 &562298206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,14 +450,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 562298203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdcdf257e0242258e7a67fe13d80e5c, type: 3}
+  m_Script: {fileID: 11500000, guid: a746b5a224ebff244853756c62cd23ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefab: {fileID: 8519488241904002640, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  _pool: {fileID: 178513673}
   enemyPositions: {fileID: 7166351703523243261}
-  character: {fileID: 4414282821800802397}
-  worldTransform: {fileID: 1683128698}
-  container: {fileID: 178513672}
-  prefab: {fileID: 559606060570185700, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  _target: {fileID: 4414282821800802396}
+  _initialCount: 7
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831741369}
+  - component: {fileID: 1831741370}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
@@ -737,6 +753,19 @@ Transform:
   m_Father: {fileID: 363245576}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831741370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831741368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57bb50d0dba818d4fb271b4530cce023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 1831741369}
 --- !u!1 &1879759788
 GameObject:
   m_ObjectHideFlags: 0

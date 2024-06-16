@@ -1,42 +1,37 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class EnemyMoveAgent : MonoBehaviour
     {
-        public bool IsReached
-        {
-            get { return this.isReached; }
-        }
+        public event Action OnReachedDestination;
 
         [SerializeField] private MoveComponent moveComponent;
 
-        private Vector2 destination;
-
-        private bool isReached;
+        private Vector2 _destination;
+        private Coroutine _coroutine;
 
         public void SetDestination(Vector2 endPoint)
         {
-            this.destination = endPoint;
-            this.isReached = false;
+            _destination = endPoint;
+            if (_coroutine != null) StopCoroutine(_coroutine);
+            _coroutine = StartCoroutine(GetToDestination());
         }
 
-        private void FixedUpdate()
+        private IEnumerator GetToDestination()
         {
-            if (this.isReached)
-            {
-                return;
-            }
-            
-            var vector = this.destination - (Vector2) this.transform.position;
+            var vector = _destination - (Vector2)transform.position;
             if (vector.magnitude <= 0.25f)
             {
-                this.isReached = true;
-                return;
+                OnReachedDestination?.Invoke();
+                yield break;
             }
 
-            var direction = vector.normalized * Time.fixedDeltaTime;
-            this.moveComponent.MoveByRigidbodyVelocity(direction);
+            Vector2 velocity = vector.normalized * Time.fixedDeltaTime;
+            moveComponent.MoveByRigidbodyVelocity(velocity);
+            yield return new WaitForFixedUpdate();
         }
     }
 }

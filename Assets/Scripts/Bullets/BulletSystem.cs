@@ -19,7 +19,7 @@ namespace ShootEmUp
         
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {            
-            bullet.OnCollisionEntered -= this.OnBulletCollision;
+            bullet.OnCollisionEntered -= OnBulletCollision;
             _bulletFactory.RemoveBullet(bullet);
         }
     }

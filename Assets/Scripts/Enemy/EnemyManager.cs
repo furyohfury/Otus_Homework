@@ -6,44 +6,32 @@ namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour
     {
-        [SerializeField]
-        private EnemyPool _enemyPool;
-
-        [SerializeField]
-        private BulletSystem _bulletSystem;
-        
-        private readonly HashSet<GameObject> m_activeEnemies = new();
+        [SerializeField] private EnemyFactory _enemyFactory;
+        [SerializeField] private BulletSystem _bulletSystem;
+        [SerializeField] private int _maxEnemies = 7;
 
         private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(1);
-                var enemy = this._enemyPool.SpawnEnemy();
-                if (enemy != null)
+                if (_enemyFactory.GetCountOfActive() < _maxEnemies)
                 {
-                    if (this.m_activeEnemies.Add(enemy))
-                    {
-                        // enemy.GetComponent<HitPointsComponent>().OnHPEnded += this.OnDestroyed;
-                        enemy.GetComponent<EnemyAttackAgent>().OnFire += this.OnFire;
-                    }    
+                    var enemy = _enemyFactory.CreateEnemy();
+                    enemy.OnFire += EnemyFire;
+                    enemy.OnDied += () => EnemyDied(enemy);
                 }
             }
         }
 
-        private void OnDestroyed(GameObject enemy)
+        private void EnemyDied(Enemy enemy)
         {
-            if (m_activeEnemies.Remove(enemy))
-            {
-                // enemy.GetComponent<HitPointsComponent>().OnHPEnded -= this.OnDestroyed;
-                enemy.GetComponent<EnemyAttackAgent>().OnFire -= this.OnFire;
-
-                _enemyPool.UnspawnEnemy(enemy);
-            }
+            enemy.OnFire -= EnemyFire;
+            _enemyFactory.RemoveEnemy(enemy);
         }
 
-        private void OnFire(BulletConfig bulletConfig, Vector2 position, Vector2 velocity)
-        {            
+        private void EnemyFire(BulletConfig bulletConfig, Vector2 position, Vector2 velocity)
+        {
             _bulletSystem.FireBullet(bulletConfig, position, velocity);
         }
     }

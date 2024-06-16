@@ -5,34 +5,23 @@ namespace ShootEmUp
 {
     public sealed class BulletFactory : MonoBehaviour
     {
-        [SerializeField]
-        private int initialCount = 50;
-        
-        [SerializeField] private Transform container;
-        [SerializeField] private Bullet prefab;
-        [SerializeField] private Transform worldTransform;
+        [SerializeField] private Pool<Bullet> _pool;
 
-        private readonly Queue<Bullet> m_bulletPool = new();
-        public HashSet<Bullet> ActiveBullets { get; private set; } = new HashSet<Bullet>();
-        
-        private void Awake()
-        {
-            for (var i = 0; i < this.initialCount; i++)
-            {
-                var bullet = Instantiate(this.prefab, this.container);
-                this.m_bulletPool.Enqueue(bullet);
-            }
-        }
+        [SerializeField] private Bullet _prefab;
+        [SerializeField] private Transform worldTransform;
+        [SerializeField] private int _initialCount = 50;
+        public HashSet<Bullet> ActiveBullets { get; private set; } = new();
 
         public Bullet GetBullet(BulletConfig config)
         {
-            if (this.m_bulletPool.TryDequeue(out var bullet))
+            Bullet bullet;
+            if (_pool.TryTakeItemFromPool(out Bullet poolBullet))
             {
-                bullet.transform.SetParent(this.worldTransform);
+                bullet = poolBullet;
             }
             else
             {
-                bullet = Instantiate(this.prefab, this.worldTransform);
+                bullet = CreateBullet();
             }
             ConstructBullet(bullet, config);
             ActiveBullets.Add(bullet);
@@ -41,12 +30,16 @@ namespace ShootEmUp
 
         public void RemoveBullet(Bullet bullet)
         {
-            if (this.ActiveBullets.Remove(bullet))
+            if (ActiveBullets.Remove(bullet))
             {
-                bullet.transform.SetParent(this.container);
-                this.m_bulletPool.Enqueue(bullet);
+                _pool.AddToPool(bullet);
             }
-        }       
+        }
+
+        private Bullet CreateBullet()
+        {
+            return Instantiate(_prefab, worldTransform);
+        }
 
         private void ConstructBullet(Bullet bullet, BulletConfig config)
         {

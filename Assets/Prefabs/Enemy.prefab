@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5568771391735819374}
   - component: {fileID: 8186052948131603766}
   - component: {fileID: 6896809305229427933}
+  - component: {fileID: 8519488241904002640}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 659620479434099170}
-  speed: 7
+  speed: 5
 --- !u!114 &5568771391735819373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,9 +196,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponComponent: {fileID: 5568771391735819374}
-  moveAgent: {fileID: 8186052948131603766}
-  countdown: 1
+  _countdown: 1
   _bulletConfig: {fileID: 11400000, guid: 6f077225eab11f7408f8ab03305caa2d, type: 2}
+--- !u!114 &8519488241904002640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c353a4d656776498c8841369de0504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackAgent: {fileID: 6896809305229427933}
+  _moveAgent: {fileID: 8186052948131603766}
+  _hitPointsComponent: {fileID: 5568771391735819373}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0

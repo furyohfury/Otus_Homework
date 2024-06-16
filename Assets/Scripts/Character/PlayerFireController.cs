@@ -23,7 +23,7 @@ namespace ShootEmUp
         {
             _bulletSystem.FireBullet(_bulletConfig,
                 _playerWeaponComponent.Position,
-                _playerWeaponComponent.Rotation * transform.up * this._bulletConfig.speed);
+                _playerWeaponComponent.Rotation * transform.up * _bulletConfig.speed);
         }
     }
 }
