@@ -12,6 +12,10 @@ namespace ShootEmUp
         [SerializeField] private int _initialCount = 50;
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
 
+        private void Awake()
+        {
+            FillPool();
+        }
         public Bullet GetBullet(BulletConfig config)
         {
             Bullet bullet;
@@ -46,6 +50,15 @@ namespace ShootEmUp
             bullet.SetColor(config.color);
             bullet.SetPhysicsLayer((int)config.physicsLayer);
             bullet.SetDamage(config.damage);
+        }
+
+        private void FillPool()
+        {
+            for(var i = 0; i < _initialCount; i++)
+            {
+                var bullet = CreateBullet();
+                _pool.AddToPool(bullet);
+            }
         }
     }
 }

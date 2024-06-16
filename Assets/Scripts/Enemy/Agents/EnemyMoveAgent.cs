@@ -28,9 +28,8 @@ namespace ShootEmUp
                 OnReachedDestination?.Invoke();
                 yield break;
             }
-
-            Vector2 velocity = vector.normalized * Time.fixedDeltaTime;
-            moveComponent.MoveByRigidbodyVelocity(velocity);
+            vector.Normalize();
+            moveComponent.MoveByRigidbodyVelocity(vector);
             yield return new WaitForFixedUpdate();
         }
     }
