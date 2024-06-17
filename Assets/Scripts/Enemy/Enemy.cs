@@ -14,14 +14,14 @@ namespace ShootEmUp
 
         private void OnEnable()
         {
-            _attackAgent.OnFire += OnFire;
-            _hitPointsComponent.OnHPEnded += OnDied;
+            _attackAgent.OnFire += Fire;
+            _hitPointsComponent.OnHPEnded += Die;
             _moveAgent.OnReachedDestination += ReachedDestination;
         }
         private void OnDisable()
         {
-            _attackAgent.OnFire -= OnFire;
-            _hitPointsComponent.OnHPEnded -= OnDied;
+            _attackAgent.OnFire -= Fire;
+            _hitPointsComponent.OnHPEnded -= Die;
             _moveAgent.OnReachedDestination -= ReachedDestination;
         }
         public void SetPosition(Vector2 position)
@@ -39,9 +39,24 @@ namespace ShootEmUp
             _attackAgent.SetTarget(target);
         }
 
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent);
+        }
+
         private void ReachedDestination()
         {
             _attackAgent.enabled = true;
+        }
+
+        private void Fire(BulletConfig config, Vector2 pos, Vector2 vel)
+        {
+            OnFire?.Invoke(config, pos, vel);
+        }
+
+        private void Die()
+        {
+            OnDied?.Invoke();
         }
     }
 }

@@ -16,21 +16,35 @@ namespace ShootEmUp
         public void SetDestination(Vector2 endPoint)
         {
             _destination = endPoint;
-            if (_coroutine != null) StopCoroutine(_coroutine);
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
             _coroutine = StartCoroutine(GetToDestination());
         }
 
         private IEnumerator GetToDestination()
         {
-            var vector = _destination - (Vector2)transform.position;
-            if (vector.magnitude <= 0.25f)
+            while (true)
             {
-                OnReachedDestination?.Invoke();
-                yield break;
-            }
-            vector.Normalize();
-            moveComponent.MoveByRigidbodyVelocity(vector);
-            yield return new WaitForFixedUpdate();
+                var vector = _destination - (Vector2)transform.position;
+                if (vector.magnitude <= 0.05f)
+                {
+                    OnReachedDestination?.Invoke();
+                    yield break;
+                }
+                else
+                {
+                    vector.Normalize();
+                    moveComponent.MoveByRigidbodyVelocity(vector * Time.fixedDeltaTime);
+                    yield return new WaitForFixedUpdate();
+                }
+            }                       
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(_destination, 0.5f);
         }
     }
 }

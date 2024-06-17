@@ -48,5 +48,10 @@ namespace ShootEmUp
         {
             spriteRenderer.color = color;
         }
+
+        public void SetParent(Transform parent)
+        {
+            transform.SetParent(parent);
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace ShootEmUp
             else
             {
                 bullet = CreateBullet();
-            }
+            }            
             ConstructBullet(bullet, config);
             ActiveBullets.Add(bullet);
             return bullet;
@@ -50,6 +50,7 @@ namespace ShootEmUp
             bullet.SetColor(config.color);
             bullet.SetPhysicsLayer((int)config.physicsLayer);
             bullet.SetDamage(config.damage);
+            bullet.SetParent(worldTransform);
         }
 
         private void FillPool()

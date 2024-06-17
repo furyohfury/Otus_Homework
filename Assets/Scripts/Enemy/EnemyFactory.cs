@@ -11,6 +11,7 @@ namespace ShootEmUp
         [SerializeField] private HashSet<Enemy> _activeEnemies = new();
         [SerializeField] private Transform _target;
         [SerializeField] private int _initialCount = 7;
+        [SerializeField] private Transform _worldTransform;
 
         public int GetCountOfActive() => _activeEnemies.Count;
 
@@ -32,11 +33,12 @@ namespace ShootEmUp
 
         public void ConstructEnemy(Enemy enemy)
         {
+            enemy.SetParent(_worldTransform);
             var spawnPosition = enemyPositions.GetRandomSpawnPosition();
             enemy.SetPosition(spawnPosition);
             var attackPosition = enemyPositions.GetRandomAttackPosition();
             enemy.SetTarget(_target);
-            enemy.SetDestination(attackPosition);
+            enemy.SetDestination(attackPosition);            
         }
 
         public void RemoveEnemy(Enemy enemy)
