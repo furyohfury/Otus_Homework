@@ -5,17 +5,14 @@ namespace ShootEmUp
 {
     public sealed class InputListener : MonoBehaviour
     {
-        public event Action OnPlayerFire;
+        public event Action OnFireButton;
         public float HorizontalDirection {  get; private set; }
-
-        [SerializeField]
-        private Player _player;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OnPlayerFire?.Invoke();
+                OnFireButton?.Invoke();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))

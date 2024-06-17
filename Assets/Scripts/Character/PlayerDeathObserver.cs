@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class PlayerDeathObserver : MonoBehaviour // redo w/ DI next homework
+    public class PlayerDeathObserver : MonoBehaviour
     {
         [SerializeField] private HitPointsComponent _hitPointsComponent;
         [SerializeField] private GameManager _gameManager;

@@ -4,8 +4,8 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public class Pool<T> : MonoBehaviour where T : MonoBehaviour
-    {        
-        [SerializeField] protected Transform container;        
+    {
+        [SerializeField] protected Transform container;
 
         protected readonly Queue<T> _cache = new();
 

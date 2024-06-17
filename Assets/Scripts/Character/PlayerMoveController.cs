@@ -9,8 +9,6 @@ namespace ShootEmUp
 
         public void FixedUpdate()
         {
-            if (_inputSystem.HorizontalDirection == 0) 
-                return;
             var direction = new Vector2(_inputSystem.HorizontalDirection, 0);
             _playerMoveComponent.MoveByRigidbodyVelocity(direction * Time.fixedDeltaTime);
         }

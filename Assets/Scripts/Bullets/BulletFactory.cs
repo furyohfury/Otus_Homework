@@ -25,8 +25,8 @@ namespace ShootEmUp
             }
             else
             {
-                bullet = CreateBullet();
-            }            
+                bullet = InstantiateBullet();
+            }
             ConstructBullet(bullet, config);
             ActiveBullets.Add(bullet);
             return bullet;
@@ -40,7 +40,7 @@ namespace ShootEmUp
             }
         }
 
-        private Bullet CreateBullet()
+        private Bullet InstantiateBullet()
         {
             return Instantiate(_prefab, worldTransform);
         }
@@ -55,9 +55,9 @@ namespace ShootEmUp
 
         private void FillPool()
         {
-            for(var i = 0; i < _initialCount; i++)
+            for (var i = 0; i < _initialCount; i++)
             {
-                var bullet = CreateBullet();
+                var bullet = InstantiateBullet();
                 _pool.AddToPool(bullet);
             }
         }

@@ -6,8 +6,8 @@ namespace ShootEmUp
     public sealed class HitPointsComponent : MonoBehaviour
     {
         public event Action OnHPEnded;
-        
-        [SerializeField] private int hitPoints;        
+
+        [SerializeField] private int hitPoints;
 
         public void TakeDamage(int damage)
         {

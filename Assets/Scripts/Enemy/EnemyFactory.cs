@@ -15,6 +15,10 @@ namespace ShootEmUp
 
         public int GetCountOfActive() => _activeEnemies.Count;
 
+        private void Awake()
+        {
+            FillPool();
+        }
         public Enemy CreateEnemy()
         {
             Enemy enemy;
@@ -38,13 +42,22 @@ namespace ShootEmUp
             enemy.SetPosition(spawnPosition);
             var attackPosition = enemyPositions.GetRandomAttackPosition();
             enemy.SetTarget(_target);
-            enemy.SetDestination(attackPosition);            
+            enemy.SetDestination(attackPosition);
         }
 
         public void RemoveEnemy(Enemy enemy)
         {
             _activeEnemies.Remove(enemy);
             _pool.AddToPool(enemy);
+        }
+
+        private void FillPool()
+        {
+            for (int i = 0; i < _initialCount; i++)
+            {
+                var enemy = CreateEnemy();
+                _pool.AddToPool(enemy);
+            }
         }
     }
 }

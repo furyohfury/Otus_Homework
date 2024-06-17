@@ -14,19 +14,19 @@ namespace ShootEmUp
         private Transform _target;
         private float _currentTime;
 
+        private void FixedUpdate()
+        {
+            FireCycle();
+        }
         public void SetTarget(Transform target)
         {
             _target = target;
+            ResetCountdown();
         }
 
         public void ResetCountdown()
         {
             _currentTime = _countdown;
-        }
-
-        private void FixedUpdate()
-        {
-            FireCycle();
         }
 
         private void FireCycle()
@@ -42,7 +42,7 @@ namespace ShootEmUp
         private void Fire()
         {
             var startPosition = weaponComponent.Position;
-            var direction = (Vector2) _target.position - startPosition;
+            var direction = (Vector2)_target.position - startPosition;
             direction.Normalize();
             OnFire?.Invoke(_bulletConfig, startPosition, direction * _bulletConfig.speed);
         }

@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class BulletsOutOfBoundsObserver : MonoBehaviour
+    public sealed class BulletsOutOfBoundsObserver : MonoBehaviour
     {
         [SerializeField] private LevelBounds _levelBounds;
         [SerializeField] private BulletFactory _bulletFactory;

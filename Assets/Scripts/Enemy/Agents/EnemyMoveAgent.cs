@@ -39,12 +39,7 @@ namespace ShootEmUp
                     moveComponent.MoveByRigidbodyVelocity(vector * Time.fixedDeltaTime);
                     yield return new WaitForFixedUpdate();
                 }
-            }                       
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(_destination, 0.5f);
+            }
         }
     }
 }

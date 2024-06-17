@@ -5,7 +5,7 @@ namespace ShootEmUp
 {
     public class Enemy : MonoBehaviour
     {
-        public event Action OnDied;
+        public event Action<Enemy> OnDied;
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
 
         [SerializeField] private EnemyAttackAgent _attackAgent;
@@ -56,7 +56,7 @@ namespace ShootEmUp
 
         private void Die()
         {
-            OnDied?.Invoke();
+            OnDied?.Invoke(this);
         }
     }
 }

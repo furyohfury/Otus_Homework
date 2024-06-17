@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemySystem : MonoBehaviour
     {
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private BulletSystem _bulletSystem;
@@ -19,7 +18,7 @@ namespace ShootEmUp
                 {
                     var enemy = _enemyFactory.CreateEnemy();
                     enemy.OnFire += EnemyFire;
-                    enemy.OnDied += () => EnemyDied(enemy);
+                    enemy.OnDied += EnemyDied;
                 }
             }
         }
@@ -27,6 +26,7 @@ namespace ShootEmUp
         private void EnemyDied(Enemy enemy)
         {
             enemy.OnFire -= EnemyFire;
+            enemy.OnDied -= EnemyDied;
             _enemyFactory.RemoveEnemy(enemy);
         }
 

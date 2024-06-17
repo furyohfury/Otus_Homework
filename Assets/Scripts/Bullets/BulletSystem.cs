@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -16,9 +14,9 @@ namespace ShootEmUp
             bullet.OnCollisionEntered += OnBulletCollision;
             return bullet;
         }
-        
+
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
-        {            
+        {
             bullet.OnCollisionEntered -= OnBulletCollision;
             _bulletFactory.RemoveBullet(bullet);
         }

@@ -6,17 +6,17 @@ namespace ShootEmUp
     {
         [SerializeField] private BulletSystem _bulletSystem;
         [SerializeField] private InputListener _inputListener;
-        [SerializeField] private WeaponComponent _playerWeaponComponent; // todo see if can delete for enemy
+        [SerializeField] private WeaponComponent _playerWeaponComponent;
 
         [SerializeField] private BulletConfig _bulletConfig;
 
         private void OnEnable()
         {
-            _inputListener.OnPlayerFire += PlayerFireBullet;
+            _inputListener.OnFireButton += PlayerFireBullet;
         }
         private void OnDisable()
         {
-            _inputListener.OnPlayerFire -= PlayerFireBullet;
+            _inputListener.OnFireButton -= PlayerFireBullet;
         }
 
         private void PlayerFireBullet()
