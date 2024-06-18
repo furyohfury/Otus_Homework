@@ -8,28 +8,45 @@ namespace ShootEmUp
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private BulletSystem _bulletSystem;
 
+        private HashSet<Enemy> _activeEnemies = new();
+        public int GetCountOfActive() => _activeEnemies.Count;
+
         private void OnEnable()
         {
-            _enemyCycleSpawner.OnSpawnEnemy += SpawnEnemy;
+            _enemyCycleSpawner.OnSpawnEnemy += GetEnemy;
         }
 
         private void OnDisable()
         {
-            _enemyCycleSpawner.OnSpawnEnemy -= SpawnEnemy;
-        }        
+            _enemyCycleSpawner.OnSpawnEnemy -= GetEnemy;
+        }
 
-        private void SpawnEnemy()
+        public Enemy GetEnemy()
         {
             var enemy = _enemyFactory.CreateEnemy();
             enemy.OnFire += EnemyFire;
             enemy.OnDied += EnemyDied;
+            if (_activeEnemies.Add(enemy))
+            {
+                return enemy;
+            }
+            else
+            {
+                throw new Exception("Trying to add active enemy again");
+                return default;
+            }          
         }
 
-        private void EnemyDied(Enemy enemy)
+        public void RemoveEnemy(Enemy enemy)
         {
             enemy.OnFire -= EnemyFire;
             enemy.OnDied -= EnemyDied;
             _enemyFactory.RemoveEnemy(enemy);
+        }
+
+        private void EnemyDied(Enemy enemy)
+        {
+            RemoveEnemy(enemy);
         }
 
         private void EnemyFire(BulletConfig bulletConfig, Vector2 position, Vector2 velocity)

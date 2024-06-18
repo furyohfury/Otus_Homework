@@ -10,12 +10,11 @@ namespace ShootEmUp
 
         [Title("References")]
         [SerializeField] private Pool<Bullet> _pool;
-        [SerializeField] private Bullet _prefab;      
         [SerializeField] protected Transform _worldTransform;
 
         private void Awake()
         {
-            _pool.FillPool();
+            _pool.FillPool(_initialCount);
         }
 
         public Bullet GetBullet(BulletConfig config, Transform parent)

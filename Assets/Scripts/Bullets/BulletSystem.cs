@@ -21,6 +21,7 @@ namespace ShootEmUp
             else
             {
                 throw new Exception("Trying to add active bullet again");
+                return default;
             }
         }
 

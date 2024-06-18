@@ -8,30 +8,18 @@ namespace ShootEmUp
         [Title("Values")]
         [SerializeField] private int _initialCount = 7;
         [Title("References")]
-        [SerializeField] private Enemy _prefab;
         [SerializeField] private Pool<Enemy> _pool;
         [SerializeField] private EnemyPositions _enemyPositions;        
         [SerializeField] private Transform _target;        
-        [SerializeField] private Transform _worldTransform;
-
-        private HashSet<Enemy> _activeEnemies = new();
-        public int GetCountOfActive() => _activeEnemies.Count;
+        [SerializeField] private Transform _worldTransform;        
 
         private void Awake()
         {
-            FillPool();
+            _pool.FillPool(_initialCount);
         }
         public Enemy CreateEnemy()
         {
-            Enemy enemy;
-            if (_pool.TryTakeItemFromPool(out Enemy pooledEnemy))
-            {
-                enemy = pooledEnemy;
-            }
-            else
-            {
-                enemy = Instantiate(_prefab);
-            }
+            Enemy enemy = pool.TryTakeItemFromPool();
             ConstructEnemy(enemy);
             _activeEnemies.Add(enemy);
             return enemy;
