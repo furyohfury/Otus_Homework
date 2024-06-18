@@ -3,8 +3,10 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour
-    {
+    {        
         [SerializeField] private BulletFactory _bulletFactory;
+
+        public HashSet<Bullet> ActiveBullets { get; private set; } = new();
 
         public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
@@ -12,7 +14,26 @@ namespace ShootEmUp
             bullet.SetPosition(position);
             bullet.SetVelocity(velocity);
             bullet.OnCollisionEntered += OnBulletCollision;
-            return bullet;
+            if (ActiveBullets.Add(bullet))
+            {                     
+                return bullet;
+            }
+            else
+            {
+                throw new Exception("Trying to add active bullet again");
+            }
+        }
+
+        private void RemoveBullet(Bullet bullet)
+        {
+            if (ActiveBullets.Remove(bullet))
+            {
+                _bulletFactory.RemoveBullet(bullet);
+            }
+            else
+            {
+                throw new Exception("Trying to remove inactive bullet");
+            }            
         }
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
@@ -22,7 +43,7 @@ namespace ShootEmUp
                 hpComponent.TakeDamage(damage);
             }
             bullet.OnCollisionEntered -= OnBulletCollision;
-            _bulletFactory.RemoveBullet(bullet);
+            RemoveBullet(bullet);
         }
     }
 }

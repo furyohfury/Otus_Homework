@@ -10,43 +10,24 @@ namespace ShootEmUp
 
         [Title("References")]
         [SerializeField] private Pool<Bullet> _pool;
-        [SerializeField] private Bullet _prefab;
-        [SerializeField] private Transform _worldTransform;
-        
-        public HashSet<Bullet> ActiveBullets { get; private set; } = new();
+        [SerializeField] private Bullet _prefab;      
+        [SerializeField] protected Transform _worldTransform;
 
         private void Awake()
         {
-            FillPool();
+            _pool.FillPool();
         }
 
-        public Bullet GetBullet(BulletConfig config)
+        public Bullet GetBullet(BulletConfig config, Transform parent)
         {
-            Bullet bullet;
-            if (_pool.TryTakeItemFromPool(out Bullet poolBullet))
-            {
-                bullet = poolBullet;
-            }
-            else
-            {
-                bullet = InstantiateBullet();
-            }
+            Bullet bullet = TakeItemFromPool();
             ConstructBullet(bullet, config);
-            ActiveBullets.Add(bullet);
             return bullet;
         }
 
         public void RemoveBullet(Bullet bullet)
         {
-            if (ActiveBullets.Remove(bullet))
-            {
-                _pool.AddToPool(bullet);
-            }
-        }
-
-        private Bullet InstantiateBullet()
-        {
-            return Instantiate(_prefab, _worldTransform);
+            _pool.AddToPool(bullet);            
         }
 
         private void ConstructBullet(Bullet bullet, BulletConfig config)
@@ -55,15 +36,6 @@ namespace ShootEmUp
             bullet.SetPhysicsLayer((int)config.physicsLayer);
             bullet.SetDamage(config.damage);
             bullet.SetParent(_worldTransform);
-        }
-
-        private void FillPool()
-        {
-            for (var i = 0; i < _initialCount; i++)
-            {
-                var bullet = InstantiateBullet();
-                _pool.AddToPool(bullet);
-            }
         }
     }
 }
