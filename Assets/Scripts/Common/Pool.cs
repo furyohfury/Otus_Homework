@@ -5,7 +5,7 @@ namespace ShootEmUp
 {
     public class Pool<T> : MonoBehaviour where T : MonoBehaviour
     {
-        [SerializeField] protected Transform container;
+        [SerializeField] protected Transform _container;        
 
         protected readonly Queue<T> _cache = new();
 
@@ -25,7 +25,7 @@ namespace ShootEmUp
         public virtual void AddToPool(T obj)
         {
             _cache.Enqueue(obj);
-            obj.transform.SetParent(container);
+            obj.transform.SetParent(_container);
         }
     }
 }

@@ -7,20 +7,22 @@ namespace ShootEmUp
     {
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private int _maxEnemies = 7;
 
-        private IEnumerator Start()
+        private void OnEnable()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(1);
-                if (_enemyFactory.GetCountOfActive() < _maxEnemies)
-                {
-                    var enemy = _enemyFactory.CreateEnemy();
-                    enemy.OnFire += EnemyFire;
-                    enemy.OnDied += EnemyDied;
-                }
-            }
+            _enemyCycleSpawner.OnSpawnEnemy += SpawnEnemy;
+        }
+
+        private void OnDisable()
+        {
+            _enemyCycleSpawner.OnSpawnEnemy -= SpawnEnemy;
+        }        
+
+        private void SpawnEnemy()
+        {
+            var enemy = _enemyFactory.CreateEnemy();
+            enemy.OnFire += EnemyFire;
+            enemy.OnDied += EnemyDied;
         }
 
         private void EnemyDied(Enemy enemy)

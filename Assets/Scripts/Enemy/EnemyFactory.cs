@@ -5,14 +5,16 @@ namespace ShootEmUp
 {
     public class EnemyFactory : MonoBehaviour
     {
+        [Title("Values")]
+        [SerializeField] private int _initialCount = 7;
+        [Title("References")]
         [SerializeField] private Enemy _prefab;
         [SerializeField] private Pool<Enemy> _pool;
-        [SerializeField] private EnemyPositions enemyPositions;
-        [SerializeField] private HashSet<Enemy> _activeEnemies = new();
-        [SerializeField] private Transform _target;
-        [SerializeField] private int _initialCount = 7;
+        [SerializeField] private EnemyPositions _enemyPositions;        
+        [SerializeField] private Transform _target;        
         [SerializeField] private Transform _worldTransform;
 
+        private HashSet<Enemy> _activeEnemies = new();
         public int GetCountOfActive() => _activeEnemies.Count;
 
         private void Awake()
@@ -38,9 +40,9 @@ namespace ShootEmUp
         public void ConstructEnemy(Enemy enemy)
         {
             enemy.SetParent(_worldTransform);
-            var spawnPosition = enemyPositions.GetRandomSpawnPosition();
+            var spawnPosition = _enemyPositions.GetRandomSpawnPosition();
             enemy.SetPosition(spawnPosition);
-            var attackPosition = enemyPositions.GetRandomAttackPosition();
+            var attackPosition = _enemyPositions.GetRandomAttackPosition();
             enemy.SetTarget(_target);
             enemy.SetDestination(attackPosition);
         }
