@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,12 +8,9 @@ namespace ShootEmUp
     {
         public event Action OnSpawnEnemy;
 
-        [Title("Values")]
         [SerializeField] private int _countdown = 1;
         [SerializeField] private int _maxEnemies = 7;
-
-        [Title("References")]
-        private EnemySystem _enemySystem;
+        [SerializeField] private EnemySystem _enemySystem;
         
         private IEnumerator Start()
         {

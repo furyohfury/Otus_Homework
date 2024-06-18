@@ -6,15 +6,15 @@ namespace ShootEmUp
     public sealed class BulletsOutOfBoundsObserver : MonoBehaviour
     {
         [SerializeField] private LevelBounds _levelBounds;
-        [SerializeField] private BulletFactory _bulletFactory;
+        [SerializeField] private BulletSystem _bulletSystem;
 
         private void FixedUpdate()
         {
-            var bulletsOutOfBounds = _bulletFactory.ActiveBullets.Where(
+            var bulletsOutOfBounds = _bulletSystem.ActiveBullets.Where(
                 b => !_levelBounds.InBounds(b.transform.position)).ToArray();
 
             foreach (var bullet in bulletsOutOfBounds)
-                _bulletFactory.RemoveBullet(bullet);
+                _bulletSystem.RemoveBullet(bullet);
         }
     }
 }

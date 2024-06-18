@@ -7,7 +7,7 @@ namespace ShootEmUp
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
-        private int damage;
+        public int Damage { get ; private set; }
 
         [SerializeField]
         private new Rigidbody2D rigidbody2D;
@@ -22,7 +22,7 @@ namespace ShootEmUp
 
         public void SetDamage(int damage)
         {
-            this.damage = damage;
+            this.Damage = damage;
         }
 
         public void SetVelocity(Vector2 velocity)

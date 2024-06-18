@@ -13,7 +13,7 @@ namespace ShootEmUp
 
         public virtual T TakeItemFromPool()
         {
-            if (_cache.TryDequeue(out item))
+            if (_cache.TryDequeue(out T item))
             {
                 return item;
             }

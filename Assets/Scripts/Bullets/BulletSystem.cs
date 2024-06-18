@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -21,11 +23,10 @@ namespace ShootEmUp
             else
             {
                 throw new Exception("Trying to add active bullet again");
-                return default;
             }
         }
 
-        private void RemoveBullet(Bullet bullet)
+        public void RemoveBullet(Bullet bullet)
         {
             if (ActiveBullets.Remove(bullet))
             {
@@ -41,7 +42,7 @@ namespace ShootEmUp
         {
             if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
             {
-                hpComponent.TakeDamage(damage);
+                hpComponent.TakeDamage(bullet.Damage);
             }
             bullet.OnCollisionEntered -= OnBulletCollision;
             RemoveBullet(bullet);

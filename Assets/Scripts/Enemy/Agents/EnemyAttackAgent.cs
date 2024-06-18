@@ -7,10 +7,8 @@ namespace ShootEmUp
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
         
-        [Title("Values")]
         [SerializeField] private float _countdown;
 
-        [Title("References")]
         [SerializeField] private WeaponComponent _weaponComponent;        
         [SerializeField] private BulletConfig _bulletConfig;
 

@@ -5,21 +5,19 @@ namespace ShootEmUp
 {
     public sealed class BulletFactory : MonoBehaviour
     {
-        [Title("Values")]
         [SerializeField] private int _initialCount = 50;
+        [SerializeField] private Transform _worldTransform;
 
-        [Title("References")]
-        [SerializeField] private Pool<Bullet> _pool;
-        [SerializeField] protected Transform _worldTransform;
+        [SerializeField] private Pool<Bullet> _pool;        
 
         private void Awake()
         {
             _pool.FillPool(_initialCount);
         }
 
-        public Bullet GetBullet(BulletConfig config, Transform parent)
+        public Bullet GetBullet(BulletConfig config)
         {
-            Bullet bullet = TakeItemFromPool();
+            Bullet bullet = _pool.TakeItemFromPool();
             ConstructBullet(bullet, config);
             return bullet;
         }

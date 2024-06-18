@@ -5,9 +5,8 @@ namespace ShootEmUp
 {
     public class EnemyFactory : MonoBehaviour
     {
-        [Title("Values")]
         [SerializeField] private int _initialCount = 7;
-        [Title("References")]
+
         [SerializeField] private Pool<Enemy> _pool;
         [SerializeField] private EnemyPositions _enemyPositions;        
         [SerializeField] private Transform _target;        
@@ -19,9 +18,8 @@ namespace ShootEmUp
         }
         public Enemy CreateEnemy()
         {
-            Enemy enemy = pool.TryTakeItemFromPool();
+            Enemy enemy = _pool.TakeItemFromPool();
             ConstructEnemy(enemy);
-            _activeEnemies.Add(enemy);
             return enemy;
         }
 
@@ -37,7 +35,6 @@ namespace ShootEmUp
 
         public void RemoveEnemy(Enemy enemy)
         {
-            _activeEnemies.Remove(enemy);
             _pool.AddToPool(enemy);
         }
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -10,16 +12,6 @@ namespace ShootEmUp
 
         private HashSet<Enemy> _activeEnemies = new();
         public int GetCountOfActive() => _activeEnemies.Count;
-
-        private void OnEnable()
-        {
-            _enemyCycleSpawner.OnSpawnEnemy += GetEnemy;
-        }
-
-        private void OnDisable()
-        {
-            _enemyCycleSpawner.OnSpawnEnemy -= GetEnemy;
-        }
 
         public Enemy GetEnemy()
         {
@@ -33,7 +25,6 @@ namespace ShootEmUp
             else
             {
                 throw new Exception("Trying to add active enemy again");
-                return default;
             }          
         }
 
