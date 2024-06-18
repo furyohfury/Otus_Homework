@@ -7,7 +7,7 @@ namespace ShootEmUp
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
-        public int Damage { get ; private set; }
+        public int Damage { get; private set; }
 
         [SerializeField]
         private new Rigidbody2D rigidbody2D;
@@ -16,7 +16,7 @@ namespace ShootEmUp
         private SpriteRenderer spriteRenderer;
 
         private void OnCollisionEnter2D(Collision2D collision)
-        {            
+        {
             OnCollisionEntered?.Invoke(this, collision);
         }
 

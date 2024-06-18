@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -8,14 +7,14 @@ namespace ShootEmUp
         [SerializeField] private int _initialCount = 50;
         [SerializeField] private Transform _worldTransform;
 
-        [SerializeField] private Pool<Bullet> _pool;        
+        [SerializeField] private Pool<Bullet> _pool;
 
         private void Awake()
         {
             _pool.FillPool(_initialCount);
         }
 
-        public Bullet GetBullet(BulletConfig config)
+        public Bullet CreateBullet(BulletConfig config)
         {
             Bullet bullet = _pool.TakeItemFromPool();
             ConstructBullet(bullet, config);
@@ -24,7 +23,7 @@ namespace ShootEmUp
 
         public void RemoveBullet(Bullet bullet)
         {
-            _pool.AddToPool(bullet);            
+            _pool.AddToPool(bullet);
         }
 
         private void ConstructBullet(Bullet bullet, BulletConfig config)

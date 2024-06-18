@@ -37,14 +37,5 @@ namespace ShootEmUp
         {
             _pool.AddToPool(enemy);
         }
-
-        private void FillPool()
-        {
-            for (int i = 0; i < _initialCount; i++)
-            {
-                var enemy = CreateEnemy();
-                _pool.AddToPool(enemy);
-            }
-        }
     }
 }

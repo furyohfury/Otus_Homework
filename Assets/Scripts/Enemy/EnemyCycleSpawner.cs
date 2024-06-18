@@ -6,8 +6,6 @@ namespace ShootEmUp
 {
     public sealed class EnemyCycleSpawner : MonoBehaviour
     {
-        public event Action OnSpawnEnemy;
-
         [SerializeField] private int _countdown = 1;
         [SerializeField] private int _maxEnemies = 7;
         [SerializeField] private EnemySystem _enemySystem;

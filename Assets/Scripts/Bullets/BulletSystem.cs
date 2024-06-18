@@ -12,7 +12,7 @@ namespace ShootEmUp
 
         public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
-            Bullet bullet = _bulletFactory.GetBullet(config);
+            Bullet bullet = _bulletFactory.CreateBullet(config);
             bullet.SetPosition(position);
             bullet.SetVelocity(velocity);
             bullet.OnCollisionEntered += OnBulletCollision;
@@ -34,11 +34,11 @@ namespace ShootEmUp
             }
             else
             {
-                throw new Exception("Trying to remove inactive bullet");
+                throw new Exception("Trying to remove already inactive bullet");
             }            
         }
 
-        private void OnBulletCollision(Bullet bullet, Collision2D collision)
+        private void OnBulletCollision(Bullet bullet, Collision2D collision) // separate class?
         {
             if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
             {

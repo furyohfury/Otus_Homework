@@ -4,16 +4,16 @@ namespace ShootEmUp
 {
     public class PlayerDeathObserver : MonoBehaviour
     {
-        [SerializeField] private HitPointsComponent _hitPointsComponent;
+        [SerializeField] private Player _player;
         [SerializeField] private GameManager _gameManager;
 
         private void OnEnable()
         {
-            _hitPointsComponent.OnHPEnded += PlayerDied;
+            _player.OnPlayerDied += PlayerDied;
         }
         private void OnDisable()
         {
-            _hitPointsComponent.OnHPEnded -= PlayerDied;
+            _player.OnPlayerDied -= PlayerDied;
         }
 
         public void PlayerDied()
