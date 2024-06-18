@@ -16,11 +16,7 @@ namespace ShootEmUp
         private SpriteRenderer spriteRenderer;
 
         private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
-            {
-                hpComponent.TakeDamage(damage);
-            }
+        {            
             OnCollisionEntered?.Invoke(this, collision);
         }
 

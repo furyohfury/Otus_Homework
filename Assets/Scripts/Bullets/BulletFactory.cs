@@ -5,17 +5,21 @@ namespace ShootEmUp
 {
     public sealed class BulletFactory : MonoBehaviour
     {
-        [SerializeField] private Pool<Bullet> _pool;
-
-        [SerializeField] private Bullet _prefab;
-        [SerializeField] private Transform worldTransform;
+        [Title("Values")]
         [SerializeField] private int _initialCount = 50;
+
+        [Title("References")]
+        [SerializeField] private Pool<Bullet> _pool;
+        [SerializeField] private Bullet _prefab;
+        [SerializeField] private Transform _worldTransform;
+        
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
 
         private void Awake()
         {
             FillPool();
         }
+
         public Bullet GetBullet(BulletConfig config)
         {
             Bullet bullet;
@@ -42,7 +46,7 @@ namespace ShootEmUp
 
         private Bullet InstantiateBullet()
         {
-            return Instantiate(_prefab, worldTransform);
+            return Instantiate(_prefab, _worldTransform);
         }
 
         private void ConstructBullet(Bullet bullet, BulletConfig config)
@@ -50,7 +54,7 @@ namespace ShootEmUp
             bullet.SetColor(config.color);
             bullet.SetPhysicsLayer((int)config.physicsLayer);
             bullet.SetDamage(config.damage);
-            bullet.SetParent(worldTransform);
+            bullet.SetParent(_worldTransform);
         }
 
         private void FillPool()

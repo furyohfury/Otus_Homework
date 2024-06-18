@@ -8,7 +8,7 @@ namespace ShootEmUp
     {
         public event Action OnReachedDestination;
 
-        [SerializeField] private MoveComponent moveComponent;
+        [SerializeField] private MoveComponent _moveComponent;
 
         private Vector2 _destination;
         private Coroutine _coroutine;
@@ -27,16 +27,17 @@ namespace ShootEmUp
         {
             while (true)
             {
-                var vector = _destination - (Vector2)transform.position;
-                if (vector.magnitude <= 0.05f)
+                Vector2 distance = _destination - (Vector2)transform.position;
+                if (distance.magnitude <= 0.05f)
                 {
                     OnReachedDestination?.Invoke();
+                    _coroutine = null;
                     yield break;
                 }
                 else
                 {
-                    vector.Normalize();
-                    moveComponent.MoveByRigidbodyVelocity(vector * Time.fixedDeltaTime);
+                    distance.Normalize();
+                    _moveComponent.MoveByRigidbodyVelocity(distance * Time.fixedDeltaTime);
                     yield return new WaitForFixedUpdate();
                 }
             }
