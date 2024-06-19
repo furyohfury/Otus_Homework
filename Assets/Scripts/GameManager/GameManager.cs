@@ -10,6 +10,8 @@ namespace ShootEmUp
 
         private IGameState _state;
 
+        private bool _activeUpdates;
+
         private void OnEnable()
         {
             IGameStateListener.OnRegister += RegisterListener;
@@ -21,6 +23,8 @@ namespace ShootEmUp
 
         private void Update()
         {
+            if (!_activeUpdates) return;
+
             for(var i = 0; i < _iOnUpdateListeners.Length; i++) //  todo must count state
             {
                 _iOnUpdateListeners.OnUpdate();
@@ -29,6 +33,8 @@ namespace ShootEmUp
 
         private void FixedUpdate()
         {
+            if (!_activeUpdates) return;
+
             for(var i = 0; i < _iOnFixedUpdateListeners.Length; i++)
             {
                 _iOnUpdateListeners.OnFixedUpdate();
@@ -51,6 +57,9 @@ namespace ShootEmUp
         public void ChangeState(IGameState state)
         {
             _state = state;
+            state.HandleState();
+            bool startOrResume = state is GameStartState || state is GameResumeState; //todo crutch to fix
+            _activeUpdates = startOrResume ? true : false;
         }
     }
 }
