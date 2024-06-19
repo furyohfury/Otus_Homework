@@ -1,4 +1,8 @@
-public interface IGameState
+using System.Collections.Generic;
+namespace ShootEmUp
 {
-    void HandleState(IEnumerable<IGameStateListerner> listeners);
+    public interface IGameState
+    {
+        void HandleState(IEnumerable<IGameStateListener> listeners);
+    }
 }

@@ -1,33 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class GameManager : MonoBehaviour
     {
-        private List<IGameStateListerner> _iGameStateListeners;
-        private List<IOnUpdateListener> _iOnUpdateListeners;
-        private List<IOnFixedUpdateListener> _iOnFixedUpdateListeners;
+        private List<IGameStateListener> _iGameStateListeners = new();
+        private List<IOnUpdateListener> _iOnUpdateListeners = new();
+        private List<IOnFixedUpdateListener> _iOnFixedUpdateListeners = new();
 
         private IGameState _state;
 
-        private bool _activeUpdates;
+        private bool _activeUpdates = true;
 
-        private void OnEnable()
+        private void Awake()
         {
             IGameStateListener.OnRegister += RegisterListener;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             IGameStateListener.OnRegister -= RegisterListener;
         }
 
         private void Update()
         {
-            if (!_activeUpdates) return;
+            if (!_activeUpdates || _iOnUpdateListeners.Count <= 0) 
+                return;
 
-            for(var i = 0; i < _iOnUpdateListeners.Length; i++) //  todo must count state
+            for(var i = 0; i < _iOnUpdateListeners.Count; i++) //  todo must count state
             {
-                _iOnUpdateListeners.OnUpdate();
+                _iOnUpdateListeners[i].OnUpdate();
             }
         }
 
@@ -35,29 +37,29 @@ namespace ShootEmUp
         {
             if (!_activeUpdates) return;
 
-            for(var i = 0; i < _iOnFixedUpdateListeners.Length; i++)
+            for(var i = 0; i < _iOnFixedUpdateListeners.Count; i++)
             {
-                _iOnUpdateListeners.OnFixedUpdate();
+                _iOnFixedUpdateListeners[i].OnFixedUpdate();
             }
         }
 
-        private void RegisterListener(IGameStateListerner listener)
+        private void RegisterListener(IGameStateListener listener)
         {
             _iGameStateListeners.Add(listener);
             if (listener is IOnUpdateListener onUpdateListener)
             {
                 _iOnUpdateListeners.Add(onUpdateListener);
             }
-            if (listener is IOnUpdateListener onFixedUpdateListener)
+            if (listener is IOnFixedUpdateListener onFixedUpdateListener)
             {
-                _iOnFixedUpdateListeners.Add(onUpdateListener);
+                _iOnFixedUpdateListeners.Add(onFixedUpdateListener);
             }
         }
         
         public void ChangeState(IGameState state)
         {
             _state = state;
-            state.HandleState();
+            state.HandleState(_iGameStateListeners);
             bool startOrResume = state is GameStartState || state is GameResumeState; //todo crutch to fix
             _activeUpdates = startOrResume ? true : false;
         }

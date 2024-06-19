@@ -1,12 +1,18 @@
-public class GameResumeState : IGameState
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ShootEmUp
 {
-    
-    public void IGameState.HandleState(IEnumerable<IGameStateListerner> listeners)
+    public class GameResumeState : IGameState
     {
-        var resumeGameListeners = listeners.Where((l) => l is IGameResumeListener).ToArray();
-        foreach(var listener in resumeGameListeners)
+        public void HandleState(IEnumerable<IGameStateListener> listeners)
         {
-            listener.ResumeGame();
+            var resumeGameListeners = listeners.Where((l) => l is IGameResumeListener).Select((l) => l as IGameResumeListener).ToArray();
+            foreach (var listener in resumeGameListeners)
+            {
+                listener.ResumeGame();
+            }
         }
+
     }
 }

@@ -1,13 +1,15 @@
-public class GameStartState : IGameState
-{    
-    public void IGameState.HandleState(IEnumerable<IGameStateListerner> listeners)
+using System.Collections.Generic;
+using System.Linq;
+namespace ShootEmUp
+{
+    public class GameStartState : IGameState
     {
-        var startGameListeners = listeners.Where((l) => l is IGameStartListener).ToArray();
-        foreach(var listener in listeners)
+        public void HandleState(IEnumerable<IGameStateListener> listeners)
         {
-            if (listener is IGameStartListener startListener)
+            var startGameListeners = listeners.Where((l) => l is IGameStartListener).Select((l) => l as IGameStartListener).ToArray();
+            foreach (var listener in startGameListeners)
             {
-                startListener.StartGame();
+                listener.StartGame();
             }
         }
     }

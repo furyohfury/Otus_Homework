@@ -1,8 +1,11 @@
-public interface IOnUpdateListener : IGameStateListener
+namespace ShootEmUp
 {
-    void OnUpdate();
-}
-public interface IOnFixedUpdateListener : IGameStateListener
-{
-    void OnFixedUpdate();
+    public interface IOnUpdateListener : IGameStateListener
+    {
+        void OnUpdate();
+    }
+    public interface IOnFixedUpdateListener : IGameStateListener
+    {
+        void OnFixedUpdate();
+    }
 }
