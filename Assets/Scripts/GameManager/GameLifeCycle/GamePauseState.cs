@@ -1,10 +1,9 @@
 public class GamePauseState : IGameState
-{
-    private List<IGamePauseListener> _iGamePauseListeners;
-    
-    public void IGameState.HandleState()
+{    
+    public void IGameState.HandleState(IEnumerable<IGameStateListerner> listeners)
     {
-        foreach(var listener in _iGamePauseListeners)
+        var resumeGameListeners = listeners.Where((l) => l is IGameResumeListener).ToArray();
+        foreach(var listener in resumeGameListeners)
         {
             listener.PauseGame();
         }

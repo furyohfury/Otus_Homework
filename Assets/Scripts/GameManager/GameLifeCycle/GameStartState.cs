@@ -1,12 +1,14 @@
 public class GameStartState : IGameState
-{
-    private List<IGameStartListener> _iGameStartListeners;
-    
-    public void IGameState.HandleState()
+{    
+    public void IGameState.HandleState(IEnumerable<IGameStateListerner> listeners)
     {
-        foreach(var listener in _iGameStartListeners)
+        var startGameListeners = listeners.Where((l) => l is IGameStartListener).ToArray();
+        foreach(var listener in listeners)
         {
-            listener.StartGame();
+            if (listener is IGameStartListener startListener)
+            {
+                startListener.StartGame();
+            }
         }
     }
 }

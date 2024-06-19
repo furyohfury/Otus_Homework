@@ -1,8 +1,8 @@
-public interface IOnUpdateListener
+public interface IOnUpdateListener : IGameStateListener
 {
     void OnUpdate();
 }
-public interface IOnFixedUpdateListener
+public interface IOnFixedUpdateListener : IGameStateListener
 {
     void OnFixedUpdate();
 }

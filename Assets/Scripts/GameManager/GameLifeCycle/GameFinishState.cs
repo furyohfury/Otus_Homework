@@ -1,10 +1,9 @@
 public class GameFinishState : IGameState
 {
-    private List<IGameFinishListener> _iGameFinishListeners;
-    
-    public void IGameState.HandleState()
+    public void IGameState.HandleState(IEnumerable<IGameStateListerner> listeners)
     {
-        foreach(var listener in _iGameFinishListeners)
+        var finishGameListeners = listeners.Where((l) => l is IGameFinishListener).ToArray();
+        foreach(var listener in finishGameListeners)
         {
             listener.FinishGame();
         }
