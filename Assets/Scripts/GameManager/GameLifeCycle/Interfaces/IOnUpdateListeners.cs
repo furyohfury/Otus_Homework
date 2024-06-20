@@ -2,10 +2,10 @@ namespace ShootEmUp
 {
     public interface IOnUpdateListener : IGameStateListener
     {
-        void OnUpdate();
+        void OnUpdate(float deltaTime);
     }
     public interface IOnFixedUpdateListener : IGameStateListener
     {
-        void OnFixedUpdate();
+        void OnFixedUpdate(float deltaTime);
     }
 }

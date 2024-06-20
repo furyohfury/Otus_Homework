@@ -7,11 +7,11 @@ namespace ShootEmUp
         [SerializeField] private Player _player;
         [SerializeField] private GameManager _gameManager;
 
-        private void OnEnable()
+        private void Awake()
         {
             _player.OnPlayerDied += PlayerDied;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             _player.OnPlayerDied -= PlayerDied;
         }
