@@ -9,7 +9,11 @@ namespace ShootEmUp
 
         public void HandleState(IEnumerable<IGameStateListener> listeners)
         {
-            var pauseGameListeners = listeners.Where((l) => l is IGamePauseListener).Select((l) => l as IGamePauseListener).ToArray();
+            var pauseGameListeners = listeners.
+            Where((l) => l is IGamePauseListener).
+            Select((l) => l as IGamePauseListener).
+            ToArray();
+            
             foreach (var listener in pauseGameListeners)
             {
                 listener.PauseGame();
