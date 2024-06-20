@@ -5,11 +5,11 @@ namespace ShootEmUp
 {
     public sealed class GameManager : MonoBehaviour
     {
-        private List<IGameStateListener> _iGameStateListeners = new();
-        private List<IOnUpdateListener> _iOnUpdateListeners = new();
-        private List<IOnFixedUpdateListener> _iOnFixedUpdateListeners = new();
+        private readonly List<IGameStateListener> _iGameStateListeners = new();
+        private readonly List<IOnUpdateListener> _iOnUpdateListeners = new();
+        private readonly List<IOnFixedUpdateListener> _iOnFixedUpdateListeners = new();
 
-        private IGameState _state;
+        [SerializeReference] private IGameState _state;
 
         private bool _activeUpdates = false;
 

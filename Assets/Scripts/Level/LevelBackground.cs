@@ -26,7 +26,7 @@ namespace ShootEmUp
             IGameStateListener.Register(this);
         }
 
-        private void OnFixedUpdate()
+        public void OnFixedUpdate(float delta)
         {
             if (myTransform.position.y <= endPositionY)
             {

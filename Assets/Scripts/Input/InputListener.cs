@@ -13,7 +13,7 @@ namespace ShootEmUp
             IGameStateListener.Register(this);
         }
 
-        private void OnUpdate()
+        public void OnUpdate(float delta)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

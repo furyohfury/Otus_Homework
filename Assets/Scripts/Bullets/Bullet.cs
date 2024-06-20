@@ -11,7 +11,7 @@ namespace ShootEmUp
         public int Damage { get; private set; }
 
         [SerializeField]
-        private Rigidbody2D rigidbody2D;
+        private Rigidbody2D _rigidbody2D;
 
         private Vector2 _velocity;
 
@@ -35,7 +35,7 @@ namespace ShootEmUp
 
         public void SetVelocity(Vector2 velocity)
         {
-            rigidbody2D.velocity = velocity;
+            _rigidbody2D.velocity = velocity;
         }
 
         public void SetPhysicsLayer(int physicsLayer)

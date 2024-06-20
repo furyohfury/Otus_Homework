@@ -20,9 +20,9 @@ namespace ShootEmUp
             IGameStateListener.Register(this);
         }
 
-        private void OnFixedUpdate()
+        public void OnFixedUpdate(float delta)
         {
-            FireCycle();
+            FireCycle(); // todo deactivate while moving
         }
         public void SetTarget(Transform target)
         {

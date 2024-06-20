@@ -12,7 +12,7 @@ namespace ShootEmUp
         {
             IGameStateListener.Register(this); // todo works only if put in start
         }
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float delta)
         {
             var bulletsOutOfBounds = _bulletSystem.ActiveBullets.Where(
                 b => !_levelBounds.InBounds(b.transform.position)).ToArray();
