@@ -5,6 +5,8 @@ namespace ShootEmUp
 {
     public class GamePauseState : IGameState
     {
+        public bool ActiveUpdates {get; } = false;
+
         public void HandleState(IEnumerable<IGameStateListener> listeners)
         {
             var pauseGameListeners = listeners.Where((l) => l is IGamePauseListener).Select((l) => l as IGamePauseListener).ToArray();

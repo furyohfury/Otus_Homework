@@ -27,7 +27,7 @@ namespace ShootEmUp
             if (!_activeUpdates || _iOnUpdateListeners.Count <= 0) 
                 return;
 
-            for(var i = 0; i < _iOnUpdateListeners.Count; i++) //  todo must count state
+            for(var i = 0; i < _iOnUpdateListeners.Count; i++)
             {
                 _iOnUpdateListeners[i].OnUpdate();
             }
@@ -59,9 +59,9 @@ namespace ShootEmUp
         public void ChangeState(IGameState state)
         {
             _state = state;
-            state.HandleState(_iGameStateListeners);
-            bool startOrResume = state is GameStartState || state is GameResumeState; //todo crutch to fix
-            _activeUpdates = startOrResume ? true : false;
+            _activeUpdates = state.ActiveUpdates;
         }
+
+        public void HandleState() => _state.HandleState(_iGameStateListeners);
     }
 }
