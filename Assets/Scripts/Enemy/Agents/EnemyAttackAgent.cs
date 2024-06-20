@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour, IOnFixedUpdateListener
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
         
@@ -15,7 +15,12 @@ namespace ShootEmUp
         private Transform _target;
         private float _currentTime;
 
-        private void FixedUpdate()
+        private void Awake()
+        {
+            IGameStateListener.Register(this);
+        }
+
+        private void OnFixedUpdate()
         {
             FireCycle();
         }

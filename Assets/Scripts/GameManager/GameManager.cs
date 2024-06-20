@@ -11,7 +11,7 @@ namespace ShootEmUp
 
         private IGameState _state;
 
-        private bool _activeUpdates = true;
+        private bool _activeUpdates = false;
 
         private void Awake()
         {

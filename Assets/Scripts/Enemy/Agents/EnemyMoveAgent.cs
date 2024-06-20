@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour
+    public sealed class EnemyMoveAgent : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         public event Action OnReachedDestination;
 
@@ -12,6 +12,11 @@ namespace ShootEmUp
 
         private Vector2 _destination;
         private Coroutine _coroutine;
+
+        private void Awake()
+        {
+            IGameStateListener.Register(this);
+        }
 
         public void SetDestination(Vector2 endPoint)
         {
@@ -41,6 +46,21 @@ namespace ShootEmUp
                     yield return new WaitForFixedUpdate();
                 }
             }
+        }
+
+        public void PauseGame() // todo check if coroutine pauses or nothing changes
+        {
+            enabled = false;
+        }
+
+        public void ResumeGame()
+        {
+            enabled = true;
+        }
+
+        public void FinishGame()
+        {
+            enabled = false;
         }
     }
 }

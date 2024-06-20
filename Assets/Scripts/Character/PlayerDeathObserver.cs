@@ -18,7 +18,8 @@ namespace ShootEmUp
 
         public void PlayerDied()
         {
-            // todo 
+            _gameManager.ChangeState(new GameFinishState());
+            _gameManager.HandleState();
         }
     }
 }

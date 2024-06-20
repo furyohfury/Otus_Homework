@@ -4,11 +4,16 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyCycleSpawner : MonoBehaviour
+    public sealed class EnemyCycleSpawner : MonoBehaviour, , IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         [SerializeField] private int _countdown = 1;
         [SerializeField] private int _maxEnemies = 7;
         [SerializeField] private EnemySystem _enemySystem;
+
+        private void Awake()
+        {
+            IGameStateListener.Register(this);
+        }
         
         private IEnumerator Start()
         {
@@ -20,6 +25,21 @@ namespace ShootEmUp
                     _enemySystem.GetEnemy();
                 }
             }
+        }
+
+        public void PauseGame() // todo check if coroutine pauses or nothing changes
+        {
+            enabled = false;
+        }
+
+        public void ResumeGame()
+        {
+            enabled = true;
+        }
+
+        public void FinishGame()
+        {
+            enabled = false;
         }
     }
 }

@@ -11,14 +11,14 @@ namespace ShootEmUp
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private MoveComponent _moveComponent;
 
-        private void OnEnable()
+        private void Awake()
         {
             _hpComponent.OnHPEnded += PlayerDied;
-        }        
+        }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            _hpComponent.OnHPEnded += PlayerDied;
+            _hpComponent.OnHPEnded -= PlayerDied;
         }
 
         private void OnValidate()

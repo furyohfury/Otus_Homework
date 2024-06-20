@@ -10,11 +10,11 @@ namespace ShootEmUp
 
         [SerializeField] private BulletConfig _bulletConfig;
 
-        private void OnEnable()
+        private void Awake()
         {
             _inputListener.OnFireButton += PlayerFireBullet;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             _inputListener.OnFireButton -= PlayerFireBullet;
         }

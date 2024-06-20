@@ -12,13 +12,13 @@ namespace ShootEmUp
         [SerializeField] private EnemyMoveAgent _moveAgent;
         [SerializeField] private HitPointsComponent _hitPointsComponent;
 
-        private void OnEnable()
+        private void Awake()
         {
             _attackAgent.OnFire += Fire;
             _hitPointsComponent.OnHPEnded += Die;
             _moveAgent.OnReachedDestination += ReachedDestination;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             _attackAgent.OnFire -= Fire;
             _hitPointsComponent.OnHPEnded -= Die;

@@ -12,7 +12,7 @@ namespace ShootEmUp
         [SerializeField] private Transform _target;        
         [SerializeField] private Transform _worldTransform;        
 
-        private void Awake()
+        private void Awake() // todo Add filling pool to startGame() or not?
         {
             _pool.FillPool(_initialCount);
         }
