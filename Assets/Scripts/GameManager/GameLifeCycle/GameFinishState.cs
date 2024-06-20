@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace ShootEmUp
 {
@@ -18,6 +19,7 @@ namespace ShootEmUp
             {
                 listener.FinishGame();
             }
+            Debug.Log("Game over");
         }
     }
 }

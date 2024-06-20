@@ -14,7 +14,7 @@ namespace ShootEmUp
 
         private void Awake()
         {
-            _gameStartButton.onClick.AddListener(() => StartCoroutine(LaunchGame()));
+            _gameStartButton.onClick.AddListener(() => StartCoroutine(LaunchGame()));            
         }
 
         public virtual IEnumerator LaunchGame()
@@ -28,6 +28,7 @@ namespace ShootEmUp
             }
             _gameManager.ChangeState(new GameStartState());
             _gameManager.HandleState();
+            _gameStartButton.gameObject.SetActive(false);
         }
     }
 }
