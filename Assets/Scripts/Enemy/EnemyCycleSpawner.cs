@@ -10,10 +10,11 @@ namespace ShootEmUp
         [SerializeField] private int _maxEnemies = 7;
         [SerializeField] private EnemySystem _enemySystem;
 
+        private bool _active = false;
+
         private void Awake()
         {
             IGameStateListener.Register(this);
-            enabled = false;
         }
         
         private IEnumerator Start()
@@ -21,7 +22,7 @@ namespace ShootEmUp
             while (true)
             {
                 yield return new WaitForSeconds(_countdown);
-                if (_enemySystem.GetCountOfActive() < _maxEnemies)
+                if (_active && _enemySystem.GetCountOfActive() < _maxEnemies)
                 {
                     _enemySystem.GetEnemy();
                 }
@@ -30,22 +31,22 @@ namespace ShootEmUp
 
         public void StartGame()
         {
-            enabled = true;
+            _active = true;
         }
 
-        public void PauseGame() // todo check if coroutine pauses or nothing changes
+        public void PauseGame()
         {
-            enabled = false;
+            _active = false;
         }
 
         public void ResumeGame()
         {
-            enabled = true;
+            _active = true;
         }
 
         public void FinishGame()
         {
-            enabled = false;
+            _active = false;
         }
     }
 }

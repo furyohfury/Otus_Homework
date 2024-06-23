@@ -48,19 +48,29 @@ namespace ShootEmUp
             }
         }
 
-        public void PauseGame() // todo check if coroutine pauses or nothing changes
+        public void PauseGame()
         {
-            enabled = false;
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
         }
 
         public void ResumeGame()
         {
-            enabled = true;
+            Vector2 distance = _destination - (Vector2)transform.position;
+            if (_coroutine != null && distance.magnitude > 0.05f)
+            {
+                _coroutine = StartCoroutine(GetToDestination());
+            }
         }
 
         public void FinishGame()
         {
-            enabled = false;
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
         }
     }
 }

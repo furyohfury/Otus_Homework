@@ -31,7 +31,7 @@ namespace ShootEmUp
         public void SetDestination(Vector2 endPoint)
         {
             _moveAgent.SetDestination(endPoint);
-            _attackAgent.enabled = false;
+            _attackAgent.Active = false;
         }
 
         public void SetTarget(Transform target)
@@ -46,7 +46,7 @@ namespace ShootEmUp
 
         private void ReachedDestination()
         {
-            _attackAgent.enabled = true;
+            _attackAgent.Active = true;
         }
 
         private void Fire(BulletConfig config, Vector2 pos, Vector2 vel)

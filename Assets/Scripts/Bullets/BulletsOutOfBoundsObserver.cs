@@ -10,7 +10,7 @@ namespace ShootEmUp
 
         private void Awake()
         {
-            IGameStateListener.Register(this); // todo works only if put in start
+            IGameStateListener.Register(this);
         }
         public void OnFixedUpdate(float delta)
         {

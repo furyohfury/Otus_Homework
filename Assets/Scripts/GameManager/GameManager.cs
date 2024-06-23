@@ -27,7 +27,7 @@ namespace ShootEmUp
             if (!_activeUpdates || _iOnUpdateListeners.Count <= 0) 
                 return;
 
-            var deltaTime = Time.deltaTime; // todo Replace to cached for all
+            var deltaTime = Time.deltaTime;
             for(var i = 0; i < _iOnUpdateListeners.Count; i++)
             {
                 _iOnUpdateListeners[i].OnUpdate(deltaTime);
@@ -39,7 +39,7 @@ namespace ShootEmUp
             if (!_activeUpdates || _iOnFixedUpdateListeners.Count <= 0) 
                 return;
 
-            var deltaTime = Time.fixedDeltaTime; // todo Replace to cached for all
+            var deltaTime = Time.fixedDeltaTime;
             for(var i = 0; i < _iOnFixedUpdateListeners.Count; i++)
             {
                 _iOnFixedUpdateListeners[i].OnFixedUpdate(deltaTime);

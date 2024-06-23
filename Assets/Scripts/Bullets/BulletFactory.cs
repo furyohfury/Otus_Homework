@@ -9,7 +9,7 @@ namespace ShootEmUp
 
         [SerializeField] private Pool<Bullet> _pool;
 
-        private void Awake() // todo Add filling pool to startGame() or not?
+        private void Awake()
         {
             _pool.FillPool(_initialCount);
         }

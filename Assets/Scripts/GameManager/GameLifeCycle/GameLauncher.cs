@@ -28,7 +28,6 @@ namespace ShootEmUp
             }
             _gameManager.ChangeState(new GameStartState());
             _gameManager.HandleState();
-            _gameStartButton.gameObject.SetActive(false);
         }
     }
 }

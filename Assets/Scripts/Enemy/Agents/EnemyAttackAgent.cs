@@ -6,14 +6,16 @@ namespace ShootEmUp
     public sealed class EnemyAttackAgent : MonoBehaviour, IOnFixedUpdateListener
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
-        
+
         [SerializeField] private float _countdown;
 
-        [SerializeField] private WeaponComponent _weaponComponent;        
+        [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private BulletConfig _bulletConfig;
 
         private Transform _target;
         private float _currentTime;
+        private bool _active = false;
+        public bool Active { get => _active; set { _active = value; } }
 
         private void Awake()
         {
@@ -22,7 +24,7 @@ namespace ShootEmUp
 
         public void OnFixedUpdate(float delta)
         {
-            FireCycle(); // todo deactivate while moving
+            FireCycle();
         }
         public void SetTarget(Transform target)
         {
@@ -47,6 +49,9 @@ namespace ShootEmUp
 
         private void Fire()
         {
+            if (!Active)
+                return;
+
             var startPosition = _weaponComponent.Position;
             var direction = (Vector2)_target.position - startPosition;
             direction.Normalize();

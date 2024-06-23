@@ -6,7 +6,7 @@ namespace ShootEmUp
 {
     public class GameFinishState : IGameState
     {
-        public bool ActiveUpdates {get; } = false;
+        public bool ActiveUpdates { get; } = false;
 
         public void HandleState(IEnumerable<IGameStateListener> listeners)
         {
@@ -14,7 +14,7 @@ namespace ShootEmUp
             Where((l) => l is IGameFinishListener).
             Select((l) => l as IGameFinishListener).
             ToArray();
-            
+
             foreach (var listener in finishGameListeners)
             {
                 listener.FinishGame();
