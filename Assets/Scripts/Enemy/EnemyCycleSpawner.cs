@@ -1,51 +1,32 @@
-using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyCycleSpawner : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener, IGameStartListener
+    public sealed class EnemyCycleSpawner : MonoBehaviour, IOnUpdateListener
     {
         [SerializeField] private int _countdown = 1;
         [SerializeField] private int _maxEnemies = 7;
         [SerializeField] private EnemySystem _enemySystem;
 
-        private bool _active = false;
+        private float _currentTime = 0f;
 
         private void Awake()
         {
             IGameStateListener.Register(this);
         }
 
-        private IEnumerator Start() // doesnt work
+        void IOnUpdateListener.OnUpdate(float deltaTime)
         {
-            while (true)
+            if (_currentTime <= 0 && _enemySystem.GetCountOfActive() < _maxEnemies)
             {
-                yield return new WaitForSeconds(_countdown);
-                if (_active && _enemySystem.GetCountOfActive() < _maxEnemies)
-                {
-                    _enemySystem.GetEnemy();
-                }
+                _currentTime = _countdown;
+                _enemySystem.GetEnemy();
+
             }
-        }
-
-        public void StartGame()
-        {
-            _active = true;
-        }
-
-        public void PauseGame()
-        {
-            _active = false;
-        }
-
-        public void ResumeGame()
-        {
-            _active = true;
-        }
-
-        public void FinishGame()
-        {
-            _active = false;
+            else
+            {
+                _currentTime -= deltaTime;
+            }
         }
     }
 }
