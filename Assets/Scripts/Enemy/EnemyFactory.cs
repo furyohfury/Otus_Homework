@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ShootEmUp
 {
@@ -8,11 +7,11 @@ namespace ShootEmUp
         [SerializeField] private int _initialCount = 7;
 
         [SerializeField] private Pool<Enemy> _pool;
-        [SerializeField] private EnemyPositions _enemyPositions;        
-        [SerializeField] private Transform _target;        
-        [SerializeField] private Transform _worldTransform;        
+        [SerializeField] private EnemyPositions _enemyPositions;
+        [SerializeField] private Transform _target;
+        [SerializeField] private Transform _worldTransform;
 
-        private void Awake() // todo Add filling pool to startGame() or not?
+        private void Awake()
         {
             _pool.FillPool(_initialCount);
         }

@@ -11,7 +11,7 @@ namespace ShootEmUp
         {
             IGameStateListener.Register(this);
         }
-        
+
         public void OnFixedUpdate(float delta)
         {
             var direction = new Vector2(_inputSystem.HorizontalDirection, 0);

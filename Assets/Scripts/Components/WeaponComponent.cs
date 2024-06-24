@@ -14,6 +14,6 @@ namespace ShootEmUp
         public Quaternion Rotation
         {
             get { return firePoint.rotation; }
-        }        
+        }
     }
 }

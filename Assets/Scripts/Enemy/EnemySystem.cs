@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,14 +24,21 @@ namespace ShootEmUp
             else
             {
                 throw new Exception("Trying to add active enemy again");
-            }          
+            }
         }
 
         public void RemoveEnemy(Enemy enemy)
         {
-            enemy.OnFire -= EnemyFire;
-            enemy.OnDied -= EnemyDied;
-            _enemyFactory.RemoveEnemy(enemy);
+            if (_activeEnemies.Remove(enemy))
+            {
+                enemy.OnFire -= EnemyFire;
+                enemy.OnDied -= EnemyDied;
+                _enemyFactory.RemoveEnemy(enemy);
+            }
+            else
+            {
+                throw new Exception("Trying to remove dead enemy");
+            }
         }
 
         private void EnemyDied(Enemy enemy)

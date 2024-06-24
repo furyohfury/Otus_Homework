@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShootEmUp
 {
-    public class GameLauncher : MonoBehaviour
+    public sealed class GameLauncher : MonoBehaviour
     {
         [SerializeField] private float _countdown = 3;
         [SerializeField] private GameManager _gameManager;
@@ -14,13 +14,13 @@ namespace ShootEmUp
 
         private void Awake()
         {
-            _gameStartButton.onClick.AddListener(() => StartCoroutine(LaunchGame()));            
+            _gameStartButton.onClick.AddListener(() => StartCoroutine(LaunchGame()));
         }
 
-        public virtual IEnumerator LaunchGame()
+        private IEnumerator LaunchGame()
         {
             float time = _countdown;
-            while(time > 0.05)
+            while (time > 0.05)
             {
                 _buttonText.text = time.ToString("f2");
                 time -= Time.deltaTime;

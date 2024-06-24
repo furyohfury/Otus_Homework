@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour, IGamePauseListener, 
+    public sealed class Bullet : MonoBehaviour, IGamePauseListener,
     IGameResumeListener, IGameFinishListener
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;

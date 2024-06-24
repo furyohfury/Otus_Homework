@@ -5,7 +5,7 @@ namespace ShootEmUp
 {
     public class GameStartState : IGameState
     {
-        public bool ActiveUpdates {get; } = true;
+        public bool ActiveUpdates { get; } = true;
 
         public void HandleState(IEnumerable<IGameStateListener> listeners)
         {

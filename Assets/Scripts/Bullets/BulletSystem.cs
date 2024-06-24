@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour
-    {        
+    {
         [SerializeField] private BulletFactory _bulletFactory;
 
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
@@ -17,7 +17,7 @@ namespace ShootEmUp
             bullet.SetVelocity(velocity);
             bullet.OnCollisionEntered += OnBulletCollision;
             if (ActiveBullets.Add(bullet))
-            {                     
+            {
                 return bullet;
             }
             else
@@ -35,7 +35,7 @@ namespace ShootEmUp
             else
             {
                 throw new Exception("Trying to remove already inactive bullet");
-            }            
+            }
         }
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision) // separate class?

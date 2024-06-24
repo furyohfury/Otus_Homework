@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyCycleSpawner : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener , IGameStartListener
+    public sealed class EnemyCycleSpawner : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener, IGameStartListener
     {
         [SerializeField] private int _countdown = 1;
         [SerializeField] private int _maxEnemies = 7;
@@ -16,8 +15,8 @@ namespace ShootEmUp
         {
             IGameStateListener.Register(this);
         }
-        
-        private IEnumerator Start()
+
+        private IEnumerator Start() // doesnt work
         {
             while (true)
             {

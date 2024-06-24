@@ -24,11 +24,11 @@ namespace ShootEmUp
 
         private void Update()
         {
-            if (!_activeUpdates || _iOnUpdateListeners.Count <= 0) 
+            if (!_activeUpdates || _iOnUpdateListeners.Count <= 0)
                 return;
 
             var deltaTime = Time.deltaTime;
-            for(var i = 0; i < _iOnUpdateListeners.Count; i++)
+            for (var i = 0; i < _iOnUpdateListeners.Count; i++)
             {
                 _iOnUpdateListeners[i].OnUpdate(deltaTime);
             }
@@ -36,11 +36,11 @@ namespace ShootEmUp
 
         private void FixedUpdate()
         {
-            if (!_activeUpdates || _iOnFixedUpdateListeners.Count <= 0) 
+            if (!_activeUpdates || _iOnFixedUpdateListeners.Count <= 0)
                 return;
 
             var deltaTime = Time.fixedDeltaTime;
-            for(var i = 0; i < _iOnFixedUpdateListeners.Count; i++)
+            for (var i = 0; i < _iOnFixedUpdateListeners.Count; i++)
             {
                 _iOnFixedUpdateListeners[i].OnFixedUpdate(deltaTime);
             }
@@ -58,7 +58,7 @@ namespace ShootEmUp
                 _iOnFixedUpdateListeners.Add(onFixedUpdateListener);
             }
         }
-        
+
         public void ChangeState(IGameState state)
         {
             _state = state;

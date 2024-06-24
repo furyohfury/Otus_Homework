@@ -15,7 +15,7 @@ namespace ShootEmUp
         private void Awake()
         {
             _pauseButton.onClick.AddListener(() => PauseButtonPressed());
-        }        
+        }
 
         private void PauseButtonPressed()
         {

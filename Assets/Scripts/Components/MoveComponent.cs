@@ -6,7 +6,7 @@ namespace ShootEmUp
     {
         [SerializeField] private float _speed = 5.0f;
 
-        [SerializeField] private Rigidbody2D _rigidbody2D;        
+        [SerializeField] private Rigidbody2D _rigidbody2D;
 
         public void MoveByRigidbodyVelocity(Vector2 velocity)
         {
