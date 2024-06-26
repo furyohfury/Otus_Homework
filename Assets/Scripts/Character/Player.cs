@@ -32,9 +32,6 @@ namespace ShootEmUp
 
         public void Move(Vector3 pos) => _moveComponent.MoveByRigidbodyVelocity(pos);
 
-        private void PlayerDied()
-        {
-            OnPlayerDied?.Invoke();
-        }
+        private void PlayerDied() => OnPlayerDied?.Invoke();
     }
 }

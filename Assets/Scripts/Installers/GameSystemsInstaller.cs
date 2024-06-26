@@ -19,7 +19,7 @@ namespace ShootEmUp
 
             Container.BindInterfacesAndSelfTo<InputListener>().AsCached();
 
-            Container.Bind<BulletSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletSystem>().AsCached();
             Container.BindInterfacesAndSelfTo<BulletsOutOfBoundsObserver>().AsCached().NonLazy();
 
             Container.Bind<EnemySystem>().AsSingle().NonLazy();

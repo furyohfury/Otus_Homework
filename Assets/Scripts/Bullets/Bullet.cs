@@ -3,22 +3,16 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour, IGamePauseListener,
-    IGameResumeListener, IGameFinishListener
+    public sealed class Bullet : MonoBehaviour
     {
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
         public int Damage { get; private set; }
-        private Vector2 _velocity;
+        public Vector2 Velocity => _rigidbody2D.velocity;
 
         [SerializeField] private Rigidbody2D _rigidbody2D;
 
         [SerializeField] private SpriteRenderer spriteRenderer;
-
-        private void Awake()
-        {
-            IGameStateListener.Register(this);
-        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -53,22 +47,6 @@ namespace ShootEmUp
         public void SetParent(Transform parent)
         {
             transform.SetParent(parent);
-        }
-
-        public void PauseGame() // todo Make this in bulletsystem. Store velocities in LookUp
-        {
-            _velocity = _rigidbody2D.velocity;
-            SetVelocity(Vector2.zero);
-        }
-
-        public void ResumeGame()
-        {
-            SetVelocity(_velocity);
-        }
-
-        public void FinishGame()
-        {
-            SetVelocity(Vector2.zero);
         }
     }
 }
