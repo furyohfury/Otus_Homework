@@ -9,6 +9,12 @@ namespace ShootEmUp
         [SerializeField] private LevelBounds _levelBounds;
         [SerializeField] private BulletSystem _bulletSystem;
 
+        public BulletsOutOfBoundsObserver(LevelBounds levelBounds, BulletSystem bulletSystem)
+        {
+            _levelBounds = levelBounds;
+            _bulletSystem = bulletSystem;
+        }
+
         public void Initialize()
         {
             IGameStateListener.Register(this);

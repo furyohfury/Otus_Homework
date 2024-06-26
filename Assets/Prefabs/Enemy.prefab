@@ -140,7 +140,7 @@ MonoBehaviour:
   _attackAgent:
     _countdown: 1
     _weaponComponent:
-      firePoint: {fileID: 0}
+      firePoint: {fileID: 3195880656587174614}
     _bulletConfig: {fileID: 11400000, guid: 6f077225eab11f7408f8ab03305caa2d, type: 2}
   _moveAgent:
     _moveComponent:

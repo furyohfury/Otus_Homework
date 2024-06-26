@@ -15,7 +15,7 @@ namespace ShootEmUp
 
         private float positionZ;
 
-        private Transform _myTransform;
+        private readonly Transform _myTransform;
 
         private readonly BackgroundConfig _backgroundConfig;
 

@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -12,8 +11,11 @@ namespace ShootEmUp
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<UIStateController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GamePauseObserver>().AsSingle();
+            Container.Bind<Button>().FromInstance(_pauseButton).AsCached().WhenInjectedInto<GamePauseObserver>();
+            Container.Bind<Button>().FromInstance(_startButton).AsCached().WhenInjectedInto<GameLauncher>();
+
+            UIStateController uIStateController = new(_pauseButton, _startButton);
+            Container.BindInterfacesAndSelfTo<UIStateController>().FromInstance(uIStateController).AsCached().NonLazy();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -20,9 +19,12 @@ namespace ShootEmUp
 
         public override void InstallBindings()
         {
-            var bulletFactory = new BulletFactory(_worldTransform, _poolsParent, _bulletPrefab, _initialBulletPoolCount);
-            Container.Bind<BulletFactory>().FromInstance(bulletFactory).AsSingle();
+            BindBulletFactory();
+            BindEnemyFactory();
+        }
 
+        private void BindEnemyFactory()
+        {
             var enemySpawnPositionsGO = GameObject.FindGameObjectsWithTag(ENEMY_RESPAWN_POSITIONS_TAG);
             var enemySpawnPositionsTransform = enemySpawnPositionsGO.Select((pos) => pos.transform).ToArray();
             var enemyAttackPositionsGO = GameObject.FindGameObjectsWithTag(ENEMY_ATTACK_POSITION_TAG);
@@ -30,6 +32,12 @@ namespace ShootEmUp
             EnemyPositions enemyPositions = new(enemySpawnPositionsTransform, enemyAttackPositionsTransform);
             var enemyFactory = new EnemyFactory(_initialEnemyPoolCount, enemyPositions, _enemyTarget, _worldTransform, _poolsParent, _enemyPrefab);
             Container.Bind<EnemyFactory>().FromInstance(enemyFactory).AsSingle();
+        }
+
+        private void BindBulletFactory()
+        {
+            var bulletFactory = new BulletFactory(_worldTransform, _poolsParent, _bulletPrefab, _initialBulletPoolCount);
+            Container.Bind<BulletFactory>().FromInstance(bulletFactory).AsSingle();
         }
     }
 }

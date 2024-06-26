@@ -1,31 +1,40 @@
-using System.Collections;
+using DG.Tweening;
+using System.Threading.Tasks;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class GameLauncher : MonoBehaviour
+    public sealed class GameLauncher : IInitializable
     {
-        [SerializeField] private float _countdown = 3;
-        [SerializeField] private GameManager _gameManager;
-        [SerializeField] private Button _gameStartButton;
-        [SerializeField] private TextMeshProUGUI _buttonText;
+        private readonly float _countdown = 3f;
+        private readonly GameManager _gameManager;
+        private readonly Button _gameStartButton;
+        private readonly TextMeshProUGUI _buttonText;
 
-        private void Awake()
+        public GameLauncher(float countdown, GameManager gameManager, Button gameStartButton)
         {
-            _gameStartButton.onClick.AddListener(() => StartCoroutine(LaunchGame()));
+            _countdown = countdown;
+            _gameManager = gameManager;
+            _gameStartButton = gameStartButton;
+            _buttonText = _gameStartButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        private IEnumerator LaunchGame()
+        void IInitializable.Initialize()
         {
-            float time = _countdown;
-            while (time > 0.05)
-            {
-                _buttonText.text = time.ToString("f2");
-                time -= Time.deltaTime;
-                yield return null;
-            }
+            _gameStartButton.onClick.AddListener(() => LaunchGame());
+        }
+
+        private async void LaunchGame()
+        {
+            _buttonText.text = _countdown.ToString();
+            DOTween.To(
+                () => float.Parse(_buttonText.text),
+                (x) => _buttonText.text = x.ToString("f2"),
+                0,
+                _countdown);
+            await Task.Delay(System.TimeSpan.FromSeconds(_countdown));
             _gameManager.ChangeState(new GameStartState());
             _gameManager.HandleState();
         }

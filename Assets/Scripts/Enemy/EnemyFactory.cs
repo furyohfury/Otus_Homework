@@ -3,10 +3,8 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public class EnemyFactory : IInitializable
+    public class EnemyFactory
     {
-        [SerializeField] private readonly int _initialCount = 7;
-
         private readonly EnemyPool _pool;
         private readonly EnemyPositions _enemyPositions;
         private readonly Transform _target;
@@ -15,16 +13,11 @@ namespace ShootEmUp
         [Inject]
         public EnemyFactory(int initialCount, EnemyPositions enemyPositions, Transform target, Transform worldTransform, Transform poolParent, Enemy prefab)
         {
-            _initialCount = initialCount;
             _pool = new EnemyPool(poolParent, prefab);
+            _pool.FillPool(initialCount);
             _enemyPositions = enemyPositions;
             _target = target;
             _worldTransform = worldTransform;
-        }
-
-        void IInitializable.Initialize()
-        {
-            _pool.FillPool(_initialCount);
         }
 
         public Enemy CreateEnemy()

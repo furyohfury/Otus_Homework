@@ -5,21 +5,15 @@ namespace ShootEmUp
 {
     public sealed class BulletFactory
     {
-        private readonly int _initialCount = 50;
         private readonly Transform _worldTransform;
-        private readonly Bullet _prefab;
-
         private readonly BulletPool _pool;
 
         [Inject]
         public BulletFactory(Transform worldTransform, Transform poolParent, Bullet prefab, int initialCount)
         {
             _worldTransform = worldTransform;
-            _prefab = prefab;
-
-            _pool = new BulletPool(poolParent, _prefab);
-            _pool.FillPool(_initialCount);
-            _initialCount = initialCount;
+            _pool = new BulletPool(poolParent, prefab);
+            _pool.FillPool(initialCount);
         }
 
         public Bullet CreateBullet(BulletConfig config)

@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Player : MonoBehaviour
+    public sealed class Player : MonoBehaviour, IHitPoints
     {
         public event Action OnPlayerDied;
 
         [SerializeField] private HitPointsComponent _hpComponent;
+        public HitPointsComponent HitPointsComponent => _hpComponent;
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private MoveComponent _moveComponent;
 
@@ -27,7 +28,7 @@ namespace ShootEmUp
         private void OnValidate()
         {
             gameObject.layer = (int)PhysicsLayer.CHARACTER;
-        }        
+        }
 
         public void Move(Vector3 pos) => _moveComponent.MoveByRigidbodyVelocity(pos);
 

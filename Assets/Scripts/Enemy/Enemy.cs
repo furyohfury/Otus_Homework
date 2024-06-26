@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IHitPoints
     {
         public event Action<Enemy> OnDied;
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
@@ -11,6 +11,7 @@ namespace ShootEmUp
         [SerializeField] private EnemyAttackAgent _attackAgent;
         [SerializeField] private EnemyMoveAgent _moveAgent;
         [SerializeField] private HitPointsComponent _hitPointsComponent;
+        public HitPointsComponent HitPointsComponent => _hitPointsComponent;
 
         private void Awake()
         {

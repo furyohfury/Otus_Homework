@@ -12,10 +12,10 @@ namespace ShootEmUp
 
         public Pool(Transform parent, T prefab)
         {
-            _container = new GameObject($"{_prefab.name}Pool").transform;
-            _container.parent = parent;
-            _container.gameObject.SetActive(false);
             _prefab = prefab;
+            _container = new GameObject($"{prefab.name}Pool").transform;
+            _container.SetParent(parent);
+            _container.gameObject.SetActive(false);            
         }
 
         public virtual T TakeItemFromPool()

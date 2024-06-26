@@ -48,9 +48,9 @@ namespace ShootEmUp
 
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent)) //todo fix
+            if (collision.gameObject.TryGetComponent(out IHitPoints hpComponent))
             {
-                hpComponent.TakeDamage(bullet.Damage);
+                hpComponent.HitPointsComponent.TakeDamage(bullet.Damage);
             }            
             RemoveBullet(bullet);
         }
