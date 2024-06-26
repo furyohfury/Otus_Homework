@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace ShootEmUp
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<UIStateController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GamePauseObserver>().AsSingle();
         }
     }
 }

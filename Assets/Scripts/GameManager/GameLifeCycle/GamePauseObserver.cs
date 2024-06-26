@@ -1,18 +1,24 @@
 ﻿using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class GamePauseObserver : MonoBehaviour
+    public class GamePauseObserver : IInitializable
     {
-        [SerializeField] private Button _pauseButton;
-        [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField] private GameManager _gameManager;
-
+        private readonly Button _pauseButton;
+        private readonly TextMeshProUGUI _text;
+        private readonly GameManager _gameManager;
         private bool _paused = false;
 
-        private void Awake()
+        public GamePauseObserver(Button pauseButton, GameManager gameManager)
+        {
+            _pauseButton = pauseButton;
+            _gameManager = gameManager;
+            _text = pauseButton.GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        void IInitializable.Initialize()
         {
             _pauseButton.onClick.AddListener(() => PauseButtonPressed());
         }

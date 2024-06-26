@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class LevelBackground : MonoBehaviour, IOnFixedUpdateListener
+    public sealed class LevelBackground : IInitializable, IOnFixedUpdateListener
     {
         private float startPositionY;
 
@@ -15,12 +15,17 @@ namespace ShootEmUp
 
         private float positionZ;
 
-        private Transform myTransform;
+        private Transform _myTransform;
 
-        [SerializeField]
-        private Params m_params;
+        private readonly BackgroundConfig _backgroundConfig;
 
-        private void Awake()
+        public LevelBackground(Transform myTransform, BackgroundConfig backgroundConfig)
+        {
+            _myTransform = myTransform;
+            _backgroundConfig = backgroundConfig;
+        }
+
+        void IInitializable.Initialize()
         {
             ConfigurePositions();
             IGameStateListener.Register(this);
@@ -28,16 +33,16 @@ namespace ShootEmUp
 
         public void OnFixedUpdate(float delta)
         {
-            if (myTransform.position.y <= endPositionY)
+            if (_myTransform.position.y <= endPositionY)
             {
-                myTransform.position = new Vector3(
+                _myTransform.position = new Vector3(
                     positionX,
                     startPositionY,
                     positionZ
                 );
             }
 
-            myTransform.position -= new Vector3(
+            _myTransform.position -= new Vector3(
                 positionX,
                 movingSpeedY * Time.fixedDeltaTime,
                 positionZ
@@ -46,26 +51,12 @@ namespace ShootEmUp
 
         private void ConfigurePositions()
         {
-            startPositionY = m_params.m_startPositionY;
-            endPositionY = m_params.m_endPositionY;
-            movingSpeedY = m_params.m_movingSpeedY;
-            myTransform = transform;
-            var position = myTransform.position;
+            startPositionY = _backgroundConfig.m_startPositionY;
+            endPositionY = _backgroundConfig.m_endPositionY;
+            movingSpeedY = _backgroundConfig.m_movingSpeedY;
+            var position = _myTransform.position;
             positionX = position.x;
             positionZ = position.z;
-        }
-
-        [Serializable]
-        public sealed class Params
-        {
-            [SerializeField]
-            public float m_startPositionY;
-
-            [SerializeField]
-            public float m_endPositionY;
-
-            [SerializeField]
-            public float m_movingSpeedY;
-        }
+        }        
     }
 }
