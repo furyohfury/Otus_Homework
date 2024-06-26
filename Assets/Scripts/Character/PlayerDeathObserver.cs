@@ -1,25 +1,32 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class PlayerDeathObserver : MonoBehaviour
+    public sealed class PlayerDeathObserver : IInitializable
     {
-        [SerializeField] private Player _player;
-        [SerializeField] private GameManager _gameManager;
+        private readonly Player _player;
+        private readonly GameManager _gameManager;
 
-        private void Awake()
+        [Inject]
+        public PlayerDeathObserver(Player player, GameManager gameManager)
+        {
+            _player = player;
+            _gameManager = gameManager;
+        }
+
+        public void Initialize()
         {
             _player.OnPlayerDied += PlayerDied;
         }
-        private void OnDestroy()
+
+        private void PlayerDied()
         {
             _player.OnPlayerDied -= PlayerDied;
-        }
-
-        public void PlayerDied()
-        {
             _gameManager.ChangeState(new GameFinishState());
             _gameManager.HandleState();
         }
+
+        
     }
 }

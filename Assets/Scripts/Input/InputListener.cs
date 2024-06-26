@@ -1,14 +1,15 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class InputListener : MonoBehaviour, IOnUpdateListener
+    public sealed class InputListener : IInitializable, IOnUpdateListener
     {
         public event Action OnFireButton;
         public float HorizontalDirection {  get; private set; }
 
-        private void Awake()
+        void IInitializable.Initialize()
         {
             IGameStateListener.Register(this);
         }
@@ -32,6 +33,6 @@ namespace ShootEmUp
             {
                 HorizontalDirection = 0;
             }
-        }
+        }        
     }
 }

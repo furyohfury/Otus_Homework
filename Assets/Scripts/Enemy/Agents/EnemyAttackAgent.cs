@@ -1,13 +1,15 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour, IOnFixedUpdateListener
+    [Serializable]
+    public sealed class EnemyAttackAgent : IOnFixedUpdateListener
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
 
-        [SerializeField] private float _countdown;
+        [SerializeField] private float _countdown = 1f;
 
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private BulletConfig _bulletConfig;
@@ -15,9 +17,15 @@ namespace ShootEmUp
         private Transform _target;
         private float _currentTime;
         private bool _active = false;
-        public bool Active { get => _active; set { _active = value; } }
+        public bool Active { get => _active; set => _active = value; }
 
-        private void Awake()
+        public EnemyAttackAgent(WeaponComponent weaponComponent, BulletConfig bulletConfig)
+        {
+            _weaponComponent = weaponComponent;
+            _bulletConfig = bulletConfig;
+        }
+
+        public void Init()
         {
             IGameStateListener.Register(this);
         }

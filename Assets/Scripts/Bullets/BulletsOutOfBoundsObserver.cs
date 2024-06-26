@@ -1,14 +1,15 @@
 ﻿using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletsOutOfBoundsObserver : MonoBehaviour, IOnFixedUpdateListener
+    public sealed class BulletsOutOfBoundsObserver : IInitializable, IOnFixedUpdateListener
     {
         [SerializeField] private LevelBounds _levelBounds;
         [SerializeField] private BulletSystem _bulletSystem;
 
-        private void Awake()
+        public void Initialize()
         {
             IGameStateListener.Register(this);
         }

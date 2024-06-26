@@ -2,22 +2,26 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyPositions : MonoBehaviour
+    public sealed class EnemyPositions
     {
-        [SerializeField]
-        private Transform[] spawnPositions;
+        private readonly Transform[] _spawnPositions;
 
-        [SerializeField]
-        private Transform[] attackPositions;
+        private readonly Transform[] _attackPositions;
+
+        public EnemyPositions(Transform[] spawnPositions, Transform[] attackPositions)
+        {
+            _spawnPositions = spawnPositions;
+            _attackPositions = attackPositions;
+        }
 
         public Vector2 GetRandomSpawnPosition()
         {
-            return RandomTransform(spawnPositions).position;
+            return RandomTransform(_spawnPositions).position;
         }
 
         public Vector2 GetRandomAttackPosition()
         {
-            return RandomTransform(attackPositions).position;
+            return RandomTransform(_attackPositions).position;
         }
 
         private Transform RandomTransform(Transform[] transforms)

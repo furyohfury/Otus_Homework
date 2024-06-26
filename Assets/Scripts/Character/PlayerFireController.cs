@@ -1,29 +1,35 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class PlayerFireController : MonoBehaviour
+    public class PlayerFireController : IInitializable
     {
-        [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private InputListener _inputListener;
-        [SerializeField] private WeaponComponent _playerWeaponComponent;
+        private readonly BulletSystem _bulletSystem;
+        private readonly InputListener _inputListener;
+        private readonly Player _player;
 
-        [SerializeField] private BulletConfig _bulletConfig;
+        private readonly BulletConfig _bulletConfig;
 
-        private void Awake()
+        [Inject]
+        public PlayerFireController(BulletSystem bulletSystem, InputListener inputListener, BulletConfig bulletConfig, Player player)
+        {
+            _bulletSystem = bulletSystem;
+            _inputListener = inputListener;
+            _bulletConfig = bulletConfig;
+            _player = player;
+        }
+
+        void IInitializable.Initialize()
         {
             _inputListener.OnFireButton += PlayerFireBullet;
-        }
-        private void OnDestroy()
-        {
-            _inputListener.OnFireButton -= PlayerFireBullet;
         }
 
         private void PlayerFireBullet()
         {
             _bulletSystem.FireBullet(_bulletConfig,
-                _playerWeaponComponent.Position,
-                _playerWeaponComponent.Rotation * transform.up * _bulletConfig.speed);
+                _player.GetWeaponPosition,
+                _player.GetWeaponRotation * Vector3.up * _bulletConfig.speed);
         }
     }
 }

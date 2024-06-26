@@ -9,14 +9,11 @@ namespace ShootEmUp
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
         public int Damage { get; private set; }
-
-        [SerializeField]
-        private Rigidbody2D _rigidbody2D;
-
         private Vector2 _velocity;
 
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
+
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         private void Awake()
         {
@@ -30,7 +27,7 @@ namespace ShootEmUp
 
         public void SetDamage(int damage)
         {
-            this.Damage = damage;
+            Damage = damage;
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -58,7 +55,7 @@ namespace ShootEmUp
             transform.SetParent(parent);
         }
 
-        public void PauseGame()
+        public void PauseGame() // todo Make this in bulletsystem. Store velocities in LookUp
         {
             _velocity = _rigidbody2D.velocity;
             SetVelocity(Vector2.zero);

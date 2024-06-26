@@ -1,75 +1,39 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener
+    [Serializable]
+    public sealed class EnemyMoveAgent : IOnFixedUpdateListener
     {
         public event Action OnReachedDestination;
 
         [SerializeField] private MoveComponent _moveComponent;
 
-        private Vector2 _destination;
-        private Coroutine _coroutine;
+        private Vector2? _destination;
 
-        private void Awake()
+        public void Init()
         {
             IGameStateListener.Register(this);
         }
 
-        public void SetDestination(Vector2 endPoint)
-        {
-            _destination = endPoint;
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-            _coroutine = StartCoroutine(GetToDestination());
-        }
+        public void SetDestination(Vector2 endPoint) => _destination = endPoint;
 
-        private IEnumerator GetToDestination()
+        void IOnFixedUpdateListener.OnFixedUpdate(float deltaTime)
         {
-            while (true)
-            {
-                Vector2 distance = _destination - (Vector2)transform.position;
-                if (distance.magnitude <= 0.05f)
-                {
-                    OnReachedDestination?.Invoke();
-                    _coroutine = null;
-                    yield break;
-                }
-                else
-                {
-                    distance.Normalize();
-                    _moveComponent.MoveByRigidbodyVelocity(distance * Time.fixedDeltaTime);
-                    yield return new WaitForFixedUpdate();
-                }
-            }
-        }
+            if (_destination == null)
+                return;
 
-        public void PauseGame()
-        {
-            if (_coroutine != null)
+            Vector2 distance = (Vector2)(_destination - _moveComponent.GetPosition);
+            if (distance.magnitude <= 0.05f)
             {
-                StopCoroutine(_coroutine);
+                OnReachedDestination?.Invoke();
+                _destination = null;
             }
-        }
-
-        public void ResumeGame()
-        {
-            Vector2 distance = _destination - (Vector2)transform.position;
-            if (_coroutine != null && distance.magnitude > 0.05f)
+            else
             {
-                _coroutine = StartCoroutine(GetToDestination());
-            }
-        }
-
-        public void FinishGame()
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
+                distance.Normalize();
+                _moveComponent.MoveByRigidbodyVelocity(distance * Time.fixedDeltaTime);
             }
         }
     }

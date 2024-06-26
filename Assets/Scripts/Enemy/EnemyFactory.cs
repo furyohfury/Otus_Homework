@@ -1,20 +1,32 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class EnemyFactory : MonoBehaviour
+    public class EnemyFactory : IInitializable
     {
-        [SerializeField] private int _initialCount = 7;
+        [SerializeField] private readonly int _initialCount = 7;
 
-        [SerializeField] private Pool<Enemy> _pool;
-        [SerializeField] private EnemyPositions _enemyPositions;
-        [SerializeField] private Transform _target;
-        [SerializeField] private Transform _worldTransform;
+        private readonly EnemyPool _pool;
+        private readonly EnemyPositions _enemyPositions;
+        private readonly Transform _target;
+        private readonly Transform _worldTransform;
 
-        private void Awake()
+        [Inject]
+        public EnemyFactory(int initialCount, EnemyPositions enemyPositions, Transform target, Transform worldTransform, Transform poolParent, Enemy prefab)
+        {
+            _initialCount = initialCount;
+            _pool = new EnemyPool(poolParent, prefab);
+            _enemyPositions = enemyPositions;
+            _target = target;
+            _worldTransform = worldTransform;
+        }
+
+        void IInitializable.Initialize()
         {
             _pool.FillPool(_initialCount);
         }
+
         public Enemy CreateEnemy()
         {
             Enemy enemy = _pool.TakeItemFromPool();

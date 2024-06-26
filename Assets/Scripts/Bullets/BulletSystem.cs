@@ -1,14 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem
     {
-        [SerializeField] private BulletFactory _bulletFactory;
+        private readonly BulletFactory _bulletFactory;
 
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
+
+        [Inject]
+        public BulletSystem(BulletFactory bulletFactory)
+        {
+            _bulletFactory = bulletFactory;
+        }
 
         public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
@@ -31,6 +38,7 @@ namespace ShootEmUp
             if (ActiveBullets.Remove(bullet))
             {
                 _bulletFactory.RemoveBullet(bullet);
+                bullet.OnCollisionEntered -= OnBulletCollision;
             }
             else
             {
@@ -38,13 +46,12 @@ namespace ShootEmUp
             }
         }
 
-        private void OnBulletCollision(Bullet bullet, Collision2D collision) // separate class?
+        private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
+            if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent)) //todo fix
             {
                 hpComponent.TakeDamage(bullet.Damage);
-            }
-            bullet.OnCollisionEntered -= OnBulletCollision;
+            }            
             RemoveBullet(bullet);
         }
     }

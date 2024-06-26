@@ -3,13 +3,20 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class Pool<T> : MonoBehaviour where T : MonoBehaviour
+    public class Pool<T> where T : MonoBehaviour
     {
-        
-        [SerializeField] protected Transform _container;
-        [SerializeField] protected T _prefab;        
+        protected Transform _container;
+        protected T _prefab;
 
         protected readonly Queue<T> _cache = new();
+
+        public Pool(Transform parent, T prefab)
+        {
+            _container = new GameObject($"{_prefab.name}Pool").transform;
+            _container.parent = parent;
+            _container.gameObject.SetActive(false);
+            _prefab = prefab;
+        }
 
         public virtual T TakeItemFromPool()
         {
@@ -31,7 +38,7 @@ namespace ShootEmUp
 
         protected T CreateItem()
         {
-            return Instantiate(_prefab, _container);
+            return Object.Instantiate(_prefab, _container);
         }
 
         public void FillPool(int count)

@@ -11,6 +11,9 @@ namespace ShootEmUp
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private MoveComponent _moveComponent;
 
+        public Vector3 GetWeaponPosition => _weaponComponent.Position;
+        public Quaternion GetWeaponRotation => _weaponComponent.Rotation;
+
         private void Awake()
         {
             _hpComponent.OnHPEnded += PlayerDied;
@@ -24,7 +27,10 @@ namespace ShootEmUp
         private void OnValidate()
         {
             gameObject.layer = (int)PhysicsLayer.CHARACTER;
-        }
+        }        
+
+        public void Move(Vector3 pos) => _moveComponent.MoveByRigidbodyVelocity(pos);
+
         private void PlayerDied()
         {
             OnPlayerDied?.Invoke();

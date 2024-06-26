@@ -1,14 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class UIStateController : MonoBehaviour, IGameStartListener, IGameFinishListener
+    public sealed class UIStateController : IInitializable, IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private Button _pauseButton;
-        [SerializeField] private Button _startButton;
+        private readonly Button _pauseButton;
+        private readonly Button _startButton;
 
-        private void Awake()
+        public UIStateController(Button pauseButton, Button startButton)
+        {
+            _pauseButton = pauseButton;
+            _startButton = startButton;
+        }
+
+        void IInitializable.Initialize()
         {
             IGameStateListener.Register(this);
             _pauseButton.gameObject.SetActive(false);

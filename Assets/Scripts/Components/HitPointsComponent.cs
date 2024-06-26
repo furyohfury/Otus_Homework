@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class HitPointsComponent : MonoBehaviour
+    [Serializable]
+    public sealed class HitPointsComponent
     {
         public event Action OnHPEnded;
 

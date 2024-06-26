@@ -1,17 +1,25 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletFactory : MonoBehaviour
+    public sealed class BulletFactory
     {
-        [SerializeField] private int _initialCount = 50;
-        [SerializeField] private Transform _worldTransform;
+        private readonly int _initialCount = 50;
+        private readonly Transform _worldTransform;
+        private readonly Bullet _prefab;
 
-        [SerializeField] private Pool<Bullet> _pool;
+        private readonly BulletPool _pool;
 
-        private void Awake()
+        [Inject]
+        public BulletFactory(Transform worldTransform, Transform poolParent, Bullet prefab, int initialCount)
         {
+            _worldTransform = worldTransform;
+            _prefab = prefab;
+
+            _pool = new BulletPool(poolParent, _prefab);
             _pool.FillPool(_initialCount);
+            _initialCount = initialCount;
         }
 
         public Bullet CreateBullet(BulletConfig config)

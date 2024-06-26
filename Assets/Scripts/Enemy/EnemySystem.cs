@@ -1,16 +1,24 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemySystem : MonoBehaviour
+    public sealed class EnemySystem
     {
-        [SerializeField] private EnemyFactory _enemyFactory;
-        [SerializeField] private BulletSystem _bulletSystem;
+        private readonly EnemyFactory _enemyFactory;
+        private readonly BulletSystem _bulletSystem;
 
-        private HashSet<Enemy> _activeEnemies = new();
+        private readonly HashSet<Enemy> _activeEnemies = new();
         public int GetCountOfActive() => _activeEnemies.Count;
+
+        [Inject]
+        public EnemySystem(EnemyFactory enemyFactory, BulletSystem bulletSystem)
+        {
+            _enemyFactory = enemyFactory;
+            _bulletSystem = bulletSystem;
+        }
 
         public Enemy GetEnemy()
         {

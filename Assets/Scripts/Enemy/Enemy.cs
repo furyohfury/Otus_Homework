@@ -17,6 +17,8 @@ namespace ShootEmUp
             _attackAgent.OnFire += Fire;
             _hitPointsComponent.OnHPEnded += Die;
             _moveAgent.OnReachedDestination += ReachedDestination;
+            _attackAgent.Init();
+            _moveAgent.Init();
         }
         private void OnDestroy()
         {
