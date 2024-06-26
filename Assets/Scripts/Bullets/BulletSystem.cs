@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
         [SerializeField] private BulletFactory _bulletFactory;
-
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
+
+        private Dictionary<Bullet, Vector2> _velocities;
+
+        private void Awake() => IGameStateListener.Register(this);
 
         public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
@@ -38,7 +42,7 @@ namespace ShootEmUp
             }
         }
 
-        private void OnBulletCollision(Bullet bullet, Collision2D collision) // separate class?
+        private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent(out HitPointsComponent hpComponent))
             {
@@ -46,6 +50,31 @@ namespace ShootEmUp
             }
             bullet.OnCollisionEntered -= OnBulletCollision;
             RemoveBullet(bullet);
+        }
+
+        void IGamePauseListener.PauseGame()
+        {
+            _velocities = ActiveBullets.ToDictionary(bullet => bullet, bullet => bullet.Velocity);
+            foreach (var bullet in ActiveBullets)
+            {
+                bullet.SetVelocity(Vector2.zero);
+            }
+        }
+
+        void IGameResumeListener.ResumeGame()
+        {
+            foreach (var bullet in ActiveBullets)
+            {
+                bullet.SetVelocity(_velocities[bullet]);
+            }
+        }
+
+        void IGameFinishListener.FinishGame()
+        {
+            foreach (var bullet in ActiveBullets)
+            {
+                bullet.SetVelocity(Vector2.zero);
+            }
         }
     }
 }
