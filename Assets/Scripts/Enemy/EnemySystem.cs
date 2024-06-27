@@ -6,11 +6,11 @@ namespace ShootEmUp
 {
     public sealed class EnemySystem : MonoBehaviour
     {
-        [SerializeField] private EnemyFactory _enemyFactory;
-        [SerializeField] private BulletSystem _bulletSystem;
+        public int GetCountOfActive() => _activeEnemies.Count;
 
         private HashSet<Enemy> _activeEnemies = new();
-        public int GetCountOfActive() => _activeEnemies.Count;
+        [SerializeField] private EnemyFactory _enemyFactory;
+        [SerializeField] private BulletSystem _bulletSystem;
 
         public Enemy GetEnemy()
         {

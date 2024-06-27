@@ -6,13 +6,10 @@ namespace ShootEmUp
     {
         [SerializeField]
         private Transform leftBorder;
-
         [SerializeField]
         private Transform rightBorder;
-
         [SerializeField]
         private Transform downBorder;
-
         [SerializeField]
         private Transform topBorder;
 

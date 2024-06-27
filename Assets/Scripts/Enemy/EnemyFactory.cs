@@ -5,7 +5,6 @@ namespace ShootEmUp
     public class EnemyFactory : MonoBehaviour
     {
         [SerializeField] private int _initialCount = 7;
-
         [SerializeField] private Pool<Enemy> _pool;
         [SerializeField] private EnemyPositions _enemyPositions;
         [SerializeField] private Transform _target;
@@ -15,6 +14,7 @@ namespace ShootEmUp
         {
             _pool.FillPool(_initialCount);
         }
+
         public Enemy CreateEnemy()
         {
             Enemy enemy = _pool.TakeItemFromPool();

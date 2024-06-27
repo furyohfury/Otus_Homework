@@ -18,16 +18,19 @@ namespace ShootEmUp
             _hitPointsComponent.OnHPEnded += Die;
             _moveAgent.OnReachedDestination += ReachedDestination;
         }
+
         private void OnDestroy()
         {
             _attackAgent.OnFire -= Fire;
             _hitPointsComponent.OnHPEnded -= Die;
             _moveAgent.OnReachedDestination -= ReachedDestination;
         }
+
         public void SetPosition(Vector2 position)
         {
             transform.position = position;
         }
+
         public void SetDestination(Vector2 endPoint)
         {
             _moveAgent.SetDestination(endPoint);

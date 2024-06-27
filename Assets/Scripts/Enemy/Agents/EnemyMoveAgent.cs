@@ -9,7 +9,6 @@ namespace ShootEmUp
         public event Action OnReachedDestination;
 
         [SerializeField] private MoveComponent _moveComponent;
-
         private Vector2 _destination;
         private Coroutine _coroutine;
 

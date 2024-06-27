@@ -11,6 +11,7 @@ namespace ShootEmUp
         {
             _player.OnPlayerDied += PlayerDied;
         }
+
         private void OnDestroy()
         {
             _player.OnPlayerDied -= PlayerDied;

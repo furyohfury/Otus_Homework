@@ -7,12 +7,15 @@ namespace ShootEmUp
 {
     public sealed class BulletSystem : MonoBehaviour, IGamePauseListener, IGameResumeListener, IGameFinishListener
     {
-        [SerializeField] private BulletFactory _bulletFactory;
         public HashSet<Bullet> ActiveBullets { get; private set; } = new();
 
+        [SerializeField] private BulletFactory _bulletFactory;
         private Dictionary<Bullet, Vector2> _velocities;
 
-        private void Awake() => IGameStateListener.Register(this);
+        private void Awake()
+        {
+            IGameStateListener.Register(this);
+        }
 
         public Bullet FireBullet(BulletConfig config, Vector2 position, Vector2 velocity)
         {
@@ -35,6 +38,7 @@ namespace ShootEmUp
             if (ActiveBullets.Remove(bullet))
             {
                 _bulletFactory.RemoveBullet(bullet);
+                bullet.OnCollisionEntered -= OnBulletCollision;
             }
             else
             {
@@ -48,7 +52,6 @@ namespace ShootEmUp
             {
                 hpComponent.TakeDamage(bullet.Damage);
             }
-            bullet.OnCollisionEntered -= OnBulletCollision;
             RemoveBullet(bullet);
         }
 

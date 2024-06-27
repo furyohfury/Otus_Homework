@@ -6,7 +6,6 @@ namespace ShootEmUp
     {
         [SerializeField]
         private Transform[] spawnPositions;
-
         [SerializeField]
         private Transform[] attackPositions;
 

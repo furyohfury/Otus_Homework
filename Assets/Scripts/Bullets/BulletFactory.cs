@@ -6,7 +6,6 @@ namespace ShootEmUp
     {
         [SerializeField] private int _initialCount = 50;
         [SerializeField] private Transform _worldTransform;
-
         [SerializeField] private Pool<Bullet> _pool;
 
         private void Awake()

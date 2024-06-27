@@ -8,15 +8,14 @@ namespace ShootEmUp
         private readonly List<IGameStateListener> _iGameStateListeners = new();
         private readonly List<IOnUpdateListener> _iOnUpdateListeners = new();
         private readonly List<IOnFixedUpdateListener> _iOnFixedUpdateListeners = new();
-
         [SerializeReference] private IGameState _state;
-
         private bool _activeUpdates = false;
 
         private void Awake()
         {
             IGameStateListener.OnRegister += RegisterListener;
         }
+
         private void OnDestroy()
         {
             IGameStateListener.OnRegister -= RegisterListener;
@@ -65,6 +64,9 @@ namespace ShootEmUp
             _activeUpdates = state.ActiveUpdates;
         }
 
-        public void HandleState() => _state.HandleState(_iGameStateListeners);
+        public void HandleState()
+        {
+            _state.HandleState(_iGameStateListeners);
+        }
     }
 }

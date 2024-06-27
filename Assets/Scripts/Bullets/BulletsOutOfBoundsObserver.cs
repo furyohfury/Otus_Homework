@@ -12,6 +12,7 @@ namespace ShootEmUp
         {
             IGameStateListener.Register(this);
         }
+
         public void OnFixedUpdate(float delta)
         {
             var bulletsOutOfBounds = _bulletSystem.ActiveBullets.Where(

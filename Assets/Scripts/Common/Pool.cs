@@ -5,9 +5,8 @@ namespace ShootEmUp
 {
     public class Pool<T> : MonoBehaviour where T : MonoBehaviour
     {
-        
         [SerializeField] protected Transform _container;
-        [SerializeField] protected T _prefab;        
+        [SerializeField] protected T _prefab;
 
         protected readonly Queue<T> _cache = new();
 

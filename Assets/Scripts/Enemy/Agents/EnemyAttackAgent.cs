@@ -7,15 +7,14 @@ namespace ShootEmUp
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
 
-        [SerializeField] private float _countdown;
+        public bool Active { get => _active; set { _active = value; } }
 
+        private bool _active = false;
+        [SerializeField] private float _countdown;
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private BulletConfig _bulletConfig;
-
         private Transform _target;
         private float _currentTime;
-        private bool _active = false;
-        public bool Active { get => _active; set { _active = value; } }
 
         private void Awake()
         {
@@ -26,6 +25,7 @@ namespace ShootEmUp
         {
             FireCycle();
         }
+
         public void SetTarget(Transform target)
         {
             _target = target;

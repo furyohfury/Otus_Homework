@@ -6,6 +6,7 @@ namespace ShootEmUp
     public sealed class InputListener : MonoBehaviour, IOnUpdateListener
     {
         public event Action OnFireButton;
+
         public float HorizontalDirection {  get; private set; }
 
         private void Awake()

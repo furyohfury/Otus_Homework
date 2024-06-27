@@ -8,11 +8,10 @@ namespace ShootEmUp
         public event Action<Bullet, Collision2D> OnCollisionEntered;
 
         public int Damage { get; private set; }
+        public Vector2 Velocity => _rigidbody2D.velocity;
 
         [SerializeField]
-        private Rigidbody2D _rigidbody2D;
-
-        public Vector2 Velocity => _rigidbody2D.velocity;
+        private Rigidbody2D _rigidbody2D;        
 
         [SerializeField]
         private SpriteRenderer spriteRenderer;

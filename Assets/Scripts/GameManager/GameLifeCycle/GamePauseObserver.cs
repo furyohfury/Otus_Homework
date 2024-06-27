@@ -9,7 +9,6 @@ namespace ShootEmUp
         [SerializeField] private Button _pauseButton;
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private GameManager _gameManager;
-
         private bool _paused = false;
 
         private void Awake()
