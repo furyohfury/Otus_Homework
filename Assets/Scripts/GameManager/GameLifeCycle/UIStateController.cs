@@ -27,9 +27,6 @@ namespace ShootEmUp
             _pauseButton.gameObject.SetActive(true);
         }
 
-        void IGameFinishListener.FinishGame()
-        {
-            _pauseButton.gameObject.SetActive(false);
-        }
+        void IGameFinishListener.FinishGame() => _pauseButton.gameObject.SetActive(false);
     }
 }

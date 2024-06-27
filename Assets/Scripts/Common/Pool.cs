@@ -36,10 +36,7 @@ namespace ShootEmUp
             item.transform.SetParent(_container);
         }
 
-        protected T CreateItem()
-        {
-            return Object.Instantiate(_prefab, _container);
-        }
+        protected T CreateItem() => Object.Instantiate(_prefab, _container);
 
         public void FillPool(int count)
         {

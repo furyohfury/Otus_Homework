@@ -7,12 +7,10 @@ namespace ShootEmUp
     public sealed class InputListener : IInitializable, IOnUpdateListener
     {
         public event Action OnFireButton;
-        public float HorizontalDirection {  get; private set; }
 
-        void IInitializable.Initialize()
-        {
-            IGameStateListener.Register(this);
-        }
+        public float HorizontalDirection { get; private set; }
+
+        void IInitializable.Initialize() => IGameStateListener.Register(this);
 
         public void OnUpdate(float delta)
         {
@@ -33,6 +31,6 @@ namespace ShootEmUp
             {
                 HorizontalDirection = 0;
             }
-        }        
+        }
     }
 }

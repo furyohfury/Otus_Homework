@@ -15,10 +15,7 @@ namespace ShootEmUp
             _player = player;
         }
 
-        void IInitializable.Initialize()
-        {
-            IGameStateListener.Register(this);
-        }
+        void IInitializable.Initialize() => IGameStateListener.Register(this);
 
         public void OnFixedUpdate(float delta)
         {

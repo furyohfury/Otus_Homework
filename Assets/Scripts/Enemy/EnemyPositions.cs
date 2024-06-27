@@ -14,15 +14,9 @@ namespace ShootEmUp
             _attackPositions = attackPositions;
         }
 
-        public Vector2 GetRandomSpawnPosition()
-        {
-            return RandomTransform(_spawnPositions).position;
-        }
+        public Vector2 GetRandomSpawnPosition() => RandomTransform(_spawnPositions).position;
 
-        public Vector2 GetRandomAttackPosition()
-        {
-            return RandomTransform(_attackPositions).position;
-        }
+        public Vector2 GetRandomAttackPosition() => RandomTransform(_attackPositions).position;
 
         private Transform RandomTransform(Transform[] transforms)
         {

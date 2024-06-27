@@ -18,10 +18,7 @@ namespace ShootEmUp
             _enemySystem = enemySystem;
         }
 
-        void IInitializable.Initialize()
-        {
-            IGameStateListener.Register(this);
-        }
+        void IInitializable.Initialize() => IGameStateListener.Register(this);
 
         void IOnUpdateListener.OnUpdate(float deltaTime)
         {

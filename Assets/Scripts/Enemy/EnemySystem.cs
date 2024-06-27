@@ -7,11 +7,11 @@ namespace ShootEmUp
 {
     public sealed class EnemySystem
     {
-        private readonly EnemyFactory _enemyFactory;
-        private readonly BulletSystem _bulletSystem;
+        public int GetCountOfActive() => _activeEnemies.Count;
 
         private readonly HashSet<Enemy> _activeEnemies = new();
-        public int GetCountOfActive() => _activeEnemies.Count;
+        private readonly EnemyFactory _enemyFactory;
+        private readonly BulletSystem _bulletSystem;
 
         [Inject]
         public EnemySystem(EnemyFactory enemyFactory, BulletSystem bulletSystem)
@@ -49,14 +49,8 @@ namespace ShootEmUp
             }
         }
 
-        private void EnemyDied(Enemy enemy)
-        {
-            RemoveEnemy(enemy);
-        }
+        private void EnemyDied(Enemy enemy) => RemoveEnemy(enemy);
 
-        private void EnemyFire(BulletConfig bulletConfig, Vector2 position, Vector2 velocity)
-        {
-            _bulletSystem.FireBullet(bulletConfig, position, velocity);
-        }
+        private void EnemyFire(BulletConfig bulletConfig, Vector2 position, Vector2 velocity) => _bulletSystem.FireBullet(bulletConfig, position, velocity);
     }
 }

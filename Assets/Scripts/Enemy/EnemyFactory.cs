@@ -37,9 +37,6 @@ namespace ShootEmUp
             enemy.SetDestination(attackPosition);
         }
 
-        public void RemoveEnemy(Enemy enemy)
-        {
-            _pool.AddToPool(enemy);
-        }
+        public void RemoveEnemy(Enemy enemy) => _pool.AddToPool(enemy);
     }
 }

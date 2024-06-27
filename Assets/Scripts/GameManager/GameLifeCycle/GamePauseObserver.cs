@@ -18,10 +18,7 @@ namespace ShootEmUp
             _text = pauseButton.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        void IInitializable.Initialize()
-        {
-            _pauseButton.onClick.AddListener(() => PauseButtonPressed());
-        }
+        void IInitializable.Initialize() => _pauseButton.onClick.AddListener(() => PauseButtonPressed());
 
         private void PauseButtonPressed()
         {

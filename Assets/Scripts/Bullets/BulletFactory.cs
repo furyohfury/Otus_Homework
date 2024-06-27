@@ -23,10 +23,7 @@ namespace ShootEmUp
             return bullet;
         }
 
-        public void RemoveBullet(Bullet bullet)
-        {
-            _pool.AddToPool(bullet);
-        }
+        public void RemoveBullet(Bullet bullet) => _pool.AddToPool(bullet);
 
         private void ConstructBullet(Bullet bullet, BulletConfig config)
         {

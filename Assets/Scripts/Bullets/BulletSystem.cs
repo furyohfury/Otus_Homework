@@ -81,6 +81,6 @@ namespace ShootEmUp
             {
                 bullet.SetVelocity(Vector2.zero);
             }
-        }        
+        }
     }
 }

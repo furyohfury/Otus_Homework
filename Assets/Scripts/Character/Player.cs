@@ -15,20 +15,11 @@ namespace ShootEmUp
         public Vector3 GetWeaponPosition => _weaponComponent.Position;
         public Quaternion GetWeaponRotation => _weaponComponent.Rotation;
 
-        private void Awake()
-        {
-            _hpComponent.OnHPEnded += PlayerDied;
-        }
+        private void Awake() => _hpComponent.OnHPEnded += PlayerDied;
 
-        private void OnDestroy()
-        {
-            _hpComponent.OnHPEnded -= PlayerDied;
-        }
+        private void OnDestroy() => _hpComponent.OnHPEnded -= PlayerDied;
 
-        private void OnValidate()
-        {
-            gameObject.layer = (int)PhysicsLayer.CHARACTER;
-        }
+        private void OnValidate() => gameObject.layer = (int)PhysicsLayer.CHARACTER;
 
         public void Move(Vector3 pos) => _moveComponent.MoveByRigidbodyVelocity(pos);
 

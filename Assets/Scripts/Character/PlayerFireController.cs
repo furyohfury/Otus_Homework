@@ -20,10 +20,7 @@ namespace ShootEmUp
             _player = player;
         }
 
-        void IInitializable.Initialize()
-        {
-            _inputListener.OnFireButton += PlayerFireBullet;
-        }
+        void IInitializable.Initialize() => _inputListener.OnFireButton += PlayerFireBullet;
 
         private void PlayerFireBullet()
         {

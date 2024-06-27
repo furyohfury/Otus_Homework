@@ -21,10 +21,7 @@ namespace ShootEmUp
             _buttonText = _gameStartButton.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        void IInitializable.Initialize()
-        {
-            _gameStartButton.onClick.AddListener(() => LaunchGame());
-        }
+        void IInitializable.Initialize() => _gameStartButton.onClick.AddListener(() => LaunchGame());
 
         private async void LaunchGame()
         {

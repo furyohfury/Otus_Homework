@@ -13,14 +13,9 @@ namespace ShootEmUp
 
         private bool _activeUpdates = false;
 
-        private void Awake()
-        {
-            IGameStateListener.OnRegister += RegisterListener;
-        }
-        private void OnDestroy()
-        {
-            IGameStateListener.OnRegister -= RegisterListener;
-        }
+        private void Awake() => IGameStateListener.OnRegister += RegisterListener;
+
+        private void OnDestroy() => IGameStateListener.OnRegister -= RegisterListener;
 
         private void Update()
         {

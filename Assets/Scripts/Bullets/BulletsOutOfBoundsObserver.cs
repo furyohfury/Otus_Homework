@@ -15,11 +15,9 @@ namespace ShootEmUp
             _bulletSystem = bulletSystem;
         }
 
-        public void Initialize()
-        {
-            IGameStateListener.Register(this);
-        }
-        public void OnFixedUpdate(float delta)
+        void IInitializable.Initialize() => IGameStateListener.Register(this);
+
+        void IOnFixedUpdateListener.OnFixedUpdate(float delta)
         {
             var bulletsOutOfBounds = _bulletSystem.ActiveBullets.Where(
                 b => !_levelBounds.InBounds(b.transform.position)).ToArray();

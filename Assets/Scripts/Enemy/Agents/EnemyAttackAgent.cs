@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
@@ -9,15 +8,14 @@ namespace ShootEmUp
     {
         public event Action<BulletConfig, Vector2, Vector2> OnFire;
 
-        [SerializeField] private float _countdown = 1f;
+        public bool Active { get => _active; set => _active = value; }
 
+        private bool _active = false;
+        [SerializeField] private float _countdown = 1f;
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private BulletConfig _bulletConfig;
-
         private Transform _target;
         private float _currentTime;
-        private bool _active = false;
-        public bool Active { get => _active; set => _active = value; }
 
         public EnemyAttackAgent(WeaponComponent weaponComponent, BulletConfig bulletConfig)
         {
@@ -25,25 +23,17 @@ namespace ShootEmUp
             _bulletConfig = bulletConfig;
         }
 
-        public void Init()
-        {
-            IGameStateListener.Register(this);
-        }
+        public void Init() => IGameStateListener.Register(this);
 
-        public void OnFixedUpdate(float delta)
-        {
-            FireCycle();
-        }
+        public void OnFixedUpdate(float delta) => FireCycle();
+
         public void SetTarget(Transform target)
         {
             _target = target;
             ResetCountdown();
         }
 
-        public void ResetCountdown()
-        {
-            _currentTime = _countdown;
-        }
+        public void ResetCountdown() => _currentTime = _countdown;
 
         private void FireCycle()
         {

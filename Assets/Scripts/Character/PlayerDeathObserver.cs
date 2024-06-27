@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 namespace ShootEmUp
@@ -15,10 +14,7 @@ namespace ShootEmUp
             _gameManager = gameManager;
         }
 
-        public void Initialize()
-        {
-            _player.OnPlayerDied += PlayerDied;
-        }
+        public void Initialize() => _player.OnPlayerDied += PlayerDied;
 
         private void PlayerDied()
         {
@@ -26,7 +22,5 @@ namespace ShootEmUp
             _gameManager.ChangeState(new GameFinishState());
             _gameManager.HandleState();
         }
-
-        
     }
 }

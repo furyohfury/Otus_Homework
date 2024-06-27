@@ -6,17 +6,12 @@ namespace ShootEmUp
     public sealed class LevelBackground : IInitializable, IOnFixedUpdateListener
     {
         private float startPositionY;
-
         private float endPositionY;
-
         private float movingSpeedY;
-
         private float positionX;
-
         private float positionZ;
 
         private readonly Transform _myTransform;
-
         private readonly BackgroundConfig _backgroundConfig;
 
         public LevelBackground(Transform myTransform, BackgroundConfig backgroundConfig)
@@ -57,6 +52,6 @@ namespace ShootEmUp
             var position = _myTransform.position;
             positionX = position.x;
             positionZ = position.z;
-        }        
+        }
     }
 }
