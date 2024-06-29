@@ -5,15 +5,11 @@ namespace ShootEmUp
 {
     public sealed class Bullet : MonoBehaviour
     {
-        public event Action<Bullet, Collision2D> OnCollisionEntered;
-
         public int Damage { get; private set; }
         public Vector2 Velocity => _rigidbody2D.velocity;
 
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
-
-        private void OnCollisionEnter2D(Collision2D collision) => OnCollisionEntered?.Invoke(this, collision);
 
         public void SetDamage(int damage) => Damage = damage;
 
