@@ -5,11 +5,12 @@ using Sirenix.OdinInspector;
 
 namespace Lessons.Architecture.PM
 {
+    [System.Serializable]
     public sealed class CharacterInfo
     {
         public event Action<CharacterStat> OnStatAdded;
         public event Action<CharacterStat> OnStatRemoved;
-    
+
         [ShowInInspector]
         private readonly HashSet<CharacterStat> stats = new();
 
