@@ -2,8 +2,10 @@
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class CharacterStatsView :MonoBehaviour
+    public sealed class AllCharacterStatsView :MonoBehaviour
     {
         private CharacterStatView _characterStatPrefab;
+
+
     }
 }
