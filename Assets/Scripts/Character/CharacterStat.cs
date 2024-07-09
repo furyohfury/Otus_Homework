@@ -18,11 +18,17 @@ namespace Lessons.Architecture.PM
             Name.Value = name;
             Value.Value = value;
         }
+        
+        [Button]
+        public void ChangeName(string name)
+        {
+            this.Name.Value = name;
+        }
 
         [Button]
         public void ChangeValue(int value)
         {
-            this.Value = value;
+            this.Value.Value = value;
         }
     }
 }

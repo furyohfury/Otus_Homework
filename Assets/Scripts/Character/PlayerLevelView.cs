@@ -18,7 +18,7 @@ namespace Lessons.Architecture.PM
 
         private IPlayerLevelPresenter _presenter;
         private float _barsWidth;
-        private readonly float _duration = 1; // todo put somewhere
+        private readonly float _duration = 1; // todo put somewhere else
 
         private void Awake()
         {
@@ -43,6 +43,13 @@ namespace Lessons.Architecture.PM
                 .Subscribe(SetExperience);
             playerLevelPresenter.ProgressBarFillRate
                 .Subscribe(SetProgressBar);
+        }
+
+        public void Hide()
+        {
+            _presenter.Dispose();
+            _disposable.Clear();
+            gameObject.SetActive(false);
         }
 
         public void SetLevel(string level) => _level.text = level;
