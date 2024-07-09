@@ -7,19 +7,22 @@ namespace Lessons.Architecture.PM
     [System.Serializable]
     public sealed class CharacterStat
     {
-        public event Action<int> OnValueChanged; 
+        [ShowInInspector, ReadOnly]
+        public ReactiveProperty<string> Name { get; private set; } = new();
 
         [ShowInInspector, ReadOnly]
-        public string Name { get; private set; }
+        public ReactiveProperty<int> Value { get; private set; } = new();
 
-        [ShowInInspector, ReadOnly]
-        public int Value { get; private set; }
+        public CharacterStat(string name, int value)
+        {
+            Name.Value = name;
+            Value.Value = value;
+        }
 
         [Button]
         public void ChangeValue(int value)
         {
             this.Value = value;
-            this.OnValueChanged?.Invoke(value);
         }
     }
 }
