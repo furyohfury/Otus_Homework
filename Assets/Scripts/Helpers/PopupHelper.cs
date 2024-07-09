@@ -1,11 +1,23 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Lessons.Architecture.PM
 {
     public class PopupHelper : MonoBehaviour
     {
-        [SerializeField] private CharacterInfo _characterInfo;
-        [SerializeField] private PlayerLevel _playerLevel;
-        [SerializeField] private UserInfo _userInfo;
+        [ShowInInspector] 
+        private CharacterInfo _characterInfo;
+        [ShowInInspector] 
+        private PlayerLevel _playerLevel;
+        [ShowInInspector] 
+        private UserInfo _userInfo;
+
+        [Inject]
+        public void Construct(CharacterInfo characterInfo, PlayerLevel playerLevel, UserInfo userInfo)
+        {
+            _characterInfo = characterInfo;
+            _playerLevel = playerLevel;
+            _userInfo = userInfo;
+        }
     }
 }

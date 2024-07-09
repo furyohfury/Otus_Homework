@@ -21,6 +21,13 @@ namespace Lessons.Architecture.PM
             get { return 100 * (this.CurrentLevel + 1); }
         }
 
+        [Inject]
+        public PlayerLevel(CharacterConfig config)
+        {
+            CurrentLevel = config.CurrentLevel;
+            CurrentExperience = config.CurrentExperience;
+        }
+
         [Button]
         public void AddExperience(int range)
         {

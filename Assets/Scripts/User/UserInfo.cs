@@ -20,6 +20,14 @@ namespace Lessons.Architecture.PM
         [ShowInInspector, ReadOnly]
         public Sprite Icon { get; private set; }
 
+        [Inject]
+        public UserInfo(UserConfig config)
+        {
+            Name = config.Name;
+            Description = config.Description;
+            Icon = config.Icon;
+        }
+
         [Button]
         public void ChangeName(string name)
         {
