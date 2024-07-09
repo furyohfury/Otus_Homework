@@ -7,6 +7,8 @@ namespace Lessons.Architecture.PM
         public override void InstallBindings()
         {
             Container.Bind<UserInfo>().AsCached();
+            Container.Bind<PlayerLevel>().AsCached();
+            Container.Bind<CharacterInfo>().AsCached();
         }
     }
 }

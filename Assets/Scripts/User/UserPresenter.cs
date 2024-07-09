@@ -9,6 +9,16 @@ namespace Lessons.Architecture.PM
         public ReactiveProperty<string> Description { get; } = new();
         public ReactiveProperty<Sprite> Icon { get; } = new();
 
+        private CompositeDisposable _disposable = new();
 
+        public UserPresenter(UserInfo userInfo)
+        {
+            // userInfo.Name.Value.Subscribe todo
+        }
+
+        public void Dispose()
+        {
+            _disposable.Clear();
+        }
     }
 }

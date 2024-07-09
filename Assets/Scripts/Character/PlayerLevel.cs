@@ -29,8 +29,8 @@ namespace Lessons.Architecture.PM
         [Button]
         public void AddExperience(int range)
         {
-            var xp = Math.Min(this.CurrentExperience + range, this.RequiredExperience);
-            this.CurrentExperience = xp;
+            var xp = Math.Min(this.CurrentExperience.Value + range, this.RequiredExperience.Value);
+            this.CurrentExperience.Value = xp;
         }
 
         [Button]
@@ -38,14 +38,14 @@ namespace Lessons.Architecture.PM
         {
             if (this.CanLevelUp())
             {
-                this.CurrentExperience = 0;
-                this.CurrentLevel++;
+                this.CurrentExperience.Value = 0;
+                this.CurrentLevel.Value++;
             }
         }
 
         public bool CanLevelUp()
         {
-            return this.CurrentExperience == this.RequiredExperience;
+            return this.CurrentExperience.Value == this.RequiredExperience.Value;
         }
     }
 }

@@ -28,19 +28,19 @@ namespace Lessons.Architecture.PM
         [Button]
         public void ChangeName(string name)
         {
-            this.Name = name;
+            this.Name.Value = name;
         }
 
         [Button]
         public void ChangeDescription(string description)
         {
-            this.Description = description;
+            this.Description.Value = description;
         }
 
         [Button]
         public void ChangeIcon(Sprite icon)
         {
-            this.Icon = icon;
+            this.Icon.Value = icon;
         }
     }
 }

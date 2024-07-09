@@ -11,8 +11,8 @@ namespace Lessons.Architecture.PM
 
         public override void InstallBindings()
         {
-            Container.Bind<CharacterConfig>().FromInstance(_characterConfig).AsSingle();
-            Container.Bind<UserConfig>().FromInstance(_userConfig).AsSingle();
+            Container.Bind<CharacterConfig>().FromInstance(_characterConfig).AsCached();
+            Container.Bind<UserConfig>().FromInstance(_userConfig).AsCached();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Lessons.Architecture.PM
             //_name.text = userPresenter.Name;
             //_description.text = userPresenter.Description;
             //_icon.sprite = userPresenter.Icon;
-
+            _presenter = userPresenter;
             userPresenter.Name.Subscribe(ChangeName)
                 .AddTo(_disposable);
             userPresenter.Description.Subscribe(ChangeDescription)
@@ -32,6 +32,13 @@ namespace Lessons.Architecture.PM
                 .AddTo(_disposable);
 
             gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {            
+            _presenter.Dispose();
+            _disposable.Clear();
+            gameObject.SetActive(false);
         }
 
         private void ChangeIcon(Sprite sprite) => _icon.sprite = sprite;
