@@ -4,7 +4,7 @@ using UniRx;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class PlayerLevelPresenter : IPlayerPresenter
+    public sealed class PlayerLevelPresenter : IPlayerLevelPresenter
     {
         public ReactiveProperty<string> Level { get; private set; } = new();
         public ReactiveProperty<string> Experience { get; private set; } = new();
@@ -13,22 +13,22 @@ namespace Lessons.Architecture.PM
         private PlayerLevel _playerLevel;
         private CompositeDisposable _disposable = new();
 
-        public void PlayerLevelPresenter(PlayerLevel playerLevel)
+        public PlayerLevelPresenter(PlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
             
-            playerLevel.Level
-                .Subscribe(level => Level = level.ToString())
-                .Addto(_disposable);
+            playerLevel.CurrentLevel
+                .Subscribe(level => Level.Value = level.ToString())
+                .AddTo(_disposable);
 
             playerLevel.CurrentExperience
                 .Subscribe(exp => 
                 {
                     int reqExp = playerLevel.RequiredExperience;
-                    Experience = $"XP : {exp/reqExp}";
-                    ProgressBarFillRate = exp/reqExp;
+                    Experience.Value = $"XP : {exp/reqExp}";
+                    ProgressBarFillRate.Value = exp/reqExp;
                 })
-                .Addto(_disposable);
+                .AddTo(_disposable);
         }
 
 

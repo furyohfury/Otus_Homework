@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using UniRx;
 
 namespace Lessons.Architecture.PM
 {
@@ -10,29 +11,29 @@ namespace Lessons.Architecture.PM
     {
         [ShowInInspector]
         private readonly HashSet<CharacterStat> _stats = new();
-        
-        public IReadOnlyReactiveCollection<CharacterStat> Stats => _stats;
+
+        public IReadOnlyReactiveCollection<CharacterStat> Stats => (IReadOnlyReactiveCollection<CharacterStat>) _stats;
 
         public CharacterInfo(CharacterConfig config)
         {
-            _stats = Config.Stats;
+            _stats = config.Stats.ToHashSet();
         }
 
         [Button]
         public void AddStat(CharacterStat stat)
         {
-            if (this._stats.Add(stat))
+            if (!this._stats.Add(stat))
             {
-                this.OnStatAdded?.Invoke(stat);
+                throw new Exception("Cant add same stat");
             }
         }
 
         [Button]
         public void RemoveStat(CharacterStat stat)
         {
-            if (this._stats.Remove(stat))
+            if (!this._stats.Remove(stat))
             {
-                this.OnStatRemoved?.Invoke(stat);
+                throw new Exception($"Cant remove stat {stat.Name.Value}");
             }
         }
 
@@ -40,7 +41,7 @@ namespace Lessons.Architecture.PM
         {
             foreach (var stat in this._stats)
             {
-                if (stat.Name == name)
+                if (stat.Name.Value == name)
                 {
                     return stat;
                 }

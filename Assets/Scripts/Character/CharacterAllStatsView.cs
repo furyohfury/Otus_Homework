@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
@@ -6,18 +8,18 @@ namespace Lessons.Architecture.PM
     {
         private CharacterStatView _characterStatPrefab;
         private HashSet<CharacterStatView> _stats = new();
-        [SerializeField] 
-        private Transform[] _statTransforms;       
-                
-        public AddStat(string stat)
+        [SerializeField]
+        private Transform[] _statTransforms;
+
+        public void AddStat(string stat)
         {
             var statGO = Instantiate(_characterStatPrefab, transform);
             statGO.SetStat(stat);
-            statGO.position = _statTransforms[_stats.Count].position;
+            statGO.transform.position = _statTransforms[_stats.Count].position;
             _stats.Add(statGO); //todo look when to add
         }
 
-        public void RemoveStat()
+        //public void RemoveStat()
 
         private void OnValidate() // todo check if works
         {

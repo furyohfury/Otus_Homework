@@ -2,5 +2,6 @@
 {
     public interface IPresenter //todo add dispose?
     {
+        public void Dispose();
     }
 }

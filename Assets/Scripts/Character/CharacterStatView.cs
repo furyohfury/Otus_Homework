@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using UniRx;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM
@@ -19,7 +20,7 @@ namespace Lessons.Architecture.PM
             }
             _presenter = statPresenter;
             statPresenter.Stat
-                .Subscribe(SetStat);
+                .Subscribe(SetStat)
                 .AddTo(_disposable);
 
             gameObject.SetActive(true);

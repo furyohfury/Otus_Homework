@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UniRx;
+using Zenject;
 
 namespace Lessons.Architecture.PM
 {
@@ -14,9 +15,9 @@ namespace Lessons.Architecture.PM
         public ReactiveProperty<int> CurrentExperience { get; private set; } = new();
 
         [ShowInInspector, ReadOnly]
-        public ReactiveProperty<int> RequiredExperience
+        public int RequiredExperience
         {
-            get { return 100 * (this.CurrentLevel + 1); }
+            get { return 100 * (this.CurrentLevel.Value + 1); }
         }
 
         [Inject]
@@ -29,7 +30,7 @@ namespace Lessons.Architecture.PM
         [Button]
         public void AddExperience(int range)
         {
-            var xp = Math.Min(this.CurrentExperience.Value + range, this.RequiredExperience.Value);
+            var xp = Math.Min(this.CurrentExperience.Value + range, this.RequiredExperience);
             this.CurrentExperience.Value = xp;
         }
 
@@ -45,7 +46,7 @@ namespace Lessons.Architecture.PM
 
         public bool CanLevelUp()
         {
-            return this.CurrentExperience.Value == this.RequiredExperience.Value;
+            return this.CurrentExperience.Value == this.RequiredExperience;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Lessons.Architecture.PM
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _icon;
 
-        private UserPresenter _presenter;
+        private IUserPresenter _presenter;
         private CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)

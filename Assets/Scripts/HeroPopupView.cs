@@ -9,7 +9,7 @@ namespace Lessons.Architecture.PM
         [SerializeField] private Button _levelupButton;
         [SerializeField] private UserView _userView;
         [SerializeField] private PlayerLevelView _playerLevelView;
-        [SerializeField] private AllCharacterStatsView _allCharacterStatsView;
+        [SerializeField] private CharacterAllStatsView _allCharacterStatsView;
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 namespace Lessons.Architecture.PM
@@ -19,6 +20,7 @@ namespace Lessons.Architecture.PM
         private IPlayerLevelPresenter _presenter;
         private float _barsWidth;
         private readonly float _duration = 1; // todo put somewhere else
+        private CompositeDisposable _disposable = new();
 
         private void Awake()
         {
