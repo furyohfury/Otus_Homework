@@ -7,11 +7,16 @@ namespace Lessons.Architecture.PM
 {
     public sealed class PlayerLevelView : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _level;
-        [SerializeField] private TMP_Text _experience;
-        [SerializeField] private RectTransform _uncompletedBar;
-        [SerializeField] private RectTransform _completedBar;
+        [SerializeField] 
+        private TMP_Text _level;
+        [SerializeField] 
+        private TMP_Text _experience;
+        [SerializeField] 
+        private RectTransform _uncompletedBar;
+        [SerializeField] 
+        private RectTransform _completedBar;
 
+        private IPlayerLevelPresenter _presenter;
         private float _barsWidth;
         private readonly float _duration = 1; // todo put somewhere
 
@@ -24,16 +29,31 @@ namespace Lessons.Architecture.PM
             _barsWidth = _completedBar.sizeDelta.x;
         }
 
-        public void SetLevel(int level) => _level.text = level.ToString();
+        public void Show(IPresenter presenter)
+        {
+            if (presenter is not IPlayerLevelPresenter playerLevelPresenter)
+            {
+                throw new System.Exception("Needed playerLevelPresenter");
+            }
+
+            _presenter = playerLevelPresenter;
+            playerLevelPresenter.Level.
+                Subscribe(SetLevel);
+            playerLevelPresenter.Experience
+                .Subscribe(SetExperience);
+            playerLevelPresenter.ProgressBarFillRate
+                .Subscribe(SetProgressBar);
+        }
+
+        public void SetLevel(string level) => _level.text = level;
+        public void SetExperience(string exp) => _experience.text = exp;
 
         [Button]
-        public void SetProgressBar(int currentValue, int maxValue)
+        public void SetProgressBar(float fillRate)
         {
-            _experience.text = $"XP : {currentValue}/{maxValue}";
-            
             DOTween.To(() => _completedBar.sizeDelta.x,
              x => _completedBar.sizeDelta = new Vector2(x, _completedBar.sizeDelta.y),
-             (float) currentValue / (float) maxValue * _barsWidth,
+             fillRate * _barsWidth,
              _duration);
         }
     }
