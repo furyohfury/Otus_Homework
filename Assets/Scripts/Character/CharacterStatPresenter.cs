@@ -2,14 +2,14 @@ using UniRx;
 
 namespace Lessons.Architecture.PM
 {
-    public sealed class StatPresenter : IStatPresenter
+    public sealed class CharacterStatPresenter : IStatPresenter
     {
         public ReactiveProperty<string> Stat { get; private set; } = new();
 
         private CharacterStat _characterStat;
         private CompositeDisposable _disposable = new();
 
-        public StatPresenter(CharacterStat stat)
+        public CharacterStatPresenter(CharacterStat stat)
         {
             _characterStat = stat;
             _characterStat.Name

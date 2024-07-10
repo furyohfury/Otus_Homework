@@ -7,19 +7,32 @@ namespace Lessons.Architecture.PM
     public sealed class CharacterAllStatsView : MonoBehaviour
     {
         private CharacterStatView _characterStatPrefab;
-        private HashSet<CharacterStatView> _stats = new();
+        private List<CharacterStatView> _stats = new();
         [SerializeField]
         private Transform[] _statTransforms;
 
-        public void AddStat(string stat)
+        public void Show(IPresenter presenter)
         {
-            var statGO = Instantiate(_characterStatPrefab, transform);
-            statGO.SetStat(stat);
-            statGO.transform.position = _statTransforms[_stats.Count].position;
-            _stats.Add(statGO); //todo look when to add
+            if (presenter is not ICharacterAllStatsPresenter charStatsPresenter)
+            {
+                throw new System.Exception("Needed ICharacterAllStatsPresenter");
+            }
+            foreach(var stat in _stats)
         }
 
-        //public void RemoveStat()
+        public void AddStat(string stat)
+        {
+            var statGO = Instantiate(_characterStatPrefab, transform);            
+            _stats.Add(statGO); //todo look when to add
+            statGO.SetStat(stat);
+            statGO.transform.position = _statTransforms[_stats.Count].position;
+            statGO.gameObject.SetActive(false);            
+        }
+
+        public void RemoveStat()
+        {
+
+        }
 
         private void OnValidate() // todo check if works
         {

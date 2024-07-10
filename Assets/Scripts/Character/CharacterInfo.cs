@@ -12,6 +12,7 @@ namespace Lessons.Architecture.PM
         [ShowInInspector]
         private readonly HashSet<CharacterStat> _stats = new();
 
+        // todo does it even work casting like that?
         public IReadOnlyReactiveCollection<CharacterStat> Stats => (IReadOnlyReactiveCollection<CharacterStat>) _stats;
 
         public CharacterInfo(CharacterConfig config)
