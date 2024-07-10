@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UniRx;
 
@@ -13,11 +12,17 @@ namespace Lessons.Architecture.PM
         private readonly HashSet<CharacterStat> _stats = new();
 
         // todo does it even work casting like that?
-        public IReadOnlyReactiveCollection<CharacterStat> Stats => (IReadOnlyReactiveCollection<CharacterStat>) _stats;
+        public IReadOnlyReactiveCollection<CharacterStat> Stats => (IReadOnlyReactiveCollection<CharacterStat>)_stats;
 
         public CharacterInfo(CharacterConfig config)
         {
-            _stats = config.Stats.ToHashSet();
+            foreach (var key in config.Stats.Keys)
+            {
+                if (!_stats.Add(new CharacterStat(key, config.Stats[key])))
+                {
+                    throw new ArgumentException($"Tried to add same stat {key}");
+                }
+            }
         }
 
         [Button]

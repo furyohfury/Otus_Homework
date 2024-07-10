@@ -2,6 +2,7 @@
 
 namespace Lessons.Architecture.PM
 {
+    [CreateAssetMenu(fileName = "UserConfig", menuName = "Create config/UserConfig")]
     public sealed class UserConfig : ScriptableObject
     {
         [SerializeField] private string _name;

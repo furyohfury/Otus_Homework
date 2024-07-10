@@ -7,31 +7,52 @@ namespace Lessons.Architecture.PM
     public sealed class CharacterAllStatsView : MonoBehaviour
     {
         private CharacterStatView _characterStatPrefab;
-        private List<CharacterStatView> _stats = new();
+        private List<CharacterStatView> _statViews = new();
         [SerializeField]
         private Transform[] _statTransforms;
+        private ICharacterAllStatsPresenter _characterAllStatsPresenter;
 
-        public void Show(IPresenter presenter)
+        public void Show(IPresenter presenter) //todo subscribe on change of PModel collection
         {
             if (presenter is not ICharacterAllStatsPresenter charStatsPresenter)
             {
                 throw new System.Exception("Needed ICharacterAllStatsPresenter");
             }
-            foreach(var stat in _stats)
+            _characterAllStatsPresenter = charStatsPresenter;
+            for (int i = 0; i < charStatsPresenter.StatPresenters.Count; i++)
+            {
+                var statPresenter = charStatsPresenter.StatPresenters[i];
+                ShowStat(CreateStat(), statPresenter);
+            }
+
+            //for (var index = 0; index < shopPopupPresenter.ProductPresenters.Count; index++)
+            //{
+            //    var productPresenter = shopPopupPresenter.ProductPresenters[index];
+            //    ProductView view = Instantiate(_viewPrefab, _container);
+            //    view.Initialized(productPresenter);
+            //    _views.Add(view);
+            //}
         }
 
-        public void AddStat(string stat)
+        public void Hide()
         {
-            var statGO = Instantiate(_characterStatPrefab, transform);            
-            _stats.Add(statGO); //todo look when to add
-            statGO.SetStat(stat);
-            statGO.transform.position = _statTransforms[_stats.Count].position;
-            statGO.gameObject.SetActive(false);            
+            foreach (var statView in _statViews)
+            {
+                statView.Hide();
+            }
         }
 
-        public void RemoveStat()
+        public void ShowStat(CharacterStatView view, IStatPresenter presenter)
         {
+            view.Show(presenter);
+        }
 
+        public CharacterStatView CreateStat()
+        {
+            var statGO = Instantiate(_characterStatPrefab, transform);
+            _statViews.Add(statGO); //todo look when to add
+            statGO.transform.position = _statTransforms[_statViews.Count].position;
+            return statGO;
         }
 
         private void OnValidate() // todo check if works
