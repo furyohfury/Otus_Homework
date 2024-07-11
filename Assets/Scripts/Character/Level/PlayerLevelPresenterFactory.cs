@@ -8,7 +8,7 @@ namespace Lessons.Architecture.PM
     {
         private PlayerLevel _playerLevel;
 
-        public UserPresenterFactory(PlayerLevel playerLevel)
+        public PlayerLevelPresenterFactory(PlayerLevel playerLevel)
         {
             _playerLevel=playerLevel;
         }

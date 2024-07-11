@@ -15,15 +15,15 @@ namespace Lessons.Architecture.PM
         [Inject]
         public UserPresenter(UserInfo userInfo)
         {
-            userInfo.Name.
+            userInfo.Name
                 .Subscribe(name => Name.Value = name)
                 .AddTo(_disposable);
 
-            userInfo.Description.
+            userInfo.Description
                 .Subscribe(desc => Description.Value = desc)
                 .AddTo(_disposable);
 
-            userInfo.Icon.
+            userInfo.Icon
                 .Subscribe(icon => Icon.Value = icon)
                 .AddTo(_disposable);
         }

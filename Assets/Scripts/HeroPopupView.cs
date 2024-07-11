@@ -24,9 +24,11 @@ namespace Lessons.Architecture.PM
             {
                 throw new System.Exception("Needed IHeroPopupPresenter");
             }
+            _heroPopupPresenter = heroPopupPresenter;
             _userView.Show(heroPopupPresenter.UserPresenter);
             _playerLevelView.Show(heroPopupPresenter.PlayerLevelPresenter);
             _characterAllStatsView.Show(heroPopupPresenter.CharacterAllStatsPresenter);
+            _exitButton.onClick.AddListener(Hide);
             gameObject.SetActive(true);
         }
 

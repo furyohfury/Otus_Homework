@@ -38,7 +38,7 @@ namespace Lessons.Architecture.PM
         {
             foreach (var statView in _statViews)
             {
-                statView.Hide();
+                Destroy(statView.gameObject);
             }
         }
 
