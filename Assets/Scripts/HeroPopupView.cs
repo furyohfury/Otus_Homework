@@ -14,7 +14,7 @@ namespace Lessons.Architecture.PM
         [SerializeField] 
         private PlayerLevelView _playerLevelView;
         [SerializeField] 
-        private CharacterAllStatsView _allCharacterStatsView;
+        private CharacterAllStatsView _characterAllStatsView;
 
         private IHeroPopupPresenter _heroPopupPresenter;
 
@@ -24,12 +24,18 @@ namespace Lessons.Architecture.PM
             {
                 throw new System.Exception("Needed IHeroPopupPresenter");
             }
-
+            _userView.Show(heroPopupPresenter.UserPresenter);
+            _playerLevelView.Show(heroPopupPresenter.PlayerLevelPresenter);
+            _characterAllStatsView.Show(heroPopupPresenter.CharacterAllStatsPresenter);
+            gameObject.SetActive(true);
         }
 
-        public interface IHeroPopupPresenter: IPresenter
+        public void Hide()
         {
-            public UserPresenter
-        }        
+            _userView.Hide();
+            _playerLevelView.Hide();
+            _characterAllStatsView.Hide();
+            gameObject.SetActive(false);
+        }              
     }
 }
