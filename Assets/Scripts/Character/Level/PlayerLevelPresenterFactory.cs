@@ -13,6 +13,6 @@ namespace Lessons.Architecture.PM
             _playerLevel=playerLevel;
         }
 
-        public PlayerLevel Create() => new PlayerLevel(_playerLevel);
+        public PlayerLevelPresenter Create() => new PlayerLevelPresenter(_playerLevel);
     }
 }
