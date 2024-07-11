@@ -1,5 +1,6 @@
 ﻿using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace Lessons.Architecture.PM
 {
@@ -11,9 +12,20 @@ namespace Lessons.Architecture.PM
 
         private CompositeDisposable _disposable = new();
 
+        [Inject]
         public UserPresenter(UserInfo userInfo)
         {
-            // userInfo.Name.Value.Subscribe todo
+            userInfo.Name.
+                .Subscribe(name => Name.Value = name)
+                .AddTo(_disposable);
+
+            userInfo.Description.
+                .Subscribe(desc => Description.Value = desc)
+                .AddTo(_disposable);
+
+            userInfo.Icon.
+                .Subscribe(icon => Icon.Value = icon)
+                .AddTo(_disposable);
         }
 
         public void Dispose()
