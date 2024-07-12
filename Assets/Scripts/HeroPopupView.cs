@@ -17,6 +17,7 @@ namespace Lessons.Architecture.PM
         private CharacterAllStatsView _characterAllStatsView;
 
         private IHeroPopupPresenter _heroPopupPresenter;
+        private CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)
         {
@@ -28,6 +29,11 @@ namespace Lessons.Architecture.PM
             _userView.Show(heroPopupPresenter.UserPresenter);
             _playerLevelView.Show(heroPopupPresenter.PlayerLevelPresenter);
             _characterAllStatsView.Show(heroPopupPresenter.CharacterAllStatsPresenter);
+
+            heroPopupPresenter.LevelUpButtonPresenter.LevelUpCommand
+                .BindTo(_levelupButton)
+                .AddTo(_disposable);
+                
             _exitButton.onClick.AddListener(Hide);
             gameObject.SetActive(true);
         }
@@ -37,6 +43,8 @@ namespace Lessons.Architecture.PM
             _userView.Hide();
             _playerLevelView.Hide();
             _characterAllStatsView.Hide();
+            _disposable.Clear();
+            _exitButton.onClick.RemoveListener(Hide);
             gameObject.SetActive(false);
         }              
     }

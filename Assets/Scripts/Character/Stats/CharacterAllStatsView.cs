@@ -40,6 +40,7 @@ namespace Lessons.Architecture.PM
             {
                 Destroy(statView.gameObject);
             }
+            _statView.Clear();
         }
 
         public void ShowStat(CharacterStatView view, IStatPresenter presenter)
