@@ -1,7 +1,3 @@
-using System;
-using Sirenix.OdinInspector;
-using UniRx;
-
 namespace Lessons.Architecture.PM
 {
     public sealed class PlayerLevelPresenterFactory
@@ -10,7 +6,7 @@ namespace Lessons.Architecture.PM
 
         public PlayerLevelPresenterFactory(PlayerLevel playerLevel)
         {
-            _playerLevel=playerLevel;
+            _playerLevel = playerLevel;
         }
 
         public PlayerLevelPresenter Create() => new PlayerLevelPresenter(_playerLevel);

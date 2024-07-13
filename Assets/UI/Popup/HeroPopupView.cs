@@ -18,7 +18,7 @@ namespace Lessons.Architecture.PM
         private CharacterAllStatsView _characterAllStatsView;
 
         private IHeroPopupPresenter _heroPopupPresenter;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)
         {
@@ -27,11 +27,11 @@ namespace Lessons.Architecture.PM
                 throw new System.Exception("Needed IHeroPopupPresenter");
             }
             _heroPopupPresenter = heroPopupPresenter;
-            _userView.Show(heroPopupPresenter.UserPresenter);
-            _playerLevelView.Show(heroPopupPresenter.PlayerLevelPresenter);
-            _characterAllStatsView.Show(heroPopupPresenter.CharacterAllStatsPresenter);
+            _userView.Show(_heroPopupPresenter.UserPresenter);
+            _playerLevelView.Show(_heroPopupPresenter.PlayerLevelPresenter);
+            _characterAllStatsView.Show(_heroPopupPresenter.CharacterAllStatsPresenter);
 
-            heroPopupPresenter.LevelUpButtonPresenter.LevelUpCommand
+            _heroPopupPresenter.LevelUpButtonPresenter.LevelUpCommand
                 .BindTo(_levelupButton)
                 .AddTo(_disposable);
                 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UniRx;
+using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
@@ -10,12 +11,11 @@ namespace Lessons.Architecture.PM
     {
         [ShowInInspector]
         private readonly HashSet<CharacterStat> _stats = new();
-
-        public IReadOnlyReactiveCollection<CharacterStat> Stats;
+        [HideInInspector]
+        public ReactiveCollection<CharacterStat> Stats => _stats.ToReactiveCollection();
 
         public CharacterInfo(CharacterConfig config)
-        {
-            Stats = _stats.ToReactiveCollection();
+        {            
             foreach (var key in config.Stats.Keys)
             {
                 if (!_stats.Add(new CharacterStat(key, config.Stats[key])))

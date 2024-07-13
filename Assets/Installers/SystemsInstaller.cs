@@ -7,6 +7,8 @@ namespace Lessons.Architecture.PM
     {
         [SerializeField]
         private CharacterStatView _charStatView;
+        [SerializeField]
+        private CharacterAllStatsView _allStatsView;
 
         public override void InstallBindings()
         {
@@ -19,6 +21,7 @@ namespace Lessons.Architecture.PM
             Container.Bind<CharacterAllStatsPresenterFactory>().AsCached();
 
             Container.Bind<CharacterStatView>().FromInstance(_charStatView).AsSingle();
+            Container.Bind<CharacterAllStatsView>().FromInstance(_allStatsView).AsSingle();
         }
     }
 }

@@ -5,11 +5,12 @@ using UnityEngine;
 namespace Lessons.Architecture.PM
 {
     public class CharacterStatView : MonoBehaviour
-    {        
-        [SerializeField] private readonly TMP_Text _stat;
+    {
+        [SerializeField]
+        private TMP_Text _stat;
 
         private IStatPresenter _presenter;
-        private readonly CompositeDisposable _disposable;
+        private readonly CompositeDisposable _disposable = new();
 
         public void SetStat(string stat) => _stat.text = stat;
 
@@ -32,6 +33,6 @@ namespace Lessons.Architecture.PM
             _disposable.Clear();
             _presenter.Dispose();
             gameObject.SetActive(false);
-        }        
+        }
     }
 }

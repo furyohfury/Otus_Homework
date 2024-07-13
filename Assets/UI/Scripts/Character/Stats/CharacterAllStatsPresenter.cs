@@ -1,36 +1,24 @@
-using System.Collections.Generic;
-using System.Linq;
 using UniRx;
 
 namespace Lessons.Architecture.PM
 {
     public sealed class CharacterAllStatsPresenter : ICharacterAllStatsPresenter
     {
-        public List<IStatPresenter> StatPresenters { get; private set; } = new();
-        public IReadOnlyReactiveCollection<string> Stats => _stats;
-        private ReactiveCollection<string> _stats;
-        
-        private CompositeDisposable _disposable = new();
+        public IReadOnlyReactiveCollection<IStatPresenter> StatPresenters => _statPresenters; // todo if not gonna do realtime changing, switch to casual list
+        private ReactiveCollection<IStatPresenter> _statPresenters = new();
 
         public CharacterAllStatsPresenter(CharacterInfo charInfo)
         {
-            _stats = new(charInfo.Stats.Select(stat => FormatStat(stat)));
-            charInfo.Stats
-                .ObserveAdd()
-                .Subscribe(stat => _stats.Add(FormatStat(stat.Value)))
-                .AddTo(_disposable);
-
-            charInfo.Stats
-                .ObserveRemove()
-                .Subscribe(stat => _stats.Remove(FormatStat(stat.Value)))
-                .AddTo(_disposable);
+            foreach (var stat in charInfo.Stats) //todo replace w/ factory? Not neccesary for now
+            {
+                var statPresenter = new CharacterStatPresenter(stat);
+                _statPresenters.Add(statPresenter);
+            }
         }
-
-        public string FormatStat(CharacterStat stat) => $"{stat.Name}: {stat.Value}";
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            // todo fix
         }
     }
 }

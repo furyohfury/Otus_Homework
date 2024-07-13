@@ -6,15 +6,20 @@ namespace Lessons.Architecture.PM
 {
     public class Test : MonoBehaviour
     {
-        [ShowInInspector]
+        [SerializeField, TitleGroup("References")]
+        private UserView _userView;
+        [SerializeField, TitleGroup("References")]
+        private CharacterAllStatsView _characterAllStatsView;
+        [SerializeField, TitleGroup("References")]
+        private PlayerLevelView _levelView;
+        [SerializeField, TitleGroup("References")]
+        private HeroPopupView _heroPopupView;
+
+        [ShowInInspector, TitleGroup("User")]
         private UserInfo _userInfo;
         private PlayerLevel _level;
-        private CharacterInfo _characterInfo;
-
-        [SerializeField]
-        private UserView _userView;
-        [SerializeField]
-        private CharacterAllStatsView _characterAllStatsView;
+        [ShowInInspector, TitleGroup("Stats")]
+        private CharacterInfo _characterInfo;       
 
         private void Awake()
         {
@@ -29,7 +34,7 @@ namespace Lessons.Architecture.PM
             _characterInfo = characterInfo;
         }
 
-        [Button]
+        [TitleGroup("User"), Button]
         public void ChangeUserInfo(UserConfig config)
         {
             _userInfo.ChangeName(config.Name);
@@ -37,29 +42,66 @@ namespace Lessons.Architecture.PM
             _userInfo.ChangeIcon(config.Icon);
         }
 
-        [Button, ButtonGroup("UserView")]
+        [ButtonGroup("User/ShowHide")]
         public void ShowUserView()
         {
             _userView.Show(new UserPresenter(_userInfo));
         }
 
-        [Button, ButtonGroup("UserView")]
+        [ButtonGroup("User/ShowHide")]
         public void HideUserView()
         {
             _userView.Hide();
         }
 
-        [Button, ButtonGroup("Stats")]
+        [TitleGroup("Stats"), ButtonGroup("Stats/ShowHide")]
         public void ShowCharacterStats()
         {
             _characterAllStatsView.Show(new CharacterAllStatsPresenter(_characterInfo));
         }
 
-        [Button, ButtonGroup("Stats")]
+        [ButtonGroup("Stats/ShowHide")]
         public void HideCharacterStats()
         {
             _characterAllStatsView.Hide();
         }
 
+        [TitleGroup("Stats"), Button]
+        public void AddStat(string name, int value) => _characterInfo.AddStat(new CharacterStat(name, value));
+
+        [TitleGroup("Level"), ButtonGroup("Level/ShowHide")]
+        public void ShowLevelView()
+        {
+            _levelView.Show(new PlayerLevelPresenter(_level));
+        }
+
+        [ButtonGroup("Level/ShowHide")]
+        public void HideLevelView()
+        {
+            _levelView.Hide();
+        }
+
+        [TitleGroup("Level"), Button]
+        public void ChangeLevel(int level)
+        {
+            _level.CurrentLevel.Value = level;
+        }
+        [TitleGroup("Level"), Button]
+        public void AddExp(int exp)
+        {
+            _level.AddExperience(exp);
+        }
+
+        [TitleGroup("Popup"), ButtonGroup("Popup/ShowHide")]
+        public void ShowPopup()
+        {
+            _heroPopupView.Show(new HeroPopupPresenter(_userInfo, _characterInfo, _level));
+        }
+
+        [ButtonGroup("Popup/ShowHide")]
+        public void HidePopup()
+        {
+            _heroPopupView.Hide();
+        }
     }
 }

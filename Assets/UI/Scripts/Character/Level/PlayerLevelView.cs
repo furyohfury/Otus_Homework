@@ -8,13 +8,13 @@ namespace Lessons.Architecture.PM
 {
     public sealed class PlayerLevelView : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private TMP_Text _level;
-        [SerializeField] 
+        [SerializeField]
         private TMP_Text _experience;
-        [SerializeField] 
+        [SerializeField]
         private RectTransform _uncompletedBar;
-        [SerializeField] 
+        [SerializeField]
         private RectTransform _completedBar;
 
         private IPlayerLevelPresenter _presenter;
@@ -39,12 +39,14 @@ namespace Lessons.Architecture.PM
             }
 
             _presenter = playerLevelPresenter;
+            gameObject.SetActive(true);
             playerLevelPresenter.Level.
                 Subscribe(SetLevel);
             playerLevelPresenter.Experience
                 .Subscribe(SetExperience);
             playerLevelPresenter.ProgressBarFillRate
                 .Subscribe(SetProgressBar);
+            
         }
 
         public void Hide()
@@ -54,11 +56,11 @@ namespace Lessons.Architecture.PM
             gameObject.SetActive(false);
         }
 
-        public void SetLevel(string level) => _level.text = level;
-        public void SetExperience(string exp) => _experience.text = exp;
+        private void SetLevel(string level) => _level.text = level;
+        private void SetExperience(string exp) => _experience.text = exp;
 
         [Button]
-        public void SetProgressBar(float fillRate)
+        private void SetProgressBar(float fillRate)
         {
             DOTween.To(() => _completedBar.sizeDelta.x,
              x => _completedBar.sizeDelta = new Vector2(x, _completedBar.sizeDelta.y),

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -19,17 +20,18 @@ namespace Lessons.Architecture.PM
             _characterStatPrefab = characterStatView;
         }
 
-        public void Show(IPresenter presenter) //todo subscribe on change of PModel collection
+        public void Show(IPresenter presenter)
         {
             if (presenter is not ICharacterAllStatsPresenter charStatsPresenter)
             {
                 throw new System.Exception("Needed ICharacterAllStatsPresenter");
             }
+
             _characterAllStatsPresenter = charStatsPresenter;
-            for (int i = 0; i < charStatsPresenter.StatPresenters.Count; i++)
+            foreach (var pres in _characterAllStatsPresenter.StatPresenters)
             {
-                var statPresenter = charStatsPresenter.StatPresenters[i];
-                ShowStat(CreateStat(), statPresenter);
+                var statView = CreateStat();
+                ShowStat(statView, pres);
             }
         }
 
@@ -49,11 +51,14 @@ namespace Lessons.Architecture.PM
 
         public CharacterStatView CreateStat()
         {
-            var statGO = Instantiate(_characterStatPrefab, transform);
-            _statViews.Add(statGO); //todo look when to add
-            statGO.transform.position = _statTransforms[_statViews.Count].position;
+            var statTransform = _statTransforms[_statViews.Count];
+            var statGO = Instantiate(_characterStatPrefab, statTransform);
+            statGO.transform.position = statTransform.position;
+            _statViews.Add(statGO);
             return statGO;
         }
+
+        //public void RemoveStat(string stat) => _statViews.Remove
 
         private void OnValidate() // todo check if works
         {

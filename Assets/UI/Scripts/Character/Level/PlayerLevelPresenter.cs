@@ -1,5 +1,3 @@
-using System;
-using Sirenix.OdinInspector;
 using UniRx;
 
 namespace Lessons.Architecture.PM
@@ -8,25 +6,26 @@ namespace Lessons.Architecture.PM
     {
         public ReactiveProperty<string> Level { get; private set; } = new();
         public ReactiveProperty<string> Experience { get; private set; } = new();
-        public ReactiveProperty<float> ProgressBarFillRate { get; private set;} = new();
-        
+        public ReactiveProperty<float> ProgressBarFillRate { get; private set; } = new();
+
         private PlayerLevel _playerLevel;
         private CompositeDisposable _disposable = new();
 
         public PlayerLevelPresenter(PlayerLevel playerLevel)
         {
             _playerLevel = playerLevel;
-            
-            playerLevel.CurrentLevel
+
+            _playerLevel.CurrentLevel
                 .Subscribe(level => Level.Value = level.ToString())
                 .AddTo(_disposable);
 
-            playerLevel.CurrentExperience
-                .Subscribe(exp => 
+            _playerLevel.CurrentExperience
+                .Subscribe(exp =>
                 {
-                    int reqExp = playerLevel.RequiredExperience;
-                    Experience.Value = $"XP : {exp/reqExp}";
-                    ProgressBarFillRate.Value = exp/reqExp;
+                    int reqExp = _playerLevel.RequiredExperience;
+                    var expRatio = (float)exp / (float) reqExp;
+                    Experience.Value = $"XP : {exp}/{reqExp}";
+                    ProgressBarFillRate.Value = expRatio;
                 })
                 .AddTo(_disposable);
         }
