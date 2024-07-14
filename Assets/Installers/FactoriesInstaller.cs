@@ -1,6 +1,10 @@
-﻿using Zenject;
+﻿using Popup.UI.Character.Level;
+using Popup.UI.Character.Stats;
+using Popup.UI.Popup;
+using Popup.UI.User;
+using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.Installers
 {
     public sealed class FactoriesInstaller : MonoInstaller
     {

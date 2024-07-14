@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.User
 {
     public interface IUserPresenter : IPresenter
     {

@@ -1,3 +1,4 @@
+using Popup.GameData.Configs;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;

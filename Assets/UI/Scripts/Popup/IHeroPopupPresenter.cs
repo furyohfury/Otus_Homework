@@ -1,4 +1,8 @@
-namespace Lessons.Architecture.PM
+using Popup.UI.Character.Level;
+using Popup.UI.Character.Stats;
+using Popup.UI.User;
+
+namespace Popup.UI.Popup
 {
     public interface IHeroPopupPresenter : IPresenter
     {

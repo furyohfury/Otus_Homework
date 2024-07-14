@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using Popup.UI;
+using Popup.UI.Character.Stats;
+using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.Installers
 {
     public sealed class SceneInstaller : MonoInstaller
     {

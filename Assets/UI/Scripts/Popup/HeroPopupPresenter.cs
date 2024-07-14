@@ -1,10 +1,16 @@
-namespace Lessons.Architecture.PM
+using Popup.UI.Character.Level;
+using Popup.UI.Character.Stats;
+using Popup.UI.User;
+
+namespace Popup.UI.Popup
 {
     public class HeroPopupPresenter : IHeroPopupPresenter
     {
+        private IPlayerLevelProgressBarPresenter _playerLevelProgressBarPresenter;
+
         public IUserPresenter UserPresenter { get; private set; }
         public IPlayerLevelPresenter PlayerLevelPresenter { get; private set; }
-        public IPlayerLevelProgressBarPresenter PlayerLevelProgressBarPresenter { get; private set; }
+        public IPlayerLevelProgressBarPresenter PlayerLevelProgressBarPresenter { get => _playerLevelProgressBarPresenter; private set => _playerLevelProgressBarPresenter = value; }
         public ICharacterAllStatsPresenter CharacterAllStatsPresenter { get; private set; }
         public ILevelUpButtonPresenter LevelUpButtonPresenter { get; private set; }
 
@@ -16,20 +22,5 @@ namespace Lessons.Architecture.PM
             CharacterAllStatsPresenter = new CharacterAllStatsPresenter(characterStatsPresenterFactory);
             LevelUpButtonPresenter = playerLevelPresentersFactory.CreateLevelUpButtonPresenter();
         }
-    }
-    public sealed class PlayerLevelPresentersFactory
-    {
-        private PlayerLevel _playerLevel;
-
-        public PlayerLevelPresentersFactory(PlayerLevel playerLevel)
-        {
-            _playerLevel = playerLevel;
-        }
-
-        public PlayerLevelPresenter CreatePlayerLevelPresenter() => new PlayerLevelPresenter(_playerLevel);
-
-        public PlayerLevelProgressBarPresenter CreatePlayerLevelProgressBarPresenter() => new PlayerLevelProgressBarPresenter(_playerLevel);
-
-        public LevelUpButtonPresenter CreateLevelUpButtonPresenter() => new LevelUpButtonPresenter(_playerLevel);
     }
 }

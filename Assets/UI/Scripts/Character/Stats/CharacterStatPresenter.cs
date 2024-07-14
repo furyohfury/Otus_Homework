@@ -1,6 +1,7 @@
+using Popup.GameData;
 using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Stats
 {
     public sealed class CharacterStatPresenter : IStatPresenter
     {

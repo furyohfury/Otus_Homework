@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Popup.GameData.Configs;
+using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.Installers
 {
-    [CreateAssetMenu(fileName ="ConfigsInstaller", menuName = "Create installer/ConfigsInstaller")]
+    [CreateAssetMenu(fileName = "ConfigsInstaller", menuName = "Create installer/ConfigsInstaller")]
     public sealed class ConfigsInstaller : ScriptableObjectInstaller
     {
         [SerializeField]

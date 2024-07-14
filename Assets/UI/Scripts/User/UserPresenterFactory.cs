@@ -1,4 +1,6 @@
-﻿namespace Lessons.Architecture.PM
+﻿using Popup.GameData;
+
+namespace Popup.UI.User
 {
     public sealed class UserPresenterFactory
     {

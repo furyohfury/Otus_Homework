@@ -1,17 +1,15 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using TMPro;
+﻿using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public sealed class PlayerLevelView : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text _level;
 
-        private IPlayerLevelPresenter _presenter;        
+        private IPlayerLevelPresenter _presenter;
         private CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)
@@ -34,6 +32,6 @@ namespace Lessons.Architecture.PM
             gameObject.SetActive(false);
         }
 
-        private void SetLevel(string level) => _level.text = level;        
+        private void SetLevel(string level) => _level.text = level;
     }
 }

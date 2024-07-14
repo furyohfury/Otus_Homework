@@ -8,21 +8,16 @@ namespace Popup.GameData.Configs
     [CreateAssetMenu(fileName = "CharacterConfig", menuName = "Create config/CharacterConfig")]
     public sealed class CharacterConfig : SerializedScriptableObject
     {
-        [SerializeField] 
+        [SerializeField]
         private Dictionary<string, int> _stats;
-        [SerializeField] 
+        [SerializeField]
         private int _currentLevel;
-        [SerializeField] 
+        [SerializeField]
         private int _currentExperience;
-        
+
 
         public Dictionary<string, int> Stats => _stats;
         public int CurrentLevel => _currentLevel;
         public int CurrentExperience => _currentExperience;
-
-        internal HashSet<CharacterStat> Select()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

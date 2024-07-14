@@ -1,7 +1,8 @@
-﻿using UniRx;
+﻿using Popup.GameData;
+using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.User
 {
     public sealed class UserPresenter : IUserPresenter
     {

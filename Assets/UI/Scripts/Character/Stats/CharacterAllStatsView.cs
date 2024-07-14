@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Stats
 {
     public sealed class CharacterAllStatsView : MonoBehaviour
     {
@@ -55,7 +55,7 @@ namespace Lessons.Architecture.PM
         private void ShowStat(CharacterStatView view, IStatPresenter presenter)
         {
             view.Show(presenter);
-        }        
+        }
 
         private void OnValidate()
         {

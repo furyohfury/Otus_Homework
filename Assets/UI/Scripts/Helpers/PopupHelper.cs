@@ -1,15 +1,17 @@
-﻿using Sirenix.OdinInspector;
+﻿using Popup.GameData;
+using Popup.UI.Popup;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI
 {
     public class PopupHelper : MonoBehaviour
     {
         [TitleGroup("References"), SerializeField]
         private HeroPopupView _heroPopupView;
         [TitleGroup("For editing"), ShowInInspector]
-        private CharacterInfo _characterInfo;
+        private GameData.CharacterInfo _characterInfo;
         [TitleGroup("For editing"), ShowInInspector]
         private PlayerLevel _playerLevel;
         [TitleGroup("For editing"), ShowInInspector]
@@ -17,7 +19,7 @@ namespace Lessons.Architecture.PM
         private HeroPopupPresenterFactory _heroPopupPresenterFactory;
 
         [Inject]
-        public void Construct(CharacterInfo characterInfo, PlayerLevel playerLevel, UserInfo userInfo, HeroPopupPresenterFactory heroPopupPresenterFactory)
+        public void Construct(GameData.CharacterInfo characterInfo, PlayerLevel playerLevel, UserInfo userInfo, HeroPopupPresenterFactory heroPopupPresenterFactory)
         {
             _characterInfo = characterInfo;
             _playerLevel = playerLevel;

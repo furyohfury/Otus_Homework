@@ -1,10 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.User
 {
     public sealed class UserView : MonoBehaviour
     {
@@ -33,7 +32,7 @@ namespace Lessons.Architecture.PM
         }
 
         public void Hide()
-        {            
+        {
             _presenter.Dispose();
             _disposable.Clear();
             gameObject.SetActive(false);

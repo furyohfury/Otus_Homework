@@ -1,4 +1,5 @@
 using System;
+using Popup.GameData.Configs;
 using Sirenix.OdinInspector;
 using UniRx;
 using Zenject;
@@ -40,7 +41,7 @@ namespace Popup.GameData
             if (CanLevelUp())
             {
                 CurrentLevel.Value++;
-                CurrentExperience.Value = 0;                
+                CurrentExperience.Value = 0;
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Popup.GameData.Configs;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;

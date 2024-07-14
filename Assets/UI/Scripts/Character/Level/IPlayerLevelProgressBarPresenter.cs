@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public interface IPlayerLevelProgressBarPresenter : IPresenter
     {

@@ -1,10 +1,10 @@
 using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public interface IPlayerLevelPresenter : IPresenter
     {
-        public ReactiveProperty<string> Level { get; }       
+        public ReactiveProperty<string> Level { get; }
 
         void Dispose();
     }

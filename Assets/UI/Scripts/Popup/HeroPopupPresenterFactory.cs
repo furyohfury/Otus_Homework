@@ -1,4 +1,8 @@
-﻿namespace Lessons.Architecture.PM
+﻿using Popup.UI.Character.Level;
+using Popup.UI.Character.Stats;
+using Popup.UI.User;
+
+namespace Popup.UI.Popup
 {
     public sealed class HeroPopupPresenterFactory
     {
@@ -13,6 +17,8 @@
             _characterStatsPresenterFactory = characterStatsPresenterFactory;
         }
 
-        public HeroPopupPresenter Create() => new(_userPresenterFactory, _playerLevelPresentersFactory, _characterStatsPresenterFactory);
+        public PlayerLevelPresentersFactory PlayerLevelPresentersFactory => _playerLevelPresentersFactory;
+
+        public HeroPopupPresenter Create() => new(_userPresenterFactory, PlayerLevelPresentersFactory, _characterStatsPresenterFactory);
     }
 }

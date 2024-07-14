@@ -1,6 +1,7 @@
+using Popup.GameData;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.Installers
 {
     public sealed class GameSystemsInstaller : MonoInstaller
     {

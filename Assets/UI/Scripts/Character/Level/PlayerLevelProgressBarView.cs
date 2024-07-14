@@ -4,7 +4,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public sealed class PlayerLevelProgressBarView : MonoBehaviour
     {

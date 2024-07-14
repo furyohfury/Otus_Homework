@@ -1,6 +1,6 @@
 using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Stats
 {
     public interface IStatPresenter : IPresenter
     {

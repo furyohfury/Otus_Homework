@@ -1,6 +1,7 @@
-﻿using UniRx;
+﻿using Popup.GameData;
+using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public sealed class PlayerLevelProgressBarPresenter : IPlayerLevelProgressBarPresenter
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Stats
 {
     public interface ICharacterAllStatsPresenter : IPresenter
     {

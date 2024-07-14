@@ -1,14 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Popup.GameData;
 using UniRx;
-using System;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public sealed class LevelUpButtonPresenter : ILevelUpButtonPresenter
     {
-        public ReactiveCommand LevelUpCommand {get; private set;}
-        public ReactiveProperty<bool> CanLevelUp {get; private set;} = new(false);
+        public ReactiveCommand LevelUpCommand { get; private set; }
+        public ReactiveProperty<bool> CanLevelUp { get; private set; } = new(false);
         private PlayerLevel _playerLevel;
         private CompositeDisposable _disposable = new();
 

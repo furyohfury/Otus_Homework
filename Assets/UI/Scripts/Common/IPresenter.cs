@@ -1,4 +1,4 @@
-﻿namespace Lessons.Architecture.PM
+﻿namespace Popup.UI
 {
     public interface IPresenter
     {

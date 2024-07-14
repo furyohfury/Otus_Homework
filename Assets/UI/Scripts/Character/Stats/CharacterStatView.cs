@@ -2,7 +2,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Stats
 {
     public class CharacterStatView : MonoBehaviour
     {

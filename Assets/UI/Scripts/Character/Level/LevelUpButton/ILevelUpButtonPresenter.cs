@@ -1,12 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
 using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.UI.Character.Level
 {
     public interface ILevelUpButtonPresenter
     {
-        public ReactiveCommand LevelUpCommand {get;}
-        public ReactiveProperty<bool> CanLevelUp {get;}
+        public ReactiveCommand LevelUpCommand { get; }
+        public ReactiveProperty<bool> CanLevelUp { get; }
     }
 }
