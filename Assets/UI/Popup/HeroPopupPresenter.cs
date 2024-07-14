@@ -1,5 +1,3 @@
-using UniRx;
-
 namespace Lessons.Architecture.PM
 {
     public class HeroPopupPresenter : IHeroPopupPresenter
@@ -17,9 +15,6 @@ namespace Lessons.Architecture.PM
             LevelUpButtonPresenter = new(playerLevel);
         }
 
-        public void Dispose() //todo fix
-        {
-            //_disposable.Clear();
-        }
+        public void Dispose() { } // todo fix i dunno
     }
 }

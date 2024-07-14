@@ -46,7 +46,6 @@ namespace Lessons.Architecture.PM
                 .Subscribe(SetExperience);
             playerLevelPresenter.ProgressBarFillRate
                 .Subscribe(SetProgressBar);
-            
         }
 
         public void Hide()

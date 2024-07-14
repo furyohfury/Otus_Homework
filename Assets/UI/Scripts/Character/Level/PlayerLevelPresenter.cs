@@ -6,7 +6,7 @@ namespace Lessons.Architecture.PM
     {
         public ReactiveProperty<string> Level { get; private set; } = new();
         public ReactiveProperty<string> Experience { get; private set; } = new();
-        public ReactiveProperty<float> ProgressBarFillRate { get; private set; } = new();
+        public ReactiveProperty<float> ProgressBarFillRate { get; private set; } = new();  // todo divide in separate presenter and view
 
         private PlayerLevel _playerLevel;
         private CompositeDisposable _disposable = new();

@@ -7,5 +7,7 @@ namespace Lessons.Architecture.PM
         public ReactiveProperty<string> Level { get; }
         public ReactiveProperty<string> Experience { get; }
         public ReactiveProperty<float> ProgressBarFillRate { get; }
+
+        void Dispose();
     }
 }
