@@ -8,13 +8,28 @@ namespace Lessons.Architecture.PM
         public ICharacterAllStatsPresenter CharacterAllStatsPresenter { get; private set; }
         public ILevelUpButtonPresenter LevelUpButtonPresenter { get; private set; }
 
-        public HeroPopupPresenter(UserInfo userInfo, CharacterInfo characterInfo, PlayerLevel playerLevel) // todo make factories?
+        public HeroPopupPresenter(UserPresenterFactory userPresenterFactory, PlayerLevelPresentersFactory playerLevelPresentersFactory, CharacterStatsPresenterFactory characterStatsPresenterFactory)
         {
-            UserPresenter = new UserPresenter(userInfo);
-            PlayerLevelPresenter = new PlayerLevelPresenter(playerLevel);
-            PlayerLevelProgressBarPresenter = new PlayerLevelProgressBarPresenter(playerLevel);
-            CharacterAllStatsPresenter = new CharacterAllStatsPresenter(characterInfo);
-            LevelUpButtonPresenter = new LevelUpButtonPresenter(playerLevel);
+            UserPresenter = userPresenterFactory.Create();
+            PlayerLevelPresenter = playerLevelPresentersFactory.CreatePlayerLevelPresenter();
+            PlayerLevelProgressBarPresenter = playerLevelPresentersFactory.CreatePlayerLevelProgressBarPresenter();
+            CharacterAllStatsPresenter = new CharacterAllStatsPresenter(characterStatsPresenterFactory);
+            LevelUpButtonPresenter = playerLevelPresentersFactory.CreateLevelUpButtonPresenter();
         }
+    }
+    public sealed class PlayerLevelPresentersFactory
+    {
+        private PlayerLevel _playerLevel;
+
+        public PlayerLevelPresentersFactory(PlayerLevel playerLevel)
+        {
+            _playerLevel = playerLevel;
+        }
+
+        public PlayerLevelPresenter CreatePlayerLevelPresenter() => new PlayerLevelPresenter(_playerLevel);
+
+        public PlayerLevelProgressBarPresenter CreatePlayerLevelProgressBarPresenter() => new PlayerLevelProgressBarPresenter(_playerLevel);
+
+        public LevelUpButtonPresenter CreateLevelUpButtonPresenter() => new LevelUpButtonPresenter(_playerLevel);
     }
 }

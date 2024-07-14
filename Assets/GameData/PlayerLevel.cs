@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UniRx;
 using Zenject;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData
 {
     [Serializable]
     public sealed class PlayerLevel

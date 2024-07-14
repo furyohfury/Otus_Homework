@@ -54,11 +54,11 @@ namespace Lessons.Architecture.PM
             _userView.Hide();
         }
 
-        [TitleGroup("Stats"), ButtonGroup("Stats/ShowHide")]
-        public void ShowCharacterStats()
-        {
-            _characterAllStatsView.Show(new CharacterAllStatsPresenter(_characterInfo));
-        }
+        //[TitleGroup("Stats"), ButtonGroup("Stats/ShowHide")]
+        //public void ShowCharacterStats()
+        //{
+        //    _characterAllStatsView.Show(new CharacterAllStatsPresenter(_characterInfo));
+        //}
 
         [ButtonGroup("Stats/ShowHide")]
         public void HideCharacterStats()
@@ -92,11 +92,11 @@ namespace Lessons.Architecture.PM
             _level.AddExperience(exp);
         }
 
-        [TitleGroup("Popup"), ButtonGroup("Popup/ShowHide")]
-        public void ShowPopup()
-        {
-            _heroPopupView.Show(new HeroPopupPresenter(_userInfo, _characterInfo, _level));
-        }
+        //[TitleGroup("Popup"), ButtonGroup("Popup/ShowHide")]
+        //public void ShowPopup()
+        //{
+        //    _heroPopupView.Show(new HeroPopupPresenter(_userInfo, _characterInfo, _level));
+        //}
 
         [ButtonGroup("Popup/ShowHide")]
         public void HidePopup()

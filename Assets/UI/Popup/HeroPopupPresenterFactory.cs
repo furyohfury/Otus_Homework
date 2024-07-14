@@ -2,17 +2,17 @@
 {
     public sealed class HeroPopupPresenterFactory
     {
-        private readonly UserInfo _userInfo;
-        private readonly CharacterInfo _characterInfo;
-        private readonly PlayerLevel _playerLevel;
+        private readonly UserPresenterFactory _userPresenterFactory;
+        private readonly PlayerLevelPresentersFactory _playerLevelPresentersFactory;
+        private readonly CharacterStatsPresenterFactory _characterStatsPresenterFactory;
 
-        public HeroPopupPresenterFactory(UserInfo userInfo, CharacterInfo characterInfo, PlayerLevel playerLevel)
+        public HeroPopupPresenterFactory(UserPresenterFactory userPresenterFactory, PlayerLevelPresentersFactory playerLevelPresentersFactory, CharacterStatsPresenterFactory characterStatsPresenterFactory)
         {
-            _userInfo = userInfo;
-            _characterInfo = characterInfo;
-            _playerLevel = playerLevel;
+            _userPresenterFactory = userPresenterFactory;
+            _playerLevelPresentersFactory = playerLevelPresentersFactory;
+            _characterStatsPresenterFactory = characterStatsPresenterFactory;
         }
 
-        public HeroPopupPresenter Create() => new(_userInfo, _characterInfo, _playerLevel);
+        public HeroPopupPresenter Create() => new(_userPresenterFactory, _playerLevelPresentersFactory, _characterStatsPresenterFactory);
     }
 }

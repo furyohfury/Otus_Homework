@@ -25,6 +25,9 @@ namespace Lessons.Architecture.PM
             _heroPopupPresenterFactory = heroPopupPresenterFactory;
         }
 
+        [TitleGroup("For editing"), Button]
+        public void AddStat(string name, int value) => _characterInfo.AddStat(new CharacterStat(name, value));
+
         [TitleGroup("Popup"), ButtonGroup("Popup/ShowHide")]
         public void ShowPopup()
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData.Configs
 {
     [CreateAssetMenu(fileName = "CharacterConfig", menuName = "Create config/CharacterConfig")]
     public sealed class CharacterConfig : SerializedScriptableObject

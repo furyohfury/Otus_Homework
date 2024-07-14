@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UniRx;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData
 {
     [System.Serializable]
     public sealed class CharacterStat

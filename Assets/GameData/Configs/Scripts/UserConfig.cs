@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData.Configs
 {
     [CreateAssetMenu(fileName = "UserConfig", menuName = "Create config/UserConfig")]
     public sealed class UserConfig : ScriptableObject

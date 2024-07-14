@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData
 {
     [System.Serializable]
     public sealed class UserInfo

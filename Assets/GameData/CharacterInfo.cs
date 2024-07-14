@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
 
-namespace Lessons.Architecture.PM
+namespace Popup.GameData
 {
     [System.Serializable]
     public sealed class CharacterInfo
@@ -15,7 +16,7 @@ namespace Lessons.Architecture.PM
         public ReactiveCollection<CharacterStat> Stats => _stats.ToReactiveCollection();
 
         public CharacterInfo(CharacterConfig config)
-        {            
+        {
             foreach (var key in config.Stats.Keys)
             {
                 if (!_stats.Add(new CharacterStat(key, config.Stats[key])))
@@ -28,7 +29,7 @@ namespace Lessons.Architecture.PM
         [Button]
         public void AddStat(CharacterStat stat)
         {
-            if (!this._stats.Add(stat))
+            if (!_stats.Add(stat))
             {
                 throw new Exception("Cant add same stat");
             }
@@ -37,7 +38,7 @@ namespace Lessons.Architecture.PM
         [Button]
         public void RemoveStat(CharacterStat stat)
         {
-            if (!this._stats.Remove(stat))
+            if (!_stats.Remove(stat))
             {
                 throw new Exception($"Cant remove stat {stat.Name.Value}");
             }
@@ -45,7 +46,7 @@ namespace Lessons.Architecture.PM
 
         public CharacterStat GetStat(string name)
         {
-            foreach (var stat in this._stats)
+            foreach (var stat in _stats)
             {
                 if (stat.Name.Value == name)
                 {
@@ -56,9 +57,9 @@ namespace Lessons.Architecture.PM
             throw new Exception($"Stat {name} is not found!");
         }
 
-        /* public CharacterStat[] GetStats()
+        public CharacterStat[] GetStats()
         {
-            return this._stats.ToArray();
-        } */
+            return _stats.ToArray();
+        }
     }
 }
