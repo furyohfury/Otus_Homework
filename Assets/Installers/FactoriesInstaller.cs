@@ -12,8 +12,6 @@ namespace Popup.Installers
         {
             Container.Bind<HeroPopupPresenterFactory>().AsCached();
             Container.Bind<CharacterStatsPresenterFactory>().AsCached();
-            Container.Bind<UserPresenterFactory>().AsCached();
-            Container.Bind<PlayerLevelPresentersFactory>().AsCached();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Popup.UI.Character.Level;
+﻿using Popup.GameData;
+using Popup.UI.Character.Level;
 using Popup.UI.Character.Stats;
 using Popup.UI.User;
 
@@ -6,19 +7,25 @@ namespace Popup.UI.Popup
 {
     public sealed class HeroPopupPresenterFactory
     {
-        private readonly UserPresenterFactory _userPresenterFactory;
-        private readonly PlayerLevelPresentersFactory _playerLevelPresentersFactory;
+        private readonly UserInfo _userInfo;
+        private readonly PlayerLevel _playerLevel;
         private readonly CharacterStatsPresenterFactory _characterStatsPresenterFactory;
 
-        public HeroPopupPresenterFactory(UserPresenterFactory userPresenterFactory, PlayerLevelPresentersFactory playerLevelPresentersFactory, CharacterStatsPresenterFactory characterStatsPresenterFactory)
+        public HeroPopupPresenterFactory(UserInfo userInfo, PlayerLevel playerLevel, CharacterStatsPresenterFactory characterStatsPresenterFactory)
         {
-            _userPresenterFactory = userPresenterFactory;
-            _playerLevelPresentersFactory = playerLevelPresentersFactory;
+            _userInfo = userInfo;
+            _playerLevel = playerLevel;
             _characterStatsPresenterFactory = characterStatsPresenterFactory;
         }
 
-        public PlayerLevelPresentersFactory PlayerLevelPresentersFactory => _playerLevelPresentersFactory;
-
-        public HeroPopupPresenter Create() => new(_userPresenterFactory, PlayerLevelPresentersFactory, _characterStatsPresenterFactory);
+        public HeroPopupPresenter Create()
+        {
+            var userPresenter = new UserPresenter(_userInfo);
+            var playerLevelPresenter = new PlayerLevelPresenter(_playerLevel);
+            var playerLevelProgressBarPresenter = new PlayerLevelProgressBarPresenter(_playerLevel);
+            var levelUpButtonPresenter = new LevelUpButtonPresenter(_playerLevel);
+            var characterStatsPresenter = new CharacterAllStatsPresenter(_characterStatsPresenterFactory);          
+            return new HeroPopupPresenter(userPresenter, playerLevelPresenter, playerLevelProgressBarPresenter, characterStatsPresenter, levelUpButtonPresenter);
+        }
     }
 }

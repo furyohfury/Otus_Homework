@@ -1,4 +1,5 @@
-﻿using Popup.GameData;
+﻿using System.Linq;
+using Popup.GameData;
 using Popup.UI.Popup;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,11 +11,11 @@ namespace Popup.UI
     {
         [TitleGroup("References"), SerializeField]
         private HeroPopupView _heroPopupView;
-        [TitleGroup("For editing"), ShowInInspector]
+        [TitleGroup("Models readonly"), ShowInInspector]
         private GameData.CharacterInfo _characterInfo;
-        [TitleGroup("For editing"), ShowInInspector]
+        [TitleGroup("Models readonly"), ShowInInspector]
         private PlayerLevel _playerLevel;
-        [TitleGroup("For editing"), ShowInInspector]
+        [TitleGroup("Models readonly"), ShowInInspector]
         private UserInfo _userInfo;
         private HeroPopupPresenterFactory _heroPopupPresenterFactory;
 
@@ -27,12 +28,39 @@ namespace Popup.UI
             _heroPopupPresenterFactory = heroPopupPresenterFactory;
         }
 
-        [TitleGroup("For editing"), Button]
+        [TitleGroup("Editing"), Button]
         public void AddStat(string name, int value) => _characterInfo.AddStat(new CharacterStat(name, value));
+
+        [TitleGroup("Editing"), Button]
+        public void RemoveStat(string name)
+        {
+            var stat = _characterInfo.Stats
+                .SingleOrDefault(s => s.Name.Value.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+            if (stat != default)
+            {
+                _characterInfo.RemoveStat(stat);
+            }
+        }
+
+        [TitleGroup("Editing"), Button]
+        public void AddExperience(int value) => _playerLevel.AddExperience(value);
+
+        [TitleGroup("Editing"), Button]
+        public void ChangeUsername(string name) => _userInfo.ChangeName(name);
+
+        [TitleGroup("Editing"), Button]
+        public void ChangeDescription(string desc) => _userInfo.ChangeDescription(desc);
+
+        [TitleGroup("Editing"), Button]
+        public void ChangeIcon(Sprite icon) => _userInfo.ChangeIcon(icon);
 
         [TitleGroup("Popup"), ButtonGroup("Popup/ShowHide")]
         public void ShowPopup()
         {
+            if (_heroPopupView.gameObject.activeSelf)
+            {
+                return;
+            }
             var presenter = _heroPopupPresenterFactory.Create();
             _heroPopupView.Show(presenter);
         }

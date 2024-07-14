@@ -14,7 +14,7 @@ namespace Popup.GameData
         [ShowInInspector]
         private readonly HashSet<CharacterStat> _stats = new();
         [HideInInspector]
-        public ReactiveCollection<CharacterStat> Stats => _stats.ToReactiveCollection();
+        public IReadOnlyReactiveCollection<CharacterStat> Stats => _stats.ToReactiveCollection();
 
         public CharacterInfo(CharacterConfig config)
         {
