@@ -16,12 +16,12 @@ namespace Lessons.Architecture.PM
             Container.Bind<PlayerLevel>().AsCached();
             Container.Bind<CharacterInfo>().AsCached();
 
-            Container.Bind<UserPresenterFactory>().AsCached();
-            Container.Bind<PlayerLevelPresenterFactory>().AsCached();
-            Container.Bind<CharacterAllStatsPresenterFactory>().AsCached();
+            Container.Bind<HeroPopupPresenterFactory>().AsCached();
 
             Container.Bind<CharacterStatView>().FromInstance(_charStatView).AsSingle();
             Container.Bind<CharacterAllStatsView>().FromInstance(_allStatsView).AsSingle();
+
+            Container.Bind<PopupHelper>().FromComponentInHierarchy().AsCached();
         }
     }
 }

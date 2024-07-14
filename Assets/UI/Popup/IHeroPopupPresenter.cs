@@ -1,10 +1,11 @@
 namespace Lessons.Architecture.PM
 {
-    public interface IHeroPopupPresenter: IPresenter
-        {
-            public UserPresenter UserPresenter {get; }
-            public PlayerLevelPresenter PlayerLevelPresenter {get; }
-            public CharacterAllStatsPresenter CharacterAllStatsPresenter {get; }
-            public LevelUpButtonPresenter LevelUpButtonPresenter {get;}
-        }  
+    public interface IHeroPopupPresenter : IPresenter
+    {
+        public IUserPresenter UserPresenter { get; }
+        public IPlayerLevelPresenter PlayerLevelPresenter { get; }
+        public IPlayerLevelProgressBarPresenter PlayerLevelProgressBarPresenter { get; }
+        public ICharacterAllStatsPresenter CharacterAllStatsPresenter { get; }
+        public ILevelUpButtonPresenter LevelUpButtonPresenter { get; }
+    }
 }

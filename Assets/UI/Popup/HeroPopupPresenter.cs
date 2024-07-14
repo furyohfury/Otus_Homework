@@ -2,19 +2,19 @@ namespace Lessons.Architecture.PM
 {
     public class HeroPopupPresenter : IHeroPopupPresenter
     {
-        public UserPresenter UserPresenter { get; private set; }
-        public PlayerLevelPresenter PlayerLevelPresenter { get; private set; }
-        public CharacterAllStatsPresenter CharacterAllStatsPresenter { get; private set; }
-        public LevelUpButtonPresenter LevelUpButtonPresenter { get; private set; }
+        public IUserPresenter UserPresenter { get; private set; }
+        public IPlayerLevelPresenter PlayerLevelPresenter { get; private set; }
+        public IPlayerLevelProgressBarPresenter PlayerLevelProgressBarPresenter { get; private set; }
+        public ICharacterAllStatsPresenter CharacterAllStatsPresenter { get; private set; }
+        public ILevelUpButtonPresenter LevelUpButtonPresenter { get; private set; }
 
         public HeroPopupPresenter(UserInfo userInfo, CharacterInfo characterInfo, PlayerLevel playerLevel) // todo make factories?
         {
-            UserPresenter = new(userInfo);
-            PlayerLevelPresenter = new(playerLevel);
-            CharacterAllStatsPresenter = new(characterInfo);
-            LevelUpButtonPresenter = new(playerLevel);
+            UserPresenter = new UserPresenter(userInfo);
+            PlayerLevelPresenter = new PlayerLevelPresenter(playerLevel);
+            PlayerLevelProgressBarPresenter = new PlayerLevelProgressBarPresenter(playerLevel);
+            CharacterAllStatsPresenter = new CharacterAllStatsPresenter(characterInfo);
+            LevelUpButtonPresenter = new LevelUpButtonPresenter(playerLevel);
         }
-
-        public void Dispose() { } // todo fix i dunno
     }
 }

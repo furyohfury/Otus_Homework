@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182e87fa3c484c04298b7eb623d4f1c8, type: 3}
   m_Name: max_UserConfig
   m_EditorClassIdentifier: 
-  _name: maxim
-  _description: ya maxim
-  _icon: {fileID: 21300000, guid: a564258f7260e47d58e9ee37e2a3abb7, type: 3}
+  _name: '@garrosh'
+  _description: For horde
+  _icon: {fileID: 21300000, guid: 7c0892898786946a98a1057c9873611a, type: 3}

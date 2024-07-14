@@ -10,26 +10,9 @@ namespace Lessons.Architecture.PM
     {
         [SerializeField]
         private TMP_Text _level;
-        [SerializeField]
-        private TMP_Text _experience;
-        [SerializeField]
-        private RectTransform _uncompletedBar;
-        [SerializeField]
-        private RectTransform _completedBar;
 
-        private IPlayerLevelPresenter _presenter;
-        private float _barsWidth;
-        private readonly float _duration = 1; // todo put somewhere else
+        private IPlayerLevelPresenter _presenter;        
         private CompositeDisposable _disposable = new();
-
-        private void Awake()
-        {
-            if (_uncompletedBar.rect.width - _completedBar.rect.width > 1)
-            {
-                throw new System.Exception("Progress bars must have same width");
-            }
-            _barsWidth = _completedBar.sizeDelta.x;
-        }
 
         public void Show(IPresenter presenter)
         {
@@ -42,10 +25,6 @@ namespace Lessons.Architecture.PM
             gameObject.SetActive(true);
             playerLevelPresenter.Level.
                 Subscribe(SetLevel);
-            playerLevelPresenter.Experience
-                .Subscribe(SetExperience);
-            playerLevelPresenter.ProgressBarFillRate
-                .Subscribe(SetProgressBar);
         }
 
         public void Hide()
@@ -55,16 +34,6 @@ namespace Lessons.Architecture.PM
             gameObject.SetActive(false);
         }
 
-        private void SetLevel(string level) => _level.text = level;
-        private void SetExperience(string exp) => _experience.text = exp;
-
-        [Button]
-        private void SetProgressBar(float fillRate)
-        {
-            DOTween.To(() => _completedBar.sizeDelta.x,
-             x => _completedBar.sizeDelta = new Vector2(x, _completedBar.sizeDelta.y),
-             fillRate * _barsWidth,
-             _duration);
-        }
+        private void SetLevel(string level) => _level.text = level;        
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182e87fa3c484c04298b7eb623d4f1c8, type: 3}
   m_Name: Fury_UserConfig
   m_EditorClassIdentifier: 
-  _name: fury
-  _description: ya eblan
-  _icon: {fileID: 21300000, guid: 7c0892898786946a98a1057c9873611a, type: 3}
+  _name: '@furyohfury'
+  _description: Chilling...
+  _icon: {fileID: 21300000, guid: 954d79ad0f5124da59b33552ab47a641, type: 3}

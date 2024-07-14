@@ -5,8 +5,6 @@ namespace Lessons.Architecture.PM
     public sealed class PlayerLevelPresenter : IPlayerLevelPresenter
     {
         public ReactiveProperty<string> Level { get; private set; } = new();
-        public ReactiveProperty<string> Experience { get; private set; } = new();
-        public ReactiveProperty<float> ProgressBarFillRate { get; private set; } = new();  // todo divide in separate presenter and view
 
         private PlayerLevel _playerLevel;
         private CompositeDisposable _disposable = new();
@@ -18,20 +16,9 @@ namespace Lessons.Architecture.PM
             _playerLevel.CurrentLevel
                 .Subscribe(level => Level.Value = level.ToString())
                 .AddTo(_disposable);
-
-            _playerLevel.CurrentExperience
-                .Subscribe(exp =>
-                {
-                    int reqExp = _playerLevel.RequiredExperience;
-                    var expRatio = (float)exp / (float) reqExp;
-                    Experience.Value = $"XP : {exp}/{reqExp}";
-                    ProgressBarFillRate.Value = expRatio;
-                })
-                .AddTo(_disposable);
         }
 
-
-        public void Dispose() //todo rename or add interface
+        public void Dispose()
         {
             _disposable.Clear();
         }

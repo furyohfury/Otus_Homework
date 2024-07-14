@@ -15,10 +15,5 @@ namespace Lessons.Architecture.PM
                 _statPresenters.Add(statPresenter);
             }
         }
-
-        public void Dispose()
-        {
-            // todo fix
-        }
     }
 }

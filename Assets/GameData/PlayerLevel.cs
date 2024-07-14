@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Lessons.Architecture.PM
 {
-    [System.Serializable]
+    [Serializable]
     public sealed class PlayerLevel
     {
         [ShowInInspector, ReadOnly]
@@ -17,7 +17,7 @@ namespace Lessons.Architecture.PM
         [ShowInInspector, ReadOnly]
         public int RequiredExperience
         {
-            get { return 100 * (this.CurrentLevel.Value + 1); }
+            get { return 100 * (CurrentLevel.Value + 1); }
         }
 
         [Inject]
@@ -30,23 +30,23 @@ namespace Lessons.Architecture.PM
         [Button]
         public void AddExperience(int range)
         {
-            var xp = Math.Min(this.CurrentExperience.Value + range, this.RequiredExperience);
-            this.CurrentExperience.Value = xp;
+            var xp = Math.Min(CurrentExperience.Value + range, RequiredExperience);
+            CurrentExperience.Value = xp;
         }
 
         [Button]
         public void LevelUp()
         {
-            if (this.CanLevelUp())
+            if (CanLevelUp())
             {
-                this.CurrentExperience.Value = 0;
-                this.CurrentLevel.Value++;
+                CurrentLevel.Value++;
+                CurrentExperience.Value = 0;                
             }
         }
 
         public bool CanLevelUp()
         {
-            return this.CurrentExperience.Value == this.RequiredExperience;
+            return CurrentExperience.Value == RequiredExperience;
         }
     }
 }

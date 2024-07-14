@@ -14,6 +14,8 @@ namespace Lessons.Architecture.PM
         private UserView _userView;
         [SerializeField] 
         private PlayerLevelView _playerLevelView;
+        [SerializeField]
+        private PlayerLevelProgressBarView _progressBarView;
         [SerializeField] 
         private CharacterAllStatsView _characterAllStatsView;
 
@@ -29,6 +31,7 @@ namespace Lessons.Architecture.PM
             _heroPopupPresenter = heroPopupPresenter;
             _userView.Show(_heroPopupPresenter.UserPresenter);
             _playerLevelView.Show(_heroPopupPresenter.PlayerLevelPresenter);
+            _progressBarView.Show(_heroPopupPresenter.PlayerLevelProgressBarPresenter);
             _characterAllStatsView.Show(_heroPopupPresenter.CharacterAllStatsPresenter);
 
             _heroPopupPresenter.LevelUpButtonPresenter.LevelUpCommand

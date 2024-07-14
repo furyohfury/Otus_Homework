@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -44,11 +43,6 @@ namespace Lessons.Architecture.PM
             _statViews.Clear();
         }
 
-        public void ShowStat(CharacterStatView view, IStatPresenter presenter)
-        {
-            view.Show(presenter);
-        }
-
         public CharacterStatView CreateStat()
         {
             var statTransform = _statTransforms[_statViews.Count];
@@ -58,9 +52,12 @@ namespace Lessons.Architecture.PM
             return statGO;
         }
 
-        //public void RemoveStat(string stat) => _statViews.Remove
+        private void ShowStat(CharacterStatView view, IStatPresenter presenter)
+        {
+            view.Show(presenter);
+        }        
 
-        private void OnValidate() // todo check if works
+        private void OnValidate()
         {
             _statTransforms.
                 OrderByDescending(transform => transform.position.y).
