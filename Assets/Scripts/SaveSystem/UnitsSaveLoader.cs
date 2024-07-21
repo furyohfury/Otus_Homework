@@ -38,6 +38,7 @@ namespace Lessons.Architecture.SaveLoad
 
             foreach (var unitdata in data)
             {
+                // Searching for unit with same ID
                 var unit = units.SingleOrDefault(unit => unit.GetInstanceID() == unitdata.ID);
 
                 if (unit != default)
@@ -46,14 +47,17 @@ namespace Lessons.Architecture.SaveLoad
                     unit.HitPoints = unitdata.HitPoints;
                     savedUnits.Add(unit);
                 }
+                // Spawning new one if cant find on scene
                 else
                 {
                     var prefab = _prefabsConfig.UnitPrefabs[unitdata.Type];
                     var newUnit = service.SpawnUnit(prefab, unitdata.Position, Quaternion.Euler(unitdata.Rotation));
+                    newUnit.HitPoints = unitdata.HitPoints;
                     savedUnits.Add(newUnit);
                 }
             }
 
+            // Destroying unit that's not in data
             var deadUnits = units.Except(savedUnits);
             foreach (var unit in deadUnits)
             {
