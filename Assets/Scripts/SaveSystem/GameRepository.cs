@@ -25,19 +25,22 @@ namespace Lessons.Architecture.SaveLoad
 
         public void SaveState()
         {
-            var serializedState = JsonConvert.SerializeObject(this.gameState);
+            var serializedState = JsonConvert.SerializeObject(this.gameState, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
             PlayerPrefs.SetString(GAME_STATE_KEY, serializedState);
         }
 
         public T GetData<T>()
         {
-            var serializedData = this.gameState[typeof(T).Name];
+            var serializedData = this.gameState[typeof(T).FullName];
             return JsonConvert.DeserializeObject<T>(serializedData);
         }
 
         public bool TryGetData<T>(out T value)
         {
-            if (this.gameState.TryGetValue(typeof(T).Name, out var serializedData))
+            if (this.gameState.TryGetValue(typeof(T).FullName, out var serializedData))
             {
                 value = JsonConvert.DeserializeObject<T>(serializedData);
                 return true;
@@ -49,8 +52,11 @@ namespace Lessons.Architecture.SaveLoad
 
         public void SetData<T>(T value)
         {
-            var serializedData = JsonConvert.SerializeObject(value);
-            this.gameState[typeof(T).Name] = serializedData;
+            var serializedData = JsonConvert.SerializeObject(value, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            this.gameState[typeof(T).FullName] = serializedData;
         }
     }
 }

@@ -42,25 +42,32 @@ namespace Lessons.Architecture.SaveLoad
 
         //TODO: TIMER
 
-        private void OnApplicationFocus(bool hasFocus)
-        {
-            if (!hasFocus)
-            {
-                this.Save();
-            }
-        }
+        //private void OnApplicationFocus(bool hasFocus)
+        //{
+        //    if (!hasFocus)
+        //    {
+        //        this.Save();
+        //    }
+        //}
 
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            if (pauseStatus)
-            {
-                this.Save();
-            }
-        }
+        //private void OnApplicationPause(bool pauseStatus)
+        //{
+        //    if (pauseStatus)
+        //    {
+        //        this.Save();
+        //    }
+        //}
 
-        private void OnApplicationQuit()
+        //private void OnApplicationQuit()
+        //{
+        //    this.Save();
+        //}
+
+        [Button]
+        public void ShowPrefs() //todo dfelete
         {
-            this.Save();
+            var s = PlayerPrefs.GetString("Lesson/GameState");
+            Debug.Log(s);
         }
     }
 }

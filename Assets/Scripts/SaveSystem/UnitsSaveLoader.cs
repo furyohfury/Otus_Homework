@@ -7,6 +7,13 @@ namespace Lessons.Architecture.SaveLoad
 {
     public sealed class UnitsSaveLoader : SaveLoader<IEnumerable<UnitData>, UnitManager>
     {
+        private readonly UnitPrefabsConfig _prefabsConfig;
+
+        public UnitsSaveLoader(UnitPrefabsConfig prefabsConfig)
+        {
+            _prefabsConfig = prefabsConfig;
+        }
+
         protected override IEnumerable<UnitData> ConvertToData(UnitManager service)
         {
             var UnitsData = new List<UnitData>();
@@ -14,11 +21,11 @@ namespace Lessons.Architecture.SaveLoad
             foreach (var unit in units)
             {
                 var unitData = new UnitData(
-                    unit.GetHashCode(),
+                    unit.GetInstanceID(),
                     unit.HitPoints,
                     unit.Position,
                     unit.Rotation,
-                    unit);
+                    unit.Type);
                 UnitsData.Add(unitData);
             }
             return UnitsData;
@@ -27,25 +34,27 @@ namespace Lessons.Architecture.SaveLoad
         protected override void SetupData(UnitManager service, IEnumerable<UnitData> data)
         {
             var units = service.GetAllUnits().ToArray();
-            var newUnits = new HashSet<Unit>();
+            var savedUnits = new HashSet<Unit>();
 
             foreach (var unitdata in data)
             {
-                var unit = units.SingleOrDefault(unit => unit.GetHashCode() == unitdata.ID);
+                var unit = units.SingleOrDefault(unit => unit.GetInstanceID() == unitdata.ID);
 
                 if (unit != default)
                 {
                     unit.transform.SetPositionAndRotation(unitdata.Position, Quaternion.Euler(unitdata.Rotation));
                     unit.HitPoints = unitdata.HitPoints;
-                    newUnits.Add(unit);
+                    savedUnits.Add(unit);
                 }
                 else
                 {
-                    var newUnit = service.SpawnUnit(unitdata.GO, unitdata.Position, Quaternion.Euler(unitdata.Rotation));
-                    newUnits.Add(newUnit);
+                    var prefab = _prefabsConfig.UnitPrefabs[unitdata.Type];
+                    var newUnit = service.SpawnUnit(prefab, unitdata.Position, Quaternion.Euler(unitdata.Rotation));
+                    savedUnits.Add(newUnit);
                 }
             }
-            var deadUnits = units.Except(newUnits);
+
+            var deadUnits = units.Except(savedUnits);
             foreach (var unit in deadUnits)
             {
                 service.DestroyUnit(unit);

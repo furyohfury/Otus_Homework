@@ -1,15 +1,20 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Lessons.Architecture.SaveLoad
 {
     public sealed class SaveLoadInstaller : MonoInstaller
     {
+        [SerializeField]
+        private UnitPrefabsConfig _unitPrefabsConfig;
+
         public override void InstallBindings()
         {
-            var unitsSaveLoader = new UnitsSaveLoader();
-            ISaveLoader[] saveloaders = { unitsSaveLoader };
+            Container.Bind<ISaveLoader>().To<UnitsSaveLoader>().AsCached();
+            Container.Bind<ISaveLoader>().To<ResourcesSaveLoader>().AsCached();
 
-            Container.Bind<ISaveLoader[]>().FromInstance(saveloaders).AsSingle();
+            Container.Bind<UnitPrefabsConfig>().FromInstance(_unitPrefabsConfig).AsSingle();
+
             Container.Bind<GameRepository>().AsSingle();
             Container.Bind<SaveLoadManager>().FromComponentInHierarchy().AsSingle();
         }

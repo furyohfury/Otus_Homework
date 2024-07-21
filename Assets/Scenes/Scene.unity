@@ -295,6 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383502207}
+  - component: {fileID: 383502208}
   m_Layer: 0
   m_Name: ResourcesInstaller
   m_TagString: Untagged
@@ -317,6 +318,19 @@ Transform:
   m_Father: {fileID: 1909702673}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383502208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383502206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a483eedc880f2a643b43872231f057b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourcesContainer: {fileID: 0}
 --- !u!4 &422399150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 488926, guid: 091fdccaeaa7b2241a4c5998b2bfd5ec,
@@ -617,7 +631,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 653492621}
-  - component: {fileID: 653492622}
   - component: {fileID: 653492623}
   m_Layer: 0
   m_Name: '[SYSTEM]'
@@ -641,18 +654,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &653492622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653492620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7badd9ed2b8e49019f0a1a46ad5cf3bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &653492623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,6 +1071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014fb5cef0d08ea4b8f538de836cc716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitPrefabsConfig: {fileID: 11400000, guid: 42db417997878304f8f7bc047c7f0bff, type: 2}
 --- !u!1001 &1486443202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1144,6 +1146,7 @@ GameObject:
   - component: {fileID: 1502192418}
   - component: {fileID: 1502192417}
   - component: {fileID: 1502192416}
+  - component: {fileID: 1502192419}
   m_Layer: 0
   m_Name: '[CAMERA]'
   m_TagString: MainCamera
@@ -1217,6 +1220,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
+--- !u!114 &1502192419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502192415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1543239238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1277,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543239238}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f4efe9afc221ff489b7a4b124c4d2d1, type: 3}
   m_Name: 
@@ -1606,6 +1642,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1043583204}
   - {fileID: 1389146126}
+  - {fileID: 383502208}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
