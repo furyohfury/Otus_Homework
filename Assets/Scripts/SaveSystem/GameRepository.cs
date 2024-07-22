@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using ModestTree;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -18,56 +15,39 @@ namespace Lessons.Architecture.SaveLoad
         {
             if (File.Exists(SaveFilePath))
             {
-                var cryptedState = File.ReadAllText(SaveFilePath).Split(" ");
-                var bytedState = cryptedState.Select(b =>
-                {
-                    if (byte.TryParse(b, out byte d))
-                    {
-                        return d;
-                    }
-                    else
-                    {
-                        Debug.Log($"Cant parse {b}, its index in array is: {cryptedState.IndexOf(b)}");
-                        return default;
-                    }
-                }).ToArray();
-
-                var decryptedState = Cryptor.DecryptStringFromBytes(bytedState.ToArray());
-                this._gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(decryptedState);
+                var cryptedState = File.ReadAllText(SaveFilePath);
+                var bytedState = CryptingService.StringToByteArray(cryptedState);
+                var decryptedState = CryptingService.DecryptStringFromBytes(bytedState);
+                _gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(decryptedState);
             }
             else
             {
-                this._gameState = new Dictionary<string, string>();
+                _gameState = new Dictionary<string, string>();
             }
         }
 
         public void SaveState() //todo into separate class
         {
-            var serializedState = JsonConvert.SerializeObject(this._gameState, new JsonSerializerSettings
+            var serializedState = JsonConvert.SerializeObject(_gameState, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
 
-            var cryptedState = new StringBuilder();
-            var bytedState = Cryptor.EncryptStringToBytes(serializedState);
-            for (int i = 0; i < bytedState.Length - 1; i++)
-            {
-                cryptedState.Append(bytedState[i] + " ");
-            }
-            cryptedState.Append(bytedState.Last());
+            var bytedState = CryptingService.EncryptStringToBytes(serializedState);
+            var cryptedState = CryptingService.ByteArrayToString(bytedState);
 
-            File.WriteAllText(SaveFilePath, cryptedState.ToString().TrimEnd());
+            File.WriteAllText(SaveFilePath, cryptedState);
         }
 
         public T GetData<T>()
         {
-            var serializedData = this._gameState[typeof(T).FullName];
+            var serializedData = _gameState[typeof(T).FullName];
             return JsonConvert.DeserializeObject<T>(serializedData);
         }
 
         public bool TryGetData<T>(out T value)
         {
-            if (this._gameState.TryGetValue(typeof(T).FullName, out var serializedData))
+            if (_gameState.TryGetValue(typeof(T).FullName, out var serializedData))
             {
                 value = JsonConvert.DeserializeObject<T>(serializedData);
                 return true;
@@ -83,7 +63,7 @@ namespace Lessons.Architecture.SaveLoad
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
-            this._gameState[typeof(T).FullName] = serializedData;
+            _gameState[typeof(T).FullName] = serializedData;
         }
     }
 }

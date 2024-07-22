@@ -1,25 +1,27 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
-using System;
+using System.Text;
 using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
     //todo rename
-    public static class Cryptor // Everything besides constructor is a copypaste from here https://learn.microsoft.com/ru-ru/dotnet/api/system.security.cryptography.cryptostream?view=net-8.0
+    public static class CryptingService // Last 2 methods are a copypaste from here https://learn.microsoft.com/ru-ru/dotnet/api/system.security.cryptography.cryptostream?view=net-8.0
     {
-        private static const string KEY = "CryptingKey";
-        private static const string IV = "CryptingIV";
+        private const string KEY = "CryptingKey";
+        private const string IV = "CryptingIV";
         private static readonly byte[] _byteKey;
         private static readonly byte[] _byteIV;
 
-        static Cryptor()
+        static CryptingService()
         {
             // Checking if there's key and IV
             if (PlayerPrefs.HasKey(KEY) && PlayerPrefs.HasKey(IV))
             {
-                _byteKey = PlayerPrefs.GetString(KEY).Split(" ");
-                _byteIV = PlayerPrefs.GetString(IV).Split(" ");
+                _byteKey = StringToByteArray(PlayerPrefs.GetString(KEY));
+                _byteIV = StringToByteArray(PlayerPrefs.GetString(IV));
             }
             else // Creating new key and IV if there's none
             {
@@ -29,24 +31,54 @@ namespace Lessons.Architecture.SaveLoad
                     _byteIV = myAes.IV;
                 }
 
-                var keySB = new StringBuilder();                
+                var keySB = new StringBuilder();
                 for (int i = 0; i < _byteKey.Length - 1; i++)
                 {
                     keySB.Append(_byteKey[i] + " ");
                 }
-                keySB.Append(bytedState.Last());
+                keySB.Append(_byteKey.Last());
 
                 var IVSB = new StringBuilder();
                 for (int i = 0; i < _byteIV.Length - 1; i++)
                 {
                     IVSB.Append(_byteIV[i] + " ");
                 }
-                IVSB.Append(bytedState.Last());
-                
+                IVSB.Append(_byteIV.Last());
+
                 // Setting in prefs as new key and IV
                 PlayerPrefs.SetString(KEY, keySB.ToString());
                 PlayerPrefs.SetString(IV, IVSB.ToString());
             }
+        }
+
+        public static byte[] StringToByteArray(string text)
+        {
+            var byteArray = text
+                    .Split(" ")
+                    .Select(b =>
+                    {
+                        if (byte.TryParse(b, out var byteVal))
+                        {
+                            return byteVal;
+                        }
+                        else
+                        {
+                            throw new Exception($"Couldn't parse value {b}");
+                        }
+                    })
+                    .ToArray();
+            return byteArray;
+        }
+
+        public static string ByteArrayToString(byte[] byteArray)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < byteArray.Length - 1; i++)
+            {
+                sb.Append(byteArray[i] + " ");
+            }
+            sb.Append(byteArray.Last());
+            return sb.ToString();
         }
 
         public static byte[] EncryptStringToBytes(string plainText)
