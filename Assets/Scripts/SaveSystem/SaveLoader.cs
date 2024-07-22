@@ -31,6 +31,7 @@ namespace Lessons.Architecture.SaveLoad
 
         protected virtual void SetupByDefault(TService service)
         {
+            throw new System.Exception($"Didn't find data to service: {service.GetType().Name}");
         }
     }
 }

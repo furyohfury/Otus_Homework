@@ -57,7 +57,7 @@ namespace Lessons.Architecture.SaveLoad
                 }
             }
 
-            // Destroying unit that's not in data
+            // Destroying units that's not in data
             var deadUnits = units.Except(savedUnits);
             foreach (var unit in deadUnits)
             {

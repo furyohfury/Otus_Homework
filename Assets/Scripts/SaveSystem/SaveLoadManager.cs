@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class SaveLoadManager : MonoBehaviour
+    public sealed class SaveLoadManager : MonoBehaviour // todo put into project installer
     {
         private ISaveLoader[] saveLoaders;
         private GameRepository repository;
@@ -17,7 +17,7 @@ namespace Lessons.Architecture.SaveLoad
         }
 
         [Button]
-        public void Load() //
+        public void Load()
         {
             this.repository.LoadState();
 
@@ -40,8 +40,6 @@ namespace Lessons.Architecture.SaveLoad
             this.repository.SaveState();
         }
 
-        //TODO: TIMER
-
         //private void OnApplicationFocus(bool hasFocus)
         //{
         //    if (!hasFocus)
@@ -62,12 +60,5 @@ namespace Lessons.Architecture.SaveLoad
         //{
         //    this.Save();
         //}
-
-        [Button]
-        public void ShowPrefs() //todo dfelete
-        {
-            var s = PlayerPrefs.GetString("Lesson/GameState");
-            Debug.Log(s);
-        }
     }
 }

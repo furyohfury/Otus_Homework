@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
+    //todo rename
     public static class Cryptor // Everything besides constructor is a copypaste from here https://learn.microsoft.com/ru-ru/dotnet/api/system.security.cryptography.cryptostream?view=net-8.0
     {
         private static const string KEY = "CryptingKey";

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public class UnitData
+    public struct UnitData
     {
         public int ID;
         public string Type;

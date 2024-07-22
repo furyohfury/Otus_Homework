@@ -8,18 +8,17 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class GameRepository : IGameRepository
+    public sealed class GameRepository : IGameRepository // todo put into project context
     {
-        private const string GAME_STATE_KEY = "Lesson/GameState";
         private const string SAVE_FILE_NAME = "SaveFile.txt";
-        private string FullSaveFilePath => string.Concat(Application.persistentDataPath, "\\", SAVE_FILE_NAME);
+        private string SaveFilePath => string.Concat(Application.persistentDataPath, "\\", SAVE_FILE_NAME);
         private Dictionary<string, string> _gameState = new();
 
-        public void LoadState()
+        public void LoadState() //todo into separate class
         {
-            if (File.Exists(FullSaveFilePath))
+            if (File.Exists(SaveFilePath))
             {
-                var cryptedState = File.ReadAllText(FullSaveFilePath).Split(" ");
+                var cryptedState = File.ReadAllText(SaveFilePath).Split(" ");
                 var bytedState = cryptedState.Select(b =>
                 {
                     if (byte.TryParse(b, out byte d))
@@ -28,7 +27,7 @@ namespace Lessons.Architecture.SaveLoad
                     }
                     else
                     {
-                        Debug.Log($"Cant parse {b}, its index is {cryptedState.IndexOf(b)}");
+                        Debug.Log($"Cant parse {b}, its index in array is: {cryptedState.IndexOf(b)}");
                         return default;
                     }
                 }).ToArray();
@@ -42,7 +41,7 @@ namespace Lessons.Architecture.SaveLoad
             }
         }
 
-        public void SaveState()
+        public void SaveState() //todo into separate class
         {
             var serializedState = JsonConvert.SerializeObject(this._gameState, new JsonSerializerSettings
             {
@@ -57,7 +56,7 @@ namespace Lessons.Architecture.SaveLoad
             }
             cryptedState.Append(bytedState.Last());
 
-            File.WriteAllText(FullSaveFilePath, cryptedState.ToString().TrimEnd());
+            File.WriteAllText(SaveFilePath, cryptedState.ToString().TrimEnd());
         }
 
         public T GetData<T>()
