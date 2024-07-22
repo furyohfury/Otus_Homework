@@ -5,16 +5,47 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public static class Cryptor
+    public static class Cryptor // Everything besides constructor is a copypaste from here https://learn.microsoft.com/ru-ru/dotnet/api/system.security.cryptography.cryptostream?view=net-8.0
     {
-        private static readonly byte[] _key;
-        private static readonly byte[] _IV;
+        private static const string KEY = "CryptingKey";
+        private static const string IV = "CryptingIV";
+        private static readonly byte[] _byteKey;
+        private static readonly byte[] _byteIV;
 
         static Cryptor()
         {
-            var data = Resources.Load<CryptoData>("CryptoData");
-            _key = data.Key;
-            _IV = data.IV;
+            // Checking if there's key and IV
+            if (PlayerPrefs.HasKey(KEY) && PlayerPrefs.HasKey(IV))
+            {
+                _byteKey = PlayerPrefs.GetString(KEY).Split(" ");
+                _byteIV = PlayerPrefs.GetString(IV).Split(" ");
+            }
+            else // Creating new key and IV if there's none
+            {
+                using (Aes myAes = Aes.Create())
+                {
+                    _byteKey = myAes.Key;
+                    _byteIV = myAes.IV;
+                }
+
+                var keySB = new StringBuilder();                
+                for (int i = 0; i < _byteKey.Length - 1; i++)
+                {
+                    keySB.Append(_byteKey[i] + " ");
+                }
+                keySB.Append(bytedState.Last());
+
+                var IVSB = new StringBuilder();
+                for (int i = 0; i < _byteIV.Length - 1; i++)
+                {
+                    IVSB.Append(_byteIV[i] + " ");
+                }
+                IVSB.Append(bytedState.Last());
+                
+                // Setting in prefs as new key and IV
+                PlayerPrefs.SetString(KEY, keySB.ToString());
+                PlayerPrefs.SetString(IV, IVSB.ToString());
+            }
         }
 
         public static byte[] EncryptStringToBytes(string plainText)
@@ -22,17 +53,17 @@ namespace Lessons.Architecture.SaveLoad
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
                 throw new ArgumentNullException(nameof(plainText));
-            if (_key == null || _key.Length <= 0)
-                throw new ArgumentNullException(nameof(_key));
-            if (_IV == null || _IV.Length <= 0)
-                throw new ArgumentNullException(nameof(_IV));
+            if (_byteKey == null || _byteKey.Length <= 0)
+                throw new ArgumentNullException(nameof(_byteKey));
+            if (_byteIV == null || _byteIV.Length <= 0)
+                throw new ArgumentNullException(nameof(_byteIV));
             byte[] encrypted;
 
             // Create a Aes object with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = _key;
-                aesAlg.IV = _IV;
+                aesAlg.Key = _byteKey;
+                aesAlg.IV = _byteIV;
 
                 // Create an encryptor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
@@ -61,10 +92,10 @@ namespace Lessons.Architecture.SaveLoad
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
                 throw new ArgumentNullException(nameof(cipherText));
-            if (_key == null || _key.Length <= 0)
-                throw new ArgumentNullException(nameof(_key));
-            if (_IV == null || _IV.Length <= 0)
-                throw new ArgumentNullException(nameof(_IV));
+            if (_byteKey == null || _byteKey.Length <= 0)
+                throw new ArgumentNullException(nameof(_byteKey));
+            if (_byteIV == null || _byteIV.Length <= 0)
+                throw new ArgumentNullException(nameof(_byteIV));
 
             // Declare the string used to hold the decrypted text.
             string plaintext = null;
@@ -72,8 +103,8 @@ namespace Lessons.Architecture.SaveLoad
             // Create a Aes object with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = _key;
-                aesAlg.IV = _IV;
+                aesAlg.Key = _byteKey;
+                aesAlg.IV = _byteIV;
 
                 // Create a decryptor to perform the stream transform.
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
