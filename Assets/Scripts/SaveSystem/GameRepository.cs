@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class GameRepository : IGameRepository // todo put into project context
+    public sealed class GameRepository : IGameRepository
     {
         private const string SAVE_FILE_NAME = "SaveFile.txt";
-        private string SaveFilePath => string.Concat(Application.persistentDataPath, "\\", SAVE_FILE_NAME);
+        private string SaveFilePath => string.Concat(Application.persistentDataPath, "/", SAVE_FILE_NAME);
         private Dictionary<string, string> _gameState = new();
 
         public void LoadState() //todo into separate class

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Lessons.Architecture.SaveLoad
 {
-    public sealed class SaveLoadManager : MonoBehaviour // todo put into project installer
+    public sealed class SaveLoadManager : MonoBehaviour
     {
         private ISaveLoader[] saveLoaders;
         private GameRepository repository;
