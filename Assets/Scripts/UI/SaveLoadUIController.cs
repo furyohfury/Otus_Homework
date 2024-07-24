@@ -11,7 +11,7 @@ namespace UI
         private readonly Button _loadButton;
         private readonly SaveLoadManager _saveLoadManager;
 
-        public SaveLoadUIPresenter(Button saveButton, Button loadButton, SaveLoadManager saveLoadManager)
+        public SaveLoadUIController(Button saveButton, Button loadButton, SaveLoadManager saveLoadManager)
         {
             _saveButton = saveButton;
             _loadButton = loadButton;

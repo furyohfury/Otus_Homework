@@ -8,11 +8,11 @@ namespace UI
 {
     public sealed class KillUnitUIController : IInitializable// todo rename to controller?
     {
-        private Button _killButton;
-        private Camera _camera;
-        private UnitManager _unitManager;
+        private readonly Button _killButton;
+        private readonly Camera _camera;
+        private readonly UnitManager _unitManager;
 
-        public KillUnitPresenter(Button killButton, Camera camera, UnitManager unitManager)
+        public KillUnitUIController(Button killButton, Camera camera, UnitManager unitManager)
         {
             _killButton = killButton;
             _camera = camera;

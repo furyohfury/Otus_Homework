@@ -6,25 +6,25 @@ namespace Lessons.Architecture.SaveLoad
 {
     public sealed class SaveLoadManager : MonoBehaviour
     {
-        private ISaveLoader[] saveLoaders;
-        private GameRepository repository;
+        private ISaveLoader[] _saveLoaders;
+        private GameRepository _repository;
 
         [Inject]
         public void Construct(ISaveLoader[] saveLoaders, GameRepository repository) //todo redo with IGameRepository
         {
-            this.saveLoaders = saveLoaders;
-            this.repository = repository;
+            this._saveLoaders = saveLoaders;
+            this._repository = repository;
         }
 
         [Button]
         public void Load()
         {
-            this.repository.LoadState();
+            this._repository.LoadState();
 
             SceneContext context = FindObjectOfType<SceneContext>();
-            foreach (var saveLoader in this.saveLoaders)
+            foreach (var saveLoader in this._saveLoaders)
             {
-                saveLoader.LoadGame(this.repository, context);
+                saveLoader.LoadGame(this._repository, context);
             }
         }
 
@@ -32,12 +32,12 @@ namespace Lessons.Architecture.SaveLoad
         public void Save()
         {
             SceneContext context = FindObjectOfType<SceneContext>();
-            foreach (var saveLoader in this.saveLoaders)
+            foreach (var saveLoader in this._saveLoaders)
             {
-                saveLoader.SaveGame(this.repository, context);
+                saveLoader.SaveGame(this._repository, context);
             }
 
-            this.repository.SaveState();
+            this._repository.SaveState();
         }
 
         //private void OnApplicationFocus(bool hasFocus)

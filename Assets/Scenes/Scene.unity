@@ -401,7 +401,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 348581829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df217142ea3e6de438614237cdca521f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8755a2dfe8c5ff947a47b85c1ec2e64d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _saveButton: {fileID: 1953558358}
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 383502206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a483eedc880f2a643b43872231f057b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 69b36c8d2b4ce654db8be1328fd2b393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &422399150 stripped
@@ -466,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 504658225}
-  - component: {fileID: 504658224}
+  - component: {fileID: 504658226}
   m_Layer: 0
   m_Name: SceneSystemsInstaller
   m_TagString: Untagged
@@ -474,18 +474,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &504658224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504658223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cca8ca88e5cae04a9972e46ec996df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &504658225
 Transform:
   m_ObjectHideFlags: 0
@@ -501,6 +489,18 @@ Transform:
   m_Father: {fileID: 1909702673}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &504658226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504658223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81480432b1d9b9148b97348c64d431be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &513304594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1043583202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f772bc42e5199e74483de40194f244a9, type: 3}
+  m_Script: {fileID: 11500000, guid: b6634777650fa244797a536ba0a8facc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _unitsContainer: {fileID: 1263304700}
@@ -2003,6 +2003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4efe9afc221ff489b7a4b124c4d2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  casFrom: 0
+  casTo: 10000000
+  parFrom: 0
+  parTo: 10000000
 --- !u!4 &1543239240
 Transform:
   m_ObjectHideFlags: 0
@@ -2532,7 +2536,7 @@ MonoBehaviour:
   - {fileID: 1043583204}
   - {fileID: 383502208}
   - {fileID: 348581831}
-  - {fileID: 504658224}
+  - {fileID: 504658226}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
