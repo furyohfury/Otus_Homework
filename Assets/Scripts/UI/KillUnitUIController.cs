@@ -6,7 +6,7 @@ using Zenject;
 
 namespace UI
 {
-    public sealed class KillUnitPresenter : IInitializable// todo rename to controller?
+    public sealed class KillUnitUIController : IInitializable// todo rename to controller?
     {
         private Button _killButton;
         private Camera _camera;
