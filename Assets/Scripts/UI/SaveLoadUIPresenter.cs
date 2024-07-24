@@ -5,7 +5,7 @@ using Zenject;
 
 namespace UI
 {
-    public sealed class SaveLoadUIPresenter : IInitializable
+    public sealed class SaveLoadUIPresenter : IInitializable // todo rename to controller?
     {
         private readonly Button _saveButton;
         private readonly Button _loadButton;
