@@ -15,9 +15,8 @@ namespace Lessons.Architecture.SaveLoad
         {
             if (File.Exists(SaveFilePath))
             {
-                var cryptedState = File.ReadAllText(SaveFilePath);
-                var bytedState = CryptingService.StringToByteArray(cryptedState);
-                var decryptedState = CryptingService.DecryptStringFromBytes(bytedState);
+                var cryptedState = File.ReadAllBytes(SaveFilePath);
+                var decryptedState = CryptingService.DecryptStringFromBytes(cryptedState);
                 _gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(decryptedState);
             }
             else
@@ -32,11 +31,9 @@ namespace Lessons.Architecture.SaveLoad
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
+            var cryptedState = CryptingService.EncryptStringToBytes(serializedState);
 
-            var bytedState = CryptingService.EncryptStringToBytes(serializedState);
-            var cryptedState = CryptingService.ByteArrayToString(bytedState);
-
-            File.WriteAllText(SaveFilePath, cryptedState);
+            File.WriteAllBytes(SaveFilePath, cryptedState);
         }
 
         public T GetData<T>()
