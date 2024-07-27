@@ -18,7 +18,7 @@ namespace Popup.UI.Character.Level
         private TweenParams _tweenParams;
 
         private IPlayerLevelProgressBarPresenter _presenter;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
         private float _barsWidth = 0f;
 
         public void Show(IPresenter presenter)
@@ -39,15 +39,16 @@ namespace Popup.UI.Character.Level
 
             _presenter = playerLevelProgressBarPresenter;
             playerLevelProgressBarPresenter.Experience
-                .Subscribe(SetExperience);
+                .Subscribe(SetExperience)
+                .AddTo(_disposable);
             playerLevelProgressBarPresenter.ProgressBarFillRate
-                .Subscribe(SetProgressBar);
+                .Subscribe(SetProgressBar)
+                .AddTo(_disposable);
             gameObject.SetActive(true);
         }
 
         public void Hide()
         {
-            _presenter.Dispose();
             _disposable.Clear();
             gameObject.SetActive(false);
         }

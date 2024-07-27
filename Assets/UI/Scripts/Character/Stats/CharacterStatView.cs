@@ -9,7 +9,6 @@ namespace Popup.UI.Character.Stats
         [SerializeField]
         private TMP_Text _stat;
 
-        private IStatPresenter _presenter;
         private readonly CompositeDisposable _disposable = new();
 
         public void SetStat(string stat) => _stat.text = stat;
@@ -20,7 +19,6 @@ namespace Popup.UI.Character.Stats
             {
                 throw new System.Exception("Needed IStatPresenter");
             }
-            _presenter = statPresenter;
             statPresenter.Stat
                 .Subscribe(SetStat)
                 .AddTo(_disposable);
@@ -31,7 +29,6 @@ namespace Popup.UI.Character.Stats
         public void Hide()
         {
             _disposable.Clear();
-            _presenter.Dispose();
             gameObject.SetActive(false);
         }
     }

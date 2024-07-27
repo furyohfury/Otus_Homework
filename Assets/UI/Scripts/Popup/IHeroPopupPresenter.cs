@@ -11,5 +11,7 @@ namespace Popup.UI.Popup
         public IPlayerLevelProgressBarPresenter PlayerLevelProgressBarPresenter { get; }
         public ICharacterAllStatsPresenter CharacterAllStatsPresenter { get; }
         public ILevelUpButtonPresenter LevelUpButtonPresenter { get; }
+
+        void Dispose();
     }
 }

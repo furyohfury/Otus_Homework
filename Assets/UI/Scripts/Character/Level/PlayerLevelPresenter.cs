@@ -7,8 +7,8 @@ namespace Popup.UI.Character.Level
     {
         public ReactiveProperty<string> Level { get; private set; } = new();
 
-        private PlayerLevel _playerLevel;
-        private CompositeDisposable _disposable = new();
+        private readonly PlayerLevel _playerLevel;
+        private readonly CompositeDisposable _disposable = new();
 
         public PlayerLevelPresenter(PlayerLevel playerLevel)
         {

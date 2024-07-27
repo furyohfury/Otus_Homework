@@ -20,5 +20,14 @@ namespace Popup.UI.Popup
             CharacterAllStatsPresenter = characterAllStatsPresenter;
             LevelUpButtonPresenter = levelUpButtonPresenter;
         }
+
+        public void Dispose()
+        {
+            UserPresenter.Dispose();
+            PlayerLevelPresenter.Dispose();
+            PlayerLevelProgressBarPresenter.Dispose();
+            CharacterAllStatsPresenter.Dispose();
+            LevelUpButtonPresenter.Dispose();
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace Popup.UI.Character.Stats
     {
         public ReactiveProperty<string> Stat { get; private set; } = new();
 
-        private CharacterStat _characterStat;
-        private CompositeDisposable _disposable = new();
+        private readonly CharacterStat _characterStat;
+        private readonly CompositeDisposable _disposable = new();
 
         public CharacterStatPresenter(CharacterStat stat)
         {

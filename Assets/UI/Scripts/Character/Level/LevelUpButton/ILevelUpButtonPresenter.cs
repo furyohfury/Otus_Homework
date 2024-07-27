@@ -6,5 +6,7 @@ namespace Popup.UI.Character.Level
     {
         public ReactiveCommand LevelUpCommand { get; }
         public ReactiveProperty<bool> CanLevelUp { get; }
+
+        void Dispose();
     }
 }

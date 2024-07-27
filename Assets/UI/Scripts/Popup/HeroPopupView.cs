@@ -25,8 +25,6 @@ namespace Popup.UI.Popup
         private IHeroPopupPresenter _heroPopupPresenter;
         private readonly CompositeDisposable _disposable = new();
 
-        public PlayerLevelProgressBarView ProgressBarView { get => _progressBarView; set => _progressBarView = value; }
-
         public void Show(IPresenter presenter)
         {
             if (presenter is not IHeroPopupPresenter heroPopupPresenter)
@@ -36,7 +34,7 @@ namespace Popup.UI.Popup
             _heroPopupPresenter = heroPopupPresenter;
             _userView.Show(_heroPopupPresenter.UserPresenter);
             _playerLevelView.Show(_heroPopupPresenter.PlayerLevelPresenter);
-            ProgressBarView.Show(_heroPopupPresenter.PlayerLevelProgressBarPresenter);
+            _progressBarView.Show(_heroPopupPresenter.PlayerLevelProgressBarPresenter);
             _characterAllStatsView.Show(_heroPopupPresenter.CharacterAllStatsPresenter);
 
             _heroPopupPresenter.LevelUpButtonPresenter.LevelUpCommand
@@ -52,6 +50,7 @@ namespace Popup.UI.Popup
             _userView.Hide();
             _playerLevelView.Hide();
             _characterAllStatsView.Hide();
+            _progressBarView.Hide();
             _disposable.Clear();
             _exitButton.onClick.RemoveListener(Hide);
             gameObject.SetActive(false);

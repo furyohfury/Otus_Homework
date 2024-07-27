@@ -8,7 +8,7 @@ namespace Popup.UI.Character.Stats
     public sealed class CharacterAllStatsView : MonoBehaviour
     {
         private CharacterStatView _characterStatPrefab;
-        private List<CharacterStatView> _statViews = new();
+        private readonly List<CharacterStatView> _statViews = new();
         [SerializeField]
         private Transform[] _statTransforms;
         private ICharacterAllStatsPresenter _characterAllStatsPresenter;
@@ -38,6 +38,7 @@ namespace Popup.UI.Character.Stats
         {
             foreach (var statView in _statViews)
             {
+                statView.Hide();
                 Destroy(statView.gameObject);
             }
             _statViews.Clear();

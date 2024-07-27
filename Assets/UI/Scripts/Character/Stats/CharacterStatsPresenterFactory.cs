@@ -13,10 +13,14 @@ namespace Popup.UI.Character.Stats
             _characterInfo = characterInfo;
         }
 
-        public CharacterStatPresenter[] CreateStatPresenters()
+        public IStatPresenter[] CreateStatPresenters()
         {
-            var presenters = _characterInfo.Stats.Select(stat => new CharacterStatPresenter(stat));
-            return presenters.ToArray();
+            IStatPresenter[] presenters = new IStatPresenter[_characterInfo.Stats.Count];
+            for (int i = 0; i < presenters.Length; i++)
+            {
+                presenters[i] = new CharacterStatPresenter(_characterInfo.Stats[i]);
+            }
+            return presenters;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Popup.UI
         [TitleGroup("Models readonly"), ShowInInspector]
         private UserInfo _userInfo;
         private HeroPopupPresenterFactory _heroPopupPresenterFactory;
+        private HeroPopupPresenter _heroPopupPresenter;
 
         [Inject]
         public void Construct(GameData.CharacterInfo characterInfo, PlayerLevel playerLevel, UserInfo userInfo, HeroPopupPresenterFactory heroPopupPresenterFactory)
@@ -61,14 +62,15 @@ namespace Popup.UI
             {
                 return;
             }
-            var presenter = _heroPopupPresenterFactory.Create();
-            _heroPopupView.Show(presenter);
+            _heroPopupPresenter = _heroPopupPresenterFactory.Create();
+            _heroPopupView.Show(_heroPopupPresenter);
         }
 
         [ButtonGroup("Popup/ShowHide")]
         public void HidePopup()
         {
             _heroPopupView.Hide();
+            _heroPopupPresenter.Dispose();
         }
     }
 }

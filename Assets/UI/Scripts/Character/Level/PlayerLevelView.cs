@@ -10,7 +10,7 @@ namespace Popup.UI.Character.Level
         private TMP_Text _level;
 
         private IPlayerLevelPresenter _presenter;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)
         {
@@ -22,7 +22,8 @@ namespace Popup.UI.Character.Level
             _presenter = playerLevelPresenter;
             gameObject.SetActive(true);
             playerLevelPresenter.Level.
-                Subscribe(SetLevel);
+                Subscribe(SetLevel)
+                .AddTo(_disposable);
         }
 
         public void Hide()

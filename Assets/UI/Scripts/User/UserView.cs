@@ -11,8 +11,7 @@ namespace Popup.UI.User
         [SerializeField] private TMP_Text _description;
         [SerializeField] private Image _icon;
 
-        private IUserPresenter _presenter;
-        private CompositeDisposable _disposable = new();
+        private readonly CompositeDisposable _disposable = new();
 
         public void Show(IPresenter presenter)
         {
@@ -20,7 +19,6 @@ namespace Popup.UI.User
             {
                 throw new System.Exception("UserView needed IUserPresenter");
             }
-            _presenter = userPresenter;
             userPresenter.Name.Subscribe(ChangeName)
                 .AddTo(_disposable);
             userPresenter.Description.Subscribe(ChangeDescription)
@@ -33,7 +31,6 @@ namespace Popup.UI.User
 
         public void Hide()
         {
-            _presenter.Dispose();
             _disposable.Clear();
             gameObject.SetActive(false);
         }
