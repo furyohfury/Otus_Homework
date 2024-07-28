@@ -1,11 +1,10 @@
-﻿using System;
-using Lessons.Architecture.SaveLoad;
+﻿using SaveLoadHomework;
 using UnityEngine.UI;
 using Zenject;
 
 namespace UI
 {
-    public sealed class SaveLoadUIController : IInitializable // todo rename to controller?
+    public sealed class SaveLoadUIController : IInitializable
     {
         private readonly Button _saveButton;
         private readonly Button _loadButton;

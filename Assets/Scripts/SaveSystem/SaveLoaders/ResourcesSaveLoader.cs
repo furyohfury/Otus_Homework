@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GameEngine;
+using SaveLoadHomework.SaveLoaders.DataStorage;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework.SaveLoaders
 {
     public sealed class ResourcesSaveLoader : SaveLoader<IEnumerable<ResourceData>, ResourceService>
     {
         protected override IEnumerable<ResourceData> ConvertToData(ResourceService service)
         {
-            var resources = service.GetResources();
-            var data = resources.Select(res => new ResourceData(res.Amount, res.GetInstanceID())).ToArray();
+            var resources = service.GetResources().ToArray();
+            ResourceData[] data = new ResourceData[resources.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = new ResourceData(resources[i].Amount, resources[i].GetInstanceID());
+            }
             return data;
         }
 

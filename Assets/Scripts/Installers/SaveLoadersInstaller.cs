@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using SaveLoadHomework.SaveLoaders;
+using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework.Installers
 {
     public sealed class SaveLoadersInstaller : MonoInstaller
     {
@@ -13,7 +14,7 @@ namespace Lessons.Architecture.SaveLoad
             Container.Bind<UnitPrefabsConfig>().FromInstance(_unitPrefabsConfig).AsSingle();
 
             Container.Bind<ISaveLoader>().To<UnitsSaveLoader>().AsCached();
-            Container.Bind<ISaveLoader>().To<ResourcesSaveLoader>().AsCached();            
+            Container.Bind<ISaveLoader>().To<ResourcesSaveLoader>().AsCached();
         }
     }
 }

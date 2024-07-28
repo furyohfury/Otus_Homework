@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework
 {
     public interface ISaveLoader
     {

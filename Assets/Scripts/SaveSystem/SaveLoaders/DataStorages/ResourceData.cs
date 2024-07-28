@@ -1,4 +1,4 @@
-﻿namespace Lessons.Architecture.SaveLoad
+﻿namespace SaveLoadHomework.SaveLoaders.DataStorage
 {
     public struct ResourceData
     {

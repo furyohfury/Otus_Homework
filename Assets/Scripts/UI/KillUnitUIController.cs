@@ -6,7 +6,7 @@ using Zenject;
 
 namespace UI
 {
-    public sealed class KillUnitUIController : IInitializable// todo rename to controller?
+    public sealed class KillUnitUIController : IInitializable
     {
         private readonly Button _killButton;
         private readonly Camera _camera;
@@ -21,7 +21,7 @@ namespace UI
 
         void IInitializable.Initialize()
         {
-            _killButton.onClick.AddListener(async () => 
+            _killButton.onClick.AddListener(async () =>
             {
                 Debug.Log("Choose unit to destroy");
                 await KillButtonPressed();
@@ -30,6 +30,7 @@ namespace UI
 
         private async UniTask KillButtonPressed()
         {
+            _killButton.interactable = false;
             await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hitInfo, float.MaxValue) && hitInfo.collider.TryGetComponent(out Unit unit))
@@ -37,6 +38,7 @@ namespace UI
                 _unitManager.DestroyUnit(unit);
                 Debug.Log($"Destroyed unit of type: {unit.Type}");
             }
+            _killButton.interactable = true;
         }
     }
 }

@@ -1,7 +1,6 @@
-using GameEngine;
 using Zenject;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework
 {
     public abstract class SaveLoader<TData, TService> : ISaveLoader
     {
@@ -10,18 +9,18 @@ namespace Lessons.Architecture.SaveLoad
             var service = context.Container.Resolve<TService>();
             if (repository.TryGetData(out TData data))
             {
-                this.SetupData(service, data);
+                SetupData(service, data);
             }
             else
             {
-                this.SetupByDefault(service);
+                SetupByDefault(service);
             }
         }
 
         void ISaveLoader.SaveGame(IGameRepository repository, SceneContext context)
         {
             var service = context.Container.Resolve<TService>();
-            var data = this.ConvertToData(service);
+            var data = ConvertToData(service);
             repository.SetData(data);
         }
 

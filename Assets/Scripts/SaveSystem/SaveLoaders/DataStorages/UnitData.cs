@@ -1,7 +1,6 @@
-﻿using GameEngine;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework.SaveLoaders.DataStorage
 {
     public struct UnitData
     {

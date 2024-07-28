@@ -1,4 +1,4 @@
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework
 {
     public interface IGameRepository
     {

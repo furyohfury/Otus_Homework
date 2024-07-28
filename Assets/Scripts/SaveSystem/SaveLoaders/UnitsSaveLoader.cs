@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GameEngine;
+using SaveLoadHomework.SaveLoaders.DataStorage;
 using UnityEngine;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework.SaveLoaders
 {
     public sealed class UnitsSaveLoader : SaveLoader<IEnumerable<UnitData>, UnitManager>
     {
@@ -16,8 +17,9 @@ namespace Lessons.Architecture.SaveLoad
 
         protected override IEnumerable<UnitData> ConvertToData(UnitManager service)
         {
-            var UnitsData = new List<UnitData>();
             var units = service.GetAllUnits().ToArray();
+            var UnitsData = new List<UnitData>();
+
             foreach (var unit in units)
             {
                 var unitData = new UnitData(

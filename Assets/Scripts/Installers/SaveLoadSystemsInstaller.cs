@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework.Installers
 {
     public sealed class SaveLoadSystemsInstaller : MonoInstaller
     {

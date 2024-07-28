@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace GameEngine.Installers
+namespace SaveLoadHomework.Installers
 {
     public sealed class SceneSystemsInstaller : MonoInstaller
     {

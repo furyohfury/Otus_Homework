@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Architecture.SaveLoad
+namespace SaveLoadHomework
 {
     public sealed class SaveLoadManager : MonoBehaviour
     {
@@ -10,21 +10,21 @@ namespace Lessons.Architecture.SaveLoad
         private GameRepository _repository;
 
         [Inject]
-        public void Construct(ISaveLoader[] saveLoaders, GameRepository repository) //todo redo with IGameRepository
+        public void Construct(ISaveLoader[] saveLoaders, GameRepository repository)
         {
-            this._saveLoaders = saveLoaders;
-            this._repository = repository;
+            _saveLoaders = saveLoaders;
+            _repository = repository;
         }
 
         [Button]
         public void Load()
         {
-            this._repository.LoadState();
+            _repository.LoadState();
 
             SceneContext context = FindObjectOfType<SceneContext>();
-            foreach (var saveLoader in this._saveLoaders)
+            foreach (var saveLoader in _saveLoaders)
             {
-                saveLoader.LoadGame(this._repository, context);
+                saveLoader.LoadGame(_repository, context);
             }
         }
 
@@ -32,33 +32,12 @@ namespace Lessons.Architecture.SaveLoad
         public void Save()
         {
             SceneContext context = FindObjectOfType<SceneContext>();
-            foreach (var saveLoader in this._saveLoaders)
+            foreach (var saveLoader in _saveLoaders)
             {
-                saveLoader.SaveGame(this._repository, context);
+                saveLoader.SaveGame(_repository, context);
             }
 
-            this._repository.SaveState();
+            _repository.SaveState();
         }
-
-        //private void OnApplicationFocus(bool hasFocus)
-        //{
-        //    if (!hasFocus)
-        //    {
-        //        this.Save();
-        //    }
-        //}
-
-        //private void OnApplicationPause(bool pauseStatus)
-        //{
-        //    if (pauseStatus)
-        //    {
-        //        this.Save();
-        //    }
-        //}
-
-        //private void OnApplicationQuit()
-        //{
-        //    this.Save();
-        //}
     }
 }
