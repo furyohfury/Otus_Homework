@@ -29,7 +29,7 @@ MonoBehaviour:
     - Name: UnitPrefabs
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[GameEngine.Unit,
-        GameEngine]], mscorlib
+        Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -57,7 +57,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: Orc_archer
+      Data: Orc_Archer
     - Name: $v
       Entry: 10
       Data: 1

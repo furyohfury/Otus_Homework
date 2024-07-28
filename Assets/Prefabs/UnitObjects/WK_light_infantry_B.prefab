@@ -2854,6 +2854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417932}
   - component: {fileID: 6584907423915659709}
+  - component: {fileID: -1480788887357518484}
   m_Layer: 0
   m_Name: WK_light_infantry_B
   m_TagString: Untagged
@@ -2914,6 +2915,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: WK_light_infantry_B
   hitPoints: 10
+--- !u!65 &-1480788887357518484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &162874
 GameObject:
   m_ObjectHideFlags: 0

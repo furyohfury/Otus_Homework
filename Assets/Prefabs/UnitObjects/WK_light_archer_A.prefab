@@ -2089,6 +2089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461784}
   - component: {fileID: -7196697707103354558}
+  - component: {fileID: -29853775354617345}
   m_Layer: 0
   m_Name: WK_light_archer_A
   m_TagString: Untagged
@@ -2149,6 +2150,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: WK_light_archer_A
   hitPoints: 10
+--- !u!65 &-29853775354617345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &147358
 GameObject:
   m_ObjectHideFlags: 0
