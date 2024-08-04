@@ -20,7 +20,7 @@ namespace GameEngine
         }
 
         [Inject]
-        private void Compose(Camera camera)
+        private void Compose(Camera camera) // todo cringe?
         {
             _core.Compose(camera);
             AddLogic(_core.MoveComponent.MoveMechanics);

@@ -7,8 +7,8 @@ namespace GameEngine
     [Serializable]
     public class MoveComponent
     {
-        public AtomicVariable<Vector3> MoveDirection;        
-        public AtomicAnd CanMove = new();
+        public AtomicVariable<Vector3> MoveDirection;
+        public IAtomicExpression<bool> CanMove;
         public MoveMechanics MoveMechanics;
 
         [SerializeField]
@@ -16,8 +16,9 @@ namespace GameEngine
         [SerializeField]
         private Rigidbody _rigidBody;
 
-        public void Compose()
+        public void Compose(IAtomicExpression<bool> canMove)
         {
+            CanMove = canMove;
             MoveMechanics = new(_speed, MoveDirection, _rigidBody, CanMove);
         }
     }

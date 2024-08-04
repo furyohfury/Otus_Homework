@@ -717,9 +717,14 @@ MonoBehaviour:
         value: 5
       _rigidBody: {fileID: 625937917}
     RotationComponent:
-      _rotationRoot: {fileID: 625937916}
-      _rotateDirection: {x: 0, y: 0, z: 0}
-      _rotateRate: 15
+      _rotationRoot: {fileID: 625937917}
+      _rotateRate:
+        value: 15
+    LifeComponent:
+      IsAlive:
+        value: 1
+      HitPoints:
+        value: 5
 --- !u!1 &797904596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1185,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489417169}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fff31b2fba9d19a47854b72a13600d8a, type: 3}
   m_Name: 

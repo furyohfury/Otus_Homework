@@ -1,6 +1,5 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Extensions;
 using UnityEngine;
 
 namespace GameEngine
@@ -13,15 +12,21 @@ namespace GameEngine
         public MoveComponent MoveComponent;
         [SerializeField]
         public RotationComponent RotationComponent;
-        
+        [SerializeField]
+        public LifeComponent LifeComponent;
+
         public LookAtTargetMechanics LookAtTargetMechanics;
 
         public void Compose(Camera camera)
         {
-            MoveComponent.Compose();
+            var canMove = new AtomicAnd();
+            canMove.Append(LifeComponent.IsAlive);
+            MoveComponent.Compose(canMove);
 
-            RotationComponent.Compose(new AtomicAnd());
-            
+            var canRotate = new AtomicAnd();
+            canRotate.Append(LifeComponent.IsAlive);
+            RotationComponent.Compose(canRotate);
+
             var rotRoot = new AtomicFunction<Vector3>(() => RotationComponent.RotationRoot.position);
             var cursorPos = new AtomicFunction<Vector3>(() =>
             {
@@ -31,6 +36,9 @@ namespace GameEngine
                 worldPos.y = RotationComponent.RotationRoot.position.y;
                 return worldPos;
             });
+
+            LifeComponent.Compose();
+
             LookAtTargetMechanics = new(RotationComponent.RotateAction, cursorPos, rotRoot, RotationComponent.CanRotate);
         }
     }
