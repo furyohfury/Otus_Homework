@@ -3,13 +3,13 @@ using Zenject;
 
 namespace GameEngine
 {
-    public sealed class InputListener : MonoBehaviour
+    public sealed class InputListener : ITickable
     {
         public Vector3 Direction { get; private set; }
 
-        void Update()
+        public void Tick()
         {
-            Direction = new (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Direction = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         }
     }
 }

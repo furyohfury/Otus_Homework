@@ -1,21 +1,28 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace GameEngine
 {
-    public sealed class CameraComponent : MonoBehaviour
+    public sealed class CameraComponent : IInitializable, ILateTickable
     {
-        [SerializeField]
-        private Transform _target;
         private Vector3 _offset;
+        private readonly Transform _target;
+        private readonly Camera _camera;
 
-        private void Start()
+        public CameraComponent(Transform target, Camera camera)
         {
-            _offset = _target.position - transform.position;
+            _target = target;
+            _camera = camera;
         }
 
-        private void LateUpdate()
+        void IInitializable.Initialize()
         {
-            transform.position = _target.position - _offset;
+            _offset = _target.position - _camera.transform.position;
+        }
+
+        void ILateTickable.LateTick()
+        {
+            _camera.transform.position = _target.position - _offset;
         }
     }
 }
