@@ -15,17 +15,27 @@ namespace GameEngine
         [SerializeField]
         public LifeComponent LifeComponent;
 
+        // Data
+        private Vector3 CursorPosition;
+
+        public MoveMechanics MoveMechanics;
         public LookAtTargetMechanics LookAtTargetMechanics;
+        public RotateMechanics RotateMechanics;
 
         public void Compose(Camera camera)
         {
+            LifeComponent.Compose();            
+
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
             MoveComponent.Compose(canMove);
 
             var canRotate = new AtomicAnd();
-            canRotate.Append(LifeComponent.IsAlive);
+            canRotate.Append(LifeComponent.IsAlive);            
             RotationComponent.Compose(canRotate);
+
+            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent._rigidBody, MoveComponent.CanMove);
+            RotateMechanics = new(RotationComponent.RotateAction, RotationComponent.RotateRate, RotationComponent.RotationRoot, RotationComponent.CanRotate);
 
             var rotRoot = new AtomicFunction<Vector3>(() => RotationComponent.RotationRoot.position);
             var cursorPos = new AtomicFunction<Vector3>(() =>
@@ -36,9 +46,6 @@ namespace GameEngine
                 worldPos.y = RotationComponent.RotationRoot.position.y;
                 return worldPos;
             });
-
-            LifeComponent.Compose();
-
             LookAtTargetMechanics = new(RotationComponent.RotateAction, cursorPos, rotRoot, RotationComponent.CanRotate);
         }
     }

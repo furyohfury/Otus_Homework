@@ -713,9 +713,10 @@ MonoBehaviour:
     MoveComponent:
       MoveDirection:
         value: {x: 0, y: 0, z: 0}
-      _speed:
+      Speed:
         value: 5
-      _rigidBody: {fileID: 625937917}
+      _rigidBody:
+        value: {fileID: 625937917}
     RotationComponent:
       _rotationRoot: {fileID: 625937917}
       _rotateRate:

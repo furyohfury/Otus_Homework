@@ -9,13 +9,16 @@ namespace GameEngine
         private readonly IAtomicValue<float> _speed;
         private readonly IAtomicValue<Vector3> _moveDirection;
         private readonly IAtomicExpression<bool> _canMove;
-        private readonly Rigidbody _rb;
+        private readonly IAtomicValue<Rigidbody> _rigidbody;
 
-        public MoveMechanics(IAtomicValue<float> speed, IAtomicValue<Vector3> moveDirection, Rigidbody rb, IAtomicExpression<bool> canMove)
+        public MoveMechanics(IAtomicValue<float> speed, 
+            IAtomicValue<Vector3> moveDirection, 
+            IAtomicValue<Rigidbody> rigidbody, 
+            IAtomicExpression<bool> canMove)
         {
             _speed = speed;
             _moveDirection = moveDirection;
-            _rb = rb;
+            _rigidbody = rigidbody;
             _canMove = canMove;
         }
 
@@ -23,7 +26,7 @@ namespace GameEngine
         {
             if (_canMove.Value)
             {
-                _rb.MovePosition(_rb.position + _speed.Value * deltaTime * _moveDirection.Value.normalized);
+                _rigidbody.Value.MovePosition(_rigidbody.Value.position + _speed.Value * deltaTime * _moveDirection.Value.normalized);
             }
         }
     }

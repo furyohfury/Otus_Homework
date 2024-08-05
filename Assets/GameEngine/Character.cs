@@ -11,6 +11,7 @@ namespace GameEngine
         [Get(MoveAPI.MoveDirection)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
 
+
         [SerializeField]
         private CharacterCore _core;
 
@@ -20,10 +21,10 @@ namespace GameEngine
         }
 
         [Inject]
-        private void Compose(Camera camera) // todo cringe?
+        private void Compose(Camera camera) // todo inject cringe?
         {
             _core.Compose(camera);
-            AddLogic(_core.MoveComponent.MoveMechanics);
+            AddLogic(_core.MoveMechanics);
             AddLogic(_core.LookAtTargetMechanics);
         }
 
