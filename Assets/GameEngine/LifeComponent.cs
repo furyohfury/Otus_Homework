@@ -3,6 +3,7 @@ using Atomic.Elements;
 
 namespace GameEngine
 {
+
     [Serializable]
     public class LifeComponent
     {
@@ -10,11 +11,23 @@ namespace GameEngine
         public AtomicVariable<bool> IsAlive = new(true);
         public AtomicVariable<int> HitPoints = new(5);
 
-        private TakeDamageMechanics _takeDamageMechanics;
-
         public void Compose()
         {
-            _takeDamageMechanics = new(TakeDamageEvent, IsAlive, HitPoints);
+            TakeDamageEvent.Subscribe(TakeDamage);
+        }
+        public void TakeDamage(int damage)
+        {
+            if (!IsAlive.Value)
+            {
+                return;
+            }
+
+            HitPoints.Value -= damage;
+
+            if (HitPoints.Value <= 0)
+            {
+                IsAlive.Value = false;
+            }
         }
 
     }

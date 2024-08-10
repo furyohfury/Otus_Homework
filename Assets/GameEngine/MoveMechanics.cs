@@ -14,7 +14,7 @@ namespace GameEngine
         public MoveMechanics(IAtomicValue<float> speed, 
             IAtomicValue<Vector3> moveDirection, 
             IAtomicValue<Rigidbody> rigidbody, 
-            IAtomicExpression<bool> canMove)
+            IAtomicExpression<bool> canMove = null)
         {
             _speed = speed;
             _moveDirection = moveDirection;

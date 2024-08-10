@@ -18,7 +18,7 @@ namespace GameEngine
 
         void ITickable.Tick()
         {
-            var moveDirection = _character.GetVariable<Vector3>(MoveAPI.MoveDirection);
+            var moveDirection = _character.GetVariable<Vector3>(MoveAPI.MOVE_DIRECTION);
             moveDirection.Value = _inputListener.Direction;
         }
     }

@@ -9,12 +9,19 @@ namespace GameEngine
     {
         public AtomicVariable<Vector3> MoveDirection;
         public AtomicVariable<float> Speed = new(5f);
-        public AtomicVariable<Rigidbody> _rigidBody;
+        public AtomicVariable<Rigidbody> Root;
         public IAtomicExpression<bool> CanMove;
 
-        public void Compose(IAtomicExpression<bool> canMove)
+        public void Compose(IAtomicExpression<bool> canMove = null)
         {
-            CanMove = canMove;
+            if (canMove == null)
+            {
+                CanMove = new AtomicAnd();
+            }
+            else
+            {
+                CanMove = canMove;
+            }
         }
     }
 }

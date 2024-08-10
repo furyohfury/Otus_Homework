@@ -8,7 +8,7 @@ namespace GameEngine
     {
         private readonly IAtomicAction<Vector3> _rotateAction;
         private readonly IAtomicValue<Vector3> _targetPoint;
-        private readonly IAtomicValue<Vector3> _transform;
+        private readonly IAtomicValue<Vector3> _selfPosition;
         private readonly IAtomicExpression<bool> _isEnabled;
 
         public LookAtTargetMechanics(
@@ -20,7 +20,7 @@ namespace GameEngine
         {
             _rotateAction = rotateAction;
             _targetPoint = targetPoint;
-            _transform = transform;
+            _selfPosition = transform;
             _isEnabled = isEnabled;
         }
 
@@ -31,7 +31,7 @@ namespace GameEngine
                 return;
             }
 
-            var direction = _targetPoint.Value - _transform.Value;
+            var direction = _targetPoint.Value - _selfPosition.Value;
             _rotateAction.Invoke(direction);
         }
     }

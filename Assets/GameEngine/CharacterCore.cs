@@ -1,5 +1,6 @@
 ﻿using System;
 using Atomic.Elements;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GameEngine
@@ -14,39 +15,63 @@ namespace GameEngine
         public RotationComponent RotationComponent;
         [SerializeField]
         public LifeComponent LifeComponent;
+        [SerializeField]
+        public ShootComponent ShootComponent;
+        [SerializeField]
+        private WeaponMagComponent _weaponMagComponent;
 
-        // Data
-        private Vector3 CursorPosition;
+        [Space]
+        public AtomicVariable<Vector3> LookDirection;
+        [SerializeField]
+        private float _weaponMagRefillCD = 2f;
+        [ShowInInspector, ReadOnly]
+        public AtomicVariable<float> WeaponMagRefillCDTimer = new(0f);
 
         public MoveMechanics MoveMechanics;
         public LookAtTargetMechanics LookAtTargetMechanics;
-        public RotateMechanics RotateMechanics;
+        public CooldownMechanics ShootCdMechanics;
+        public CooldownMechanics WeaponMagRefillMechanics;
 
-        public void Compose(Camera camera)
+        public void Compose()
         {
-            LifeComponent.Compose();            
+            LifeComponent.Compose();
 
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
             MoveComponent.Compose(canMove);
 
             var canRotate = new AtomicAnd();
-            canRotate.Append(LifeComponent.IsAlive);            
+            canRotate.Append(LifeComponent.IsAlive);
             RotationComponent.Compose(canRotate);
 
-            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent._rigidBody, MoveComponent.CanMove);
-            RotateMechanics = new(RotationComponent.RotateAction, RotationComponent.RotateRate, RotationComponent.RotationRoot, RotationComponent.CanRotate);
+            var canShoot = new AtomicAnd();
+            canShoot.Append(LifeComponent.IsAlive);
+            canShoot.Append(new AtomicFunction<bool>(() => !_weaponMagComponent.IsEmpty.Value));
+            ShootComponent.Compose(canShoot);
+
+            WeaponMagRefillCDTimer.Subscribe(cd =>
+            {
+                if (cd <= 0 && !_weaponMagComponent.IsFull.Value)
+                {
+                    _weaponMagComponent.AddBullet.Invoke();
+                    WeaponMagRefillCDTimer.Value = _weaponMagRefillCD;
+                }
+            });
+            _weaponMagComponent.Compose(ShootComponent.ShootEvent);
+
+            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent.Root, MoveComponent.CanMove);
 
             var rotRoot = new AtomicFunction<Vector3>(() => RotationComponent.RotationRoot.position);
-            var cursorPos = new AtomicFunction<Vector3>(() =>
+            var lookDir = new AtomicFunction<Vector3>(() =>
             {
-                var screenPos = Input.mousePosition;
-                screenPos = new(screenPos.x, screenPos.y, (camera.transform.position - rotRoot.Value).magnitude);
-                var worldPos = camera.ScreenToWorldPoint(screenPos);
-                worldPos.y = RotationComponent.RotationRoot.position.y;
-                return worldPos;
+                var cursorPos = LookDirection.Value;
+                return new Vector3(cursorPos.x, RotationComponent.RotationRoot.position.y, cursorPos.z);
             });
-            LookAtTargetMechanics = new(RotationComponent.RotateAction, cursorPos, rotRoot, RotationComponent.CanRotate);
+            LookAtTargetMechanics = new(RotationComponent.RotateAction, lookDir, rotRoot, RotationComponent.CanRotate);
+
+            ShootCdMechanics = new(ShootComponent.ReloadTimer);
+            ShootComponent.ShootEvent.Subscribe(() => WeaponMagRefillCDTimer.Value = _weaponMagRefillCD);
+            WeaponMagRefillMechanics = new(WeaponMagRefillCDTimer);
         }
     }
 }
