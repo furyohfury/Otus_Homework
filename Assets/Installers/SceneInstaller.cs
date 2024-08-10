@@ -21,6 +21,8 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<CharacterMoveController>().AsSingle().WithArguments(_character);
             Container.BindInterfacesAndSelfTo<PlayerLookDirectionController>().AsSingle().WithArguments(_character);
             Container.BindInterfacesAndSelfTo<PlayerShootController>().AsSingle().WithArguments(_character);
+            Container.Bind<GameManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerDeathObserver>().AsSingle().WithArguments(_character);
         }
     }
 }

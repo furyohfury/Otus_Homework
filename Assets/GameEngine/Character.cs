@@ -7,6 +7,8 @@ namespace GameEngine
     public sealed class Character : AtomicObject
     {
         // Interfaces
+        [Get("IsAlive")]
+        public IAtomicVariable<bool> IsAlive => _core.LifeComponent.IsAlive;
         [Get(MoveAPI.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
         [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
@@ -16,7 +18,7 @@ namespace GameEngine
         [Get("RootPosition")]
         public AtomicFunction<Vector3> RootPosition;
         [Get(ShootAPI.SHOOT_REQUEST)]
-        public IAtomicAction ShootRequest => _animation.ShootRequest; // todo fix
+        public IAtomicAction ShootRequest => _animation.ShootRequest;
 
         [SerializeField]
         private CharacterCore _core;
