@@ -28,7 +28,7 @@ namespace GameEngine
         public ChaseTargetMechanics ChaseTargetMechanics;
         public CooldownMechanics CooldownMechanics;
 
-        public void Compose(IAtomicEvent attackStartEvent, IAtomicEvent attackEndEvent)
+        public void Compose()
         {
             LifeComponent.Compose();
 
@@ -57,16 +57,11 @@ namespace GameEngine
             chaseTargetEnabled.Append(hasTarget);
             ChaseTargetMechanics = new(myPos, playerPos, StoppingDistance, chaseTargetEnabled, MoveComponent.MoveDirection);
 
-            AttackComponent.Compose(attackStartEvent, attackEndEvent);
+            ChaseTargetMechanics.ReachedTargetEvent.Subscribe(AttackComponent.AttackRequest.Invoke);
+
+            AttackComponent.Compose();
             AttackComponent.CanAttack.Append(LifeComponent.IsAlive);
             AttackComponent.CanAttack.Append(hasTarget);
-            attackStartEvent.Subscribe(() =>
-            {
-                if (AttackComponent.ReloadTimer.Value <= 0)
-                {
-                    AttackComponent.ReloadTimer.Value = AttackComponent.AttackCooldown;
-                }
-            });
             CooldownMechanics = new CooldownMechanics(AttackComponent.ReloadTimer);
         }
     }
