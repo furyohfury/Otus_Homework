@@ -12,7 +12,6 @@ namespace GameEngine
         private readonly IAtomicExpression<bool> _isEnabled;
 
         public LookAtTargetMechanics(
-
             IAtomicAction<Vector3> rotateAction,
             IAtomicValue<Vector3> targetPoint,
             IAtomicValue<Vector3> transform,

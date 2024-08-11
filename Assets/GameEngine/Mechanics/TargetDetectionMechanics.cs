@@ -43,7 +43,7 @@ namespace GameEngine
                         target = collider.gameObject;
                     }
                 }
-                
+
             }
             _target.Value = target;
         }

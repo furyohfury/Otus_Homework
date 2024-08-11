@@ -27,7 +27,7 @@ namespace Installers
             Application.targetFrameRate = 60;
 
             Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
-            Container.BindInterfacesAndSelfTo<CameraComponent>().AsSingle().WithArguments(_character.transform);
+            Container.BindInterfacesAndSelfTo<CameraComponent>().AsSingle().WithArguments(_character);
             Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharacterMoveController>().AsSingle().WithArguments(_character);
             Container.BindInterfacesAndSelfTo<CharacterLookDirectionController>().AsSingle().WithArguments(_character);

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using Atomic.Elements;
+using Atomic.Extensions;
+using Atomic.Objects;
+using UnityEngine;
 using Zenject;
 
 namespace GameEngine
@@ -6,10 +10,11 @@ namespace GameEngine
     public sealed class CameraComponent : IInitializable, ILateTickable
     {
         private Vector3 _offset;
-        private readonly Transform _target;
         private readonly Camera _camera;
+        private readonly IAtomicEntity _target;
+        private IAtomicFunction<Vector3> _rootPosition;
 
-        public CameraComponent(Transform target, Camera camera)
+        public CameraComponent(IAtomicEntity target, Camera camera)
         {
             _target = target;
             _camera = camera;
@@ -17,12 +22,20 @@ namespace GameEngine
 
         void IInitializable.Initialize()
         {
-            _offset = _target.position - _camera.transform.position;
+            if (_target.TryGetFunction<Vector3>(PositionAPI.ROOT_POSITION, out IAtomicFunction<Vector3> pos))
+            {
+                _rootPosition = pos;
+                _offset = _target.GetValue<Vector3>(PositionAPI.ROOT_POSITION).Value - _camera.transform.position;
+            }
+            else
+            {
+                throw new Exception("Camera component didnt find player root");
+            }
         }
 
         void ILateTickable.LateTick()
         {
-            _camera.transform.position = _target.position - _offset;
+            _camera.transform.position = _rootPosition.Value - _offset; // todo fix
         }
     }
 }

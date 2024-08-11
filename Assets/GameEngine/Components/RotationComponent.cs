@@ -9,7 +9,8 @@ namespace GameEngine
     {
         public AtomicEvent<Vector3> RotateAction;
         public IAtomicExpression<bool> CanRotate;
-        public AtomicVariable<float> RotateRate;
+        [SerializeField]
+        private AtomicVariable<float> _rotateRate;
 
         private IAtomicValue<Rigidbody> _root;
 
@@ -34,7 +35,7 @@ namespace GameEngine
             }
 
             var targetRotation = Quaternion.LookRotation(forwardDirection, Vector3.up);
-            _root.Value.rotation = Quaternion.Lerp(_root.Value.rotation, targetRotation, RotateRate.Value);
+            _root.Value.rotation = Quaternion.Lerp(_root.Value.rotation, targetRotation, _rotateRate.Value);
         }
     }
 }

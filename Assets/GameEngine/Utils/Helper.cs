@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using Atomic.Extensions;
+using Atomic.Objects;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 

@@ -16,6 +16,7 @@ namespace GameEngine
         {
             TakeDamageRequest.Subscribe(TakeDamage);
         }
+
         public void TakeDamage(int damage)
         {
             if (!IsAlive.Value) return;

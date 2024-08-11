@@ -9,18 +9,25 @@ namespace GameEngine
     public sealed class CharacterCore
     {
         // Components
+        [TitleGroup("Components", alignment: TitleAlignments.Centered, boldTitle: true)]
         public MoveComponent MoveComponent;
-        public RotationComponent RotationComponent;
+        [SerializeField, TitleGroup("Components")]
+        private RotationComponent _rotationComponent;
+        [TitleGroup("Components")]
         public LifeComponent LifeComponent;
+        [TitleGroup("Components")]
         public ShootComponent ShootComponent;
+        [TitleGroup("Components")]
         public WeaponMagComponent WeaponMagComponent;
-
-        [Space]
+        
+        [TitleGroup("Separate variables", alignment: TitleAlignments.Centered, boldTitle: true)]
         public AtomicVariable<Rigidbody> Root;
+        [TitleGroup("Separate variables")]
         public AtomicVariable<Vector3> LookDirection;
-        [SerializeField]
+        [TitleGroup("Separate variables")]
+        [TitleGroup("Separate variables"), SerializeField]
         private float _weaponMagRefillCD = 2f;
-        [ShowInInspector, ReadOnly]
+        [TitleGroup("Separate variables"), ShowInInspector, ReadOnly]
         public AtomicVariable<float> WeaponMagRefillCDTimer = new(0f);
 
         public MoveMechanics MoveMechanics;
@@ -34,11 +41,11 @@ namespace GameEngine
 
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
-            MoveComponent.Compose(Root, canMove);
+            MoveComponent.Compose(canMove);
 
             var canRotate = new AtomicAnd();
             canRotate.Append(LifeComponent.IsAlive);
-            RotationComponent.Compose(Root, canRotate);
+            _rotationComponent.Compose(Root, canRotate);
 
             var canShoot = new AtomicAnd();
             canShoot.Append(LifeComponent.IsAlive);
@@ -63,7 +70,7 @@ namespace GameEngine
                 var cursorPos = LookDirection.Value;
                 return new Vector3(cursorPos.x, Root.Value.position.y, cursorPos.z);
             });
-            LookAtTargetMechanics = new(RotationComponent.RotateAction, lookDir, rotRoot, RotationComponent.CanRotate);
+            LookAtTargetMechanics = new(_rotationComponent.RotateAction, lookDir, rotRoot, _rotationComponent.CanRotate);
 
             ShootCdMechanics = new(ShootComponent.ReloadTimer);
             ShootComponent.ShootEvent.Subscribe(() => WeaponMagRefillCDTimer.Value = _weaponMagRefillCD);

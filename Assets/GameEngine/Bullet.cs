@@ -21,7 +21,7 @@ namespace GameEngine
 
         private void Awake()
         {
-            _moveComponent.Compose(_root);
+            _moveComponent.Compose();
             _moveMechanics = new(_moveComponent.Speed, _moveComponent.MoveDirection, _root, _moveComponent.CanMove);
             AddLogic(_moveMechanics);
         }

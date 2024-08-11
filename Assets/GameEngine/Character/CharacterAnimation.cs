@@ -9,7 +9,6 @@ namespace GameEngine
     [Serializable]
     public sealed class CharacterAnimation : IAtomicEnable, IAtomicDisable
     {
-        public AtomicEvent ShootRequest = new();
         [SerializeField]
         private Animator _animator;
         [SerializeField]
@@ -69,7 +68,7 @@ namespace GameEngine
 
         private void OnEventReceived()
         {
-            _shootAction?.Invoke();
+            _shootAction.Invoke();
         }
     }
 }

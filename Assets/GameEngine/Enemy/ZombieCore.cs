@@ -8,21 +8,25 @@ namespace GameEngine
     [Serializable]
     public class ZombieCore
     {
-        [SerializeField]
+        [TitleGroup("Components", alignment: TitleAlignments.Centered, boldTitle: true)]
         public LifeComponent LifeComponent;
-        [SerializeField]
+        [TitleGroup("Components")]
         public MoveComponent MoveComponent;
-        [SerializeField]
-        public RotationComponent RotationComponent;
+        [SerializeField, TitleGroup("Components")]
+        private RotationComponent _rotationComponent;
+        [TitleGroup("Components")]
         public AttackComponent AttackComponent;
 
         [ShowInInspector, ReadOnly, Space]
         private readonly AtomicVariable<GameObject> _target = new();
-        [SerializeField]
-        private AtomicVariable<Rigidbody> _root;
+        [TitleGroup("Separate variables", alignment: TitleAlignments.Centered, boldTitle: true)]
         public AtomicVariable<float> DetectionRadius;
-        public AtomicVariable<LayerMask> _playerLayer;
+        [TitleGroup("Separate variables")]
         public AtomicVariable<float> StoppingDistance;
+        [SerializeField, TitleGroup("Separate variables")]
+        private AtomicVariable<LayerMask> _playerLayer;
+        [SerializeField, TitleGroup("Separate variables")]
+        private AtomicVariable<Rigidbody> _root;
 
         public MoveMechanics MoveMechanics;
         public TargetDetectionMechanics TargetDetectionMechanics;
@@ -36,11 +40,11 @@ namespace GameEngine
 
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
-            MoveComponent.Compose(_root, canMove);
+            MoveComponent.Compose(canMove);
 
             var canRotate = new AtomicAnd();
             canRotate.Append(LifeComponent.IsAlive);
-            RotationComponent.Compose(_root, canRotate);
+            _rotationComponent.Compose(_root, canRotate);
 
             MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, _root, MoveComponent.CanMove);
 
@@ -51,8 +55,9 @@ namespace GameEngine
             var hasTarget = new AtomicFunction<bool>(() => _target.Value != null);
             var lookAtTargetEnabled = new AtomicAnd();
             lookAtTargetEnabled.Append(LifeComponent.IsAlive);
+            lookAtTargetEnabled.Append(_rotationComponent.CanRotate);
             lookAtTargetEnabled.Append(hasTarget);
-            LookAtTargetMechanics = new(RotationComponent.RotateAction, playerPos, myPos, lookAtTargetEnabled);
+            LookAtTargetMechanics = new(_rotationComponent.RotateAction, playerPos, myPos, lookAtTargetEnabled);
 
             var chaseTargetEnabled = new AtomicAnd();
             chaseTargetEnabled.Append(LifeComponent.IsAlive);

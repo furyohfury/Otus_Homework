@@ -7,9 +7,9 @@ namespace GameEngine
     [Serializable]
     public class CharacterAudio
     {
-        [SerializeField] 
+        [SerializeField]
         private AudioSource _audioSource;
-        [SerializeField] 
+        [SerializeField]
         private AudioClip _shootSfx;
         [SerializeField]
         private AudioClip _takeDamageSfx;

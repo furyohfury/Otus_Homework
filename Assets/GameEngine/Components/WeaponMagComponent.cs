@@ -1,18 +1,16 @@
 ﻿using System;
 using Atomic.Elements;
-using UnityEngine;
 
 namespace GameEngine
 {
     [Serializable]
     public sealed class WeaponMagComponent
     {
-        public IAtomicEvent SpendBullet;
         public AtomicEvent AddBullet;
         public AtomicVariable<int> CurrentCount = new(10);
+        public AtomicVariable<int> MaxCount = new(10);
         public AtomicFunction<bool> IsEmpty = new();
         public AtomicFunction<bool> IsFull = new();
-        public AtomicVariable<int> MaxCount = new(10);
 
         public void Compose(IAtomicEvent spendBulletAction)
         {

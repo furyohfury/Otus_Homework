@@ -11,11 +11,8 @@ namespace GameEngine
         public AtomicVariable<float> Speed = new(5f);
         public IAtomicExpression<bool> CanMove;
 
-        private IAtomicValue<Rigidbody> _root;
-
-        public void Compose(IAtomicValue<Rigidbody> root, IAtomicExpression<bool> canMove = null)
+        public void Compose(IAtomicExpression<bool> canMove = null)
         {
-            _root = root;
             if (canMove == null)
             {
                 CanMove = new AtomicAnd();

@@ -31,7 +31,7 @@ namespace GameEngine
                     var legsLayer = _animator.GetLayerIndex("Legs");
                     _animator.SetLayerWeight(bodyLayer, 0);
                     _animator.SetLayerWeight(legsLayer, 0);
-                }                
+                }
             }
         }
 

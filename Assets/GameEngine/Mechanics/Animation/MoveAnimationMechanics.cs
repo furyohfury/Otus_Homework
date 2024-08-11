@@ -10,9 +10,10 @@ namespace GameEngine
         private readonly IAtomicObservable<Vector3> _moveDirection;
         private readonly int _isMovingHash = Animator.StringToHash("IsMoving");
 
-        public MoveAnimationMechanics(IAtomicObservable<Vector3> moveDirection,
-                                      IAtomicExpression<bool> canMove,
-                                      Animator animator)
+        public MoveAnimationMechanics(
+            IAtomicObservable<Vector3> moveDirection,
+            IAtomicExpression<bool> canMove,
+            Animator animator)
         {
             _moveDirection = moveDirection;
             _canMove = canMove;

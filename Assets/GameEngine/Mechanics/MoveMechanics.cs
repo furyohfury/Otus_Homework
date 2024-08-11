@@ -11,9 +11,10 @@ namespace GameEngine
         private readonly IAtomicExpression<bool> _canMove;
         private readonly IAtomicValue<Rigidbody> _rigidbody;
 
-        public MoveMechanics(IAtomicValue<float> speed, 
-            IAtomicValue<Vector3> moveDirection, 
-            IAtomicValue<Rigidbody> rigidbody, 
+        public MoveMechanics(
+            IAtomicValue<float> speed,
+            IAtomicValue<Vector3> moveDirection,
+            IAtomicValue<Rigidbody> rigidbody,
             IAtomicExpression<bool> canMove = null)
         {
             _speed = speed;

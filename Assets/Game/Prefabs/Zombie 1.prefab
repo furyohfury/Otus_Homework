@@ -324,26 +324,26 @@ MonoBehaviour:
         value: {x: 0, y: 0, z: 0}
       Speed:
         value: 2
-    RotationComponent:
-      RotateRate:
+    _rotationComponent:
+      _rotateRate:
         value: 0.3
     AttackComponent:
-      Damage:
+      ReloadTimer:
+        value: 0
+      _damage:
         value: 1
       _attackCooldown: 2
       _hitboxCollider: {fileID: 4224570137474595728}
-      ReloadTimer:
-        value: 0
-    _root:
-      value: {fileID: 4224570136817561636}
     DetectionRadius:
       value: 50
+    StoppingDistance:
+      value: 1.5
     _playerLayer:
       value:
         serializedVersion: 2
         m_Bits: 1024
-    StoppingDistance:
-      value: 1.5
+    _root:
+      value: {fileID: 4224570136817561636}
   _animation:
     _animator: {fileID: 8764017898849974952}
     _dispatcher: {fileID: 4224570137655066792}

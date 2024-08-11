@@ -8,7 +8,7 @@ namespace GameEngine
 {
     [Serializable]
     public sealed class ZombieAnimation : IAtomicEnable, IAtomicDisable
-    {        
+    {
         [SerializeField]
         private Animator _animator;
         [SerializeField]

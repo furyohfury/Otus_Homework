@@ -13,13 +13,15 @@ namespace GameEngine
         public AtomicEvent AttackEndEvent;
         public AtomicEvent AttackCooldownStartEvent;
         public AtomicAnd CanAttack = new();
-        public AtomicVariable<int> Damage = new(1);
+        [ShowInInspector, ReadOnly]
+        public AtomicVariable<float> ReloadTimer = new(0);
+        [SerializeField]
+        private AtomicVariable<int> _damage = new(1);
         [SerializeField]
         private float _attackCooldown = 2f;
         [SerializeField]
         private MeleeAttackHitBox _hitboxCollider;
-        [ShowInInspector, ReadOnly]
-        public AtomicVariable<float> ReloadTimer = new(0);
+
         private AtomicFunction<bool> _readyToAttack;
 
         public void Compose()
@@ -28,7 +30,7 @@ namespace GameEngine
             AttackEndEvent.Subscribe(OnAttackEnd);
             _readyToAttack = new(() => ReloadTimer.Value <= 0);
             CanAttack.Append(_readyToAttack);
-            _hitboxCollider.Compose(Damage);
+            _hitboxCollider.Compose(_damage);
             AttackCooldownStartEvent.Subscribe(OnAttackCooldownStart);
         }
 
@@ -46,6 +48,5 @@ namespace GameEngine
         {
             _hitboxCollider.Disable();
         }
-
     }
 }

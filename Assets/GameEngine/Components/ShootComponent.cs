@@ -14,16 +14,16 @@ namespace GameEngine
         public AtomicEvent ShootAction;
         public AtomicEvent ShootEvent;
         public AtomicAnd CanShoot = new();
-
-        [SerializeField] 
-        private float _reloadTime = 2f;        
-        [SerializeField] 
-        private AtomicEntity _bulletPrefab;
-        [SerializeField] 
-        private Transform _firePoint;
-
         [ShowInInspector, ReadOnly]
         public AtomicVariable<float> ReloadTimer = new(0);
+
+        [SerializeField]
+        private float _reloadTime = 2f;
+        [SerializeField]
+        private AtomicEntity _bulletPrefab;
+        [SerializeField]
+        private Transform _firePoint;
+
         [ShowInInspector, ReadOnly]
         private AtomicFunction<bool> _loaded;
 
