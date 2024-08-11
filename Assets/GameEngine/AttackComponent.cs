@@ -20,7 +20,6 @@ namespace GameEngine
         private MeleeAttackHitBox _hitboxCollider;
         [ShowInInspector, ReadOnly]
         public AtomicVariable<float> ReloadTimer = new(0);
-        [ShowInInspector, ReadOnly]
         private AtomicFunction<bool> _readyToAttack;
 
         public void Compose()
