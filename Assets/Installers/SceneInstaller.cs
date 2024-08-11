@@ -24,14 +24,14 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            Application.targetFrameRate = 60; // todo delete
+            Application.targetFrameRate = 60;
 
             Container.Bind<Camera>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesAndSelfTo<CameraComponent>().AsSingle().WithArguments(_character.transform);
             Container.BindInterfacesAndSelfTo<InputListener>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharacterMoveController>().AsSingle().WithArguments(_character);
-            Container.BindInterfacesAndSelfTo<PlayerLookDirectionController>().AsSingle().WithArguments(_character);
-            Container.BindInterfacesAndSelfTo<PlayerShootController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesAndSelfTo<CharacterLookDirectionController>().AsSingle().WithArguments(_character);
+            Container.BindInterfacesAndSelfTo<CharacterShootController>().AsSingle().WithArguments(_character);
             Container.Bind<GameManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameOverController>().AsSingle().WithArguments(_character, _gameOverPopup);
             var zombieSpawner = new SpawnerOnCD(_zombieSpawnCD, _zombiePrefab, _worldTransform, _zombieSpawnPoints);

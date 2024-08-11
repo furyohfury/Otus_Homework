@@ -165,5 +165,5 @@ MonoBehaviour:
       value: {x: 0, y: 0, z: 0}
     Speed:
       value: 15
-    Root:
-      value: {fileID: -4554007514668407227}
+  _root:
+    value: {fileID: -4554007514668407227}

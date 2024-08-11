@@ -5,25 +5,25 @@ using Zenject;
 
 namespace GameEngine
 {
-    public sealed class PlayerLookDirectionController : ITickable
+    public sealed class CharacterLookDirectionController : ITickable
     {
-        private readonly IAtomicEntity _player;
+        private readonly IAtomicEntity _character;
         private readonly Camera _camera;
 
-        public PlayerLookDirectionController(IAtomicEntity player, Camera camera)
+        public CharacterLookDirectionController(IAtomicEntity player, Camera camera)
         {
-            _player = player;
+            _character = player;
             _camera = camera;
         }
 
         void ITickable.Tick()
         {
             var screenPos = Input.mousePosition;
-            var playerPos = _player.GetValue<Vector3>("RootPosition").Value;
+            var playerPos = _character.GetValue<Vector3>("RootPosition").Value;
             screenPos = new(screenPos.x, screenPos.y, (_camera.transform.position - playerPos).magnitude);
 
             var worldPos = _camera.ScreenToWorldPoint(screenPos);
-            _player.GetVariable<Vector3>(RotateAPI.LOOK_DIRECTION).Value = worldPos;
+            _character.GetVariable<Vector3>(RotateAPI.LOOK_DIRECTION).Value = worldPos;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace GameEngine
         public WeaponMagComponent WeaponMagComponent;
 
         [Space]
+        public AtomicVariable<Rigidbody> Root;
         public AtomicVariable<Vector3> LookDirection;
         [SerializeField]
         private float _weaponMagRefillCD = 2f;
@@ -33,11 +34,11 @@ namespace GameEngine
 
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
-            MoveComponent.Compose(canMove);
+            MoveComponent.Compose(Root, canMove);
 
             var canRotate = new AtomicAnd();
             canRotate.Append(LifeComponent.IsAlive);
-            RotationComponent.Compose(canRotate);
+            RotationComponent.Compose(Root, canRotate);
 
             var canShoot = new AtomicAnd();
             canShoot.Append(LifeComponent.IsAlive);
@@ -54,13 +55,13 @@ namespace GameEngine
             });
             WeaponMagComponent.Compose(ShootComponent.ShootEvent);
 
-            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent.Root, MoveComponent.CanMove);
+            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, Root, MoveComponent.CanMove);
 
-            var rotRoot = new AtomicFunction<Vector3>(() => RotationComponent.RotationRoot.position);
+            var rotRoot = new AtomicFunction<Vector3>(() => Root.Value.position);
             var lookDir = new AtomicFunction<Vector3>(() =>
             {
                 var cursorPos = LookDirection.Value;
-                return new Vector3(cursorPos.x, RotationComponent.RotationRoot.position.y, cursorPos.z);
+                return new Vector3(cursorPos.x, Root.Value.position.y, cursorPos.z);
             });
             LookAtTargetMechanics = new(RotationComponent.RotateAction, lookDir, rotRoot, RotationComponent.CanRotate);
 

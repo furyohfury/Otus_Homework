@@ -1,11 +1,12 @@
 ﻿using Atomic.Extensions;
 using Atomic.Objects;
+using GameEngine;
 using TMPro;
 using Zenject;
 
-namespace GameEngine
+namespace UI
 {
-    public sealed class PlayerUIObserver : IInitializable
+    public sealed class CharacterUIObserver : IInitializable
     {
         private readonly TMP_Text _hpText;
         private readonly TMP_Text _bulletsText;
@@ -13,35 +14,40 @@ namespace GameEngine
         private int _killCount = 0;
 
         private readonly EnemySystem _enemySystem;
-        private readonly AtomicObject _player;
+        private readonly AtomicObject _character;
 
-        public PlayerUIObserver(TMP_Text hpText, TMP_Text bulletsText, TMP_Text killsText, EnemySystem enemySystem, AtomicObject player)
+        public CharacterUIObserver(
+            TMP_Text hpText,
+            TMP_Text bulletsText,
+            TMP_Text killsText,
+            EnemySystem enemySystem,
+            AtomicObject character)
         {
             _hpText = hpText;
             _bulletsText = bulletsText;
             _killsText = killsText;
             _enemySystem = enemySystem;
-            _player = player;
+            _character = character;
         }
 
         void IInitializable.Initialize()
         {
-            if (_player.TryGetObservable<int>(LifeAPI.HIT_POINTS, out var hpObs))
+            if (_character.TryGetObservable<int>(LifeAPI.HIT_POINTS, out var hpObs))
             {
                 hpObs.Subscribe(OnPlayerHPChanged);
-                _hpText.text = _player.GetValue<int>(LifeAPI.HIT_POINTS).Value.ToString();
+                _hpText.text = _character.GetValue<int>(LifeAPI.HIT_POINTS).Value.ToString();
             }
             else
             {
                 throw new System.Exception("Couldnt find player hp");
             }
 
-            if (_player.TryGetObservable<int>(WeaponMagAPI.CURRENT_BULLET_COUNT, out var currentBulletsObs))
+            if (_character.TryGetObservable<int>(WeaponMagAPI.CURRENT_BULLET_COUNT, out var currentBulletsObs))
             {
                 currentBulletsObs.Subscribe(OnCurrentBulletCountChanged);
 
-                var curr = _player.GetValue<int>(WeaponMagAPI.CURRENT_BULLET_COUNT).Value;
-                var max = _player.GetValue<int>(WeaponMagAPI.MAX_BULLET_COUNT).Value;
+                var curr = _character.GetValue<int>(WeaponMagAPI.CURRENT_BULLET_COUNT).Value;
+                var max = _character.GetValue<int>(WeaponMagAPI.MAX_BULLET_COUNT).Value;
                 _bulletsText.text = $"{curr}/{max}";
             }
             else
@@ -61,7 +67,7 @@ namespace GameEngine
 
         private void OnCurrentBulletCountChanged(int count)
         {
-            _bulletsText.text = $"{count}/{_player.GetValue<int>(WeaponMagAPI.MAX_BULLET_COUNT).Value}";
+            _bulletsText.text = $"{count}/{_character.GetValue<int>(WeaponMagAPI.MAX_BULLET_COUNT).Value}";
         }
 
         private void OnPlayerHPChanged(int hp)

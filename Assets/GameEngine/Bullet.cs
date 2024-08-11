@@ -10,15 +10,19 @@ namespace GameEngine
         [Get(MoveAPI.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _moveComponent.MoveDirection;
 
-        [SerializeField] private int _damage = 1;
-        [SerializeField] private MoveComponent _moveComponent;
+        [SerializeField] 
+        private int _damage = 1;
+        [SerializeField] 
+        private MoveComponent _moveComponent;
+        [SerializeField]
+        private AtomicVariable<Rigidbody> _root;
 
         private MoveMechanics _moveMechanics;
 
         private void Awake()
         {
-            _moveComponent.Compose();
-            _moveMechanics = new(_moveComponent.Speed, _moveComponent.MoveDirection, _moveComponent.Root, _moveComponent.CanMove);
+            _moveComponent.Compose(_root);
+            _moveMechanics = new(_moveComponent.Speed, _moveComponent.MoveDirection, _root, _moveComponent.CanMove);
             AddLogic(_moveMechanics);
         }
 

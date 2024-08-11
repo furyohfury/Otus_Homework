@@ -18,6 +18,8 @@ namespace GameEngine
 
         [ShowInInspector, ReadOnly, Space]
         private readonly AtomicVariable<GameObject> _target = new();
+        [SerializeField]
+        private AtomicVariable<Rigidbody> _root;
         public AtomicVariable<float> DetectionRadius;
         public AtomicVariable<LayerMask> _playerLayer;
         public AtomicVariable<float> StoppingDistance;
@@ -34,15 +36,15 @@ namespace GameEngine
 
             var canMove = new AtomicAnd();
             canMove.Append(LifeComponent.IsAlive);
-            MoveComponent.Compose(canMove);
+            MoveComponent.Compose(_root, canMove);
 
             var canRotate = new AtomicAnd();
             canRotate.Append(LifeComponent.IsAlive);
-            RotationComponent.Compose(canRotate);
+            RotationComponent.Compose(_root, canRotate);
 
-            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent.Root, MoveComponent.CanMove);
+            MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, _root, MoveComponent.CanMove);
 
-            var myPos = new AtomicFunction<Vector3>(() => MoveComponent.Root.Value.position);
+            var myPos = new AtomicFunction<Vector3>(() => _root.Value.position);
             TargetDetectionMechanics = new(DetectionRadius, myPos, _target, _playerLayer);
 
             var playerPos = new AtomicFunction<Vector3>(() => _target.Value.transform.position);

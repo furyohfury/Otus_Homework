@@ -1,6 +1,7 @@
 ﻿using Atomic.Objects;
 using GameEngine;
 using TMPro;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -16,10 +17,12 @@ namespace Installers
         private TMP_Text _playerKillCount;
         [SerializeField]
         private AtomicObject _character;
+        [SerializeField]
+        private GameObject _gameOverPopup;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerUIObserver>()
+            Container.BindInterfacesAndSelfTo<CharacterUIObserver>()
                 .AsCached()
                 .WithArguments(
                 _playerHP, 
