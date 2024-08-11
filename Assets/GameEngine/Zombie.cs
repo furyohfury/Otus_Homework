@@ -17,7 +17,7 @@ namespace GameEngine
 
         private void Awake()
         {
-            _core.Compose(_animation.AttackStartEvent, _animation.AttackEndEvent);
+            _core.Compose();
             AddLogic(_core.MoveMechanics);
             AddLogic(_core.TargetDetectionMechanics);
             AddLogic(_core.LookAtTargetMechanics);
@@ -30,7 +30,10 @@ namespace GameEngine
                 _core.LifeComponent.IsAlive,
                 _core.LifeComponent.HitPoints,
                 _core.AttackComponent.CanAttack,
-                _core.ChaseTargetMechanics.ReachedTargetEvent                
+                _core.AttackComponent.AttackRequest,
+                _core.AttackComponent.AttackStartEvent,
+                _core.AttackComponent.AttackEndEvent,
+                _core.AttackComponent.AttackCooldownStartEvent
                 );
         }
 

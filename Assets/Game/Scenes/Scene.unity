@@ -1676,8 +1676,8 @@ MonoBehaviour:
     AttackComponent:
       Damage:
         value: 1
+      _attackCooldown: 2
       _hitboxCollider: {fileID: 1915270018}
-      AttackCooldown: 2
       ReloadTimer:
         value: 0
     DetectionRadius:
