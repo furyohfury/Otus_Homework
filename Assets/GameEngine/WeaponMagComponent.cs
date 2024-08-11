@@ -9,23 +9,22 @@ namespace GameEngine
     {
         public IAtomicEvent SpendBullet;
         public AtomicEvent AddBullet;
-        public AtomicVariable<int> CurrentCount = new(5);
+        public AtomicVariable<int> CurrentCount = new(10);
         public AtomicFunction<bool> IsEmpty = new();
         public AtomicFunction<bool> IsFull = new();
-
-        [SerializeField] private int _maxCount = 5;
+        public AtomicVariable<int> MaxCount = new(10);
 
         public void Compose(IAtomicEvent spendBulletAction)
         {
             IsEmpty.Compose(() => CurrentCount.Value <= 0);
-            IsFull.Compose(() => CurrentCount.Value == _maxCount);
+            IsFull.Compose(() => CurrentCount.Value == MaxCount.Value);
             spendBulletAction.Subscribe(OnSpendBullet);
             AddBullet.Subscribe(OnAddBullet);
         }
 
         private void OnAddBullet()
         {
-            if (CurrentCount.Value != _maxCount)
+            if (CurrentCount.Value != MaxCount.Value)
             {
                 CurrentCount.Value++;
             }

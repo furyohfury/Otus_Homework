@@ -34,6 +34,7 @@ namespace GameEngine
                 if (atomicEntity.TryGetAction<int>(LifeAPI.TAKE_DAMAGE_ACTION, out var action))
                 {
                     action.Invoke(_damage);
+                    Destroy(gameObject);
                 }
             }
         }

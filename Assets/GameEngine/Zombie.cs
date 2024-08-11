@@ -8,21 +8,22 @@ namespace GameEngine
     public sealed class Zombie : AtomicObject
     {
         [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
-        public IAtomicAction<int> TakeDamageEvent => _core.LifeComponent.TakeDamageEvent;
+        public IAtomicAction<int> TakeDamageEvent => _core.LifeComponent.TakeDamageRequest;
+        [Get(LifeAPI.IS_ALIVE)]
+        public IAtomicObservable<bool> IsAlive => _core.LifeComponent.IsAlive;
 
         [SerializeField]
         private ZombieCore _core;
         [SerializeField]
         private ZombieAnimation _animation;
+        [SerializeField]
+        private ZombieVfx _vfx;
+        [SerializeField]
+        private ZombieAudio _audio;
 
         private void Awake()
         {
-            _core.Compose();
-            AddLogic(_core.MoveMechanics);
-            AddLogic(_core.TargetDetectionMechanics);
-            AddLogic(_core.LookAtTargetMechanics);
-            AddLogic(_core.ChaseTargetMechanics);
-            AddLogic(_core.CooldownMechanics);
+            _core.Compose();            
 
             _animation.Compose(
                 _core.MoveComponent.MoveDirection,
@@ -35,6 +36,16 @@ namespace GameEngine
                 _core.AttackComponent.AttackEndEvent,
                 _core.AttackComponent.AttackCooldownStartEvent
                 );
+
+            _vfx.Compose(_core.LifeComponent.IsAlive);
+
+            _audio.Compose(_core.LifeComponent.IsAlive);
+
+            AddLogic(_core.MoveMechanics);
+            AddLogic(_core.TargetDetectionMechanics);
+            AddLogic(_core.LookAtTargetMechanics);
+            AddLogic(_core.ChaseTargetMechanics);
+            AddLogic(_core.CooldownMechanics);
         }
 
         private void Update()

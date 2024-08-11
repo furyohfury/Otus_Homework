@@ -9,16 +9,11 @@ namespace GameEngine
     public sealed class CharacterCore
     {
         // Components
-        [SerializeField]
         public MoveComponent MoveComponent;
-        [SerializeField]
         public RotationComponent RotationComponent;
-        [SerializeField]
         public LifeComponent LifeComponent;
-        [SerializeField]
         public ShootComponent ShootComponent;
-        [SerializeField]
-        private WeaponMagComponent _weaponMagComponent;
+        public WeaponMagComponent WeaponMagComponent;
 
         [Space]
         public AtomicVariable<Vector3> LookDirection;
@@ -46,18 +41,18 @@ namespace GameEngine
 
             var canShoot = new AtomicAnd();
             canShoot.Append(LifeComponent.IsAlive);
-            canShoot.Append(new AtomicFunction<bool>(() => !_weaponMagComponent.IsEmpty.Value));
+            canShoot.Append(new AtomicFunction<bool>(() => !WeaponMagComponent.IsEmpty.Value));
             ShootComponent.Compose(canShoot);
 
             WeaponMagRefillCDTimer.Subscribe(cd =>
             {
-                if (cd <= 0 && !_weaponMagComponent.IsFull.Value)
+                if (cd <= 0 && !WeaponMagComponent.IsFull.Value)
                 {
-                    _weaponMagComponent.AddBullet.Invoke();
+                    WeaponMagComponent.AddBullet.Invoke();
                     WeaponMagRefillCDTimer.Value = _weaponMagRefillCD;
                 }
             });
-            _weaponMagComponent.Compose(ShootComponent.ShootEvent);
+            WeaponMagComponent.Compose(ShootComponent.ShootEvent);
 
             MoveMechanics = new(MoveComponent.Speed, MoveComponent.MoveDirection, MoveComponent.Root, MoveComponent.CanMove);
 

@@ -9,13 +9,13 @@ using Object = UnityEngine.Object;
 
 namespace GameEngine
 {
-    public sealed class SpawnerOnCD : IInitializable
+    public sealed class SpawnerOnCD
     {
         public AtomicEvent<AtomicEntity> OnSpawnedEvent = new();
         private readonly float _cd;
         private readonly AtomicEntity _entity;
         private readonly Transform _container;
-        private readonly CancellationTokenSource _cancellationTokenSource = new();
+        private CancellationTokenSource _cancellationTokenSource = new();
         private readonly Transform[] _spawnPoints;
 
         public SpawnerOnCD(float cd, AtomicEntity entity, Transform container, Transform[] spawnPoints)
@@ -24,10 +24,6 @@ namespace GameEngine
             _entity = entity;
             _container = container;
             _spawnPoints = spawnPoints;
-        }
-        void IInitializable.Initialize()
-        {
-            Enable();
         }
 
         public void Enable()
@@ -44,7 +40,11 @@ namespace GameEngine
         {
             while (true)
             {
-                if (token.IsCancellationRequested) break;
+                if (token.IsCancellationRequested)
+                {
+                    _cancellationTokenSource = new();
+                    break;
+                }
 
                 
                 var spawnPos = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length - 1)];

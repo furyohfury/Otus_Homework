@@ -164,6 +164,6 @@ MonoBehaviour:
     MoveDirection:
       value: {x: 0, y: 0, z: 0}
     Speed:
-      value: 5
+      value: 15
     Root:
       value: {fileID: -4554007514668407227}
