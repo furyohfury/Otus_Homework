@@ -19,7 +19,7 @@ namespace GameEngine
         void ITickable.Tick()
         {
             var screenPos = Input.mousePosition;
-            var playerPos = _character.GetValue<Vector3>("RootPosition").Value;
+            var playerPos = _character.GetValue<Vector3>(PositionAPI.ROOT_POSITION).Value;
             screenPos = new(screenPos.x, screenPos.y, (_camera.transform.position - playerPos).magnitude);
 
             var worldPos = _camera.ScreenToWorldPoint(screenPos);

@@ -7,11 +7,13 @@ namespace GameEngine
 {
     public sealed class Zombie : AtomicObject
     {
+        // Interfaces
         [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
         public IAtomicAction<int> TakeDamageEvent => _core.LifeComponent.TakeDamageRequest;
         [Get(LifeAPI.IS_ALIVE)]
         public IAtomicObservable<bool> IsAlive => _core.LifeComponent.IsAlive;
 
+        // Sections
         [SerializeField]
         private ZombieCore _core;
         [SerializeField]
@@ -23,7 +25,7 @@ namespace GameEngine
 
         private void Awake()
         {
-            _core.Compose();            
+            _core.Compose();
 
             _animation.Compose(
                 _core.MoveComponent.MoveDirection,
@@ -46,6 +48,13 @@ namespace GameEngine
             AddLogic(_core.LookAtTargetMechanics);
             AddLogic(_core.ChaseTargetMechanics);
             AddLogic(_core.CooldownMechanics);
+
+            AddLogic(_animation);
+        }
+
+        private void OnEnable()
+        {
+            Enable();
         }
 
         private void Update()
@@ -57,11 +66,15 @@ namespace GameEngine
         {
             OnFixedUpdate(Time.fixedDeltaTime);
         }
+        private void OnDisable()
+        {
+            Disable();
+        }
 
 #if UNITY_EDITOR
         private bool _showRadius = false;
         [Button]
-        public void ShowRadiuses()
+        public void ShowDetectionAndAttackRadiuses()
         {
             _showRadius = !_showRadius;
         }

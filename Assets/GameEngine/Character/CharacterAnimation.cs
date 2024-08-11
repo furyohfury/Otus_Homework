@@ -1,12 +1,13 @@
 ﻿using System;
 using Assets.GameEngine;
 using Atomic.Elements;
+using Atomic.Objects;
 using UnityEngine;
 
 namespace GameEngine
 {
     [Serializable]
-    public sealed class CharacterAnimation
+    public sealed class CharacterAnimation : IAtomicEnable, IAtomicDisable
     {
         public AtomicEvent ShootRequest = new();
         [SerializeField]
@@ -14,68 +15,48 @@ namespace GameEngine
         [SerializeField]
         private AnimatorDispatcher _dispatcher;
 
-        private readonly int _isMovingHash = Animator.StringToHash("IsMoving");
-        private readonly int _isDeadHash = Animator.StringToHash("IsDead");
         private readonly int _shootEventHash = Animator.StringToHash("ShootEvent");
-        private readonly int _takeDamageEventHash = Animator.StringToHash("TakeDamageEvent");
 
+        private MoveAnimationMechanics _moveAnimationMechanics;
+        private DeathAnimationMechanics _deathAnimationMechanics;
+        private TakeDamageAnimationMechanics _takeDamageAttackAnimation;
         private IAtomicEvent _shootAction;
+        private IAtomicEvent _shootRequest;
         private IAtomicExpression<bool> _canShoot;
-        private IAtomicExpression<bool> _canMove;
 
-        public void Compose(
-            IAtomicObservable<Vector3> moveDirection,
-            IAtomicExpression<bool> canMove,
-            IAtomicObservable<bool> isAlive,
-            IAtomicExpression<bool> canShoot,
-            IAtomicEvent shootRequest,
-            IAtomicEvent shootAction,
-            IAtomicObservable<int> hp)
+        public void Compose(IAtomicObservable<Vector3> moveDirection,
+                            IAtomicExpression<bool> canMove,
+                            IAtomicObservable<bool> isAlive,
+                            IAtomicExpression<bool> canShoot,
+                            IAtomicEvent shootRequest,
+                            IAtomicEvent shootAction,
+                            IAtomicObservable<int> hp)
         {
-            _canMove = canMove;
-            moveDirection.Subscribe(OnChangeMoveDirection);
-
-            isAlive.Subscribe(OnDead);
+            _moveAnimationMechanics = new(moveDirection, canMove, _animator);
+            _deathAnimationMechanics = new(isAlive, _animator);
+            _takeDamageAttackAnimation = new(hp, _animator);
 
             _canShoot = canShoot;
-            _shootAction = shootAction;
-            shootRequest.Subscribe(OnShootRequest);
-
+            _shootAction = shootAction;            
+            _shootRequest = shootRequest;
             _dispatcher.SubscribeOnEvent("ShootAction", OnEventReceived);
-
-            hp.Subscribe(OnHPChanged);
         }
 
-        private void OnChangeMoveDirection(Vector3 dir)
+        void IAtomicEnable.Enable()
         {
-            if (_canMove.Value && dir != Vector3.zero)
-            {
-                _animator.SetBool(_isMovingHash, true);
-            }
-            else
-            {
-                _animator.SetBool(_isMovingHash, false);
-            }
-        }
+            _moveAnimationMechanics.OnEnable();
+            _deathAnimationMechanics.OnEnable();
+            _takeDamageAttackAnimation.OnEnable();
 
-        private void OnDead(bool alive)
-        {
-            if (!alive)
-            {
-                _animator.SetTrigger(_isDeadHash);
-                var bodyLayer = _animator.GetLayerIndex("Body");
-                var legsLayer = _animator.GetLayerIndex("Legs");
-                _animator.SetLayerWeight(bodyLayer, 0);
-                _animator.SetLayerWeight(legsLayer, 0);
-            }
+            _shootRequest.Subscribe(OnShootRequest);
         }
-
-        private void OnHPChanged(int hp)
+        void IAtomicDisable.Disable()
         {
-            if (hp > 0)
-            {
-                _animator.SetTrigger(_takeDamageEventHash);
-            }
+            _moveAnimationMechanics.OnDisable();
+            _deathAnimationMechanics.OnDisable();
+            _takeDamageAttackAnimation.OnDisable();
+
+            _shootRequest.Unsubscribe(OnShootRequest);
         }
 
         private void OnShootRequest()
