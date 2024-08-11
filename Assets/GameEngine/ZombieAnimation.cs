@@ -8,9 +8,8 @@ namespace GameEngine
     [Serializable]
     public sealed class ZombieAnimation
     {
-        private IAtomicEvent _attackStartEvent;
-        private IAtomicEvent _attackEndEvent;
-        private IAtomicEvent _attackCDStartEvent;
+        public AtomicEvent AttackStartEvent = new();
+        public AtomicEvent AttackEndEvent = new();
         [SerializeField]
         private Animator _animator;
         [SerializeField]
@@ -30,10 +29,7 @@ namespace GameEngine
             IAtomicObservable<bool> isAlive,
             IAtomicObservable<int> hp,
             IAtomicExpression<bool> canAttack,
-            IAtomicEvent attackRequest,
-            IAtomicEvent attackStartEvent,
-            IAtomicEvent attackEndEvent,
-            IAtomicEvent attackCDStartEvent)
+            IAtomicEvent attackStartEvent)
         {
             _canMove = canMove;
             moveDirection.Subscribe(OnChangeMoveDirection);
@@ -46,11 +42,17 @@ namespace GameEngine
             hp.Subscribe(OnHPChanged);
 
             _canAttack = canAttack;
-            attackRequest.Subscribe(OnAttackRequest);
-            _attackStartEvent = attackStartEvent;
-            _attackEndEvent = attackEndEvent;
-            _attackCDStartEvent = attackCDStartEvent;
-        }        
+            attackStartEvent.Subscribe(OnAttackStart);
+        }
+
+        private void OnAttackStart()
+        {
+            if (_canAttack.Value)
+            {
+                _animator.SetTrigger(_attackEventHash);
+                AttackStartEvent.Invoke();
+            }
+        }
 
         private void OnChangeMoveDirection(Vector3 dir)
         {
@@ -80,23 +82,14 @@ namespace GameEngine
             }
         }
 
-        private void OnAttackRequest()
-        {
-            if (_canAttack.Value)
-            {
-                _animator.SetTrigger(_attackEventHash);
-                _attackCDStartEvent.Invoke();
-            }
-        }
-
         private void OnAttackStartEventReceived()
         {
-            _attackStartEvent.Invoke();
+            AttackStartEvent.Invoke();
         }
 
         private void OnAttackEndEventReceived()
         {
-            _attackEndEvent.Invoke();
+            AttackEndEvent.Invoke();
         }
     }
 }
