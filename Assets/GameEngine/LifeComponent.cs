@@ -29,6 +29,5 @@ namespace GameEngine
                 IsAlive.Value = false;
             }
         }
-
     }
 }

@@ -17,7 +17,7 @@ namespace GameEngine
 
         void IInitializable.Initialize()
         {
-            _player.GetObservable<bool>("IsAlive").Subscribe(_ => _gameManager.GameOver());
+            _player.GetObservable<bool>(LifeAPI.IS_ALIVE).Subscribe(_ => _gameManager.GameOver());
         }
     }
 }

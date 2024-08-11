@@ -23,7 +23,7 @@ namespace GameEngine
             screenPos = new(screenPos.x, screenPos.y, (_camera.transform.position - playerPos).magnitude);
 
             var worldPos = _camera.ScreenToWorldPoint(screenPos);
-            _player.GetVariable<Vector3>("LookDirection").Value = worldPos;
+            _player.GetVariable<Vector3>(RotateAPI.LOOK_DIRECTION).Value = worldPos;
         }
     }
 }

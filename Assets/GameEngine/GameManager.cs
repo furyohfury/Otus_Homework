@@ -6,7 +6,6 @@ namespace GameEngine
     {
         public void GameOver()
         {
-            EditorApplication.isPaused = true; // todo redo
         }
     }
 }

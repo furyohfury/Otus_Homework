@@ -1,4 +1,5 @@
-﻿using Atomic.Extensions;
+﻿using Atomic.Elements;
+using Atomic.Extensions;
 using Atomic.Objects;
 using Zenject;
 
@@ -17,13 +18,13 @@ namespace GameEngine
 
         void IInitializable.Initialize()
         {
-            if (_player.TryGetAction(ShootAPI.SHOOT_REQUEST, out var action))
+            if (_player.TryGetAction(ShootAPI.SHOOT_REQUEST, out IAtomicAction action))
             {
                 _inputListener.ShootRequest.Subscribe(action);
             }
             else
             {
-                throw new System.Exception("Didnt find shoot request on player");
+                throw new System.NullReferenceException("Didnt find shoot request on player");
             }
         }
     }
