@@ -10,9 +10,9 @@ namespace GameEngine
     public sealed class CameraComponent : IInitializable, ILateTickable
     {
         private Vector3 _offset;
+        private IAtomicValue<Vector3> _targetPos;
         private readonly Camera _camera;
         private readonly IAtomicEntity _target;
-        private IAtomicFunction<Vector3> _rootPosition;
 
         public CameraComponent(IAtomicEntity target, Camera camera)
         {
@@ -22,10 +22,10 @@ namespace GameEngine
 
         void IInitializable.Initialize()
         {
-            if (_target.TryGetFunction<Vector3>(PositionAPI.ROOT_POSITION, out IAtomicFunction<Vector3> pos))
+            if (_target.TryGetValue<Vector3>(PositionAPI.ROOT_POSITION, out var pos))
             {
-                _rootPosition = pos;
                 _offset = pos.Value - _camera.transform.position;
+                _targetPos = pos;
             }
             else
             {
@@ -35,7 +35,7 @@ namespace GameEngine
 
         void ILateTickable.LateTick()
         {
-            _camera.transform.position = _rootPosition.Value - _offset; // todo fix
+            _camera.transform.position = _targetPos.Value - _offset; // todo fix
         }
     }
 }

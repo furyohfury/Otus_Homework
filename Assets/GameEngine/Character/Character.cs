@@ -18,7 +18,7 @@ namespace GameEngine
         [Get(RotateAPI.LOOK_DIRECTION)]
         public IAtomicVariable<Vector3> LookDirection => _core.LookDirection;
         [Get(PositionAPI.ROOT_POSITION)]
-        public AtomicFunction<Vector3> RootPosition;
+        public IAtomicValue<Vector3> RootPosition => _core.RootPosition;
         [Get(ShootAPI.SHOOT_REQUEST)]
         public IAtomicAction ShootRequest => _core.ShootComponent.ShootRequest;
         [Get(WeaponMagAPI.CURRENT_BULLET_COUNT)]
@@ -57,8 +57,6 @@ namespace GameEngine
                          _core.LifeComponent.TakeDamageRequest);
 
             _audio.Compose(_core.ShootComponent.ShootEvent, _core.LifeComponent.TakeDamageEvent, _core.LifeComponent.IsAlive);
-
-            RootPosition = new AtomicFunction<Vector3>(() => _core.Root.Value.position);
 
             AddLogic(_core.MoveMechanics);
             AddLogic(_core.LookAtTargetMechanics);

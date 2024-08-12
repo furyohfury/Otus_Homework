@@ -21,7 +21,7 @@ namespace GameEngine
         public WeaponMagComponent WeaponMagComponent;
         
         [TitleGroup("Separate variables", alignment: TitleAlignments.Centered, boldTitle: true)]
-        public AtomicVariable<Rigidbody> Root;
+        public AtomicVariable<Rigidbody> Root;        
         [TitleGroup("Separate variables")]
         public AtomicVariable<Vector3> LookDirection;
         [TitleGroup("Separate variables")]
@@ -29,6 +29,8 @@ namespace GameEngine
         private float _weaponMagRefillCD = 2f;
         [TitleGroup("Separate variables"), ShowInInspector, ReadOnly]
         public AtomicVariable<float> WeaponMagRefillCDTimer = new(0f);
+        [HideInInspector]
+        public IAtomicValue<Vector3> RootPosition => new AtomicFunction<Vector3>(() => Root.Value.position);
 
         public MoveMechanics MoveMechanics;
         public LookAtTargetMechanics LookAtTargetMechanics;
