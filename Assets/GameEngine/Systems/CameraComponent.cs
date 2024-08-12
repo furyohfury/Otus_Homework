@@ -25,7 +25,7 @@ namespace GameEngine
             if (_target.TryGetFunction<Vector3>(PositionAPI.ROOT_POSITION, out IAtomicFunction<Vector3> pos))
             {
                 _rootPosition = pos;
-                _offset = _target.GetValue<Vector3>(PositionAPI.ROOT_POSITION).Value - _camera.transform.position;
+                _offset = pos.Value - _camera.transform.position;
             }
             else
             {
