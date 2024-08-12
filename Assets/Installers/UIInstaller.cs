@@ -1,5 +1,4 @@
 ﻿using Atomic.Objects;
-using GameEngine;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -25,9 +24,9 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<CharacterUIObserver>()
                 .AsCached()
                 .WithArguments(
-                _playerHP, 
-                _playerBullets, 
-                _playerKillCount, 
+                _playerHP,
+                _playerBullets,
+                _playerKillCount,
                 _character);
         }
     }

@@ -10,9 +10,9 @@ namespace GameEngine
         [Get(MoveAPI.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _moveComponent.MoveDirection;
 
-        [SerializeField] 
+        [SerializeField]
         private int _damage = 1;
-        [SerializeField] 
+        [SerializeField]
         private MoveComponent _moveComponent;
         [SerializeField]
         private AtomicVariable<Rigidbody> _root;

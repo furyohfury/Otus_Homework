@@ -16,7 +16,6 @@ namespace GameEngine
         private readonly SpawnerOnCD _enemySpawner;
         private readonly float _enemyDestroyDelay = 2f;
 
-        [Inject]
         public EnemySystem(SpawnerOnCD enemySpawner, float enemyDestroyDelay)
         {
             _enemySpawner = enemySpawner;

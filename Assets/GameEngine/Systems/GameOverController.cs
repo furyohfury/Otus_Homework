@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic.Extensions;
+﻿using Atomic.Extensions;
 using Atomic.Objects;
 using UnityEngine;
 using Zenject;

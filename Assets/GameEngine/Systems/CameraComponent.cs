@@ -35,7 +35,7 @@ namespace GameEngine
 
         void ILateTickable.LateTick()
         {
-            _camera.transform.position = _targetPos.Value - _offset; // todo fix
+            _camera.transform.position = _targetPos.Value - _offset;
         }
     }
 }

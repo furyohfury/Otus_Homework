@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using UnityEditor;
 
 namespace GameEngine
 {
@@ -6,7 +8,13 @@ namespace GameEngine
     {
         public void GameOver()
         {
-            // dunno whats gotta be here))
+            Pause().Forget();
+        }
+
+        private async UniTask Pause()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(5));
+            EditorApplication.isPaused = true;
         }
     }
 }
