@@ -18,7 +18,9 @@ namespace GameEngine
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out AtomicEntity entity) && entity.TryGetAction<int>(LifeAPI.TAKE_DAMAGE_ACTION, out var action))
+            if (other.TryGetComponent(out IAtomicEntity entity)
+                && entity.Is("Character") // or mb easier w/ collision matrix i dunno
+                && entity.TryGetAction<int>(LifeAPI.TAKE_DAMAGE_ACTION, out var action))
             {
                 action.Invoke(_damage.Value);
             }

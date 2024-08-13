@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace GameEngine
 {
+    [Is("Character")]
     public sealed class Character : AtomicObject
     {
         // Interfaces
