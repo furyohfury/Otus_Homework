@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
 
