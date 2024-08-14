@@ -8,7 +8,7 @@ namespace GameEngine
     public sealed class Zombie : AtomicObject
     {
         // Interfaces
-        [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
+        [Get(LifeAPI.TAKE_DAMAGE_REQUEST)]
         public IAtomicAction<int> TakeDamageEvent => _core.LifeComponent.TakeDamageRequest;
         [Get(LifeAPI.IS_ALIVE)]
         public IAtomicObservable<bool> IsAlive => _core.LifeComponent.IsAlive;

@@ -26,27 +26,15 @@ namespace GameEngine
 
         public void Compose()
         {
-            AttackStartEvent.Subscribe(OnAttackStart);
-            AttackEndEvent.Subscribe(OnAttackEnd);
             _readyToAttack = new(() => ReloadTimer.Value <= 0);
             CanAttack.Append(_readyToAttack);
-            _hitboxCollider.Compose(_damage);
+            _hitboxCollider.Compose(AttackStartEvent, AttackEndEvent, _damage);
             AttackCooldownStartEvent.Subscribe(OnAttackCooldownStart);
         }
 
         private void OnAttackCooldownStart()
         {
             ReloadTimer.Value = _attackCooldown;
-        }
-
-        private void OnAttackStart()
-        {
-            _hitboxCollider.Enable();
-        }
-
-        private void OnAttackEnd()
-        {
-            _hitboxCollider.Disable();
         }
     }
 }

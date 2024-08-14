@@ -14,8 +14,8 @@ namespace GameEngine
         public IAtomicObservable<int> HitPoints => _core.LifeComponent.HitPoints;
         [Get(MoveAPI.MOVE_DIRECTION)]
         public IAtomicVariable<Vector3> MoveDirection => _core.MoveComponent.MoveDirection;
-        [Get(LifeAPI.TAKE_DAMAGE_ACTION)]
-        public IAtomicAction<int> TakeDamageEvent => _core.LifeComponent.TakeDamageRequest;
+        [Get(LifeAPI.TAKE_DAMAGE_REQUEST)]
+        public IAtomicAction<int> TakeDamageRequest => _core.LifeComponent.TakeDamageRequest;
         [Get(RotateAPI.LOOK_DIRECTION)]
         public IAtomicVariable<Vector3> LookDirection => _core.LookDirection;
         [Get(PositionAPI.ROOT_POSITION)]

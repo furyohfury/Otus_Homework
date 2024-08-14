@@ -7,7 +7,7 @@
 
     public static class LifeAPI
     {
-        public const string TAKE_DAMAGE_ACTION = nameof(TAKE_DAMAGE_ACTION);
+        public const string TAKE_DAMAGE_REQUEST = nameof(TAKE_DAMAGE_REQUEST);
         public const string IS_ALIVE = nameof(IS_ALIVE);
         public const string HIT_POINTS = nameof(HIT_POINTS);
     }
