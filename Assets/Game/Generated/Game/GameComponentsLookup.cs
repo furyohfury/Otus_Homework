@@ -8,15 +8,45 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int DebugMessage = 0;
+    public const int AttackRange = 0;
+    public const int AttackTimer = 1;
+    public const int Direction = 2;
+    public const int Health = 3;
+    public const int MoveDirection = 4;
+    public const int MoveSpeed = 5;
+    public const int Position = 6;
+    public const int SpawnRequest = 7;
+    public const int Speed = 8;
+    public const int Team = 9;
+    public const int TransformView = 10;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
-        "DebugMessage"
+        "AttackRange",
+        "AttackTimer",
+        "Direction",
+        "Health",
+        "MoveDirection",
+        "MoveSpeed",
+        "Position",
+        "SpawnRequest",
+        "Speed",
+        "Team",
+        "TransformView"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(DebugMessageComponent)
+        typeof(AttackRangeComponent),
+        typeof(AttackTimerComponent),
+        typeof(DirectionComponent),
+        typeof(HealthComponent),
+        typeof(MoveDirectionComponent),
+        typeof(MoveSpeedComponent),
+        typeof(PositionComponent),
+        typeof(SpawnRequestComponent),
+        typeof(SpeedComponent),
+        typeof(TeamComponent),
+        typeof(TransformViewComponent)
     };
 }

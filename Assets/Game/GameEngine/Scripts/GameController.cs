@@ -3,24 +3,23 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    Systems _systems;
+    private Systems _systems;
 
-    void Start()
+    private void Start()
     {
-        Application.targetFrameRate = 60;
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
 
-        // create the systems by creating individual features
         _systems = new Feature("Systems")
-            .Add(new DebugMessageSystem(contexts))
-            .Add(new HelloWorldSystem(contexts));
+             .Add(new SpawnRequestSystem(contexts))
+             .Add(new AddViewSystem(contexts))
+             .Add(new RenderPositionSystem(contexts));
 
         // call Initialize() on all of the IInitializeSystems
         _systems.Initialize();
     }
 
-    void Update()
+    private void Update()
     {
         // call Execute() on all the IExecuteSystems and 
         // ReactiveSystems that were triggered last frame
