@@ -4,11 +4,14 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private Systems _systems;
+    private EntityManager _entityManager;
 
     private void Start()
     {
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
+        _entityManager = new EntityManager();
+        _entityManager.Initialize(contexts);
 
         _systems = new Feature("Systems")
              .Add(new SpawnRequestSystem(contexts))
