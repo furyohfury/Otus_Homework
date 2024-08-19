@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+        
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
         _entityManager = new EntityManager();
@@ -20,7 +22,7 @@ public class GameController : MonoBehaviour
              .Add(new TargetSearchSystem(contexts))
              .Add(new ChaseTargetSystem(contexts))
              
-             .Add(new MoveViewSystem(contexts))
+             .Add(new MoveSystem(contexts))
              .Add(new RenderPositionSystem(contexts));
 
         // call Initialize() on all of the IInitializeSystems

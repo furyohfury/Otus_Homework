@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public sealed class TargetDeadSystem : IExecuteSystem
 {
@@ -11,9 +12,9 @@ public sealed class TargetDeadSystem : IExecuteSystem
 
     public void Execute()
     {
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.GetEntities())
         {
-            if (entity.enemyTarget.Value == null)
+            if (entity.target.Value != Vector3.zero)
             {
                 entity.RemoveTarget();
             }

@@ -4,5 +4,5 @@ using UnityEngine;
 [Game]
 public class TargetComponent : IComponent
 {
-    public Entity Value;
+    public Vector3 Value;
 }

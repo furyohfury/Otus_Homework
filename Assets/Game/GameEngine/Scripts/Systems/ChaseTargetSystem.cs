@@ -3,13 +3,13 @@
 public sealed class ChaseTargetSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _chaseEntities;
-    private Contexts _contexts;
+    private readonly Contexts _contexts;
 
     public ChaseTargetSystem(Contexts contexts)
     {
         _contexts = contexts;
         var matcher = GameMatcher
-            .AllOf(GameMatcher.EnemyTarget, GameMatcher.AttackRange);
+            .AllOf(GameMatcher.Target, GameMatcher.AttackRange);
         _chaseEntities = contexts.game.GetGroup(matcher);
     }
 
@@ -17,15 +17,21 @@ public sealed class ChaseTargetSystem : IExecuteSystem
     {
         foreach (var entity in _chaseEntities)
         {
-            if ((entity.enemyTarget.Value.position - entity.position.Value).sqrMagnitude > entity.attackRange.Value)
+            var distanceVector = entity.target.Value - entity.position.Value;
+            if (distanceVector.sqrMagnitude > entity.attackRange.Value * entity.attackRange.Value)
             {
                 if (entity.hasMoveDirection)
                 {
-                    entity.ReplaceMoveDirection(entity.enemyTarget.Value.position);
+                    entity.ReplaceMoveDirection(distanceVector);
+                }
+                else
+                {
+                    entity.AddMoveDirection(distanceVector);
                 }
             }
             else
             {
+                entity.RemoveMoveDirection();
                 var attackRequestEntity = _contexts.game.CreateEntity();
                 attackRequestEntity.AddAttackRequest(entity);
             }
