@@ -6,15 +6,16 @@ public class RenderPositionSystem : IExecuteSystem
 
     public RenderPositionSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.TransformView, GameMatcher.Position);
+        var matcher = GameMatcher.AllOf(GameMatcher.TransformView, GameMatcher.Position, GameMatcher.Direction);
         _group = contexts.game.GetGroup(matcher);
     }
 
     public void Execute()
     {
-        foreach (GameEntity e in _group)
+        foreach (var entity in _group)
         {
-            e.transformView.Value.position = e.position.Value;
+            entity.transformView.Value.position = entity.position.Value;
+            entity.transformView.Value.rotation = entity.direction.Value;
         }
     }
 }

@@ -9,43 +9,52 @@
 public static class GameComponentsLookup {
 
     public const int AttackRange = 0;
-    public const int AttackTimer = 1;
-    public const int Direction = 2;
-    public const int Health = 3;
-    public const int MoveDirection = 4;
-    public const int MoveSpeed = 5;
-    public const int Position = 6;
-    public const int SpawnRequest = 7;
-    public const int Speed = 8;
-    public const int Team = 9;
-    public const int TransformView = 10;
+    public const int AttackRequest = 1;
+    public const int AttackTimer = 2;
+    public const int DamageDealRequest = 3;
+    public const int Direction = 4;
+    public const int EnemyTarget = 5;
+    public const int Health = 6;
+    public const int MoveDirection = 7;
+    public const int MoveSpeed = 8;
+    public const int Position = 9;
+    public const int SpawnRequest = 10;
+    public const int Target = 11;
+    public const int Team = 12;
+    public const int TransformView = 13;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "AttackRange",
+        "AttackRequest",
         "AttackTimer",
+        "DamageDealRequest",
         "Direction",
+        "EnemyTarget",
         "Health",
         "MoveDirection",
         "MoveSpeed",
         "Position",
         "SpawnRequest",
-        "Speed",
+        "Target",
         "Team",
         "TransformView"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(AttackRangeComponent),
+        typeof(AttackRequest),
         typeof(AttackTimerComponent),
+        typeof(DamageDealRequest),
         typeof(DirectionComponent),
+        typeof(EnemyTargetComponent),
         typeof(HealthComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PositionComponent),
         typeof(SpawnRequestComponent),
-        typeof(SpeedComponent),
+        typeof(TargetComponent),
         typeof(TeamComponent),
         typeof(TransformViewComponent)
     };

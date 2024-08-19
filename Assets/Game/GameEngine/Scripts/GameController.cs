@@ -16,6 +16,11 @@ public class GameController : MonoBehaviour
         _systems = new Feature("Systems")
              .Add(new SpawnRequestSystem(contexts))
              .Add(new AddViewSystem(contexts))
+             .Add(new TargetDeadSystem(contexts))
+             .Add(new TargetSearchSystem(contexts))
+             .Add(new ChaseTargetSystem(contexts))
+             
+             .Add(new MoveViewSystem(contexts))
              .Add(new RenderPositionSystem(contexts));
 
         // call Initialize() on all of the IInitializeSystems
