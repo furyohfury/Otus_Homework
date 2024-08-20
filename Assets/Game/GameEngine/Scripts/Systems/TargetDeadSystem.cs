@@ -17,6 +17,10 @@ public sealed class TargetDeadSystem : IExecuteSystem
             if (entity.target.Value != Vector3.zero)
             {
                 entity.RemoveTarget();
+                if (entity.hasMoveDirection)
+                {
+                    entity.RemoveMoveDirection();
+                }
             }
         }
     }
