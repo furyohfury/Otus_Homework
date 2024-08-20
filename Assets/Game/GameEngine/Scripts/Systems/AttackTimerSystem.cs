@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public sealed class AttackTimerSystem : IExecuteSystem
 {
@@ -12,13 +13,13 @@ public sealed class AttackTimerSystem : IExecuteSystem
 
     public void Execute()
     {
-        var deltaTime = UnityEngine.Time.deltaTime;
+        var deltaTime = Time.deltaTime;
         foreach (var entity in _entities.GetEntities())
         {
             if (entity.attackTimer.Value > 0)
             {
                 entity.attackTimer.Value -= deltaTime;
-            }    
+            }
         }
     }
 }

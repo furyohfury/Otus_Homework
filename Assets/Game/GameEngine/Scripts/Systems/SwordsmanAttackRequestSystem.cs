@@ -2,7 +2,7 @@
 
 public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSystem
 {
-    private IGroup<GameEntity> _entities;
+    private readonly IGroup<GameEntity> _entities;
 
     public SwordsmanAttackRequestSystem(Contexts contexts)
     {
@@ -10,19 +10,19 @@ public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSyste
         _entities = contexts.game.GetGroup(matcher);
     }
 
-    public void Execute()
-    {
-        foreach (var entity in _entities.GetEntities())
-        {
-            entity.isMeleeAttackEvent = true;
-        }
-    }
-
     public void Cleanup()
     {
         foreach (var entity in _entities.GetEntities())
         {
             entity.isAttackRequest = false;
+        }
+    }
+
+    public void Execute()
+    {
+        foreach (var entity in _entities.GetEntities())
+        {
+            entity.isMeleeAttackEvent = true;
         }
     }
 }

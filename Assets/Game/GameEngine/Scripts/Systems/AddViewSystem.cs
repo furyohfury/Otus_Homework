@@ -10,7 +10,7 @@ public class AddViewSystem : IExecuteSystem
     public AddViewSystem(Contexts contexts)
     {
         _viewGroup = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Position,
-                                                              GameMatcher.SpawnRequest));
+            GameMatcher.SpawnRequest));
     }
 
     public void Execute()

@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using UnityEngine;
 
 public sealed class SpawnRequestSystem : IExecuteSystem
 {

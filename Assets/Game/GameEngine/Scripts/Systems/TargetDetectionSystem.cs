@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using UnityEngine;
 
 public sealed class TargetDetectionSystem : IExecuteSystem
 {
@@ -12,7 +11,7 @@ public sealed class TargetDetectionSystem : IExecuteSystem
             .AllOf(GameMatcher.Team, GameMatcher.AttackRange, GameMatcher.Position)
             .NoneOf(GameMatcher.EnemyTarget);
         _searchGroup = contexts.game.GetGroup(matcher);
-        matcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Health,GameMatcher.Position);
+        matcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Health, GameMatcher.Position);
         _targetGroup = contexts.game.GetGroup(matcher);
     }
 

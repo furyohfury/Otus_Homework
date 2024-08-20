@@ -1,10 +1,10 @@
 ﻿using Entitas;
 
-public sealed class ChaseTargetSystem : IExecuteSystem
+public sealed class TargetChaseSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _entities;
 
-    public ChaseTargetSystem(Contexts contexts)
+    public TargetChaseSystem(Contexts contexts)
     {
         var matcher = GameMatcher
             .AllOf(GameMatcher.EnemyTarget, GameMatcher.AttackRange);

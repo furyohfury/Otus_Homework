@@ -20,14 +20,15 @@ public static class GameComponentsLookup {
     public const int MeleeAttackEvent = 9;
     public const int MoveDirection = 10;
     public const int MoveSpeed = 11;
-    public const int Position = 12;
-    public const int SpawnRequest = 13;
-    public const int Target = 14;
-    public const int TargetInRange = 15;
-    public const int Team = 16;
-    public const int TransformView = 17;
+    public const int MovingEvent = 12;
+    public const int Position = 13;
+    public const int SpawnRequest = 14;
+    public const int Target = 15;
+    public const int TargetInRange = 16;
+    public const int Team = 17;
+    public const int TransformView = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -42,6 +43,7 @@ public static class GameComponentsLookup {
         "MeleeAttackEvent",
         "MoveDirection",
         "MoveSpeed",
+        "MovingEvent",
         "Position",
         "SpawnRequest",
         "Target",
@@ -63,6 +65,7 @@ public static class GameComponentsLookup {
         typeof(MeleeAttackEventComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
+        typeof(MovingEventComponent),
         typeof(PositionComponent),
         typeof(SpawnRequestComponent),
         typeof(TargetComponent),

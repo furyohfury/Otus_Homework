@@ -14,13 +14,12 @@ public sealed class TargetDeadSystem : IExecuteSystem
     {
         foreach (var entity in _entities.GetEntities())
         {
-            if (entity.enemyTarget.Value == null)
+            if (entity.enemyTarget.Value != null) continue;
+
+            entity.RemoveEnemyTarget();
+            if (entity.hasMoveDirection)
             {
-                entity.RemoveEnemyTarget();
-                if (entity.hasMoveDirection)
-                {
-                    entity.RemoveMoveDirection();
-                }
+                entity.RemoveMoveDirection();
             }
         }
     }

@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
         _systems = new Feature("Systems")
             .Add(new TargetDeadSystem(contexts))
             .Add(new TargetDetectionSystem(contexts))
-            .Add(new ChaseTargetSystem(contexts))
+            .Add(new TargetChaseSystem(contexts))
             .Add(new LookAtTargetSystem(contexts))
             .Add(new TargetInRangeSystem(contexts))
             .Add(new SwordsmanAttackRequestSystem(contexts))
@@ -27,7 +27,8 @@ public class GameController : MonoBehaviour
             // View Systems
             .Add(new MoveSystem(contexts))
             .Add(new RenderPositionSystem(contexts))
-            .Add(new MeleeAttackEventSystem(contexts));
+            .Add(new MeleeAttackEventSystem(contexts))
+            .Add(new MovingAnimationSystem(contexts.game));
         
 
         // call Initialize() on all of the IInitializeSystems
