@@ -14,7 +14,7 @@ public sealed class TargetDeadSystem : IExecuteSystem
     {
         foreach (var entity in _entities.GetEntities())
         {
-            if (entity.target.Value != Vector3.zero)
+            if (entity.target.Value == Vector3.zero)
             {
                 entity.RemoveTarget();
                 if (entity.hasMoveDirection)

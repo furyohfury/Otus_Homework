@@ -18,10 +18,13 @@ public class GameController : MonoBehaviour
         _systems = new Feature("Systems")
              .Add(new SpawnRequestSystem(contexts))
              .Add(new AddViewSystem(contexts))
-             .Add(new TargetDeadSystem(contexts))
-             .Add(new TargetSearchSystem(contexts))
+             // .Add(new TargetDeadSystem(contexts))
+             .Add(new TargetDetectionSystem(contexts))
              .Add(new ChaseTargetSystem(contexts))
+             .Add(new LookAtTargetSystem(contexts))
+             .Add(new TargetInRangeSystem(contexts))
              
+             // View Systems
              .Add(new MoveSystem(contexts))
              .Add(new RenderPositionSystem(contexts));
 

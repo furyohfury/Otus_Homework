@@ -2012,8 +2012,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1707629682}
-  - {fileID: 516669618}
   - {fileID: 1914976720}
+  - {fileID: 516669618}
   - {fileID: 74384898}
   m_Father: {fileID: 800337253}
   m_RootOrder: 0
@@ -2368,7 +2368,7 @@ MonoBehaviour:
   _moveSpeed: 5
   _team: 1
   _attackCooldown: 2
-  _attackRange: 1
+  _attackRange: 5
 --- !u!1001 &1622863030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2556,7 +2556,7 @@ PrefabInstance:
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
@@ -3090,7 +3090,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}
@@ -4267,7 +4267,7 @@ MonoBehaviour:
   _moveSpeed: 5
   _team: 0
   _attackCooldown: 2
-  _attackRange: 1
+  _attackRange: 5
 --- !u!114 &8692576747098801707
 MonoBehaviour:
   m_ObjectHideFlags: 0

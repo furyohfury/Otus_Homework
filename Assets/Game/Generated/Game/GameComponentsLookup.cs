@@ -8,24 +8,27 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int AttackRange = 0;
-    public const int AttackRequest = 1;
-    public const int AttackTimer = 2;
-    public const int DamageDealRequest = 3;
-    public const int Direction = 4;
-    public const int EnemyTarget = 5;
-    public const int Health = 6;
-    public const int MoveDirection = 7;
-    public const int MoveSpeed = 8;
-    public const int Position = 9;
-    public const int SpawnRequest = 10;
-    public const int Target = 11;
-    public const int Team = 12;
-    public const int TransformView = 13;
+    public const int AttackCooldown = 0;
+    public const int AttackRange = 1;
+    public const int AttackRequest = 2;
+    public const int AttackTimer = 3;
+    public const int DamageDealRequest = 4;
+    public const int Direction = 5;
+    public const int EnemyTarget = 6;
+    public const int Health = 7;
+    public const int MoveDirection = 8;
+    public const int MoveSpeed = 9;
+    public const int Position = 10;
+    public const int SpawnRequest = 11;
+    public const int Target = 12;
+    public const int TargetInRange = 13;
+    public const int Team = 14;
+    public const int TransformView = 15;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
+        "AttackCooldown",
         "AttackRange",
         "AttackRequest",
         "AttackTimer",
@@ -38,11 +41,13 @@ public static class GameComponentsLookup {
         "Position",
         "SpawnRequest",
         "Target",
+        "TargetInRange",
         "Team",
         "TransformView"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AttackCooldownComponent),
         typeof(AttackRangeComponent),
         typeof(AttackRequest),
         typeof(AttackTimerComponent),
@@ -55,6 +60,7 @@ public static class GameComponentsLookup {
         typeof(PositionComponent),
         typeof(SpawnRequestComponent),
         typeof(TargetComponent),
+        typeof(TargetInRangeComponent),
         typeof(TeamComponent),
         typeof(TransformViewComponent)
     };

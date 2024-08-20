@@ -13,11 +13,11 @@ public sealed class AttackTimerSystem : IExecuteSystem
     public void Execute()
     {
         var deltaTime = UnityEngine.Time.deltaTime;
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.GetEntities())
         {
-            if (entity.AttackTimer.Value > 0)
+            if (entity.attackTimer.Value > 0)
             {
-                entity.AttackTimer.Value -= deltaTime;
+                entity.attackTimer.Value -= deltaTime;
             }    
         }
     }

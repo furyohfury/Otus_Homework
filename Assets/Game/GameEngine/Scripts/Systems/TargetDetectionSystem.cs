@@ -1,18 +1,18 @@
 ﻿using Entitas;
 using UnityEngine;
 
-public sealed class TargetSearchSystem : IExecuteSystem
+public sealed class TargetDetectionSystem : IExecuteSystem
 {
     private readonly IGroup<GameEntity> _searchGroup;
     private readonly IGroup<GameEntity> _targetGroup;
 
-    public TargetSearchSystem(Contexts contexts)
+    public TargetDetectionSystem(Contexts contexts)
     {
         var matcher = GameMatcher
             .AllOf(GameMatcher.Team, GameMatcher.AttackRange, GameMatcher.Position)
             .NoneOf(GameMatcher.EnemyTarget);
         _searchGroup = contexts.game.GetGroup(matcher);
-        matcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Health);
+        matcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Health,GameMatcher.Position);
         _targetGroup = contexts.game.GetGroup(matcher);
     }
 
@@ -20,7 +20,7 @@ public sealed class TargetSearchSystem : IExecuteSystem
     {
         foreach (var entity in _searchGroup.GetEntities())
         {
-            var target = Vector3.zero;
+            GameEntity target = null;
             var minDistance = float.MaxValue;
             foreach (var ent in _targetGroup)
             {
@@ -32,13 +32,13 @@ public sealed class TargetSearchSystem : IExecuteSystem
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    target = entPos;
+                    target = ent;
                 }
             }
 
-            if (target != Vector3.zero)
+            if (target != null)
             {
-                entity.AddTarget(target); // TODO cant modify collection
+                entity.AddEnemyTarget(target);
             }
         }
     }

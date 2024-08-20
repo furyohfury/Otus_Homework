@@ -17,8 +17,6 @@ public sealed class MoveSystem : IExecuteSystem
         foreach (var entity in _entities)
         {
             entity.position.Value += entity.moveDirection.Value.normalized * entity.moveSpeed.Value * deltaTime;
-            var lookRot = Quaternion.LookRotation(entity.moveDirection.Value);
-            entity.direction.Value = Quaternion.Slerp(entity.direction.Value, lookRot, deltaTime * 0.3f); // TODO rate in rotation
         }
     }
 }
