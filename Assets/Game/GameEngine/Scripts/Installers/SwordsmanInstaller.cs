@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public sealed class SwordsmanInstaller : EntityInstaller
 {
@@ -21,6 +20,9 @@ public sealed class SwordsmanInstaller : EntityInstaller
     [SerializeField]
     private float _attackRange;
 
+    [SerializeField]
+    private Animator _animator;
+
     public override void Install(GameEntity entity)
     {
         entity.AddPosition(_transform.position);
@@ -29,8 +31,10 @@ public sealed class SwordsmanInstaller : EntityInstaller
         entity.AddMoveSpeed(_moveSpeed);
         entity.AddTeam(_team);
         entity.AddTransformView(_transform);
-        entity.AddAttackTimer(_attackCooldown);
+        entity.AddAttackCooldown(_attackCooldown);
+        entity.AddAttackTimer(0f);
         entity.AddAttackRange(_attackRange);
+        entity.AddAnimatorView(_animator);
     }
 
     public override void Dispose(GameEntity entity)

@@ -8,26 +8,29 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int AttackCooldown = 0;
-    public const int AttackRange = 1;
-    public const int AttackRequest = 2;
-    public const int AttackTimer = 3;
-    public const int DamageDealRequest = 4;
-    public const int Direction = 5;
-    public const int EnemyTarget = 6;
-    public const int Health = 7;
-    public const int MoveDirection = 8;
-    public const int MoveSpeed = 9;
-    public const int Position = 10;
-    public const int SpawnRequest = 11;
-    public const int Target = 12;
-    public const int TargetInRange = 13;
-    public const int Team = 14;
-    public const int TransformView = 15;
+    public const int AnimatorView = 0;
+    public const int AttackCooldown = 1;
+    public const int AttackRange = 2;
+    public const int AttackRequest = 3;
+    public const int AttackTimer = 4;
+    public const int DamageDealRequest = 5;
+    public const int Direction = 6;
+    public const int EnemyTarget = 7;
+    public const int Health = 8;
+    public const int MeleeAttackEvent = 9;
+    public const int MoveDirection = 10;
+    public const int MoveSpeed = 11;
+    public const int Position = 12;
+    public const int SpawnRequest = 13;
+    public const int Target = 14;
+    public const int TargetInRange = 15;
+    public const int Team = 16;
+    public const int TransformView = 17;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 18;
 
     public static readonly string[] componentNames = {
+        "AnimatorView",
         "AttackCooldown",
         "AttackRange",
         "AttackRequest",
@@ -36,6 +39,7 @@ public static class GameComponentsLookup {
         "Direction",
         "EnemyTarget",
         "Health",
+        "MeleeAttackEvent",
         "MoveDirection",
         "MoveSpeed",
         "Position",
@@ -47,6 +51,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AnimatorViewComponent),
         typeof(AttackCooldownComponent),
         typeof(AttackRangeComponent),
         typeof(AttackRequest),
@@ -55,6 +60,7 @@ public static class GameComponentsLookup {
         typeof(DirectionComponent),
         typeof(EnemyTargetComponent),
         typeof(HealthComponent),
+        typeof(MeleeAttackEventComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(PositionComponent),

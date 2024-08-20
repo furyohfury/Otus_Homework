@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly AttackRequest attackRequestComponent = new AttackRequest();
+    static readonly MeleeAttackEventComponent meleeAttackEventComponent = new MeleeAttackEventComponent();
 
-    public bool isAttackRequest {
-        get { return HasComponent(GameComponentsLookup.AttackRequest); }
+    public bool isMeleeAttackEvent {
+        get { return HasComponent(GameComponentsLookup.MeleeAttackEvent); }
         set {
-            if (value != isAttackRequest) {
-                var index = GameComponentsLookup.AttackRequest;
+            if (value != isMeleeAttackEvent) {
+                var index = GameComponentsLookup.MeleeAttackEvent;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : attackRequestComponent;
+                            : meleeAttackEventComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherAttackRequest;
+    static Entitas.IMatcher<GameEntity> _matcherMeleeAttackEvent;
 
-    public static Entitas.IMatcher<GameEntity> AttackRequest {
+    public static Entitas.IMatcher<GameEntity> MeleeAttackEvent {
         get {
-            if (_matcherAttackRequest == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.AttackRequest);
+            if (_matcherMeleeAttackEvent == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.MeleeAttackEvent);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherAttackRequest = matcher;
+                _matcherMeleeAttackEvent = matcher;
             }
 
-            return _matcherAttackRequest;
+            return _matcherMeleeAttackEvent;
         }
     }
 }

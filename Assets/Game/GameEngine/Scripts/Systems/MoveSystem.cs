@@ -14,7 +14,7 @@ public sealed class MoveSystem : IExecuteSystem
     public void Execute()
     {
         var deltaTime = Time.deltaTime;
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.GetEntities())
         {
             entity.position.Value += entity.moveDirection.Value.normalized * entity.moveSpeed.Value * deltaTime;
         }

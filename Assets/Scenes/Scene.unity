@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!95 &66450861 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8692576747537636603, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8692576747098801704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &74384897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2369,6 +2375,7 @@ MonoBehaviour:
   _team: 1
   _attackCooldown: 2
   _attackRange: 5
+  _animator: {fileID: 1712799045}
 --- !u!1001 &1622863030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2459,6 +2466,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
     type: 3}
   m_PrefabInstance: {fileID: 1870072545585007306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1712799045 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8692576747537636603, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 74384897}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1738537723
 PrefabInstance:
@@ -4266,8 +4279,9 @@ MonoBehaviour:
   _health: 10
   _moveSpeed: 5
   _team: 0
-  _attackCooldown: 2
+  _attackCooldown: 5
   _attackRange: 5
+  _animator: {fileID: 66450861}
 --- !u!114 &8692576747098801707
 MonoBehaviour:
   m_ObjectHideFlags: 0

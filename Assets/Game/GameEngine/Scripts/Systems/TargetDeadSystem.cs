@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using UnityEngine;
 
 public sealed class TargetDeadSystem : IExecuteSystem
 {
@@ -7,16 +6,17 @@ public sealed class TargetDeadSystem : IExecuteSystem
 
     public TargetDeadSystem(Contexts contexts)
     {
-        _entities = contexts.game.GetGroup(GameMatcher.Target);
+        var matcher = GameMatcher.EnemyTarget;
+        _entities = contexts.game.GetGroup(matcher);
     }
 
     public void Execute()
     {
         foreach (var entity in _entities.GetEntities())
         {
-            if (entity.target.Value == Vector3.zero)
+            if (entity.enemyTarget.Value == null)
             {
-                entity.RemoveTarget();
+                entity.RemoveEnemyTarget();
                 if (entity.hasMoveDirection)
                 {
                     entity.RemoveMoveDirection();

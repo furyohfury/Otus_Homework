@@ -14,7 +14,7 @@ public sealed class LookAtTargetSystem : IExecuteSystem
     public void Execute()
     {
         var deltaTime = Time.deltaTime;
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.GetEntities())
         {
             var enemyTarget = entity.enemyTarget.Value;
             var lookRot = Quaternion.LookRotation(enemyTarget.position.Value - entity.position.Value); // TODO rate in rotation

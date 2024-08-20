@@ -15,11 +15,11 @@ public sealed class TargetInRangeSystem : IExecuteSystem
 
     public void Execute()
     {
-        foreach (var entity in _entities)
+        foreach (var entity in _entities.GetEntities())
         {
             if (entity.attackTimer.Value <= 0)
             {
-                entity.AddAttackRequest(null); // TODO
+                entity.isAttackRequest = true;
                 entity.attackTimer.Value = entity.attackCooldown.Value;
             }
         }
