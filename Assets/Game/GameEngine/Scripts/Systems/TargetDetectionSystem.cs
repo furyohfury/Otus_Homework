@@ -23,7 +23,7 @@ public sealed class TargetDetectionSystem : IExecuteSystem
             var minDistance = float.MaxValue;
             foreach (var ent in _targetGroup)
             {
-                if (ent == entity || ent.team == entity.team) continue;
+                if (ent == entity || ent.team == entity.team) continue; // TODO fix, attacks same team
 
                 var entPos = ent.position.Value;
                 var distance = (entPos - entity.position.Value).sqrMagnitude;

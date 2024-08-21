@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
 {
@@ -22,6 +23,7 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
             var weapon = entity.rangeWeapon;
 
             var spawnEvent = _contexts.game.CreateEntity();
+            spawnEvent.isSpawnRequest = true;
             spawnEvent.AddPosition(weapon.FirePoint.position);
             spawnEvent.AddDirection(weapon.FirePoint.rotation);
             spawnEvent.AddPrefab(weapon.ProjectilePrefab);

@@ -17,7 +17,7 @@ public sealed class ProjectileInstaller : EntityInstaller
         entity.AddPosition(_transform.position);
         entity.AddDirection(_transform.rotation);
         entity.AddMoveSpeed(_moveSpeed);
-        entity.AddMoveDirection(Vector3.forward);
+        entity.AddMoveDirection(_transform.forward);
         entity.AddTeam(_team);
         entity.AddTransformView(_transform);
         

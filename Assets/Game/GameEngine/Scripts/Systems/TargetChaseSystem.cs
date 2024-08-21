@@ -21,12 +21,14 @@ public sealed class TargetChaseSystem : IExecuteSystem
             {
                 entity.ReplaceMoveDirection(vectorToTarget);
                 entity.isTargetInRange = false;
+                continue;
             }
-            else if (entity.hasMoveDirection)
+            
+            if (entity.hasMoveDirection)
             {
                 entity.RemoveMoveDirection();
-                entity.isTargetInRange = true;
             }
+            entity.isTargetInRange = true;
         }
     }
 }
