@@ -6,7 +6,7 @@ public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSyste
 
     public SwordsmanAttackRequestSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest); // TODO make swordsman component?
+        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.isMeleeAttacker);
         _entities = contexts.game.GetGroup(matcher);
     }
 

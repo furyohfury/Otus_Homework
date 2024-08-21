@@ -27,7 +27,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
     {
         entity.AddPosition(_transform.position);
         entity.AddDirection(_transform.rotation);
-        entity.AddHealth(_health); // todo add config
+        entity.AddHealth(_health); // TODO add config
         entity.AddMoveSpeed(_moveSpeed);
         entity.AddTeam(_team);
         entity.AddTransformView(_transform);
@@ -35,6 +35,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
         entity.AddAttackTimer(0f);
         entity.AddAttackRange(_attackRange);
         entity.AddAnimatorView(_animator);
+        entity.isMeleeAttacker = true;
     }
 
     public override void Dispose(GameEntity entity)
