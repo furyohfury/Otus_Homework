@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSystem
+public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSystem // TODO rename in meleeattackreqsys
 {
     private readonly IGroup<GameEntity> _entities;
 
@@ -8,6 +8,14 @@ public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSyste
     {
         var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.isMeleeAttacker);
         _entities = contexts.game.GetGroup(matcher);
+    }    
+
+    public void Execute()
+    {
+        foreach (var entity in _entities.GetEntities())
+        {
+            entity.isMeleeAttackEvent = true;
+        }
     }
 
     public void Cleanup()
@@ -15,14 +23,6 @@ public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSyste
         foreach (var entity in _entities.GetEntities())
         {
             entity.isAttackRequest = false;
-        }
-    }
-
-    public void Execute()
-    {
-        foreach (var entity in _entities.GetEntities())
-        {
-            entity.isMeleeAttackEvent = true;
         }
     }
 }

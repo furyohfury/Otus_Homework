@@ -21,8 +21,9 @@ public class GameController : MonoBehaviour
             .Add(new TargetChaseSystem(contexts))
             .Add(new LookAtTargetSystem(contexts))
             .Add(new TargetInRangeSystem(contexts))
-            .Add(new SwordsmanAttackRequestSystem(contexts))
             .Add(new AttackTimerSystem(contexts))
+            .Add(new SwordsmanAttackRequestSystem(contexts))
+            .Add(new RangeAttackRequestSystem(contexts))            
 
             // View Systems
             .Add(new MoveSystem(contexts))

@@ -25,7 +25,7 @@ public sealed class MovingAnimationSystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
-            entity.animatorView.Value.SetBool(IsMoving, entity.hasMoveDirection); // TODO FIX LOL
+            entity.animatorView.Value.SetBool(IsMoving, entity.hasMoveDirection); // TODO FIX LOL WHY ITS NOT WORKING
         }
     }
 }
