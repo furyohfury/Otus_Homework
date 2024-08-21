@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
             .Add(new TargetInRangeSystem(contexts))
             .Add(new AttackTimerSystem(contexts))
             .Add(new SwordsmanAttackRequestSystem(contexts))
-            .Add(new RangeAttackRequestSystem(contexts))            
+            .Add(new RangeAttackRequestSystem(contexts))           
+            .Add(new SpawnRequestSystem(contexts)) 
 
             // View Systems
             .Add(new MoveSystem(contexts))

@@ -1,19 +1,39 @@
 ﻿using Entitas;
 
-public sealed class SpawnRequestSystem : IExecuteSystem
+public sealed class SpawnRequestSystem : IExecuteSystem, ICleanupSystem
 {
-    private readonly IGroup<GameEntity> _viewGroup;
+    private readonly IGroup<GameEntity> _entities;
+    private readonly EntityManager _entityManager;
 
-    public SpawnRequestSystem(Contexts contexts)
+    public SpawnRequestSystem(Contexts contexts, EntityManager manager)
     {
-        _viewGroup = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Position).NoneOf(GameMatcher.TransformView));
+        var matcher = GameMatcher.AllOf(
+            GameMatcher.SpawnRequest,
+            GameMatcher.Position,
+            GameMatcher.Direction,
+            GameMatcher.Prefab);
+            _entities = contexts.game.GetGroup(matcher);
+
+            _entityManager = manager;
     }
 
     public void Execute()
     {
-        foreach (var entity in _viewGroup)
+        foreach (var entity in _entities.GetEntities())
         {
-            entity.isSpawnRequest = true;
+            var position = entity.position.Value;
+            var rotation = entity.direction.Value;
+            var prefab = entity.prefab.Value;
+            
+            _entityManager.Create(prefab, position, rotation);
+        }
+    }
+
+    public void Cleanup()
+    {
+        foreach (var entity in _entities.GetEntities())
+        {
+            entity.Destroy();
         }
     }
 }
