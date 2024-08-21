@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 [Game]
-public class DamageDealRequest : IComponent
+public class DamageDealRequest : IComponent // TODO delete
 {
     
 }

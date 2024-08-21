@@ -11,6 +11,7 @@ public class FortressInstaller : EntityInstaller
     public override void Install(GameEntity entity)
     {
         entity.AddHealth(_health);
+        entity.isDamagableTag = true;
         entity.AddTeam(_team);
     }
 

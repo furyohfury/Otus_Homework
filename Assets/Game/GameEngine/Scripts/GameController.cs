@@ -6,12 +6,15 @@ public class GameController : MonoBehaviour
     private Systems _systems;
     private EntityManager _entityManager;
 
+    public Contexts Contexts { get; private set; }
+
     private void Start()
     {
         Application.targetFrameRate = 60;
         
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
+        Contexts = contexts;
         _entityManager = new EntityManager();
         _entityManager.Initialize(contexts);
 

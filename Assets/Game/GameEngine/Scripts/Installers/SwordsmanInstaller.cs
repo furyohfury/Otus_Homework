@@ -28,6 +28,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
         entity.AddPosition(_transform.position);
         entity.AddDirection(_transform.rotation);
         entity.AddHealth(_health); // TODO add config
+        entity.isDamagableTag = true;
         entity.AddMoveSpeed(_moveSpeed);
         entity.AddTeam(_team);
         entity.AddTransformView(_transform);
