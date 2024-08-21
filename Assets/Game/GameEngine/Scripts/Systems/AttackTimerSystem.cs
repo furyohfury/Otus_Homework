@@ -7,7 +7,7 @@ public sealed class AttackTimerSystem : IExecuteSystem
 
     public AttackTimerSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AttackTimer; // TODO add attackcdcomponent
+        var matcher = GameMatcher.AllOf(GameMatcher.AttackTimer, GameMatcher.AttackCooldown);
         _entities = contexts.game.GetGroup(matcher);
     }
 

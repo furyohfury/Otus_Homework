@@ -1,12 +1,12 @@
 ﻿using Entitas;
 
-public sealed class SwordsmanAttackRequestSystem : IExecuteSystem, ICleanupSystem // TODO rename in meleeattackreqsys
+public sealed class MeleeAttackRequestSystem : IExecuteSystem, ICleanupSystem
 {
     private readonly IGroup<GameEntity> _entities;
 
-    public SwordsmanAttackRequestSystem(Contexts contexts)
+    public MeleeAttackRequestSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.isMeleeAttacker);
+        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.MeleeAttacker);
         _entities = contexts.game.GetGroup(matcher);
     }    
 

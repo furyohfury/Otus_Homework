@@ -16,19 +16,25 @@ public static class GameComponentsLookup {
     public const int DamageDealRequest = 5;
     public const int Direction = 6;
     public const int EnemyTarget = 7;
-    public const int Health = 8;
-    public const int MeleeAttackEvent = 9;
-    public const int MoveDirection = 10;
-    public const int MoveSpeed = 11;
-    public const int MovingEvent = 12;
-    public const int Position = 13;
-    public const int SpawnRequest = 14;
-    public const int Target = 15;
-    public const int TargetInRange = 16;
-    public const int Team = 17;
-    public const int TransformView = 18;
+    public const int FireRequest = 8;
+    public const int Health = 9;
+    public const int MeleeAttacker = 10;
+    public const int MeleeAttackEvent = 11;
+    public const int MoveDirection = 12;
+    public const int MoveSpeed = 13;
+    public const int MovingEvent = 14;
+    public const int Position = 15;
+    public const int Prefab = 16;
+    public const int RangeAttacker = 17;
+    public const int RangeAttackEvent = 18;
+    public const int RangeWeapon = 19;
+    public const int SpawnRequest = 20;
+    public const int Target = 21;
+    public const int TargetInRange = 22;
+    public const int Team = 23;
+    public const int TransformView = 24;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 25;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -39,12 +45,18 @@ public static class GameComponentsLookup {
         "DamageDealRequest",
         "Direction",
         "EnemyTarget",
+        "FireRequest",
         "Health",
+        "MeleeAttacker",
         "MeleeAttackEvent",
         "MoveDirection",
         "MoveSpeed",
         "MovingEvent",
         "Position",
+        "Prefab",
+        "RangeAttacker",
+        "RangeAttackEvent",
+        "RangeWeapon",
         "SpawnRequest",
         "Target",
         "TargetInRange",
@@ -61,12 +73,18 @@ public static class GameComponentsLookup {
         typeof(DamageDealRequest),
         typeof(DirectionComponent),
         typeof(EnemyTargetComponent),
+        typeof(FireRequestComponent),
         typeof(HealthComponent),
+        typeof(MeleeAttackerComponent),
         typeof(MeleeAttackEventComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(MovingEventComponent),
         typeof(PositionComponent),
+        typeof(PrefabComponent),
+        typeof(RangeAttackerComponent),
+        typeof(RangeAttackEventComponent),
+        typeof(RangeWeaponComponent),
         typeof(SpawnRequestComponent),
         typeof(TargetComponent),
         typeof(TargetInRangeComponent),

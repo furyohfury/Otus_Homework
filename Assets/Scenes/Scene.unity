@@ -2626,6 +2626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer (Red)
       objectReference: {fileID: 0}
+    - target: {fileID: 1870072543877420731, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1870072544955971606, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2916,6 +2921,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer (Blue)
       objectReference: {fileID: 0}
+    - target: {fileID: 1870072543877420731, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
 --- !u!1001 &7657002863243684347
@@ -3069,6 +3079,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142621739760630197, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.0019389566
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142621739760630197, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.1928418
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142621739760630197, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 172.35263
       objectReference: {fileID: 0}
     - target: {fileID: 8169307028071973972, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}

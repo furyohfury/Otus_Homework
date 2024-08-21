@@ -22,11 +22,11 @@ public class GameController : MonoBehaviour
             .Add(new LookAtTargetSystem(contexts))
             .Add(new TargetInRangeSystem(contexts))
             .Add(new AttackTimerSystem(contexts))
-            .Add(new SwordsmanAttackRequestSystem(contexts))
+            .Add(new MeleeAttackRequestSystem(contexts))
             .Add(new RangeAttackRequestSystem(contexts))           
-            .Add(new SpawnRequestSystem(contexts)) 
+            .Add(new SpawnRequestSystem(contexts, _entityManager)) 
             .Add(new MoveSystem(contexts))
-
+            
             // View Systems            
             .Add(new RenderPositionSystem(contexts))
             .Add(new AnimatorMovingListenerSystem(contexts.game))

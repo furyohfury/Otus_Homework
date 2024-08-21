@@ -19,12 +19,12 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
         {
             entity.isRangeAttackEvent = true;
 
-            var weapon = entity.rangeWeapon.Value;
+            var weapon = entity.rangeWeapon;
 
             var spawnEvent = _contexts.game.CreateEntity();
-            spawnEvent.AddPosition(weapon.FirePoint.Value.position);
-            spawnEvent.AddDirection(weapon.FirePoint.Value.rotation);
-            spawnEvent.AddPrefab(weapon.ProjectilePrefab.Value);
+            spawnEvent.AddPosition(weapon.FirePoint.position);
+            spawnEvent.AddDirection(weapon.FirePoint.rotation);
+            spawnEvent.AddPrefab(weapon.ProjectilePrefab);
         }
     }
 
@@ -32,7 +32,7 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
     {
         foreach (var entity in _entities.GetEntities())
         {
-            entity.RemoveAttackRequest();
+            entity.isAttackRequest = false;
         }
     }
 }
