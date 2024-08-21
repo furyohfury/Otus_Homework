@@ -36,10 +36,10 @@ public sealed class AnimatorMovingListenerSystem : ReactiveSystem<GameEntity>
 	{
 		foreach (var entity in entities)
 		{
-			if (entity.animatorView.Value.GetBool(IsMoving) != entity.hasMoveDirection)
-			{
+			// if (entity.animatorView.Value.GetBool(IsMoving) != entity.hasMoveDirection)
+			// {
 				entity.animatorView.Value.SetBool(IsMoving, entity.hasMoveDirection);
-			}
+			// }
 		}
 	}
 }

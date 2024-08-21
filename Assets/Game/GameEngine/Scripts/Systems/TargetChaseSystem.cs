@@ -19,7 +19,14 @@ public sealed class TargetChaseSystem : IExecuteSystem
             var vectorToTarget = enemy.position.Value - entity.position.Value;
             if (vectorToTarget.sqrMagnitude > entity.attackRange.Value * entity.attackRange.Value)
             {
-                entity.ReplaceMoveDirection(vectorToTarget);
+                if (entity.hasMoveDirection)
+                {
+                    entity.moveDirection.Value = vectorToTarget;
+                }
+                else
+                {
+                    entity.AddMoveDirection(vectorToTarget);
+                }
                 entity.isTargetInRange = false;
                 continue;
             }
