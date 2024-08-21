@@ -29,6 +29,8 @@ public class GameController : MonoBehaviour
             .Add(new RangeAttackRequestSystem(contexts))           
             .Add(new SpawnRequestSystem(contexts, _entityManager)) 
             .Add(new MoveSystem(contexts))
+            .Add(new ArrowTriggerEnterRequestSystem(contexts))
+            .Add(new TakeDamageRequestSystem(contexts))
             
             // View Systems            
             .Add(new RenderPositionSystem(contexts))
