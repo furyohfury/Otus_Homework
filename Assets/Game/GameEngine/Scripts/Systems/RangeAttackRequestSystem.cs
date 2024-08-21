@@ -7,7 +7,7 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
 
     public RangeAttackRequestSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.isRangeAttacker, GameMatcher.RangeWeapon);
+        var matcher = GameMatcher.AllOf(GameMatcher.AttackRequest, GameMatcher.RangeAttacker, GameMatcher.RangeWeapon);
         _entities = contexts.game.GetGroup(matcher);
 
         _contexts = contexts;

@@ -37,6 +37,7 @@ public sealed class EntityManager
         {
             view.Dispose();
             Object.Destroy(view.gameObject);
+            entity.Destroy();
         }
     }
 
