@@ -17,6 +17,8 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
     {
         foreach (var entity in _entities.GetEntities())
         {
+            entity.isRangeAttackEvent = true;
+
             var weapon = entity.rangeWeapon.Value;
 
             var spawnEvent = _contexts.game.CreateEntity();

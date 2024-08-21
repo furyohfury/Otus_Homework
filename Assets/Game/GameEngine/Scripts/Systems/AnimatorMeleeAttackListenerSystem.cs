@@ -1,12 +1,12 @@
 ﻿using Entitas;
 using UnityEngine;
 
-public sealed class MeleeAttackEventSystem : IExecuteSystem, ICleanupSystem
+public sealed class AnimatorMeleeAttackListenerSystem : IExecuteSystem, ICleanupSystem
 {
     private static readonly int MeleeAttack = Animator.StringToHash("MeleeAttack");
     private readonly IGroup<GameEntity> _entities;
 
-    public MeleeAttackEventSystem(Contexts contexts)
+    public AnimatorMeleeAttackListenerSystem(Contexts contexts)
     {
         var matcher = GameMatcher.AllOf(GameMatcher.AnimatorView, GameMatcher.MeleeAttackEvent);
         _entities = contexts.game.GetGroup(matcher);

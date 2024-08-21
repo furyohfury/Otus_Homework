@@ -3,11 +3,11 @@ using Entitas;
 using UnityEngine;
 
 // TODO mb make separate w/ movingevent (theres already a component)
-public sealed class MovingAnimationSystem : ReactiveSystem<GameEntity>
+public sealed class AnimatorMovingListenerSystem : ReactiveSystem<GameEntity>
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
 
-    public MovingAnimationSystem(IContext<GameEntity> context) : base(context)
+    public AnimatorMovingListenerSystem(IContext<GameEntity> context) : base(context)
     {
     }
 

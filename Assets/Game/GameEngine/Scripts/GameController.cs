@@ -25,12 +25,13 @@ public class GameController : MonoBehaviour
             .Add(new SwordsmanAttackRequestSystem(contexts))
             .Add(new RangeAttackRequestSystem(contexts))           
             .Add(new SpawnRequestSystem(contexts)) 
-
-            // View Systems
             .Add(new MoveSystem(contexts))
+
+            // View Systems            
             .Add(new RenderPositionSystem(contexts))
-            .Add(new MeleeAttackEventSystem(contexts))
-            .Add(new MovingAnimationSystem(contexts.game));
+            .Add(new AnimatorMovingListenerSystem(contexts.game))
+            .Add(new AnimatorMeleeAttackListenerSystem(contexts))
+            .Add(new AnimatorRangeAttackListenerSystem(contexts));
         
 
         // call Initialize() on all of the IInitializeSystems
