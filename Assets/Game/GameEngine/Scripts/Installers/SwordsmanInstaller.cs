@@ -2,6 +2,8 @@
 
 public sealed class SwordsmanInstaller : EntityInstaller
 {
+	private const string DEATH_END = "DeathEnd";
+	
 	[SerializeField]
 	private Transform _transform;
 	[SerializeField]
@@ -35,7 +37,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
 		entity.isMeleeAttacker = true;
-		_animatorDispatcher.SubscribeOnEvent("DeathEnd", OnDeathEndEvent);
+		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_entity = entity;
 	}
 
@@ -46,6 +48,6 @@ public sealed class SwordsmanInstaller : EntityInstaller
 
 	public override void Dispose(GameEntity entity)
 	{
-		_animatorDispatcher.UnsubscribeOnEvent("DeathEnd", OnDeathEndEvent);
+		_animatorDispatcher.UnsubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 	}
 }
