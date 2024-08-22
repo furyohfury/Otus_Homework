@@ -31,12 +31,15 @@ public class GameController : MonoBehaviour
             .Add(new MoveSystem(contexts))
             .Add(new ArrowTriggerEnterRequestSystem(contexts))
             .Add(new TakeDamageRequestSystem(contexts))
+            .Add(new HealthEmptySystem(contexts))
+            .Add(new DeathRequestSystem(contexts))            
             
             // View Systems            
             .Add(new RenderPositionSystem(contexts))
             .Add(new AnimatorMovingListenerSystem(contexts.game))
             .Add(new AnimatorMeleeAttackListenerSystem(contexts))
-            .Add(new AnimatorRangeAttackListenerSystem(contexts));
+            .Add(new AnimatorRangeAttackListenerSystem(contexts))
+            .Add(new AnimatorDeathListenerSystem(contexts));
         
 
         // call Initialize() on all of the IInitializeSystems

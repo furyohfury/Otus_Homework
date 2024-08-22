@@ -15,13 +15,13 @@ public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
 
 	public void Execute()
 	{
-		foreach (var request in _entities)
+		foreach (var entity in _entities)
 		{
-			var target = request.targetEntity;
+			var target = entity.targetEntity;
 			if (target.Value.hasHealth)
 			{
 				var targetHp = target.Value.health;
-				targetHp.Value -= request.damage.Value;
+				targetHp.Value -= entity.damage.Value;
 			}
 			// TODO takedamage event and system for visual
 		}

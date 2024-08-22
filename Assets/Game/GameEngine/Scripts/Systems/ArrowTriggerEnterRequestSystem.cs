@@ -2,7 +2,7 @@
 
 public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 {
-	private readonly IGroup<GameEntity> _requests;
+	private readonly IGroup<GameEntity> _entities;
 	private Contexts _contexts;
 
 	public ArrowTriggerEnterRequestSystem(Contexts contexts)
@@ -12,7 +12,7 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 			GameMatcher.ArrowTag,
 			GameMatcher.SourceEntity,
 			GameMatcher.TargetEntity);
-		_requests = contexts.game.GetGroup(matcher);
+		_entities = contexts.game.GetGroup(matcher);
 
 		_contexts = contexts;
 	}
@@ -20,18 +20,18 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 
 	public void Execute()
 	{
-		foreach (var request in _requests)
+		foreach (var entity in _entities)
 		{
-			var target = request.targetEntity;
+			var target = entity.targetEntity;
 			var damage = target.Value.damage;
-			if (target.Value.isDamagableTag)
+			if (target.Value.isDamagableTag) // TODO add if inactive
 			{
 				var damageRequest = _contexts.game.CreateEntity();
 				damageRequest.isTakeDamageRequest = true;
 				damageRequest.AddTargetEntity(target.Value);
 				damageRequest.AddDamage(damage.Value);
 			}
-			var source = request.sourceEntity; // todo tag to destroy arrow
+			var source = entity.sourceEntity; // todo tag to destroy arrow
 		}
 	}
 }

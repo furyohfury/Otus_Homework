@@ -14,7 +14,7 @@ public class ArrowCollisionDispatcher : MonoBehaviour
 	}
 
 	[Inject]
-	public void Construct(GameController gameController)
+	public void Construct(GameController gameController) // TODO check if injection works
 	{
 		_contexts = gameController.Contexts;
 	}
