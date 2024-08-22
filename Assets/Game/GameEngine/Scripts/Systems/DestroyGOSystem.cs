@@ -3,10 +3,11 @@ using Entitas;
 public class DestroyGOSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
+	private EntityManager _entityManager;
 
 	public DestroyGOSystem(Contexts contexts)
 	{
-		var matcher = GameMatcher.AllOf(GameMatcher.Inactive);
+		var matcher = GameMatcher.AllOf(GameMatcher.Inactive).NoneOf(GameMatcher.DelayedDeath);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -14,8 +15,7 @@ public class DestroyGOSystem : IExecuteSystem
 	{
 		foreach (var entity in _entities)
 		{
-			var animator = entity.animatorView.Value;
-            animator.SetTrigger("Death");
+			_entityManager.Destroy(entity);
 		}
 	}
 }

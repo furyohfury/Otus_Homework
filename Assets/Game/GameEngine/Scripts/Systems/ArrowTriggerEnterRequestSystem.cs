@@ -24,14 +24,15 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 		{
 			var target = entity.targetEntity;
 			var damage = target.Value.damage;
-			if (target.Value.isDamagableTag) // TODO add if inactive
+			if (target.Value.isDamagableTag && !target.Value.isInactive)
 			{
 				var damageRequest = _contexts.game.CreateEntity();
 				damageRequest.isTakeDamageRequest = true;
 				damageRequest.AddTargetEntity(target.Value);
 				damageRequest.AddDamage(damage.Value);
 			}
-			var source = entity.sourceEntity; // todo tag to destroy arrow
+			var source = entity.sourceEntity;
+			source.isInactive = true;
 		}
 	}
 }

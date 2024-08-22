@@ -1,6 +1,6 @@
 using Entitas;
 
-public class AnimatorDeathListenerSystem : IExecuteSystem
+public class AnimatorDeathListenerSystem : IExecuteSystem, ICleanupSystem
 {
 	private readonly IGroup<GameEntity> _entities;
 
@@ -16,6 +16,15 @@ public class AnimatorDeathListenerSystem : IExecuteSystem
 		{
 			var animator = entity.animatorView.Value;
             animator.SetTrigger("Death");
+            entity.isDelayedDeath = true;
+		}
+	}
+
+    public void Cleanup()
+	{
+		foreach (var entity in _entities)
+		{			
+            entity.isDeathEvent = false;
 		}
 	}
 }
