@@ -27,26 +27,27 @@ public static class GameComponentsLookup {
     public const int Inactive = 16;
     public const int MeleeAttacker = 17;
     public const int MeleeAttackEvent = 18;
-    public const int MoveDirection = 19;
-    public const int MoveSpeed = 20;
-    public const int MovingEvent = 21;
-    public const int Position = 22;
-    public const int Prefab = 23;
-    public const int RangeAttacker = 24;
-    public const int RangeAttackEvent = 25;
-    public const int RangeWeapon = 26;
-    public const int ShootRequest = 27;
-    public const int SourceEntity = 28;
-    public const int SpawnRequest = 29;
-    public const int TakeDamageRequest = 30;
-    public const int Target = 31;
-    public const int TargetEntity = 32;
-    public const int TargetInRange = 33;
-    public const int Team = 34;
-    public const int TransformView = 35;
-    public const int TriggerEnterRequest = 36;
+    public const int MeleeWeapon = 19;
+    public const int MoveDirection = 20;
+    public const int MoveSpeed = 21;
+    public const int MovingEvent = 22;
+    public const int Position = 23;
+    public const int Prefab = 24;
+    public const int RangeAttacker = 25;
+    public const int RangeAttackEvent = 26;
+    public const int RangeWeapon = 27;
+    public const int ShootRequest = 28;
+    public const int SourceEntity = 29;
+    public const int SpawnRequest = 30;
+    public const int TakeDamageRequest = 31;
+    public const int Target = 32;
+    public const int TargetEntity = 33;
+    public const int TargetInRange = 34;
+    public const int Team = 35;
+    public const int TransformView = 36;
+    public const int TriggerEnterRequest = 37;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -68,6 +69,7 @@ public static class GameComponentsLookup {
         "Inactive",
         "MeleeAttacker",
         "MeleeAttackEvent",
+        "MeleeWeapon",
         "MoveDirection",
         "MoveSpeed",
         "MovingEvent",
@@ -108,6 +110,7 @@ public static class GameComponentsLookup {
         typeof(InactiveComponent),
         typeof(MeleeAttackerComponent),
         typeof(MeleeAttackEventComponent),
+        typeof(MeleeWeaponComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(MovingEventComponent),

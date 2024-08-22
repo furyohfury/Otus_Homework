@@ -3,7 +3,9 @@
 public sealed class SwordsmanInstaller : EntityInstaller
 {
 	private const string DEATH_END = "DeathEnd";
-	
+	private const string MELEE_ATTACK_START = "MeleeAttackStart";
+	private const string MELEE_ATTACK_END = "MeleeAttackEnd";
+
 	[SerializeField]
 	private Transform _transform;
 	[SerializeField]
@@ -16,6 +18,8 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	private float _attackCooldown;
 	[SerializeField]
 	private float _attackRange;
+	[SerializeField]
+	private Collider _meleeWeapon;
 	[SerializeField]
 	private Animator _animator;
 	[SerializeField]
@@ -37,17 +41,33 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
 		entity.isMeleeAttacker = true;
+		entity.AddMeleeWeapon(_meleeWeapon);
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
+		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
+		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);
 		_entity = entity;
 	}
+
 
 	public void OnDeathEndEvent()
 	{
 		_entity.isDelayedDeath = false;
 	}
+	
+	private void OnMeleeAttackEndEvent()
+	{
+		
+	}
+
+	private void OnMeleeAttackStartEvent()
+	{
+		
+	}
 
 	public override void Dispose(GameEntity entity)
 	{
 		_animatorDispatcher.UnsubscribeOnEvent(DEATH_END, OnDeathEndEvent);
+		_animatorDispatcher.UnsubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
+		_animatorDispatcher.UnsubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);
 	}
 }

@@ -4,7 +4,7 @@ public sealed class ArcherInstaller : EntityInstaller
 {
 	private const string DEATH_END = "DeathEnd";
 	private const string BOW_SHOOT = "BowShoot";
-	
+
 	[SerializeField]
 	private Transform _transform;
 	[SerializeField]

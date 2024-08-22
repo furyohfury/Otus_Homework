@@ -18476,9 +18476,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1707629682}
   - {fileID: 1914976720}
   - {fileID: 516669618}
+  - {fileID: 1707629682}
   - {fileID: 8692576747255873691}
   m_Father: {fileID: 800337253}
   m_RootOrder: 0
@@ -18827,7 +18827,8 @@ MonoBehaviour:
   _moveSpeed: 5
   _team: 1
   _attackCooldown: 2
-  _attackRange: 5
+  _attackRange: 3
+  _meleeWeapon: {fileID: 8692576747594745747}
   _animator: {fileID: 8692576747601926906}
   _animatorDispatcher: {fileID: 1712799046}
 --- !u!136 &1538376799
@@ -18962,7 +18963,7 @@ Transform:
   m_Children:
   - {fileID: 631570620}
   m_Father: {fileID: 1263304700}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1707629683
 MonoBehaviour:
@@ -19010,10 +19011,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.59
-  m_Height: 1.97
+  m_Radius: 0.82
+  m_Height: 2.99
   m_Direction: 1
-  m_Center: {x: 0, y: 0.69, z: 0}
+  m_Center: {x: 0, y: 1.44, z: 0}
 --- !u!114 &1712799046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19122,7 +19123,7 @@ PrefabInstance:
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870072543877420728, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
         type: 3}
@@ -22489,7 +22490,7 @@ Transform:
   - {fileID: 9111276097254361739}
   m_Father: {fileID: 8692576747594783988}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -0.00858492, y: 3.2947254, z: 172.72923}
+  m_LocalEulerAnglesHint: {x: -5.223621, y: 12.740063, z: 160.76364}
 --- !u!1 &8169307028003095125
 GameObject:
   m_ObjectHideFlags: 0
@@ -22803,7 +22804,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
         type: 3}
@@ -23981,6 +23982,7 @@ MonoBehaviour:
   _team: 0
   _attackCooldown: 5
   _attackRange: 5
+  _meleeWeapon: {fileID: 0}
   _animator: {fileID: 66450861}
   _animatorDispatcher: {fileID: 0}
 --- !u!114 &8692576747098801707
@@ -34647,6 +34649,7 @@ GameObject:
   - component: {fileID: 8692576747594745746}
   - component: {fileID: 8692576747591315148}
   - component: {fileID: 8692576747592352994}
+  - component: {fileID: 8692576747594745747}
   m_Layer: 15
   m_Name: w_short_sword
   m_TagString: Untagged
@@ -35381,6 +35384,19 @@ Transform:
   m_Father: {fileID: 8692576747594832082}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8692576747594745747
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747594600256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.79, y: 0.10026593, z: 0.19}
+  m_Center: {x: -0.51, y: -0.0027283356, z: 0.0050608874}
 --- !u!4 &8692576747594745894
 Transform:
   m_ObjectHideFlags: 0
