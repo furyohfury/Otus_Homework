@@ -39,6 +39,7 @@ public class EntityView : MonoBehaviour
             installer.Dispose(LinkedEntity);
         }
         LinkedEntity.Release(this);
+        gameObject.Unlink();
     }
 
     // public void AddData<T>(T component) where T : struct

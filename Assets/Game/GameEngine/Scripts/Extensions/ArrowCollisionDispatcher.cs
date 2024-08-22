@@ -1,33 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Zenject;
 
 public class ArrowCollisionDispatcher : MonoBehaviour
 {
 	[SerializeField]
+	private EntityView _view;
 	private GameEntity _entity;
-
 	private Contexts _contexts;
 
-	private void Awake()
+	public void Construct()
 	{
-		_entity = GetComponent<EntityView>().LinkedEntity;
-	}
-
-	[Inject]
-	public void Construct(GameController gameController) // TODO check if injection works
-	{
-		_contexts = gameController.Contexts;
+		_contexts = Contexts.sharedInstance; // its bad but i cant inject properly otherwise
+		_entity = _view.LinkedEntity;
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.TryGetComponent(out EntityView entityView))
+		if (other.TryGetComponent(out EntityView hitTarget))
 		{
 			var triggerRequest = _contexts.game.CreateEntity();
 			triggerRequest.isTriggerEnterRequest = true;
 			triggerRequest.isArrowTag = true;
 			triggerRequest.AddSourceEntity(_entity);
-			triggerRequest.AddTargetEntity(entityView.LinkedEntity);
+			triggerRequest.AddTargetEntity(hitTarget.LinkedEntity);
 		}
 	}
 }

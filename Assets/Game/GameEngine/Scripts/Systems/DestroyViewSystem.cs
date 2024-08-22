@@ -3,7 +3,7 @@ using Entitas;
 public class DestroyViewSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
-	private EntityManager _entityManager;
+	private readonly EntityManager _entityManager;
 
 	public DestroyViewSystem(Contexts contexts, EntityManager entityManager)
 	{
@@ -14,7 +14,7 @@ public class DestroyViewSystem : IExecuteSystem
 
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			_entityManager.Destroy(entity);
 		}

@@ -1,9 +1,9 @@
 ﻿using Entitas;
 
-public class ArrowTriggerEnterRequestSystem : IExecuteSystem
+public class ArrowTriggerEnterRequestSystem : IExecuteSystem, ICleanupSystem
 {
 	private readonly IGroup<GameEntity> _entities;
-	private Contexts _contexts;
+	private readonly Contexts _contexts;
 
 	public ArrowTriggerEnterRequestSystem(Contexts contexts)
 	{
@@ -17,22 +17,31 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 		_contexts = contexts;
 	}
 
-
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
-			var target = entity.targetEntity;
-			var damage = target.Value.damage;
-			if (target.Value.isDamagableTag && !target.Value.isInactive)
+			var source = entity.sourceEntity.Value;
+			var target = entity.targetEntity.Value;
+			if (target.isDamagableTag && !target.isInactive)
 			{
+				var damage = source.damage.Value;
+
 				var damageRequest = _contexts.game.CreateEntity();
 				damageRequest.isTakeDamageRequest = true;
-				damageRequest.AddTargetEntity(target.Value);
-				damageRequest.AddDamage(damage.Value);
+				damageRequest.AddTargetEntity(target);
+				damageRequest.AddDamage(damage);
 			}
-			var source = entity.sourceEntity;
-			source.Value.isInactive = true;
+
+			source.isInactive = true;
+		}
+	}
+
+	public void Cleanup()
+	{
+		foreach (var entity in _entities.GetEntities())
+		{
+			entity.Destroy();
 		}
 	}
 }

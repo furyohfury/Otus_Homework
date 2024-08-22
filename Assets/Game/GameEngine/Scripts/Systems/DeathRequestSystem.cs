@@ -12,10 +12,9 @@ public class DeathRequestSystem : IExecuteSystem, ICleanupSystem
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
-
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			entity.isInactive = true;
             entity.isDeathEvent = true;
@@ -24,7 +23,7 @@ public class DeathRequestSystem : IExecuteSystem, ICleanupSystem
 
     public void Cleanup()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{			
             entity.isDeathRequest = false;
 		}

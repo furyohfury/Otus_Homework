@@ -15,7 +15,7 @@ public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
 
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			var target = entity.targetEntity;
 			if (target.Value.hasHealth)
@@ -29,7 +29,7 @@ public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
 	
 	public void Cleanup()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			entity.Destroy();
 		}

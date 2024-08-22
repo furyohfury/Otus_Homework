@@ -7,20 +7,20 @@ public class HealthEmptySystem : IExecuteSystem
 	public HealthEmptySystem(Contexts contexts)
 	{
 		var matcher = GameMatcher
-            .AllOf(GameMatcher.Health)
-            .NoneOf(GameMatcher.DeathRequest, GameMatcher.Inactive);
+		              .AllOf(GameMatcher.Health)
+		              .NoneOf(GameMatcher.DeathRequest, GameMatcher.Inactive);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
 
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			if (entity.health.Value <= 0)
-            {
-                entity.isDeathRequest = true;
-            }
+			{
+				entity.isDeathRequest = true;
+			}
 		}
 	}
 }

@@ -13,7 +13,7 @@ public class AnimatorDeathListenerSystem : IExecuteSystem, ICleanupSystem
 
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			var animator = entity.animatorView.Value;
 			animator.SetTrigger(AnimatorHash.Death);
@@ -23,7 +23,7 @@ public class AnimatorDeathListenerSystem : IExecuteSystem, ICleanupSystem
 
 	public void Cleanup()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			entity.isDeathEvent = false;
 		}
