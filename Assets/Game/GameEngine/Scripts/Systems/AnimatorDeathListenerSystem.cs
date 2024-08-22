@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class AnimatorDeathListenerSystem : IExecuteSystem, ICleanupSystem
 {
@@ -15,16 +16,16 @@ public class AnimatorDeathListenerSystem : IExecuteSystem, ICleanupSystem
 		foreach (var entity in _entities)
 		{
 			var animator = entity.animatorView.Value;
-            animator.SetTrigger("Death");
-            entity.isDelayedDeath = true;
+			animator.SetTrigger(AnimatorHash.Death);
+			entity.isDelayedDeath = true;
 		}
 	}
 
-    public void Cleanup()
+	public void Cleanup()
 	{
 		foreach (var entity in _entities)
-		{			
-            entity.isDeathEvent = false;
+		{
+			entity.isDeathEvent = false;
 		}
 	}
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public sealed class AnimatorMeleeAttackListenerSystem : IExecuteSystem, ICleanupSystem
 {
-    private static readonly int MeleeAttack = Animator.StringToHash("MeleeAttack");
     private readonly IGroup<GameEntity> _entities;
 
     public AnimatorMeleeAttackListenerSystem(Contexts contexts)
@@ -24,7 +23,7 @@ public sealed class AnimatorMeleeAttackListenerSystem : IExecuteSystem, ICleanup
     {
         foreach (var entity in _entities.GetEntities())
         {
-            entity.animatorView.Value.SetTrigger(MeleeAttack);
+            entity.animatorView.Value.SetTrigger(AnimatorHash.MeleeAttack);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 // TODO mb make separate w/ movingevent (theres already a component). Then gotta redo target chase system as
 // if (vectorToTarget.sqrMagnitude > entity.attackRange.Value * entity.attackRange.Value)
@@ -16,8 +15,6 @@ using UnityEngine;
 // }
 public sealed class AnimatorMovingListenerSystem : ReactiveSystem<GameEntity>
 {
-	private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-
 	public AnimatorMovingListenerSystem(IContext<GameEntity> context) : base(context)
 	{
 	}
@@ -36,10 +33,7 @@ public sealed class AnimatorMovingListenerSystem : ReactiveSystem<GameEntity>
 	{
 		foreach (var entity in entities)
 		{
-			// if (entity.animatorView.Value.GetBool(IsMoving) != entity.hasMoveDirection)
-			// {
-				entity.animatorView.Value.SetBool(IsMoving, entity.hasMoveDirection);
-			// }
+			entity.animatorView.Value.SetBool(AnimatorHash.IsMoving, entity.hasMoveDirection);
 		}
 	}
 }

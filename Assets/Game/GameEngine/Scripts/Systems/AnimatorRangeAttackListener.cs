@@ -14,7 +14,7 @@ public sealed class AnimatorRangeAttackListenerSystem : IExecuteSystem, ICleanup
     {
         foreach (var entity in _entities.GetEntities())
         {
-            entity.animatorView.Value.SetTrigger("RangeAttack");            
+            entity.animatorView.Value.SetTrigger(AnimatorHash.RangeAttack);            
         }
     }
 
