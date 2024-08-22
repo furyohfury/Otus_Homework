@@ -17,31 +17,35 @@ public static class GameComponentsLookup {
     public const int DamagableTag = 6;
     public const int Damage = 7;
     public const int DamageDealRequest = 8;
-    public const int Direction = 9;
-    public const int EnemyTarget = 10;
-    public const int FireRequest = 11;
-    public const int Health = 12;
-    public const int MeleeAttacker = 13;
-    public const int MeleeAttackEvent = 14;
-    public const int MoveDirection = 15;
-    public const int MoveSpeed = 16;
-    public const int MovingEvent = 17;
-    public const int Position = 18;
-    public const int Prefab = 19;
-    public const int RangeAttacker = 20;
-    public const int RangeAttackEvent = 21;
-    public const int RangeWeapon = 22;
-    public const int SourceEntity = 23;
-    public const int SpawnRequest = 24;
-    public const int TakeDamageRequest = 25;
-    public const int Target = 26;
-    public const int TargetEntity = 27;
-    public const int TargetInRange = 28;
-    public const int Team = 29;
-    public const int TransformView = 30;
-    public const int TriggerEnterRequest = 31;
+    public const int DeathEvent = 9;
+    public const int DeathRequest = 10;
+    public const int DelayedDeath = 11;
+    public const int Direction = 12;
+    public const int EnemyTarget = 13;
+    public const int FireRequest = 14;
+    public const int Health = 15;
+    public const int Inactive = 16;
+    public const int MeleeAttacker = 17;
+    public const int MeleeAttackEvent = 18;
+    public const int MoveDirection = 19;
+    public const int MoveSpeed = 20;
+    public const int MovingEvent = 21;
+    public const int Position = 22;
+    public const int Prefab = 23;
+    public const int RangeAttacker = 24;
+    public const int RangeAttackEvent = 25;
+    public const int RangeWeapon = 26;
+    public const int SourceEntity = 27;
+    public const int SpawnRequest = 28;
+    public const int TakeDamageRequest = 29;
+    public const int Target = 30;
+    public const int TargetEntity = 31;
+    public const int TargetInRange = 32;
+    public const int Team = 33;
+    public const int TransformView = 34;
+    public const int TriggerEnterRequest = 35;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -53,10 +57,14 @@ public static class GameComponentsLookup {
         "DamagableTag",
         "Damage",
         "DamageDealRequest",
+        "DeathEvent",
+        "DeathRequest",
+        "DelayedDeath",
         "Direction",
         "EnemyTarget",
         "FireRequest",
         "Health",
+        "Inactive",
         "MeleeAttacker",
         "MeleeAttackEvent",
         "MoveDirection",
@@ -88,10 +96,14 @@ public static class GameComponentsLookup {
         typeof(DamagableTagComponent),
         typeof(DamageComponent),
         typeof(DamageDealRequest),
+        typeof(DeathEventComponent),
+        typeof(DeathRequestComponent),
+        typeof(DelayedDeathComponent),
         typeof(DirectionComponent),
         typeof(EnemyTargetComponent),
         typeof(FireRequestComponent),
         typeof(HealthComponent),
+        typeof(InactiveComponent),
         typeof(MeleeAttackerComponent),
         typeof(MeleeAttackEventComponent),
         typeof(MoveDirectionComponent),

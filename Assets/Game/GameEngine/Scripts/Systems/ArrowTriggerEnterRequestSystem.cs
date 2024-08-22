@@ -32,7 +32,7 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 				damageRequest.AddDamage(damage.Value);
 			}
 			var source = entity.sourceEntity;
-			source.isInactive = true;
+			source.Value.isInactive = true;
 		}
 	}
 }
