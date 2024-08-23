@@ -22,11 +22,19 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
             var maxHP = entity.health.Max;
             if (currentHP <= maxHP / 4)
             {
-                entity.damagedParticleSystem.Big.Play();
+                var bigPS = entity.damagedParticleSystem.Big;
+                if (!bigPS.isPlaying)
+                {
+                    bigPS.Play();
+                }                
             }			
             else if (currentHP <= maxHP / 2)
             {
-                entity.damagedParticleSystem.Small.Play();
+                var smallPS = entity.damagedParticleSystem.Small;
+                if (!smallPS.isPlaying)
+                {
+                    smallPS.Play();
+                }
             }
 		}
 	}
