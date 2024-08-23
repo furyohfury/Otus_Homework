@@ -20,10 +20,14 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
 		{
             var currentHP = entity.health.Current;
             var maxHP = entity.health.Max;
-            if (currentHP <= maxHP / 2)
+            if (currentHP <= maxHP / 4)
             {
-                entity.damagedParticleSystem.Value.Play(); // TODO what to do w/ the heavily damaged
+                entity.damagedParticleSystem.Big.Play();
             }			
+            else if (currentHP <= maxHP / 2)
+            {
+                entity.damagedParticleSystem.Small.Play();
+            }
 		}
 	}
 }

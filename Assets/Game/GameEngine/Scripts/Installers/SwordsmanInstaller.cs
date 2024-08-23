@@ -33,7 +33,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	{
 		entity.AddPosition(_transform.position);
 		entity.AddDirection(_transform.rotation);
-		entity.AddHealth(_health); // TODO add config
+		entity.AddHealth(_health, _health); // TODO add config
 		entity.isDamagableTag = true;
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddTeam(_team);
@@ -45,7 +45,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.isMeleeAttacker = true;
 		entity.isUnit = true;
 		entity.AddMeleeWeapon(_meleeWeapon);
-		entity.AddDamagedParticleSystem(_damagedParticleSystem);
+		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);

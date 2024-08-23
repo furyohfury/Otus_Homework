@@ -2,7 +2,7 @@ using Entitas;
 using UnityEngine;
 
 [Game]
-public class DamagedParticleSystemComponent : IComponent
+public class UnitDamagedParticleSystemComponent : IComponent
 {
     public ParticleSystem Value;
 }

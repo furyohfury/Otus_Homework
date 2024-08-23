@@ -34,7 +34,7 @@ public sealed class ArcherInstaller : EntityInstaller
 	{
 		entity.AddPosition(_transform.position);
 		entity.AddDirection(_transform.rotation);
-		entity.AddHealth(_health); // TODO add config
+		entity.AddHealth(_health, _health); // TODO add config
 		entity.isDamagableTag = true;
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddTeam(_team);
@@ -43,7 +43,7 @@ public sealed class ArcherInstaller : EntityInstaller
 		entity.AddAttackTimer(0f);
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
-		entity.AddDamagedParticleSystem(_damagedParticleSystem);
+		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		entity.isRangeAttacker = true;
 		entity.isUnit = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
