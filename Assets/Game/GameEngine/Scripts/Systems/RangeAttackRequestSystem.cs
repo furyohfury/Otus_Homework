@@ -11,15 +11,16 @@ public sealed class RangeAttackRequestSystem : IExecuteSystem, ICleanupSystem
 	}    
 	public void Execute()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			entity.isRangeAttackEvent = true;
+			entity.isAttackRequest = false;
 		}
 	}
 
 	public void Cleanup()
 	{
-		foreach (var entity in _entities)
+		foreach (var entity in _entities.GetEntities())
 		{
 			entity.isRangeAttackEvent = false;
 		}

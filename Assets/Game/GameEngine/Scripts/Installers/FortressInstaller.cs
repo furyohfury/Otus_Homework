@@ -17,7 +17,8 @@ public class FortressInstaller : EntityInstaller
         entity.isDamagableTag = true;
         entity.AddTeam(_team);
         entity.AddBuildingDamagedParticleSystem(_damagedSmallParticleSystem, _damagedBigParticleSystem);
-        entity.isBuilding = true;
+        entity.isBuildingTag = true;
+        entity.AddPosition(transform.position);
     }
 
     public override void Dispose(GameEntity entity)

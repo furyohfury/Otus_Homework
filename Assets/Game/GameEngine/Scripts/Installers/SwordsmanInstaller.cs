@@ -43,7 +43,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
 		entity.isMeleeAttacker = true;
-		entity.isUnit = true;
+		entity.isUnitTag = true;
 		entity.AddMeleeWeapon(_meleeWeapon);
 		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);

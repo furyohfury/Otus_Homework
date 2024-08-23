@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
+public class TakeDamageRequestSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
 
@@ -20,20 +20,12 @@ public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
 			var target = entity.targetEntity.Value;
 			if (target.hasHealth)
 			{
-				var targetHp = target.health.Value;
-				targetHp -= entity.damage.Value;
+				var targetHp = target.health;
+				targetHp.Current -= entity.damage.Value;
 			}
-			// TODO takedamage event and system for visual
+
 			target.isDamagedEvent = true;
 			entity.Destroy();
-		}
-	}
-	
-	public void Cleanup()
-	{
-		foreach (var entity in _entities.GetEntities())
-		{			
-			target.isDamagedEvent = false;
 		}
 	}
 }

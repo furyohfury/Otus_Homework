@@ -45,7 +45,7 @@ public sealed class ArcherInstaller : EntityInstaller
 		entity.AddAnimatorView(_animator);
 		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		entity.isRangeAttacker = true;
-		entity.isUnit = true;
+		entity.isUnitTag = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
 
 		_entity = entity;

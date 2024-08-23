@@ -7,7 +7,7 @@ public sealed class TargetChaseSystem : IExecuteSystem
     public TargetChaseSystem(Contexts contexts)
     {
         var matcher = GameMatcher
-            .AllOf(GameMatcher.EnemyTarget, GameMatcher.AttackRange)
+            .AllOf(GameMatcher.EnemyTarget, GameMatcher.AttackRange, GameMatcher.Position)
             .NoneOf(GameMatcher.Inactive);
         _entities = contexts.game.GetGroup(matcher);
     }

@@ -40,10 +40,13 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorMovingListenerSystem(contexts.game))
 		           .Add(new AnimatorMeleeAttackListenerSystem(contexts))
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
-		           .Add(new AnimatorDeathListenerSystem(contexts))		           
-				   .Add(new UnitDamagedParticleSystemComponent(contexts))
-				   .Add(new BuildingDamagedParticleSystemComponent(contexts))
-				   .Add(new DestroyViewSystem(contexts, _entityManager));
+		           .Add(new AnimatorDeathListenerSystem(contexts))
+		           .Add(new UnitDamagedEventParticleSystem(contexts))
+		           .Add(new BuildingDamagedEventParticleSystem(contexts))
+		           .Add(new DestroyViewSystem(contexts, _entityManager))
+
+		           // Cleanup Systems
+		           .Add(new OneFrameCleanupSystem(contexts));
 
 
 		// call Initialize() on all of the IInitializeSystems

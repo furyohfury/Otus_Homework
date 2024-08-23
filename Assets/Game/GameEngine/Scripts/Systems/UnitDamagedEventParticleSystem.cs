@@ -8,8 +8,8 @@ public class UnitDamagedEventParticleSystem : IExecuteSystem
 	{
 		var matcher = GameMatcher.AllOf(
             GameMatcher.DamagedEvent, 
-            GameMatcher.DamagedParticleSystem, 
-            GameMatcher.Unit);
+            GameMatcher.UnitDamagedParticleSystem, 
+            GameMatcher.UnitTag);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -17,7 +17,7 @@ public class UnitDamagedEventParticleSystem : IExecuteSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			entity.damagedParticleSystem.Value.Play();
+			entity.unitDamagedParticleSystem.Value.Play();
 		}
 	}
 }

@@ -21,9 +21,9 @@ public sealed class TargetDetectionSystem : IExecuteSystem
         {
             GameEntity target = null;
             var minDistance = float.MaxValue;
-            foreach (var ent in _targetGroup)
+            foreach (var ent in _targetGroup.GetEntities())
             {
-                if (ent == entity || ent.team == entity.team) continue; // TODO fix, attacks same team
+                if (ent == entity || ent.team.Value == entity.team.Value) continue; // TODO fix, attacks same team
 
                 var entPos = ent.position.Value;
                 var distance = (entPos - entity.position.Value).sqrMagnitude;

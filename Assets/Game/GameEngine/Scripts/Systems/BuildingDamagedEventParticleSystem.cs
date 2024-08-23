@@ -8,8 +8,8 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
 	{
 		var matcher = GameMatcher.AllOf(
             GameMatcher.DamagedEvent, 
-            GameMatcher.DamagedParticleSystem, 
-            GameMatcher.Building,
+            GameMatcher.BuildingDamagedParticleSystem, 
+            GameMatcher.BuildingTag,
             GameMatcher.Health);
 		_entities = contexts.game.GetGroup(matcher);
 	}
@@ -22,7 +22,7 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
             var maxHP = entity.health.Max;
             if (currentHP <= maxHP / 4)
             {
-                var bigPS = entity.damagedParticleSystem.Big;
+                var bigPS = entity.buildingDamagedParticleSystem.Big;
                 if (!bigPS.isPlaying)
                 {
                     bigPS.Play();
@@ -30,7 +30,7 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
             }			
             else if (currentHP <= maxHP / 2)
             {
-                var smallPS = entity.damagedParticleSystem.Small;
+                var smallPS = entity.buildingDamagedParticleSystem.Small;
                 if (!smallPS.isPlaying)
                 {
                     smallPS.Play();
