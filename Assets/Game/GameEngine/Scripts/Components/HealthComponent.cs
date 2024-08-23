@@ -3,5 +3,6 @@
 [Game]
 public class HealthComponent : IComponent
 {
-    public int Value;
+    public int Current;
+    public int Max;
 }

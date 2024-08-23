@@ -9,7 +9,8 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
 		var matcher = GameMatcher.AllOf(
             GameMatcher.DamagedEvent, 
             GameMatcher.DamagedParticleSystem, 
-            GameMatcher.Building);
+            GameMatcher.Building,
+            GameMatcher.Health);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -17,7 +18,12 @@ public class BuildingDamagedEventParticleSystem : IExecuteSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			entity.damagedParticleSystem.Value.Play();
+            var currentHP = entity.health.Current;
+            var maxHP = entity.health.Max;
+            if (currentHP <= maxHP / 2)
+            {
+                entity.damagedParticleSystem.Value.Play(); // TODO what to do w/ the heavily damaged
+            }			
 		}
 	}
 }
