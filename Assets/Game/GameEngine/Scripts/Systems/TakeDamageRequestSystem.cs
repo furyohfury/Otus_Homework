@@ -17,21 +17,23 @@ public class TakeDamageRequestSystem : IExecuteSystem, ICleanupSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			var target = entity.targetEntity;
-			if (target.Value.hasHealth)
+			var target = entity.targetEntity.Value;
+			if (target.hasHealth)
 			{
-				var targetHp = target.Value.health;
-				targetHp.Value -= entity.damage.Value;
+				var targetHp = target.health.Value;
+				targetHp -= entity.damage.Value;
 			}
 			// TODO takedamage event and system for visual
+			target.isDamagedEvent = true;
+			entity.Destroy();
 		}
 	}
 	
 	public void Cleanup()
 	{
 		foreach (var entity in _entities.GetEntities())
-		{
-			entity.Destroy();
+		{			
+			target.isDamagedEvent = false;
 		}
 	}
 }

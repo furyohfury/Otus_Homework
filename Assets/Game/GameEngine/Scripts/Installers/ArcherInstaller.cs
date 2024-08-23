@@ -20,6 +20,8 @@ public sealed class ArcherInstaller : EntityInstaller
 	[SerializeField]
 	private Animator _animator;
 	[SerializeField]
+	private ParticleSystem _damagedParticleSystem;
+	[SerializeField]
 	private EntityView _arrow;
 	[SerializeField]
 	private Transform _firePoint;
@@ -41,7 +43,9 @@ public sealed class ArcherInstaller : EntityInstaller
 		entity.AddAttackTimer(0f);
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
+		entity.AddDamagedParticleSystem(_damagedParticleSystem);
 		entity.isRangeAttacker = true;
+		entity.isUnit = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
 
 		_entity = entity;

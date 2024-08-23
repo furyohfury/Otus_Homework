@@ -23,6 +23,8 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	[SerializeField]
 	private Animator _animator;
 	[SerializeField]
+	private ParticleSystem _damagedParticleSystem;
+	[SerializeField]
 	private AnimatorDispatcher _animatorDispatcher;
 
 	private GameEntity _entity;
@@ -41,7 +43,9 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
 		entity.isMeleeAttacker = true;
+		entity.isUnit = true;
 		entity.AddMeleeWeapon(_meleeWeapon);
+		entity.AddDamagedParticleSystem(_damagedParticleSystem);
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);
