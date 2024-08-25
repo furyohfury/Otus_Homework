@@ -22,7 +22,7 @@ public sealed class ShootRequestSystem : IExecuteSystem, ICleanupSystem
 			var spawnEvent = _contexts.game.CreateEntity();
 			spawnEvent.isSpawnRequest = true;
 			spawnEvent.AddPosition(weapon.FirePoint.position);
-			spawnEvent.AddDirection(weapon.FirePoint.rotation);
+			spawnEvent.AddRotation(weapon.FirePoint.rotation);
 			spawnEvent.AddPrefab(weapon.ProjectilePrefab);
 		}
 	}

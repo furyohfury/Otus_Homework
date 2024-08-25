@@ -10,7 +10,7 @@ public sealed class SpawnPrefabRequestSystem : IExecuteSystem, ICleanupSystem
 		var matcher = GameMatcher.AllOf(
 			GameMatcher.SpawnRequest,
 			GameMatcher.Position,
-			GameMatcher.Direction,
+			GameMatcher.Rotation,
 			GameMatcher.Prefab);
 		_entities = contexts.game.GetGroup(matcher);
 
@@ -22,7 +22,7 @@ public sealed class SpawnPrefabRequestSystem : IExecuteSystem, ICleanupSystem
 		foreach (var entity in _entities.GetEntities())
 		{
 			var position = entity.position.Value;
-			var rotation = entity.direction.Value;
+			var rotation = entity.rotation.Value;
 			var prefab = entity.prefab.Value;
 			if (entity.hasTransformView)
 			{

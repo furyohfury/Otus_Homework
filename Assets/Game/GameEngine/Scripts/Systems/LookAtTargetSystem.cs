@@ -7,7 +7,10 @@ public sealed class LookAtTargetSystem : IExecuteSystem
 
     public LookAtTargetSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.Direction, GameMatcher.EnemyTarget, GameMatcher.Position);
+        var matcher = GameMatcher.AllOf(GameMatcher.Rotation,
+            GameMatcher.EnemyTarget,
+            GameMatcher.Position,
+            GameMatcher.RotationRate);
         _entities = contexts.game.GetGroup(matcher);
     }
 
@@ -19,7 +22,7 @@ public sealed class LookAtTargetSystem : IExecuteSystem
             var enemyTarget = entity.enemyTarget.Value;
             var lookRot =
                 Quaternion.LookRotation(enemyTarget.position.Value - entity.position.Value); // TODO rate in rotation
-            entity.direction.Value = Quaternion.Slerp(entity.direction.Value, lookRot, deltaTime * 15f);
+            entity.rotation.Value = Quaternion.Slerp(entity.rotation.Value, lookRot, deltaTime * entity.rotationRate.Value);
         }
     }
 }

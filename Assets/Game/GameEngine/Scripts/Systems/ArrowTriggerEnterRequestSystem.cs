@@ -9,7 +9,6 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 	{
 		var matcher = GameMatcher.AllOf(
 			GameMatcher.TriggerEnterRequest,
-			GameMatcher.TypeId,
 			GameMatcher.SourceEntity,
 			GameMatcher.TargetEntity);
 		_entities = contexts.game.GetGroup(matcher);
@@ -21,8 +20,9 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			if (entity.typeId.Value != "Projectile") continue;
 			var source = entity.sourceEntity.Value;
+			if (source.typeId.Value != "Projectile") continue;
+			
 			var target = entity.targetEntity.Value;
 			if (target.isDamagableTag && !target.isInactive)
 			{

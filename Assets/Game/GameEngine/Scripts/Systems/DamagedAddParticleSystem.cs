@@ -57,7 +57,7 @@ public class DamagedAddParticleSystem : IExecuteSystem
 	{
 		var goSystem = _entityManager.CreateNonEntity(particleSystem,
 			entity.position.Value,
-			entity.direction.Value,
+			entity.rotation.Value,
 			entity.transformView.Value);
 		goSystem.name = particleSystem.name;
 		return goSystem;

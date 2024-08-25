@@ -31,7 +31,8 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddDamage(_config.Damage);
 
 		entity.AddPosition(transform.position);
-		entity.AddDirection(transform.rotation);
+		entity.AddRotation(transform.rotation);
+		entity.AddRotationRate(_config.RotationRate);
 		entity.isDamagableTag = true;
 		entity.AddTeam(_team);
 		entity.AddTransformView(transform);

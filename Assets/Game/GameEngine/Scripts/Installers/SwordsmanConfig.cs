@@ -5,6 +5,7 @@ public sealed class SwordsmanConfig : ScriptableObject
 {
 	public int Health;
 	public float MoveSpeed;
+	public float RotationRate;
 	public float AttackCooldown;
 	public float AttackRange;
 	public int Damage;

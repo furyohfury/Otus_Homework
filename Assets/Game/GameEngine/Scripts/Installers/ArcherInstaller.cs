@@ -31,13 +31,13 @@ public sealed class ArcherInstaller : EntityInstaller
 		entity.AddAttackCooldown(_config.AttackCooldown);
 		
 		entity.AddPosition(transform.position);
-		entity.AddDirection(transform.rotation);
+		entity.AddRotation(transform.rotation);
+		entity.AddRotationRate(_config.RotationRate);
 		entity.isDamagableTag = true;
 		entity.AddTeam(_team);
 		entity.AddTransformView(transform);
 		entity.AddAttackTimer(0f);
 		entity.AddAnimatorView(_animator);
-		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		entity.isRangeAttacker = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
 		entity.AddTypeId("Unit");

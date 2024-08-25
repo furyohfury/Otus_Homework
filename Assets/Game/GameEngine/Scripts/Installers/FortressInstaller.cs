@@ -21,7 +21,7 @@ public class FortressInstaller : EntityInstaller
 		entity.isDamagableTag = true;
 		entity.AddTeam(_team);
 		entity.AddPosition(transform.position);
-		entity.AddDirection(transform.rotation);
+		entity.AddRotation(transform.rotation);
 		entity.AddTypeId("Building");
 		entity.AddTransformView(transform);
 		var gameContext = Contexts.sharedInstance.game;
@@ -34,7 +34,7 @@ public class FortressInstaller : EntityInstaller
 			var spawnPoint = _spawnPoints[index];
 			spawnRequest.AddPosition(spawnPoint.position);
 			spawnRequest.AddPrefab(entityView);
-			spawnRequest.AddDirection(transform.rotation);
+			spawnRequest.AddRotation(transform.rotation);
 			spawnRequest.AddTransformView(_spawnContainer);
 		}
 	}

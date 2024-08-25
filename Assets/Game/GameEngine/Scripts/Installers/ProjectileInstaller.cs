@@ -15,7 +15,7 @@ public sealed class ProjectileInstaller : EntityInstaller
 	public override void Install(GameEntity entity)
 	{
 		entity.AddPosition(transform.position);
-		entity.AddDirection(transform.rotation);
+		entity.AddRotation(transform.rotation);
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddMoveDirection(transform.forward);
 		entity.AddTransformView(transform);

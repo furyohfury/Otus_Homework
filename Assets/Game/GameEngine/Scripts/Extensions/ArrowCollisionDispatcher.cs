@@ -21,7 +21,6 @@ public class ArrowCollisionDispatcher : MonoBehaviour
 		{
 			var triggerRequest = _contexts.game.CreateEntity();
 			triggerRequest.isTriggerEnterRequest = true;
-			triggerRequest.isArrowTag = true;
 			triggerRequest.AddSourceEntity(_entity);
 			triggerRequest.AddTargetEntity(hitTarget.LinkedEntity);
 		}
