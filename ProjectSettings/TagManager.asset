@@ -12,16 +12,16 @@ TagManager:
   - 
   - Water
   - UI
+  - Blue
+  - Red
+  - BlueProjectile
+  - RedProjectile
   - 
   - 
   - 
   - 
-  - Character
-  - Enemy
   - 
-  - EnemyBullet
-  - PlayerBullet
-  - Damagable
+  - 
   - 
   - 
   - 

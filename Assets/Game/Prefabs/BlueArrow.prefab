@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2566192965894890879}
   - component: {fileID: 2832919133084447647}
   - component: {fileID: 3821910703666712899}
-  m_Layer: 0
-  m_Name: Arrow
+  m_Layer: 8
+  m_Name: BlueArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transform: {fileID: 2832919133084447616}
   _moveSpeed: 15
-  _team: 0
-  _damage: 6
+  _damage: 5
+  _deathTimer: 10
   _dispatcher: {fileID: 3821910703666712899}
 --- !u!114 &3821910703666712899
 MonoBehaviour:
@@ -120,6 +120,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: aa6419f48f4fbc84c9ec864a8468f57e, type: 3}
       propertyPath: m_Name
       value: View
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: aa6419f48f4fbc84c9ec864a8468f57e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: aa6419f48f4fbc84c9ec864a8468f57e, type: 3}
       propertyPath: m_RootOrder

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public sealed class ProjectileInstaller : EntityInstaller
 {
@@ -7,9 +8,9 @@ public sealed class ProjectileInstaller : EntityInstaller
 	[SerializeField]
 	private float _moveSpeed;
 	[SerializeField]
-	private Team _team;
-	[SerializeField]
 	private int _damage;
+	[SerializeField]
+	private float _deathTimer;
 	[SerializeField]
 	private ArrowCollisionDispatcher _dispatcher;
 
@@ -20,9 +21,9 @@ public sealed class ProjectileInstaller : EntityInstaller
 		entity.AddDirection(_transform.rotation);
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddMoveDirection(_transform.forward);
-		entity.AddTeam(_team);
 		entity.AddTransformView(_transform);
 		entity.AddDamage(_damage);
+		entity.AddDeathTimer(_deathTimer);
 		_dispatcher.Construct();
 	}
 

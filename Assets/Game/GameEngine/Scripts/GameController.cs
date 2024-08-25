@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
 		           .Add(new MeleeWeaponTriggerEnterRequestSystem(contexts))
 		           .Add(new TakeDamageRequestSystem(contexts))
 		           .Add(new HealthEmptySystem(contexts))
+		           .Add(new DeathTimerCountdownSystem(contexts))
 		           .Add(new DeathRequestSystem(contexts))
 
 		           // View Systems            
