@@ -3,42 +3,37 @@ using UnityEngine;
 
 public class EntityView : MonoBehaviour
 {
-    [SerializeField]
-    private EntityInstaller[] installers;
+	public GameEntity LinkedEntity;
 
-    // private GameContext _gameContext;
+	[SerializeField]
+	private EntityInstaller[] installers;
 
-    public GameEntity LinkedEntity;
+	public bool IsAlive()
+	{
+		return LinkedEntity.isEnabled;
+	}
 
-    public bool IsAlive() => LinkedEntity.isEnabled;
+	public void Initialize(GameEntity gameEntity)
+	{
+		LinkedEntity = gameEntity;
 
-    // public void Initialize(GameContext context)
-    // {
-    //     var entity = context.CreateEntity();
-    //     Initialize(entity, context);
-    // }
+		for (int i = 0, count = installers.Length; i < count; i++)
+		{
+			var installer = installers[i];
+			installer.Install(LinkedEntity);
+		}
 
-    public void Initialize(GameEntity gameEntity)
-    {
-        LinkedEntity = gameEntity;
+		gameObject.Link(gameEntity);
+	}
 
-        for (int i = 0, count = installers.Length; i < count; i++)
-        {
-            var installer = installers[i];
-            installer.Install(LinkedEntity);
-        }
-        LinkedEntity.Retain(this);
-        gameObject.Link(gameEntity);
-    }
+	public void Dispose()
+	{
+		for (int i = 0, count = installers.Length; i < count; i++)
+		{
+			var installer = installers[i];
+			installer.Dispose(LinkedEntity);
+		}
 
-    public void Dispose()
-    {
-        for (int i = 0, count = installers.Length; i < count; i++)
-        {
-            var installer = installers[i];
-            installer.Dispose(LinkedEntity);
-        }
-        LinkedEntity.Release(this);
-        gameObject.Unlink();
-    }
+		gameObject.Unlink();
+	}
 }

@@ -7,17 +7,10 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	private const string MELEE_ATTACK_END = "MeleeAttackEnd";
 
 	[SerializeField]
-	private Transform _transform;
-	[SerializeField]
-	private int _health;
-	[SerializeField]
-	private float _moveSpeed;
+	private SwordsmanConfig _config;
+
 	[SerializeField]
 	private Team _team;
-	[SerializeField]
-	private float _attackCooldown;
-	[SerializeField]
-	private float _attackRange;
 	[SerializeField]
 	private Collider _meleeWeaponCollider;
 	[SerializeField]
@@ -26,28 +19,27 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	private AnimatorDispatcher _animatorDispatcher;
 	[SerializeField]
 	private SwordCollisionDispatcher _swordCollisionDispatcher;
-	[SerializeField]
-	private int _damage;
 
 	private GameEntity _entity;
 
 	public override void Install(GameEntity entity)
 	{
-		entity.AddPosition(_transform.position);
-		entity.AddDirection(_transform.rotation);
-		entity.AddHealth(_health, _health); // TODO add config
+		entity.AddHealth(_config.Health, _config.Health);
+		entity.AddMoveSpeed(_config.MoveSpeed);
+		entity.AddAttackRange(_config.AttackRange);
+		entity.AddAttackCooldown(_config.AttackCooldown);
+		entity.AddDamage(_config.Damage);
+
+		entity.AddPosition(transform.position);
+		entity.AddDirection(transform.rotation);
 		entity.isDamagableTag = true;
-		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddTeam(_team);
-		entity.AddTransformView(_transform);
-		entity.AddAttackCooldown(_attackCooldown);
+		entity.AddTransformView(transform);
 		entity.AddAttackTimer(0f);
-		entity.AddAttackRange(_attackRange);
 		entity.isMeleeAttacker = true;
 		entity.AddTypeId("Unit");
 		entity.AddMeleeWeapon(_meleeWeaponCollider);
 		entity.AddAnimatorView(_animator);
-		entity.AddDamage(_damage);
 		_swordCollisionDispatcher.Construct();
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
@@ -55,8 +47,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		_entity = entity;
 	}
 
-
-	public void OnDeathEndEvent()
+	private void OnDeathEndEvent()
 	{
 		_entity.isDelayedDeath = false;
 	}

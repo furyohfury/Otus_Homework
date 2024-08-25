@@ -5,9 +5,11 @@ public sealed class EntityManager
 {
 	private readonly Dictionary<GameEntity, EntityView> _entities = new();
 	private Contexts _contexts;
+	private Transform _worldTransform;
 
-	public void Initialize(Contexts contexts)
+	public void Initialize(Contexts contexts, Transform worldTransform)
 	{
+		_worldTransform = worldTransform;
 		var entities = Object.FindObjectsOfType<EntityView>();
 		for (int i = 0, count = entities.Length; i < count; i++)
 		{
@@ -24,14 +26,18 @@ public sealed class EntityManager
 	// then make dispose in entity installer where make it ready to return to pool
 	public EntityView Create(EntityView prefab, Vector3 position, Quaternion rotation, Transform parent = null)
 	{
-		var entityView = Object.Instantiate(prefab, position, rotation, parent);
+		var container = parent == null ? _worldTransform : parent;
+		var entityView = Object.Instantiate(prefab, position, rotation, container);
+
+
 		var entity = _contexts.game.CreateEntity();
 		entityView.Initialize(entity);
 		_entities.Add(entity, entityView);
 		return entityView;
 	}
 
-	public T CreateNonEntity<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent = null) where T : Component
+	public T CreateNonEntity<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent = null)
+		where T : Component
 	{
 		return Object.Instantiate(prefab, position, rotation, parent);
 	}
@@ -41,7 +47,9 @@ public sealed class EntityManager
 		if (_entities.Remove(entity, out var view))
 		{
 			view.Dispose();
+
 			Object.Destroy(view.gameObject);
+
 			entity.Destroy();
 		}
 	}

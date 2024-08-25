@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FortressInstaller : EntityInstaller
 {
@@ -7,13 +8,13 @@ public class FortressInstaller : EntityInstaller
 	[SerializeField]
 	private Team _team;
 	[SerializeField]
-	private EntityView[] _unitsToSpawn;
-	[SerializeField]
 	private Transform _spawnContainer;
 	[SerializeField]
 	private Transform _spawnPointsContainer;
-	private Transform[] _spawnPoints;
+	public EntityView[] UnitsToSpawn;
 
+	private Transform[] _spawnPoints;
+	
 	public override void Install(GameEntity entity)
 	{
 		entity.AddHealth(_health, _health);
@@ -25,7 +26,7 @@ public class FortressInstaller : EntityInstaller
 		entity.AddTransformView(transform);
 		var gameContext = Contexts.sharedInstance.game;
 		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>();
-		foreach (var entityView in _unitsToSpawn)
+		foreach (var entityView in UnitsToSpawn)
 		{
 			var spawnRequest = gameContext.CreateEntity();
 			spawnRequest.isSpawnRequest = true;

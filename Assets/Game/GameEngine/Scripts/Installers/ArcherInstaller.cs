@@ -6,42 +6,36 @@ public sealed class ArcherInstaller : EntityInstaller
 	private const string BOW_SHOOT = "BowShoot";
 
 	[SerializeField]
-	private Transform _transform;
-	[SerializeField]
-	private int _health;
-	[SerializeField]
-	private float _moveSpeed;
+	private ArcherConfig _config;
+	
 	[SerializeField]
 	private Team _team;
 	[SerializeField]
-	private float _attackCooldown;
-	[SerializeField]
-	private float _attackRange;
-	[SerializeField]
 	private Animator _animator;
+	[SerializeField]
+	private AnimatorDispatcher _animatorDispatcher;
 	[SerializeField]
 	private ParticleSystem _damagedParticleSystem;
 	[SerializeField]
 	private EntityView _arrow;
 	[SerializeField]
 	private Transform _firePoint;
-	[SerializeField]
-	private AnimatorDispatcher _animatorDispatcher;
 
 	private GameEntity _entity;
 
 	public override void Install(GameEntity entity)
 	{
-		entity.AddPosition(_transform.position);
-		entity.AddDirection(_transform.rotation);
-		entity.AddHealth(_health, _health); // TODO add config
+		entity.AddHealth(_config.Health, _config.Health);
+		entity.AddMoveSpeed(_config.MoveSpeed);
+		entity.AddAttackRange(_config.AttackRange);
+		entity.AddAttackCooldown(_config.AttackCooldown);
+		
+		entity.AddPosition(transform.position);
+		entity.AddDirection(transform.rotation);
 		entity.isDamagableTag = true;
-		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddTeam(_team);
-		entity.AddTransformView(_transform);
-		entity.AddAttackCooldown(_attackCooldown);
+		entity.AddTransformView(transform);
 		entity.AddAttackTimer(0f);
-		entity.AddAttackRange(_attackRange);
 		entity.AddAnimatorView(_animator);
 		entity.AddUnitDamagedParticleSystem(_damagedParticleSystem);
 		entity.isRangeAttacker = true;
@@ -58,7 +52,7 @@ public sealed class ArcherInstaller : EntityInstaller
 		_entity.isShootRequest = true;
 	}
 
-	public void OnDeathEndEvent()
+	private void OnDeathEndEvent()
 	{
 		_entity.isDelayedDeath = false;
 	}

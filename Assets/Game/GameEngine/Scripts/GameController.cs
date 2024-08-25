@@ -5,17 +5,20 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField]
 	private DamagedParticlesHelper _damagedParticlesHelper; // TODO in common config
+	[SerializeField]
+	private Transform _worldTransform;
+	
 	private Systems _systems;
 	private EntityManager _entityManager;
 
 	private void Start()
 	{
-		Application.targetFrameRate = 60;
+		// Application.targetFrameRate = 60;
 
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;
 		_entityManager = new EntityManager();
-		_entityManager.Initialize(contexts);
+		_entityManager.Initialize(contexts, _worldTransform);
 
 		_systems = new Feature("Systems")
 		           .Add(new TargetDeadSystem(contexts))

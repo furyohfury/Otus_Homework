@@ -4,8 +4,6 @@ using UnityEngine.Serialization;
 public sealed class ProjectileInstaller : EntityInstaller
 {
 	[SerializeField]
-	private Transform _transform;
-	[SerializeField]
 	private float _moveSpeed;
 	[SerializeField]
 	private int _damage;
@@ -16,14 +14,14 @@ public sealed class ProjectileInstaller : EntityInstaller
 
 	public override void Install(GameEntity entity)
 	{
-		// TODO add config
-		entity.AddPosition(_transform.position);
-		entity.AddDirection(_transform.rotation);
+		entity.AddPosition(transform.position);
+		entity.AddDirection(transform.rotation);
 		entity.AddMoveSpeed(_moveSpeed);
-		entity.AddMoveDirection(_transform.forward);
-		entity.AddTransformView(_transform);
+		entity.AddMoveDirection(transform.forward);
+		entity.AddTransformView(transform);
 		entity.AddDamage(_damage);
 		entity.AddDeathTimer(_deathTimer);
+		entity.AddTypeId("Projectile");
 		_dispatcher.Construct();
 	}
 
