@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public class ArrowTriggerEnterRequestSystem : IExecuteSystem, ICleanupSystem
+public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
 	private readonly Contexts _contexts;
@@ -34,13 +34,6 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem, ICleanupSystem
 			}
 
 			source.isInactive = true;
-		}
-	}
-
-	public void Cleanup()
-	{
-		foreach (var entity in _entities.GetEntities())
-		{
 			entity.Destroy();
 		}
 	}

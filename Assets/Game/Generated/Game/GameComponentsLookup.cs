@@ -33,30 +33,31 @@ public static class GameComponentsLookup {
     public const int MeleeAttacker = 22;
     public const int MeleeAttackEvent = 23;
     public const int MeleeWeapon = 24;
-    public const int MoveDirection = 25;
-    public const int MoveSpeed = 26;
-    public const int MovingEvent = 27;
-    public const int OneFrameTag = 28;
-    public const int Position = 29;
-    public const int Prefab = 30;
-    public const int RangeAttacker = 31;
-    public const int RangeAttackEvent = 32;
-    public const int RangeWeapon = 33;
-    public const int ShootRequest = 34;
-    public const int SourceEntity = 35;
-    public const int SpawnRequest = 36;
-    public const int TakeDamageRequest = 37;
-    public const int Target = 38;
-    public const int TargetEntity = 39;
-    public const int TargetInRange = 40;
-    public const int Team = 41;
-    public const int TransformView = 42;
-    public const int TriggerEnterRequest = 43;
-    public const int TypeId = 44;
-    public const int UnitDamagedParticleSystem = 45;
-    public const int UnitTag = 46;
+    public const int MeleeWeaponTag = 25;
+    public const int MoveDirection = 26;
+    public const int MoveSpeed = 27;
+    public const int MovingEvent = 28;
+    public const int OneFrameTag = 29;
+    public const int Position = 30;
+    public const int Prefab = 31;
+    public const int RangeAttacker = 32;
+    public const int RangeAttackEvent = 33;
+    public const int RangeWeapon = 34;
+    public const int ShootRequest = 35;
+    public const int SourceEntity = 36;
+    public const int SpawnRequest = 37;
+    public const int TakeDamageRequest = 38;
+    public const int Target = 39;
+    public const int TargetEntity = 40;
+    public const int TargetInRange = 41;
+    public const int Team = 42;
+    public const int TransformView = 43;
+    public const int TriggerEnterRequest = 44;
+    public const int TypeId = 45;
+    public const int UnitDamagedParticleSystem = 46;
+    public const int UnitTag = 47;
 
-    public const int TotalComponents = 47;
+    public const int TotalComponents = 48;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -84,6 +85,7 @@ public static class GameComponentsLookup {
         "MeleeAttacker",
         "MeleeAttackEvent",
         "MeleeWeapon",
+        "MeleeWeaponTag",
         "MoveDirection",
         "MoveSpeed",
         "MovingEvent",
@@ -134,6 +136,7 @@ public static class GameComponentsLookup {
         typeof(MeleeAttackerComponent),
         typeof(MeleeAttackEventComponent),
         typeof(MeleeWeaponComponent),
+        typeof(MeleeWeaponTagComponent),
         typeof(MoveDirectionComponent),
         typeof(MoveSpeedComponent),
         typeof(MovingEventComponent),

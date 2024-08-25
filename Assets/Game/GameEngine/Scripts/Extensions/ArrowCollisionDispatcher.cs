@@ -11,7 +11,7 @@ public class ArrowCollisionDispatcher : MonoBehaviour
 
 	public void Construct()
 	{
-		_contexts = Contexts.sharedInstance; // its bad but i cant inject properly otherwise
+		_contexts = Contexts.sharedInstance;
 		_entity = _view.LinkedEntity;
 	}
 

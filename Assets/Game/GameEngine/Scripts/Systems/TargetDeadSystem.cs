@@ -14,7 +14,7 @@ public sealed class TargetDeadSystem : IExecuteSystem
     {
         foreach (var entity in _entities.GetEntities())
         {
-            if (entity.enemyTarget.Value.isEnabled) continue;
+            if (entity.enemyTarget.Value.isEnabled && !entity.enemyTarget.Value.isInactive) continue;
 
             entity.RemoveEnemyTarget();
             entity.isTargetInRange = false;

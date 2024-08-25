@@ -8,15 +8,12 @@ public class GameController : MonoBehaviour
 	private Systems _systems;
 	private EntityManager _entityManager;
 
-	public Contexts Contexts { get; private set; }
-
 	private void Start()
 	{
 		Application.targetFrameRate = 60;
 
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;
-		Contexts = contexts;
 		_entityManager = new EntityManager();
 		_entityManager.Initialize(contexts);
 
@@ -33,6 +30,7 @@ public class GameController : MonoBehaviour
 		           .Add(new SpawnPrefabRequestSystem(contexts, _entityManager))
 		           .Add(new MoveSystem(contexts))
 		           .Add(new ArrowTriggerEnterRequestSystem(contexts))
+		           .Add(new MeleeWeaponTriggerEnterRequestSystem(contexts))
 		           .Add(new TakeDamageRequestSystem(contexts))
 		           .Add(new HealthEmptySystem(contexts))
 		           .Add(new DeathRequestSystem(contexts))
@@ -44,7 +42,7 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
 		           .Add(new AnimatorDeathListenerSystem(contexts))
 		           .Add(new DamagedAddParticleSystem(contexts, _damagedParticlesHelper, _entityManager))
-		           .Add(new DamagedParticlesRequestSystem(contexts, _entityManager))
+		           .Add(new DamagedParticlesLifeCycleSystem(contexts, _entityManager))
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
 		           // Cleanup Systems

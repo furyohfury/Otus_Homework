@@ -32,11 +32,11 @@ public class DamagedAddParticleSystem : IExecuteSystem
 				continue;
 			}
 
-			if (!particleSystem.main.loop)
-			{
-				SpawnSystem(particleSystem, entity);
-			}
-			else if (entity.hasDamagedParticleSystem)
+			// if (!particleSystem.main.loop)
+			// {
+			// 	SpawnSystem(particleSystem, entity);
+			// }
+			if (entity.hasDamagedParticleSystem)
 			{
 				var existingSystem = entity.damagedParticleSystem.Value;
 				if (existingSystem.name == particleSystem.name)

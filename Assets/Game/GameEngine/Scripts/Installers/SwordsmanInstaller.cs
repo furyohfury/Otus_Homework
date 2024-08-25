@@ -19,13 +19,15 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	[SerializeField]
 	private float _attackRange;
 	[SerializeField]
-	private Collider _meleeWeapon;
+	private Collider _meleeWeaponCollider;
 	[SerializeField]
 	private Animator _animator;
 	[SerializeField]
-	private ParticleSystem _damagedParticleSystem;
-	[SerializeField]
 	private AnimatorDispatcher _animatorDispatcher;
+	[SerializeField]
+	private SwordCollisionDispatcher _swordCollisionDispatcher;
+	[SerializeField]
+	private int _damage;
 
 	private GameEntity _entity;
 
@@ -41,11 +43,12 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackCooldown(_attackCooldown);
 		entity.AddAttackTimer(0f);
 		entity.AddAttackRange(_attackRange);
-		entity.AddAnimatorView(_animator);
 		entity.isMeleeAttacker = true;
-		entity.isUnitTag = true;
 		entity.AddTypeId("Unit");
-		entity.AddMeleeWeapon(_meleeWeapon);
+		entity.AddMeleeWeapon(_meleeWeaponCollider);
+		entity.AddAnimatorView(_animator);
+		entity.AddDamage(_damage);
+		_swordCollisionDispatcher.Construct();
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);
@@ -57,15 +60,15 @@ public sealed class SwordsmanInstaller : EntityInstaller
 	{
 		_entity.isDelayedDeath = false;
 	}
-	
-	private void OnMeleeAttackEndEvent()
-	{
-		
-	}
 
 	private void OnMeleeAttackStartEvent()
 	{
-		
+		_meleeWeaponCollider.enabled = true;
+	}
+
+	private void OnMeleeAttackEndEvent()
+	{
+		_meleeWeaponCollider.enabled = false;
 	}
 
 	public override void Dispose(GameEntity entity)

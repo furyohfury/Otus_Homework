@@ -19,7 +19,6 @@ MonoBehaviour:
     - {fileID: 6837061768053742934, guid: c041548ad5f52014d8ae27de23cf2764, type: 3}
     - {fileID: 19800648, guid: 4cc2bcf001dff1841ab60befad39294b, type: 3}
     - {fileID: 19858866, guid: c1f7cd26d86e36c44921a1c45d23513b, type: 3}
-    - {fileID: 19883616, guid: 43cc1a347ac43cd498e91db9fb766337, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -39,7 +38,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
       Data: 
@@ -109,30 +108,6 @@ MonoBehaviour:
     - Name: $v
       Entry: 10
       Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 7
-      Data: DamagedParticlesHelper+Args, Assembly-CSharp
-    - Name: TypeID
-      Entry: 1
-      Data: Building
-    - Name: MinHealthRatio
-      Entry: 4
-      Data: 0
-    - Name: MaxHealthRatio
-      Entry: 4
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: $v
-      Entry: 10
-      Data: 3
     - Name: 
       Entry: 8
       Data: 
