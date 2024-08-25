@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 		           .Add(new MeleeAttackRequestSystem(contexts))
 		           .Add(new RangeAttackRequestSystem(contexts))
 		           .Add(new ShootRequestSystem(contexts))
-		           .Add(new SpawnRequestSystem(contexts, _entityManager))
+		           .Add(new SpawnPrefabRequestSystem(contexts, _entityManager))
 		           .Add(new MoveSystem(contexts))
 		           .Add(new ArrowTriggerEnterRequestSystem(contexts))
 		           .Add(new TakeDamageRequestSystem(contexts))
@@ -43,10 +43,8 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorMeleeAttackListenerSystem(contexts))
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
 		           .Add(new AnimatorDeathListenerSystem(contexts))
-		           .Add(new DamagedAddParticleSystem(contexts, _damagedParticlesHelper))
-		           .Add(new DamagedParticlesPlaySystem(contexts))
-		           // .Add(new UnitDamagedEventParticleSystem(contexts))
-		           // .Add(new BuildingDamagedEventParticleSystem(contexts))
+		           .Add(new DamagedAddParticleSystem(contexts, _damagedParticlesHelper, _entityManager))
+		           .Add(new DamagedParticlesRequestSystem(contexts, _entityManager))
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
 		           // Cleanup Systems

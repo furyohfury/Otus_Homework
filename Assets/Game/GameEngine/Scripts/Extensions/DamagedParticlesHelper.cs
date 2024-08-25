@@ -25,6 +25,12 @@ public class DamagedParticlesHelper : SerializedScriptableObject
 
 	public bool TryGetParticles(string typeId, float hpRatio, out ParticleSystem system)
 	{
+		system = null;
+		if (!_ids.Contains(typeId))
+		{
+			return false;
+		}
+
 		foreach (var key in _particleDict.Keys)
 		{
 			if (key.TypeID != typeId) continue;
@@ -36,7 +42,6 @@ public class DamagedParticlesHelper : SerializedScriptableObject
 			}
 		}
 
-		system = null;
 		return false;
 	}
 
