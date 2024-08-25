@@ -4,8 +4,9 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	[SerializeField]
+	private DependencyHelper _dependencyHelper;
+	
 	private DamagedParticlesHelper _damagedParticlesHelper; // TODO in common config
-	[SerializeField]
 	private Transform _worldTransform;
 	
 	private Systems _systems;
@@ -13,8 +14,8 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
-		// Application.targetFrameRate = 60;
-
+		_damagedParticlesHelper = _dependencyHelper.DamagedParticlesHelper;
+		_worldTransform = _dependencyHelper.WorldTransform;
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;
 		_entityManager = new EntityManager();
@@ -50,9 +51,8 @@ public class GameController : MonoBehaviour
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
 		           // Cleanup Systems
-		           .Add(new OneFrameCleanupSystem(contexts));
-
-
+		           .Add(new EventsDeleteSystem(contexts));
+		
 		// call Initialize() on all of the IInitializeSystems
 		_systems.Initialize();
 	}

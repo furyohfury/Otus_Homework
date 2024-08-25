@@ -15,44 +15,43 @@ public static class GameComponentsLookup {
     public const int AttackTimer = 4;
     public const int DamagableTag = 5;
     public const int Damage = 6;
-    public const int DamageDealRequest = 7;
-    public const int DamagedEvent = 8;
-    public const int DamagedParticleSystem = 9;
-    public const int DamagedParticleSystemRequest = 10;
-    public const int DeathEvent = 11;
-    public const int DeathRequest = 12;
-    public const int DeathTimer = 13;
-    public const int DelayedDeath = 14;
-    public const int EnemyTarget = 15;
-    public const int FireRequest = 16;
-    public const int Health = 17;
-    public const int Inactive = 18;
-    public const int MeleeAttacker = 19;
-    public const int MeleeAttackEvent = 20;
-    public const int MeleeWeapon = 21;
-    public const int MeleeWeaponTag = 22;
-    public const int MoveDirection = 23;
-    public const int MoveSpeed = 24;
-    public const int Position = 25;
-    public const int Prefab = 26;
-    public const int RangeAttacker = 27;
-    public const int RangeAttackEvent = 28;
-    public const int RangeWeapon = 29;
-    public const int Rotation = 30;
-    public const int RotationRate = 31;
-    public const int ShootRequest = 32;
-    public const int SourceEntity = 33;
-    public const int SpawnRequest = 34;
-    public const int TakeDamageRequest = 35;
-    public const int Target = 36;
-    public const int TargetEntity = 37;
-    public const int TargetInRange = 38;
-    public const int Team = 39;
-    public const int TransformView = 40;
-    public const int TriggerEnterRequest = 41;
-    public const int TypeId = 42;
+    public const int DamagedEvent = 7;
+    public const int DamagedParticleSystem = 8;
+    public const int DamagedParticleSystemRequest = 9;
+    public const int DeathEvent = 10;
+    public const int DeathRequest = 11;
+    public const int DeathTimer = 12;
+    public const int DelayedDeath = 13;
+    public const int EnemyTarget = 14;
+    public const int FireRequest = 15;
+    public const int Health = 16;
+    public const int Inactive = 17;
+    public const int MeleeAttacker = 18;
+    public const int MeleeAttackEvent = 19;
+    public const int MeleeWeapon = 20;
+    public const int MeleeWeaponTag = 21;
+    public const int MoveDirection = 22;
+    public const int MoveSpeed = 23;
+    public const int Position = 24;
+    public const int Prefab = 25;
+    public const int RangeAttacker = 26;
+    public const int RangeAttackEvent = 27;
+    public const int RangeWeapon = 28;
+    public const int Rotation = 29;
+    public const int RotationRate = 30;
+    public const int ShootRequest = 31;
+    public const int SourceEntity = 32;
+    public const int SpawnRequest = 33;
+    public const int TakeDamageRequest = 34;
+    public const int Target = 35;
+    public const int TargetEntity = 36;
+    public const int TargetInRange = 37;
+    public const int Team = 38;
+    public const int TransformView = 39;
+    public const int TriggerEnterRequest = 40;
+    public const int TypeId = 41;
 
-    public const int TotalComponents = 43;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -62,7 +61,6 @@ public static class GameComponentsLookup {
         "AttackTimer",
         "DamagableTag",
         "Damage",
-        "DamageDealRequest",
         "DamagedEvent",
         "DamagedParticleSystem",
         "DamagedParticleSystemRequest",
@@ -108,7 +106,6 @@ public static class GameComponentsLookup {
         typeof(AttackTimerComponent),
         typeof(DamagableTagComponent),
         typeof(DamageComponent),
-        typeof(DamageDealRequest),
         typeof(DamagedEventComponent),
         typeof(DamagedParticleSystemComponent),
         typeof(DamagedParticleSystemRequestComponent),
