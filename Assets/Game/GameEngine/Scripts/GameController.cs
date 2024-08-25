@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+	[SerializeField]
+	private DamagedParticlesHelper _damagedParticlesHelper; // TODO in common config
 	private Systems _systems;
 	private EntityManager _entityManager;
 
@@ -41,8 +43,10 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorMeleeAttackListenerSystem(contexts))
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
 		           .Add(new AnimatorDeathListenerSystem(contexts))
-		           .Add(new UnitDamagedEventParticleSystem(contexts))
-		           .Add(new BuildingDamagedEventParticleSystem(contexts))
+		           .Add(new DamagedAddParticleSystem(contexts, _damagedParticlesHelper))
+		           .Add(new DamagedParticlesPlaySystem(contexts))
+		           // .Add(new UnitDamagedEventParticleSystem(contexts))
+		           // .Add(new BuildingDamagedEventParticleSystem(contexts))
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
 		           // Cleanup Systems

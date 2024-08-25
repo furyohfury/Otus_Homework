@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public class TakeDamageRequestSystem : IExecuteSystem
 {
@@ -21,7 +22,7 @@ public class TakeDamageRequestSystem : IExecuteSystem
 			if (target.hasHealth)
 			{
 				var targetHp = target.health;
-				targetHp.Current -= entity.damage.Value;
+				targetHp.Current = Mathf.Max(0, targetHp.Current - entity.damage.Value);
 			}
 
 			target.isDamagedEvent = true;

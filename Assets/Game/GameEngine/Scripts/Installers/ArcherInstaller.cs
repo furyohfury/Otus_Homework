@@ -47,6 +47,7 @@ public sealed class ArcherInstaller : EntityInstaller
 		entity.isRangeAttacker = true;
 		entity.isUnitTag = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
+		entity.AddTypeId("Unit");
 
 		_entity = entity;
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);

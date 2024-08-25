@@ -7,7 +7,8 @@ public class DestroyViewSystem : IExecuteSystem
 
 	public DestroyViewSystem(Contexts contexts, EntityManager entityManager)
 	{
-		var matcher = GameMatcher.AllOf(GameMatcher.Inactive).NoneOf(GameMatcher.DelayedDeath);
+		var matcher = GameMatcher.AllOf(GameMatcher.Inactive, GameMatcher.TransformView)
+		                         .NoneOf(GameMatcher.DelayedDeath);
 		_entities = contexts.game.GetGroup(matcher);
 		_entityManager = entityManager;
 	}

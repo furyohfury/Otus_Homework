@@ -16,9 +16,11 @@ public class FortressInstaller : EntityInstaller
         entity.AddHealth(_health, _health);
         entity.isDamagableTag = true;
         entity.AddTeam(_team);
-        entity.AddBuildingDamagedParticleSystem(_damagedSmallParticleSystem, _damagedBigParticleSystem);
         entity.isBuildingTag = true;
         entity.AddPosition(transform.position);
+        entity.AddTypeId("Building");
+        entity.AddDirection(transform.rotation);
+        entity.AddTransformView(transform);
     }
 
     public override void Dispose(GameEntity entity)
