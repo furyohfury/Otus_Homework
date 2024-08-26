@@ -33,11 +33,6 @@ public class DamagedAddParticleSystem : IExecuteSystem
 				continue;
 			}
 
-			Transform parent = null;
-			if (ratio != 0)
-			{
-				parent = entity.transformView.Value;
-			}
 			// If already has ParticleSystem than need to replace it and destroy old one
 			if (entity.hasDamagedParticleSystem)
 			{
@@ -51,7 +46,7 @@ public class DamagedAddParticleSystem : IExecuteSystem
 				_entityManager.DestroyNonEntity(existingSystem);
 			}
 
-			var goSystem = SpawnSystem(particleSystem, entity, parent);
+			var goSystem = SpawnSystem(particleSystem, entity, entity.transformView.Value);
 			entity.ReplaceDamagedParticleSystem(goSystem);
 			entity.isDamagedParticleSystemRequest = true;
 		}
