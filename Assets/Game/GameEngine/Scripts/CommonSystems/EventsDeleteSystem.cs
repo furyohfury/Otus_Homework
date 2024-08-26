@@ -6,7 +6,9 @@ public class EventsDeleteSystem : ICleanupSystem
 
 	public EventsDeleteSystem(Contexts contexts)
 	{
-		var matcher = GameMatcher.AnyOf(GameMatcher.DamagedEvent);
+		var matcher = GameMatcher.AnyOf(GameMatcher.DamagedEvent,
+			GameMatcher.MeleeAttackEvent,
+			GameMatcher.RangeAttackEvent);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -15,6 +17,9 @@ public class EventsDeleteSystem : ICleanupSystem
 		foreach (var entity in _entities.GetEntities())
 		{
 			entity.isDamagedEvent = false;
+			entity.isMeleeAttackEvent = false;
+			entity.isRangeAttackEvent = false;
+			entity.isDeathEvent = false;
 		}
 	}
 }

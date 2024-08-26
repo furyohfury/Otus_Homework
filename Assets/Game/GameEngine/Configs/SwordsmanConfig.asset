@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 10
   MoveSpeed: 5
-  RotationRate: 12
+  RotationRate: 5
   AttackCooldown: 3
   AttackRange: 2
   Damage: 5

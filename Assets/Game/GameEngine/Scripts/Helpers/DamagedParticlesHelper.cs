@@ -35,7 +35,7 @@ public class DamagedParticlesHelper : SerializedScriptableObject
 		{
 			if (key.TypeID != typeId) continue;
 
-			if (key.MinHealthRatio <= hpRatio && key.MaxHealthRatio > hpRatio)
+			if (key.MinHealthRatio <= hpRatio && key.MaxHealthRatio >= hpRatio)
 			{
 				system = _particleDict[key];
 				return true;

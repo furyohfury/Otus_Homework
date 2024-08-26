@@ -28,8 +28,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddMoveSpeed(_config.MoveSpeed);
 		entity.AddAttackRange(_config.AttackRange);
 		entity.AddAttackCooldown(_config.AttackCooldown);
-		entity.AddDamage(_config.Damage);
-
+		entity.AddMeleeWeapon(_meleeWeaponCollider, _config.Damage);
 		entity.AddPosition(transform.position);
 		entity.AddRotation(transform.rotation);
 		entity.AddRotationRate(_config.RotationRate);
@@ -39,7 +38,6 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddAttackTimer(0f);
 		entity.isMeleeAttacker = true;
 		entity.AddTypeId("Unit");
-		entity.AddMeleeWeapon(_meleeWeaponCollider);
 		entity.AddAnimatorView(_animator);
 		entity.isTargetSeeker = true;
 		_swordCollisionDispatcher.Construct();

@@ -7,11 +7,11 @@ public sealed class MoveSystem : IExecuteSystem
 
 	public MoveSystem(Contexts contexts)
 	{
-		var matcher = GameMatcher.AllOf(
-			                         GameMatcher.MoveDirection,
+		var matcher = GameMatcher.AllOf(GameMatcher.MoveDirection,
 			                         GameMatcher.MoveSpeed,
 			                         GameMatcher.Position)
-		                         .NoneOf(GameMatcher.Inactive);
+		                         .NoneOf(GameMatcher.Inactive,
+			                         GameMatcher.DeathRequest);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 

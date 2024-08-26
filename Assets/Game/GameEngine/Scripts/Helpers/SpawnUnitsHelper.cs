@@ -24,6 +24,6 @@ public class SpawnUnitsHelper : MonoBehaviour
 	public void ClearFortressUnits(Team team)
 	{
 		var fortress = team == Team.Blue ? Bluefortress : Redfortress;
-		fortress.UnitsToSpawn = null;
+		fortress.UnitsToSpawn = new EntityView[]{};
 	}
 }

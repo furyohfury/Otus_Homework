@@ -24,13 +24,14 @@ public sealed class MeleeWeaponTriggerEnterRequestSystem : IExecuteSystem
 			var target = entity.targetEntity.Value;
 			if (target.isDamagableTag && !target.isInactive)
 			{
-				var damage = source.damage.Value;
+				var damage = source.meleeWeapon.Damage;
 
 				var damageRequest = _contexts.game.CreateEntity();
 				damageRequest.isTakeDamageRequest = true;
 				damageRequest.AddTargetEntity(target);
 				damageRequest.AddDamage(damage);
 			}
+
 			entity.Destroy();
 		}
 	}

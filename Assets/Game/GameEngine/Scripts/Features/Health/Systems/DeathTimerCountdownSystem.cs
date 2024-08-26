@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public sealed class DeathTimerCountdownSystem : IExecuteSystem
 {
@@ -6,7 +7,8 @@ public sealed class DeathTimerCountdownSystem : IExecuteSystem
 
 	public DeathTimerCountdownSystem(Contexts contexts)
 	{
-		var matcher = GameMatcher.DeathTimer;
+		var matcher = GameMatcher.AllOf(GameMatcher.DeathTimer)
+		                         .NoneOf(GameMatcher.Inactive, GameMatcher.DeathRequest);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -14,7 +16,7 @@ public sealed class DeathTimerCountdownSystem : IExecuteSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			var deltaTime = UnityEngine.Time.deltaTime;
+			var deltaTime = Time.deltaTime;
 			var timer = entity.deathTimer;
 			if (timer.Value <= 0)
 			{

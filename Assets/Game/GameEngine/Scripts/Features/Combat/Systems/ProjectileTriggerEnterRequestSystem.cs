@@ -1,11 +1,11 @@
 ﻿using Entitas;
 
-public class ArrowTriggerEnterRequestSystem : IExecuteSystem
+public class ProjectileTriggerEnterRequestSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
 	private readonly Contexts _contexts;
 
-	public ArrowTriggerEnterRequestSystem(Contexts contexts)
+	public ProjectileTriggerEnterRequestSystem(Contexts contexts)
 	{
 		var matcher = GameMatcher.AllOf(
 			GameMatcher.TriggerEnterRequest,
@@ -34,7 +34,7 @@ public class ArrowTriggerEnterRequestSystem : IExecuteSystem
 				damageRequest.AddDamage(damage);
 			}
 
-			source.isInactive = true;
+			source.isDeathRequest = true;
 			entity.Destroy();
 		}
 	}

@@ -8,7 +8,7 @@ public class DamagedParticlesLifeCycleSystem : IExecuteSystem, ICleanupSystem
 	public DamagedParticlesLifeCycleSystem(Contexts contexts, EntityManager entityManager)
 	{
 		_entityManager = entityManager;
-		var matcher = GameMatcher.AllOf(GameMatcher.DamagedParticleSystem);
+		var matcher = GameMatcher.AllOf(GameMatcher.DamagedParticleSystem, GameMatcher.DamagedParticleSystemRequest);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 
@@ -16,11 +16,8 @@ public class DamagedParticlesLifeCycleSystem : IExecuteSystem, ICleanupSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			if (entity.isDamagedParticleSystemRequest)
-			{
-				entity.damagedParticleSystem.Value.Play();
-				entity.isDamagedParticleSystemRequest = false;
-			}
+			entity.damagedParticleSystem.Value.Play();
+			entity.isDamagedParticleSystemRequest = false;
 		}
 	}
 

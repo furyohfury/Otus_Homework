@@ -1,6 +1,7 @@
 using Entitas;
 
-public sealed class ShootRequestSystem : IExecuteSystem, ICleanupSystem
+// Created by archer installer on BowShoot animationevent 
+public sealed class ShootRequestSystem : IExecuteSystem
 {
 	private readonly IGroup<GameEntity> _entities;
 	private readonly Contexts _contexts;
@@ -24,13 +25,6 @@ public sealed class ShootRequestSystem : IExecuteSystem, ICleanupSystem
 			spawnEvent.AddPosition(weapon.FirePoint.position);
 			spawnEvent.AddRotation(weapon.FirePoint.rotation);
 			spawnEvent.AddPrefab(weapon.ProjectilePrefab);
-		}
-	}
-
-	public void Cleanup()
-	{
-		foreach (var entity in _entities.GetEntities())
-		{
 			entity.isShootRequest = false;
 		}
 	}

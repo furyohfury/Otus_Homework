@@ -21,9 +21,7 @@ public sealed class EntityManager
 
 		_contexts = contexts;
 	}
-
-	// TODO make poolable by adding parameter bool poolable = false;
-	// then make dispose in entity installer where make it ready to return to pool
+	
 	public EntityView Create(EntityView prefab, Vector3 position, Quaternion rotation, Transform parent = null)
 	{
 		var container = parent == null ? _worldTransform : parent;
@@ -39,7 +37,8 @@ public sealed class EntityManager
 	public T CreateNonEntity<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent = null)
 		where T : Component
 	{
-		return Object.Instantiate(prefab, position, rotation, parent);
+		var container = parent == null ? _worldTransform : parent;
+		return Object.Instantiate(prefab, position, rotation, container);
 	}
 
 	public void Destroy(GameEntity entity)

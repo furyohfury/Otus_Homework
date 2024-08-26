@@ -17,7 +17,7 @@ public class HealthEmptySystem : IExecuteSystem
 	{
 		foreach (var entity in _entities.GetEntities())
 		{
-			if (entity.health.Current <= 0)
+			if (entity.isEnabled && entity.health.Current <= 0)
 			{
 				entity.isDeathRequest = true;
 			}

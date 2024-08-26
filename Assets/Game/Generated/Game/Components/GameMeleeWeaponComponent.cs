@@ -11,17 +11,19 @@ public partial class GameEntity {
     public MeleeWeaponComponent meleeWeapon { get { return (MeleeWeaponComponent)GetComponent(GameComponentsLookup.MeleeWeapon); } }
     public bool hasMeleeWeapon { get { return HasComponent(GameComponentsLookup.MeleeWeapon); } }
 
-    public void AddMeleeWeapon(UnityEngine.Collider newValue) {
+    public void AddMeleeWeapon(UnityEngine.Collider newHitBox, int newDamage) {
         var index = GameComponentsLookup.MeleeWeapon;
         var component = (MeleeWeaponComponent)CreateComponent(index, typeof(MeleeWeaponComponent));
-        component.Value = newValue;
+        component.HitBox = newHitBox;
+        component.Damage = newDamage;
         AddComponent(index, component);
     }
 
-    public void ReplaceMeleeWeapon(UnityEngine.Collider newValue) {
+    public void ReplaceMeleeWeapon(UnityEngine.Collider newHitBox, int newDamage) {
         var index = GameComponentsLookup.MeleeWeapon;
         var component = (MeleeWeaponComponent)CreateComponent(index, typeof(MeleeWeaponComponent));
-        component.Value = newValue;
+        component.HitBox = newHitBox;
+        component.Damage = newDamage;
         ReplaceComponent(index, component);
     }
 

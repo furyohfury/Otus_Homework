@@ -8,10 +8,9 @@ public class GameController : MonoBehaviour
 	// so it resolves everything. And just put scenecontext or container itself into here
 	[SerializeField]
 	private DependencyHelper _dependencyHelper;
-	
-	private DamagedParticlesHelper _damagedParticlesHelper; 
+	private DamagedParticlesHelper _damagedParticlesHelper;
 	private Transform _worldTransform;
-	
+
 	private Systems _systems;
 	private EntityManager _entityManager;
 
@@ -37,12 +36,13 @@ public class GameController : MonoBehaviour
 		           .Add(new ShootRequestSystem(contexts))
 		           .Add(new SpawnPrefabRequestSystem(contexts, _entityManager))
 		           .Add(new MoveSystem(contexts))
-		           .Add(new ArrowTriggerEnterRequestSystem(contexts))
+		           .Add(new ProjectileTriggerEnterRequestSystem(contexts))
 		           .Add(new MeleeWeaponTriggerEnterRequestSystem(contexts))
 		           .Add(new TakeDamageRequestSystem(contexts))
 		           .Add(new HealthEmptySystem(contexts))
 		           .Add(new DeathTimerCountdownSystem(contexts))
 		           .Add(new DeathRequestSystem(contexts))
+		           .Add(new GameOverSystem(contexts))
 
 		           // View Systems            
 		           .Add(new RenderPositionSystem(contexts))
@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
 
 		           // Cleanup Systems
 		           .Add(new EventsDeleteSystem(contexts));
-		
+
 		// call Initialize() on all of the IInitializeSystems
 		_systems.Initialize();
 	}
