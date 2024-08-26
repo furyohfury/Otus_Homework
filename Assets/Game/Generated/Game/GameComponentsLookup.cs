@@ -43,15 +43,16 @@ public static class GameComponentsLookup {
     public const int SourceEntity = 32;
     public const int SpawnRequest = 33;
     public const int TakeDamageRequest = 34;
-    public const int Target = 35;
-    public const int TargetEntity = 36;
-    public const int TargetInRange = 37;
-    public const int Team = 38;
-    public const int TransformView = 39;
-    public const int TriggerEnterRequest = 40;
-    public const int TypeId = 41;
+    public const int TargetEntity = 35;
+    public const int TargetInRange = 36;
+    public const int TargetSearchRequest = 37;
+    public const int TargetSeeker = 38;
+    public const int Team = 39;
+    public const int TransformView = 40;
+    public const int TriggerEnterRequest = 41;
+    public const int TypeId = 42;
 
-    public const int TotalComponents = 42;
+    public const int TotalComponents = 43;
 
     public static readonly string[] componentNames = {
         "AnimatorView",
@@ -89,9 +90,10 @@ public static class GameComponentsLookup {
         "SourceEntity",
         "SpawnRequest",
         "TakeDamageRequest",
-        "Target",
         "TargetEntity",
         "TargetInRange",
+        "TargetSearchRequest",
+        "TargetSeeker",
         "Team",
         "TransformView",
         "TriggerEnterRequest",
@@ -134,9 +136,10 @@ public static class GameComponentsLookup {
         typeof(SourceEntityComponent),
         typeof(SpawnRequestComponent),
         typeof(TakeDamageRequestComponent),
-        typeof(TargetComponent),
         typeof(TargetEntityComponent),
         typeof(TargetInRangeComponent),
+        typeof(TargetSearchRequestComponent),
+        typeof(TargetSeekerComponent),
         typeof(TeamComponent),
         typeof(TransformViewComponent),
         typeof(TriggerEnterRequestComponent),

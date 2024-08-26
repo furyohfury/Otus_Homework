@@ -8,9 +8,9 @@ public sealed class LookAtTargetSystem : IExecuteSystem
 	public LookAtTargetSystem(Contexts contexts)
 	{
 		var matcher = GameMatcher.AllOf(GameMatcher.Rotation,
+			GameMatcher.RotationRate,
 			GameMatcher.EnemyTarget,
-			GameMatcher.Position,
-			GameMatcher.RotationRate);
+			GameMatcher.Position);
 		_entities = contexts.game.GetGroup(matcher);
 	}
 

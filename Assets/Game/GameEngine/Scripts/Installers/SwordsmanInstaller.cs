@@ -41,6 +41,7 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		entity.AddTypeId("Unit");
 		entity.AddMeleeWeapon(_meleeWeaponCollider);
 		entity.AddAnimatorView(_animator);
+		entity.isTargetSeeker = true;
 		_swordCollisionDispatcher.Construct();
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.SubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);

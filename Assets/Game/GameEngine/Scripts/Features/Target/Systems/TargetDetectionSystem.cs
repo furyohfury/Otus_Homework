@@ -7,13 +7,14 @@ public sealed class TargetDetectionSystem : IExecuteSystem
 
 	public TargetDetectionSystem(Contexts contexts)
 	{
-		// TODO TARGETSEARCHREQUEST?
-		var matcher = GameMatcher
-		              .AllOf(GameMatcher.Team, GameMatcher.AttackRange, GameMatcher.Position)
-		              .NoneOf(GameMatcher.EnemyTarget);
-		_searchGroup = contexts.game.GetGroup(matcher);
-		matcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Health, GameMatcher.Position);
-		_targetGroup = contexts.game.GetGroup(matcher);
+		var seekerMatcher = GameMatcher.AllOf(GameMatcher.TargetSearchRequest,
+			GameMatcher.Team,
+			GameMatcher.AttackRange,
+			GameMatcher.Position);
+		_searchGroup = contexts.game.GetGroup(seekerMatcher);
+		var targetMatcher = GameMatcher.AllOf(GameMatcher.Team, GameMatcher.Position)
+		                               .NoneOf(GameMatcher.Inactive);
+		_targetGroup = contexts.game.GetGroup(targetMatcher);
 	}
 
 	public void Execute()
@@ -40,6 +41,8 @@ public sealed class TargetDetectionSystem : IExecuteSystem
 			{
 				entity.AddEnemyTarget(target);
 			}
+
+			entity.isTargetSearchRequest = false;
 		}
 	}
 }

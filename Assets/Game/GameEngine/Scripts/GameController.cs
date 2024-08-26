@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 
 		_systems = new Feature("Systems")
 		           .Add(new TargetDeadSystem(contexts))
+		           .Add(new TargetSeekerSystem(contexts))
 		           .Add(new TargetDetectionSystem(contexts))
 		           .Add(new TargetChaseSystem(contexts))
 		           .Add(new LookAtTargetSystem(contexts))

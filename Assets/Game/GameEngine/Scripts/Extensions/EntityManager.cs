@@ -47,9 +47,7 @@ public sealed class EntityManager
 		if (_entities.Remove(entity, out var view))
 		{
 			view.Dispose();
-
 			Object.Destroy(view.gameObject);
-
 			entity.Destroy();
 		}
 	}
