@@ -3,25 +3,18 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-	// TODO try to add everything into zenject (add contexts.sharedinstance there too) 
-	// and create systems with smth like container.createnew(system)
-	// so it resolves everything. And just put scenecontext or container itself into here
 	[SerializeField]
 	private DependencyHelper _dependencyHelper;
-	private DamagedParticlesHelper _damagedParticlesHelper;
-	private Transform _worldTransform;
-
+	
 	private Systems _systems;
 	private EntityManager _entityManager;
 
 	private void Start()
 	{
-		_damagedParticlesHelper = _dependencyHelper.DamagedParticlesHelper;
-		_worldTransform = _dependencyHelper.WorldTransform;
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;
 		_entityManager = new EntityManager();
-		_entityManager.Initialize(contexts, _worldTransform);
+		_entityManager.Initialize(contexts, _dependencyHelper.WorldTransform);
 
 		_systems = new Feature("Systems")
 		           .Add(new TargetDeadSystem(contexts))
@@ -50,7 +43,7 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorMeleeAttackListenerSystem(contexts))
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
 		           .Add(new AnimatorDeathListenerSystem(contexts))
-		           .Add(new DamagedAddParticleSystem(contexts, _damagedParticlesHelper, _entityManager))
+		           .Add(new DamagedAddParticleSystem(contexts, _dependencyHelper.DamagedParticlesHelper, _entityManager))
 		           .Add(new DamagedParticlesLifeCycleSystem(contexts, _entityManager))
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
