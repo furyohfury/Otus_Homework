@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 15
-  _damage: 6
+  _damage: 7
   _deathTimer: 10
   _dispatcher: {fileID: 3821910703666712899}
 --- !u!114 &3821910703666712899

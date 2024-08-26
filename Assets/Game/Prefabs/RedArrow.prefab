@@ -92,9 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f0487559458c04c81dfeabbb19ccb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transform: {fileID: 2832919133084447616}
   _moveSpeed: 15
-  _damage: 6
+  _damage: 7
   _deathTimer: 10
   _dispatcher: {fileID: 3821910703666712899}
 --- !u!114 &3821910703666712899

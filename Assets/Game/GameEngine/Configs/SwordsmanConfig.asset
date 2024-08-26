@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b35a853a5d47aebaa97489e6524485, type: 3}
   m_Name: SwordsmanConfig
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 20
   MoveSpeed: 5
   RotationRate: 5
   AttackCooldown: 3

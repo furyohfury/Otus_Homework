@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd5c85fa8e94b7b8337712e40aa2fe9, type: 3}
   m_Name: ArcherConfig
   m_EditorClassIdentifier: 
-  Health: 5
+  Health: 10
   MoveSpeed: 2
   RotationRate: 3
   AttackCooldown: 4
