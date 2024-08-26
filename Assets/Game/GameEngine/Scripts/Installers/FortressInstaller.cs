@@ -17,13 +17,14 @@ public class FortressInstaller : EntityInstaller
 	
 	public override void Install(GameEntity entity)
 	{
+		entity.AddPosition(transform.position);
+		entity.AddRotation(transform.rotation);
 		entity.AddHealth(_health, _health);
 		entity.isDamagableTag = true;
 		entity.AddTeam(_team);
-		entity.AddPosition(transform.position);
-		entity.AddRotation(transform.rotation);
 		entity.AddTypeId("Building");
 		entity.AddTransformView(transform);
+		
 		var gameContext = Contexts.sharedInstance.game;
 		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>();
 		foreach (var entityView in UnitsToSpawn)

@@ -10,7 +10,7 @@ public sealed class ProjectileInstaller : EntityInstaller
 	[SerializeField]
 	private float _deathTimer;
 	[SerializeField]
-	private ArrowCollisionDispatcher _dispatcher;
+	private ProjectileCollisionDispatcher _dispatcher;
 
 	public override void Install(GameEntity entity)
 	{
@@ -18,10 +18,11 @@ public sealed class ProjectileInstaller : EntityInstaller
 		entity.AddRotation(transform.rotation);
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddMoveDirection(transform.forward);
-		entity.AddTransformView(transform);
+		
 		entity.AddDamage(_damage);
 		entity.AddDeathTimer(_deathTimer);
 		entity.AddTypeId("Projectile");
+		entity.AddTransformView(transform);
 		_dispatcher.Construct();
 	}
 

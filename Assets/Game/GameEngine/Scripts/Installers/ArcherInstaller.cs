@@ -25,23 +25,26 @@ public sealed class ArcherInstaller : EntityInstaller
 
 	public override void Install(GameEntity entity)
 	{
-		entity.AddHealth(_config.Health, _config.Health);
-		entity.AddMoveSpeed(_config.MoveSpeed);
-		entity.AddAttackRange(_config.AttackRange);
-		entity.AddAttackCooldown(_config.AttackCooldown);
-		
 		entity.AddPosition(transform.position);
 		entity.AddRotation(transform.rotation);
 		entity.AddRotationRate(_config.RotationRate);
+		entity.AddMoveSpeed(_config.MoveSpeed);
+		
+		entity.AddHealth(_config.Health, _config.Health);
 		entity.isDamagableTag = true;
-		entity.AddTeam(_team);
-		entity.AddTransformView(transform);
+		
+		entity.AddAttackRange(_config.AttackRange);
+		entity.AddAttackCooldown(_config.AttackCooldown);
 		entity.AddAttackTimer(0f);
-		entity.AddAnimatorView(_animator);
 		entity.isRangeAttacker = true;
 		entity.AddRangeWeapon(_firePoint, _arrow);
+		
+		entity.AddTeam(_team);
 		entity.AddTypeId("Unit");
 		entity.isTargetSeeker = true;
+		
+		entity.AddTransformView(transform);
+		entity.AddAnimatorView(_animator);
 
 		_entity = entity;
 		_animatorDispatcher.SubscribeOnEvent(DEATH_END, OnDeathEndEvent);

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ArrowCollisionDispatcher : MonoBehaviour
+public class ProjectileCollisionDispatcher : MonoBehaviour
 {
 	[SerializeField]
 	private EntityView _view;
