@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+	// TODO try to add everything into zenject (add contexts.sharedinstance there too) 
+	// and create systems with smth like container.createnew(system)
+	// so it resolves everything. And just put scenecontext or container itself into here
 	[SerializeField]
 	private DependencyHelper _dependencyHelper;
 	
-	private DamagedParticlesHelper _damagedParticlesHelper; // TODO in common config
+	private DamagedParticlesHelper _damagedParticlesHelper; 
 	private Transform _worldTransform;
 	
 	private Systems _systems;

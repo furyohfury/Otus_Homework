@@ -7,6 +7,7 @@ public sealed class TargetDetectionSystem : IExecuteSystem
 
 	public TargetDetectionSystem(Contexts contexts)
 	{
+		// TODO TARGETSEARCHREQUEST?
 		var matcher = GameMatcher
 		              .AllOf(GameMatcher.Team, GameMatcher.AttackRange, GameMatcher.Position)
 		              .NoneOf(GameMatcher.EnemyTarget);
