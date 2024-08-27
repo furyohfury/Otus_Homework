@@ -12,7 +12,7 @@ public sealed class EntityManager
 	{
 		_worldTransform = worldTransform;
 		_contexts = contexts;
-		_pool = new(poolTransform);
+		_pool = new EntityViewPool(poolTransform);
 
 		var entities = Object.FindObjectsOfType<EntityView>();
 		for (int i = 0, count = entities.Length; i < count; i++)
@@ -21,18 +21,22 @@ public sealed class EntityManager
 			var entity = contexts.game.CreateEntity();
 			entityView.Initialize(entity);
 			_entities.Add(entity, entityView);
-		}		
+		}
 	}
-	
+
 	public EntityView Create(EntityView prefab, Vector3 position, Quaternion rotation, Transform parent = null)
 	{
 		var container = parent == null ? _worldTransform : parent;
 		EntityView entityView;
 		if (!_pool.TryGet(prefab.name, out entityView))
 		{
-			entityView = Object.Instantiate(prefab, position, rotation, container);
+			entityView = Object.Instantiate(prefab);
 		}
 
+		entityView.transform.position = position;
+		entityView.transform.rotation = rotation;
+		entityView.transform.parent = container;
+		entityView.name = prefab.name;
 		var entity = _contexts.game.CreateEntity();
 		entityView.Initialize(entity);
 		_entities.Add(entity, entityView);
@@ -58,7 +62,8 @@ public sealed class EntityManager
 			else
 			{
 				Object.Destroy(view.gameObject);
-			}			
+			}
+
 			entity.Destroy();
 		}
 	}
@@ -71,5 +76,13 @@ public sealed class EntityManager
 	public EntityView GetEntityView(GameEntity entity)
 	{
 		return _entities[entity];
+	}
+
+	public void Dispose()
+	{
+		foreach (var entityView in _entities.Values)
+		{
+			entityView.Dispose();
+		}
 	}
 }

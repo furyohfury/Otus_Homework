@@ -26,7 +26,7 @@ public class FortressInstaller : EntityInstaller
 		entity.AddTransformView(transform);
 		
 		var gameContext = Contexts.sharedInstance.game;
-		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>().Skip(1);
+		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>().Skip(1).ToArray();
 		foreach (var entityView in UnitsToSpawn)
 		{
 			var spawnRequest = gameContext.CreateEntity();

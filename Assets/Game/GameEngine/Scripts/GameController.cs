@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField]
 	private DependencyHelper _dependencyHelper;
-	
+
 	private Systems _systems;
 	private EntityManager _entityManager;
 
@@ -43,7 +43,8 @@ public class GameController : MonoBehaviour
 		           .Add(new AnimatorMeleeAttackListenerSystem(contexts))
 		           .Add(new AnimatorRangeAttackListenerSystem(contexts))
 		           .Add(new AnimatorDeathListenerSystem(contexts))
-		           .Add(new DamagedAddParticleSystem(contexts, _dependencyHelper.DamagedParticlesHelper, _entityManager))
+		           .Add(new DamagedAddParticleSystem(contexts, _dependencyHelper.DamagedParticlesHelper,
+			           _entityManager))
 		           .Add(new DamagedParticlesLifeCycleSystem(contexts, _entityManager))
 		           .Add(new DestroyViewSystem(contexts, _entityManager))
 
@@ -61,5 +62,10 @@ public class GameController : MonoBehaviour
 		_systems.Execute();
 		// call cleanup() on all the ICleanupSystems
 		_systems.Cleanup();
+	}
+
+	private void OnApplicationQuit()
+	{
+		_entityManager.Dispose();
 	}
 }

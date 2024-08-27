@@ -34,7 +34,6 @@ public sealed class SpawnPrefabRequestSystem : IExecuteSystem
 			{
 				view = _entityManager.Create(prefab, position, rotation);
 			}
-			view.name = prefab.name;
 			entity.Destroy();
 		}
 	}

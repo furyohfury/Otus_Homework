@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public sealed class ProjectileInstaller : EntityInstaller
 {
@@ -18,7 +17,7 @@ public sealed class ProjectileInstaller : EntityInstaller
 		entity.AddRotation(transform.rotation);
 		entity.AddMoveSpeed(_moveSpeed);
 		entity.AddMoveDirection(transform.forward);
-		
+
 		entity.AddDamage(_damage);
 		entity.AddDeathTimer(_deathTimer);
 		entity.AddTypeId("Projectile");
