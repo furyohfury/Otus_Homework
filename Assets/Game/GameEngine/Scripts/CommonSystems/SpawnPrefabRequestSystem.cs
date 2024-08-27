@@ -24,16 +24,17 @@ public sealed class SpawnPrefabRequestSystem : IExecuteSystem
 			var position = entity.position.Value;
 			var rotation = entity.rotation.Value;
 			var prefab = entity.prefab.Value;
+			EntityView view;
 			if (entity.hasTransformView)
 			{
 				var parentTransform = entity.transformView.Value;
-				_entityManager.Create(prefab, position, rotation, parentTransform);
+				view = _entityManager.Create(prefab, position, rotation, parentTransform);
 			}
 			else
 			{
-				_entityManager.Create(prefab, position, rotation);
+				view = _entityManager.Create(prefab, position, rotation);
 			}
-
+			view.name = prefab.name;
 			entity.Destroy();
 		}
 	}

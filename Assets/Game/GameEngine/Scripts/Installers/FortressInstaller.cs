@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
+using System.Linq;
 
 public class FortressInstaller : EntityInstaller
 {
@@ -26,7 +26,7 @@ public class FortressInstaller : EntityInstaller
 		entity.AddTransformView(transform);
 		
 		var gameContext = Contexts.sharedInstance.game;
-		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>();
+		_spawnPoints = _spawnPointsContainer.GetComponentsInChildren<Transform>().Skip(1);
 		foreach (var entityView in UnitsToSpawn)
 		{
 			var spawnRequest = gameContext.CreateEntity();
