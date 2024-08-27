@@ -65,5 +65,6 @@ public sealed class ArcherInstaller : EntityInstaller
 	{
 		_animatorDispatcher.UnsubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.UnsubscribeOnEvent(BOW_SHOOT, OnBowShoot);
+		_entity = null;
 	}
 }

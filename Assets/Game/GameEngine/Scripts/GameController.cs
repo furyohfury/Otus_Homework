@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;
 		_entityManager = new EntityManager();
-		_entityManager.Initialize(contexts, _dependencyHelper.WorldTransform);
+		_entityManager.Initialize(contexts, _dependencyHelper.WorldTransform, _dependencyHelper.PoolTransform);
 
 		_systems = new Feature("Systems")
 		           .Add(new TargetDeadSystem(contexts))

@@ -13,6 +13,8 @@ public class EntityView : MonoBehaviour
 		return LinkedEntity.isEnabled;
 	}
 
+	public bool IsPoolable = true;
+
 	public void Initialize(GameEntity gameEntity)
 	{
 		LinkedEntity = gameEntity;

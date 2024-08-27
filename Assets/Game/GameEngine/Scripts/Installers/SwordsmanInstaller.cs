@@ -72,5 +72,6 @@ public sealed class SwordsmanInstaller : EntityInstaller
 		_animatorDispatcher.UnsubscribeOnEvent(DEATH_END, OnDeathEndEvent);
 		_animatorDispatcher.UnsubscribeOnEvent(MELEE_ATTACK_START, OnMeleeAttackStartEvent);
 		_animatorDispatcher.UnsubscribeOnEvent(MELEE_ATTACK_END, OnMeleeAttackEndEvent);
+		_entity = null;
 	}
 }

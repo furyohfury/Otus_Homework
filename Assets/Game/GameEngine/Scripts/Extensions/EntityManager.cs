@@ -6,10 +6,14 @@ public sealed class EntityManager
 	private readonly Dictionary<GameEntity, EntityView> _entities = new();
 	private Contexts _contexts;
 	private Transform _worldTransform;
+	private EntityViewPool _pool;
 
-	public void Initialize(Contexts contexts, Transform worldTransform)
+	public void Initialize(Contexts contexts, Transform worldTransform, Transform poolTransform)
 	{
 		_worldTransform = worldTransform;
+		_contexts = contexts;
+		_pool = new(poolTransform);
+
 		var entities = Object.FindObjectsOfType<EntityView>();
 		for (int i = 0, count = entities.Length; i < count; i++)
 		{
@@ -17,16 +21,17 @@ public sealed class EntityManager
 			var entity = contexts.game.CreateEntity();
 			entityView.Initialize(entity);
 			_entities.Add(entity, entityView);
-		}
-
-		_contexts = contexts;
+		}		
 	}
 	
 	public EntityView Create(EntityView prefab, Vector3 position, Quaternion rotation, Transform parent = null)
 	{
 		var container = parent == null ? _worldTransform : parent;
-		var entityView = Object.Instantiate(prefab, position, rotation, container);
-
+		EntityView entityView;
+		if (!_pool.TryGet(prefab.name, out entityView))
+		{
+			entityView = Object.Instantiate(prefab, position, rotation, container);
+		}
 
 		var entity = _contexts.game.CreateEntity();
 		entityView.Initialize(entity);
@@ -46,7 +51,14 @@ public sealed class EntityManager
 		if (_entities.Remove(entity, out var view))
 		{
 			view.Dispose();
-			Object.Destroy(view.gameObject);
+			if (view.IsPoolable)
+			{
+				_pool.Return(view);
+			}
+			else
+			{
+				Object.Destroy(view.gameObject);
+			}			
 			entity.Destroy();
 		}
 	}
