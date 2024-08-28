@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+namespace Upgrades
+{
 public abstract class UpgradeConfig : ScriptableObject
 {
 	public string id;
@@ -12,4 +14,5 @@ public abstract class UpgradeConfig : ScriptableObject
 	}
 
 	public abstract Upgrade InstantiateUpgrade();
+}
 }

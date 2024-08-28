@@ -1,6 +1,8 @@
 ﻿using System;
 using Sirenix.OdinInspector;
 
+namespace Upgrades
+{
 [Serializable]
 public abstract class Upgrade
 {
@@ -44,4 +46,5 @@ public abstract class Upgrade
 	{
 		Level = savedLevel;
 	}
+}
 }

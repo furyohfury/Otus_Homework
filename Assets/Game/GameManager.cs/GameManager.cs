@@ -21,6 +21,11 @@ namespace GameLifeCycle
             IGameStateListener.OnRegister -= RegisterListener;
         }
 
+        private void Start()
+        {
+            HandleState(new GameStartState());
+        }
+
         private void Update()
         {
             if (!_activeUpdates || _iOnUpdateListeners.Count <= 0)

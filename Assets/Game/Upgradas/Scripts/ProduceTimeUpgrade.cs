@@ -1,5 +1,7 @@
 ﻿using Zenject;
 
+namespace Upgrades
+{
 public sealed class ProduceTimeUpgrade : Upgrade
 {
 	private ConveyorModel _conveyorModel;
@@ -18,4 +20,5 @@ public sealed class ProduceTimeUpgrade : Upgrade
 	{
 		_conveyorModel.ProduceTime.Value -= i;
 	}
+}
 }

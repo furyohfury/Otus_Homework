@@ -2,6 +2,8 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+namespace Upgrades
+{
 [Serializable]
 public sealed class UpgradePriceTable
 {
@@ -44,4 +46,5 @@ public sealed class UpgradePriceTable
 
 		levels = table;
 	}
+}
 }
