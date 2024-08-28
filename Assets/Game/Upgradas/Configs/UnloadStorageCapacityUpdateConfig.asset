@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2e91abd41684a2e8bec6efcbe8efb55, type: 3}
-  m_Name: ProduceTimeUpdateConfig
+  m_Script: {fileID: 11500000, guid: 6ff072e9eab86154586a7ffae2784212, type: 3}
+  m_Name: UnloadStorageCapacityUpdateConfig
   m_EditorClassIdentifier: 
-  id: ProduceTime
-  _maxLevel: 6
+  id: 
+  _maxLevel: 7
   _priceTable:
-    basePrice: 2
-    levels: 000000000400000006000000080000000a0000000c000000
+    basePrice: 3
+    levels: 0000000006000000090000000c0000000f0000001200000015000000

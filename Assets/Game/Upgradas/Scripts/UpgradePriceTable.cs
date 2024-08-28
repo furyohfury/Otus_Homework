@@ -4,47 +4,47 @@ using UnityEngine;
 
 namespace Upgrades
 {
-[Serializable]
-public sealed class UpgradePriceTable
-{
-	[Space]
-	[SerializeField]
-	private int basePrice;
-
-	[Space]
-	[ListDrawerSettings(OnBeginListElementGUI = "DrawLevels")]
-	[SerializeField]
-	private int[] levels;
-
-	public int GetPrice(int level)
+	[Serializable]
+	public sealed class UpgradePriceTable
 	{
-		var index = level - 1;
-		index = Mathf.Clamp(index, 0, levels.Length - 1);
-		return levels[index];
-	}
+		[Space]
+		[SerializeField]
+		private int basePrice;
 
-	private void DrawLevels(int index)
-	{
-		GUILayout.Space(8);
-		GUILayout.Label($"Level #{index + 1}");
-	}
+		[Space]
+		[ListDrawerSettings(OnBeginListElementGUI = "DrawLevels")]
+		[SerializeField]
+		private int[] levels;
 
-	public void OnValidate(int maxLevel)
-	{
-		EvaluatePriceTable(maxLevel);
-	}
-
-	private void EvaluatePriceTable(int maxLevel)
-	{
-		var table = new int[maxLevel];
-		table[0] = new int();
-		for (var level = 2; level <= maxLevel; level++)
+		public int GetPrice(int level)
 		{
-			var price = basePrice * level;
-			table[level - 1] = price;
+			var index = level - 1;
+			index = Mathf.Clamp(index, 0, levels.Length - 1);
+			return levels[index];
 		}
 
-		levels = table;
+		private void DrawLevels(int index)
+		{
+			GUILayout.Space(8);
+			GUILayout.Label($"Level #{index + 1}");
+		}
+
+		public void OnValidate(int maxLevel)
+		{
+			EvaluatePriceTable(maxLevel);
+		}
+
+		private void EvaluatePriceTable(int maxLevel)
+		{
+			var table = new int[maxLevel];
+			table[0] = new int();
+			for (var level = 2; level <= maxLevel; level++)
+			{
+				var price = basePrice * level;
+				table[level - 1] = price;
+			}
+
+			levels = table;
+		}
 	}
-}
 }

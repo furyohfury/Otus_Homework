@@ -2,17 +2,16 @@
 
 namespace Upgrades
 {
-public abstract class UpgradeConfig : ScriptableObject
-{
-	public string id; // TODO delete if will use types
-	public int maxLevel;
-	public UpgradePriceTable priceTable;
-
-	protected virtual void OnValidate()
+	public abstract class UpgradeConfig : ScriptableObject
 	{
-		priceTable.OnValidate(maxLevel);
-	}
+		public int _maxLevel;
+		public UpgradePriceTable _priceTable;
 
-	public abstract Upgrade InstantiateUpgrade();
-}
+		protected virtual void OnValidate()
+		{
+			_priceTable.OnValidate(_maxLevel);
+		}
+
+		public abstract Upgrade InstantiateUpgrade();
+	}
 }
