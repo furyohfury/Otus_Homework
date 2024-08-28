@@ -9,14 +9,24 @@ public class UpgradeDebug : MonoBehaviour
 
 	private UpgradeSystem _upgradeSystem;
 
-	private void Awake()
+	public void Construct(UpgradeSystem upgradeSystem)
 	{
-		
+		_upgradeSystem = upgradeSystem
 	}
 
 	[Button]
-	public void LevelUp()
+	public void LevelUpProduceTime()
 	{
-		_upgrade.LevelUp();
+		_upgradeSystem.TryUpgrade<ProduceTimeUpgrade>();		
+	}
+	[Button]
+	public void LevelUpLoadStorageCapacity()
+	{
+		_upgradeSystem.TryUpgrade<LoadStorageCapacityUpgrade>();		
+	}
+	[Button]
+	public void LevelUpUnloadStorageCapacity()
+	{
+		_upgradeSystem.TryUpgrade<UnloadStorageCapacityUpgrade>();		
 	}
 }
