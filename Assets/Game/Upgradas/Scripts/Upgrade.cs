@@ -7,7 +7,7 @@ namespace Upgrades
 public abstract class Upgrade
 {
 	[ShowInInspector] [ReadOnly]
-	public string Id => _config.id;
+	public string Id => _config.id; // TODO delete if will use types
 
 	[ShowInInspector] [ReadOnly]
 	public int Level { get; private set; } = 1;
@@ -38,6 +38,7 @@ public abstract class Upgrade
 
 		Level++;
 		OnLevelUp(Level);
+		PlayerPrefs.SetInt(this.GetType(), savedLevel); // TODO check if all types actually get an inherited one
 	}
 
 	public abstract void OnLevelUp(int i);

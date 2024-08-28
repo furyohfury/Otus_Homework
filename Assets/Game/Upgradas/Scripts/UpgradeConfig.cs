@@ -4,7 +4,7 @@ namespace Upgrades
 {
 public abstract class UpgradeConfig : ScriptableObject
 {
-	public string id;
+	public string id; // TODO delete if will use types
 	public int maxLevel;
 	public UpgradePriceTable priceTable;
 

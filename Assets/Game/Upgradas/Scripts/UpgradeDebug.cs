@@ -4,19 +4,14 @@ using Zenject;
 
 public class UpgradeDebug : MonoBehaviour
 {
-	[SerializeField]
+	[ShowInInspector, Readonly]
 	private ConveyorModel _conveyorModel;
-	[SerializeField]
-	private UpgradeConfig _upgradeConfig;
 
-	[ShowInInspector]
-	private Upgrade _upgrade;
+	private UpgradeSystem _upgradeSystem;
 
 	private void Awake()
 	{
-		_upgrade = _upgradeConfig.InstantiateUpgrade();
-		var savedLevel = 3;
-		_upgrade.SetupLevel(savedLevel);
+		
 	}
 
 	[Button]

@@ -18,7 +18,7 @@ public sealed class ProduceTimeUpgrade : Upgrade
 
 	public override void OnLevelUp(int i)
 	{
-		_conveyorModel.ProduceTime.Value -= i;
+		_conveyorModel.ProduceTime.Value -= i; // TODO make upgrade table if not too lazy
 	}
 }
 }
