@@ -35,20 +35,26 @@ public class UpgradeDebug : MonoBehaviour
 	{
 		if (!_upgradeSystem.TryUpgrade<ProduceTimeUpgrade>())
 		{
-			Debug.Log("Cant upgrade produce time");
+			Debug.Log("Cant upgrade ProduceTime");
 		}
 	}
 
 	[Button]
 	public void LevelUpLoadStorageCapacity()
 	{
-		_upgradeSystem.TryUpgrade<LoadStorageCapacityUpgrade>();
+		if (!_upgradeSystem.TryUpgrade<LoadStorageCapacityUpgrade>())
+		{
+			Debug.Log("Cant upgrade LoadStorageCapacity");
+		}
 	}
 
 	[Button]
 	public void LevelUpUnloadStorageCapacity()
 	{
-		_upgradeSystem.TryUpgrade<UnloadStorageCapacityUpgrade>();
+		if (!_upgradeSystem.TryUpgrade<UnloadStorageCapacityUpgrade>())
+		{
+			Debug.Log("Cant upgrade UnloadStorageCapacity");
+		}
 	}
 
 	[Button] [HorizontalGroup("Money")]

@@ -167,11 +167,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadStorageCapacity:
-    value: 5
+    value: 10
   UnloadStorageCapacity:
-    value: 5
+    value: 10
   ProduceTime:
-    value: 5
+    value: 10
   _examples: []
   references:
     version: 2
