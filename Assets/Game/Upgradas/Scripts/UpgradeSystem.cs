@@ -5,14 +5,15 @@ namespace Upgrades
         private readonly IMoneyStorage _moneyStorage;
 	private readonly Dictionary<Type, Upgrade> _upgrades = new();
 
-	public UpgradeSystem(IMoneyStorage moneyStorage, UpgradeConfig[] configs)
+	public UpgradeSystem(IMoneyStorage moneyStorage, UpgradeConfig[] configs, DiContainer diContainer)
 	{
 		_moneyStorage = moneyStorage;
 		_configs = configs;
 		foreach (var config in _configs)
 		{
 			var upgrade = config.InstantiateUpgrade();
-			_upgrades.Add(upgrade.GetType(), upgrade);
+            diContainer.Inject(upgrade);
+			_upgrades.Add(upgrade.GetType(), upgrade);            
 		}
 	}
 
