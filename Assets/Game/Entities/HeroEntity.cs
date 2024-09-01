@@ -21,7 +21,7 @@ namespace Entities
 		private void OnEnable()
 		{
 			var healthComponent = GetData<HealthComponent>();
-			// healthComponent.CurrentHealth.Subscribe(_heroView.SetStats(c));
+			healthComponent.OnHealthChanged += ChangeViewHp;
 		}
 
 		private void ChangeViewHp(int hp)
@@ -31,7 +31,8 @@ namespace Entities
 
 		private void OnDisable()
 		{
-			
+			var healthComponent = GetData<HealthComponent>();
+			healthComponent.OnHealthChanged -= ChangeViewHp;
 		}
 	}
 }
