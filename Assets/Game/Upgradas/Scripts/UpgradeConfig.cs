@@ -5,12 +5,12 @@ namespace Upgrades
 	public abstract class UpgradeConfig : ScriptableObject
 	{
 		public string Id;
-		public int _maxLevel; // TODO naming pascalcase
-		public UpgradePriceTable _priceTable;
+		public int MaxLevel;
+		public UpgradePriceTable PriceTable;
 
 		protected virtual void OnValidate()
 		{
-			_priceTable.OnValidate(_maxLevel);
+			PriceTable.OnValidate(MaxLevel);
 		}
 
 		public abstract Upgrade InstantiateUpgrade();

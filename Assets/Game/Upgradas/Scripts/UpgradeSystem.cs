@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Game.GamePlay.Upgrades;
-using GameLifeCycle;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +10,7 @@ namespace Upgrades
 		public Dictionary<string, Upgrade> Upgrades { get; } = new();
 		private readonly IMoneyStorage _moneyStorage;
 
+		[Inject]
 		public UpgradeSystem(IMoneyStorage moneyStorage, UpgradeConfig[] configs, DiContainer diContainer)
 		{
 			_moneyStorage = moneyStorage;
@@ -31,13 +30,13 @@ namespace Upgrades
 				if (PlayerPrefs.HasKey(savedLevel))
 				{
 					upgrade.SetupLevel(PlayerPrefs.GetInt(savedLevel));
-				}				
+				}
 			}
 		}
 
-		public bool TryUpgrade(UpgradeConfig config)
+		public bool TryUpgrade(string id)
 		{
-			if (!Upgrades.TryGetValue(config.Id, out var upgrade))
+			if (!Upgrades.TryGetValue(id, out var upgrade))
 				return false;
 
 			if (!upgrade.IsMaxLevel && _moneyStorage.CanSpendMoney(upgrade.NextPrice))
@@ -48,6 +47,11 @@ namespace Upgrades
 			}
 
 			return false;
+		}
+
+		public bool TryUpgrade(UpgradeConfig config)
+		{
+			return TryUpgrade(config.Id);
 		}
 	}
 }

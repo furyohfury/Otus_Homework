@@ -3,7 +3,6 @@ using UnityEngine;
 using Upgrades;
 using Zenject;
 
-
 public class SceneInstaller : MonoInstaller
 {
 	[SerializeField]
@@ -14,6 +13,6 @@ public class SceneInstaller : MonoInstaller
 		Container.Bind<ConveyorModel>().FromComponentInHierarchy().AsSingle();
 		Container.Bind<IMoneyStorage>().To<MoneyStorage>().FromComponentInHierarchy().AsSingle();
 		Container.BindInterfacesAndSelfTo<UpgradeSystem>().AsSingle();
-		Container.Bind<UpgradeConfig[]>().FromInstance(_upgradeConfigs).AsCached();		
+		Container.Bind<UpgradeConfig[]>().FromInstance(_upgradeConfigs).AsCached();
 	}
 }

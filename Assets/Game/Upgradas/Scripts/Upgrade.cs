@@ -8,19 +8,19 @@ namespace Upgrades
 	public abstract class Upgrade
 	{
 		[ShowInInspector] [ReadOnly]
-		public int Id => _config.Id;
+		public string Id => _config.Id;
 
 		[ShowInInspector] [ReadOnly]
 		public int Level { get; private set; } = 1;
 
 		[ShowInInspector] [ReadOnly]
-		public int MaxLevel => _config._maxLevel;
+		public int MaxLevel => _config.MaxLevel;
 
 		[ShowInInspector] [ReadOnly]
-		public bool IsMaxLevel => Level >= _config._maxLevel;
+		public bool IsMaxLevel => Level >= _config.MaxLevel;
 
 		[ShowInInspector] [ReadOnly]
-		public int NextPrice => _config._priceTable.GetPrice(Level + 1); // TODO check if works properly w/ 1st level
+		public int NextPrice => _config.PriceTable.GetPrice(Level + 1);
 
 		private readonly UpgradeConfig _config;
 

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff072e9eab86154586a7ffae2784212, type: 3}
   m_Name: UnloadStorageCapacityUpdateConfig
   m_EditorClassIdentifier: 
-  id: 
-  _maxLevel: 7
-  _priceTable:
+  Id: UnloadStorageCapacityUpgrade
+  MaxLevel: 7
+  PriceTable:
     basePrice: 3
     levels: 0000000006000000090000000c0000000f0000001200000015000000

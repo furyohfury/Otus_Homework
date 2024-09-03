@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.GamePlay.Upgrades;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,7 +8,7 @@ using Zenject;
 public class UpgradeDebug : MonoBehaviour
 {
 	[ShowInInspector] [ReadOnly]
-	public Dictionary<Type, Upgrade> Upgrades;
+	public Dictionary<string, Upgrade> Upgrades;
 
 	[ShowInInspector] [ReadOnly] [HorizontalGroup("Money")] [PropertySpace]
 	public int Money => _moneyStorage.Money;
@@ -30,30 +29,13 @@ public class UpgradeDebug : MonoBehaviour
 		Upgrades = _upgradeSystem.Upgrades;
 	}
 
-	[Button]
-	public void LevelUpProduceTime()
-	{
-		if (!_upgradeSystem.TryUpgrade<ProduceTimeUpgrade>())
-		{
-			Debug.Log("Cant upgrade ProduceTime");
-		}
-	}
 
 	[Button]
-	public void LevelUpLoadStorageCapacity()
+	public void LevelUpUpgrade(UpgradeConfig config)
 	{
-		if (!_upgradeSystem.TryUpgrade<LoadStorageCapacityUpgrade>())
+		if (!_upgradeSystem.TryUpgrade(config))
 		{
-			Debug.Log("Cant upgrade LoadStorageCapacity");
-		}
-	}
-
-	[Button]
-	public void LevelUpUnloadStorageCapacity()
-	{
-		if (!_upgradeSystem.TryUpgrade<UnloadStorageCapacityUpgrade>())
-		{
-			Debug.Log("Cant upgrade UnloadStorageCapacity");
+			Debug.Log($"Cant upgrade {config.Id}");
 		}
 	}
 
