@@ -11,6 +11,13 @@ namespace Lessons.Lesson19_EventBus
         private HeroListView _heroListView;
         private HeroEntity _currentHero;
 
+        [Inject]
+        public void Construct(EventBus eventBus, UIService uiservice)
+        {
+            _eventBus = eventBus;
+            _heroListView = uiservice.GetRedPlayer();
+        }
+
         protected override void OnRun()
         {
             _heroListView.OnHeroClicked += OnHeroClicked;
@@ -23,7 +30,7 @@ namespace Lessons.Lesson19_EventBus
         
         private void OnHeroClicked(HeroView hero)
         {
-            _eventBus.RaiseEvent(new AttackEvent(hero.GetComponent<HeroEntity>()));
+            _eventBus.RaiseEvent(new AttackEvent());
             Finish();
         }
     }

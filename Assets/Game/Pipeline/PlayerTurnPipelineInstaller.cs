@@ -20,6 +20,8 @@ namespace Lessons.Lesson19_EventBus
 			_playerTurnPipeline.AddTask(new StartTask());
 			// _turnPipeline.AddTask(_diContainer.CreateInstance<PlayerInputTask>());
 			// _turnPipeline.AddTask(_diContainer.CreateInstance<StartVisualPipelineTask>());
+			// _turnPipeline.AddTask(_diContainer.CreateInstance<EnemyInputTask>());
+			// _turnPipeline.AddTask(_diContainer.CreateInstance<StartVisualPipelineTask>());
 			_playerTurnPipeline.AddTask(new FinishTask());
 		}
 	}
