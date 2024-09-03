@@ -8,6 +8,9 @@ namespace Upgrades
 	public abstract class Upgrade
 	{
 		[ShowInInspector] [ReadOnly]
+		public int Id => _config.Id;
+
+		[ShowInInspector] [ReadOnly]
 		public int Level { get; private set; } = 1;
 
 		[ShowInInspector] [ReadOnly]
@@ -17,7 +20,7 @@ namespace Upgrades
 		public bool IsMaxLevel => Level >= _config._maxLevel;
 
 		[ShowInInspector] [ReadOnly]
-		public int NextPrice => _config._priceTable.GetPrice(Level + 1);
+		public int NextPrice => _config._priceTable.GetPrice(Level + 1); // TODO check if works properly w/ 1st level
 
 		private readonly UpgradeConfig _config;
 
@@ -31,10 +34,10 @@ namespace Upgrades
 		{
 			Level++;
 			OnLevelUp(Level);
-			PlayerPrefs.SetInt(GetType().ToString(), Level);
+			PlayerPrefs.SetInt(Id, Level);
 		}
 
-		public abstract void OnLevelUp(int i);
+		public abstract void OnLevelUp(int level);
 
 		public void SetupLevel(int savedLevel)
 		{

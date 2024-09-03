@@ -16,7 +16,7 @@ namespace Upgrades
 		{
 		}
 
-		public override void OnLevelUp(int i)
+		public override void OnLevelUp(int level)
 		{
 			_conveyorModel.UnloadStorageCapacity.Value += 1;
 		}

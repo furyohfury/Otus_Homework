@@ -4,7 +4,8 @@ namespace Upgrades
 {
 	public abstract class UpgradeConfig : ScriptableObject
 	{
-		public int _maxLevel;
+		public string Id;
+		public int _maxLevel; // TODO naming pascalcase
 		public UpgradePriceTable _priceTable;
 
 		protected virtual void OnValidate()

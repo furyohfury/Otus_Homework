@@ -7,9 +7,9 @@ using Zenject;
 
 namespace Upgrades
 {
-	public sealed class UpgradeSystem : IGameStartListener
+	public sealed class UpgradeSystem : IInitializable
 	{
-		public Dictionary<Type, Upgrade> Upgrades { get; } = new();
+		public Dictionary<string, Upgrade> Upgrades { get; } = new();
 		private readonly IMoneyStorage _moneyStorage;
 
 		public UpgradeSystem(IMoneyStorage moneyStorage, UpgradeConfig[] configs, DiContainer diContainer)
@@ -19,15 +19,25 @@ namespace Upgrades
 			{
 				var upgrade = config.InstantiateUpgrade();
 				diContainer.Inject(upgrade);
-				Upgrades.Add(upgrade.GetType(), upgrade);
+				Upgrades.Add(config.Id, upgrade);
 			}
-
-			IGameStateListener.Register(this);
 		}
 
-		public bool TryUpgrade<T>() where T : Upgrade
+		public void Initialize()
 		{
-			if (!Upgrades.TryGetValue(typeof(T), out var upgrade))
+			foreach (var upgrade in Upgrades.Values)
+			{
+				var savedLevel = upgrade.Id;
+				if (PlayerPrefs.HasKey(savedLevel))
+				{
+					upgrade.SetupLevel(PlayerPrefs.GetInt(savedLevel));
+				}				
+			}
+		}
+
+		public bool TryUpgrade(UpgradeConfig config)
+		{
+			if (!Upgrades.TryGetValue(config.Id, out var upgrade))
 				return false;
 
 			if (!upgrade.IsMaxLevel && _moneyStorage.CanSpendMoney(upgrade.NextPrice))
@@ -38,15 +48,6 @@ namespace Upgrades
 			}
 
 			return false;
-		}
-
-		public void StartGame()
-		{
-			foreach (var upgrade in Upgrades.Values)
-			{
-				var savedLevel = PlayerPrefs.GetInt(upgrade.GetType().ToString());
-				upgrade.SetupLevel(savedLevel);
-			}
 		}
 	}
 }
