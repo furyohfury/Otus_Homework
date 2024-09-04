@@ -8,7 +8,7 @@
 
          protected override void OnHandleEvent(DealDamageEvent evt)
          {
-             if (!evt.Target.TryGet(out HealthComponent health))
+             if (!evt.Target.TryGetData(out HealthComponent health))
              {
                  return;
              }

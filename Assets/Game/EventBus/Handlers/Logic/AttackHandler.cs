@@ -8,10 +8,14 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnHandleEvent(AttackEvent evt)
         {    
-            if (evt.Entity.TryGet(out DamageComponent damageComponent))
+            if (evt.Source.TryGetData(out DamageComponent sourcedamageComponent))
             {
-                EventBus.RaiseEvent(new DealDamageEvent(evt.Target, damageComponent.Damage));
+                EventBus.RaiseEvent(new DealDamageEvent(evt.Target, sourceDamageComponent.Damage));
             }            
+            if (evt.Target.TryGetData(out DamageComponent targetDamageComponent))
+            {
+                EventBus.RaiseEvent(new DealDamageEvent(evt.Source, targetDamageComponent.Damage));
+            }
         }
     }
 }

@@ -18,10 +18,10 @@
 
          protected override void OnRun()
          {
-            var sourceView = _source.TryGetData<HeroViewComponent>();
-             var targetView = _target.TryGetData<HeroViewComponent>();
+             _source.TryGetData(out HeroViewComponent sourceHeroViewComponent);
+             _target.TryGetData(out HeroViewComponent targetHeroViewComponent);
 
-             sourceView.AnimateAttack(targetView);
+             sourceHeroViewComponent.HeroView.AnimateAttack(targetHeroViewComponent.HeroView);
              // TODO on unitasksource finish invoke Finish() here
          }
      }

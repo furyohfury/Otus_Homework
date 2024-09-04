@@ -7,15 +7,24 @@ namespace Game.Installers
 	{
 		public override void InstallBindings()
 		{
+			// Services
+			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
+			Container.Bind<CurrentHeroService().AsSingle();
+
+			// Pipeline
 			Container.Bind<PlayerTurnPipeline>().AsCached();
 			Container.BindInterfacesAndSelfTo<PlayerTurnPipelineInstaller>().AsCached();
 			Container.Bind<PlayerTurnPipelineRunner>().AsCached();
-			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
+			
+			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();
-			Container.Bind<CurrentHeroService().AsSingle();
+			Container.Bind<AttackHandler>().AsSingle();			
+			Container.Bind<DealDamageHandler>().AsSingle();
+			Container.Bind<DestroyHandler>().AsSingle();
 
-			Container.Bind<AttackHandler>().AsSingle();
+			// Event bus visual
 			Container.Bind<AttackVisualHandler>().AsSingle();
+			Container.Bind<DestroyVisualHandler>().AsSingle();
 		}
 	}
 }

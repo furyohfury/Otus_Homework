@@ -21,6 +21,12 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnRun()
         {
+            // TODO if frozen
+            // if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
+            // {
+            //     Finish();
+            //     return;
+            // }
             _heroListView.OnHeroClicked += OnHeroClicked;
         }
 
@@ -31,7 +37,8 @@ namespace Lessons.Lesson19_EventBus
         
         private void OnHeroClicked(HeroView hero)
         {
-            _eventBus.RaiseEvent(new AttackEvent(CurrentHero, hero)); // TODO hero needs to be heroentity
+            var currentHero = CurrentHeroService.CurrentHero;
+            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero)); // TODO hero needs to be heroentity
             Finish();
         }
     }
