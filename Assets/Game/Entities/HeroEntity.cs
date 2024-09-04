@@ -16,6 +16,9 @@ namespace Entities
 		private void Awake()
 		{
 			_entity.AddData(new HealthComponent(_config.CurrentHealth, _config.MaxHealth));
+			// damage component
+			// destroy component
+			// heroview component
 		}
 
 		private void OnEnable()

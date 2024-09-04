@@ -13,6 +13,9 @@ namespace Game.Installers
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.Bind<EventBus>().AsSingle();
 			Container.Bind<CurrentHeroService().AsSingle();
+
+			Container.Bind<AttackHandler>().AsSingle();
+			Container.Bind<AttackVisualHandler>().AsSingle();
 		}
 	}
 }

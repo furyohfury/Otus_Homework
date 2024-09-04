@@ -7,27 +7,11 @@ namespace Lessons.Lesson19_EventBus
         }
 
         protected override void OnHandleEvent(AttackEvent evt)
-        {
-            
-            
-            if (evt.Entity.TryGet(out StatsComponent stats))
+        {    
+            if (evt.Entity.TryGet(out DamageComponent damageComponent))
             {
-                EventBus.RaiseEvent(new DealDamageEvent(evt.Target, stats.Strength));
-            }
-            
-            if (evt.Entity.TryGet(out WeaponComponent weaponComponent))
-            {
-                var weapon = weaponComponent.Weapon;
-                var effects = weapon.Effects;
-                
-                foreach (var effect in effects)
-                {
-                    effect.Source = evt.Entity;
-                    effect.Target = evt.Target;
-                    
-                    EventBus.RaiseEvent(effect);
-                }
-            }
+                EventBus.RaiseEvent(new DealDamageEvent(evt.Target, damageComponent.Damage));
+            }            
         }
     }
 }

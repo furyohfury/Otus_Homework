@@ -5,9 +5,13 @@ namespace Lessons.Lesson19_EventBus
 {
 	public class AttackEvent : IEvent
 	{
-		public AttackEvent(HeroEntity source, HeroEntity target)
+		public Entity Source;
+		public Entity Target;
+
+		public AttackEvent(Entity source, Entity target)
 		{
-            
+            Source = source;
+			Target = target;
 		}
 	}
 }
