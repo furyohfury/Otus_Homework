@@ -1,3 +1,5 @@
+ using Entities;
+
  namespace Lessons.Lesson19_EventBus
  {
      public sealed class DealDamageHandler : BaseHandler<DealDamageEvent>
@@ -13,9 +15,9 @@
                  return;
              }
              
-             health.Value -= evt.Damage;
+             health.CurrentHealth -= evt.Damage;
 
-             if (health.Value <= 0)
+             if (health.CurrentHealth <= 0)
              {
                  EventBus.RaiseEvent(new DestroyEvent(evt.Target));
              }

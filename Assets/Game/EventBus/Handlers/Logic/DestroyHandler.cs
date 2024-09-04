@@ -1,3 +1,5 @@
+ using Entities;
+
  namespace Lessons.Lesson19_EventBus
  {
      public sealed class DestroyHandler : BaseHandler<DestroyEvent>

@@ -2,12 +2,13 @@ using System;
 using Entities;
 using UI;
 using UnityEngine;
+using Zenject;
 
 namespace Lessons.Lesson19_EventBus
 {
     public class PlayerInputTask : EventTask
     {
-        private readonly EventBus _eventBus;
+        private EventBus _eventBus;
         private HeroListView _enemyHeroListView;
         private CurrentHeroService _currentHeroService;
 
@@ -21,6 +22,7 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnRun()
         {
+            Debug.Log("Run PlayerInputTask");
             // TODO if frozen
             // if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
             // {
@@ -37,8 +39,10 @@ namespace Lessons.Lesson19_EventBus
         
         private void OnHeroClicked(HeroView hero)
         {
-            var currentHero = CurrentHeroService.CurrentHero;
-            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero)); // TODO hero needs to be heroentity
+            Debug.Log($"Clicked hero {hero.name}");
+            var currentHero = _currentHeroService.CurrentHero;
+            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>())); 
+            // TODO hero needs to be heroentity
             Finish();
         }
     }

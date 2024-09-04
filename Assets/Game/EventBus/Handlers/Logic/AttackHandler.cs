@@ -1,3 +1,5 @@
+using Entities;
+
 namespace Lessons.Lesson19_EventBus
 {
     public sealed class AttackHandler : BaseHandler<AttackEvent>
@@ -8,7 +10,7 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnHandleEvent(AttackEvent evt)
         {    
-            if (evt.Source.TryGetData(out DamageComponent sourcedamageComponent))
+            if (evt.Source.TryGetData(out DamageComponent sourceDamageComponent))
             {
                 EventBus.RaiseEvent(new DealDamageEvent(evt.Target, sourceDamageComponent.Damage));
             }            

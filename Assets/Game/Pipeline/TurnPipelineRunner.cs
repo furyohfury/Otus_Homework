@@ -1,37 +1,32 @@
-using System;
-using Entities;
-using Sirenix.OdinInspector;
-using UnityEngine;
 using Zenject;
 
 namespace Lessons.Lesson19_EventBus
 {
-    public class TurnPipelineRunner : IInitializable
-    {
-        private PlayerTurnPipeline _pipeline;
-        
-        [Inject]
-        public TurnPipelineRunner(PlayerTurnPipeline pipeline)
-        {
-            _pipeline = pipeline;
-        }
-        
-        void IInitializable.Initialize()
-        {
-            _pipeline.OnFinished += OnFinished;
-            Run();
-        }
+	public class TurnPipelineRunner : IInitializable
+	{
+		private readonly TurnPipeline _pipeline;
 
-        private void OnFinished()
-        {
-            _pipeline.Reset();
-            _pipeline.RunNextTask();
-        }
+		[Inject]
+		public TurnPipelineRunner(TurnPipeline pipeline)
+		{
+			_pipeline = pipeline;
+		}
 
-        public void Run()
-        {
-            _pipeline.RunNextTask();
-        }
+		void IInitializable.Initialize()
+		{
+			_pipeline.OnFinished += OnFinished;
+			// Run(); // TODO uncomm
+		}
 
-    }
+		private void OnFinished()
+		{
+			_pipeline.Reset();
+			_pipeline.RunNextTask();
+		}
+
+		public void Run()
+		{
+			_pipeline.RunNextTask();
+		}
+	}
 }

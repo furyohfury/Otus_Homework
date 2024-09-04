@@ -1,4 +1,6 @@
 ﻿using Lessons.Lesson19_EventBus;
+using UI;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Installers
@@ -7,14 +9,15 @@ namespace Game.Installers
 	{
 		public override void InstallBindings()
 		{
+			Application.targetFrameRate = 60;
 			// Services
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
-			Container.Bind<CurrentHeroService().AsSingle();
+			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
 
 			// Pipeline
 			Container.Bind<TurnPipeline>().AsCached();
 			Container.BindInterfacesAndSelfTo<TurnPipelineInstaller>().AsCached();
-			Container.Bind<TurnPipelineRunner>().AsCached();
+			Container.BindInterfacesAndSelfTo<TurnPipelineRunner>().AsCached();
 			
 			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();

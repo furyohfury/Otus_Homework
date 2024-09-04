@@ -7,7 +7,7 @@ namespace Lessons.Lesson19_EventBus
         public Entity Target;
         public int Damage;
         
-        public DealDamageEvent(IEntity target, int damage)
+        public DealDamageEvent(Entity target, int damage)
         {
             Target = target;
             Damage = damage;

@@ -5,24 +5,26 @@ namespace Lessons.Lesson19_EventBus
 {
 	public class TurnPipelineInstaller : IInitializable
 	{
-		private readonly PlayerTurnPipeline _playerTurnPipeline;
+		private readonly TurnPipeline _turnPipeline;
 		private readonly DiContainer _diContainer;
 
 		[Inject]
-		public TurnPipelineInstaller(PlayerTurnPipeline playerTurnPipeline, DiContainer diContainer)
+		public TurnPipelineInstaller(TurnPipeline turnPipeline, DiContainer diContainer)
 		{
-			_playerTurnPipeline = playerTurnPipeline;
+			_turnPipeline = turnPipeline;
 			_diContainer = diContainer;
 		}
 
 		void IInitializable.Initialize()
 		{
-			_playerTurnPipeline.AddTask(new StartTask());
-			// _turnPipeline.AddTask(_diContainer.CreateInstance<PlayerInputTask>());
+			_turnPipeline.AddTask(new StartTask());
+			var playerInputTask = new PlayerInputTask();
+			_diContainer.Inject(playerInputTask);
+			_turnPipeline.AddTask(playerInputTask);
 			// _turnPipeline.AddTask(_diContainer.CreateInstance<StartVisualPipelineTask>());
 			// _turnPipeline.AddTask(_diContainer.CreateInstance<EnemyInputTask>());
 			// _turnPipeline.AddTask(_diContainer.CreateInstance<StartVisualPipelineTask>());
-			_playerTurnPipeline.AddTask(new FinishTask());
+			_turnPipeline.AddTask(new FinishTask());
 		}
 	}
 }

@@ -10,15 +10,13 @@ namespace Entities
 		private HeroView _heroView;
 		[SerializeField]
 		private HeroConfig _config;
-		[SerializeField]
-		private Entity _entity;
 
 		private void Awake()
 		{
-			_entity.AddData(new HealthComponent(_config.CurrentHealth, _config.MaxHealth));
-			// damage component
-			// destroy component
-			// heroview component
+			AddData(new HealthComponent(_config.CurrentHealth, _config.MaxHealth));
+			AddData(new DamageComponent(_config.Damage));
+			AddData(new DestroyComponent(gameObject));
+			AddData(new HeroViewComponent(_heroView));
 		}
 
 		private void OnEnable()

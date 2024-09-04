@@ -1,30 +1,30 @@
-public sealed class CurrentHeroService : ICurrentHeroService, IInitializable, IDisposable
+using System;
+using Entities;
+using Lessons.Lesson19_EventBus;
+using Zenject;
+
+public sealed class CurrentHeroService : ICurrentHeroService, IInitializable, IDisposable // TODO make everything through interface
 {
-    public HeroEntity CurrentHero {get; private set;}
-    private PipelineRunenr _pipelineRunner;
+	public HeroEntity CurrentHero => _currentHero;
+	public HeroEntity _currentHero; // TODO make private after debug
+	private TurnPipelineRunner _pipelineRunner;
 
-    public CurrentHeroService(PipelineRunner pipelineRunner)
-    {
-        _pipelineRunner = pipelineRunner;
-    }
+	public CurrentHeroService(TurnPipelineRunner pipelineRunner)
+	{
+		_pipelineRunner = pipelineRunner;
+	}
 
-    public void Initialize()
-    {
-        _pipelineRunner.OnPipelineCompleted += OnPipelineCompleted;
-    }
+	public void Initialize()
+	{
+		// _pipelineRunner.OnPipelineCompleted += OnPipelineCompleted;
+	}
 
-    public void OnPipelineCompleted()
-    {
-        
-    }
+	public void OnPipelineCompleted()
+	{
+	}
 
-    public void Dispose()
-    {
-        _pipelineRunner.OnPipelineCompleted -= OnPipelineCompleted;
-    }
-}
-
-public interface ICurrentHeroService
-{
-    public HeroEntity CurrentHero {get;}
+	public void Dispose()
+	{
+		// _pipelineRunner.OnPipelineCompleted -= OnPipelineCompleted;
+	}
 }
