@@ -12,9 +12,9 @@ namespace Game.Installers
 			Container.Bind<CurrentHeroService().AsSingle();
 
 			// Pipeline
-			Container.Bind<PlayerTurnPipeline>().AsCached();
-			Container.BindInterfacesAndSelfTo<PlayerTurnPipelineInstaller>().AsCached();
-			Container.Bind<PlayerTurnPipelineRunner>().AsCached();
+			Container.Bind<TurnPipeline>().AsCached();
+			Container.BindInterfacesAndSelfTo<TurnPipelineInstaller>().AsCached();
+			Container.Bind<TurnPipelineRunner>().AsCached();
 			
 			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();

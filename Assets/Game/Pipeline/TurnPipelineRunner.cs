@@ -6,14 +6,12 @@ using Zenject;
 
 namespace Lessons.Lesson19_EventBus
 {
-    public class PlayerTurnPipelineRunner : IInitializable
+    public class TurnPipelineRunner : IInitializable
     {
         private PlayerTurnPipeline _pipeline;
-        private HeroEntity _activeHero;
-        private HeroEntity[] _playerHeroes;
         
         [Inject]
-        public PlayerTurnPipelineRunner(PlayerTurnPipeline pipeline)
+        public TurnPipelineRunner(PlayerTurnPipeline pipeline)
         {
             _pipeline = pipeline;
         }

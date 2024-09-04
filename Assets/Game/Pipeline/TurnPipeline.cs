@@ -1,6 +1,6 @@
 namespace Lessons.Lesson19_EventBus
 {
-    public class PlayerTurnPipeline : Pipeline
+    public class TurnPipeline : Pipeline
     {
         
     }

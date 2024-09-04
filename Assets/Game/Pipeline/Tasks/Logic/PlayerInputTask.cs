@@ -8,14 +8,14 @@ namespace Lessons.Lesson19_EventBus
     public class PlayerInputTask : EventTask
     {
         private readonly EventBus _eventBus;
-        private HeroListView _heroListView;
+        private HeroListView _enemyHeroListView;
         private CurrentHeroService _currentHeroService;
 
         [Inject]
         public void Construct(EventBus eventBus, UIService uiservice, CurrentHeroService currentHeroService)
         {
             _eventBus = eventBus;
-            _heroListView = uiservice.GetRedPlayer();
+            _enemyHeroListView = uiservice.GetRedPlayer();
             _currentHeroService = currentHeroService;
         }
 
@@ -27,12 +27,12 @@ namespace Lessons.Lesson19_EventBus
             //     Finish();
             //     return;
             // }
-            _heroListView.OnHeroClicked += OnHeroClicked;
+            _enemyHeroListView.OnHeroClicked += OnHeroClicked;
         }
 
         protected override void OnFinish()
         {
-            _heroListView.OnHeroClicked -= OnHeroClicked;
+            _enemyHeroListView.OnHeroClicked -= OnHeroClicked;
         }
         
         private void OnHeroClicked(HeroView hero)

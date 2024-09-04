@@ -17,7 +17,7 @@
          {
              if (_entity.TryGetData(out HeroViewComponent heroViewComponent))
              {
-                heroViewComponent.HeroView.SetActive(false);
+                 // TODO mb some vfx
              }
          }
      }
