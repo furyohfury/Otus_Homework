@@ -11,6 +11,17 @@ namespace Entities
 
 		public void AddData(IComponent component) => Components.Add(component.GetType(), component);
 
+		public bool TryRemoveData<T>() where T : IComponent
+		{
+			var type = typeof(T);
+			if (Components.ContainsKey(type))
+			{
+				Components.Remove[type];
+				return true;
+			}
+			return false;			
+		}
+
 		public bool TryGetData<T>(out T component)
 		{
 			foreach (var entityComponent in Components)

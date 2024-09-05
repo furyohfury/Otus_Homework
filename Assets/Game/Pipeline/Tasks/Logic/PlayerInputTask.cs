@@ -26,6 +26,7 @@ namespace Lessons.Lesson19_EventBus
             // TODO if frozen
             // if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
             // {
+            //     _currentHeroService.CurrentHero.TryRemoveData<Disabled>();
             //     Finish();
             //     return;
             // }
