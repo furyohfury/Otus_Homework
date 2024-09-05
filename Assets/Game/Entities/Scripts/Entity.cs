@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Entities
@@ -9,34 +8,39 @@ namespace Entities
 	{
 		protected readonly Dictionary<Type, IComponent> Components = new();
 
-		public void AddData(IComponent component) => Components.Add(component.GetType(), component);
+		public void AddData(IComponent component)
+		{
+			Components.Add(component.GetType(), component);
+		}
 
 		public bool TryRemoveData<T>() where T : IComponent
 		{
 			var type = typeof(T);
 			if (Components.ContainsKey(type))
 			{
-				Components.Remove[type];
+				Components.Remove(type);
 				return true;
 			}
-			return false;			
+
+			return false;
 		}
 
 		public bool TryGetData<T>(out T component)
 		{
-			foreach (var entityComponent in Components)
+			var type = typeof(T);
+			if (Components.TryGetValue(type, out var tComponent))
 			{
-				if (entityComponent is T tcomponent)
-				{
-					component = tcomponent;
-					return true;
-				}
+				component = (T)tComponent;
+				return true;
 			}
 
 			component = default;
 			return false;
 		}
 
-		protected T GetData<T>() => (T) Components[typeof(T)];
+		protected T GetData<T>()
+		{
+			return (T)Components[typeof(T)];
+		}
 	}
 }

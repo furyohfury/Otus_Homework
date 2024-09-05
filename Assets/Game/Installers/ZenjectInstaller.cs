@@ -16,18 +16,19 @@ namespace Game.Installers
 
 			// Pipeline
 			Container.Bind<TurnPipeline>().AsCached();
+			Container.Bind<VisualPipeline>().AsCached();
 			Container.BindInterfacesAndSelfTo<TurnPipelineInstaller>().AsCached();
 			Container.BindInterfacesAndSelfTo<TurnPipelineRunner>().AsCached();
 			
 			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();
-			Container.Bind<AttackHandler>().AsSingle();			
-			Container.Bind<DealDamageHandler>().AsSingle();
-			Container.Bind<DestroyHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle();			
+			Container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle();
 
 			// Event bus visual
-			Container.Bind<AttackVisualHandler>().AsSingle();
-			Container.Bind<DestroyVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
 		}
 	}
 }

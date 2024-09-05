@@ -18,23 +18,24 @@ namespace Game
 		private HeroListView _redPlayerViews;
 		[SerializeField]
 		private HeroView _heroView;
+		
+		[SerializeField]
+		private Button _herobutton;
+		[SerializeField]
+		private Button _debugButton;
 
 		// [ShowInInspector]
 		private HeroEntity _currentHero => _currentHeroService.CurrentHero;
 
 		private void Start()
 		{
-			_redPlayerViews = FindObjectOfType<UIService>().GetRedPlayer();
-			_redPlayerViews.OnHeroClicked += RedPlayerViewsOnOnHeroClicked;
+			// _redPlayerViews = FindObjectOfType<UIService>().GetRedPlayer();
+			// _redPlayerViews.OnHeroClicked += RedPlayerViewsOnOnHeroClicked;
 		}
+		
 		private void RedPlayerViewsOnOnHeroClicked(HeroView obj)
 		{
 			Debug.Log($"hero {obj.name} clicked");
-		}
-
-		private void OnOnClicked()
-		{
-			Debug.Log("First was clicked");
 		}
 
 

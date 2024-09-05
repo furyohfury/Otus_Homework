@@ -45,7 +45,7 @@ namespace Lessons.Lesson19_EventBus
             
             // var key = typeof(TEvent);
             var key = evt.GetType();
-            Debug.Log($"Raise event {key}");
+            Debug.Log($"Raise event {key.Name}");
 
             if (_handlers.TryGetValue(key, out var handlers))
             {

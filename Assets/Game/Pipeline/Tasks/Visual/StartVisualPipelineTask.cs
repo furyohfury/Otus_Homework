@@ -1,12 +1,14 @@
 using UnityEngine;
+using Zenject;
 
 namespace Lessons.Lesson19_EventBus.Visual
 {
     public class StartVisualPipelineTask : EventTask
     {
-        private readonly VisualPipeline _visualPipeline;
+        private VisualPipeline _visualPipeline;
 
-        public StartVisualPipelineTask(VisualPipeline visualPipeline)
+        [Inject]
+        public void Construct(VisualPipeline visualPipeline)
         {
             _visualPipeline = visualPipeline;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI
 {
-    [RequireComponent(typeof(Canvas))]
+    // [RequireComponent(typeof(Canvas))]
     public sealed class HeroListView : MonoBehaviour
     {
         private const int FORWARD_LAYER = 10;
@@ -15,11 +15,11 @@ namespace UI
         [SerializeField]
         private HeroView[] views;
 
-        private Canvas canvas;
+        // private Canvas canvas; TODO delete this shit
 
         private void Awake()
         {
-            this.canvas = this.GetComponent<Canvas>();
+            // this.canvas = this.GetComponent<Canvas>();
         }
 
         private void OnEnable()
@@ -56,7 +56,7 @@ namespace UI
 
         public void SetActive(bool isActive)
         {
-            this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
+            // this.canvas.sortingOrder = isActive ? FORWARD_LAYER : BACK_LAYER;
         }
     }
 }
