@@ -3,13 +3,13 @@ using Zenject;
 
 namespace Lessons.Lesson19_EventBus
 {
-	public class TurnPipelineInstaller : IInitializable
+	public class PlayerTurnPipelineInstaller : IInitializable
 	{
 		private readonly TurnPipeline _turnPipeline;
 		private readonly DiContainer _diContainer;
 
 		[Inject]
-		public TurnPipelineInstaller(TurnPipeline turnPipeline, DiContainer diContainer)
+		public PlayerTurnPipelineInstaller(TurnPipeline turnPipeline, DiContainer diContainer)
 		{
 			_turnPipeline = turnPipeline;
 			_diContainer = diContainer;

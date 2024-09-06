@@ -7,14 +7,14 @@ using Random = UnityEngine.Random;
 
 namespace Lessons.Lesson19_EventBus
 {
-    public class EnemyInputTask : EventTask
+    public class AIInputTask : EventTask
     {
         private EventBus _eventBus;
         private HeroListView _playerHeroListView;
         private CurrentHeroService _currentHeroService;
 
         [Inject]
-        public EnemyInputTask(EventBus eventBus, UIService uiservice, CurrentHeroService currentHeroService)
+        public AIInputTask(EventBus eventBus, UIService uiservice, CurrentHeroService currentHeroService)
         {
             _eventBus = eventBus;
             _playerHeroListView = uiservice.GetBluePlayer();

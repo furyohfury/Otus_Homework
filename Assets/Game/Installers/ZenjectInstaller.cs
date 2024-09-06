@@ -16,10 +16,16 @@ namespace Game.Installers
 			Container.Bind<HeroEntity[]>().FromComponentsInHierarchy().AsCached();
 
 			// Pipeline
-			Container.Bind<TurnPipeline>().AsCached();
 			Container.Bind<VisualPipeline>().AsCached();
-			Container.BindInterfacesAndSelfTo<TurnPipelineInstaller>().AsCached();
-			Container.BindInterfacesAndSelfTo<TurnPipelineRunner>().AsCached();
+
+			var playerTurnPipeline = new TurnPipeline();	
+			Container.Bind<TurnPipeline>().FromInstance(playerTurnPipeline).AsCached();		
+			Container.BindInterfacesAndSelfTo<PlayerTurnPipelineInstaller>().AsCached().WithArguments(playerTurnPipeline);
+			var aiTurnPipeline = new TurnPipeline();	
+			Container.Bind<TurnPipeline>().FromInstance(aiTurnPipeline).AsCached();		
+			Container.BindInterfacesAndSelfTo<AITurnPipelineInstaller>().AsCached().WithArguments(aiTurnPipeline);
+
+			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached();
 			
 			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();
