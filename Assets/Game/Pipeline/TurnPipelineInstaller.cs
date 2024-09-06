@@ -21,9 +21,9 @@ namespace Lessons.Lesson19_EventBus
 			var playerInputTask = new PlayerInputTask();
 			
 			_diContainer.Inject(playerInputTask);
-			_turnPipeline.AddTask(playerInputTask);
-			// _turnPipeline.AddTask(_diContainer.CreateInstance<EnemyInputTask>());
+			_turnPipeline.AddTask(playerInputTask);			
 			var startVisualPipelineTask = new StartVisualPipelineTask();
+			// endturntask
 			_diContainer.Inject(startVisualPipelineTask);
 			_turnPipeline.AddTask(startVisualPipelineTask);
 			

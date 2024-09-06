@@ -15,7 +15,7 @@ namespace Lessons.Lesson19_EventBus
 		void IInitializable.Initialize()
 		{
 			_pipeline.OnFinished += OnFinished;
-			// Run(); // TODO uncomm
+			Run();
 		}
 
 		private void OnFinished()

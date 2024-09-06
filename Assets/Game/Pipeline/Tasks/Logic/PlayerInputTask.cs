@@ -42,8 +42,7 @@ namespace Lessons.Lesson19_EventBus
         {
             Debug.Log($"Clicked hero {hero.name}");
             var currentHero = _currentHeroService.CurrentHero;
-            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>())); 
-            // TODO hero needs to be heroentity
+            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));   // TODO getcomp is cringe but works for now         
             Finish();
         }
     }

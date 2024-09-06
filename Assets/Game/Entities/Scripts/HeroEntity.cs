@@ -10,6 +10,8 @@ namespace Entities
 		private HeroView _heroView;
 		[SerializeField]
 		private HeroConfig _config;
+		[SerializeField]
+		private Team _team;
 
 		private void Awake()
 		{
@@ -17,6 +19,7 @@ namespace Entities
 			AddData(new DamageComponent(_config.Damage));
 			AddData(new DestroyComponent(gameObject));
 			AddData(new HeroViewComponent(_heroView));
+			AddData(new TeamComponent(_team));
 		}
 
 		private void OnEnable()
@@ -27,7 +30,9 @@ namespace Entities
 
 		private void ChangeViewHp(int hp)
 		{
-			
+			var damageComponent = GetData<DamageComponent>();
+			int damage = damageComponent.Damage;
+			_heroView.SetStats($"{damage}/{hp}");
 		}
 
 		private void OnDisable()

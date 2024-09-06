@@ -10,9 +10,10 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Application.targetFrameRate = 60;
-			// Services
+			// Scene
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
+			Container.Bind<HeroEntity[]>().FromComponentsInHierarchy().AsCached();
 
 			// Pipeline
 			Container.Bind<TurnPipeline>().AsCached();

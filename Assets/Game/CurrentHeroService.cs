@@ -6,25 +6,20 @@ using Zenject;
 public sealed class CurrentHeroService : ICurrentHeroService, IInitializable, IDisposable // TODO make everything through interface
 {
 	public HeroEntity CurrentHero => _currentHero;
-	public HeroEntity _currentHero; // TODO make private after debug
-	private TurnPipelineRunner _pipelineRunner;
+	private HeroEntity _currentHero;
 
-	public CurrentHeroService(TurnPipelineRunner pipelineRunner)
+	public CurrentHeroService()
 	{
-		_pipelineRunner = pipelineRunner;
+		
 	}
 
 	public void Initialize()
 	{
-		// _pipelineRunner.OnPipelineCompleted += OnPipelineCompleted;
-	}
-
-	public void OnPipelineCompleted()
-	{
+		
 	}
 
 	public void Dispose()
 	{
-		// _pipelineRunner.OnPipelineCompleted -= OnPipelineCompleted;
+		
 	}
 }
