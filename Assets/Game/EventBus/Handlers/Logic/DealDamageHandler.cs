@@ -1,4 +1,5 @@
  using Entities;
+ using UnityEngine;
 
  namespace Lessons.Lesson19_EventBus
  {
@@ -10,12 +11,13 @@
 
          protected override void OnHandleEvent(DealDamageEvent evt)
          {
+             Debug.Log($"DealDamage handled. Target: {evt.Target.gameObject.name}, damage: {evt.Damage}");
              if (!evt.Target.TryGetData(out HealthComponent health))
              {
                  return;
              }
              
-             health.CurrentHealth -= evt.Damage;
+             health.ChangeCurrentHealth(-evt.Damage);
 
              if (health.CurrentHealth <= 0)
              {

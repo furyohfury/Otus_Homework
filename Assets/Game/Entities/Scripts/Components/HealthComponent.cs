@@ -17,7 +17,7 @@ namespace Entities
 
 		public void ChangeCurrentHealth(int hp)
 		{
-			CurrentHealth = hp;
+			CurrentHealth += hp;
 			OnHealthChanged?.Invoke(CurrentHealth);
 		}
 		

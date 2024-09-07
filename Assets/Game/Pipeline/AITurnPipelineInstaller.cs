@@ -17,7 +17,7 @@ namespace Lessons.Lesson19_EventBus
 
 		void IInitializable.Initialize()
 		{			
-            var aiInputTask = _diContainer.CreateInstance<AIInputTask>();
+             var aiInputTask = _diContainer.Instantiate<AIInputTask>();
 			_turnPipeline.AddTask(aiInputTask);			
 			var startVisualPipelineTask = new StartVisualPipelineTask();
 			// endturntask

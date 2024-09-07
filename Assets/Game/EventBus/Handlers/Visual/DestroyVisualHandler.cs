@@ -11,7 +11,7 @@
 
          protected override void OnHandleEvent(DestroyEvent evt)
          {
-             _visualPipeline.AddTask(new DestroyVisualTask(evt.Entity));
+             _visualPipeline.AddTask(new DestroyVisualTask(evt.Target));
          }
      }
  }

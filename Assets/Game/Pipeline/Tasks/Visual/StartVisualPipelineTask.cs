@@ -15,7 +15,7 @@ namespace Lessons.Lesson19_EventBus.Visual
 
         protected override void OnRun()
         {
-            Debug.Log("Run visual task");
+            Debug.Log("VisualPipelineStart task OnRun");
             _visualPipeline.OnFinished += OnFinishedPipeline;
             _visualPipeline.RunNextTask();
         }
@@ -27,6 +27,7 @@ namespace Lessons.Lesson19_EventBus.Visual
 
         private void OnFinishedPipeline()
         {
+            Debug.Log("VisualPipeline finished and cleared");
             _visualPipeline.ClearAll();
             Finish();
         }

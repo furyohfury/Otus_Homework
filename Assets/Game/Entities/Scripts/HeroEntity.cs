@@ -17,7 +17,7 @@ namespace Entities
 		{
 			AddData(new HealthComponent(_config.CurrentHealth, _config.MaxHealth));
 			AddData(new DamageComponent(_config.Damage));
-			AddData(new DestroyComponent(gameObject));
+			AddData(new DestroyComponent());
 			AddData(new HeroViewComponent(_heroView));
 			AddData(new TeamComponent(_team));
 		}

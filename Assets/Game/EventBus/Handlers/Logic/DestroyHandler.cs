@@ -1,21 +1,21 @@
- using Entities;
+using Entities;
+using UnityEngine;
 
- namespace Lessons.Lesson19_EventBus
- {
-     public sealed class DestroyHandler : BaseHandler<DestroyEvent>
-     {         
-         
-         public DestroyHandler(EventBus eventBus) : base(eventBus)
-         {
-             
-         }
+namespace Lessons.Lesson19_EventBus
+{
+	public sealed class DestroyHandler : BaseHandler<DestroyEvent>
+	{
+		public DestroyHandler(EventBus eventBus) : base(eventBus)
+		{
+		}
 
-         protected override void OnHandleEvent(DestroyEvent evt)
-         {             
-             if (evt.Entity.TryGetData(out DestroyComponent destroyComponent))
-              {
-                  destroyComponent.Destroy();
-              }
-         }
-     }
- }
+		protected override void OnHandleEvent(DestroyEvent evt)
+		{
+			Debug.Log($"Destroy handled, Target: {evt.Target}");
+			if (evt.Target.TryGetData(out DestroyComponent destroyComponent))
+			{
+				destroyComponent.Destroy();
+			}
+		}
+	}
+}

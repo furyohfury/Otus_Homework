@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &48072247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827189790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &57628784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (3)
+      value: RedHero4
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -164,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -174,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -214,12 +220,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1650
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -250,12 +256,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 57628784}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2019806276}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &132797173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 165874627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &165874627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (2)
+      value: BlueHero2
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -297,7 +309,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -307,7 +319,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -347,12 +359,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -383,12 +395,27 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 165874627}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 132797173}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &165874630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132797173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 165874629}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 0
 --- !u!1 &185250766
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (1)
+      value: BlueHero1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -498,7 +525,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -508,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -558,12 +585,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -620,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroView: {fileID: 202141558}
   _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 0
 --- !u!1 &389887956
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389887956}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
   m_Name: 
@@ -761,7 +789,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (3)
+      value: BlueHero3
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -786,7 +814,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -796,7 +824,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -836,12 +864,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1190
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -872,7 +900,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 459021462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 849372072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
@@ -1187,7 +1215,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743752121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
   m_Name: 
@@ -1305,6 +1333,27 @@ Transform:
   m_Father: {fileID: 603324042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &849372072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 459021462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &849372073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849372072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 459021464}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 0
 --- !u!224 &1141858329 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
@@ -1387,7 +1436,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (2)
+      value: RedHero3
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1412,7 +1461,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1422,7 +1471,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1462,12 +1511,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1190
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1498,7 +1547,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1370046839}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2133109594}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
@@ -1520,7 +1569,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (4)
+      value: BlueHero4
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1545,7 +1594,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1555,7 +1604,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1605,12 +1654,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1650
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1641,12 +1690,27 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1827189790}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 48072247}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1827189793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48072247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 1827189792}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 0
 --- !u!1 &1854234142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1828,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bluePlayer: {fileID: 743752126}
   redPlayer: {fileID: 389887961}
+--- !u!1 &1871660846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1991190821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1917274683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1884,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView (1)
+      value: RedHero2
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1839,7 +1909,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1849,7 +1919,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1899,12 +1969,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -1935,12 +2005,48 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1991190821}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1871660846}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1991190824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871660846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 1991190823}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 1
+--- !u!1 &2019806276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 57628784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2019806277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019806276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 57628786}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 1
 --- !u!1 &2128271738 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
@@ -1961,6 +2067,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroView: {fileID: 1141858330}
   _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 1
+--- !u!1 &2133109594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1370046839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2133109595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133109594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82929898846c8b8c40fa121a811c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroView: {fileID: 1370046841}
+  _config: {fileID: 11400000, guid: abc8188ba70332f499e3e9501392ef5a, type: 2}
+  _team: 1
 --- !u!1001 &383512544509087720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1981,7 +2109,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_Name
-      value: HeroView
+      value: RedHero1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -2006,7 +2134,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -2016,7 +2144,7 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -2066,12 +2194,12 @@ PrefabInstance:
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -292.8158
       objectReference: {fileID: 0}
     - target: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}

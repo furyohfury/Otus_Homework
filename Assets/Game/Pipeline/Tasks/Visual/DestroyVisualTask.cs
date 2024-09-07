@@ -17,8 +17,11 @@
          {
              if (_entity.TryGetData(out HeroViewComponent heroViewComponent))
              {
-                 // TODO mb some vfx
+                 Debug.Log($"DestroyVisualTask of {_entity.gameObject.name}");
+                 heroViewComponent.HeroView.gameObject.SetActive(false);
+                 // Object.Destroy(heroViewComponent.HeroView.gameObject);
              }
+             Finish();
          }
      }
  }

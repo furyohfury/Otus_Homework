@@ -1,4 +1,5 @@
-﻿using Lessons.Lesson19_EventBus;
+﻿using Entities;
+using Lessons.Lesson19_EventBus;
 using UI;
 using UnityEngine;
 using Zenject;
@@ -13,7 +14,7 @@ namespace Game.Installers
 			// Scene
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
-			Container.Bind<HeroEntity[]>().FromComponentsInHierarchy().AsCached();
+			Container.Bind<HeroEntity>().FromComponentsInHierarchy().AsCached();
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();

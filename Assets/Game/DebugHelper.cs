@@ -11,7 +11,7 @@ namespace Game
 {
 	public class DebugHelper : MonoBehaviour
 	{
-		private TurnPipelineRunner _turnPipelineRunner;
+		private GamePipelineRunner _turnPipelineRunner;
 		private CurrentHeroService _currentHeroService;
 		
 		[SerializeField]
@@ -23,14 +23,15 @@ namespace Game
 		private Button _herobutton;
 		[SerializeField]
 		private Button _debugButton;
+		[SerializeField]
+		private DiContainer _diContainer;
 
 		// [ShowInInspector]
 		private HeroEntity _currentHero => _currentHeroService.CurrentHero;
 
 		private void Start()
 		{
-			// _redPlayerViews = FindObjectOfType<UIService>().GetRedPlayer();
-			// _redPlayerViews.OnHeroClicked += RedPlayerViewsOnOnHeroClicked;
+			// _diContainer.Instantiate<>()
 		}
 		
 		private void RedPlayerViewsOnOnHeroClicked(HeroView obj)
@@ -40,16 +41,17 @@ namespace Game
 
 
 		[Inject]
-		public void Construct(CurrentHeroService currentHeroService, TurnPipelineRunner turnPipelineRunner)
+		public void Construct(CurrentHeroService currentHeroService, GamePipelineRunner turnPipelineRunner, DiContainer diContainer)
 		{
 			_currentHeroService = currentHeroService;
 			_turnPipelineRunner = turnPipelineRunner;
+			_diContainer = diContainer;
 		}
 
 		[Button]
 		public void SetCurrentHero(HeroEntity hero)
 		{
-			_currentHeroService._currentHero = hero;
+			_currentHeroService.SetCurrentHero(hero);
 		}
 
 		[Button]

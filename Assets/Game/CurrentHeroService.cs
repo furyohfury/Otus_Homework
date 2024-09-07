@@ -18,6 +18,8 @@ public sealed class CurrentHeroService : ICurrentHeroService, IInitializable, ID
 		
 	}
 
+	public void SetCurrentHero(HeroEntity heroEntity) => _currentHero = heroEntity;
+
 	public void Dispose()
 	{
 		

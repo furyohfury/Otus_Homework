@@ -4,11 +4,11 @@
  {
      public struct DestroyEvent : IEvent
      {
-         public Entity Entity;
+         public readonly Entity Target;
 
-         public DestroyEvent(Entity entity)
+         public DestroyEvent(Entity target)
          {
-             Entity = entity;
+             Target = target;
          }
      }
  }

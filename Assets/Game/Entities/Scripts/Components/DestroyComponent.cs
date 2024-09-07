@@ -1,19 +1,22 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Entities
 {
 	public sealed class DestroyComponent : IComponent
-	{
-        private readonly GameObject _gameObject;
+    {
+        public Action OnDestroyed;
+        public bool IsDead { get; private set; }
         
-        public DestroyComponent(GameObject gameObject)
+        public DestroyComponent()
         {
-            _gameObject = gameObject;
         }
 
         public void Destroy()
         {
-            Object.Destroy(_gameObject);
+            IsDead = true;
+            OnDestroyed?.Invoke();
         }
     }
 }

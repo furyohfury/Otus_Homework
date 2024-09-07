@@ -17,12 +17,12 @@ namespace Lessons.Lesson19_EventBus
 
 		protected override async void OnRun()
 		{
-			Debug.Log("Attack visual task");
+			Debug.Log("Attack visual task OnRun");
 			_source.TryGetData(out HeroViewComponent sourceHeroViewComponent);
 			_target.TryGetData(out HeroViewComponent targetHeroViewComponent);
 
 			await sourceHeroViewComponent.HeroView.AnimateAttack(targetHeroViewComponent.HeroView);
-			Debug.Log("ATTACK ANIM FINISHED");
+			Debug.Log("Attack animation Ended");
 			Finish();
 		}
 	}

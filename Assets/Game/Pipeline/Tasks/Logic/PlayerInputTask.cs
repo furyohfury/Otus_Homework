@@ -22,7 +22,7 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnRun()
         {
-            Debug.Log("Run PlayerInputTask");
+            Debug.Log("PlayerInputTask OnRun");
             // TODO if frozen
             // if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
             // {

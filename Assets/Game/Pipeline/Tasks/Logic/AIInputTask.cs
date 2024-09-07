@@ -23,6 +23,7 @@ namespace Lessons.Lesson19_EventBus
 
         protected override void OnRun()
         {
+            Debug.Log("AI input task OnRun");
             // TODO if frozen
             // if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
             // {
@@ -35,7 +36,7 @@ namespace Lessons.Lesson19_EventBus
             int index = Random.Range(0, playerHeroViews.Count);
             var hero = playerHeroViews[index];
             
-            // _eventBus.RaiseEvent(new AttackEvent(currentHero, hero)); 
+            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>())); 
             // TODO hero needs to be heroentity
             Finish();
         }

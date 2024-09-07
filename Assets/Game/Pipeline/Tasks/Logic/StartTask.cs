@@ -6,7 +6,7 @@ namespace Lessons.Lesson19_EventBus
     {
         protected override void OnRun()
         {
-            Debug.Log("Run start task");
+            Debug.Log("Start task OnRun");
             Finish();
         }
     }
