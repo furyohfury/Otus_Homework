@@ -9,10 +9,6 @@ namespace Entities
         public Action OnDestroyed;
         public bool IsDead { get; private set; }
         
-        public DestroyComponent()
-        {
-        }
-
         public void Destroy()
         {
             IsDead = true;
