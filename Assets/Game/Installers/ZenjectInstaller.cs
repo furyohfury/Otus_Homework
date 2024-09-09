@@ -8,13 +8,15 @@ namespace Game.Installers
 {
 	public class ZenjectInstaller : MonoInstaller	
 	{
+		private HeroEntity[] _playerOneHeroes;
+		private HeroEntity[] _playerTwoHeroes;
+
 		public override void InstallBindings()
 		{
 			Application.targetFrameRate = 60;
 			// Scene
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
-			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
-			Container.Bind<HeroEntity>().FromComponentsInHierarchy().AsCached();
+			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();	
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();
