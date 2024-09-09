@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using Entities;
-using UnityEditor;
-using UnityEngine;
 using Zenject;
 
 namespace Lessons.Lesson19_EventBus
@@ -14,10 +11,7 @@ namespace Lessons.Lesson19_EventBus
 
 		private readonly CurrentHeroService _currentHeroService;
 		private Player _currentPlayer = Player.One;
-		private LinkedList<HeroEntity> _playerOneHeroes;
-		private LinkedListNode<HeroEntity> _playerOneHeroNode;
-		private LinkedList<HeroEntity> _playerTwoHeroes;
-		private LinkedListNode<HeroEntity> _playerTwoHeroNode;
+		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
 
 		[Inject]
 		public GamePipelineRunner(TurnPipeline[] pipelines, CurrentHeroService currentHeroService,
@@ -25,8 +19,8 @@ namespace Lessons.Lesson19_EventBus
 		{
 			_pipelines = pipelines;
 			_currentHeroService = currentHeroService;
-			_playerOneHeroes = new LinkedList<HeroEntity>(playerOneHeroes);
-			_playerTwoHeroes = new LinkedList<HeroEntity>(playerTwoHeroes);
+			_heroCollections.Add(Player.One, new HeroCollection(playerOneHeroes, 0));
+			_heroCollections.Add(Player.Two, new HeroCollection(playerTwoHeroes, playerTwoHeroes.Length - 1));
 		}
 
 		void IInitializable.Initialize()
@@ -43,7 +37,9 @@ namespace Lessons.Lesson19_EventBus
 		private void OnFinished()
 		{
 			_pipelines[_activeIndex].Reset();
-			_activeIndex = _activeIndex == _pipelines.Length - 1 ? 0 : _activeIndex + 1;
+			_activeIndex = _activeIndex == _pipelines.Length - 1
+				? 0
+				: _activeIndex + 1;
 			ChangeCurrentHero();
 			Run();
 		}
@@ -53,78 +49,34 @@ namespace Lessons.Lesson19_EventBus
 			_pipelines[_activeIndex].RunNextTask();
 		}
 
-		private void InitializeOrder() // TODO full cringe redo (soso)
-		{			
-			_playerOneHeroNode = _playerOneHeroes.First;
-			_playerTwoHeroNode = _playerTwoHeroes.Last;
+		private void InitializeOrder()
+		{
+			foreach (var playerOneHero in _heroCollections[Player.One].HeroEntities)
+			{
+				playerOneHero.TryGetData(out DestroyComponent destroyComponent);
+				destroyComponent.OnDestroyed += () => _heroCollections[Player.One].RemoveHero(playerOneHero);
+			}
 
-			foreach (var playerOneHero in _playerOneHeroes) // TODO fix if current hero destroyed
+			foreach (var playerTwoHero in _heroCollections[Player.Two].HeroEntities)
 			{
-				playerOneHero.TryGetData(out DestroyComponent destroyComponent)
-				
-					destroyComponent.OnDestroyed += () =>
-					{
-						_playerOneHeroes.Remove(playerOneHero);
-					};
-				
+				playerTwoHero.TryGetData(out DestroyComponent destroyComponent);
+				destroyComponent.OnDestroyed += () => _heroCollections[Player.Two].RemoveHero(playerTwoHero);
 			}
-			
-			foreach (var playerTwoHero in _playerTwoHeroes)
-			{
-				if (playerTwoHero.TryGetData(out DestroyComponent destroyComponent))
-				{
-					destroyComponent.OnDestroyed += () =>
-					{
-						_playerTwoHeroes.Remove(playerTwoHero);
-					};
-				}
-			}
-			
-			_currentHeroService.SetCurrentHero(_playerOneHeroes.First.Value);
+
+			_currentHeroService.SetCurrentHero(_heroCollections[Player.One].HeroEntities[0]);
 		}
-		
+
 		private void ChangeCurrentHero()
 		{
-			_currentPlayer = _currentPlayer == Player.One ? PlayerTwo : PlayerOne;
-			if (!TryGetNextHero(_currentPlayer, out HeroEntity nextHero))
+			_currentPlayer = _currentPlayer == Player.One
+				? Player.Two
+				: Player.One;
+			if (!_heroCollections[_currentPlayer].TryGetNextHero(out var nextHero))
 			{
-				Debug.Log($"{_currentPlayer.ToString()} has no heroes left");
-				EditorApplication.isPaused = true;
+				// TODO game over logic here or in separate controller
 			}
 
 			_currentHeroService.SetCurrentHero(nextHero);
-		}
-
-		private bool TryGetNextHero(Player player, out HeroEntity nextHero)
-		{
-			if (player == Player.One)
-			{
-				if (_playerOneHeroes.Count <= 0)
-				{
-					nextHero = default;
-					return false;
-				}
-				nextHero = _playerOneHeroNode.Next ?? _playerOneHeroes.First;
-				_playerOneHeroNode = nextHero;
-				return true;
-			}
-			else
-			{
-				if (_playerTwoHeroes.Count <= 0)
-				{
-					nextHero = default;
-					return false;
-				}
-				nextHero = _playerTwoHeroNode.Next ?? _playerTwoHeroes.First;
-				_playerTwoHeroNode = nextHero;
-				return true;
-			}
-		}
-		
-		public enum Player : byte
-		{
-			One,
-			Two
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Entities;
 using Lessons.Lesson19_EventBus;
 using Sirenix.OdinInspector;
@@ -29,9 +30,12 @@ namespace Game
 		// [ShowInInspector]
 		private HeroEntity _currentHero => _currentHeroService.CurrentHero;
 
+		private List<HeroEntity> _playerOneHeroes;
+
 		private void Start()
 		{
 			// _diContainer.Instantiate<>()
+			// _playerOneHeroes = _turnPipelineRunner.GetType().GetField("")
 		}
 		
 		private void RedPlayerViewsOnOnHeroClicked(HeroView obj)

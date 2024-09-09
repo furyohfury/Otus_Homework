@@ -1318,6 +1318,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fb71a1fe3e4681a653759dc9977012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerOneHeroes:
+  - {fileID: 202141561}
+  - {fileID: 165874630}
+  - {fileID: 849372073}
+  - {fileID: 1827189793}
+  _playerTwoHeroes:
+  - {fileID: 2128271739}
+  - {fileID: 1991190824}
+  - {fileID: 2133109595}
+  - {fileID: 2019806277}
 --- !u!4 &835942017
 Transform:
   m_ObjectHideFlags: 0

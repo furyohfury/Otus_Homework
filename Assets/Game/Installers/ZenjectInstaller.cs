@@ -8,7 +8,9 @@ namespace Game.Installers
 {
 	public class ZenjectInstaller : MonoInstaller	
 	{
+		[SerializeField]
 		private HeroEntity[] _playerOneHeroes;
+		[SerializeField]
 		private HeroEntity[] _playerTwoHeroes;
 
 		public override void InstallBindings()
@@ -28,7 +30,7 @@ namespace Game.Installers
 			Container.Bind<TurnPipeline>().FromInstance(aiTurnPipeline).AsCached();		
 			Container.BindInterfacesAndSelfTo<AITurnPipelineInstaller>().AsCached().WithArguments(aiTurnPipeline);
 
-			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached();
+			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached().WithArguments(_playerOneHeroes, _playerTwoHeroes);
 			
 			// Event bus logic
 			Container.Bind<EventBus>().AsSingle();
