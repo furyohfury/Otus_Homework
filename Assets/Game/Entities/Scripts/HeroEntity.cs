@@ -20,6 +20,7 @@ namespace Entities
 			AddData(new DestroyComponent());
 			AddData(new HeroViewComponent(_heroView));
 			AddData(new TeamComponent(_team));
+			AddData(_config.AttackEffects);
 		}
 
 		private void OnEnable()

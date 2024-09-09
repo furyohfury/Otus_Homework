@@ -13,6 +13,11 @@ namespace Entities
 			Components.Add(component.GetType(), component);
 		}
 
+		public bool HasData<T>() where T : IComponent
+		{
+			return Components.ContainsKey(typeof(T));
+		}
+
 		public bool TryRemoveData<T>() where T : IComponent
 		{
 			var type = typeof(T);

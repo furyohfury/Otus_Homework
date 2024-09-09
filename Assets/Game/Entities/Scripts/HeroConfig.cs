@@ -8,6 +8,7 @@ namespace Entities
 		public int CurrentHealth;
 		public int MaxHealth;
 		public int Damage;
+		public AttackEffects AttackEffects;
 		// public Sprite Icon;
 		// public Effect[] Effects;
 	}
