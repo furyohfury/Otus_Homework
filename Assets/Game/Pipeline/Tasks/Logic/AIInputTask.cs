@@ -43,9 +43,13 @@ namespace Lessons.Lesson19_EventBus
 
 			var index = Random.Range(0, activePlayerHeroView.Length);
 			var hero = activePlayerHeroView[index];
+			if (currentHero.TryGetData(out InputEffects inputEffects) && inputEffects.InputEffects.OfType<AttackWrongTargetEffect>().Any())
+			{
+				_eventBus.RaiseEvent(new AttackWrongTargetEffect()); // TODO mb remove cringe
+			}
 
 			_eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));
 			Finish();
 		}
-	}
+	}	
 }

@@ -2,7 +2,7 @@
 {
 	public enum Player : byte
 	{
-		One,
-		Two
+		Blue,
+		Red
 	}
 }
