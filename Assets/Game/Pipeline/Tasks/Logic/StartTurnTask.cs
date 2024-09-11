@@ -6,13 +6,13 @@ namespace EventBus
 {
 	public sealed class StartTurnTask : EventTask
 	{
-		private readonly AudioSource _audioSource;
+		private readonly AudioPlayer _audioPlayer;
 		private readonly CurrentHeroService _currentHeroService;
 
 		[Inject]
-		public StartTurnTask(AudioSource audioSource, CurrentHeroService currentHeroService)
+		public StartTurnTask(AudioPlayer audioPlayer, CurrentHeroService currentHeroService)
 		{
-			_audioSource = audioSource;
+			_audioPlayer = audioPlayer;
 			_currentHeroService = currentHeroService;
 		}
 
@@ -28,8 +28,7 @@ namespace EventBus
 
 			var clips = heroStartTurnSoundComponent.AudioClips;
 			var randomIndex = Random.Range(0, clips.Length);
-			_audioSource.clip = clips[randomIndex];
-			_audioSource.Play();
+			_audioPlayer.PlaySound(clips[randomIndex]);
 			Finish();
 		}
 	}

@@ -15,7 +15,7 @@ namespace Game.Installers
 		[SerializeField]
 		private ParticleSystem _damagedParticleSystem;
 		[SerializeField]
-		private AudioSource _audioSource;
+		private AudioPlayer _audioPlayer;
 
 		public override void InstallBindings()
 		{
@@ -23,7 +23,7 @@ namespace Game.Installers
 			// Scene
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
-			Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
+			Container.Bind<AudioPlayer>().FromInstance(_audioPlayer).AsSingle();
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();

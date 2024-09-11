@@ -25,6 +25,8 @@ namespace EventBus
 			targetHeroViewComponent.HeroView.SetStats($"{_damage}/{_health}");
 			var position = targetHeroViewComponent.HeroView.transform.position;
 			var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
+			var psMain = particles.main;
+			psMain.stopAction = ParticleSystemStopAction.Destroy;
 			particles.Play(); // TODO mb change view anyway cuz cant have callback when attacked
 			Finish();
 		}
