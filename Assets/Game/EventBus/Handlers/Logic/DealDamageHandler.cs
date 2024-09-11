@@ -12,7 +12,7 @@
 
          protected override void OnHandleEvent(DealDamageEvent evt)
          {             
-             if (!evt.Target.TryGetComponent(out StatsComponent statsComponent))
+             if (!evt.Target.TryGetData(out StatsComponent statsComponent))
              {
                  return;
              }

@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bd9a3df89841bebdfdb7820dcead5e, type: 3}
   m_Name: DebugHeroCOnfig
   m_EditorClassIdentifier: 
-  CurrentHealth: 20
-  MaxHealth: 20
+  Health: 20
   Damage: 10
+  AttackEffects:
+    Effects: []
+  references:
+    version: 2
+    RefIds: []

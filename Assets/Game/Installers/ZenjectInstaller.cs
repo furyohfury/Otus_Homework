@@ -12,6 +12,8 @@ namespace Game.Installers
 		private HeroEntity[] _playerOneHeroes;
 		[SerializeField]
 		private HeroEntity[] _playerTwoHeroes;
+		[SerializeField]
+		private ParticleSystem _damagedParticleSystem;
 
 		public override void InstallBindings()
 		{
@@ -38,10 +40,13 @@ namespace Game.Installers
 			Container.Bind<EventBus.EventBus>().AsSingle();
 			Container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<RemoveDivineShieldHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle();
 
 			// Event bus visual
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle().WithArguments(_damagedParticleSystem);
+			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
 		}
 	}

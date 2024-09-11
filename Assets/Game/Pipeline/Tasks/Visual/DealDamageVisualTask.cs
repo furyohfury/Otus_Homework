@@ -6,26 +6,26 @@ namespace EventBus
 	public class DealDamageVisualTask : EventTask
 	{
 		private readonly Entity _target;
-        private int _health;
-        private int _damage;
-        private ParticleSystem _particles;
+		private readonly int _health;
+		private readonly int _damage;
+		private readonly ParticleSystem _particles;
 
-
-		public DealDamageVisualTask(Entity target, int damage, int health)
+		public DealDamageVisualTask(Entity target, int damage, int health, ParticleSystem particleSystem)
 		{
 			_target = target;
-            _damage = damage;
-            _health = health;
+			_damage = damage;
+			_health = health;
+			_particles = particleSystem;
 		}
 
-		protected override async void OnRun()
+		protected override void OnRun()
 		{
 			Debug.Log("DealDamageVisualTask OnRun");
 			_target.TryGetData(out HeroViewComponent targetHeroViewComponent);
-            targetHeroViewComponent.HeroView.SetStats($"{_damage/_health}");
-            var position = targetHeroViewComponent.HeroView.transform.position;
-            var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
-            particles.Play();
+			targetHeroViewComponent.HeroView.SetStats($"{_damage}/{_health}");
+			var position = targetHeroViewComponent.HeroView.transform.position;
+			var particles = Object.Instantiate(_particles, position, Quaternion.identity); // TODO ps
+			particles.Play();
 			Finish();
 		}
 	}

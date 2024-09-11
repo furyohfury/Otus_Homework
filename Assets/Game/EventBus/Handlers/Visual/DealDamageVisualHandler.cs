@@ -1,14 +1,17 @@
 using Entities;
+using UnityEngine;
 
 namespace EventBus
 {
     public sealed class DealDamageVisualHandler : BaseHandler<DealDamageEvent>
     {
         private readonly VisualPipeline _visualPipeline;
+        private readonly ParticleSystem _particleSystem;
 
-        public DealDamageVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
+        public DealDamageVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, ParticleSystem particleSystem) : base(eventBus)
         {
             _visualPipeline = visualPipeline;
+            _particleSystem = particleSystem;
         }
 
         protected override void OnHandleEvent(DealDamageEvent evt)
@@ -16,7 +19,7 @@ namespace EventBus
             evt.Target.TryGetData(out StatsComponent statsComponent);
             var damage =statsComponent.Damage;
             var health = statsComponent.CurrentHealth;
-            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Target, damage, health));
+            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Target, damage, health, _particleSystem));
         }
     }
 }
