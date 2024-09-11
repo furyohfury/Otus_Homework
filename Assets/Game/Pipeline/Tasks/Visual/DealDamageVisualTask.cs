@@ -24,8 +24,8 @@ namespace EventBus
 			_target.TryGetData(out HeroViewComponent targetHeroViewComponent);
 			targetHeroViewComponent.HeroView.SetStats($"{_damage}/{_health}");
 			var position = targetHeroViewComponent.HeroView.transform.position;
-			var particles = Object.Instantiate(_particles, position, Quaternion.identity); // TODO ps
-			particles.Play();
+			var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
+			particles.Play(); // TODO mb change view anyway cuz cant have callback when attacked
 			Finish();
 		}
 	}

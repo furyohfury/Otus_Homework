@@ -23,7 +23,7 @@ namespace Game.Installers
 			// Scene
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
-			Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle(); // TODO mb some service or smth
+			Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();

@@ -11,7 +11,7 @@ namespace EventBus
 		{
 		}
 
-		protected override void OnHandleEvent(AttackEvent evt) // TODO crutched. Fix if possible
+		protected override void OnHandleEvent(AttackEvent evt)
 		{
 			Debug.Log($"Attack handled. Source: {evt.Source.gameObject.name}, Target: {evt.Target.gameObject.name}");
 			evt.Source.TryGetData(out StatsComponent sourceStatsComponent);

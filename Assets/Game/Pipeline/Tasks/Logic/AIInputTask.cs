@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Entities;
 using UI;
 using UnityEngine;
@@ -21,9 +23,10 @@ namespace EventBus
 			_currentHeroService = currentHeroService;
 		}
 
-		protected override void OnRun()
+		protected override async void OnRun()
 		{
 			Debug.Log("AI input task OnRun");
+			await UniTask.Delay(TimeSpan.FromSeconds(1));
 			// TODO if frozen
 			// if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
 			// {

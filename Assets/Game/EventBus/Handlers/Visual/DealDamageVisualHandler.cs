@@ -1,5 +1,6 @@
 using Entities;
 using UnityEngine;
+using Zenject;
 
 namespace EventBus
 {
@@ -8,6 +9,7 @@ namespace EventBus
         private readonly VisualPipeline _visualPipeline;
         private readonly ParticleSystem _particleSystem;
 
+        [Inject]
         public DealDamageVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, ParticleSystem particleSystem) : base(eventBus)
         {
             _visualPipeline = visualPipeline;

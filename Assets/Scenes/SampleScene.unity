@@ -1136,7 +1136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &604338284
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1197,7 +1197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604338283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 110.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   - {fileID: 1991190824}
   - {fileID: 2133109595}
   - {fileID: 2019806277}
-  _damagedParticleSystem: {fileID: 19831454, guid: fa0f45d143def4e4188900695d955614,
+  _damagedParticleSystem: {fileID: 19864940, guid: 82bf03917e16d3d4cad30518cca28308,
     type: 3}
   _audioSource: {fileID: 487689638}
 --- !u!4 &835942017
