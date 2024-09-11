@@ -18,15 +18,11 @@ namespace EventBus
 		void IInitializable.Initialize()
 		{
 			_turnPipeline.AddTask(new StartTask());
-			var playerInputTask = new PlayerInputTask();
-			
-			_diContainer.Inject(playerInputTask);
-			_turnPipeline.AddTask(playerInputTask);			
-			var startVisualPipelineTask = new StartVisualPipelineTask();
+			_turnPipeline.AddTask(_diContainer.Instantiate<StartTurnTask>());
+			_turnPipeline.AddTask(_diContainer.Instantiate<PlayerInputTask>());		
 			// endturntask
-			_diContainer.Inject(startVisualPipelineTask);
-			_turnPipeline.AddTask(startVisualPipelineTask);
-			
+			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
+			_turnPipeline.AddTask(_diContainer.Instantiate<EndOfTurnTask>());
 			_turnPipeline.AddTask(new FinishTask());
 		}
 	}

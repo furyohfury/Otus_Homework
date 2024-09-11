@@ -23,6 +23,9 @@ namespace EventBus
             OnFinish();
         }
 
+        /// <summary>
+        /// It's necessary to have Finish() at the end of the method
+        /// </summary>
         protected virtual void OnRun() { }
         protected virtual void OnFinish() { }
     }

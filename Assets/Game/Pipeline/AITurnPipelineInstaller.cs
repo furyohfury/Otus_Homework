@@ -17,13 +17,12 @@ namespace EventBus
 
 		void IInitializable.Initialize()
 		{			
-             var aiInputTask = _diContainer.Instantiate<AIInputTask>();
-			_turnPipeline.AddTask(aiInputTask);			
-			var startVisualPipelineTask = new StartVisualPipelineTask();
+			_turnPipeline.AddTask(new StartTask());
+			_turnPipeline.AddTask(_diContainer.Instantiate<StartTurnTask>());
+			_turnPipeline.AddTask(_diContainer.Instantiate<AIInputTask>());		
 			// endturntask
-			_diContainer.Inject(startVisualPipelineTask);
-			_turnPipeline.AddTask(startVisualPipelineTask);
-			
+			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
+			_turnPipeline.AddTask(_diContainer.Instantiate<EndOfTurnTask>());
 			_turnPipeline.AddTask(new FinishTask());
 		}
 	}
