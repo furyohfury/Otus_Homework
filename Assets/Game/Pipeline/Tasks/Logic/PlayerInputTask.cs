@@ -4,7 +4,7 @@ using UI;
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
     public class PlayerInputTask : EventTask
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
     public class EventBus
     {

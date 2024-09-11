@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Lessons.Lesson19_EventBus.Visual
+namespace EventBus.Visual
 {
     public class StartVisualPipelineTask : EventTask
     {

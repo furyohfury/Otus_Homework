@@ -1,4 +1,4 @@
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
     public sealed class AttackVisualHandler : BaseHandler<AttackEvent>
     {

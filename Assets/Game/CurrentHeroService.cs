@@ -1,6 +1,6 @@
 using System;
 using Entities;
-using Lessons.Lesson19_EventBus;
+using EventBus;
 using Zenject;
 
 public sealed class CurrentHeroService : ICurrentHeroService, IInitializable, IDisposable // TODO make everything through interface

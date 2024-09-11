@@ -1,7 +1,7 @@
 using Entities;
 using UnityEngine;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public class DealDamageVisualTask : EventTask
 	{
@@ -21,9 +21,9 @@ namespace Lessons.Lesson19_EventBus
 		protected override async void OnRun()
 		{
 			Debug.Log("DealDamageVisualTask OnRun");
-			_target.TryGetData(out HeroViewComponent targetHeroViewComponent)
-            targetHeroViewComponent.SetStats($"{_damage/_health}");
-            var position = targetHeroViewComponent.transform.position;
+			_target.TryGetData(out HeroViewComponent targetHeroViewComponent);
+            targetHeroViewComponent.HeroView.SetStats($"{_damage/_health}");
+            var position = targetHeroViewComponent.HeroView.transform.position;
             var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
             particles.Play();
 			Finish();

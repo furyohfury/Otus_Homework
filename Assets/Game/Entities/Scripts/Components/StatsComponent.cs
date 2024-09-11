@@ -1,12 +1,12 @@
 namespace Entities
 {
-	public sealed class StatsComponent : IComponent // TODO mb unite with hp to stats component
+	public sealed class StatsComponent : IComponent
 	{
 		public int Damage;
         public int CurrentHealth;
         public int MaxHealth;
 
-		public DamageComponent(int damage, int currentHealth, int maxHealth)
+		public StatsComponent(int damage, int currentHealth, int maxHealth)
 		{
 			Damage = damage;
             CurrentHealth = currentHealth;

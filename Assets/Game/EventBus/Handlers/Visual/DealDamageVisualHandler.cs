@@ -1,4 +1,6 @@
-namespace Game.EventBus
+using Entities;
+
+namespace EventBus
 {
     public sealed class DealDamageVisualHandler : BaseHandler<DealDamageEvent>
     {

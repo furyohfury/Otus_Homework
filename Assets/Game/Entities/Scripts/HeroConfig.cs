@@ -5,8 +5,7 @@ namespace Entities
 	[CreateAssetMenu(fileName = "HeroConfig", menuName = "Create config/Hero config", order = 0)]
 	public class HeroConfig : ScriptableObject
 	{
-		public int CurrentHealth;
-		public int MaxHealth;
+		public int Health;
 		public int Damage;
 		public AttackEffects AttackEffects;
 		// public Sprite Icon;

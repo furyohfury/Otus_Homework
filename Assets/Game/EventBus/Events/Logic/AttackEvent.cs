@@ -1,7 +1,7 @@
 using Entities;
 using UI;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public class AttackEvent : IEvent
 	{

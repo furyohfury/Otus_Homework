@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public abstract class Pipeline
 	{

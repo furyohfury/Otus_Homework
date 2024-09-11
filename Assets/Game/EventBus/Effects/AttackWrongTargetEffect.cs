@@ -1,4 +1,8 @@
-namespace Game.EventBus
+using Entities;
+using EventBus;
+using UI;
+
+namespace EventBus
 {
     public sealed class AttackWrongTargetEffect : IEffect
 	{

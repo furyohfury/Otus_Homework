@@ -1,18 +1,18 @@
 using Entities;
-using UI;
+using UnityEngine;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public class RemoveDivineShieldEvent : IEvent
 	{
-		public Entity Entity;
-        public GameObject ShieldView;
+		public readonly Entity Entity;
+		public readonly GameObject ShieldView;
 
 		public RemoveDivineShieldEvent(Entity entity)
 		{
-            Entity = entity;
-            entity.TryGetData(out DivineShieldComponent divineShieldComponent);
-            ShieldView = divineShieldComponent.DivineShieldView;
+			Entity = entity;
+			entity.TryGetData(out DivineShieldComponent divineShieldComponent);
+			ShieldView = divineShieldComponent.DivineShieldView;
 		}
 	}
 }

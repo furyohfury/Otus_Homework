@@ -1,7 +1,7 @@
 using System;
 using Zenject;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
     public abstract class BaseHandler<TEvent> : IInitializable, IDisposable
     {

@@ -1,6 +1,6 @@
  using Entities;
 
- namespace Lessons.Lesson19_EventBus
+ namespace EventBus
  {
      public struct DestroyEvent : IEvent
      {

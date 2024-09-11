@@ -1,7 +1,8 @@
  using Entities;
+ using EventBus;
  using UnityEngine;
 
- namespace Lessons.Lesson19_EventBus
+ namespace EventBus
  {
      public sealed class DealDamageHandler : BaseHandler<DealDamageEvent>
      {
@@ -11,7 +12,7 @@
 
          protected override void OnHandleEvent(DealDamageEvent evt)
          {             
-             if (!evt.Target.TryGetData(out HealthComponent health))
+             if (!evt.Target.TryGetComponent(out StatsComponent statsComponent))
              {
                  return;
              }
@@ -23,9 +24,9 @@
              }
 
              Debug.Log($"DealDamage handled. Target: {evt.Target.gameObject.name}, damage: {evt.Damage}");
-             health.ChangeCurrentHealth(-evt.Damage);
+             statsComponent.CurrentHealth -= evt.Damage;
 
-             if (health.CurrentHealth <= 0)
+             if (statsComponent.CurrentHealth <= 0)
              {
                  EventBus.RaiseEvent(new DestroyEvent(evt.Target));
              }

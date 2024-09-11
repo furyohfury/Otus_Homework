@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using Entities;
-using Lessons.Lesson19_EventBus;
+using EventBus;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;

@@ -1,7 +1,7 @@
-using Lessons.Lesson19_EventBus.Visual;
+using EventBus.Visual;
 using Zenject;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public class AITurnPipelineInstaller : IInitializable
 	{

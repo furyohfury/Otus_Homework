@@ -1,6 +1,6 @@
 using System;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
     public interface IEventHandlerCollection
     {

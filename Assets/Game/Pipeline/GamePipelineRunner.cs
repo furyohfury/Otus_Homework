@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Entities;
 using Zenject;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public class GamePipelineRunner : IInitializable
 	{

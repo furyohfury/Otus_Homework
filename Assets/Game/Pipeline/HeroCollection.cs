@@ -2,7 +2,7 @@
 using System.Linq;
 using Entities;
 
-namespace Lessons.Lesson19_EventBus
+namespace EventBus
 {
 	public sealed class HeroCollection
 	{

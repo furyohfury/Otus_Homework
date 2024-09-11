@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Lessons.Lesson19_EventBus;
+using EventBus;
 using UnityEngine;
 
 namespace Entities

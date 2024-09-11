@@ -1,7 +1,8 @@
+ using System;
  using Entities;
  using UnityEngine;
 
- namespace Lessons.Lesson19_EventBus
+ namespace EventBus
  {
      public sealed class RemoveDivineShieldHandler : BaseHandler<RemoveDivineShieldEvent>
      {
@@ -10,8 +11,11 @@
          }
 
          protected override void OnHandleEvent(RemoveDivineShieldEvent evt)
-         {             
-             evt.Target.RemoveData<DivineShieldComponent>();
+         {
+             if (!evt.Entity.TryRemoveData<DivineShieldComponent>())
+             {
+                 throw new Exception($"{evt.Entity.name} has no divine shield"); // TODO add id?
+             }
          }
      }
  }

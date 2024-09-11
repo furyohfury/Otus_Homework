@@ -1,7 +1,7 @@
 // using Entities;
 // using UnityEngine;
 //
-// namespace Lessons.Lesson19_EventBus
+// namespace EventBus
 // {
 //     public struct ApplyDirectionEvent : IEvent
 //     {
