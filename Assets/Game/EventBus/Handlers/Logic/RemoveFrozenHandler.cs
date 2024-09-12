@@ -1,6 +1,9 @@
+using UnityEngine;
+using Zenject;
+
 namespace EventBus
 {
-    public sealed public class RemoveFrozenHandler : BaseHandler<RemoveFrozenEvent>
+    public sealed class RemoveFrozenHandler : BaseHandler<RemoveFrozenEvent>
     {
         [Inject]
 		public RemoveFrozenHandler(EventBus eventBus) : base(eventBus)

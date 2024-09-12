@@ -28,6 +28,7 @@ namespace EventBus
 			Debug.Log("AI input task OnRun");			
 
 			await UniTask.Delay(TimeSpan.FromSeconds(1));
+			var currentHero = _currentHeroService.CurrentHero;
 
 			if (currentHero.HasData<FrozenComponent>())
             {
@@ -36,7 +37,6 @@ namespace EventBus
 				 return;
             }
 
-			var currentHero = _currentHeroService.CurrentHero;
 
 			var playerHeroViews = _playerHeroListView.GetViews();
 			var activePlayerHeroView = playerHeroViews.Where(view => view.isActiveAndEnabled).ToArray();

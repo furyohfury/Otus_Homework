@@ -1,3 +1,6 @@
+using UnityEngine;
+using Zenject;
+
 namespace EventBus
 {   
     public sealed class FreezeHandler : BaseHandler<FreezeEvent>
@@ -10,7 +13,7 @@ namespace EventBus
 		protected override void OnHandleEvent(FreezeEvent evt)
 		{
 			Debug.Log($"Freeze handled.Target: {evt.Target.gameObject.name}");
-            evt.Target.AddData(new FreezeComponent());
+            evt.Target.AddData(new FrozenComponent());
 		}
 	}
 }

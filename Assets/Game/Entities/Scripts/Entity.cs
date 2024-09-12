@@ -43,9 +43,14 @@ namespace Entities
 			return false;
 		}
 
-		public T GetData<T>()
+		public T GetData<T>() where T : IComponent
 		{
 			return (T)Components[typeof(T)];
+		}
+		
+		public void RemoveData<T>() where T : IComponent
+		{
+			Components.Remove(typeof(T));
 		}
 	}
 }

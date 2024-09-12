@@ -1,4 +1,7 @@
-namespace Pipeline
+using Entities;
+using UnityEngine;
+
+namespace EventBus
 {
     public class FreezeVisualTask : EventTask
 	{
@@ -15,9 +18,9 @@ namespace Pipeline
 		{
 			Debug.Log("FreezeVisualTask OnRun");
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
-            var parentTransform = targetHeroViewComponent.transform;
-            var view = GameObject.Instantiate(_prefab, targetHeroViewComponent.parentTransform.position, Quaternion.identity, parentTransform);
-			var freezeComponent = _target.GetData<FreezeComponent>();
+            var parentTransform = targetHeroViewComponent.HeroView.transform;
+            var view = GameObject.Instantiate(_prefab, parentTransform.position, Quaternion.identity, parentTransform);
+			var freezeComponent = _target.GetData<FrozenComponent>();
             freezeComponent.View = view;
             Finish();
 		}

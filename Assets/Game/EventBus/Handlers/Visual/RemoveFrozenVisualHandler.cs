@@ -4,15 +4,14 @@ namespace EventBus
     {
         private readonly VisualPipeline _visualPipeline;
 
-        public RemoveFrozenHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
+        public RemoveFrozenVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
         {
             _visualPipeline = visualPipeline;
         }
 
         protected override void OnHandleEvent(RemoveFrozenEvent evt)
         {    
-            var view = evt.Target.GetData<FrozenComponent>().View;
-            _visualPipeline.AddTask(new DestroyGOVisualTask(view));
+            _visualPipeline.AddTask(new DestroyGOVisualTask(evt.View));
         }
     }
 }

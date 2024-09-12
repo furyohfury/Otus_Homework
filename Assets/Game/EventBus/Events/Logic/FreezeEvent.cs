@@ -1,8 +1,10 @@
+using Entities;
+
 namespace EventBus
 {   
     public struct FreezeEvent : IEvent
     {
-        private Entity Target;
+        public Entity Target;
 
         public FreezeEvent(Entity target)
         {
