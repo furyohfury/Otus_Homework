@@ -43,7 +43,7 @@ namespace Entities
 			return false;
 		}
 
-		protected T GetData<T>()
+		public T GetData<T>()
 		{
 			return (T)Components[typeof(T)];
 		}

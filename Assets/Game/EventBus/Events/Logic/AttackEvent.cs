@@ -3,7 +3,7 @@ using UI;
 
 namespace EventBus
 {
-	public class AttackEvent : IEvent
+	public struct AttackEvent : IEvent
 	{
 		public Entity Source;
 		public Entity Target;
