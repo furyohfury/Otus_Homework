@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EventBus
 {
-	public class RemoveDivineShieldEvent : IEvent
+	public struct RemoveDivineShieldEvent : IEvent
 	{
 		public readonly Entity Entity;
 		public readonly GameObject ShieldView;

@@ -25,14 +25,17 @@ namespace EventBus
 
 		protected override async void OnRun()
 		{
-			Debug.Log("AI input task OnRun");
+			Debug.Log("AI input task OnRun");			
+
 			await UniTask.Delay(TimeSpan.FromSeconds(1));
-			// TODO if frozen
-			// if (_currentHeroService.CurrentHero.TryGetData<Disabled>(out _))
-			// {
-			//     Finish();
-			//     return;
-			// }
+
+			if (currentHero.HasData<FrozenComponent>())
+            {
+                 _eventBus.RaiseEvent(new RemoveFrozenEvent(currentHero));
+				 Finish();
+				 return;
+            }
+
 			var currentHero = _currentHeroService.CurrentHero;
 
 			var playerHeroViews = _playerHeroListView.GetViews();

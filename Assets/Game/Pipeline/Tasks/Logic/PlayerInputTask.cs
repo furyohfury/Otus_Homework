@@ -42,7 +42,16 @@ namespace EventBus
         {
             Debug.Log($"Clicked hero {hero.name}");
             var currentHero = _currentHeroService.CurrentHero;
-            _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));   // TODO getcomp is cringe but works for now         
+            
+            if (currentHero.HasData<FrozenComponent>())
+            {
+                 _eventBus.RaiseEvent(new RemoveFrozenEvent(currentHero));
+            }
+            else
+            {
+                _eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));   // TODO getcomp is cringe but works for now
+            }
+                     
             Finish();
         }
     }

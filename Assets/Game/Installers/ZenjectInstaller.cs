@@ -16,6 +16,8 @@ namespace Game.Installers
 		private ParticleSystem _damagedParticleSystem;
 		[SerializeField]
 		private AudioPlayer _audioPlayer;
+		[SerializeField]
+		private GameObject _freezeEffectPrefab;
 
 		public override void InstallBindings()
 		{
@@ -42,14 +44,18 @@ namespace Game.Installers
 			// Event bus logic
 			Container.Bind<EventBus.EventBus>().AsSingle();
 			Container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<FreezeHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<RemoveFrozenHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle();
 
 			// Event bus visual
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<FreezeVisualHandler>().AsSingle().WithArguments(_freezeEffectPrefab);
 			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle().WithArguments(_damagedParticleSystem);
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
 		}
 	}

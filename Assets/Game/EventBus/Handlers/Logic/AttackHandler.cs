@@ -20,9 +20,15 @@ namespace EventBus
 			var targetDamage = targetStatsComponent.Damage;
 
 			EventBus.RaiseEvent(new DealDamageEvent(evt.Target, sourceDamage));
+
 			if (!evt.Source.HasData<NoReturnDamageComponent>())
 			{
 				EventBus.RaiseEvent(new DealDamageEvent(evt.Source, targetDamage));
+			}
+
+			if (evt.Source.HasData<FreezeOnAttackComponent>())
+			{
+				EventBus.RaiseEvent(new FreezeEvent(evt.Target));
 			}
 		}
 	}
