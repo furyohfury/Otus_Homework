@@ -1,5 +1,7 @@
-﻿using Entities;
+﻿using System.Collections.Generic;
+using Entities;
 using EventBus;
+using Game.EventBus;
 using UI;
 using UnityEngine;
 using Zenject;
@@ -18,6 +20,10 @@ namespace Game.Installers
 		private AudioPlayer _audioPlayer;
 		[SerializeField]
 		private GameObject _freezeEffectPrefab;
+		[SerializeField]
+		private ParticleSystem _damageAllParticleSystem;
+
+		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
 
 		public override void InstallBindings()
 		{
@@ -26,6 +32,9 @@ namespace Game.Installers
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
 			Container.Bind<AudioPlayer>().FromInstance(_audioPlayer).AsSingle();
+			_heroCollections.Add(Player.Blue, new HeroCollection(_playerOneHeroes, 0));
+			_heroCollections.Add(Player.Red, new HeroCollection(_playerTwoHeroes, _playerTwoHeroes.Length - 1));
+			Container.BindInstance(_heroCollections).AsSingle();
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();
@@ -38,13 +47,15 @@ namespace Game.Installers
 			Container.Bind<TurnPipeline>().FromInstance(aiTurnPipeline).AsCached();
 			Container.BindInterfacesAndSelfTo<AITurnPipelineInstaller>().AsCached().WithArguments(aiTurnPipeline);
 
-			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached()
-			         .WithArguments(_playerOneHeroes, _playerTwoHeroes);
+			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached();
 
 			// Event bus logic
-			Container.Bind<EventBus.EventBus>().AsSingle();
+			Container.Bind<global::EventBus.EventBus>().AsSingle();
+			Container.BindInterfacesAndSelfTo<AttackWrongTargetHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DamageRandomEnemyHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DamageAllHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenHandler>().AsSingle();
@@ -53,7 +64,10 @@ namespace Game.Installers
 			// Event bus visual
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeVisualHandler>().AsSingle().WithArguments(_freezeEffectPrefab);
-			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle().WithArguments(_damagedParticleSystem);
+			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle().WithArguments(_damageAllParticleSystem);
+			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
+			         .WithArguments(_damagedParticleSystem);
+			Container.BindInterfacesAndSelfTo<DamageRandomEnemyVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();

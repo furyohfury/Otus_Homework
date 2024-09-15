@@ -25,17 +25,17 @@ namespace EventBus
 
 		protected override async void OnRun()
 		{
-			Debug.Log("AI input task OnRun");			
+			Debug.Log("AI input task OnRun");
 
 			await UniTask.Delay(TimeSpan.FromSeconds(1));
 			var currentHero = _currentHeroService.CurrentHero;
 
 			if (currentHero.HasData<FrozenComponent>())
-            {
-                 _eventBus.RaiseEvent(new RemoveFrozenEvent(currentHero));
-				 Finish();
-				 return;
-            }
+			{
+				_eventBus.RaiseEvent(new RemoveFrozenEvent(currentHero));
+				Finish();
+				return;
+			}
 
 
 			var playerHeroViews = _playerHeroListView.GetViews();
@@ -49,13 +49,18 @@ namespace EventBus
 
 			var index = Random.Range(0, activePlayerHeroView.Length);
 			var hero = activePlayerHeroView[index];
-			// if (currentHero.TryGetData(out InputEffects inputEffects) && inputEffects.InputEffects.OfType<AttackWrongTargetEffect>().Any())
-			// {
-			// 	_eventBus.RaiseEvent(new AttackWrongTargetEffect()); // TODO mb remove cringe
-			// }
 
-			_eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));
+			if (currentHero.TryGetData(out AttackWrongTargetComponent attackWrongTargetComponent))
+			{
+				_eventBus.RaiseEvent(new AttackWrongTargetEvent(attackWrongTargetComponent.Probability,
+					hero.GetComponent<HeroEntity>()));
+			}
+			else
+			{
+				_eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));
+			}
+
 			Finish();
 		}
-	}	
+	}
 }

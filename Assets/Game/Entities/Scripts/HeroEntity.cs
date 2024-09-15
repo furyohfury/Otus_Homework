@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using EventBus;
 using UI;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Entities
 		[SerializeField]
 		private int _damage;
 		[SerializeField]
-		private Team _team;
+		private Player _player;
 		
 		[SerializeField] [Space]
 		private HeroView _heroView;
@@ -26,7 +27,7 @@ namespace Entities
 			AddData(new StatsComponent(_damage, _health, _health));
 			AddData(new DestroyComponent());
 			AddData(new HeroViewComponent(_heroView));
-			AddData(new TeamComponent(_team));
+			AddData(new PlayerComponent(_player));
 			AddData(new HeroStartTurnSoundComponent(_startTurnSounds));
 			
 			// AddData(_config.AttackEffects);

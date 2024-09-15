@@ -1,7 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entities;
-using EventBus;
+using Game.EventBus;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;
@@ -14,12 +13,12 @@ namespace Game
 	{
 		private GamePipelineRunner _turnPipelineRunner;
 		private CurrentHeroService _currentHeroService;
-		
+
 		[SerializeField]
 		private HeroListView _redPlayerViews;
 		[SerializeField]
 		private HeroView _heroView;
-		
+
 		[SerializeField]
 		private Button _herobutton;
 		[SerializeField]
@@ -37,7 +36,7 @@ namespace Game
 			// _diContainer.Instantiate<>()
 			// _playerOneHeroes = _turnPipelineRunner.GetType().GetField("")
 		}
-		
+
 		private void RedPlayerViewsOnOnHeroClicked(HeroView obj)
 		{
 			Debug.Log($"hero {obj.name} clicked");
@@ -45,7 +44,8 @@ namespace Game
 
 
 		[Inject]
-		public void Construct(CurrentHeroService currentHeroService, GamePipelineRunner turnPipelineRunner, DiContainer diContainer)
+		public void Construct(CurrentHeroService currentHeroService, GamePipelineRunner turnPipelineRunner,
+			DiContainer diContainer)
 		{
 			_currentHeroService = currentHeroService;
 			_turnPipelineRunner = turnPipelineRunner;
@@ -59,6 +59,9 @@ namespace Game
 		}
 
 		[Button]
-		public void RunTurnPipeline() => _turnPipelineRunner.Run();
+		public void RunTurnPipeline()
+		{
+			_turnPipelineRunner.Run();
+		}
 	}
 }

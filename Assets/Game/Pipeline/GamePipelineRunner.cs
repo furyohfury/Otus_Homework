@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Entities;
+using EventBus;
 using Zenject;
 
-namespace EventBus
+namespace Game.EventBus
 {
 	public class GamePipelineRunner : IInitializable
 	{
@@ -11,16 +12,15 @@ namespace EventBus
 
 		private readonly CurrentHeroService _currentHeroService;
 		private Player _currentPlayer = Player.Blue; // TODO in currentHeroService
-		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
+		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
 		[Inject]
 		public GamePipelineRunner(TurnPipeline[] pipelines, CurrentHeroService currentHeroService,
-			HeroEntity[] playerOneHeroes, HeroEntity[] playerTwoHeroes)
+			Dictionary<Player, HeroCollection> heroCollections)
 		{
 			_pipelines = pipelines;
 			_currentHeroService = currentHeroService;
-			_heroCollections.Add(Player.Blue, new HeroCollection(playerOneHeroes, 0));
-			_heroCollections.Add(Player.Red, new HeroCollection(playerTwoHeroes, playerTwoHeroes.Length - 1));
+			_heroCollections = heroCollections;
 		}
 
 		void IInitializable.Initialize()
@@ -71,6 +71,7 @@ namespace EventBus
 			_currentPlayer = _currentPlayer == Player.Blue
 				? Player.Red
 				: Player.Blue;
+			_currentHeroService.SetCurrentPlayer(_currentPlayer);
 			if (!_heroCollections[_currentPlayer].TryGetNextHero(out var nextHero))
 			{
 				// TODO game over logic here or in separate controller

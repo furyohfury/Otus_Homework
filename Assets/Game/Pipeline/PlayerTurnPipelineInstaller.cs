@@ -23,6 +23,7 @@ namespace EventBus
 			// endturntask
 			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
 			_turnPipeline.AddTask(_diContainer.Instantiate<EndOfTurnTask>());
+			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
 			_turnPipeline.AddTask(new FinishTask());
 		}
 	}
