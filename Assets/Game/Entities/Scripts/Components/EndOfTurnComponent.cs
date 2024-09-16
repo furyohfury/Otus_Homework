@@ -12,12 +12,7 @@ namespace Entities
 	{
 		[SerializeReference]
 		public List<ICombatEvent> Events = new();
-	}
-
-	public interface ICombatEvent : IEvent
-	{
-		public Entity Source { get; set; }
-	}
+	}	
 
 	[Serializable]
 	public struct DamageRandomEnemyEvent : ICombatEvent
