@@ -19,11 +19,11 @@ namespace EventBus
 			evt.Target.TryGetData(out StatsComponent targetStatsComponent);
 			var targetDamage = targetStatsComponent.Damage;
 
-			EventBus.RaiseEvent(new DealDamageEvent(evt.Target, sourceDamage));
+			EventBus.RaiseEvent(new DealDamageEvent(evt.Source, evt.Target, sourceDamage));
 
 			if (!evt.Source.HasData<NoReturnDamageComponent>())
 			{
-				EventBus.RaiseEvent(new DealDamageEvent(evt.Source, targetDamage));
+				EventBus.RaiseEvent(new DealDamageEvent(evt.Target, evt.Source, targetDamage));
 			}
 
 			if (evt.Source.HasData<FreezeOnAttackComponent>())

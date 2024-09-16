@@ -37,6 +37,11 @@
                  }
              }
 
+             if (evt.Source.TryGetData(out VampiricComponent vampiricComponent))
+             {
+                EventBus.RaiseEvent(new VampiricEvent(evt.Source, evt.Damage, vampiricComponent.Probability));
+             }
+
              if (statsComponent.CurrentHealth <= 0)
              {
                  EventBus.RaiseEvent(new DestroyEvent(evt.Target));

@@ -57,6 +57,8 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<DamageRandomEnemyHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DamageAllHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DealDamageHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<VampiricHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<HealHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyHandler>().AsSingle();
