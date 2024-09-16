@@ -1,7 +1,10 @@
+using System;
+
 namespace Entities
 {
+	[Serializable]
     public sealed class VampiricComponent : IComponent
 	{
-		public int Probability;
+		public float Probability;
 	}
 }

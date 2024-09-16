@@ -1,3 +1,6 @@
+using Entities;
+using UnityEngine;
+
 namespace EventBus
 {
    public class HealVisualTask : EventTask
@@ -15,8 +18,8 @@ namespace EventBus
 		{
 			Debug.Log("HealVisualTask OnRun");
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
-			var position = targetHeroViewComponent.HeroView.transform.position;
-			var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
+			var container = targetHeroViewComponent.Container;
+			var particles = ParticleSystem.Instantiate(_particleSystem, container.position, Quaternion.identity, container);
 			var psMain = particles.main;
 			psMain.stopAction = ParticleSystemStopAction.Destroy;
 			particles.Play();

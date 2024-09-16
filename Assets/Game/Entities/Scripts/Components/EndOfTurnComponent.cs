@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using EventBus;
 using UnityEngine;
 using Zenject;
@@ -41,7 +42,7 @@ namespace Entities
 				: Player.Blue;
 			var enemyHeroes = _heroCollections[enemyPlayer].HeroEntities;
 			var randomEnemy = enemyHeroes[Random.Range(0, enemyHeroes.Count)];
-			EventBus.RaiseEvent(new DealDamageEvent(randomEnemy, evt.Damage));
+			EventBus.RaiseEvent(new DealDamageEvent(evt.Source, randomEnemy, evt.Damage));
 		}
 	}
 
@@ -88,8 +89,8 @@ namespace Entities
 			var startPos = sourceHeroViewComponent.Container.position;
 			var endPos = targetHeroViewComponent.Container.position;
 			
-			projectile.DOMove(startPos, endPos, 1f)
-                .OnComplete(Finish);
+			var projectile = GameObject.Instantiate(_projectile, startPos, Quaternion.identity, _worldTransform);
+			projectile.transform.DOMove(endPos, 1f).OnComplete(Finish);
 		}
 	}
 }

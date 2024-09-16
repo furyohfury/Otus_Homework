@@ -17,9 +17,9 @@ namespace EventBus
 		protected override void OnRun()
 		{
 			Debug.Log("DamageAllVisualTask OnRun");
-			var heroView = _hero.GetData<HeroViewComponent>().HeroView;
-			var position = heroView.transform.position;
-			var particles = Object.Instantiate(_particleSystem, position, Quaternion.identity, heroView.transform);
+			var container = _hero.GetData<HeroViewComponent>().Container;
+			var position = container.transform.position;
+			var particles = Object.Instantiate(_particleSystem, position, Quaternion.identity, container.transform);
 			var main = particles.main;
 			main.stopAction = ParticleSystemStopAction.Destroy;
 			particles.Play();

@@ -1,3 +1,6 @@
+using UnityEngine;
+using Zenject;
+
 namespace EventBus
 {
     public sealed class HealVisualHandler : BaseHandler<HealEvent>
@@ -14,8 +17,8 @@ namespace EventBus
 
          protected override void OnHandleEvent(HealEvent evt)
          {             
-             _visualPipeline.AddTask(new HealVisualTask(evt.Target, _particleSystem));
-             _visualPipeline.AddTask(new ChangeStatsVisualTask(evt.Target));
+             _visualPipeline.AddTask(new HealVisualTask(evt.Entity, _particleSystem));
+             _visualPipeline.AddTask(new ChangeStatsVisualTask(evt.Entity));
          }
      }
 }

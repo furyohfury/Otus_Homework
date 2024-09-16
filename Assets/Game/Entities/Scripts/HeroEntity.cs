@@ -17,6 +17,8 @@ namespace Entities
 		[SerializeField] [Space]
 		private HeroView _heroView;
 		[SerializeField]
+		private Transform _effectsContainer;
+		[SerializeField]
 		private AudioClip[] _startTurnSounds;
 		
 		[SerializeReference]
@@ -26,7 +28,7 @@ namespace Entities
 		{
 			AddData(new StatsComponent(_damage, _health, _health));
 			AddData(new DestroyComponent());
-			AddData(new HeroViewComponent(_heroView));
+			AddData(new HeroViewComponent(_heroView, _effectsContainer));
 			AddData(new PlayerComponent(_player));
 			AddData(new HeroStartTurnSoundComponent(_startTurnSounds));
 			

@@ -1,3 +1,5 @@
+using Entities;
+
 namespace EventBus
 {
     public interface ICombatEvent : IEvent

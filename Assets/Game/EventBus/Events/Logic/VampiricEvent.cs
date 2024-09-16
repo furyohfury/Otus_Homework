@@ -6,9 +6,9 @@ namespace EventBus
     {
         public Entity Entity;
         public int Damage;
-        public int Probability;
+        public float Probability;
         
-        public VampiricEvent(Entity entity, int damage, int probability)
+        public VampiricEvent(Entity entity, int damage, float probability)
         {
             Entity = entity;            
             Damage = damage;

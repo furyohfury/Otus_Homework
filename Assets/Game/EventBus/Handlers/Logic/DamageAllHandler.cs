@@ -23,7 +23,7 @@ namespace EventBus
 				{
 					if (hero != evt.Source)
 					{
-						EventBus.RaiseEvent(new DealDamageEvent(hero, evt.Damage));
+						EventBus.RaiseEvent(new DealDamageEvent(evt.Source, hero, evt.Damage));
 					}
 				}
 			}

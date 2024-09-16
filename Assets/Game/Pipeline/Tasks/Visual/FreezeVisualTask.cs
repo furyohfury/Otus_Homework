@@ -18,7 +18,7 @@ namespace EventBus
 		{
 			Debug.Log("FreezeVisualTask OnRun");
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
-            var parentTransform = targetHeroViewComponent.HeroView.transform;
+            var parentTransform = targetHeroViewComponent.Container;
             var view = GameObject.Instantiate(_prefab, parentTransform.position, Quaternion.identity, parentTransform);
 			var freezeComponent = _target.GetData<FrozenComponent>();
             freezeComponent.View = view;
