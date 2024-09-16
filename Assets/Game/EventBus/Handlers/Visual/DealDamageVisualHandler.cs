@@ -21,7 +21,9 @@ namespace EventBus
             evt.Target.TryGetData(out StatsComponent statsComponent);
             var damage =statsComponent.Damage;
             var health = statsComponent.CurrentHealth;
-            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Target, damage, health, _particleSystem));
+            // TODO delete if wont fuck with attack animation callback
+            _visualPipeline.AddTask(new DealDamageVisualTask(evt.Target, damage, health, _particleSystem)); 
+            _visualPipeline.AddTask(new ChangeStatsVisualTask(evt.Target));
         }
     }
 }

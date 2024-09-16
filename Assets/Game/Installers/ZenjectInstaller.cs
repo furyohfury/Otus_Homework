@@ -22,6 +22,8 @@ namespace Game.Installers
 		private GameObject _freezeEffectPrefab;
 		[SerializeField]
 		private ParticleSystem _damageAllParticleSystem;
+		[SerializeField]
+		private ParticleSystem _healParticleSystem;
 
 		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
 
@@ -69,6 +71,7 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle().WithArguments(_damageAllParticleSystem);
 			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
 			         .WithArguments(_damagedParticleSystem);
+			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);
 			Container.BindInterfacesAndSelfTo<DamageRandomEnemyVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();

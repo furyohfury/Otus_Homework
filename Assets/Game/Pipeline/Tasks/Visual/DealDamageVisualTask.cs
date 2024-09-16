@@ -21,8 +21,7 @@ namespace EventBus
 		protected override void OnRun()
 		{
 			Debug.Log("DealDamageVisualTask OnRun");
-			_target.TryGetData(out HeroViewComponent targetHeroViewComponent);
-			targetHeroViewComponent.HeroView.SetStats($"{_damage}/{_health}");
+			// _target.TryGetData(out HeroViewComponent targetHeroViewComponent);
 			// var position = targetHeroViewComponent.HeroView.transform.position;
 			// var particles = ParticleSystem.Instantiate(_particles, position, Quaternion.identity);
 			// var psMain = particles.main;
