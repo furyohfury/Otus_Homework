@@ -24,6 +24,10 @@ namespace Game.Installers
 		private ParticleSystem _damageAllParticleSystem;
 		[SerializeField]
 		private ParticleSystem _healParticleSystem;
+		[SerializeField]
+		private GameObject _projectile;
+		[SerializeField]
+		private Transform _worldTransform;
 
 		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
 
@@ -72,7 +76,7 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
 			         .WithArguments(_damagedParticleSystem);
 			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);
-			Container.BindInterfacesAndSelfTo<DamageRandomEnemyVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<FireProjectileVisualHandler>().AsSingle().WithArguments(_projectile, _worldTransform);
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
