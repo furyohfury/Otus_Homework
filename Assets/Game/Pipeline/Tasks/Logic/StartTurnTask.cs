@@ -21,14 +21,17 @@ namespace EventBus
 			Debug.Log("StartTurnTask OnRun");
 			var currentHero = _currentHeroService.CurrentHero;
 
-			currentHero.TryGetData(out HeroViewComponent heroViewComponent);
-			currentHero.TryGetData(out HeroStartTurnSoundComponent heroStartTurnSoundComponent);
-
+			heroViewComponent = currentHero.GetData<HeroViewComponent>();
 			heroViewComponent.HeroView.SetActive(true);
 
-			var clips = heroStartTurnSoundComponent.AudioClips;
-			var randomIndex = Random.Range(0, clips.Length);
-			_audioPlayer.PlaySound(clips[randomIndex]);
+			if (currentHero.TryGetData(out HeroSoundComponent heroSoundComponent))
+			{
+				var clips = heroSoundComponent.StartTurnClips;
+				if (clips == null) continue;
+				
+				var randomIndex = Random.Range(0, clips.Length);
+				_audioPlayer.PlaySound(clips[randomIndex]);
+			}			
 			Finish();
 		}
 	}
