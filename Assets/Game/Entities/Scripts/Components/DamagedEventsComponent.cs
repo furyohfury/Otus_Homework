@@ -9,6 +9,6 @@ namespace Entities
 	public sealed class DamagedEventsComponent : IComponent
 	{
 		[SerializeReference]
-		public List<ICombatEvent> Events = new(); // TODO has source but huh?
+		public List<ICombatEvent> Events = new();
 	}
 }

@@ -74,8 +74,7 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeVisualHandler>().AsSingle().WithArguments(_freezeEffectPrefab);
 			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle();
-			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
-			         .WithArguments(_damagedParticleSystem);
+			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);
 			Container.BindInterfacesAndSelfTo<FireProjectileVisualHandler>().AsSingle().WithArguments(_worldTransform);
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();

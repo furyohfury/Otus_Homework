@@ -11,7 +11,6 @@ namespace Game.EventBus
 		private int _activeIndex;
 
 		private readonly CurrentHeroService _currentHeroService;
-		private Player _currentPlayer = Player.Blue; // TODO in currentHeroService
 		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
 		[Inject]
@@ -68,11 +67,11 @@ namespace Game.EventBus
 
 		private void ChangeCurrentHero()
 		{
-			_currentPlayer = _currentPlayer == Player.Blue
+			var currentPlayer = _currentHeroService.CurrentPlayer == Player.Blue
 				? Player.Red
 				: Player.Blue;
-			_currentHeroService.SetCurrentPlayer(_currentPlayer);
-			if (!_heroCollections[_currentPlayer].TryGetNextHero(out var nextHero))
+			_currentHeroService.SetCurrentPlayer(currentPlayer);
+			if (!_heroCollections[currentPlayer].TryGetNextHero(out var nextHero))
 			{
 				// TODO game over logic here or in separate controller
 			}
