@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Entities
 {
+	[Serializable]
 	public sealed class HeroSoundComponent : IComponent
 	{
 		public AudioClip[] StartTurnClips;

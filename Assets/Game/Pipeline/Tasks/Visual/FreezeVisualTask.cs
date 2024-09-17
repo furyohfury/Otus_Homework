@@ -14,7 +14,7 @@ namespace EventBus
             _prefab = prefab;
 		}
 
-		protected override async void OnRun()
+		protected override void OnRun()
 		{
 			Debug.Log("FreezeVisualTask OnRun");
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();

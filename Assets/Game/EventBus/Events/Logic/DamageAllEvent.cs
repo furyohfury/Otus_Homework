@@ -1,5 +1,6 @@
 ﻿using System;
 using Entities;
+using UnityEngine;
 
 namespace EventBus
 {
@@ -8,5 +9,9 @@ namespace EventBus
 	{
 		public Entity Source { get; set; }
 		public int Damage;
+		[field: SerializeField]
+		public EventTriggerLink EventTriggerLink { get; set; }
+		[field: SerializeField]
+		public AudioClip[] AudioClips { get; set; }
 	}
 }

@@ -11,9 +11,9 @@ namespace Game.Installers
 	public class ZenjectInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private HeroEntity[] _playerOneHeroes;
+		private HeroEntity[] _bluePlayerHeroes;
 		[SerializeField]
-		private HeroEntity[] _playerTwoHeroes;
+		private HeroEntity[] _redPlayerHeroes;
 		[SerializeField]
 		private ParticleSystem _damagedParticleSystem;
 		[SerializeField]
@@ -38,8 +38,8 @@ namespace Game.Installers
 			Container.Bind<UIService>().FromComponentInHierarchy().AsSingle();
 			Container.BindInterfacesAndSelfTo<CurrentHeroService>().AsSingle();
 			Container.Bind<AudioPlayer>().FromInstance(_audioPlayer).AsSingle();
-			_heroCollections.Add(Player.Blue, new HeroCollection(_playerOneHeroes, 0));
-			_heroCollections.Add(Player.Red, new HeroCollection(_playerTwoHeroes, _playerTwoHeroes.Length - 1));
+			_heroCollections.Add(Player.Blue, new HeroCollection(_bluePlayerHeroes, 0));
+			_heroCollections.Add(Player.Red, new HeroCollection(_redPlayerHeroes, _redPlayerHeroes.Length - 1));
 			Container.BindInstance(_heroCollections).AsSingle();
 
 			// Pipeline
@@ -73,13 +73,15 @@ namespace Game.Installers
 			// Event bus visual
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeVisualHandler>().AsSingle().WithArguments(_freezeEffectPrefab);
-			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle().WithArguments(_damageAllParticleSystem);
+			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle()
+			         .WithArguments(_damageAllParticleSystem);
 			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
 			         .WithArguments(_damagedParticleSystem);
 			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);
-			Container.BindInterfacesAndSelfTo<FireProjectileVisualHandler>().AsSingle().WithArguments(_projectile, _worldTransform);
+			Container.BindInterfacesAndSelfTo<FireProjectileVisualHandler>().AsSingle().WithArguments(_worldTransform);
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
-			Container.BindInterfacesAndSelfTo<AbilitySoundHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<DamageRandomEnemyVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<HealRandomAllyVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
 		}

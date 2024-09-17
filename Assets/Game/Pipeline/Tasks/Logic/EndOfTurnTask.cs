@@ -1,20 +1,23 @@
-﻿using Entities;
+﻿using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 using Zenject;
 
 namespace EventBus
 {
-	public sealed class EndOfTurnTask : EventTask
+	public sealed class EndOfTurnTask : EventTask // TODO works before destroyed
 	{
 		private readonly CurrentHeroService _currentHeroService;
 		private readonly EventBus _eventBus;
 		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
 		[Inject]
-		public EndOfTurnTask(CurrentHeroService currentHeroService, EventBus eventBus)
+		public EndOfTurnTask(CurrentHeroService currentHeroService, EventBus eventBus,
+			Dictionary<Player, HeroCollection> heroCollections)
 		{
 			_currentHeroService = currentHeroService;
 			_eventBus = eventBus;
+			_heroCollections = heroCollections;
 		}
 
 		protected override void OnRun()
@@ -22,14 +25,14 @@ namespace EventBus
 			Debug.Log("EndOfTurnTask OnRun");
 			var currentHero = _currentHeroService.CurrentHero;
 
-			RaiseEoTHeroEvents(currentHero);	
+			RaiseEoTHeroEvents(currentHero);
 			RaiseEoTPlayerEvents(currentHero);
 			RaiseEoTEnemyEvents();
-			SetVisualInactive(currentHero);			
+			SetVisualInactive(currentHero);
 			Finish();
 		}
 
-		private void RaiseEoTHeroEvents(HeroEntity hero)
+		private void RaiseEoTHeroEvents(HeroEntity currentHero)
 		{
 			if (currentHero.TryGetData(out EndOfTurnComponent endOfTurnComponent))
 			{
@@ -41,7 +44,7 @@ namespace EventBus
 			}
 		}
 
-		private void RaiseEoTPlayerEvents()
+		private void RaiseEoTPlayerEvents(HeroEntity currentHero)
 		{
 			var currentPlayer = _currentHeroService.CurrentPlayer;
 			var currentPlayerHeroes = _heroCollections[currentPlayer].HeroEntities;
@@ -50,7 +53,7 @@ namespace EventBus
 				if (hero == currentHero) continue;
 
 				if (!hero.TryGetData(out EndOfTurnComponent endOfTurnComponent)) continue;
-				
+
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
 				{
 					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Player)
@@ -58,21 +61,21 @@ namespace EventBus
 						endOfTurnEvent.Source = hero;
 						_eventBus.RaiseEvent(endOfTurnEvent);
 					}
-				}				
+				}
 			}
 		}
 
-		private void RaiseEoTEnemyEvents(HeroEntity currentHero)
+		private void RaiseEoTEnemyEvents()
 		{
-			var enemyPlayer = _currentHeroService.CurrentPlayer == Player.Blue 
+			var enemyPlayer = _currentHeroService.CurrentPlayer == Player.Blue
 				? Player.Red
-				: Player.Blue; 
+				: Player.Blue;
 			var enemyPlayerHeroes = _heroCollections[enemyPlayer].HeroEntities;
 
 			foreach (var hero in enemyPlayerHeroes)
 			{
 				if (!hero.TryGetData(out EndOfTurnComponent endOfTurnComponent)) continue;
-				
+
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
 				{
 					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Any)
@@ -80,13 +83,13 @@ namespace EventBus
 						endOfTurnEvent.Source = hero;
 						_eventBus.RaiseEvent(endOfTurnEvent);
 					}
-				}				
+				}
 			}
 		}
-		
-		private void SetVisualInactive(HeroEntity hero)
+
+		private void SetVisualInactive(HeroEntity currentHero)
 		{
-			heroViewComponent = currentHero.GetData<HeroViewComponent>();
+			var heroViewComponent = currentHero.GetData<HeroViewComponent>();
 			heroViewComponent.HeroView.SetActive(false);
 		}
 	}

@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace EventBus
 {
-   public class ChangeStatsVisualTask : EventTask
+	public class ChangeStatsVisualTask : EventTask
 	{
 		private readonly Entity _target;
-		private AudioPlayer _audioPlayer;
+		private readonly AudioPlayer _audioPlayer;
 
 		public ChangeStatsVisualTask(Entity target, AudioPlayer audioPlayer)
 		{
@@ -21,15 +21,19 @@ namespace EventBus
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
 			targetHeroViewComponent.HeroView.SetStats($"{stats.Damage}/{stats.CurrentHealth}");
 
-			if (stats.CurrentHP <= stats.MaxHP * 0.2f && currentHero.TryGetData(out HeroSoundComponent heroSoundComponent))
+			if (stats.CurrentHealth > 0
+			    && stats.CurrentHealth <= stats.MaxHealth * 0.2f
+			    && _target.TryGetData(out HeroSoundComponent heroSoundComponent))
 			{
 				var clips = heroSoundComponent.LowHealthClips;
-				if (clips == null) continue;
-				
-				var randomIndex = Random.Range(0, clips.Length);
-				_audioPlayer.PlaySound(clips[randomIndex]);
-			}	
+				if (clips != null)
+				{
+					var randomIndex = Random.Range(0, clips.Length);
+					_audioPlayer.PlaySound(clips[randomIndex]);
+				}
+			}
+
 			Finish();
 		}
-	} 
+	}
 }

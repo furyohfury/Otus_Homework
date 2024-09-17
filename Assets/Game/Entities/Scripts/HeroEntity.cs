@@ -24,7 +24,7 @@ namespace Entities
 		{
 			InitializeData();
 
-			var stats = $"{_stats.Damage}/{_stats.Health}";
+			var stats = $"{_stats.Damage}/{_stats.CurrentHealth}";
 			_heroView.HeroView.SetStats(stats);
 		}
 
@@ -44,7 +44,11 @@ namespace Entities
 
 		private void OnValidate()
 		{
-			_heroView.HeroView.SetStats(stats);
+			if (_heroView != null && _heroView.HeroView != null)
+			{
+				var stats = $"{_stats.Damage}/{_stats.CurrentHealth}";
+				_heroView.HeroView.SetStats(stats);
+			}
 		}
 	}
 }
