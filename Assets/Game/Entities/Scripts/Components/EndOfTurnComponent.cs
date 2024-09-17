@@ -9,6 +9,6 @@ namespace Entities
 	public sealed class EndOfTurnComponent : IComponent
 	{
 		[SerializeReference]
-		public List<IEffect> Events = new();
+		public List<ICombatEvent> Events = new();
 	}
 }

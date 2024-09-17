@@ -24,7 +24,7 @@ namespace EventBus
 		{
 			Debug.Log("EndOfTurnTask OnRun");
 			var currentHero = _currentHeroService.CurrentHero;
-			
+
 			RaiseEoTHeroEvents(currentHero);
 			RaiseEoTPlayerEvents(currentHero);
 			RaiseEoTEnemyEvents();

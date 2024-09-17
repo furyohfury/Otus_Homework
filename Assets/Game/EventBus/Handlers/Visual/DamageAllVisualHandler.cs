@@ -3,7 +3,7 @@ using Zenject;
 
 namespace EventBus
 {
-	public sealed class DamageAllVisualHandler : BaseHandler<DamageAllEffect>
+	public sealed class DamageAllVisualHandler : BaseHandler<DamageAllEvent>
 	{
 		private readonly VisualPipeline _visualPipeline;
 		private readonly AudioPlayer _audioPlayer;
@@ -17,7 +17,7 @@ namespace EventBus
 			_audioPlayer = audioPlayer;
 		}
 
-		protected override void OnHandleEvent(DamageAllEffect evt)
+		protected override void OnHandleEvent(DamageAllEvent evt)
 		{
 			Debug.Log("DamageAllVisualHandler");
 			_visualPipeline.AddTask(new DamageAllVisualTask(evt.ParticleSystem, evt.Source));

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Entities
 {
-	public sealed class DamageRandomEnemyHandler : BaseHandler<DamageRandomEnemyEffect>
+	public sealed class DamageRandomEnemyHandler : BaseHandler<DamageRandomEnemyEvent>
 	{
 		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
@@ -16,7 +16,7 @@ namespace Entities
 			_heroCollections = heroCollections;
 		}
 
-		protected override void OnHandleEvent(DamageRandomEnemyEffect evt)
+		protected override void OnHandleEvent(DamageRandomEnemyEvent evt)
 		{
 			Debug.Log("DamageRandomEnemyEvent handled");
 			var player = evt.Source.GetData<PlayerComponent>().Player;
