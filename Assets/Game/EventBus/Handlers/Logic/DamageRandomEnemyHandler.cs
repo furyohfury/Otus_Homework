@@ -19,8 +19,8 @@ namespace Entities
 		protected override void OnHandleEvent(DamageRandomEnemyEvent evt)
 		{
 			Debug.Log("DamageRandomEnemyEvent handled");
-			var currentPlayer = evt.Source.GetData<PlayerComponent>().Player;
-			var enemyPlayer = currentPlayer == Player.Blue
+			var player = evt.Source.GetData<PlayerComponent>().Player;
+			var enemyPlayer = player == Player.Blue
 				? Player.Red
 				: Player.Blue;
 			var enemyHeroes = _heroCollections[enemyPlayer].HeroEntities;
