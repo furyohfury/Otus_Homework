@@ -7,39 +7,44 @@ namespace Entities
 {
 	public sealed class HeroEntity : Entity
 	{
-		[SerializeField] [Space]
-		private int _health;
 		[SerializeField]
-		private int _damage;
+		private StatsComponent _stats;
 		[SerializeField]
-		private Player _player;
+		private PlayerComponent _player;
 		
 		[SerializeField] [Space]
-		private HeroView _heroView;
+		private HeroViewComponent _heroView;
 		[SerializeField]
-		private Transform _effectsContainer;
-		[SerializeField]
-		private AudioClip[] _startTurnSounds;
+		private HeroSoundComponent _sounds;
 		
 		[SerializeReference]
 		private List<IComponent> _uniqueComponents;
 
 		private void Awake()
 		{
-			AddData(new StatsComponent(_damage, _health, _health));
+			InitializeData();
+
+			var stats = $"{_stats.Damage}/{_stats.Health}";
+			_heroView.HeroView.SetStats(stats);
+		}
+
+		private void InitializeData()
+		{
+			AddData(_stats);			
+			AddData(_heroView);
+			AddData(_player);
+			AddData(_sounds);
 			AddData(new DestroyComponent());
-			AddData(new HeroViewComponent(_heroView, _effectsContainer));
-			AddData(new PlayerComponent(_player));
-			AddData(new HeroStartTurnSoundComponent(_startTurnSounds));
 			
-			// AddData(_config.AttackEffects);
 			foreach (var component in _uniqueComponents)
 			{
 				AddData(component);
 			}
+		}
 
-			var stats = $"{_damage}/{_health}";
-			_heroView.SetStats(stats);
+		private void OnValidate()
+		{
+			_heroView.HeroView.SetStats(stats);
 		}
 	}
 }
