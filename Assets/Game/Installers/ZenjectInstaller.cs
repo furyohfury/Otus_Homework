@@ -73,8 +73,7 @@ namespace Game.Installers
 			// Event bus visual
 			Container.BindInterfacesAndSelfTo<AttackVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeVisualHandler>().AsSingle().WithArguments(_freezeEffectPrefab);
-			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle()
-			         .WithArguments(_damageAllParticleSystem);
+			Container.BindInterfacesAndSelfTo<DamageAllVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DealDamageVisualHandler>().AsSingle()
 			         .WithArguments(_damagedParticleSystem);
 			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);

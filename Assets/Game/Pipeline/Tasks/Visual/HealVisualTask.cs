@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace EventBus
 {
-   public class HealVisualTask : EventTask
+	public class HealVisualTask : EventTask
 	{
 		private readonly Entity _target;
-        private ParticleSystem _particleSystem;
+		private readonly ParticleSystem _particleSystem;
 
 		public HealVisualTask(Entity target, ParticleSystem particleSystem)
 		{
 			_target = target;
-            _particleSystem = particleSystem;
+			_particleSystem = particleSystem;
 		}
 
 		protected override void OnRun()
@@ -19,11 +19,11 @@ namespace EventBus
 			Debug.Log("HealVisualTask OnRun");
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
 			var container = targetHeroViewComponent.Container;
-			var particles = ParticleSystem.Instantiate(_particleSystem, container.position, Quaternion.identity, container);
+			var particles = Object.Instantiate(_particleSystem, container.position, Quaternion.identity, container);
 			var psMain = particles.main;
 			psMain.stopAction = ParticleSystemStopAction.Destroy;
 			particles.Play();
 			Finish();
 		}
-	} 
+	}
 }

@@ -3375,6 +3375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
+      propertyPath: managedReferences[187092198157189144]
+      value: Assembly-CSharp EventBus.DamageAllEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
       propertyPath: managedReferences[187092198157189133].Damage
       value: 0
       objectReference: {fileID: 0}
@@ -3390,13 +3395,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
+      propertyPath: managedReferences[187092198157189144].Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].ParticleSystem
+      value: 
+      objectReference: {fileID: 9160477339209404033, guid: bec97436fdc1bbc45927bfb2fe0d132f,
+        type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
       propertyPath: managedReferences[187092198157189132].Events.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
       propertyPath: managedReferences[187092198157189132].Events.Array.data[0]
-      value: 187092198157189141
+      value: 187092198157189144
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
@@ -3405,7 +3421,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
+      propertyPath: managedReferences[187092198157189144].<EventTriggerLink>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
       propertyPath: managedReferences[187092198157189141].<AudioClips>k__BackingField.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.size
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
@@ -3431,6 +3457,31 @@ PrefabInstance:
     - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
         type: 3}
       propertyPath: managedReferences[187092198157189141].<AudioClips>k__BackingField.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 02f04a1cc50a2457799df1aadd4d69c2, type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 855f23e1af9964e14a4956788f3097a8, type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 22eae6007a5b540ddb343c25c1c84dae, type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e23698572f7448d1bad5e6f926790c0, type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5394c6470fa594d1a96b89972712026e, type: 3}
+    - target: {fileID: 3024873938846846355, guid: 7851c3bfa6ae8a14aaafb1e6ae545f33,
+        type: 3}
+      propertyPath: managedReferences[187092198157189144].<AudioClips>k__BackingField.Array.data[4]
       value: 
       objectReference: {fileID: 8300000, guid: 02f04a1cc50a2457799df1aadd4d69c2, type: 3}
     m_RemovedComponents: []

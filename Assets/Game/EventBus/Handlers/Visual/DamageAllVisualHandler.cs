@@ -6,23 +6,21 @@ namespace EventBus
 	public sealed class DamageAllVisualHandler : BaseHandler<DamageAllEvent>
 	{
 		private readonly VisualPipeline _visualPipeline;
-		private readonly ParticleSystem _particleSystem;
 		private readonly AudioPlayer _audioPlayer;
 
 		[Inject]
-		public DamageAllVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, ParticleSystem particleSystem,
+		public DamageAllVisualHandler(EventBus eventBus, VisualPipeline visualPipeline,
 			AudioPlayer audioPlayer) :
 			base(eventBus)
 		{
 			_visualPipeline = visualPipeline;
-			_particleSystem = particleSystem;
 			_audioPlayer = audioPlayer;
 		}
 
 		protected override void OnHandleEvent(DamageAllEvent evt)
 		{
 			Debug.Log("DamageAllVisualHandler");
-			_visualPipeline.AddTask(new DamageAllVisualTask(_particleSystem, evt.Source));
+			_visualPipeline.AddTask(new DamageAllVisualTask(evt.ParticleSystem, evt.Source));
 
 			var clips = evt.AudioClips;
 			if (clips == null) return;
