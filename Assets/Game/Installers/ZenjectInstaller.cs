@@ -79,6 +79,7 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<HealVisualHandler>().AsSingle().WithArguments(_healParticleSystem);
 			Container.BindInterfacesAndSelfTo<FireProjectileVisualHandler>().AsSingle().WithArguments(_projectile, _worldTransform);
 			Container.BindInterfacesAndSelfTo<RemoveDivineShieldVisualHandler>().AsSingle();
+			Container.BindInterfacesAndSelfTo<AbilitySoundHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<RemoveFrozenVisualHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<DestroyVisualHandler>().AsSingle();
 		}
