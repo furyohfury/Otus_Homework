@@ -25,7 +25,10 @@ namespace Entities
 				: Player.Blue;
 			var enemyHeroes = _heroCollections[enemyPlayer].HeroEntities;
 			var randomEnemy = enemyHeroes[Random.Range(0, enemyHeroes.Count)];
-			EventBus.RaiseEvent(new FireProjectileVisualEvent(evt.Source, randomEnemy));
+			if (evt.Projectile != null)
+			{
+				EventBus.RaiseEvent(new FireProjectileVisualEvent(evt.Source, randomEnemy, evt.Projectile));
+			}			
 			EventBus.RaiseEvent(new DealDamageEvent(evt.Source, randomEnemy, evt.Damage));
 		}
 	}

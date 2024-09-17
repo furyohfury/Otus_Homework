@@ -8,5 +8,6 @@ namespace Entities
 	{
 		public Entity Source { get; set; }
 		public int Damage;
+		public GameObject Projectile;
 	}
 }
