@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EventBus
 {
-	public sealed class HealRandomAllyHandler : BaseHandler<HealRandomAllyEvent>
+	public sealed class HealRandomAllyHandler : BaseHandler<HealRandomAllyEffect>
 	{
         private CurrentHeroService _currentHeroService;
         private Dictionary<Player, HeroCollection> _heroCollections;
@@ -14,7 +14,7 @@ namespace EventBus
 			_heroCollections = heroCollections;
 		}
 
-		protected override void OnHandleEvent(HealRandomAllyEvent evt)
+		protected override void OnHandleEvent(HealRandomAllyEffect evt)
 		{
 			Debug.Log($"HealRandomAllyHandler, Source: {evt.Source}");
 

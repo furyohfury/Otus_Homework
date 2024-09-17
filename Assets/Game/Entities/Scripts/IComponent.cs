@@ -1,6 +1,6 @@
 namespace Entities
 {
-	public interface IComponent // TODO remove all this shitty boxing
+	public interface IComponent
 	{
 	}
 }

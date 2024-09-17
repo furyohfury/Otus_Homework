@@ -4,7 +4,7 @@ using Zenject;
 
 namespace EventBus
 {
-	public sealed class DamageRandomEnemyVisualHandler : BaseHandler<DamageRandomEnemyEvent>
+	public sealed class DamageRandomEnemyVisualHandler : BaseHandler<DamageRandomEnemyEffect>
 	{
 		private readonly VisualPipeline _visualPipeline;
 		private readonly AudioPlayer _audioPlayer;
@@ -18,7 +18,7 @@ namespace EventBus
 			_audioPlayer = audioPlayer;
 		}
 
-		protected override void OnHandleEvent(DamageRandomEnemyEvent evt)
+		protected override void OnHandleEvent(DamageRandomEnemyEffect evt)
 		{
 			var clips = evt.AudioClips;
 			if (clips == null) return;

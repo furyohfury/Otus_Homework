@@ -14,7 +14,7 @@
          {
              if (!evt.Entity.TryRemoveData<DivineShieldComponent>())
              {
-                 throw new Exception($"{evt.Entity.name} has no divine shield"); // TODO add id?
+                 throw new Exception($"{evt.Entity.name} has no divine shield");
              }
          }
      }

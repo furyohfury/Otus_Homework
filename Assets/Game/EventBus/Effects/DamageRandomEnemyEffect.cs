@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Entities
 {
 	[Serializable]
-	public struct DamageRandomEnemyEvent : ICombatEvent
+	public struct DamageRandomEnemyEffect : IEffect
 	{
 		public Entity Source { get; set; }
 		public int Damage;

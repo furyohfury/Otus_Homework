@@ -4,7 +4,7 @@ using Zenject;
 
 namespace EventBus
 {
-	public sealed class DamageAllHandler : BaseHandler<DamageAllEvent>
+	public sealed class DamageAllHandler : BaseHandler<DamageAllEffect>
 	{
 		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
@@ -14,7 +14,7 @@ namespace EventBus
 			_heroCollections = heroCollections;
 		}
 
-		protected override void OnHandleEvent(DamageAllEvent evt)
+		protected override void OnHandleEvent(DamageAllEffect evt)
 		{
 			Debug.Log("DamageAllHandler");
 			foreach (var heroCollection in _heroCollections.Values)

@@ -3,7 +3,7 @@ using Zenject;
 
 namespace EventBus
 {
-	public sealed class HealRandomAllyVisualHandler : BaseHandler<HealRandomAllyEvent>
+	public sealed class HealRandomAllyVisualHandler : BaseHandler<HealRandomAllyEffect>
 	{
 		private readonly VisualPipeline _visualPipeline;
 		private readonly AudioPlayer _audioPlayer;
@@ -16,7 +16,7 @@ namespace EventBus
 			_audioPlayer = audioPlayer;
 		}
 
-		protected override void OnHandleEvent(HealRandomAllyEvent evt)
+		protected override void OnHandleEvent(HealRandomAllyEffect evt)
 		{
 			var clips = evt.AudioClips;
 			if (clips == null) return;
