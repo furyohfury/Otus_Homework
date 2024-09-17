@@ -21,6 +21,13 @@ namespace EventBus
 			Debug.Log("EndOfTurnTask OnRun");
 			var currentHero = _currentHeroService.CurrentHero;
 
+			RaiseEoTEvents(currentHero);	
+			SetVisualInactive(currentHero);
+			Finish();
+		}
+
+		private void RaiseEoTEvents(HeroEntity hero)
+		{
 			if (currentHero.TryGetData(out EndOfTurnComponent endOfTurnComponent))
 			{
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
@@ -29,10 +36,12 @@ namespace EventBus
 					_eventBus.RaiseEvent(endOfTurnEvent);
 				}
 			}
+		}
 
-			currentHero.TryGetData(out HeroViewComponent heroViewComponent);
+		private void SetVisualInactive(HeroEntity hero)
+		{
+			heroViewComponent = currentHero.GetData<HeroViewComponent>();
 			heroViewComponent.HeroView.SetActive(false);
-			Finish();
 		}
 	}
 }
