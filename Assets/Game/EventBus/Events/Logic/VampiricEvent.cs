@@ -4,9 +4,9 @@ namespace EventBus
 {
 	public struct VampiricEvent : IEvent
 	{
-		public Entity Entity;
-		public int Damage;
-		public float Probability;
+		public readonly Entity Entity;
+		public readonly int Damage;
+		public readonly float Probability;
 
 		public VampiricEvent(Entity entity, int damage, float probability)
 		{

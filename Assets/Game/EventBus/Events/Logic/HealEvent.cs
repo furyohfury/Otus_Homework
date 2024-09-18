@@ -4,8 +4,8 @@ namespace EventBus
 {
 	public struct HealEvent : IEvent
 	{
-		public Entity Entity;
-		public int Amount;
+		public readonly Entity Entity;
+		public readonly int Amount;
 
 		public HealEvent(Entity entity, int amount)
 		{

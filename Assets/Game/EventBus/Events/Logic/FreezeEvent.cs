@@ -4,7 +4,7 @@ namespace EventBus
 {
 	public struct FreezeEvent : IEvent
 	{
-		public Entity Target;
+		public readonly Entity Target;
 
 		public FreezeEvent(Entity target)
 		{

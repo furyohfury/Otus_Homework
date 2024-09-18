@@ -1,15 +1,13 @@
-using System;
 using Entities;
 
 namespace EventBus
 {
-	[Serializable]
 	public struct AttackWrongTargetEvent : IEvent
 	{
-		public float Probability;
-		public HeroEntity InitialTarget;
+		public readonly float Probability;
+		public readonly Entity InitialTarget;
 
-		public AttackWrongTargetEvent(float probability, HeroEntity initialTarget)
+		public AttackWrongTargetEvent(float probability, Entity initialTarget)
 		{
 			Probability = probability;
 			InitialTarget = initialTarget;

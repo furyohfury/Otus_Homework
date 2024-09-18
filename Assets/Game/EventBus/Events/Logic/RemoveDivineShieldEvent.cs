@@ -11,7 +11,7 @@ namespace EventBus
 		public RemoveDivineShieldEvent(Entity entity)
 		{
 			Entity = entity;
-			entity.TryGetData(out DivineShieldComponent divineShieldComponent);
+			var divineShieldComponent = entity.GetData<DivineShieldComponent>();
 			ShieldView = divineShieldComponent.DivineShieldView;
 		}
 	}

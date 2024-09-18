@@ -6,24 +6,24 @@ namespace Entities
 {
 	public class Entity : MonoBehaviour
 	{
-		protected readonly Dictionary<Type, IComponent> Components = new();
+		private readonly Dictionary<Type, IComponent> _components = new();
 
 		public void AddData(IComponent component)
 		{
-			Components.Add(component.GetType(), component);
+			_components.Add(component.GetType(), component);
 		}
 
 		public bool HasData<T>() where T : IComponent
 		{
-			return Components.ContainsKey(typeof(T));
+			return _components.ContainsKey(typeof(T));
 		}
 
 		public bool TryRemoveData<T>() where T : IComponent
 		{
 			var type = typeof(T);
-			if (Components.ContainsKey(type))
+			if (_components.ContainsKey(type))
 			{
-				Components.Remove(type);
+				_components.Remove(type);
 				return true;
 			}
 
@@ -33,7 +33,7 @@ namespace Entities
 		public bool TryGetData<T>(out T component)
 		{
 			var type = typeof(T);
-			if (Components.TryGetValue(type, out var tComponent))
+			if (_components.TryGetValue(type, out var tComponent))
 			{
 				component = (T)tComponent;
 				return true;
@@ -45,12 +45,12 @@ namespace Entities
 
 		public T GetData<T>() where T : IComponent
 		{
-			return (T)Components[typeof(T)];
+			return (T)_components[typeof(T)];
 		}
 
 		public void RemoveData<T>() where T : IComponent
 		{
-			Components.Remove(typeof(T));
+			_components.Remove(typeof(T));
 		}
 	}
 }

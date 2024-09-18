@@ -4,9 +4,9 @@ namespace EventBus
 {
 	public struct DealDamageEvent : IEvent
 	{
-		public Entity Source;
-		public Entity Target;
-		public int Damage;
+		public readonly Entity Source;
+		public readonly Entity Target;
+		public readonly int Damage;
 
 		public DealDamageEvent(Entity source, Entity target, int damage)
 		{

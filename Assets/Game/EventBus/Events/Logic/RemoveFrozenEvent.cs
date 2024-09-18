@@ -5,8 +5,8 @@ namespace EventBus
 {
 	public struct RemoveFrozenEvent : IEvent
 	{
-		public Entity Target;
-		public GameObject View;
+		public readonly Entity Target;
+		public readonly GameObject View;
 
 		public RemoveFrozenEvent(Entity target)
 		{
