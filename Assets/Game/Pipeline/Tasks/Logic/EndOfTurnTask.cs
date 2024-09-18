@@ -34,6 +34,8 @@ namespace EventBus
 
 		private void RaiseEoTHeroEvents(HeroEntity currentHero)
 		{
+			if (currentHero.GetData<DestroyComponent>().IsDead) return;
+
 			if (currentHero.TryGetData(out EndOfTurnComponent endOfTurnComponent))
 			{
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
@@ -56,7 +58,8 @@ namespace EventBus
 
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
 				{
-					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Player)
+					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Player 
+					|| endOfTurnEvent.EventTriggerLink == EventTriggerLink.Any)
 					{
 						endOfTurnEvent.Source = hero;
 						_eventBus.RaiseEvent(endOfTurnEvent);
