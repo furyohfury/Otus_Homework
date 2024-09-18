@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Entities;
 using EventBus;
@@ -74,13 +75,19 @@ namespace Game.EventBus
 			var previousPlayer = _currentHeroService.CurrentPlayer;
 			var currentPlayer = _currentHeroService.CurrentPlayer == Player.Blue
 				? Player.Red
-				: Player.Blue;			
-			if (!_heroCollections[currentPlayer].TryGetNextHero(out var nextHero))
+				: Player.Blue;		
+
+			// Check for game over
+			foreach (var key in _heroCollections.Keys)
 			{
-				return false;
-				OnNoHeroesLeft?.Invoke(previousPlayer);
+				if (_heroCollections[key].HeroEntities.Count <= 0)
+				{
+					OnNoHeroesLeft?.Invoke(key);
+					return false;
+				}
 			}
 
+			_heroCollections[currentPlayer].TryGetNextHero(out var nextHero);
 			_currentHeroService.SetCurrentPlayer(currentPlayer);
 			_currentHeroService.SetCurrentHero(nextHero);
 			return true;

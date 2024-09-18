@@ -2,6 +2,7 @@
 using Entities;
 using EventBus;
 using Game.EventBus;
+using TMPro;
 using UI;
 using UnityEngine;
 using Zenject;
@@ -45,7 +46,7 @@ namespace Game.Installers
 			_heroCollections.Add(Player.Blue, new HeroCollection(_bluePlayerHeroes, 0));
 			_heroCollections.Add(Player.Red, new HeroCollection(_redPlayerHeroes, _redPlayerHeroes.Length - 1));
 			Container.BindInstance(_heroCollections).AsSingle();
-			Container.Bind<GameOverController>().AsSingle().WithArguments(_gameOverScreen, _playerText);
+			Container.BindInterfacesAndSelfTo<GameOverController>().AsSingle().WithArguments(_gameOverScreen, _playerText);
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();
