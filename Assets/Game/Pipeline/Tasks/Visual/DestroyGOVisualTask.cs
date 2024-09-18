@@ -1,22 +1,20 @@
- using DG.Tweening;
- using Entities;
- using UnityEngine;
+using UnityEngine;
 
- namespace EventBus
- {
-     public class DestroyGOVisualTask : EventTask
-     {
-         private readonly GameObject _gameObject;
+namespace EventBus
+{
+	public class DestroyGOVisualTask : EventTask
+	{
+		private readonly GameObject _gameObject;
 
-         public DestroyGOVisualTask(GameObject gameObject)
-         {
-             _gameObject = gameObject;
-         }
+		public DestroyGOVisualTask(GameObject gameObject)
+		{
+			_gameObject = gameObject;
+		}
 
-         protected override void OnRun()
-         {             
-                 Object.Destroy(_gameObject);
-             Finish();
-         }
-     }
- }
+		protected override void OnRun()
+		{
+			Object.Destroy(_gameObject);
+			Finish();
+		}
+	}
+}

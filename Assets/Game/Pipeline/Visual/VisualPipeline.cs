@@ -1,7 +1,6 @@
 namespace EventBus
 {
-    public class VisualPipeline : Pipeline
-    {
-        
-    }
+	public class VisualPipeline : Pipeline
+	{
+	}
 }

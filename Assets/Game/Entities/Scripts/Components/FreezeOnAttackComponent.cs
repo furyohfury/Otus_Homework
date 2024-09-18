@@ -2,10 +2,9 @@ using System;
 using Entities;
 
 namespace EventBus
-{   
-    [Serializable]
-    public sealed class FreezeOnAttackComponent : IComponent
-    {
-        
-    } 
+{
+	[Serializable]
+	public sealed class FreezeOnAttackComponent : IComponent
+	{
+	}
 }

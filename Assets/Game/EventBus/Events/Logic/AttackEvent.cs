@@ -1,5 +1,4 @@
 using Entities;
-using UI;
 
 namespace EventBus
 {
@@ -10,7 +9,7 @@ namespace EventBus
 
 		public AttackEvent(Entity source, Entity target)
 		{
-            Source = source;
+			Source = source;
 			Target = target;
 		}
 	}

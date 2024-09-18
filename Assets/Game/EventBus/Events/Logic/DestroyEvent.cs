@@ -1,14 +1,14 @@
- using Entities;
+using Entities;
 
- namespace EventBus
- {
-     public struct DestroyEvent : IEvent
-     {
-         public readonly Entity Target;
+namespace EventBus
+{
+	public struct DestroyEvent : IEvent
+	{
+		public readonly Entity Target;
 
-         public DestroyEvent(Entity target)
-         {
-             Target = target;
-         }
-     }
- }
+		public DestroyEvent(Entity target)
+		{
+			Target = target;
+		}
+	}
+}

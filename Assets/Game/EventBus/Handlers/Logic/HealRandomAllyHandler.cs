@@ -6,10 +6,11 @@ namespace EventBus
 {
 	public sealed class HealRandomAllyHandler : BaseHandler<HealRandomAllyEvent>
 	{
-        private CurrentHeroService _currentHeroService;
-        private Dictionary<Player, HeroCollection> _heroCollections;
+		private CurrentHeroService _currentHeroService;
+		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
-		public HealRandomAllyHandler(EventBus eventBus, Dictionary<Player, HeroCollection> heroCollections) : base(eventBus)
+		public HealRandomAllyHandler(EventBus eventBus, Dictionary<Player, HeroCollection> heroCollections) :
+			base(eventBus)
 		{
 			_heroCollections = heroCollections;
 		}

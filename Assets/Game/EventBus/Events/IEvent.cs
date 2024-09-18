@@ -1,7 +1,6 @@
 namespace EventBus
 {
-    public interface IEvent
-    {
-        
-    }
+	public interface IEvent
+	{
+	}
 }

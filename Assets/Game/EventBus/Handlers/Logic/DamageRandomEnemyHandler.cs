@@ -28,7 +28,8 @@ namespace Entities
 			if (evt.Projectile != null)
 			{
 				EventBus.RaiseEvent(new FireProjectileVisualEvent(evt.Source, randomEnemy, evt.Projectile));
-			}			
+			}
+
 			EventBus.RaiseEvent(new DealDamageEvent(evt.Source, randomEnemy, evt.Damage));
 		}
 	}

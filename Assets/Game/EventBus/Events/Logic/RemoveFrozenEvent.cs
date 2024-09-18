@@ -1,5 +1,4 @@
 using Entities;
-using UI;
 using UnityEngine;
 
 namespace EventBus
@@ -7,12 +6,12 @@ namespace EventBus
 	public struct RemoveFrozenEvent : IEvent
 	{
 		public Entity Target;
-        public GameObject View;
+		public GameObject View;
 
 		public RemoveFrozenEvent(Entity target)
 		{
 			Target = target;
-            View = target.GetData<FrozenComponent>().View;
+			View = target.GetData<FrozenComponent>().View;
 		}
-	}        
+	}
 }

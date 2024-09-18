@@ -47,7 +47,7 @@ namespace Entities
 		{
 			return (T)Components[typeof(T)];
 		}
-		
+
 		public void RemoveData<T>() where T : IComponent
 		{
 			Components.Remove(typeof(T));

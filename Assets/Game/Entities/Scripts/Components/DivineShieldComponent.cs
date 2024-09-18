@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace EventBus
 {
-    [Serializable]
-    public sealed class DivineShieldComponent : IComponent
-    {
-        public GameObject DivineShieldView;
-    }
+	[Serializable]
+	public sealed class DivineShieldComponent : IComponent
+	{
+		public GameObject DivineShieldView;
+	}
 }

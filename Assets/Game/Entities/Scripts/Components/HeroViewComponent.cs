@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Entities
 {
-    [Serializable]
-    public sealed class HeroViewComponent : IComponent
-    {
-        public HeroView HeroView;
-        public Transform Container;
-    }
+	[Serializable]
+	public sealed class HeroViewComponent : IComponent
+	{
+		public HeroView HeroView;
+		public Transform Container;
+	}
 }

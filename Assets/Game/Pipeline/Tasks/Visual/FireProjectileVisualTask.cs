@@ -8,8 +8,8 @@ namespace Entities
 	{
 		private readonly Entity _source;
 		private readonly Entity _target;
-		private GameObject _projectile;
-		private Transform _worldTransform;
+		private readonly GameObject _projectile;
+		private readonly Transform _worldTransform;
 
 
 		public FireProjectileVisualTask(Entity source, Entity target, GameObject projectile, Transform worldTransform)
@@ -27,11 +27,11 @@ namespace Entities
 			var targetHeroViewComponent = _target.GetData<HeroViewComponent>();
 			var startPos = sourceHeroViewComponent.Container.position;
 			var endPos = targetHeroViewComponent.Container.position;
-			
-			var projectile = GameObject.Instantiate(_projectile, startPos, Quaternion.identity, _worldTransform);
+
+			var projectile = Object.Instantiate(_projectile, startPos, Quaternion.identity, _worldTransform);
 			projectile.transform.DOMove(endPos, 1f).OnComplete(() =>
 			{
-				GameObject.Destroy(projectile);
+				Object.Destroy(projectile);
 				Finish();
 			});
 		}

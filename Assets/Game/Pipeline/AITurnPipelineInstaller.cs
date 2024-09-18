@@ -16,10 +16,10 @@ namespace EventBus
 		}
 
 		void IInitializable.Initialize()
-		{			
+		{
 			_turnPipeline.AddTask(new StartTask());
 			_turnPipeline.AddTask(_diContainer.Instantiate<StartTurnTask>());
-			_turnPipeline.AddTask(_diContainer.Instantiate<AIInputTask>());		
+			_turnPipeline.AddTask(_diContainer.Instantiate<AIInputTask>());
 			// endturntask
 			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
 			_turnPipeline.AddTask(_diContainer.Instantiate<EndOfTurnTask>());

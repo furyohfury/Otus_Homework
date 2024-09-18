@@ -3,17 +3,17 @@ using Zenject;
 
 namespace EventBus
 {
-    public sealed class RemoveFrozenHandler : BaseHandler<RemoveFrozenEvent>
-    {
-        [Inject]
+	public sealed class RemoveFrozenHandler : BaseHandler<RemoveFrozenEvent>
+	{
+		[Inject]
 		public RemoveFrozenHandler(EventBus eventBus) : base(eventBus)
 		{
 		}
 
-        protected override void OnHandleEvent(RemoveFrozenEvent evt)
+		protected override void OnHandleEvent(RemoveFrozenEvent evt)
 		{
-            Debug.Log($"RemoveFrozenHandler.Target: {evt.Target.gameObject.name}");
-            evt.Target.RemoveData<FrozenComponent>();
-        }
-    }
+			Debug.Log($"RemoveFrozenHandler.Target: {evt.Target.gameObject.name}");
+			evt.Target.RemoveData<FrozenComponent>();
+		}
+	}
 }

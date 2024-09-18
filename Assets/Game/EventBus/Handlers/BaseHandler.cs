@@ -3,25 +3,25 @@ using Zenject;
 
 namespace EventBus
 {
-    public abstract class BaseHandler<TEvent> : IInitializable, IDisposable
-    {
-        protected readonly EventBus EventBus;
+	public abstract class BaseHandler<TEvent> : IInitializable, IDisposable
+	{
+		protected readonly EventBus EventBus;
 
-        protected BaseHandler(EventBus eventBus)
-        {
-            EventBus = eventBus;
-        }
+		protected BaseHandler(EventBus eventBus)
+		{
+			EventBus = eventBus;
+		}
 
-        public void Initialize()
-        {
-            EventBus.Subscribe<TEvent>(OnHandleEvent);
-        }
+		public void Initialize()
+		{
+			EventBus.Subscribe<TEvent>(OnHandleEvent);
+		}
 
-        public void Dispose()
-        {
-            EventBus.Unsubscribe<TEvent>(OnHandleEvent);
-        }
+		public void Dispose()
+		{
+			EventBus.Unsubscribe<TEvent>(OnHandleEvent);
+		}
 
-        protected abstract void OnHandleEvent(TEvent evt);
-    }
+		protected abstract void OnHandleEvent(TEvent evt);
+	}
 }

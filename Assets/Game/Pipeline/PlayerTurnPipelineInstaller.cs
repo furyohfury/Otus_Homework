@@ -19,7 +19,7 @@ namespace EventBus
 		{
 			_turnPipeline.AddTask(new StartTask());
 			_turnPipeline.AddTask(_diContainer.Instantiate<StartTurnTask>());
-			_turnPipeline.AddTask(_diContainer.Instantiate<PlayerInputTask>());		
+			_turnPipeline.AddTask(_diContainer.Instantiate<PlayerInputTask>());
 			// endturntask
 			_turnPipeline.AddTask(_diContainer.Instantiate<StartVisualPipelineTask>());
 			_turnPipeline.AddTask(_diContainer.Instantiate<EndOfTurnTask>());

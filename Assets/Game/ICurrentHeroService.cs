@@ -2,5 +2,5 @@
 
 public interface ICurrentHeroService
 {
-	public HeroEntity CurrentHero {get;}
+	public HeroEntity CurrentHero { get; }
 }

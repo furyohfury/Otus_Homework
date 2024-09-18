@@ -58,8 +58,8 @@ namespace EventBus
 
 				foreach (var endOfTurnEvent in endOfTurnComponent.Events)
 				{
-					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Player 
-					|| endOfTurnEvent.EventTriggerLink == EventTriggerLink.Any)
+					if (endOfTurnEvent.EventTriggerLink == EventTriggerLink.Player
+					    || endOfTurnEvent.EventTriggerLink == EventTriggerLink.Any)
 					{
 						endOfTurnEvent.Source = hero;
 						_eventBus.RaiseEvent(endOfTurnEvent);

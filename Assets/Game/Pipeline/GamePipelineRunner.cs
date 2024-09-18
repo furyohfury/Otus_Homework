@@ -45,7 +45,7 @@ namespace Game.EventBus
 			if (TryChangeCurrentHero())
 			{
 				Run();
-			}			
+			}
 		}
 
 		public void Run()
@@ -75,7 +75,7 @@ namespace Game.EventBus
 			var previousPlayer = _currentHeroService.CurrentPlayer;
 			var currentPlayer = _currentHeroService.CurrentPlayer == Player.Blue
 				? Player.Red
-				: Player.Blue;		
+				: Player.Blue;
 
 			// Check for game over
 			foreach (var key in _heroCollections.Keys)

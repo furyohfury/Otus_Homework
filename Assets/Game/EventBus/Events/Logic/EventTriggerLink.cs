@@ -1,6 +1,6 @@
 namespace EventBus
 {
-    public enum EventTriggerLink : byte
+	public enum EventTriggerLink : byte
 	{
 		Hero,
 		Player,

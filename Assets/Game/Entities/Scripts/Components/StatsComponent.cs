@@ -6,7 +6,7 @@ namespace Entities
 	public sealed class StatsComponent : IComponent
 	{
 		public int Damage;
-        public int CurrentHealth;
-        public int MaxHealth;
+		public int CurrentHealth;
+		public int MaxHealth;
 	}
 }

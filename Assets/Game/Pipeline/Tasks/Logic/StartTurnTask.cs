@@ -32,7 +32,8 @@ namespace EventBus
 					var randomIndex = Random.Range(0, clips.Length);
 					_audioPlayer.PlaySound(clips[randomIndex]);
 				}
-			}			
+			}
+
 			Finish();
 		}
 	}

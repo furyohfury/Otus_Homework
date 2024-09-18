@@ -32,7 +32,7 @@ namespace Game.Installers
 		[SerializeField]
 		private GameObject _gameOverScreen;
 		[SerializeField]
-        private TMP_Text _playerText;
+		private TMP_Text _playerText;
 
 		private readonly Dictionary<Player, HeroCollection> _heroCollections = new();
 
@@ -46,7 +46,8 @@ namespace Game.Installers
 			_heroCollections.Add(Player.Blue, new HeroCollection(_bluePlayerHeroes, 0));
 			_heroCollections.Add(Player.Red, new HeroCollection(_redPlayerHeroes, _redPlayerHeroes.Length - 1));
 			Container.BindInstance(_heroCollections).AsSingle();
-			Container.BindInterfacesAndSelfTo<GameOverController>().AsSingle().WithArguments(_gameOverScreen, _playerText);
+			Container.BindInterfacesAndSelfTo<GameOverController>().AsSingle()
+			         .WithArguments(_gameOverScreen, _playerText);
 
 			// Pipeline
 			Container.Bind<VisualPipeline>().AsCached();
