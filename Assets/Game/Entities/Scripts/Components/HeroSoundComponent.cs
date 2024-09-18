@@ -8,7 +8,6 @@ namespace Entities
 	{
 		public AudioClip[] StartTurnClips;
 		public AudioClip[] LowHealthClips;
-		public AudioClip[] AbilityClips;
 		public AudioClip[] DeathClips;
 	}
 }
