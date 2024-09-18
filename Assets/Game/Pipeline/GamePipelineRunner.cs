@@ -7,6 +7,8 @@ namespace Game.EventBus
 {
 	public class GamePipelineRunner : IInitializable
 	{
+		public event Action<Player> OnNoHeroesLeft;
+
 		private readonly TurnPipeline[] _pipelines;
 		private int _activeIndex;
 
@@ -39,8 +41,10 @@ namespace Game.EventBus
 			_activeIndex = _activeIndex == _pipelines.Length - 1
 				? 0
 				: _activeIndex + 1;
-			ChangeCurrentHero();
-			Run();
+			if (TryChangeCurrentHero())
+			{
+				Run();
+			}			
 		}
 
 		public void Run()
@@ -65,18 +69,21 @@ namespace Game.EventBus
 			_currentHeroService.SetCurrentHero(_heroCollections[Player.Blue].HeroEntities[0]);
 		}
 
-		private void ChangeCurrentHero()
+		private bool TryChangeCurrentHero()
 		{
+			var previousPlayer = _currentHeroService.CurrentPlayer;
 			var currentPlayer = _currentHeroService.CurrentPlayer == Player.Blue
 				? Player.Red
-				: Player.Blue;
-			_currentHeroService.SetCurrentPlayer(currentPlayer);
+				: Player.Blue;			
 			if (!_heroCollections[currentPlayer].TryGetNextHero(out var nextHero))
 			{
-				// TODO game over logic here or in separate controller
+				return false;
+				OnNoHeroesLeft?.Invoke(previousPlayer);
 			}
 
+			_currentHeroService.SetCurrentPlayer(currentPlayer);
 			_currentHeroService.SetCurrentHero(nextHero);
+			return true;
 		}
 	}
 }
