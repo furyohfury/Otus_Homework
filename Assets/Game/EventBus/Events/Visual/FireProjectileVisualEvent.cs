@@ -1,8 +1,8 @@
 ﻿using System;
-using EventBus;
+using Entities;
 using UnityEngine;
 
-namespace Entities
+namespace EventBus
 {
 	[Serializable]
 	public struct FireProjectileVisualEvent : IEvent

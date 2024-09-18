@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Entities;
-using EventBus;
 using Zenject;
 
-namespace Game.EventBus
+namespace EventBus
 {
 	public class GamePipelineRunner : IInitializable
 	{

@@ -1,7 +1,6 @@
 using System;
-using Entities;
 
-namespace EventBus
+namespace Entities
 {
 	[Serializable]
 	public sealed class FreezeOnAttackComponent : IComponent

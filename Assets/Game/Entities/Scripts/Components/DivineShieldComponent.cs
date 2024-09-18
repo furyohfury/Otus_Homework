@@ -1,8 +1,7 @@
 using System;
-using Entities;
 using UnityEngine;
 
-namespace EventBus
+namespace Entities
 {
 	[Serializable]
 	public sealed class DivineShieldComponent : IComponent

@@ -1,8 +1,8 @@
 ﻿using DG.Tweening;
-using EventBus;
+using Entities;
 using UnityEngine;
 
-namespace Entities
+namespace EventBus
 {
 	public class FireProjectileVisualTask : EventTask
 	{

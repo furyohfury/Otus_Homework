@@ -1,4 +1,3 @@
-using EventBus.Visual;
 using Zenject;
 
 namespace EventBus

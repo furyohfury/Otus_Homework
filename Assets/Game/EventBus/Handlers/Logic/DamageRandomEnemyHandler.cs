@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
-using EventBus;
+using Entities;
 using UnityEngine;
 using Zenject;
 
-namespace Entities
+namespace EventBus
 {
 	public sealed class DamageRandomEnemyHandler : BaseHandler<DamageRandomEnemyEvent>
 	{
 		private readonly Dictionary<Player, HeroCollection> _heroCollections;
 
 		[Inject]
-		public DamageRandomEnemyHandler(EventBus.EventBus eventBus, Dictionary<Player, HeroCollection> heroCollections)
+		public DamageRandomEnemyHandler(EventBus eventBus, Dictionary<Player, HeroCollection> heroCollections)
 			: base(eventBus)
 		{
 			_heroCollections = heroCollections;

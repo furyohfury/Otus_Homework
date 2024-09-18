@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entities;
 using EventBus;
-using Game.EventBus;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -9,7 +8,7 @@ using Zenject;
 
 namespace Game.Installers
 {
-	public class ZenjectInstaller : MonoInstaller
+	public class ZenjectInstaller : MonoInstaller // too lazy to divide on separate installers((
 	{
 		[SerializeField]
 		private HeroEntity[] _bluePlayerHeroes;
@@ -63,7 +62,7 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<GamePipelineRunner>().AsCached();
 
 			// Event bus logic
-			Container.Bind<global::EventBus.EventBus>().AsSingle();
+			Container.Bind<EventBus.EventBus>().AsSingle();
 			Container.BindInterfacesAndSelfTo<AttackWrongTargetHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<AttackHandler>().AsSingle();
 			Container.BindInterfacesAndSelfTo<FreezeHandler>().AsSingle();

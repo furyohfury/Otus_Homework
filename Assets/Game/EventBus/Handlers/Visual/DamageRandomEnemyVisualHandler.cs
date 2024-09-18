@@ -1,5 +1,4 @@
-﻿using Entities;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace EventBus
