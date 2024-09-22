@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using TMPro;
@@ -9,19 +10,19 @@ namespace RealTime
 {
 	public sealed class TimeManager : MonoBehaviour
 	{
+
 		[SerializeField]
 		private TMP_Text _time;
 
-		private const string ENTER_QUIT_TIME_PREFS = "ENTER_QUIT_TIME_PREFS";
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow";
 
 		private async void Awake()
 		{
-			var time = await GetServerTime();
+			var time = await GetServerTimeOrDefault();
 			_time.text = time.ToString();
 		}
 
-		private async UniTask<DateTime> GetServerTime()
+		public async UniTask<DateTime> GetServerTimeOrDefault()
 		{
 			var request = UnityWebRequest.Get(SERVER_PATH);
 			await request.SendWebRequest();
@@ -31,6 +32,7 @@ namespace RealTime
 				var date = JsonConvert.DeserializeObject<ServerTimeData>(dateJson);
 				return DateTime.Parse(date.dateTime);
 			}
+
 			return default;
 		}
 
