@@ -7,9 +7,7 @@ namespace RealTime
 	public class EnterExitTimeController : MonoBehaviour
 	{
 		private const string ENTER_QUIT_TIME_PREFS = "ENTER_QUIT_TIME_PREFS";
-
-		[SerializeField]
-		private TimeManager _timeManager;
+		
 		[SerializeField]
 		private GameObject _canvas;
 		[SerializeField]
@@ -30,7 +28,7 @@ namespace RealTime
 				_previousSessions = JsonConvert.DeserializeObject<EnterQuitTime>(prevSessions);
 			}
 
-			_currentSession.EnterTime = await _timeManager.GetServerTimeOrDefault();			
+			_currentSession.EnterTime = await ServerTimeManager.GetServerTimeOrDefault();			
 			_button.onClick.AddListener(Show);
 		}
 
@@ -58,7 +56,7 @@ namespace RealTime
 
 		private void OnApplicationQuit()
 		{
-			var quitTime = await _timeManager.GetServerTimeOrDefault();
+			var quitTime = await ServerTimeManager.GetServerTimeOrDefault();
 			_currentSession.QuitTime = quitTime;
 			_currentSession.SessionDuration = quitTime != default 
 					? quitTime.Subtract(_currentSession.EntryTime);
