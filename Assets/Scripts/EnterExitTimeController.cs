@@ -19,6 +19,9 @@ namespace RealTime
 		private EnterQuitTime _previousSessions;
 		private EnterQuitTime _currentSession = new();		
 		private StringBuilder _viewTime = new();
+		private string _previousSessionsString;
+
+		private UniTaskCompletionSource _completionSource = new();
 
 		private async void Start()
 		{
@@ -26,6 +29,12 @@ namespace RealTime
 			{
 				var prevSessions = PlayerPrefs.GetString(ENTER_QUIT_TIME_PREFS);
 				_previousSessions = JsonConvert.DeserializeObject<EnterQuitTime>(prevSessions);
+				
+				foreach (var enterQuitTime in _previousSessions)
+				{
+					_viewTime.AppendLine(FormatTime(enterQuitTime));
+				}
+				_previousSessionsString = _viewTime.ToString();
 			}
 
 			_currentSession.EnterTime = await ServerTimeManager.GetServerTimeOrDefault();			
@@ -33,18 +42,26 @@ namespace RealTime
 		}
 
 		public void Show()
-		{
-			_viewTime.Clear();
-			_viewTime.Append("Entry/tQuit/tDuration");
-			foreach (var enterQuitTime in _previousSessions)
-			{
-				_viewTime.Append(FormatTime(enterQuitTime));
-			}
-			_viewTime.Append(FormatTime(_currentSession));
-			_viewTimeText.text = _viewTime.ToString();
+		{			
 			_canvas.SetActive(true);
 			_button.onClick.RemoveListener(Show);
 			_button.onClick.AddListener(Hide);
+			ShowTimeTable().Forget();
+		}
+
+		private async UniTask ShowTimeTable()
+		{
+			_completionSource = new();
+			while(!_completionSource.CancellationToken.IsCancellationRequested)
+			{
+				_viewTime.Clear();
+				_viewTime.AppendLine("Entry/tQuit/tDuration");
+				_viewTime.AppendLine(_previousSessionsString);
+				_currentSession.SessionDuration = DateTime.Now - _currentSession.EntryTime;
+				_viewTime.AppendLine(FormatTime(_currentSession));
+				_viewTimeText.text = _viewTime.ToString();
+				await UniTask.Delay(TimeSpan.FromSeconds(1f));
+			}
 		}
 
 		private void Hide()
@@ -52,6 +69,7 @@ namespace RealTime
 			_canvas.SetActive(false);
 			_button.onClick.RemoveListener(Hide);
 			_button.onClick.AddListener(Show);
+			_completionSource.Cancel();
 		}
 
 		private void OnApplicationQuit()
