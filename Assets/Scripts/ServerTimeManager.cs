@@ -8,19 +8,9 @@ using UnityEngine.Networking;
 
 namespace RealTime
 {
-	public sealed class TimeManager : MonoBehaviour
+	public static class ServerTimeManager
 	{
-
-		[SerializeField]
-		private TMP_Text _time;
-
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow";
-
-		private async void Awake()
-		{
-			var time = await GetServerTimeOrDefault();
-			_time.text = time.ToString();
-		}
 
 		public async UniTask<DateTime> GetServerTimeOrDefault()
 		{
