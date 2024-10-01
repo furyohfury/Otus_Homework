@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Net.NetworkInformation;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using TMPro;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace RealTime
@@ -12,7 +9,7 @@ namespace RealTime
 	{
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow";
 
-		public async UniTask<DateTime> GetServerTimeOrDefault()
+		public static async UniTask<DateTime> GetServerTimeOrDefault()
 		{
 			var request = UnityWebRequest.Get(SERVER_PATH);
 			await request.SendWebRequest();

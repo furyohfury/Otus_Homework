@@ -1,6 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RealTime
 {
@@ -16,19 +24,19 @@ namespace RealTime
 		private Button _button;
 
 		private bool _active = false;
-		private EnterQuitTime _previousSessions;
-		private EnterQuitTime _currentSession = new();		
+		private List<EnterQuitTime> _previousSessions = new();
+		private EnterQuitTime _currentSession;
 		private StringBuilder _viewTime = new();
 		private string _previousSessionsString;
 
-		private UniTaskCompletionSource _completionSource = new();
+		private CancellationTokenSource _cancellationTokenSource = new();
 
 		private async void Start()
 		{
 			if (PlayerPrefs.HasKey(ENTER_QUIT_TIME_PREFS))
 			{
 				var prevSessions = PlayerPrefs.GetString(ENTER_QUIT_TIME_PREFS);
-				_previousSessions = JsonConvert.DeserializeObject<EnterQuitTime>(prevSessions);
+				_previousSessions = JsonConvert.DeserializeObject<List<EnterQuitTime>>(prevSessions);
 				
 				foreach (var enterQuitTime in _previousSessions)
 				{
@@ -37,7 +45,7 @@ namespace RealTime
 				_previousSessionsString = _viewTime.ToString();
 			}
 
-			_currentSession.EnterTime = await ServerTimeManager.GetServerTimeOrDefault();			
+			_currentSession.EntryTime = await ServerTimeManager.GetServerTimeOrDefault();			
 			_button.onClick.AddListener(Show);
 		}
 
@@ -51,11 +59,11 @@ namespace RealTime
 
 		private async UniTask ShowTimeTable()
 		{
-			_completionSource = new();
-			while(!_completionSource.CancellationToken.IsCancellationRequested)
+			_cancellationTokenSource = new();
+			while(!_cancellationTokenSource.IsCancellationRequested)
 			{
 				_viewTime.Clear();
-				_viewTime.AppendLine("Entry/tQuit/tDuration");
+				_viewTime.AppendLine("Entry\tQuit\tDuration");
 				_viewTime.AppendLine(_previousSessionsString);
 				_currentSession.SessionDuration = DateTime.Now - _currentSession.EntryTime;
 				_viewTime.AppendLine(FormatTime(_currentSession));
@@ -69,15 +77,15 @@ namespace RealTime
 			_canvas.SetActive(false);
 			_button.onClick.RemoveListener(Hide);
 			_button.onClick.AddListener(Show);
-			_completionSource.Cancel();
+			_cancellationTokenSource.Cancel();
 		}
 
-		private void OnApplicationQuit()
+		private async void OnApplicationQuit()
 		{
 			var quitTime = await ServerTimeManager.GetServerTimeOrDefault();
 			_currentSession.QuitTime = quitTime;
 			_currentSession.SessionDuration = quitTime != default 
-					? quitTime.Subtract(_currentSession.EntryTime);
+					? quitTime.Subtract(_currentSession.EntryTime)
 					: default;
 			_previousSessions.Add(_currentSession);
 			var serializedSessions = JsonConvert.SerializeObject(_previousSessions);
@@ -86,24 +94,32 @@ namespace RealTime
 
 		private string FormatTime(EnterQuitTime enterQuitTime)
 		{
-			var entry = enterQuitTime.EnterTime != default 
-			? EnterTime.ToString("G")
+			var entry = enterQuitTime.EntryTime != default 
+			? enterQuitTime.EntryTime.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
 			: "Error";
 
 			var quit = enterQuitTime.QuitTime != default 
-			? QuitTime.ToString("G")
+			? enterQuitTime.QuitTime.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
 			: "Error";
 
 			var duration = enterQuitTime.SessionDuration != default 
-			? SessionDuration.ToString("G")
+			? enterQuitTime.SessionDuration.ToString("hh\\.mm\\:ss")
 			: "Error";
 
-			return $"{entry}/t{quit}/t{duration}";
+			return $"{entry}\t{quit}\t{duration}";
 		}
+		
+#if UNITY_EDITOR
+		[Button]
+		public void ClearPrefs()
+		{
+			PlayerPrefs.DeleteAll();
+		}
+#endif
 
 		private struct EnterQuitTime
 		{
-			public DateTime EnterTime;
+			public DateTime EntryTime;
 			public DateTime QuitTime;
 			public TimeSpan SessionDuration;
 		}
