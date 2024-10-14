@@ -15,7 +15,7 @@ namespace RealTime
 	public class EnterExitTimeController : MonoBehaviour
 	{
 		private const string ENTER_QUIT_TIME_PREFS = "ENTER_QUIT_TIME_PREFS";
-		
+
 		[SerializeField]
 		private GameObject _canvas;
 		[SerializeField]
@@ -26,7 +26,7 @@ namespace RealTime
 		private bool _active = false;
 		private List<EnterQuitTime> _previousSessions = new();
 		private EnterQuitTime _currentSession;
-		private StringBuilder _viewTime = new();
+		private readonly StringBuilder _viewTime = new();
 		private string _previousSessionsString;
 
 		private CancellationTokenSource _cancellationTokenSource = new();
@@ -37,20 +37,30 @@ namespace RealTime
 			{
 				var prevSessions = PlayerPrefs.GetString(ENTER_QUIT_TIME_PREFS);
 				_previousSessions = JsonConvert.DeserializeObject<List<EnterQuitTime>>(prevSessions);
-				
+
 				foreach (var enterQuitTime in _previousSessions)
 				{
 					_viewTime.AppendLine(FormatTime(enterQuitTime));
 				}
+
 				_previousSessionsString = _viewTime.ToString();
 			}
 
-			_currentSession.EntryTime = await ServerTimeManager.GetServerTimeOrDefault();			
 			_button.onClick.AddListener(Show);
+
+			try
+			{
+				_currentSession.EntryTime = await ServerTimeManager.GetServerTimeByIPAsync();
+			}
+			catch (Exception e)
+			{
+				_currentSession.EntryTime = null;
+				Debug.LogError(e.Message);
+			}
 		}
 
 		public void Show()
-		{			
+		{
 			_canvas.SetActive(true);
 			_button.onClick.RemoveListener(Show);
 			_button.onClick.AddListener(Hide);
@@ -59,8 +69,8 @@ namespace RealTime
 
 		private async UniTask ShowTimeTable()
 		{
-			_cancellationTokenSource = new();
-			while(!_cancellationTokenSource.IsCancellationRequested)
+			_cancellationTokenSource = new CancellationTokenSource();
+			while (!_cancellationTokenSource.IsCancellationRequested)
 			{
 				_viewTime.Clear();
 				_viewTime.AppendLine("Entry\tQuit\tDuration");
@@ -82,33 +92,45 @@ namespace RealTime
 
 		private async void OnApplicationQuit()
 		{
-			var quitTime = await ServerTimeManager.GetServerTimeOrDefault();
-			_currentSession.QuitTime = quitTime;
-			_currentSession.SessionDuration = quitTime != default 
-					? quitTime.Subtract(_currentSession.EntryTime)
-					: default;
-			_previousSessions.Add(_currentSession);
-			var serializedSessions = JsonConvert.SerializeObject(_previousSessions);
-			PlayerPrefs.SetString(ENTER_QUIT_TIME_PREFS, serializedSessions);
+			try
+			{
+				var quitTime = await ServerTimeManager.GetServerTimeByIPAsync();
+				_currentSession.QuitTime = quitTime;
+				if (_currentSession.EntryTime.HasValue)
+				{
+					_currentSession.SessionDuration = quitTime.Subtract(_currentSession.EntryTime.Value);
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.LogError(e.Message);
+				throw;
+			}
+			finally
+			{
+				_previousSessions.Add(_currentSession);
+				var serializedSessions = JsonConvert.SerializeObject(_previousSessions);
+				PlayerPrefs.SetString(ENTER_QUIT_TIME_PREFS, serializedSessions);
+			}
 		}
 
 		private string FormatTime(EnterQuitTime enterQuitTime)
 		{
-			var entry = enterQuitTime.EntryTime != default 
-			? enterQuitTime.EntryTime.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
-			: "Error";
+			var entry = enterQuitTime.EntryTime.HasValue
+				? enterQuitTime.EntryTime.Value.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
+				: "No data";
 
-			var quit = enterQuitTime.QuitTime != default 
-			? enterQuitTime.QuitTime.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
-			: "Error";
+			var quit = enterQuitTime.QuitTime.HasValue
+				? enterQuitTime.QuitTime.Value.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
+				: "No data";
 
-			var duration = enterQuitTime.SessionDuration != default 
-			? enterQuitTime.SessionDuration.ToString("hh\\.mm\\:ss")
-			: "Error";
+			var duration = enterQuitTime.SessionDuration.HasValue
+				? enterQuitTime.SessionDuration.Value.ToString("hh\\:mm\\:ss")
+				: "No data";
 
 			return $"{entry}\t{quit}\t{duration}";
 		}
-		
+
 #if UNITY_EDITOR
 		[Button]
 		public void ClearPrefs()
@@ -119,9 +141,9 @@ namespace RealTime
 
 		private struct EnterQuitTime
 		{
-			public DateTime EntryTime;
-			public DateTime QuitTime;
-			public TimeSpan SessionDuration;
+			public DateTime? EntryTime;
+			public DateTime? QuitTime;
+			public TimeSpan? SessionDuration;
 		}
 	}
 }
