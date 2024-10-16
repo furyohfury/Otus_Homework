@@ -30,20 +30,6 @@ namespace RealTime
 				_userIP = string.Empty;
 			}
 		}
-
-		private static async UniTask<DateTime> GetServerTimeOrDefault()
-		{
-			var request = UnityWebRequest.Get($"https://timeapi.io/api/time/current/ip?ipAddress={_userIP}");
-			await request.SendWebRequest();
-			if (request.result == UnityWebRequest.Result.Success)
-			{
-				var dateJson = request.downloadHandler.text;
-				var date = JsonConvert.DeserializeObject<ServerTimeData>(dateJson);
-				return DateTime.Parse(date.dateTime);
-			}
-
-			return default;
-		}
 		
 		public static async UniTask<DateTime> GetServerTimeByIPAsync()
 		{

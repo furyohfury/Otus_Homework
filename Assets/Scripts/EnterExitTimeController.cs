@@ -59,7 +59,7 @@ namespace RealTime
 			}
 		}
 
-		public void Show()
+		public async void Show()
 		{
 			_canvas.SetActive(true);
 			_button.onClick.RemoveListener(Show);
@@ -69,16 +69,32 @@ namespace RealTime
 
 		private async UniTask ShowTimeTable()
 		{
+			DateTime currentTime;
+			try
+			{
+				currentTime = await ServerTimeManager.GetServerTimeByIPAsync();
+			}
+			catch
+			{}
+
+			bool canCountDuration = currentTime != default && _currentSession.EntryTime.HasValue;
+			int secondsPassed = 0;
+			TimeSpan timeBeforeOpening = currentTime - _currentSession.EntryTime;
+
 			_cancellationTokenSource = new CancellationTokenSource();
 			while (!_cancellationTokenSource.IsCancellationRequested)
 			{
 				_viewTime.Clear();
 				_viewTime.AppendLine("Entry\tQuit\tDuration");
 				_viewTime.AppendLine(_previousSessionsString);
-				_currentSession.SessionDuration = DateTime.Now - _currentSession.EntryTime;
+				if (canCountDuration)
+				{
+					_currentSession.SessionDuration = timeBeforeOpening.Add(TimeSpan.FromSeconds(secondsPassed));
+				}				
 				_viewTime.AppendLine(FormatTime(_currentSession));
 				_viewTimeText.text = _viewTime.ToString();
 				await UniTask.Delay(TimeSpan.FromSeconds(1f));
+				secondsPassed++;
 			}
 		}
 
@@ -103,8 +119,7 @@ namespace RealTime
 			}
 			catch (Exception e)
 			{
-				Debug.LogError(e.Message);
-				throw;
+				throw e;
 			}
 			finally
 			{
