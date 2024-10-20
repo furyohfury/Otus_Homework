@@ -48,14 +48,14 @@ namespace RealTime
 
 			_button.onClick.AddListener(Show);
 
-			try
+			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
+			if (serverTimeRequest.successful)
 			{
-				_currentSession.EntryTime = await ServerTimeManager.GetServerTimeByIPAsync();
+				_currentSession.EntryTime = serverTimeRequest.serverTime;
 			}
-			catch (Exception e)
+			else
 			{
-				_currentSession.EntryTime = null;
-				Debug.LogError(e.Message);
+				Debug.LogError("Cant get server time");
 			}
 		}
 
@@ -69,17 +69,26 @@ namespace RealTime
 
 		private async UniTask ShowTimeTable()
 		{
-			DateTime currentTime;
-			try
-			{
-				currentTime = await ServerTimeManager.GetServerTimeByIPAsync();
-			}
-			catch
-			{}
+			DateTime currentTime = default;
+			TimeSpan timeBeforeOpening = default;
 
-			bool canCountDuration = currentTime != default && _currentSession.EntryTime.HasValue;
+			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
+			if (serverTimeRequest.successful)
+			{
+				currentTime = serverTimeRequest.serverTime;
+			}
+			else
+			{
+				Debug.LogError("Cant get server time");
+			}
+
+			var canCountDuration = currentTime != default && _currentSession.EntryTime.HasValue;
+			if (canCountDuration)
+			{
+				timeBeforeOpening = currentTime - _currentSession.EntryTime.Value;
+			}
+
 			int secondsPassed = 0;
-			TimeSpan timeBeforeOpening = currentTime - _currentSession.EntryTime;
 
 			_cancellationTokenSource = new CancellationTokenSource();
 			while (!_cancellationTokenSource.IsCancellationRequested)
@@ -90,7 +99,8 @@ namespace RealTime
 				if (canCountDuration)
 				{
 					_currentSession.SessionDuration = timeBeforeOpening.Add(TimeSpan.FromSeconds(secondsPassed));
-				}				
+				}
+
 				_viewTime.AppendLine(FormatTime(_currentSession));
 				_viewTimeText.text = _viewTime.ToString();
 				await UniTask.Delay(TimeSpan.FromSeconds(1f));
@@ -108,35 +118,29 @@ namespace RealTime
 
 		private async void OnApplicationQuit()
 		{
-			try
+			var (successful, serverTime) = await ServerTimeManager.TryGetServerTimeAsync();
+			if (successful)
 			{
-				var quitTime = await ServerTimeManager.GetServerTimeByIPAsync();
-				_currentSession.QuitTime = quitTime;
+				_currentSession.QuitTime = serverTime;
 				if (_currentSession.EntryTime.HasValue)
 				{
-					_currentSession.SessionDuration = quitTime.Subtract(_currentSession.EntryTime.Value);
+					_currentSession.SessionDuration = serverTime.Subtract(_currentSession.EntryTime.Value);
 				}
 			}
-			catch (Exception e)
-			{
-				throw e;
-			}
-			finally
-			{
-				_previousSessions.Add(_currentSession);
-				var serializedSessions = JsonConvert.SerializeObject(_previousSessions);
-				PlayerPrefs.SetString(ENTER_QUIT_TIME_PREFS, serializedSessions);
-			}
+
+			_previousSessions.Add(_currentSession);
+			var serializedSessions = JsonConvert.SerializeObject(_previousSessions);
+			PlayerPrefs.SetString(ENTER_QUIT_TIME_PREFS, serializedSessions);
 		}
 
 		private string FormatTime(EnterQuitTime enterQuitTime)
 		{
 			var entry = enterQuitTime.EntryTime.HasValue
-				? enterQuitTime.EntryTime.Value.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
+				? enterQuitTime.EntryTime.Value.ToString("dd/MM/yy HH:mm:ss", CultureInfo.CurrentCulture)
 				: "No data";
 
 			var quit = enterQuitTime.QuitTime.HasValue
-				? enterQuitTime.QuitTime.Value.ToString("dd/MM/yy HH:mm:ss", CultureInfo.InvariantCulture)
+				? enterQuitTime.QuitTime.Value.ToString("dd/MM/yy HH:mm:ss")
 				: "No data";
 
 			var duration = enterQuitTime.SessionDuration.HasValue

@@ -11,11 +11,7 @@ namespace RealTime
 	{
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow";
 		private static string _userIP;
-
-		static ServerTimeManager()
-		{
-			GetUserIP();
-		}
+		private static readonly int _numberOfConnectionRetries = 3;
 
 		private static void GetUserIP()
 		{
@@ -30,28 +26,22 @@ namespace RealTime
 				_userIP = string.Empty;
 			}
 		}
-		
-		public static async UniTask<DateTime> GetServerTimeByIPAsync()
+
+		public static async UniTask<(bool successful, DateTime serverTime)> TryGetServerTimeAsync()
 		{
-			if (_userIP == string.Empty)
+			var request = UnityWebRequest.Get($"https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow");
+			await request.SendWebRequest();
+			for (int i = 0; i < _numberOfConnectionRetries; i++)
 			{
-				GetUserIP();
-				if (_userIP == string.Empty)
+				if (request.result == UnityWebRequest.Result.Success)
 				{
-					throw new Exception("Cant get IP");
+					var dateJson = request.downloadHandler.text;
+					var date = JsonConvert.DeserializeObject<ServerTimeData>(dateJson);
+					return (true, DateTime.Parse(date.dateTime));
 				}
 			}
-			
-			var request = UnityWebRequest.Get($"https://timeapi.io/api/time/current/ip?ipAddress={_userIP}");
-			await request.SendWebRequest();
-			if (request.result == UnityWebRequest.Result.Success)
-			{
-				var dateJson = request.downloadHandler.text;
-				var date = JsonConvert.DeserializeObject<ServerTimeData>(dateJson);
-				return DateTime.Parse(date.dateTime);
-			}
 
-			throw new Exception("Cant get time from server");
+			return (false, default);
 		}
 
 		private struct ServerTimeData
