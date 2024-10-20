@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace RealTime
 {
@@ -6,8 +7,13 @@ namespace RealTime
 	{
 		[SerializeField]
 		private int _amount;
-		[SerializeField]
 		private OilStorage _oilStorage;
+		
+		[Inject]
+		private void Construct(OilStorage oilStorage)
+		{
+			_oilStorage = oilStorage;
+		}
 
 		void IReward.GetReward()
 		{

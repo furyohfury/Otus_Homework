@@ -10,14 +10,12 @@ namespace RealTime
 	public sealed class ChestTimer
 	{
 		public event Action OnFinished;
-
-		[JsonProperty]
 		public TimeSpan TimeLeft => TimeSpan.FromSeconds(_durationInSeconds);
 
-		[SerializeField] [JsonProperty]
+		[SerializeField]
 		private int _initialDurationInSeconds;
-		[JsonProperty]
 		private int _durationInSeconds;
+		
 		private CompositeDisposable _disposable = new();
 
 		public void Initialize()

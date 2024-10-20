@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
+using Zenject;
 
 namespace RealTime
 {
 	public sealed class ChestManager : MonoBehaviour
 	{
-		private Chest[] _chests;
-		private const string CHEST_DATA_KEY = nameof(CHEST_DATA_KEY);
+		[SerializeField]
+		private Transform[] _chestPositions;
+		[SerializeField]
+		private Transform _parentTransform;
+		[SerializeField]
+		private Chest[] _defaultChests;
+		
+		private string _saveFilePath;
+		private ChestSpawner _chestSpawner;
+
+		[Inject]
+		public void Construct(ChestSpawner chestSpawner)
+		{
+			_chestSpawner = chestSpawner;
+		}
 
 		private void Start()
 		{
-			_chests = FindObjectsOfType<Chest>();
+			_saveFilePath = Path.Combine(Application.persistentDataPath, "ChestData.json");
+			_chestPositions = _chestPositions.OrderBy(pos => pos.position.x).ThenBy(pos => pos.position.y).ToArray();
 
-			if (PlayerPrefs.HasKey(CHEST_DATA_KEY))
+			if (File.Exists(_saveFilePath))
 			{
-				var chestData = PlayerPrefs.GetString(CHEST_DATA_KEY);
-				var savedData = JsonConvert.DeserializeObject<Dictionary<Chest, int>>(chestData);
+				
 			}
-			
-			foreach (var chest in savedData.Keys)
+			else
 			{
-				chest.Initialize(savedData[chest]);
+				CreateDefaultChests();
 			}
 		}
 
-		private void OnApplicationPause(bool pauseStatus)
+		private void CreateDefaultChests()
 		{
-			if (pauseStatus != true) return;
-			
-			var durationsDictionary = new Dictionary<Chest, int>();
-			foreach (var chest in _chests)
+			for (int i = 0; i < _defaultChests.Length; i++)
 			{
-				durationsDictionary.Add(chest, (int) chest.TimeLeft.TotalSeconds);
+				var chest = _chestSpawner.SpawnChest(_defaultChests[i], _chestPositions[i].position, _parentTransform);
 			}
-
-			var savedDurations = JsonConvert.SerializeObject(durationsDictionary);
-			PlayerPrefs.SetString(CHEST_DATA_KEY, savedDurations);
 		}
 	}
 }

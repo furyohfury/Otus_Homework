@@ -7,53 +7,64 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace RealTime
 {
 	public sealed class Chest : SerializedMonoBehaviour
 	{
-		[SerializeReference] [JsonProperty]
-		private IReward _reward;
-		[SerializeField] [JsonProperty]
-		private ChestType _chestType;
-		[SerializeField] [JsonProperty]
-		private ChestTimer _timer;
-		
+		[field: SerializeReference]
+		public IReward[] Rewards { get; private set; }
+
+		[field: SerializeField]
+		public ChestType ChestType { get; private set; }
+
+		[field: SerializeField]
+		public ChestTimer Timer { get; private set; }
+
+		[SerializeField]
+		private TMP_Text _timerView;
+		[SerializeField]
+		private Button _openButton;
+		[SerializeField]
+		private Image _image;
+		[SerializeField]
+		private Dictionary<ChestStatus, Sprite> _sprites;
+
 		private CompositeDisposable _disposable = new();
 
-		private void OnEnable()
+		public void Construct(IReward[] rewards, ChestType type, ChestTimer timer, DiContainer diContainer)
 		{
-			_timer.OnFinished += OnTimerFinished;
+			Rewards = rewards;
+			ChestType = type;
+			Timer = timer;
+
+			foreach (var reward in Rewards)
+			{
+				diContainer.Inject(reward);
+			}
 		}
 
-		public void Initialize(int timerCurrentDuration)
+		private void Start()
 		{
-			StartTimer(timerCurrentDuration);
+			Timer.OnFinished += OnTimerFinished;
+			Timer.Initialize();
+			StartTimerView();
 		}
 
-		private void OnDisable()
+		private void StartTimerView()
 		{
-			_timer.OnFinished -= OnTimerFinished;
-		}
-
-		private void StartTimer(int timerCurrentDuration)
-		{
-			// var startTimerRequest = await _timer.TryStart();
-			//
-			// if (!startTimerRequest)
-			// {
-			// 	_timerView.text = "Can't get server time";
-			// }
-			_timer.Start(timerCurrentDuration);
 			Observable
 				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(_ => _timerView.text = _timer.TimeLeft.ToString("hh\\:mm\\:ss"))
+				.Subscribe(_ => _timerView.text = Timer.TimeLeft.ToString("hh\\:mm\\:ss"))
 				.AddTo(_disposable);
 		}
-		
+
 		private void OnTimerFinished()
 		{
 			_openButton.onClick.AddListener(OpenChest);
+			_disposable.Clear();
+			_timerView.text = "Ready to open!";
 			_image.sprite = _sprites[ChestStatus.Ready];
 		}
 
@@ -64,10 +75,16 @@ namespace RealTime
 			Observable
 				.Timer(TimeSpan.FromSeconds(1f))
 				.Subscribe(_ => _image.sprite = _sprites[ChestStatus.Closed]);
-			_reward.GetReward();
-			_timer.Restart();
+
+			foreach (var reward in Rewards)
+			{
+				reward.GetReward();
+			}
+
+			Timer.Restart();
+			StartTimerView();
 		}
-		
+
 		private enum ChestStatus
 		{
 			Closed,
