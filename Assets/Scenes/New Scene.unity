@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 746051643}
   - component: {fileID: 746051642}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2371,21 +2371,21 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _reward:
-    rid: 6280842970731380736
+    rid: 6280842989593690113
   _chestType: 0
   _timer:
-    _initialDurationInSeconds: 10
+    _initialDurationInSeconds: 0
   _timerView: {fileID: 746051642}
   _openButton: {fileID: 1845625092}
   _image: {fileID: 1845625090}
   references:
     version: 2
     RefIds:
-    - rid: 6280842970731380736
+    - rid: 6280842989593690113
       type: {class: MoneyReward, ns: RealTime, asm: Assembly-CSharp}
       data:
-        _amount: 10
-        _moneyStorage: {fileID: 1386729856}
+        _amount: 0
+        _moneyStorage: {fileID: 0}
 --- !u!4 &1926630237
 Transform:
   m_ObjectHideFlags: 0

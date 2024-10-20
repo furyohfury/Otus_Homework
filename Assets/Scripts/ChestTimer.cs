@@ -1,6 +1,4 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
 using UniRx;
 using UnityEngine;
 
@@ -11,12 +9,10 @@ namespace RealTime
 	{
 		public event Action OnFinished;
 
-		[JsonProperty]
 		public TimeSpan TimeLeft => TimeSpan.FromSeconds(_durationInSeconds);
 
-		[SerializeField] [JsonProperty]
+		[SerializeField]
 		private int _initialDurationInSeconds;
-		[JsonProperty]
 		private int _durationInSeconds;
 		private CompositeDisposable _disposable = new();
 

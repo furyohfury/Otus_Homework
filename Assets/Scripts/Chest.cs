@@ -10,44 +10,28 @@ using UnityEngine.UI;
 
 namespace RealTime
 {
-	public sealed class Chest : SerializedMonoBehaviour
+	public sealed class Chest : MonoBehaviour
 	{
-		[SerializeReference] [JsonProperty]
-		private IReward _reward;
-		[SerializeField] [JsonProperty]
-		private ChestType _chestType;
-		[SerializeField] [JsonProperty]
-		private ChestTimer _timer;
-		
-		private CompositeDisposable _disposable = new();
+		[SerializeField]
+		private ChestData _chestData;
+		[SerializeField]
+		private ChestView _chestView;
 
-		private void OnEnable()
+		private CompositeDisposable _disposable;
+
+		public void Construct(ChestData chestData)
 		{
-			_timer.OnFinished += OnTimerFinished;
+			_chestData = chestData;
+			_chestData.Initialize();
+			_chestData.Timer.OnFinished += OnTimerFinished;
+			StartTimerView();
 		}
 
-		public void Initialize(int timerCurrentDuration)
+		private void StartTimerView()
 		{
-			StartTimer(timerCurrentDuration);
-		}
-
-		private void OnDisable()
-		{
-			_timer.OnFinished -= OnTimerFinished;
-		}
-
-		private void StartTimer(int timerCurrentDuration)
-		{
-			// var startTimerRequest = await _timer.TryStart();
-			//
-			// if (!startTimerRequest)
-			// {
-			// 	_timerView.text = "Can't get server time";
-			// }
-			_timer.Start(timerCurrentDuration);
 			Observable
 				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(_ => _timerView.text = _timer.TimeLeft.ToString("hh\\:mm\\:ss"))
+				.Subscribe(_ => _chestView.SetTimerText(_chestData.Timer.TimeLeft.ToString("hh\\:mm\\:ss")))
 				.AddTo(_disposable);
 		}
 		
@@ -64,15 +48,8 @@ namespace RealTime
 			Observable
 				.Timer(TimeSpan.FromSeconds(1f))
 				.Subscribe(_ => _image.sprite = _sprites[ChestStatus.Closed]);
-			_reward.GetReward();
+			Reward.GetReward();
 			_timer.Restart();
-		}
-		
-		private enum ChestStatus
-		{
-			Closed,
-			Ready,
-			Opened
 		}
 	}
 }
