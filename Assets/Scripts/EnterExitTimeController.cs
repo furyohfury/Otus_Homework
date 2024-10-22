@@ -26,7 +26,6 @@ namespace RealTime
 		private bool _active = false;
 		private List<EnterQuitTime> _previousSessions = new();
 		private EnterQuitTime _currentSession;
-		private readonly StringBuilder _viewTime = new();
 		private string _previousSessionsString;
 
 		private CancellationTokenSource _cancellationTokenSource = new();
@@ -46,87 +45,55 @@ namespace RealTime
 				_previousSessionsString = _viewTime.ToString();
 			}
 
-			_button.onClick.AddListener(Show);
+			_button.onClick.AddListener(OnShowButtonClick);
 
-			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
-			if (serverTimeRequest.successful)
+			// Setup entry time
+			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 			{
-				_currentSession.EntryTime = serverTimeRequest.serverTime;
-			}
-			else
-			{
-				Debug.LogError("Cant get server time");
+				_currentSession.EntryTime = currentTime;
 			}
 		}
 
-		public async void Show()
+		public void OnShowButtonClick()
 		{
+			if (_canvas.gameObject.isActiveSelf)
+			{
+				_canvas.SetActive(false);
+				_cancellationTokenSource.Cancel();
+			}
+
 			_canvas.SetActive(true);
-			_button.onClick.RemoveListener(Show);
-			_button.onClick.AddListener(Hide);
 			ShowTimeTable().Forget();
 		}
-
-
-		// TODO doenst work in pause
+		
 		private async UniTask ShowTimeTable()
 		{
-			DateTime currentTime = default;
-			TimeSpan timeBeforeOpening = default;
-
-			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
-			if (serverTimeRequest.successful)
-			{
-				currentTime = serverTimeRequest.serverTime;
-			}
-			else
-			{
-				Debug.LogError("Cant get server time");
-			}
-
-			var canCountDuration = currentTime != default && _currentSession.EntryTime.HasValue;
-			if (canCountDuration)
-			{
-				timeBeforeOpening = currentTime - _currentSession.EntryTime.Value;
-			}
-
-			int secondsPassed = 0;
-
 			_cancellationTokenSource = new CancellationTokenSource();
 			while (!_cancellationTokenSource.IsCancellationRequested)
-			{
-				_viewTime.Clear();
-				_viewTime.AppendLine("Entry\tQuit\tDuration");
-				_viewTime.AppendLine(_previousSessionsString);
-				if (canCountDuration)
+			{				
+				if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 				{
 					_currentSession.SessionDuration = timeBeforeOpening.Add(TimeSpan.FromSeconds(secondsPassed));
 				}
+				else
+				{
+					_currentSession.SessionDuration = null;
+				}								
 
-				_viewTime.AppendLine(FormatTime(_currentSession));
-				_viewTimeText.text = _viewTime.ToString();
+				var currentSessionString = FormatTime(_currentSession);
+				_viewTimeText.text = string.Concat(_previousSessionsString, currentSessionString);
 				await UniTask.Delay(TimeSpan.FromSeconds(1f));
-				secondsPassed++;
 			}
-		}
-
-		private void Hide()
-		{
-			_canvas.SetActive(false);
-			_button.onClick.RemoveListener(Hide);
-			_button.onClick.AddListener(Show);
-			_cancellationTokenSource.Cancel();
 		}
 
 		private async void OnApplicationQuit()
 		{
-			var (successful, serverTime) = await ServerTimeManager.TryGetServerTimeAsync();
-			if (successful)
+			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 			{
-				_currentSession.QuitTime = serverTime;
+				_currentSession.QuitTime = currentTime;
 				if (_currentSession.EntryTime.HasValue)
 				{
-					_currentSession.SessionDuration = serverTime.Subtract(_currentSession.EntryTime.Value);
+					_currentSession.SessionDuration = currentTime.Subtract(_currentSession.EntryTime.Value);
 				}
 			}
 
