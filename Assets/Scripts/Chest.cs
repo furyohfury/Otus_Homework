@@ -33,16 +33,11 @@ namespace RealTime
 
 		private CompositeDisposable _disposable = new();
 
-		public void Construct(IReward[] rewards, ChestType type, ChestTimer timer, DiContainer diContainer)
+		public void Construct(IReward[] rewards, ChestType type, ChestTimer timer)
 		{
 			Rewards = rewards;
 			ChestType = type;
-			Timer = timer;
-
-			foreach (var reward in Rewards)
-			{
-				diContainer.Inject(reward);
-			}
+			Timer = timer;			
 		}
 
 		private void Start()

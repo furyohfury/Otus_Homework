@@ -17,7 +17,11 @@ namespace RealTime
 		public Chest SpawnChest(Chest chest, Vector3 pos, Transform parent)
 		{
 			var spawnedChest = Object.Instantiate(chest, pos, quaternion.identity, parent);
-			spawnedChest.Construct(chest.Rewards, chest.ChestType, chest.Timer, _diContainer);
+			spawnedChest.Construct(chest.Rewards, chest.ChestType, chest.Timer);
+			foreach (var reward in spawnedChest.Rewards)
+			{
+				diContainer.Inject(reward);
+			}			
 			return spawnedChest;
 		}
 	}
