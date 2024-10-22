@@ -37,5 +37,12 @@ namespace RealTime
 			timeLeft = _finishTime - currentTime;
 			return true;
 		}
+
+		public void Restart()
+		{
+			_finishTime = default;
+			_initialized = false;
+			Initialize();
+		}
 	}
 }
