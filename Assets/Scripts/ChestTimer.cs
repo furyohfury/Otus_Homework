@@ -8,24 +8,34 @@ namespace RealTime
 {
 	[Serializable]
 	public sealed class ChestTimer
-	{
+	{	
 		[SerializeField]
 		private float _initialDurationInSeconds; // to save
-		private DateTime _finishTime; // to save
-		private TimeSpan _timeLeft;
+		private DateTime _finishTime; // to save. Check if saves default or null if not initialized
+		private bool _initialized = false;
 
-		public async UniTask Initialize()
+		public void Initialize()
 		{
-			if (_finishTime == default)
+			if (!ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime)) return;
+						
+			if (_finishTime == default) // First time initialization
 			{
-				_finishTime = TimeSpan.FromSeconds(_initialDurationInSeconds);
+				var duration = TimeSpan.FromSeconds(_initialDurationInSeconds);
+				_finishTime = currentTime + duration;
+			}			
+			_initialized = true;		
+		}
+
+		public bool TryGetTimeLeft(out TimeSpan timeLeft)
+		{
+			if (!_initialized || !ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+			{
+				timeLeft = default;
+				return false;
 			}
 
-			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
-			if (serverTimeRequest.successful)
-			{
-				_timeLeft = _finishTime - serverTimeRequest.serverTime;
-			}
+			timeLeft = _finishTime - currentTime;
+			return true;
 		}
 	}
 }
