@@ -7,29 +7,50 @@ using UnityEngine.Networking;
 
 namespace RealTime
 {
-	public static class ServerTimeManager
+	public static class ServerTimeManager : MonoBehaviour
 	{
-		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow";
-		private static string _userIP;
-		private static readonly int _numberOfConnectionRetries = 3;
+		public static ServerTimeManager Instance;
+		
+		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Etc/UTC";
+		private 
+		private readonly int _numberOfConnectionRetries = 3;
+		private DateTime _serverTime;
+		private TimeSpan _delta;
 
-		private static void GetUserIP()
+		private async UniTaskVoid Awake()
 		{
-			try
+			if (Instance == null)
 			{
-				var hostName = Dns.GetHostName();
-				_userIP = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+				Instance = this;
 			}
-			catch (Exception e)
+			else
 			{
-				Debug.LogError("Cant get IP");
-				_userIP = string.Empty;
+				Destroy(this);
+			}
+			var serverTimeRequest = await TryGetServerTimeAsync();
+			if (serverTimeRequest.successful)
+			{
+				_serverTime = serverTimeRequest.serverTime;
+				_delta = DateTime.Now.ToUniversalTime() - _serverTime;
 			}
 		}
 
-		public static async UniTask<(bool successful, DateTime serverTime)> TryGetServerTimeAsync()
+		// TODO mb convert to device timezone. Shouldnt be hard, but only for entry time and not chests
+		public bool TryGetCurrentTime(out DateTime time)
 		{
-			var request = UnityWebRequest.Get($"https://timeapi.io/api/time/current/zone?timeZone=Europe%2FMoscow");
+			if (_delta == default)
+			{
+				time = default;
+				return false;
+			}
+
+			time = DateTime.Now.Subtract(_delta);
+			return true;
+		}
+		
+		private async UniTask<(bool successful, DateTime serverTime)> TryGetServerTimeAsync()
+		{
+			var request = UnityWebRequest.Get(SERVER_PATH);
 			await request.SendWebRequest();
 			for (int i = 0; i < _numberOfConnectionRetries; i++)
 			{
@@ -42,6 +63,24 @@ namespace RealTime
 			}
 
 			return (false, default);
+		}
+
+		private void OnApplicationFocus(bool focused)
+		{
+			// User may have tried to change system settings
+			if (!focused) return;
+			
+				var serverTimeRequest = await TryGetServerTimeAsync();
+				if (serverTimeRequest.successful)
+				{
+					_serverTime = serverTimeRequest.serverTime;
+					_delta = DateTime.Now.ToUniversalTime() - _serverTime;
+				}
+				else
+				{
+					_serverTime = default;
+					_delta = default;
+				}					
 		}
 
 		private struct ServerTimeData

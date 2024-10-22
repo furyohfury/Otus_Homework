@@ -67,6 +67,8 @@ namespace RealTime
 			ShowTimeTable().Forget();
 		}
 
+
+		// TODO doenst work in pause
 		private async UniTask ShowTimeTable()
 		{
 			DateTime currentTime = default;

@@ -9,37 +9,22 @@ namespace RealTime
 	[Serializable]
 	public sealed class ChestTimer
 	{
-		public event Action OnFinished;
-		public TimeSpan TimeLeft => TimeSpan.FromSeconds(_durationInSeconds);
-
 		[SerializeField]
-		private int _initialDurationInSeconds;
-		private int _durationInSeconds;
-		
-		private CompositeDisposable _disposable = new();
+		private float _initialDurationInSeconds; // to save
+		private DateTime _finishTime; // to save
+		private TimeSpan _timeLeft;
 
-		public void Initialize()
+		public async UniTask Initialize()
 		{
-			Observable
-				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(_ => DecrementSecond())
-				.AddTo(_disposable);
-		}
-
-		public void Restart()
-		{
-			_disposable.Clear();
-			_durationInSeconds = _initialDurationInSeconds;
-			Initialize();
-		}
-
-		private void DecrementSecond()
-		{
-			_durationInSeconds -= 1;
-			if (_durationInSeconds <= 0)
+			if (_finishTime == default)
 			{
-				_disposable.Clear();
-				OnFinished?.Invoke();
+				_finishTime = TimeSpan.FromSeconds(_initialDurationInSeconds);
+			}
+
+			var serverTimeRequest = await ServerTimeManager.TryGetServerTimeAsync();
+			if (serverTimeRequest.successful)
+			{
+				_timeLeft = _finishTime - serverTimeRequest.serverTime;
 			}
 		}
 	}
