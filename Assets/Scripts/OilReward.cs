@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace RealTime
 {
-	[Serializable]
 	public sealed class OilReward : IReward
 	{
 		[SerializeField]
@@ -12,7 +10,7 @@ namespace RealTime
 		private OilStorage _oilStorage;
 		
 		[Inject]
-		public void Construct(OilStorage oilStorage)
+		private void Construct(OilStorage oilStorage)
 		{
 			_oilStorage = oilStorage;
 		}

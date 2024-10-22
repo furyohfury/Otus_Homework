@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace RealTime
 {
-	[Serializable]
 	public sealed class MoneyReward : IReward
 	{
 		[SerializeField]
@@ -12,11 +10,11 @@ namespace RealTime
 		private MoneyStorage _moneyStorage;
 
 		[Inject]
-		public void Construct(MoneyStorage moneyStorage)
+		private void Construct(MoneyStorage moneyStorage)
 		{
 			_moneyStorage = moneyStorage;
 		}
-		
+
 		void IReward.GetReward()
 		{
 			_moneyStorage.AddMoney(_amount);

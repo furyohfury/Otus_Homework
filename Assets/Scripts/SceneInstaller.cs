@@ -6,8 +6,10 @@ namespace RealTime
 	{
 		public override void InstallBindings()
 		{
-			Container.Bind<MoneyStorage>().FromComponentInHierarchy();
-			Container.Bind<OilStorage>().FromComponentInHierarchy();
+			Container.Bind<MoneyStorage>().FromComponentInHierarchy().AsSingle();
+			Container.Bind<OilStorage>().FromComponentInHierarchy().AsSingle();
+			Container.Bind<ChestSpawner>().AsSingle();
+			Container.Bind<ChestManager>().FromComponentInHierarchy().AsSingle();
 		}
 	}
 }

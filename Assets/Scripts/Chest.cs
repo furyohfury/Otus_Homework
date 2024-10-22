@@ -7,23 +7,42 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace RealTime
 {
-	public sealed class Chest : MonoBehaviour
+	public sealed class Chest : SerializedMonoBehaviour
 	{
-		[SerializeField]
-		private ChestData _chestData;
-		[SerializeField]
-		private ChestView _chestView;
+		[field: SerializeReference]
+		public IReward[] Rewards { get; private set; }
 
-		private CompositeDisposable _disposable;
+		[field: SerializeField]
+		public ChestType ChestType { get; private set; }
 
-		public void Construct(ChestData chestData)
+		[field: SerializeField]
+		public ChestTimer Timer { get; private set; }
+
+		[SerializeField]
+		private TMP_Text _timerView;
+		[SerializeField]
+		private Button _openButton;
+		[SerializeField]
+		private Image _image;
+		[SerializeField]
+		private Dictionary<ChestStatus, Sprite> _sprites;
+
+		private CompositeDisposable _disposable = new();
+
+		public void Construct(IReward[] rewards, ChestType type, ChestTimer timer)
 		{
-			_chestData = chestData;
-			_chestData.Initialize();
-			_chestData.Timer.OnFinished += OnTimerFinished;
+			Rewards = rewards;
+			ChestType = type;
+			Timer = timer;			
+		}
+
+		private void Start()
+		{
+			Timer.Initialize();
 			StartTimerView();
 		}
 
@@ -31,13 +50,32 @@ namespace RealTime
 		{
 			Observable
 				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(_ => _chestView.SetTimerText(_chestData.Timer.TimeLeft.ToString("hh\\:mm\\:ss")))
+				.Subscribe(_ => OnTimerTick())
 				.AddTo(_disposable);
 		}
-		
+
+		private void OnTimerTick()
+		{
+			if (!Timer.TryGetTimeLeft(out TimeSpan timeLeft))
+			{
+				_timerView.text = "Can't get data";
+				return;
+			}
+			
+			if (timeLeft <= TimeSpan.Zero)
+			{
+				OnTimerFinished();
+				return;
+			}
+
+			_timerView.text = timeLeft.ToString("hh\\:mm\\:ss");
+		}
+
 		private void OnTimerFinished()
 		{
 			_openButton.onClick.AddListener(OpenChest);
+			_disposable.Clear();
+			_timerView.text = "Ready to open!";
 			_image.sprite = _sprites[ChestStatus.Ready];
 		}
 
@@ -48,8 +86,21 @@ namespace RealTime
 			Observable
 				.Timer(TimeSpan.FromSeconds(1f))
 				.Subscribe(_ => _image.sprite = _sprites[ChestStatus.Closed]);
-			Reward.GetReward();
-			_timer.Restart();
+
+			foreach (var reward in Rewards)
+			{
+				reward.GetReward();
+			}
+
+			Timer.Restart();
+			StartTimerView();
+		}
+
+		private enum ChestStatus
+		{
+			Closed,
+			Ready,
+			Opened
 		}
 	}
 }

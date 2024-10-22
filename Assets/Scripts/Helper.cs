@@ -38,7 +38,7 @@ namespace RealTime
 		[Button]
 		public async void GetTimeByIP()
 		{
-			var r = await ServerTimeManager.TryGetServerTimeAsync();
+			// var r = await ServerTimeManager.TryGetServerTimeAsync();
 			// Debug.Log(r.ToString("g"));
 		}
 
