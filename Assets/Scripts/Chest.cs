@@ -42,7 +42,6 @@ namespace RealTime
 
 		private void Start()
 		{
-			Timer.OnFinished += OnTimerFinished;
 			Timer.Initialize();
 			StartTimerView();
 		}
@@ -51,8 +50,25 @@ namespace RealTime
 		{
 			Observable
 				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(_ => _timerView.text = Timer.TimeLeft.ToString("hh\\:mm\\:ss"))
+				.Subscribe(OnTimerTick)
 				.AddTo(_disposable);
+		}
+
+		private void OnTimerTick() // TODO not void
+		{
+			if (!Timer.TryGetTimeLeft(out TimeSpan timeLeft))
+			{
+				_timerView.text = timeLeft.ToString("Can't get data");
+				return;
+			}
+			
+			if (timeLeft <= 0)
+			{
+				OnTimerFinished();
+				return;
+			}
+
+			_timerView.text = timeLeft.ToString("hh\\:mm\\:ss");
 		}
 
 		private void OnTimerFinished()
