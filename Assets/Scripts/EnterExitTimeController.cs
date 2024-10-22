@@ -29,7 +29,7 @@ namespace RealTime
 
 		private CancellationTokenSource _cancellationTokenSource = new();
 
-		private void Start()
+		private async void Start()
 		{
 			if (PlayerPrefs.HasKey(ENTER_QUIT_TIME_PREFS))
 			{
@@ -47,6 +47,11 @@ namespace RealTime
 
 			_button.onClick.AddListener(OnShowButtonClick);
 
+			if (!ServerTimeManager.Instance.Initialized)
+			{
+				await UniTask.WaitUntil(() => ServerTimeManager.Instance.Initialized);
+			}
+			
 			// Setup entry time
 			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 			{

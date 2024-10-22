@@ -11,6 +11,7 @@ namespace RealTime
 	public class ServerTimeManager : MonoBehaviour
 	{
 		public static ServerTimeManager Instance;
+		public bool Initialized { get; private set; }
 		
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Etc/UTC";
 		private const int NUMBER_OF_CONNECTION_RETRIES = 3;
@@ -38,6 +39,8 @@ namespace RealTime
 				_serverTime = serverTimeRequest.serverTime;
 				_delta = DateTime.Now.ToUniversalTime() - _serverTime;
 			}
+
+			Initialized = true;
 		}
 
 		// TODO mb convert to device timezone. Shouldnt be hard, but only for entry time and not chests
