@@ -23,26 +23,26 @@ namespace RealTime
 		[SerializeField]
 		private Button _button;
 
-		private bool _active = false;
 		private List<EnterQuitTime> _previousSessions = new();
 		private EnterQuitTime _currentSession;
 		private string _previousSessionsString;
 
 		private CancellationTokenSource _cancellationTokenSource = new();
 
-		private async void Start()
+		private void Start()
 		{
 			if (PlayerPrefs.HasKey(ENTER_QUIT_TIME_PREFS))
 			{
 				var prevSessions = PlayerPrefs.GetString(ENTER_QUIT_TIME_PREFS);
 				_previousSessions = JsonConvert.DeserializeObject<List<EnterQuitTime>>(prevSessions);
 
+				var previousSessionsString = new StringBuilder();
 				foreach (var enterQuitTime in _previousSessions)
 				{
-					_viewTime.AppendLine(FormatTime(enterQuitTime));
+					previousSessionsString.AppendLine(FormatTime(enterQuitTime));
 				}
 
-				_previousSessionsString = _viewTime.ToString();
+				_previousSessionsString = previousSessionsString.ToString();
 			}
 
 			_button.onClick.AddListener(OnShowButtonClick);
@@ -54,31 +54,34 @@ namespace RealTime
 			}
 		}
 
-		public void OnShowButtonClick()
+		private void OnShowButtonClick()
 		{
-			if (_canvas.gameObject.isActiveSelf)
+			if (_canvas.gameObject.activeSelf)
 			{
 				_canvas.SetActive(false);
 				_cancellationTokenSource.Cancel();
 			}
-
-			_canvas.SetActive(true);
-			ShowTimeTable().Forget();
+			else
+			{
+				_canvas.SetActive(true);
+				ShowTimeTable().Forget();
+			}
 		}
-		
+
 		private async UniTask ShowTimeTable()
 		{
 			_cancellationTokenSource = new CancellationTokenSource();
 			while (!_cancellationTokenSource.IsCancellationRequested)
-			{				
-				if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+			{
+				if (_currentSession.EntryTime.HasValue &&
+				    ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 				{
-					_currentSession.SessionDuration = timeBeforeOpening.Add(TimeSpan.FromSeconds(secondsPassed));
+					_currentSession.SessionDuration = currentTime - _currentSession.EntryTime.Value;
 				}
 				else
 				{
 					_currentSession.SessionDuration = null;
-				}								
+				}
 
 				var currentSessionString = FormatTime(_currentSession);
 				_viewTimeText.text = string.Concat(_previousSessionsString, currentSessionString);

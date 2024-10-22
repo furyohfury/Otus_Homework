@@ -50,19 +50,19 @@ namespace RealTime
 		{
 			Observable
 				.Interval(TimeSpan.FromSeconds(1f))
-				.Subscribe(OnTimerTick)
+				.Subscribe(_ => OnTimerTick())
 				.AddTo(_disposable);
 		}
 
-		private void OnTimerTick() // TODO not void
+		private void OnTimerTick()
 		{
 			if (!Timer.TryGetTimeLeft(out TimeSpan timeLeft))
 			{
-				_timerView.text = timeLeft.ToString("Can't get data");
+				_timerView.text = "Can't get data";
 				return;
 			}
 			
-			if (timeLeft <= 0)
+			if (timeLeft <= TimeSpan.Zero)
 			{
 				OnTimerFinished();
 				return;

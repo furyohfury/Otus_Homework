@@ -20,7 +20,7 @@ namespace RealTime
 			spawnedChest.Construct(chest.Rewards, chest.ChestType, chest.Timer);
 			foreach (var reward in spawnedChest.Rewards)
 			{
-				diContainer.Inject(reward);
+				_diContainer.Inject(reward);
 			}			
 			return spawnedChest;
 		}

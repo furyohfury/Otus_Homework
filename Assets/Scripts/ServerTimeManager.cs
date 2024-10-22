@@ -2,22 +2,22 @@
 using System.Net;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace RealTime
 {
-	public static class ServerTimeManager : MonoBehaviour
+	public class ServerTimeManager : MonoBehaviour
 	{
 		public static ServerTimeManager Instance;
 		
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Etc/UTC";
-		private 
-		private readonly int _numberOfConnectionRetries = 3;
+		private const int NUMBER_OF_CONNECTION_RETRIES = 3;
 		private DateTime _serverTime;
 		private TimeSpan _delta;
 
-		private async UniTaskVoid Awake()
+		private async void Awake()
 		{
 			if (Instance == null)
 			{
@@ -27,6 +27,11 @@ namespace RealTime
 			{
 				Destroy(this);
 			}
+			await Initialize();
+		}
+
+		private async UniTask Initialize()
+		{
 			var serverTimeRequest = await TryGetServerTimeAsync();
 			if (serverTimeRequest.successful)
 			{
@@ -47,12 +52,12 @@ namespace RealTime
 			time = DateTime.Now.Subtract(_delta);
 			return true;
 		}
-		
+
 		private async UniTask<(bool successful, DateTime serverTime)> TryGetServerTimeAsync()
 		{
 			var request = UnityWebRequest.Get(SERVER_PATH);
 			await request.SendWebRequest();
-			for (int i = 0; i < _numberOfConnectionRetries; i++)
+			for (int i = 0; i < NUMBER_OF_CONNECTION_RETRIES; i++)
 			{
 				if (request.result == UnityWebRequest.Result.Success)
 				{
@@ -65,7 +70,7 @@ namespace RealTime
 			return (false, default);
 		}
 
-		private void OnApplicationFocus(bool focused)
+		private async void OnApplicationFocus(bool focused)
 		{
 			// User may have tried to change system settings
 			if (!focused) return;
