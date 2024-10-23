@@ -20,26 +20,25 @@ namespace RealTime
 		
 		private string _saveFilePath;
 		private ChestSpawner _chestSpawner;
+		private IChestSaveLoader _chestSaveLoader;
 		private List<Chest> _activeChests = new();
 
 		[Inject]
-		public void Construct(ChestSpawner chestSpawner)
+		public void Construct(ChestSpawner chestSpawner, IChestSaveLoader chestSaveLoader)
 		{
 			_chestSpawner = chestSpawner;
+			_chestSaveLoader = chestSaveLoader;
 		}
 
 		private void Start()
-		{
-			_saveFilePath = Path.Combine(Application.persistentDataPath, "ChestData.json");
+		{			
 			_chestPositions = _chestPositions.OrderBy(pos => pos.position.x).ThenBy(pos => pos.position.y).ToArray();
 
-			if (File.Exists(_saveFilePath))
+			if (TryLoadChestsData(out List<Chest> data))
 			{
-				var fileData = File.ReadAllText(_saveFilePath);
-				List<Chest> savedChests = JsonConvert.DeserializeObject<List<Chest>>(fileData);
-				for (int i = 0; i < savedChests.Length; i++)
+				for (int i = 0; i < data.Length; i++)
 				{
-					var chest = _chestSpawner.SpawnFromPrefab(savedChests[i], _chestPositions[i].position, _parentTransform);
+					var chest = _chestSpawner.SpawnFromPrefab(data[i], _chestPositions[i].position, _parentTransform);
 					_chests.Add(chest);
 				}
 			}
@@ -57,18 +56,11 @@ namespace RealTime
 				var chest = _chestSpawner.SpawnChest(_defaultChests[i], _chestPositions[i].position, _parentTransform);
 				_chests.Add(chest);
 			}
-		}		
-
-		// TODO mb with separate saveloader and interface. So would be able to download from server, file etc
-		private void SaveChestsData() 
-		{
-			var serializedChests = JsonConvert.SerializeObject(_chests);
-			File.WriteAllText(_saveFilePath, serializedChests);
 		}
-
+		
 		private void OnApplicationQuit()
 		{
-			SaveChestsData();
+			_chestSaveLoader.SaveChestData(_chests);
 		}
 	}
 }
