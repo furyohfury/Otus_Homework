@@ -13,7 +13,7 @@ namespace RealTime
 			Container.Bind<OilStorage>().FromComponentInHierarchy().AsSingle();
 			Container.Bind<ChestSpawner>().AsSingle().WithArguments(_prefab);
 			Container.Bind<ChestManager>().FromComponentInHierarchy().AsSingle();
-			Container.BindSelfAndInterfacesTo<FileChestSaveLoader>().AsSingle(); // TODO check if binds to ichestsaveloader
+			Container.Bind<FileChestSaveLoader>().To<IChestSaveLoader>().AsSingle();
 		}
 	}
 }

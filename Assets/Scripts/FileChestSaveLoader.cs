@@ -1,12 +1,12 @@
 namespace RealTime
 {
-    public sealed class FileChestSaveLoader : IChestSaveLoader, IInitializable
+    public sealed class FileChestSaveLoader : IChestSaveLoader
     {
         private string _saveFilePath;
 
-        public void Initialize()
+        public void FileChestSaveLoader()
         {
-            _saveFilePath = Path.Combine(Application.persistentDataPath, "ChestData.json");
+             _saveFilePath = Path.Combine(Application.persistentDataPath, "ChestData.json");
         }
         
         public void SaveChestsData(List<Chest> data)
