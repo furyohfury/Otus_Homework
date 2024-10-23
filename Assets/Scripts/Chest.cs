@@ -13,13 +13,13 @@ namespace RealTime
 {
 	public sealed class Chest : SerializedMonoBehaviour
 	{
-		[field: SerializeReference]
+		[field: SerializeReference] [JsonProperty]
 		public IReward[] Rewards { get; private set; }
 
-		[field: SerializeField]
+		[field: SerializeField] [JsonProperty]
 		public ChestType ChestType { get; private set; }
 
-		[field: SerializeField]
+		[field: SerializeField] [JsonProperty]
 		public ChestTimer Timer { get; private set; }
 
 		[SerializeField]
