@@ -9,10 +9,11 @@ namespace RealTime
 	[Serializable]
 	public sealed class ChestTimer
 	{	
-		[SerializeField]
-		private float _initialDurationInSeconds; // to save
-		private DateTime _finishTime; // to save. Check if saves default or null if not initialized
-		private bool _initialized = false;
+		[SerializeField] [JsonProperty]
+		private float _initialDurationInSeconds;
+		[JsonProperty]
+		private DateTime _finishTime;
+		private bool _initialized;
 
 		public void Initialize()
 		{

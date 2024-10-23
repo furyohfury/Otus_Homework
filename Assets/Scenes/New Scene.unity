@@ -1961,7 +1961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1611271110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2216,8 +2216,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841825385}
-  - component: {fileID: 1841825384}
   - component: {fileID: 1841825386}
+  - component: {fileID: 1841825384}
   m_Layer: 0
   m_Name: DI
   m_TagString: Untagged
@@ -2237,6 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e999ee0be245f2bc9059650e33cee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefab: {fileID: 3070377920959716226, guid: 2f488797b6e1b9d4baf5dd4fc59520da, type: 3}
 --- !u!4 &1841825385
 Transform:
   m_ObjectHideFlags: 0

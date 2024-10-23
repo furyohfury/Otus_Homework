@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -36,13 +37,6 @@ namespace RealTime
 		}
 
 		[Button]
-		public async void GetTimeByIP()
-		{
-			// var r = await ServerTimeManager.TryGetServerTimeAsync();
-			// Debug.Log(r.ToString("g"));
-		}
-
-		[Button]
 		public void ShowDateTimeNow()
 		{
 			Debug.Log(DateTime.Now.ToString("dd/MM/yy HH:mm:ss"));
@@ -54,6 +48,12 @@ namespace RealTime
 			Debug.Log(TimeZoneInfo.Local.DisplayName);
 			Debug.Log(TimeZoneInfo.Local.Id);
 			Debug.Log(TimeZoneInfo.Local.StandardName);
+		}
+
+		[Button]
+		public void ShowPath()
+		{
+			Debug.Log(Path.Combine(Application.persistentDataPath, "ChestData.json"));
 		}
 	}
 }

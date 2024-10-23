@@ -127,7 +127,7 @@ namespace RealTime
 			return $"{entry}\t{quit}\t{duration}";
 		}
 
-		private async void OnApplicationQuit()
+		private void OnApplicationQuit()
 		{
 			SaveSessionData();
 		}

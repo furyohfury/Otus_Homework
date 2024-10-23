@@ -15,6 +15,17 @@ namespace RealTime
 			_diContainer = diContainer;
 			_prefab = prefab;
 		}		
+		
+		public Chest SpawnChest(ChestData chestData, Vector3 pos, Transform parent)
+		{
+			var spawnedChest = Object.Instantiate(_prefab, pos, quaternion.identity, parent);
+			spawnedChest.Construct(chestData.Rewards, chestData.ChestType, chestData.Timer);
+			foreach (var reward in spawnedChest.Rewards)
+			{
+				_diContainer.Inject(reward);
+			}			
+			return spawnedChest;
+		}
 
 		public Chest SpawnChest(Chest chest, Vector3 pos, Transform parent)
 		{

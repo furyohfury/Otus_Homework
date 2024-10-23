@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using Newtonsoft.Json;
+using UnityEngine;
 using Zenject;
 
 namespace RealTime
 {
+	[Serializable]
 	public sealed class MoneyReward : IReward
 	{
-		[SerializeField]
+		[SerializeField][JsonProperty]
 		private int _amount;
 		private MoneyStorage _moneyStorage;
 

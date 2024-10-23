@@ -34,12 +34,13 @@ namespace RealTime
 		{			
 			_chestPositions = _chestPositions.OrderBy(pos => pos.position.x).ThenBy(pos => pos.position.y).ToArray();
 
-			if (TryLoadChestsData(out List<Chest> data))
+			if (_chestSaveLoader.TryLoadChestsData(out IEnumerable<ChestData> data))
 			{
-				for (int i = 0; i < data.Length; i++)
+				var savedChestData = data.ToArray();
+				for (int i = 0; i < savedChestData.Length; i++)
 				{
-					var chest = _chestSpawner.SpawnChest(data[i], _chestPositions[i].position, _parentTransform);
-					_chests.Add(chest);
+					var chest = _chestSpawner.SpawnChest(savedChestData[i], _chestPositions[i].position, _parentTransform);
+					_activeChests.Add(chest);
 				}
 			}
 			else
@@ -54,13 +55,13 @@ namespace RealTime
 			for (int i = 0; i < _defaultChests.Length; i++)
 			{
 				var chest = _chestSpawner.SpawnChest(_defaultChests[i], _chestPositions[i].position, _parentTransform);
-				_chests.Add(chest);
+				_activeChests.Add(chest);
 			}
 		}
 		
 		private void OnApplicationQuit()
 		{
-			_chestSaveLoader.SaveChestData(_chests);
+			_chestSaveLoader.SaveChestsData(_activeChests);
 		}
 	}
 }

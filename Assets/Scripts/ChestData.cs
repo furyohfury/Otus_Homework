@@ -7,14 +7,14 @@ namespace RealTime
 	public sealed class ChestData
 	{
 		public ChestTimer Timer;
-		[SerializeReference]
-		private IReward _reward;
-		[SerializeField]
-		private ChestType _chestType;
+		public IReward[] Rewards;
+		public ChestType ChestType;
 
-		public void Initialize()
+		public ChestData(ChestTimer timer, IReward[] rewards, ChestType chestType)
 		{
-			Timer.Initialize();
+			Timer = timer;
+			Rewards = rewards;
+			ChestType = chestType;
 		}
 	}
 }
