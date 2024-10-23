@@ -38,7 +38,7 @@ namespace RealTime
 			{
 				for (int i = 0; i < data.Length; i++)
 				{
-					var chest = _chestSpawner.SpawnFromPrefab(data[i], _chestPositions[i].position, _parentTransform);
+					var chest = _chestSpawner.SpawnChest(data[i], _chestPositions[i].position, _parentTransform);
 					_chests.Add(chest);
 				}
 			}
