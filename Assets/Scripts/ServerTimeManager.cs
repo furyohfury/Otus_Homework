@@ -52,6 +52,7 @@ namespace RealTime
 				return false;
 			}
 
+			// TODO test changing timezone and time itself (not that important for homework tho)
 			time = DateTime.Now.Subtract(_delta);
 			return true;
 		}

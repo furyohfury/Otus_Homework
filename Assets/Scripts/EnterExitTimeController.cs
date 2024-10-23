@@ -92,9 +92,9 @@ namespace RealTime
 				_viewTimeText.text = string.Concat(_previousSessionsString, currentSessionString);
 				await UniTask.Delay(TimeSpan.FromSeconds(1f));
 			}
-		}
+		}		
 
-		private async void OnApplicationQuit()
+		private void SaveSessionData()
 		{
 			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
 			{
@@ -125,6 +125,11 @@ namespace RealTime
 				: "No data";
 
 			return $"{entry}\t{quit}\t{duration}";
+		}
+
+		private async void OnApplicationQuit()
+		{
+			SaveSessionData();
 		}
 
 #if UNITY_EDITOR
