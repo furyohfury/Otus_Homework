@@ -15,8 +15,13 @@ namespace RealTime
 		private DateTime _finishTime;
 		private bool _initialized;
 
-		public void Initialize()
+		public async UniTask Initialize()
 		{
+			if (!ServerTimeManager.Instance.Initialized)
+			{
+				await UniTask.WaitUntil(() => ServerTimeManager.Instance.Initialized);
+			}
+			
 			if (!ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime)) return;
 						
 			if (_finishTime == default) // First time initialization

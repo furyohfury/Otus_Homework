@@ -245,7 +245,7 @@ MonoBehaviour:
   - rid: 6280842989593690114
   <ChestType>k__BackingField: 0
   <Timer>k__BackingField:
-    _initialDurationInSeconds: 5
+    _initialDurationInSeconds: 10
   _timerView: {fileID: 3070377921741867236}
   _openButton: {fileID: 3070377920638063066}
   _image: {fileID: 3070377920638063068}

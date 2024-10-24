@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3070377920959716227}
   - component: {fileID: 3070377920959716226}
   m_Layer: 0
-  m_Name: Chest_Steel
+  m_Name: Chest_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,21 +241,16 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  <Rewards>k__BackingField:
-  - rid: 6280842989593690125
-  <ChestType>k__BackingField: 1
+  <Rewards>k__BackingField: []
+  <ChestType>k__BackingField: 0
   <Timer>k__BackingField:
-    _initialDurationInSeconds: 30
+    _initialDurationInSeconds: 0
   _timerView: {fileID: 3070377921741867236}
   _openButton: {fileID: 3070377920638063066}
   _image: {fileID: 3070377920638063068}
   references:
     version: 2
-    RefIds:
-    - rid: 6280842989593690125
-      type: {class: OilReward, ns: RealTime, asm: Assembly-CSharp}
-      data:
-        _amount: 5
+    RefIds: []
 --- !u!1 &3070377921741867239
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +286,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.8487, y: 135}
-  m_SizeDelta: {x: 487.8173, y: 53.821}
+  m_AnchoredPosition: {x: 4.5757, y: 133}
+  m_SizeDelta: {x: 454.4304, y: 53.821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3070377921741867237
 CanvasRenderer:

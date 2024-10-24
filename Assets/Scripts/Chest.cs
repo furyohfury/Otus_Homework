@@ -40,9 +40,9 @@ namespace RealTime
 			Timer = timer;			
 		}
 
-		private void Start()
+		private async void Start()
 		{
-			Timer.Initialize();
+			await Timer.Initialize();
 			StartTimerView();
 		}
 

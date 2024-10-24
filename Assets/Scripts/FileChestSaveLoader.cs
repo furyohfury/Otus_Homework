@@ -14,7 +14,10 @@ namespace RealTime
 		{
 			var data = chests.Select(chest => new ChestData(chest.Timer, chest.Rewards, chest.ChestType)).ToArray();
 
-			var serializedChests = JsonConvert.SerializeObject(data);
+			var serializedChests = JsonConvert.SerializeObject(data, new JsonSerializerSettings
+			                                                         {
+				                                                         TypeNameHandling = TypeNameHandling.All
+			                                                         });
 			File.WriteAllText(_saveFilePath, serializedChests);
 		}
 
@@ -27,14 +30,17 @@ namespace RealTime
 			}
 
 			var fileData = File.ReadAllText(_saveFilePath);
-			
-			var savedChests = JsonConvert.DeserializeObject<ChestData[]>(fileData);
+
+			var savedChests = JsonConvert.DeserializeObject<ChestData[]>(fileData, new JsonSerializerSettings
+				{
+					TypeNameHandling = TypeNameHandling.All
+				});
 			if (savedChests == null || savedChests.Length <= 0)
 			{
 				data = null;
 				return false;
 			}
-			
+
 			data = savedChests;
 			return true;
 		}
