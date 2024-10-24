@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace RealTime
 {
@@ -37,7 +35,7 @@ namespace RealTime
 		{
 			Rewards = rewards;
 			ChestType = type;
-			Timer = timer;			
+			Timer = timer;
 		}
 
 		private async void Start()
@@ -56,12 +54,12 @@ namespace RealTime
 
 		private void OnTimerTick()
 		{
-			if (!Timer.TryGetTimeLeft(out TimeSpan timeLeft))
+			if (!Timer.TryGetTimeLeft(out var timeLeft))
 			{
 				_timerView.text = "Can't get data";
 				return;
 			}
-			
+
 			if (timeLeft <= TimeSpan.Zero)
 			{
 				OnTimerFinished();

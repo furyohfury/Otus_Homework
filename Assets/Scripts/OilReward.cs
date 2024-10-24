@@ -11,7 +11,7 @@ namespace RealTime
 		[SerializeField] [JsonProperty]
 		private int _amount;
 		private OilStorage _oilStorage;
-		
+
 		[Inject]
 		private void Construct(OilStorage oilStorage)
 		{

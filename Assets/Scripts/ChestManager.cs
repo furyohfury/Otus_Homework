@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 using Zenject;
 
@@ -16,12 +13,12 @@ namespace RealTime
 		private Transform _parentTransform;
 		[SerializeField]
 		private Chest[] _defaultChests;
-		
-		
+
+
 		private string _saveFilePath;
 		private ChestSpawner _chestSpawner;
 		private IChestSaveLoader _chestSaveLoader;
-		private List<Chest> _activeChests = new();
+		private readonly List<Chest> _activeChests = new();
 
 		[Inject]
 		public void Construct(ChestSpawner chestSpawner, IChestSaveLoader chestSaveLoader)
@@ -31,15 +28,16 @@ namespace RealTime
 		}
 
 		private void Start()
-		{			
+		{
 			_chestPositions = _chestPositions.OrderBy(pos => pos.position.x).ThenBy(pos => pos.position.y).ToArray();
 
-			if (_chestSaveLoader.TryLoadChestsData(out IEnumerable<ChestData> data))
+			if (_chestSaveLoader.TryLoadChestsData(out var data))
 			{
 				var savedChestData = data.ToArray();
-				for (int i = 0; i < savedChestData.Length; i++)
+				for (var i = 0; i < savedChestData.Length; i++)
 				{
-					var chest = _chestSpawner.SpawnChest(savedChestData[i], _chestPositions[i].position, _parentTransform);
+					var chest = _chestSpawner.SpawnChest(savedChestData[i], _chestPositions[i].position,
+						_parentTransform);
 					_activeChests.Add(chest);
 				}
 			}
@@ -52,13 +50,13 @@ namespace RealTime
 
 		private void CreateDefaultChests()
 		{
-			for (int i = 0; i < _defaultChests.Length; i++)
+			for (var i = 0; i < _defaultChests.Length; i++)
 			{
 				var chest = _chestSpawner.SpawnChest(_defaultChests[i], _chestPositions[i].position, _parentTransform);
 				_activeChests.Add(chest);
 			}
 		}
-		
+
 		private void OnApplicationQuit()
 		{
 			_chestSaveLoader.SaveChestsData(_activeChests);

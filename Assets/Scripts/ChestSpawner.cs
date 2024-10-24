@@ -6,16 +6,16 @@ namespace RealTime
 {
 	public sealed class ChestSpawner
 	{
-		private DiContainer _diContainer;
-		private Chest _prefab;
-		
+		private readonly DiContainer _diContainer;
+		private readonly Chest _prefab;
+
 		[Inject]
 		public ChestSpawner(DiContainer diContainer, Chest prefab)
 		{
 			_diContainer = diContainer;
 			_prefab = prefab;
-		}		
-		
+		}
+
 		public Chest SpawnChest(ChestData chestData, Vector3 pos, Transform parent)
 		{
 			var spawnedChest = Object.Instantiate(_prefab, pos, quaternion.identity, parent);
@@ -23,7 +23,8 @@ namespace RealTime
 			foreach (var reward in spawnedChest.Rewards)
 			{
 				_diContainer.Inject(reward);
-			}			
+			}
+
 			return spawnedChest;
 		}
 
@@ -34,7 +35,8 @@ namespace RealTime
 			foreach (var reward in spawnedChest.Rewards)
 			{
 				_diContainer.Inject(reward);
-			}			
+			}
+
 			return spawnedChest;
 		}
 	}

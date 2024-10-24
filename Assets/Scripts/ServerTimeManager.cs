@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -12,7 +10,7 @@ namespace RealTime
 	{
 		public static ServerTimeManager Instance;
 		public bool Initialized { get; private set; }
-		
+
 		private const string SERVER_PATH = "https://timeapi.io/api/time/current/zone?timeZone=Etc/UTC";
 		private const int NUMBER_OF_CONNECTION_RETRIES = 3;
 		private DateTime _serverTime;
@@ -28,6 +26,7 @@ namespace RealTime
 			{
 				Destroy(this);
 			}
+
 			await Initialize();
 		}
 
@@ -59,7 +58,7 @@ namespace RealTime
 		{
 			var request = UnityWebRequest.Get(SERVER_PATH);
 			await request.SendWebRequest();
-			for (int i = 0; i < NUMBER_OF_CONNECTION_RETRIES; i++)
+			for (var i = 0; i < NUMBER_OF_CONNECTION_RETRIES; i++)
 			{
 				if (request.result == UnityWebRequest.Result.Success)
 				{
@@ -76,18 +75,18 @@ namespace RealTime
 		{
 			// User may have tried to change system settings
 			if (!focused) return;
-			
-				var serverTimeRequest = await TryGetServerTimeAsync();
-				if (serverTimeRequest.successful)
-				{
-					_serverTime = serverTimeRequest.serverTime;
-					_delta = DateTime.Now.ToUniversalTime() - _serverTime;
-				}
-				else
-				{
-					_serverTime = default;
-					_delta = default;
-				}					
+
+			var serverTimeRequest = await TryGetServerTimeAsync();
+			if (serverTimeRequest.successful)
+			{
+				_serverTime = serverTimeRequest.serverTime;
+				_delta = DateTime.Now.ToUniversalTime() - _serverTime;
+			}
+			else
+			{
+				_serverTime = default;
+				_delta = default;
+			}
 		}
 
 		private struct ServerTimeData

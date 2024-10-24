@@ -1,14 +1,13 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using UniRx;
 using UnityEngine;
 
 namespace RealTime
 {
 	[Serializable]
 	public sealed class ChestTimer
-	{	
+	{
 		[SerializeField] [JsonProperty]
 		private float _initialDurationInSeconds;
 		[JsonProperty]
@@ -21,20 +20,21 @@ namespace RealTime
 			{
 				await UniTask.WaitUntil(() => ServerTimeManager.Instance.Initialized);
 			}
-			
-			if (!ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime)) return;
-						
+
+			if (!ServerTimeManager.Instance.TryGetCurrentTime(out var currentTime)) return;
+
 			if (_finishTime == default) // First time initialization
 			{
 				var duration = TimeSpan.FromSeconds(_initialDurationInSeconds);
 				_finishTime = currentTime + duration;
-			}			
-			_initialized = true;		
+			}
+
+			_initialized = true;
 		}
 
 		public bool TryGetTimeLeft(out TimeSpan timeLeft)
 		{
-			if (!_initialized || !ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+			if (!_initialized || !ServerTimeManager.Instance.TryGetCurrentTime(out var currentTime))
 			{
 				timeLeft = default;
 				return false;
@@ -48,7 +48,7 @@ namespace RealTime
 		{
 			_finishTime = default;
 			_initialized = false;
-			Initialize();
+			Initialize().Forget();
 		}
 	}
 }

@@ -6,11 +6,11 @@ namespace RealTime
 	public sealed class OilStorage : MonoBehaviour
 	{
 		[ShowInInspector]
-		public int Amount => _amount;
+		public int Amount { get; private set; }
 
-		private int _amount;
-
-		public void AddOil(int count) => _amount += count;
-		public void SpendOil(int count) => _amount -= count;
+		public void AddOil(int count)
+		{
+			Amount += count;
+		}
 	}
 }

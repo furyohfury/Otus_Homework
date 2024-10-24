@@ -51,9 +51,9 @@ namespace RealTime
 			{
 				await UniTask.WaitUntil(() => ServerTimeManager.Instance.Initialized);
 			}
-			
+
 			// Setup entry time
-			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+			if (ServerTimeManager.Instance.TryGetCurrentTime(out var currentTime))
 			{
 				_currentSession.EntryTime = currentTime;
 			}
@@ -79,7 +79,7 @@ namespace RealTime
 			while (!_cancellationTokenSource.IsCancellationRequested)
 			{
 				if (_currentSession.EntryTime.HasValue &&
-				    ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+				    ServerTimeManager.Instance.TryGetCurrentTime(out var currentTime))
 				{
 					_currentSession.SessionDuration = currentTime - _currentSession.EntryTime.Value;
 				}
@@ -92,11 +92,11 @@ namespace RealTime
 				_viewTimeText.text = string.Concat(_previousSessionsString, currentSessionString);
 				await UniTask.Delay(TimeSpan.FromSeconds(1f));
 			}
-		}		
+		}
 
 		private void SaveSessionData()
 		{
-			if (ServerTimeManager.Instance.TryGetCurrentTime(out DateTime currentTime))
+			if (ServerTimeManager.Instance.TryGetCurrentTime(out var currentTime))
 			{
 				_currentSession.QuitTime = currentTime;
 				if (_currentSession.EntryTime.HasValue)
