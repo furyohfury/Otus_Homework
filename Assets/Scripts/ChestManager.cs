@@ -8,7 +8,7 @@ using Zenject;
 
 namespace RealTime
 {
-	public sealed class ChestManager : MonoBehaviour // TODO can change with DI and IDisposable
+	public sealed class ChestManager : MonoBehaviour
 	{
 		[SerializeField]
 		private Transform[] _chestPositions;

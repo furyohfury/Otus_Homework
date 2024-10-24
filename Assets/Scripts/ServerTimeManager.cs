@@ -43,7 +43,6 @@ namespace RealTime
 			Initialized = true;
 		}
 
-		// TODO mb convert to device timezone. Shouldnt be hard, but only for entry time and not chests
 		public bool TryGetCurrentTime(out DateTime time)
 		{
 			if (_delta == default)
@@ -52,7 +51,6 @@ namespace RealTime
 				return false;
 			}
 
-			// TODO test changing timezone and time itself (not that important for homework tho)
 			time = DateTime.Now.Subtract(_delta);
 			return true;
 		}
