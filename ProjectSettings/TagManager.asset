@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AttackPosition
+  - Tree
+  - Character
+  - Barn
   layers:
   - Default
   - TransparentFX
@@ -12,11 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Blue
-  - Red
-  - BlueProjectile
-  - RedProjectile
   - 
+  - 
+  - 
+  - 
+  - Resource
   - 
   - 
   - 
