@@ -9,7 +9,8 @@ namespace Game.Engine
 	{
 		public bool Invoke(IBlackboard blackboard)
 		{
-			return blackboard.TryGetTreeService(out var treeService) && treeService.Trees.Any(tree => tree.activeInHierarchy);
+			return blackboard.TryGetTreeService(out var treeService) &&
+			       treeService.Trees.Any(tree => tree.activeInHierarchy);
 		}
 	}
 }

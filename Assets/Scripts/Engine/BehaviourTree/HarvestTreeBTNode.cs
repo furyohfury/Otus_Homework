@@ -1,6 +1,5 @@
 ﻿using System;
 using Atomic.AI;
-using UnityEngine;
 
 namespace Game.Engine
 {
@@ -9,21 +8,20 @@ namespace Game.Engine
 	{
 		protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
 		{
-			HarvestComponent harvestComponent = blackboard.GetCharacter().GetComponent<HarvestComponent>();
-			ResourceStorageComponent resourceStorageComponent = blackboard.GetCharacter().GetComponent<ResourceStorageComponent>();
+			if (!blackboard.TryGetCharacter(out var character) || !blackboard.TryGetTarget(out var tree))
+			{
+				return BTResult.FAILURE;
+			}
+			
+			var harvestComponent = character.GetComponent<HarvestComponent>();
+			var resourceStorageComponent = character.GetComponent<ResourceStorageComponent>();
 
-			GameObject tree = blackboard.GetTreeTarget();
-
-			// if (!tree.activeInHierarchy && resourceStorageComponent.IsNotEmpty())
-			// {
-			// 	return BTResult.FAILURE;
-			// }
-            
 			if (resourceStorageComponent.IsEmpty() && tree.activeInHierarchy)
 			{
 				harvestComponent.StartHarvest();
 				return BTResult.RUNNING;
 			}
+
 			return BTResult.SUCCESS;
 		}
 	}

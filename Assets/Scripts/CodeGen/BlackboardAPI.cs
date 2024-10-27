@@ -21,7 +21,6 @@ namespace Game
         public const int WaypointPause = 10; // float
         public const int WaypointTime = 11; // float
         public const int Enemy = 12; // GameObject : class
-        public const int TreeTarget = 13; // GameObject : class
 
 
         ///Extensions
@@ -215,22 +214,6 @@ namespace Game
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelEnemy(this IBlackboard obj) => obj.DelObject(Enemy);
-
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool HasTreeTarget(this IBlackboard obj) => obj.HasObject(TreeTarget);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static GameObject  GetTreeTarget(this IBlackboard obj) => obj.GetObject<GameObject >(TreeTarget);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetTreeTarget(this IBlackboard obj, out GameObject  value) => obj.TryGetObject(TreeTarget, out value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetTreeTarget(this IBlackboard obj, GameObject  value) => obj.SetObject(TreeTarget, value);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool DelTreeTarget(this IBlackboard obj) => obj.DelObject(TreeTarget);
 
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using Atomic.AI;
-using Game.Content;
-using UnityEngine;
 
 namespace Game.Engine
 {
@@ -10,7 +8,7 @@ namespace Game.Engine
 	{
 		protected override BTResult OnUpdate(IBlackboard blackboard, float deltaTime)
 		{
-			if (!blackboard.TryGetCharacter(out GameObject character))
+			if (!blackboard.TryGetCharacter(out var character))
 			{
 				return BTResult.FAILURE;
 			}
@@ -19,7 +17,7 @@ namespace Game.Engine
 			{
 				return BTResult.FAILURE;
 			}
-			
+
 			var characterStorage = character.GetComponent<ResourceStorageComponent>();
 			var barnStorage = barn.GetComponent<ResourceStorageComponent>();
 

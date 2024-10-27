@@ -4,79 +4,79 @@ using UnityEngine;
 
 namespace Game.Engine
 {
-    [Serializable]
-    public sealed class ResourceStorageComponent : MonoBehaviour
-    {
-        public event Action OnStateChanged;
+	[Serializable]
+	public sealed class ResourceStorageComponent : MonoBehaviour
+	{
+		public event Action OnStateChanged;
 
-        public int Current => this.current;
-        public int FreeSlots => this.capacity - this.current;
-        
-        [SerializeField]
-        private int capacity;
+		public int Current => current;
+		public int FreeSlots => capacity - current;
 
-        [SerializeField]
-        private int current;
+		[SerializeField]
+		private int capacity;
 
-        public bool CanAddResources(int range)
-        {
-            return this.current + range <= this.capacity;
-        }
+		[SerializeField]
+		private int current;
 
-        [Button]
-        public void AddResources(int range)
-        {
-            this.current = Mathf.Min(this.capacity, this.current + range);
-            this.OnStateChanged?.Invoke();
-        }
+		public bool CanAddResources(int range)
+		{
+			return current + range <= capacity;
+		}
 
-        [Button]
-        public bool RemoveResources(int count)
-        {
-            if (this.current - count >= 0)
-            {
-                this.current -= count;
-                this.OnStateChanged?.Invoke();
-                return true;
-            }
+		[Button]
+		public void AddResources(int range)
+		{
+			current = Mathf.Min(capacity, current + range);
+			OnStateChanged?.Invoke();
+		}
 
-            return false;
-        }
+		[Button]
+		public bool RemoveResources(int count)
+		{
+			if (current - count >= 0)
+			{
+				current -= count;
+				OnStateChanged?.Invoke();
+				return true;
+			}
 
-        [Button]
-        public int ExtractAllResources()
-        {
-            int result = this.current;
-            this.current = 0;
-            this.OnStateChanged?.Invoke();
-            return result;
-        }
+			return false;
+		}
 
-        [Button]
-        public void Clear()
-        {
-            this.current = 0;
-            this.OnStateChanged?.Invoke();
-        }
-        
-        public bool IsFull()
-        {
-            return this.current == this.capacity;
-        }
+		[Button]
+		public int ExtractAllResources()
+		{
+			var result = current;
+			current = 0;
+			OnStateChanged?.Invoke();
+			return result;
+		}
 
-        public bool IsNotFull()
-        {
-            return this.current < this.capacity;
-        }
+		[Button]
+		public void Clear()
+		{
+			current = 0;
+			OnStateChanged?.Invoke();
+		}
 
-        public bool IsNotEmpty()
-        {
-            return this.current > 0;
-        }
+		public bool IsFull()
+		{
+			return current == capacity;
+		}
 
-        public bool IsEmpty()
-        {
-            return this.current == 0;
-        }
-    }
+		public bool IsNotFull()
+		{
+			return current < capacity;
+		}
+
+		public bool IsNotEmpty()
+		{
+			return current > 0;
+		}
+
+		public bool IsEmpty()
+		{
+			return current == 0;
+		}
+	}
 }
