@@ -6,26 +6,19 @@ namespace Game.Content
     public sealed class Character : MonoBehaviour
     {
         [Header("Movement")]
-        [field : SerializeField]
-        public MoveComponent MoveComponent {get; private set;}
+        public MoveComponent MoveComponent;
 
-        [SerializeField]
-        private LookComponent _lookComponent;
+        public LookComponent LookComponent;
 
         [Header("Harvesting")]
-        [field : SerializeField]
-        public HarvestComponent HarvestComponent {get; private set;}
+        public HarvestComponent HarvestComponent;
 
-        [SerializeField]
-        private OverlapSphereComponent _overlapSphereComponent;
+        public OverlapSphereComponent OverlapSphereComponent;
 
-        [SerializeField]
-        private TakeResourceComponent _takeResourceComponent;
+        public TakeResourceComponent TakeResourceComponent;
 
         [Header("Storage")]
-        [field : SerializeField]
-        public ResourceStorageComponent ResourceStorage {get; private set;}
-
+        public ResourceStorageComponent ResourceStorage;
         private void OnEnable()
         {
             MoveComponent.OnMove += this.OnMove;
@@ -38,7 +31,7 @@ namespace Game.Content
 
         private void OnMove()
         {
-            _lookComponent.Direction = MoveComponent.MoveDirection;
+            LookComponent.Direction = MoveComponent.MoveDirection;
         }
 
         private void Start()
@@ -49,14 +42,14 @@ namespace Game.Content
 
         private void RaycastResources()
         {
-            _overlapSphereComponent.OverlapSphere(this.HarvestResource);
+            OverlapSphereComponent.OverlapSphere(this.HarvestResource);
         }
 
         private bool HarvestResource(GameObject target)
         {
             return target.CompareTag(GameObjectTags.Tree) &&
                    target.activeSelf &&
-                   _takeResourceComponent.TakeResources(target);
+                   TakeResourceComponent.TakeResources(target);
         }
     }
 }

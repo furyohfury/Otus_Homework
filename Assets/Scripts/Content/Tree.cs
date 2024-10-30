@@ -7,8 +7,7 @@ namespace Game.Content
     {
         private static readonly int ChopAnimHash = Animator.StringToHash("Chop");
 
-        [field : SerializeField]
-        public ResourceStorageComponent Storage {get; private set;}
+        public ResourceStorageComponent Storage;
 
         [SerializeField]
         private Animator _animator;        
