@@ -7,25 +7,25 @@ namespace Game.Content
     {
         private static readonly int ChopAnimHash = Animator.StringToHash("Chop");
 
-        [SerializeField]
-        private Animator _animator;
+        [field : SerializeField]
+        public ResourceStorageComponent Storage {get; private set;}
 
         [SerializeField]
-        private ResourceStorageComponent storage;
+        private Animator _animator;        
 
         private void OnEnable()
         {
-            this.storage.OnStateChanged += this.OnStateChanged;
+            this.Storage.OnStateChanged += this.OnStateChanged;
         }
 
         private void OnDisable()
         {
-            this.storage.OnStateChanged -= this.OnStateChanged;
+            this.Storage.OnStateChanged -= this.OnStateChanged;
         }
 
         private void OnStateChanged()
         {
-            if (this.storage.IsEmpty())
+            if (this.Storage.IsEmpty())
             {
                 this.gameObject.SetActive(false);
             }
