@@ -9,13 +9,13 @@ namespace Game.Engine
 	public sealed class PlaySoundBlackboardAction : IBlackboardAction
 	{
 		[SerializeField]
-		private AudioSource _audioSource;
-		[SerializeField]
 		private AudioClip[] _audioClips;
 
 		public void Invoke(IBlackboard blackboard)
 		{
-			_audioSource.PlayOneShot(_audioClips[Random.Range(0, _audioClips.Length)]);
+			var audioSource = (AudioSource)blackboard.GetAudioSource();
+			// по идее надо отдельный инсталлер для audiosource но это уже детали фреймворка
+			audioSource.PlayOneShot(_audioClips[Random.Range(0, _audioClips.Length)]);
 		}
 	}
 }

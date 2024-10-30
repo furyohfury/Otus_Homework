@@ -1,7 +1,7 @@
 using Game.Engine;
 using UnityEngine;
 
-namespace Game.Content
+namespace Game
 {
     public sealed class Character : MonoBehaviour
     {

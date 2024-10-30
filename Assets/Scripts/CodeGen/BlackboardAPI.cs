@@ -21,6 +21,7 @@ namespace Game
         public const int WaypointPause = 10; // float
         public const int WaypointTime = 11; // float
         public const int Enemy = 12; // GameObject : class
+        public const int AudioSource = 13; // Component : class
 
 
         ///Extensions
@@ -214,6 +215,22 @@ namespace Game
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool DelEnemy(this IBlackboard obj) => obj.DelObject(Enemy);
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasAudioSource(this IBlackboard obj) => obj.HasObject(AudioSource);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Component  GetAudioSource(this IBlackboard obj) => obj.GetObject<Component >(AudioSource);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetAudioSource(this IBlackboard obj, out Component  value) => obj.TryGetObject(AudioSource, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetAudioSource(this IBlackboard obj, Component  value) => obj.SetObject(AudioSource, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelAudioSource(this IBlackboard obj) => obj.DelObject(AudioSource);
 
     }
 }

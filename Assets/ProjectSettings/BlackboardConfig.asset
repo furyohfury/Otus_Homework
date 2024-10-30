@@ -58,3 +58,6 @@ MonoBehaviour:
   - id: 12
     name: Enemy
     type: 'GameObject : class'
+  - id: 13
+    name: AudioSource
+    type: 'Component : class'

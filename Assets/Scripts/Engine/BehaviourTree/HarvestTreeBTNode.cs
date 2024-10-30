@@ -12,29 +12,17 @@ namespace Game.Engine
 			{
 				return BTResult.FAILURE;
 			}
-			
+
 			var harvestComponent = character.GetComponent<HarvestComponent>();
 			var resourceStorageComponent = character.GetComponent<ResourceStorageComponent>();
-			
-			if (!tree.activeInHierarchy && resourceStorageComponent.IsNotFull())
-			{
-				return BTResult.FAILURE;
-			}
-            
+
 			if (resourceStorageComponent.IsNotFull() && tree.activeInHierarchy)
 			{
 				harvestComponent.StartHarvest();
 				return BTResult.RUNNING;
 			}
-			return BTResult.SUCCESS;
 
-			// if (resourceStorageComponent.IsEmpty() && tree.activeInHierarchy)
-			// {
-			// 	harvestComponent.StartHarvest();
-			// 	return BTResult.RUNNING;
-			// }
-			//
-			// return BTResult.SUCCESS;
+			return BTResult.SUCCESS;
 		}
 	}
 }

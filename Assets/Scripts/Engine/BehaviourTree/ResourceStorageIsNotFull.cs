@@ -9,7 +9,7 @@ namespace Game.Engine
 	{
 		[SerializeField]
 		private ResourceStorageComponent _resourceStorage;
-		
+
 		public bool Invoke(IBlackboard blackboard)
 		{
 			return _resourceStorage.IsNotFull();
