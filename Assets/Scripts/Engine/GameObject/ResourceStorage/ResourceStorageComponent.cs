@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace Game.Engine
@@ -17,6 +18,15 @@ namespace Game.Engine
 
 		[SerializeField]
 		private int current;
+
+		[SerializeField]
+		private TMP_Text _text;
+
+		private void OnEnable()
+		{
+			ChangeView();
+			OnStateChanged += ChangeView;
+		}
 
 		public bool CanAddResources(int range)
 		{
@@ -77,6 +87,19 @@ namespace Game.Engine
 		public bool IsEmpty()
 		{
 			return current == 0;
+		}
+		
+		private void OnDisable()
+		{
+			OnStateChanged -= ChangeView;
+		}
+
+		private void ChangeView()
+		{
+			if (_text != null)
+			{
+				_text.text = $"{current}/{capacity}";
+			}
 		}
 	}
 }

@@ -13,6 +13,11 @@ namespace Game.Engine
 				return BTResult.FAILURE;
 			}
 
+			if ((tree.transform.position - character.transform.position).sqrMagnitude > 1)
+			{
+				return BTResult.FAILURE;
+			}
+
 			var harvestComponent = character.GetComponent<HarvestComponent>();
 			var resourceStorageComponent = character.GetComponent<ResourceStorageComponent>();
 

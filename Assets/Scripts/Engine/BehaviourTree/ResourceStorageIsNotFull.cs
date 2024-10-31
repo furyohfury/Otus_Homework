@@ -7,12 +7,18 @@ namespace Game.Engine
 	[Serializable]
 	public sealed class ResourceStorageIsNotFull : IBlackboardCondition
 	{
-		[SerializeField]
-		private ResourceStorageComponent _resourceStorage;
+		[SerializeField] [BlackboardKey]
+		private int _owner;
 
 		public bool Invoke(IBlackboard blackboard)
 		{
-			return _resourceStorage.IsNotFull();
+			if (!blackboard.TryGetObject(_owner, out GameObject ownerGo))
+			{
+				return false;
+			}
+
+			var storage = ownerGo.GetComponent<ResourceStorageComponent>();
+			return storage.IsNotFull();
 		}
 	}
 }
