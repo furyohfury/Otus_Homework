@@ -1,5 +1,4 @@
-﻿using System;
-using Lessons.Meta.Lesson_Inventory;
+﻿using Lessons.Meta.Lesson_Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,13 +18,14 @@ namespace Equipment
 		private void Start()
 		{
 			_equipmentManaComponentObserver = new EquipmentManaComponentObserver(CharacterEquipment, Hero.Instance);
-			_equipmentHitPointsComponentObserver = new EquipmentHitPointsComponentObserver(CharacterEquipment, Hero.Instance);
-			_equipmentInventoryMediator = new(CharacterEquipment, Inventory);
-			
+			_equipmentHitPointsComponentObserver =
+				new EquipmentHitPointsComponentObserver(CharacterEquipment, Hero.Instance);
+			_equipmentInventoryMediator = new EquipmentInventoryMediator(CharacterEquipment, Inventory);
+
 			_healthComponentObserver = new InventoryHealthComponentObserver(Inventory, Hero.Instance);
 			_manaComponentObserver = new InventoryManaComponentObserver(Inventory, Hero.Instance);
 		}
-		
+
 		[Button]
 		public void AddItem(InventoryItemConfig itemConfig)
 		{
@@ -53,7 +53,7 @@ namespace Equipment
 			var item = itemConfig.CreateEquipmentItem();
 			CharacterEquipment.TryEquipItem(item);
 		}
-		
+
 		[Button]
 		public void UnequipItem(EquipmentItemConfig itemConfig)
 		{

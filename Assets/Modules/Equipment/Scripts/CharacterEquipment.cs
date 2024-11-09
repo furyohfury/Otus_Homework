@@ -10,7 +10,7 @@ namespace Equipment
 	{
 		public Action<EquipmentItem> OnEquipped;
 		public Action<EquipmentItem> OnUnequipped;
-		
+
 		[SerializeReference]
 		public Dictionary<EquipmentSlot, EquipmentItem> Items = new();
 
@@ -22,7 +22,7 @@ namespace Equipment
 			}
 
 			var slot = equipmentItem.Slot;
-			if (Items.TryGetValue(slot, out EquipmentItem oldItem))
+			if (Items.TryGetValue(slot, out var oldItem))
 			{
 				SwapItems(oldItem, equipmentItem);
 			}
@@ -46,7 +46,7 @@ namespace Equipment
 			Items.Remove(equipmentItem.Slot);
 			OnUnequipped?.Invoke(equipmentItem);
 		}
-		
+
 		private void SwapItems(EquipmentItem oldItem, EquipmentItem newItem)
 		{
 			Items[oldItem.Slot] = newItem;
