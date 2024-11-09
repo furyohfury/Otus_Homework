@@ -16,17 +16,17 @@ namespace Equipment
 
 		private void OnItemEquipped(EquipmentItem equipmentItem)
 		{
-			if (equipmentItem.TryGetComponent<InventoryItem_ManaEffectComponent>(out var component))
+			if (equipmentItem.TryGetComponent<EquipmentItem_ManaEffectComponent>(out var component))
 			{
-				_hero.ManaPoints += component.ManaValue;
+				component.Apply();
 			}
 		}
 
 		private void OnItemUnequipped(EquipmentItem equipmentItem)
 		{
-			if (equipmentItem.TryGetComponent<InventoryItem_ManaEffectComponent>(out var component))
+			if (equipmentItem.TryGetComponent<EquipmentItem_ManaEffectComponent>(out var component))
 			{
-				_hero.ManaPoints = Mathf.Max(0, _hero.ManaPoints - component.ManaValue);
+				component.Discard();
 			}
 		}
 	}

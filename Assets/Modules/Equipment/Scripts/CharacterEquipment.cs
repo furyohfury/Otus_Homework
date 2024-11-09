@@ -37,7 +37,8 @@ namespace Equipment
 
 		public void UnequipItem(EquipmentItem equipmentItem)
 		{
-			if (IsSameItem(equipmentItem, Items[equipmentItem.Slot]) == false)
+			if (Items.TryGetValue(equipmentItem.Slot, out var equippedItem) == false 
+			    || IsSameItem(equipmentItem, equippedItem) == false)
 			{
 				Debug.Log($"No {equipmentItem.Name} in equipment to discard");
 				return;

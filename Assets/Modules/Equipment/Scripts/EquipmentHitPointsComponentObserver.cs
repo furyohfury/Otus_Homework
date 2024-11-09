@@ -16,17 +16,17 @@ namespace Equipment
 
 		private void OnItemEquipped(EquipmentItem equipmentItem)
 		{
-			if (equipmentItem.TryGetComponent<InventoryItem_HealthEffectComponent>(out var component))
+			if (equipmentItem.TryGetComponent<EquipmentItem_HealthEffectComponent>(out var component))
 			{
-				_hero.HitPoints += component.HitPoints;
+				component.Apply();
 			}
 		}
 
 		private void OnItemUnequipped(EquipmentItem equipmentItem)
 		{
-			if (equipmentItem.TryGetComponent<InventoryItem_HealthEffectComponent>(out var component))
+			if (equipmentItem.TryGetComponent<EquipmentItem_HealthEffectComponent>(out var component))
 			{
-				_hero.HitPoints = Mathf.Max(0, _hero.HitPoints - component.HitPoints);
+				component.Discard();
 			}
 		}
 	}

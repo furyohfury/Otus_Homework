@@ -18,12 +18,12 @@ MonoBehaviour:
     Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     Flags: 4
     ItemComponents:
-    - rid: 2388721111162421248
-    Slot: 0
+    - rid: 2388721111162421250
+  Slot: 0
   references:
     version: 2
     RefIds:
-    - rid: 2388721111162421248
-      type: {class: InventoryItem_HealthEffectComponent, ns: Lessons.Meta.Lesson_Inventory, asm: Inventory}
+    - rid: 2388721111162421250
+      type: {class: EquipmentItem_HealthEffectComponent, ns: Equipment, asm: NewAssembly}
       data:
         HitPoints: 2
