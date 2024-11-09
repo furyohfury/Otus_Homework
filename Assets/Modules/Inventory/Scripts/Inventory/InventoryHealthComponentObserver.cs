@@ -20,7 +20,7 @@ namespace Lessons.Meta.Lesson_Inventory
             {
                 if (inventoryItem.TryGetComponent<InventoryItem_HealthEffectComponent>(out var component))
                 {
-                    _hero.MaxHitPoints += component.HitPoints;
+                    _hero.HitPoints += component.HitPoints;
                 }   
             }
         }
@@ -31,7 +31,7 @@ namespace Lessons.Meta.Lesson_Inventory
             {
                 if (inventoryItem.TryGetComponent<InventoryItem_HealthEffectComponent>(out var component))
                 {
-                    _hero.MaxHitPoints -= component.HitPoints;
+                    _hero.HitPoints -= component.HitPoints;
                 }   
             }
         }

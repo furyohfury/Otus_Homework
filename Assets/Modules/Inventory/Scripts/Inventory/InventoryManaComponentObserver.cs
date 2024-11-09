@@ -16,7 +16,7 @@ namespace Lessons.Meta.Lesson_Inventory
         {
             if (inventoryItem.TryGetComponent<InventoryItem_ManaEffectComponent>(out var component))
             {
-                _hero.Mana += component.ManaValue;
+                _hero.ManaPoints += component.ManaValue;
             }   
         }
     }

@@ -50,11 +50,11 @@ namespace Lessons.Meta.Lesson_Inventory
             };
         }
 
-        private List<IItemComponent> CloneComponents()
+        protected List<IItemComponent> CloneComponents()
         {
-            var list = new List<IItemComponent>();
+            var list = new List<IItemComponent>(ItemComponents.Count);
 
-            foreach (IItemComponent itemComponent in ItemComponents)
+            foreach (var itemComponent in ItemComponents)
             {
                 list.Add(itemComponent.Clone());
             }
