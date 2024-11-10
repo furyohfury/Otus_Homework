@@ -4,6 +4,7 @@ namespace Lessons.Meta.Lesson_Inventory
     {
         IItemComponent Clone();
     }
+    
 
     public interface IEffectibleComponent
     {

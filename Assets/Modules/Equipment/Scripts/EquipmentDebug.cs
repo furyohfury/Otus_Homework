@@ -11,19 +11,17 @@ namespace Equipment
 
 		private EquipmentManaComponentObserver _equipmentManaComponentObserver;
 		private EquipmentHitPointsComponentObserver _equipmentHitPointsComponentObserver;
-		private EquipmentInventoryMediator _equipmentInventoryMediator;
-		private InventoryHealthComponentObserver _healthComponentObserver;
-		private InventoryManaComponentObserver _manaComponentObserver;
+		// private EquipmentInventoryMediator _equipmentInventoryMediator;
 
 		private void Start()
 		{
 			_equipmentManaComponentObserver = new EquipmentManaComponentObserver(CharacterEquipment, Hero.Instance);
 			_equipmentHitPointsComponentObserver =
 				new EquipmentHitPointsComponentObserver(CharacterEquipment, Hero.Instance);
-			_equipmentInventoryMediator = new EquipmentInventoryMediator(CharacterEquipment, Inventory);
+			// _equipmentInventoryMediator = new EquipmentInventoryMediator(CharacterEquipment, Inventory);
 
-			_healthComponentObserver = new InventoryHealthComponentObserver(Inventory, Hero.Instance);
-			_manaComponentObserver = new InventoryManaComponentObserver(Inventory, Hero.Instance);
+			new InventoryHealthComponentObserver(Inventory, Hero.Instance);
+			new InventoryManaComponentObserver(Inventory, Hero.Instance);
 		}
 
 		[Button]
@@ -48,16 +46,16 @@ namespace Equipment
 		}
 
 		[Button]
-		public void EquipItem(EquipmentItemConfig itemConfig)
+		public void EquipItem(InventoryItemConfig itemConfig)
 		{
-			var item = itemConfig.CreateEquipmentItem();
+			var item = itemConfig.Item;
 			CharacterEquipment.TryEquipItem(item);
 		}
 
 		[Button]
-		public void UnequipItem(EquipmentItemConfig itemConfig)
+		public void UnequipItem(InventoryItemConfig itemConfig)
 		{
-			var item = itemConfig.CreateEquipmentItem();
+			var item = itemConfig.Item;
 			CharacterEquipment.UnequipItem(item);
 		}
 	}

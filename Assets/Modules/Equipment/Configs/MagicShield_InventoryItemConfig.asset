@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10545e56f1349a4995d3d00539fea2c, type: 3}
+  m_Name: MagicShield_InventoryItemConfig
+  m_EditorClassIdentifier: 
+  Item:
+    Name: Magic shield
+    Description: Shield of grand magus
+    Icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    Flags: 0
+    ItemComponents:
+    - rid: 2388721137584177153
+    - rid: 2388721137584177154
+  references:
+    version: 2
+    RefIds:
+    - rid: 2388721137584177153
+      type: {class: InventoryItem_EquippableSlotComponent, ns: Equipment, asm: NewAssembly}
+      data:
+        Slot: 0
+    - rid: 2388721137584177154
+      type: {class: InventoryItem_ManaEffectOnEquipComponent, ns: Equipment, asm: NewAssembly}
+      data:
+        ManaValue: 5

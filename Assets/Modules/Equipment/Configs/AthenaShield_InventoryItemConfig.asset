@@ -9,21 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8655c2b14f7d4e18bf01ce335f471620, type: 3}
-  m_Name: AthenaShield_EquipmentItemConfig
+  m_Script: {fileID: 11500000, guid: f10545e56f1349a4995d3d00539fea2c, type: 3}
+  m_Name: AthenaShield_InventoryItemConfig
   m_EditorClassIdentifier: 
   Item:
     Name: Athena shield
     Description: Shield gifted by Athena
     Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    Flags: 4
+    Flags: 0
     ItemComponents:
-    - rid: 2388721111162421250
-  Slot: 0
+    - rid: 2388721137584177152
+    - rid: 2388721137584177153
   references:
     version: 2
     RefIds:
-    - rid: 2388721111162421250
-      type: {class: EquipmentItem_HealthEffectComponent, ns: Equipment, asm: NewAssembly}
+    - rid: 2388721137584177152
+      type: {class: InventoryItem_HealthEffectOnEquipComponent, ns: Equipment, asm: NewAssembly}
       data:
         HitPoints: 2
+    - rid: 2388721137584177153
+      type: {class: InventoryItem_EquippableSlotComponent, ns: Equipment, asm: NewAssembly}
+      data:
+        Slot: 0

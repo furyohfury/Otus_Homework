@@ -14,19 +14,19 @@ namespace Equipment
 			characterEquipment.OnUnequipped += OnItemUnequipped;
 		}
 
-		private void OnItemEquipped(EquipmentItem equipmentItem)
+		private void OnItemEquipped(InventoryItem item)
 		{
-			if (equipmentItem.TryGetComponent<EquipmentItem_ManaEffectComponent>(out var component))
+			if (item.TryGetComponent<InventoryItem_ManaEffectOnEquipComponent>(out var component))
 			{
-				component.Apply();
+				_hero.ManaPoints += component.ManaValue;
 			}
 		}
 
-		private void OnItemUnequipped(EquipmentItem equipmentItem)
+		private void OnItemUnequipped(InventoryItem item)
 		{
-			if (equipmentItem.TryGetComponent<EquipmentItem_ManaEffectComponent>(out var component))
+			if (item.TryGetComponent<InventoryItem_ManaEffectOnEquipComponent>(out var component))
 			{
-				component.Discard();
+				_hero.ManaPoints = Mathf.Max(0, _hero.ManaPoints - component.ManaValue);
 			}
 		}
 	}

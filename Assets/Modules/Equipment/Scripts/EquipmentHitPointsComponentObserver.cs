@@ -14,19 +14,19 @@ namespace Equipment
 			characterEquipment.OnUnequipped += OnItemUnequipped;
 		}
 
-		private void OnItemEquipped(EquipmentItem equipmentItem)
+		private void OnItemEquipped(InventoryItem item)
 		{
-			if (equipmentItem.TryGetComponent<EquipmentItem_HealthEffectComponent>(out var component))
+			if (item.TryGetComponent<InventoryItem_HealthEffectOnEquipComponent>(out var component))
 			{
-				component.Apply();
+				_hero.HitPoints += component.HitPoints;
 			}
 		}
 
-		private void OnItemUnequipped(EquipmentItem equipmentItem)
+		private void OnItemUnequipped(InventoryItem item)
 		{
-			if (equipmentItem.TryGetComponent<EquipmentItem_HealthEffectComponent>(out var component))
+			if (item.TryGetComponent<InventoryItem_HealthEffectOnEquipComponent>(out var component))
 			{
-				component.Discard();
+				_hero.HitPoints = Mathf.Max(0, _hero.HitPoints - component.HitPoints);
 			}
 		}
 	}
