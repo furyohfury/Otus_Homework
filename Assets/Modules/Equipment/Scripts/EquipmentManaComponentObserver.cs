@@ -35,7 +35,7 @@ namespace Equipment
 				_hero.ManaPoints = Mathf.Max(0, _hero.ManaPoints - component.ManaValue);
 			}
 		}
-		
+
 		public void StopObserving()
 		{
 			_characterEquipment.OnEquipped -= OnItemEquipped;

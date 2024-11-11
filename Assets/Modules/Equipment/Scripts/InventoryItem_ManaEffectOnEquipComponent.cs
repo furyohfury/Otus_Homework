@@ -1,6 +1,5 @@
 ﻿using System;
 using Lessons.Meta.Lesson_Inventory;
-using UnityEngine;
 
 namespace Equipment
 {

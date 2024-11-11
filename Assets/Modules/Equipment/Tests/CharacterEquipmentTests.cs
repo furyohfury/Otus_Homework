@@ -172,9 +172,9 @@ public class CharacterEquipmentTests
 	public void WhenEquipSameItem_AndItHasEquipEffect_ThenApplyEffect()
 	{
 		// Arrange
-		var hero = new HeroMock() { HitPoints = 2 };
+		var hero = new HeroMock { HitPoints = 2 };
 		var oldHitPoints = hero.HitPoints;
-		
+
 		var equippableSlotComponent = new InventoryItem_EquippableSlotComponent { Slot = EquipmentSlot.Head };
 		var hitPointComponent = new InventoryItem_HealthEffectOnEquipComponent { HitPoints = 50 };
 		var oldItem = new InventoryItem
@@ -183,7 +183,7 @@ public class CharacterEquipmentTests
 		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent, hitPointComponent }, Name = "Helm" };
 		var inventory = new Inventory();
 		inventory.AddItem(oldItem);
-		
+
 		var equipmentController = new EquipmentController(_equipment, inventory);
 		var observer = new EquipmentHitPointsComponentObserver(_equipment, hero);
 		observer.StartObserving();
@@ -207,7 +207,7 @@ public class CharacterEquipmentTests
 		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent }, Name = "Helm" };
 		var inventory = new Inventory();
 		inventory.AddItem(oldItem);
-		
+
 		var equipmentController = new EquipmentController(_equipment, inventory);
 		equipmentController.TryEquipItemFromInventory(oldItem);
 		inventory.AddItem(newItem);

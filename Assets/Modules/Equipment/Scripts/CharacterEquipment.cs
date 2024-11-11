@@ -21,17 +21,18 @@ namespace Equipment
 				Debug.Log($"Cant equip {item.Name}. It isn't equippable");
 				return false;
 			}
-			
+
 			var slot = slotComponent.Slot;
-			if (Items.TryGetValue(slot, out InventoryItem oldItem))
+			if (Items.TryGetValue(slot, out var oldItem))
 			{
 				SwapItems(oldItem, item, slot);
 			}
 			else
 			{
-				Items.Add(slot, item );
+				Items.Add(slot, item);
 				OnEquipped?.Invoke(item);
 			}
+
 			return true;
 		}
 
@@ -42,8 +43,8 @@ namespace Equipment
 				Debug.Log($"Cant unequip {item.Name}. It isn't equippable");
 				return;
 			}
-			
-			if (Items.TryGetValue(slotComponent.Slot, out var equippedItem) == false 
+
+			if (Items.TryGetValue(slotComponent.Slot, out var equippedItem) == false
 			    || IsSameItem(item, equippedItem) == false)
 			{
 				Debug.Log($"No {item.Name} in equipment to discard");

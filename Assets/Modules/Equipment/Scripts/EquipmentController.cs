@@ -23,16 +23,17 @@ namespace Equipment
 				Debug.Log($"Can't equip {item.Name} because it isn't in inventory");
 				return false;
 			}
-			
+
 			return _equipment.TryEquipItem(inventoryItem);
 		}
 
 		public void UnequipItem(InventoryItem item)
 		{
-			if (_inventory.TryFindItem(item, out var inventoryItem) == true)
+			if (_inventory.TryFindItem(item, out var inventoryItem))
 			{
 				_inventory.RemoveItem(inventoryItem);
 			}
+
 			_equipment.UnequipItem(item);
 		}
 
