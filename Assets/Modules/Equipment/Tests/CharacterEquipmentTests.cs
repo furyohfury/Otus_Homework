@@ -54,7 +54,7 @@ public class CharacterEquipmentTests
 		var inventory = new Inventory();
 		_equipment.TryEquipItem(oldItem);
 		inventory.AddItem(newItem);
-		// var mediator = new EquipmentInventoryMediator(_equipment, inventory);
+		// var equipmentController = new EquipmentInventoryequipmentController(_equipment, inventory);
 		// Act
 		_equipment.TryEquipItem(newItem);
 		// Assert
@@ -69,9 +69,9 @@ public class CharacterEquipmentTests
 		var item = new InventoryItem { ItemComponents = { equippableSlotComponent } };
 		var inventory = new Inventory();
 		inventory.AddItem(item);
-		// var mediator = new EquipmentInventoryMediator(_equipment, inventory);
+		var equipmentController = new EquipmentController(_equipment, inventory);
 		// Act
-		_equipment.TryEquipItem(item);
+		equipmentController.TryEquipItemFromInventory(item);
 		// Assert
 		Assert.IsFalse(inventory.TryFindItem(item, out var _));
 	}
@@ -89,6 +89,7 @@ public class CharacterEquipmentTests
 		var hero = new HeroMock { ManaPoints = 5 };
 		var mana = hero.ManaPoints;
 		var observer = new EquipmentManaComponentObserver(_equipment, hero);
+		observer.StartObserving();
 		// Act
 		_equipment.TryEquipItem(item);
 		// Assert
@@ -107,13 +108,14 @@ public class CharacterEquipmentTests
 
 
 		var hero = new HeroMock { ManaPoints = 5 };
-		var mana = hero.ManaPoints;
 		var observer = new EquipmentManaComponentObserver(_equipment, hero);
-		// Act
+		observer.StartObserving();
 		_equipment.TryEquipItem(item);
+		var mana = hero.ManaPoints;
+		// Act
 		_equipment.UnequipItem(item);
 		// Assert
-		Assert.IsTrue(Mathf.Approximately(hero.ManaPoints, mana));
+		Assert.IsTrue(Mathf.Approximately(hero.ManaPoints, mana - manaComponent.ManaValue));
 	}
 
 	[Test]
@@ -128,7 +130,7 @@ public class CharacterEquipmentTests
 		_equipment.TryEquipItem(inventoryItem);
 		// Assert
 		Assert.IsTrue(inventory.TryFindItem(inventoryItem, out _));
-		Assert.IsFalse(_equipment.TryEquipItem(inventoryItem));
+		Assert.IsFalse(_equipment.Items.Values.Contains(inventoryItem));
 	}
 
 	[Test]
@@ -138,10 +140,81 @@ public class CharacterEquipmentTests
 		var equippableSlotComponent = new InventoryItem_EquippableSlotComponent { Slot = EquipmentSlot.Head };
 
 		var item = new InventoryItem
-		           { ItemComponents = new List<IItemComponent> { equippableSlotComponent } };
+		           { ItemComponents = new List<IItemComponent> { equippableSlotComponent }, Name = "Helm" };
+		var inventory = new Inventory();
+		var equipmentController = new EquipmentController(_equipment, inventory);
 		// Act
-		_equipment.TryEquipItem(item);
+		equipmentController.TryEquipItemFromInventory(item);
 		// Assert
 		Assert.IsFalse(_equipment.Items.Values.Contains(item));
+	}
+
+	[Test]
+	public void WhenUnequipItem_ThenReturnItToInventory()
+	{
+		// Arrange
+		var equippableSlotComponent = new InventoryItem_EquippableSlotComponent { Slot = EquipmentSlot.Head };
+
+		var item = new InventoryItem
+		           { ItemComponents = new List<IItemComponent> { equippableSlotComponent }, Name = "Helm" };
+		var inventory = new Inventory();
+		inventory.AddItem(item);
+		var equipmentController = new EquipmentController(_equipment, inventory);
+		equipmentController.TryEquipItemFromInventory(item);
+		// Act
+		equipmentController.UnequipItem(item);
+		// Assert
+		Assert.IsTrue(inventory.TryFindItem(item, out _));
+		Assert.IsFalse(_equipment.Items.Values.Contains(item));
+	}
+
+	[Test]
+	public void WhenEquipSameItem_AndItHasEquipEffect_ThenApplyEffect()
+	{
+		// Arrange
+		var hero = new HeroMock() { HitPoints = 2 };
+		var oldHitPoints = hero.HitPoints;
+		
+		var equippableSlotComponent = new InventoryItem_EquippableSlotComponent { Slot = EquipmentSlot.Head };
+		var hitPointComponent = new InventoryItem_HealthEffectOnEquipComponent { HitPoints = 50 };
+		var oldItem = new InventoryItem
+		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent }, Name = "Helm" };
+		var newItem = new InventoryItem
+		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent, hitPointComponent }, Name = "Helm" };
+		var inventory = new Inventory();
+		inventory.AddItem(oldItem);
+		
+		var equipmentController = new EquipmentController(_equipment, inventory);
+		var observer = new EquipmentHitPointsComponentObserver(_equipment, hero);
+		observer.StartObserving();
+		equipmentController.TryEquipItemFromInventory(oldItem);
+		inventory.AddItem(newItem);
+		// Act
+		equipmentController.TryEquipItemFromInventory(newItem);
+		// Assert
+		Assert.IsTrue(hero.HitPoints == oldHitPoints + 50);
+	}
+
+	[Test]
+	public void WhenUnequipItem_AndSameItemIsInInventory_ThenUnequipAndSwapItemInInventoryToOld()
+	{
+		// Arrange
+		var equippableSlotComponent = new InventoryItem_EquippableSlotComponent { Slot = EquipmentSlot.Head };
+		var hitPointComponent = new InventoryItem_HealthEffectOnEquipComponent { HitPoints = 50 };
+		var oldItem = new InventoryItem
+		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent, hitPointComponent }, Name = "Helm" };
+		var newItem = new InventoryItem
+		              { ItemComponents = new List<IItemComponent> { equippableSlotComponent }, Name = "Helm" };
+		var inventory = new Inventory();
+		inventory.AddItem(oldItem);
+		
+		var equipmentController = new EquipmentController(_equipment, inventory);
+		equipmentController.TryEquipItemFromInventory(oldItem);
+		inventory.AddItem(newItem);
+		// Act
+		equipmentController.UnequipItem(oldItem);
+		// Assert
+		Assert.IsTrue(inventory.TryFindItem(oldItem, out var inventoryItem));
+		Assert.IsTrue(inventoryItem.TryGetComponent(out InventoryItem_HealthEffectOnEquipComponent _));
 	}
 }

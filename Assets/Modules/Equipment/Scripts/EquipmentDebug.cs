@@ -11,17 +11,25 @@ namespace Equipment
 
 		private EquipmentManaComponentObserver _equipmentManaComponentObserver;
 		private EquipmentHitPointsComponentObserver _equipmentHitPointsComponentObserver;
-		// private EquipmentInventoryMediator _equipmentInventoryMediator;
+		private EquipmentController _equipmentController;
+		private InventoryHealthComponentObserver _inventoryHealthComponentObserver;
+		private InventoryManaComponentObserver _inventoryManaComponentObserver;
 
 		private void Start()
 		{
 			_equipmentManaComponentObserver = new EquipmentManaComponentObserver(CharacterEquipment, Hero.Instance);
 			_equipmentHitPointsComponentObserver =
 				new EquipmentHitPointsComponentObserver(CharacterEquipment, Hero.Instance);
-			// _equipmentInventoryMediator = new EquipmentInventoryMediator(CharacterEquipment, Inventory);
+			_equipmentManaComponentObserver.StartObserving();
+			_equipmentHitPointsComponentObserver.StartObserving();
 
-			new InventoryHealthComponentObserver(Inventory, Hero.Instance);
-			new InventoryManaComponentObserver(Inventory, Hero.Instance);
+
+			_inventoryHealthComponentObserver = new InventoryHealthComponentObserver(Inventory, Hero.Instance);
+			_inventoryManaComponentObserver = new InventoryManaComponentObserver(Inventory, Hero.Instance);
+			_inventoryManaComponentObserver.StartObserving();
+			_inventoryHealthComponentObserver.StartObserving();
+
+			_equipmentController = new EquipmentController(CharacterEquipment, Inventory);
 		}
 
 		[Button]
@@ -48,15 +56,23 @@ namespace Equipment
 		[Button]
 		public void EquipItem(InventoryItemConfig itemConfig)
 		{
-			var item = itemConfig.Item;
-			CharacterEquipment.TryEquipItem(item);
+			var item = itemConfig.Item.Clone();
+			_equipmentController.TryEquipItemFromInventory(item);
 		}
 
 		[Button]
 		public void UnequipItem(InventoryItemConfig itemConfig)
 		{
-			var item = itemConfig.Item;
-			CharacterEquipment.UnequipItem(item);
+			var item = itemConfig.Item.Clone();
+			_equipmentController.UnequipItem(item);
+		}
+
+		private void OnDestroy()
+		{
+			_equipmentManaComponentObserver.StopObserving();
+			_equipmentHitPointsComponentObserver.StopObserving();
+			_inventoryHealthComponentObserver.StopObserving();
+			_inventoryManaComponentObserver.StopObserving();
 		}
 	}
 }

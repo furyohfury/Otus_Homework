@@ -6,12 +6,18 @@ namespace Equipment
 	public sealed class EquipmentManaComponentObserver
 	{
 		private readonly ICharacter _hero;
+		private readonly CharacterEquipment _characterEquipment;
 
 		public EquipmentManaComponentObserver(CharacterEquipment characterEquipment, ICharacter hero)
 		{
+			_characterEquipment = characterEquipment;
 			_hero = hero;
-			characterEquipment.OnEquipped += OnItemEquipped;
-			characterEquipment.OnUnequipped += OnItemUnequipped;
+		}
+
+		public void StartObserving()
+		{
+			_characterEquipment.OnEquipped += OnItemEquipped;
+			_characterEquipment.OnUnequipped += OnItemUnequipped;
 		}
 
 		private void OnItemEquipped(InventoryItem item)
@@ -28,6 +34,12 @@ namespace Equipment
 			{
 				_hero.ManaPoints = Mathf.Max(0, _hero.ManaPoints - component.ManaValue);
 			}
+		}
+		
+		public void StopObserving()
+		{
+			_characterEquipment.OnEquipped -= OnItemEquipped;
+			_characterEquipment.OnUnequipped -= OnItemUnequipped;
 		}
 	}
 }

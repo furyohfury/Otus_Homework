@@ -5,13 +5,19 @@ namespace Equipment
 {
 	public sealed class EquipmentHitPointsComponentObserver
 	{
+		private readonly CharacterEquipment _characterEquipment;
 		private readonly ICharacter _hero;
 
 		public EquipmentHitPointsComponentObserver(CharacterEquipment characterEquipment, ICharacter hero)
 		{
+			_characterEquipment = characterEquipment;
 			_hero = hero;
-			characterEquipment.OnEquipped += OnItemEquipped;
-			characterEquipment.OnUnequipped += OnItemUnequipped;
+		}
+
+		public void StartObserving()
+		{
+			_characterEquipment.OnEquipped += OnItemEquipped;
+			_characterEquipment.OnUnequipped += OnItemUnequipped;
 		}
 
 		private void OnItemEquipped(InventoryItem item)
@@ -28,6 +34,12 @@ namespace Equipment
 			{
 				_hero.HitPoints = Mathf.Max(0, _hero.HitPoints - component.HitPoints);
 			}
+		}
+
+		public void StopObserving()
+		{
+			_characterEquipment.OnEquipped -= OnItemEquipped;
+			_characterEquipment.OnUnequipped -= OnItemUnequipped;
 		}
 	}
 }

@@ -9,7 +9,12 @@ namespace Lessons.Meta.Lesson_Inventory
         {
             _inventory = inventory;
             _hero = hero;
-            _inventory.OnConsumed += InventoryOnOnConsumed;
+        }
+        
+        public void StartObserving()
+        {
+            _inventory.OnAdded += InventoryOnOnConsumed;
+            _inventory.OnRemoved += InventoryOnOnConsumed;
         }
 
         private void InventoryOnOnConsumed(InventoryItem inventoryItem)
@@ -18,6 +23,12 @@ namespace Lessons.Meta.Lesson_Inventory
             {
                 _hero.ManaPoints += component.ManaValue;
             }   
+        }
+        
+        public void StopObserving()
+        {
+            _inventory.OnAdded -= InventoryOnOnConsumed;
+            _inventory.OnRemoved -= InventoryOnOnConsumed;
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Equipment
 			}
 
 			Items.Remove(slotComponent.Slot);
-			OnUnequipped?.Invoke(item);
+			OnUnequipped?.Invoke(equippedItem);
 		}
 
 		private void SwapItems(InventoryItem oldItem, InventoryItem newItem, EquipmentSlot slot)

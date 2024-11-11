@@ -9,9 +9,12 @@ namespace Lessons.Meta.Lesson_Inventory
         {
             _inventory = inventory;
             _hero = hero;
+        }
+        
+        public void StartObserving()
+        {
             _inventory.OnAdded += InventoryOnOnAdded;
             _inventory.OnRemoved += InventoryOnOnRemoved;
-            //OnRemoved
         }
 
         private void InventoryOnOnAdded(InventoryItem inventoryItem)
@@ -34,6 +37,12 @@ namespace Lessons.Meta.Lesson_Inventory
                     _hero.HitPoints -= component.HitPoints;
                 }   
             }
+        }
+        
+        public void StopObserving()
+        {
+            _inventory.OnAdded -= InventoryOnOnAdded;
+            _inventory.OnRemoved -= InventoryOnOnRemoved;
         }
     }
 }

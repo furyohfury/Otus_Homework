@@ -18,15 +18,10 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: c43fb207d20b8b244a02d92326918ba4, type: 3}
     Flags: 0
     ItemComponents:
-    - rid: 2388721137584177152
     - rid: 2388721137584177153
   references:
     version: 2
     RefIds:
-    - rid: 2388721137584177152
-      type: {class: InventoryItem_HealthEffectOnEquipComponent, ns: Equipment, asm: NewAssembly}
-      data:
-        HitPoints: 2
     - rid: 2388721137584177153
       type: {class: InventoryItem_EquippableSlotComponent, ns: Equipment, asm: NewAssembly}
       data:
