@@ -59,7 +59,8 @@ namespace Game.Entities
 			_canJump.Append(entity.GetIsGrounded());
 			entity.AddCanJump(_canJump);
 			entity.AddJumpForce(_jumpForce);
-			entity.AddJumpAction(new BaseEvent());
+			entity.AddJumpRequest(new BaseEvent());
+			entity.AddJumpEvent(new BaseEvent());
 
 			// Behaviours
 			entity.AddBehaviour(new MovementBehaviour());

@@ -13,7 +13,7 @@ namespace Game
 		public void Init(IEntity entity)
 		{
 			_animator = entity.GetAnimator();
-			_jumpEvent = entity.GetJumpAction();
+			_jumpEvent = entity.GetJumpEvent();
 			_jumpAnimationHash = Animator.StringToHash("Jump");
 			_jumpEvent.Subscribe(OnJump);
 		}

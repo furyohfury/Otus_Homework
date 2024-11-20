@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bae1cf0fb645f197e54e0bd53a7b2f, type: 3}
+  m_Name: EntityValueSettings
+  m_EditorClassIdentifier: 
+  local: 0
+  namespace: Atomic.Entities
+  directoryPath: Assets/Codegen
+  suffix: API
+  imports:
+  - Atomic.Elements
+  categories:
+  - name: Movement
+    indexes:
+    - id: 1
+      name: MoveSpeed
+      type: ReactiveVariable<float>
+    - id: 2
+      name: MoveDirection
+      type: ReactiveVariable<Vector2>
+    - id: 3
+      name: CanMove
+      type: AndExpression
+    - id: 4
+      name: CanJump
+      type: AndExpression
+    - id: 6
+      name: IsGrounded
+      type: BaseFunction<bool>
+    - id: 8
+      name: JumpForce
+      type: ReactiveVariable<float>
+    - id: 9
+      name: JumpRequest
+      type: BaseEvent
+    - id: 12
+      name: JumpEvent
+      type: BaseEvent
+  - name: Physics
+    indexes:
+    - id: 11
+      name: Rigidbody
+      type: Rigidbody2D
+  - name: Visual
+    indexes:
+    - id: 10
+      name: Animator
+      type: Animator
+    - id: 5
+      name: VisualTransfoirm
+      type: Transform

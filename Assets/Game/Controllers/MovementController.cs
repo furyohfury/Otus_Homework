@@ -34,7 +34,7 @@ namespace Game
 
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				if (_character.TryGetJumpAction(out var action))
+				if (_character.TryGetJumpRequest(out var action))
 				{
 					action.Invoke();
 				}
