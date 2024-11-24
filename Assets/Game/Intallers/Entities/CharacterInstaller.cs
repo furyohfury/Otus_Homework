@@ -22,6 +22,9 @@ namespace Game.Entities
 		private Transform _groundCheckTransform;
 		[SerializeField]
 		private LayerMask _groundLayer;
+		
+		[SerializeField] [Header("Combat")]
+		private SceneEntity _sword;
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
@@ -30,6 +33,7 @@ namespace Game.Entities
 		{
 			InitializeMovement(entity);
 			InitializeComponents(entity);
+			InitializeCombat(entity);
 		}
 
 		private void InitializeComponents(IEntity entity)
@@ -67,6 +71,17 @@ namespace Game.Entities
 			entity.AddBehaviour(new JumpBehaviour());
 			entity.AddBehaviour(new MovementVisualBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());
+		}
+
+		private void InitializeCombat(IEntity entity)
+		{
+			entity.AddSword(_sword);
+			entity.AddAttackRequest(new BaseEvent());
+			entity.AddAttackEvent(new BaseEvent());
+			entity.AddCanAttack(new AndExpression());
+			
+			entity.AddBehaviour(new SwordAttackBehaviour());
+			entity.AddBehaviour(new SwordAttackAnimationBehaviour());
 		}
 	}
 }

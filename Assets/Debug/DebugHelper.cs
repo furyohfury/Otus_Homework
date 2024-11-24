@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace a
@@ -9,6 +11,15 @@ namespace a
 		private Transform _transform;
 		[SerializeField]
 		private LayerMask _groundLayer;
+		[SerializeField]
+		private Transform _sword;
+		private Vector3 defaultRot;
+
+
+		private void Start()
+		{
+			defaultRot = _sword.rotation.eulerAngles;
+		}
 
 		[Button]
 		public void CheckOverlapPoint()
@@ -33,6 +44,19 @@ namespace a
 			else
 			{
 				Debug.Log("no hit");
+			}
+		}
+
+		[Button]
+		public void Animate(int i)
+		{
+			if (i == 1)
+			{
+				_sword.DORotate(defaultRot + new Vector3(0, 0, -90f), 1f);
+			}
+			else if (i == 2)
+			{
+				_sword.DORotate(new Vector3(0, 0, -90f), 1f);
 			}
 		}
 	}

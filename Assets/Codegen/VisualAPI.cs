@@ -6,6 +6,7 @@ using UnityEngine;
 using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using Atomic.Elements;
+using Game;
 
 namespace Atomic.Entities
 {
@@ -13,7 +14,7 @@ namespace Atomic.Entities
     {
         ///Keys
         public const int Animator = 10; // Animator
-        public const int VisualTransfoirm = 5; // Transform
+        public const int VisualTransform = 5; // Transform
 
 
         ///Extensions
@@ -36,21 +37,21 @@ namespace Atomic.Entities
         public static void SetAnimator(this IEntity obj, Animator value) => obj.SetValue(Animator, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Transform GetVisualTransfoirm(this IEntity obj) => obj.GetValue<Transform>(VisualTransfoirm);
+        public static Transform GetVisualTransform(this IEntity obj) => obj.GetValue<Transform>(VisualTransform);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetVisualTransfoirm(this IEntity obj, out Transform value) => obj.TryGetValue(VisualTransfoirm, out value);
+        public static bool TryGetVisualTransform(this IEntity obj, out Transform value) => obj.TryGetValue(VisualTransform, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddVisualTransfoirm(this IEntity obj, Transform value) => obj.AddValue(VisualTransfoirm, value);
+        public static bool AddVisualTransform(this IEntity obj, Transform value) => obj.AddValue(VisualTransform, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasVisualTransfoirm(this IEntity obj) => obj.HasValue(VisualTransfoirm);
+        public static bool HasVisualTransform(this IEntity obj) => obj.HasValue(VisualTransform);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelVisualTransfoirm(this IEntity obj) => obj.DelValue(VisualTransfoirm);
+        public static bool DelVisualTransform(this IEntity obj) => obj.DelValue(VisualTransform);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetVisualTransfoirm(this IEntity obj, Transform value) => obj.SetValue(VisualTransfoirm, value);
+        public static void SetVisualTransform(this IEntity obj, Transform value) => obj.SetValue(VisualTransform, value);
     }
 }

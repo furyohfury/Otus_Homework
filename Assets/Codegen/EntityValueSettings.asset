@@ -18,6 +18,7 @@ MonoBehaviour:
   suffix: API
   imports:
   - Atomic.Elements
+  - Game
   categories:
   - name: Movement
     indexes:
@@ -50,11 +51,61 @@ MonoBehaviour:
     - id: 11
       name: Rigidbody
       type: Rigidbody2D
+    - id: 21
+      name: Collider2D
+      type: Collider2D
   - name: Visual
     indexes:
     - id: 10
       name: Animator
       type: Animator
     - id: 5
-      name: VisualTransfoirm
+      name: VisualTransform
       type: Transform
+  - name: Combat
+    indexes:
+    - id: 7
+      name: Sword
+      type: SceneEntity
+    - id: 13
+      name: AttackRequest
+      type: BaseEvent
+    - id: 15
+      name: AttackEvent
+      type: BaseEvent
+    - id: 16
+      name: CanAttack
+      type: AndExpression
+    - id: 17
+      name: Damage
+      type: ReactiveVariable<int>
+  - name: Sword
+    indexes:
+    - id: 14
+      name: AttackRotationAngle
+      type: ReactiveVariable<Vector3>
+    - id: 22
+      name: SlashSpeed
+      type: ReactiveVariable<float>
+    - id: 25
+      name: RestoreSlashSpeed
+      type: ReactiveVariable<float>
+  - name: Life
+    indexes:
+    - id: 18
+      name: Health
+      type: ReactiveVariable<int>
+    - id: 19
+      name: IsDead
+      type: ReactiveVariable<bool>
+  - name: Interaction
+    indexes:
+    - id: 23
+      name: TriggerReceiver
+      type: TriggerReceiver
+    - id: 20
+      name: TriggerEnterEvent
+      type: BaseEvent<Collider2D>
+    - id: 24
+      name: TriggerExitEvent
+      type: BaseEvent<Collider2D>

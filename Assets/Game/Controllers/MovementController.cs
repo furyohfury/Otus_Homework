@@ -34,9 +34,21 @@ namespace Game
 
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				if (_character.TryGetJumpRequest(out var action))
+				if (_character.TryGetJumpRequest(out var request))
 				{
-					action.Invoke();
+					request.Invoke();
+				}
+			}
+
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				if (_character.TryGetAttackRequest(out var request))
+				{
+					request.Invoke();
+				}
+				else
+				{
+					Debug.Log("No attackrequest on character");
 				}
 			}
 		}

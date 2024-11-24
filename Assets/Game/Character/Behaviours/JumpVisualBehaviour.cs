@@ -28,4 +28,12 @@ namespace Game
 			_jumpEvent.Unsubscribe(OnJump);
 		}
 	}
+
+	public sealed class RotateWeaponBehaviour : IEntityInit
+	{
+		public void Init(IEntity entity)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
 }
