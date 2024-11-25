@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class MovementVisualBehaviour : IEntityInit, IEntityUpdate
+	public sealed class MovementAnimatorBehaviour : IEntityInit, IEntityUpdate
 	{
 		private Animator _animator;
 		private IValue<Vector2> _moveDirection;

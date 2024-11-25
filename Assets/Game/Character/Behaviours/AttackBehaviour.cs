@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class SwordAttackBehaviour : IEntityInit, IEntityDispose
+	public sealed class AttackBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
 		private BaseEvent _attackRequest;

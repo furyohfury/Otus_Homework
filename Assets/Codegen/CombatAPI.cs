@@ -18,6 +18,9 @@ namespace Atomic.Entities
         public const int AttackEvent = 15; // BaseEvent
         public const int CanAttack = 16; // AndExpression
         public const int Damage = 17; // ReactiveVariable<int>
+        public const int PistolBulletPrefab = 29; // GameObject
+        public const int FirePoint = 30; // Transform
+        public const int Ammo = 31; // ReactiveVariable<int>
 
 
         ///Extensions
@@ -110,5 +113,59 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetDamage(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Damage, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject GetPistolBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(PistolBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetPistolBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(PistolBulletPrefab, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddPistolBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(PistolBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasPistolBulletPrefab(this IEntity obj) => obj.HasValue(PistolBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelPistolBulletPrefab(this IEntity obj) => obj.DelValue(PistolBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetPistolBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(PistolBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform GetFirePoint(this IEntity obj) => obj.GetValue<Transform>(FirePoint);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetFirePoint(this IEntity obj, out Transform value) => obj.TryGetValue(FirePoint, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddFirePoint(this IEntity obj, Transform value) => obj.AddValue(FirePoint, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasFirePoint(this IEntity obj) => obj.HasValue(FirePoint);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelFirePoint(this IEntity obj) => obj.DelValue(FirePoint);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetFirePoint(this IEntity obj, Transform value) => obj.SetValue(FirePoint, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<int> GetAmmo(this IEntity obj) => obj.GetValue<ReactiveVariable<int>>(Ammo);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAmmo(this IEntity obj, out ReactiveVariable<int> value) => obj.TryGetValue(Ammo, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAmmo(this IEntity obj, ReactiveVariable<int> value) => obj.AddValue(Ammo, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAmmo(this IEntity obj) => obj.HasValue(Ammo);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAmmo(this IEntity obj) => obj.DelValue(Ammo);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAmmo(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Ammo, value);
     }
 }

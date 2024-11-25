@@ -14,7 +14,10 @@ namespace Atomic.Entities
     {
         ///Keys
         public const int Health = 18; // ReactiveVariable<int>
-        public const int IsDead = 19; // ReactiveVariable<bool>
+        public const int IsDead = 19; // BaseFunction<bool>
+        public const int CanTakeDamage = 26; // AndExpression
+        public const int TakeDamageRequest = 27; // BaseEvent<int>
+        public const int TakeDamageEvent = 28; // BaseEvent<int>
 
 
         ///Extensions
@@ -37,13 +40,13 @@ namespace Atomic.Entities
         public static void SetHealth(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Health, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<bool> GetIsDead(this IEntity obj) => obj.GetValue<ReactiveVariable<bool>>(IsDead);
+        public static BaseFunction<bool> GetIsDead(this IEntity obj) => obj.GetValue<BaseFunction<bool>>(IsDead);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetIsDead(this IEntity obj, out ReactiveVariable<bool> value) => obj.TryGetValue(IsDead, out value);
+        public static bool TryGetIsDead(this IEntity obj, out BaseFunction<bool> value) => obj.TryGetValue(IsDead, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddIsDead(this IEntity obj, ReactiveVariable<bool> value) => obj.AddValue(IsDead, value);
+        public static bool AddIsDead(this IEntity obj, BaseFunction<bool> value) => obj.AddValue(IsDead, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasIsDead(this IEntity obj) => obj.HasValue(IsDead);
@@ -52,6 +55,60 @@ namespace Atomic.Entities
         public static bool DelIsDead(this IEntity obj) => obj.DelValue(IsDead);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetIsDead(this IEntity obj, ReactiveVariable<bool> value) => obj.SetValue(IsDead, value);
+        public static void SetIsDead(this IEntity obj, BaseFunction<bool> value) => obj.SetValue(IsDead, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AndExpression GetCanTakeDamage(this IEntity obj) => obj.GetValue<AndExpression>(CanTakeDamage);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetCanTakeDamage(this IEntity obj, out AndExpression value) => obj.TryGetValue(CanTakeDamage, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddCanTakeDamage(this IEntity obj, AndExpression value) => obj.AddValue(CanTakeDamage, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasCanTakeDamage(this IEntity obj) => obj.HasValue(CanTakeDamage);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelCanTakeDamage(this IEntity obj) => obj.DelValue(CanTakeDamage);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetCanTakeDamage(this IEntity obj, AndExpression value) => obj.SetValue(CanTakeDamage, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<int> GetTakeDamageRequest(this IEntity obj) => obj.GetValue<BaseEvent<int>>(TakeDamageRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetTakeDamageRequest(this IEntity obj, out BaseEvent<int> value) => obj.TryGetValue(TakeDamageRequest, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddTakeDamageRequest(this IEntity obj, BaseEvent<int> value) => obj.AddValue(TakeDamageRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasTakeDamageRequest(this IEntity obj) => obj.HasValue(TakeDamageRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelTakeDamageRequest(this IEntity obj) => obj.DelValue(TakeDamageRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetTakeDamageRequest(this IEntity obj, BaseEvent<int> value) => obj.SetValue(TakeDamageRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<int> GetTakeDamageEvent(this IEntity obj) => obj.GetValue<BaseEvent<int>>(TakeDamageEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetTakeDamageEvent(this IEntity obj, out BaseEvent<int> value) => obj.TryGetValue(TakeDamageEvent, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddTakeDamageEvent(this IEntity obj, BaseEvent<int> value) => obj.AddValue(TakeDamageEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasTakeDamageEvent(this IEntity obj) => obj.HasValue(TakeDamageEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelTakeDamageEvent(this IEntity obj) => obj.DelValue(TakeDamageEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetTakeDamageEvent(this IEntity obj, BaseEvent<int> value) => obj.SetValue(TakeDamageEvent, value);
     }
 }

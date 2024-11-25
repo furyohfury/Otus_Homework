@@ -18,17 +18,15 @@ namespace Game
 
 		private void OnTriggerEntered(Collider2D collider)
 		{
-			if (!collider.TryGetEntity(out var entity))
+			if (!collider.TryGetEntity(out var entity) || !entity.HasHealth())
 			{
 				return;
 			}
 
-			if (!entity.TryGetHealth(out var health))
+			if (entity.TryGetTakeDamageRequest(out var request))
 			{
-				return;
+				request.Invoke(_damage.Value);
 			}
-
-			health.Value -= _damage.Value;
 		}
 
 		public void Dispose(IEntity entity)

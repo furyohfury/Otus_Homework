@@ -14,7 +14,7 @@ namespace Game.Entities
 		[SerializeField]
 		private Animator _animator;
 
-		[SerializeField] [Header("Movement")]
+		[Header("Movement")] [SerializeField] 
 		private ReactiveVariable<float> _moveSpeed;
 		[SerializeField]
 		private ReactiveVariable<float> _jumpForce;
@@ -23,8 +23,15 @@ namespace Game.Entities
 		[SerializeField]
 		private LayerMask _groundLayer;
 		
-		[SerializeField] [Header("Combat")]
+		[Header("Combat")] [SerializeField]
 		private SceneEntity _sword;
+		[SerializeField]
+		private Transform _firePoint;
+		[SerializeField]
+		private GameObject _pistolBulletPrefab;
+
+		[Header("Life")] [SerializeField]
+		private int _health;
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
@@ -69,7 +76,7 @@ namespace Game.Entities
 			// Behaviours
 			entity.AddBehaviour(new MovementBehaviour());
 			entity.AddBehaviour(new JumpBehaviour());
-			entity.AddBehaviour(new MovementVisualBehaviour());
+			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());
 		}
 
@@ -79,9 +86,23 @@ namespace Game.Entities
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
 			entity.AddCanAttack(new AndExpression());
+			entity.AddFirePoint(_firePoint);
+			entity.AddPistolBulletPrefab(_pistolBulletPrefab);
 			
-			entity.AddBehaviour(new SwordAttackBehaviour());
-			entity.AddBehaviour(new SwordAttackAnimationBehaviour());
+			entity.AddBehaviour(new AttackBehaviour());
+			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
+			entity.AddBehaviour(new PistolShootBehaviour());
+		}
+
+		private void InitializeLife(IEntity entity)
+		{
+			entity.AddHealth(_health);
+			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
+			entity.AddTakeDamageRequest(new BaseEvent<int>());
+			entity.AddTakeDamageEvent(new BaseEvent<int>());
+
+			entity.AddBehaviour(new TakeDamageRequestBehaviour());
+			entity.AddBehaviour(new TakeDamageEventBehaviour());
 		}
 	}
 }

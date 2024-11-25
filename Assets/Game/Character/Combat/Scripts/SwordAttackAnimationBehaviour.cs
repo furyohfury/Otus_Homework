@@ -48,7 +48,6 @@ namespace Game
 			                   .OnComplete(() => _sequence = null);
 			// TODO mb cancellation token
 			// TODO collider activation in separate bh mb
-			// TODO timingi vinesti
 			_sequence.Play();
 		}
 

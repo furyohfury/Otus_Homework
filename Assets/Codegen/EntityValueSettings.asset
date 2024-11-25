@@ -79,6 +79,15 @@ MonoBehaviour:
     - id: 17
       name: Damage
       type: ReactiveVariable<int>
+    - id: 29
+      name: PistolBulletPrefab
+      type: GameObject
+    - id: 30
+      name: FirePoint
+      type: Transform
+    - id: 31
+      name: Ammo
+      type: ReactiveVariable<int>
   - name: Sword
     indexes:
     - id: 14
@@ -97,7 +106,16 @@ MonoBehaviour:
       type: ReactiveVariable<int>
     - id: 19
       name: IsDead
-      type: ReactiveVariable<bool>
+      type: BaseFunction<bool>
+    - id: 26
+      name: CanTakeDamage
+      type: AndExpression
+    - id: 27
+      name: TakeDamageRequest
+      type: BaseEvent<int>
+    - id: 28
+      name: TakeDamageEvent
+      type: BaseEvent<int>
   - name: Interaction
     indexes:
     - id: 23
