@@ -21,6 +21,7 @@ namespace Atomic.Entities
         public const int PistolBulletPrefab = 29; // GameObject
         public const int FirePoint = 30; // Transform
         public const int Ammo = 31; // ReactiveVariable<int>
+        public const int Weapon = 33; // ReactiveVariable<GameObject>
 
 
         ///Extensions
@@ -167,5 +168,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAmmo(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Ammo, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<GameObject> GetWeapon(this IEntity obj) => obj.GetValue<ReactiveVariable<GameObject>>(Weapon);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetWeapon(this IEntity obj, out ReactiveVariable<GameObject> value) => obj.TryGetValue(Weapon, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddWeapon(this IEntity obj, ReactiveVariable<GameObject> value) => obj.AddValue(Weapon, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasWeapon(this IEntity obj) => obj.HasValue(Weapon);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelWeapon(this IEntity obj) => obj.DelValue(Weapon);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetWeapon(this IEntity obj, ReactiveVariable<GameObject> value) => obj.SetValue(Weapon, value);
     }
 }
