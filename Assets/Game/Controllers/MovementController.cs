@@ -9,6 +9,7 @@ namespace Game
 	public sealed class MovementController : IInitializable, ITickable
 	{
 		private readonly IEntity _character;
+		private Rigidbody2D _rigidbody;
 		private ReactiveVariable<Vector2> _moveDirection;
 
 		[Inject]
@@ -23,6 +24,8 @@ namespace Game
 			{
 				Debug.LogError("Cant find character movedirection");
 			}
+
+			_rigidbody = _character.GetRigidbody();
 		}
 
 		public void Tick()
@@ -30,6 +33,7 @@ namespace Game
 			var input = Input.GetAxis("Horizontal");
 			var direction = new Vector2(input, 0);
 
+			direction.y = _rigidbody.velocity.y;
 			_moveDirection.Value = direction;
 
 			if (Input.GetKeyDown(KeyCode.Space))

@@ -23,7 +23,7 @@ namespace Game
 			// TODO use pool with world?
 			
 			//can make pool HERE lol
-			GameObject.Instantiate(_pistolBulletPrefab, _firePoint.position, Quaternion.identity);
+			GameObject.Instantiate(_pistolBulletPrefab, _firePoint.position, _firePoint.rotation);
 		}
 
 		public void Dispose(IEntity entity)

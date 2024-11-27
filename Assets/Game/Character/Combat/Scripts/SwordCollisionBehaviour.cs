@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class WeaponCollisionBehaviour : IEntityInit, IEntityDispose
+	public sealed class SwordCollisionBehaviour : IEntityInit, IEntityDispose
 	{
 		private IValue<int> _damage;
 		private TriggerReceiver _triggerReceiver;

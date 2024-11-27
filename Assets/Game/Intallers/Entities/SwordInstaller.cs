@@ -35,7 +35,7 @@ namespace Game.Entities
 			entity.AddSlashSpeed(_slashSpeed);
 			entity.AddRestoreSlashSpeed(_restoreSlashSpeed);
 			
-			entity.AddBehaviour(new WeaponCollisionBehaviour());
+			entity.AddBehaviour(new SwordCollisionBehaviour());
 		}
 	}
 }

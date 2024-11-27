@@ -18,6 +18,7 @@ namespace Atomic.Entities
         public const int CanTakeDamage = 26; // AndExpression
         public const int TakeDamageRequest = 27; // BaseEvent<int>
         public const int TakeDamageEvent = 28; // BaseEvent<int>
+        public const int DeathEvent = 34; // BaseEvent
 
 
         ///Extensions
@@ -110,5 +111,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetTakeDamageEvent(this IEntity obj, BaseEvent<int> value) => obj.SetValue(TakeDamageEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent GetDeathEvent(this IEntity obj) => obj.GetValue<BaseEvent>(DeathEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetDeathEvent(this IEntity obj, out BaseEvent value) => obj.TryGetValue(DeathEvent, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddDeathEvent(this IEntity obj, BaseEvent value) => obj.AddValue(DeathEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasDeathEvent(this IEntity obj) => obj.HasValue(DeathEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelDeathEvent(this IEntity obj) => obj.DelValue(DeathEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetDeathEvent(this IEntity obj, BaseEvent value) => obj.SetValue(DeathEvent, value);
     }
 }

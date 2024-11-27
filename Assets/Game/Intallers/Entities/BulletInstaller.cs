@@ -20,12 +20,10 @@ namespace Game.Entities
 		private int _damage;
 		[SerializeField]
 		private float _moveSpeed;
-		[SerializeField]
-		private Vector2 _moveDirection;
 
 		public void Install(IEntity entity)
 		{
-			entity.AddMoveDirection(_moveDirection);
+			entity.AddMoveDirection(new ReactiveVariable<Vector2>(_visualTransform.right));
 			entity.AddVisualTransform(_visualTransform);
 			entity.AddDamage(_damage);
 			entity.AddTriggerReceiver(_triggerReceiver);
@@ -35,9 +33,11 @@ namespace Game.Entities
 			entity.AddRigidbody(_rigidbody2D);
 			entity.AddMoveSpeed(_moveSpeed);
 			entity.AddCanMove(new AndExpression());
+			entity.AddDeathEvent(new BaseEvent());
 			
-			entity.AddBehaviour(new WeaponCollisionBehaviour());
+			entity.AddBehaviour(new BulletCollisionBehaviour());
 			entity.AddBehaviour(new MovementBehaviour());
+			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
 		}
 	}
 }

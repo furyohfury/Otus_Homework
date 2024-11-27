@@ -4,16 +4,13 @@ namespace Game
 {
 	public static class VectorUtils
 	{
-		public static void LookAtX(this Transform transform, Vector3 target)
+		public static void LookAtX(this Transform transform, Vector3 targetPos)
 		{
-			// Направление от объекта к цели
-			Vector3 direction = target - transform.position;
-
-			// Угол в градусах для поворота вокруг оси Z
-			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-			// Устанавливаем поворот
-			transform.rotation = Quaternion.Euler(0, 0, angle);
+			var dir = targetPos - transform.position;
+			var angle = Vector3.Angle(transform.right, dir);
+			var rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+			
+			transform.rotation *= rotation;
 		}
 	}
 }

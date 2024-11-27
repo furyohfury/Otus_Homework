@@ -122,6 +122,9 @@ MonoBehaviour:
     - id: 28
       name: TakeDamageEvent
       type: BaseEvent<int>
+    - id: 34
+      name: DeathEvent
+      type: BaseEvent
   - name: Interaction
     indexes:
     - id: 23

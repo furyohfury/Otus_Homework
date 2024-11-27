@@ -109,6 +109,7 @@ namespace Game.Entities
 			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
 			entity.AddTakeDamageRequest(new BaseEvent<int>());
 			entity.AddTakeDamageEvent(new BaseEvent<int>());
+			entity.AddDeathEvent(new BaseEvent());
 
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
