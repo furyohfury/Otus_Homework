@@ -46,6 +46,9 @@ MonoBehaviour:
     - id: 12
       name: JumpEvent
       type: BaseEvent
+    - id: 32
+      name: Target
+      type: ReactiveVariable<Transform>
   - name: Physics
     indexes:
     - id: 11
@@ -88,6 +91,9 @@ MonoBehaviour:
     - id: 31
       name: Ammo
       type: ReactiveVariable<int>
+    - id: 33
+      name: Weapon
+      type: ReactiveVariable<GameObject>
   - name: Sword
     indexes:
     - id: 14

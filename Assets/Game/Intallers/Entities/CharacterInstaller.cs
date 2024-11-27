@@ -13,6 +13,8 @@ namespace Game.Entities
 		private Rigidbody2D _rigidBody;
 		[SerializeField]
 		private Animator _animator;
+		[SerializeField]
+		private Transform _transform;
 
 		[Header("Movement")] [SerializeField] 
 		private ReactiveVariable<float> _moveSpeed;
@@ -29,6 +31,9 @@ namespace Game.Entities
 		private Transform _firePoint;
 		[SerializeField]
 		private GameObject _pistolBulletPrefab;
+		[SerializeField]
+		private GameObject _weapon;
+		
 
 		[Header("Life")] [SerializeField]
 		private int _health;
@@ -47,6 +52,7 @@ namespace Game.Entities
 		{
 			entity.AddRigidbody(_rigidBody);
 			entity.AddAnimator(_animator);
+			entity.AddVisualTransform(_transform);
 		}
 
 		private void InitializeMovement(IEntity entity)
@@ -78,6 +84,7 @@ namespace Game.Entities
 			entity.AddBehaviour(new JumpBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());
+			entity.AddBehaviour(new LookAtTargetBehaviour());
 		}
 
 		private void InitializeCombat(IEntity entity)
@@ -88,10 +95,12 @@ namespace Game.Entities
 			entity.AddCanAttack(new AndExpression());
 			entity.AddFirePoint(_firePoint);
 			entity.AddPistolBulletPrefab(_pistolBulletPrefab);
+			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
 			
 			entity.AddBehaviour(new AttackBehaviour());
 			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
 			entity.AddBehaviour(new PistolShootBehaviour());
+			entity.AddBehaviour(new AimWeaponBehaviour());
 		}
 
 		private void InitializeLife(IEntity entity)

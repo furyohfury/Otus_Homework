@@ -1,4 +1,6 @@
 ﻿using System;
+using Atomic.Elements;
+using Atomic.Entities;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,6 +16,11 @@ namespace a
 		[SerializeField]
 		private Transform _sword;
 		private Vector3 defaultRot;
+		[SerializeField]
+		private Transform _target;
+		[SerializeField]
+		private SceneEntity _entity;
+		
 
 
 		private void Start()
@@ -58,6 +65,14 @@ namespace a
 			{
 				_sword.DORotate(new Vector3(0, 0, -90f), 1f);
 			}
+		}
+
+
+		[Button]
+		public void AddTarget()
+		{
+			var target = new ReactiveVariable<Transform>(_target);
+			_entity.AddTarget(target);
 		}
 	}
 }
