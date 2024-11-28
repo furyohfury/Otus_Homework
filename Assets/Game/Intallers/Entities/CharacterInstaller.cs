@@ -84,7 +84,8 @@ namespace Game.Entities
 
 			// Behaviours
 			entity.AddBehaviour(new MovementByPhysicsBehaviour());
-			entity.AddBehaviour(new JumpBehaviour());
+			entity.AddBehaviour(new JumpRequestBehaviour());
+			entity.AddBehaviour(new JumpEventBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());
 			entity.AddBehaviour(new RotateToTarget2DBehaviour());
