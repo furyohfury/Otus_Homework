@@ -11,6 +11,7 @@ namespace Game
 
 		public void Init(IEntity entity)
 		{
+			_canJump = entity.GetCanJump();
 			_jumpRequest = entity.GetJumpRequest();
 			_jumpRequest.Subscribe(OnJumpRequest);
 			_jumpEvent = entity.GetJumpEvent();

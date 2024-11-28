@@ -36,6 +36,7 @@ namespace Game
 			Movement();
 			Jumping();
 			Shooting();
+			Ability();
 		}
 
 		private void SetMouseAsTarget()
@@ -73,7 +74,7 @@ namespace Game
 
 		private void Shooting()
 		{
-			if (Input.GetKeyDown(KeyCode.E))
+			if (Input.GetKeyDown(KeyCode.Q))
 			{
 				if (_character.TryGetAttackRequest(out var request))
 				{
@@ -82,6 +83,17 @@ namespace Game
 				else
 				{
 					Debug.Log("No attackrequest on character");
+				}
+			}
+		}
+
+		private void Ability()
+		{
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				if (_character.TryGetAbilityEvent(out var abilityEvent))
+				{
+					abilityEvent.Invoke();
 				}
 			}
 		}

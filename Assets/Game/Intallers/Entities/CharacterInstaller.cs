@@ -48,6 +48,7 @@ namespace Game.Entities
 			InitializeMovement(entity);
 			InitializeComponents(entity);
 			InitializeCombat(entity);
+			InitializeAbilities(entity);
 		}
 
 		private void InitializeComponents(IEntity entity)
@@ -117,6 +118,12 @@ namespace Game.Entities
 
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
+		}
+
+		private void InitializeAbilities(IEntity entity)
+		{
+			entity.AddAbilityEvent(new BaseEvent());
+			entity.AddBehaviour(new JumpAbilityBehaviour());
 		}
 	}
 }

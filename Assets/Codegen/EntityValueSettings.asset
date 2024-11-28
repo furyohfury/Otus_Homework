@@ -139,3 +139,11 @@ MonoBehaviour:
     - id: 24
       name: TriggerExitEvent
       type: BaseEvent<Collider2D>
+  - name: Ability
+    indexes:
+    - id: 36
+      name: AbilityRequest
+      type: BaseEvent
+    - id: 37
+      name: AbilityEvent
+      type: BaseEvent
