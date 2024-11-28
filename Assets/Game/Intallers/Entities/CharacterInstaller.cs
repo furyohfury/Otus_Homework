@@ -87,7 +87,7 @@ namespace Game.Entities
 			entity.AddBehaviour(new JumpBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());
-			entity.AddBehaviour(new LookAtTargetBehaviour());
+			entity.AddBehaviour(new RotateToTarget2DBehaviour());
 		}
 
 		private void InitializeCombat(IEntity entity)

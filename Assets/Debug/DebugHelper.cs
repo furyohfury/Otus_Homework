@@ -72,7 +72,7 @@ namespace a
 		public void AddTarget()
 		{
 			var target = new ReactiveVariable<Transform>(_target);
-			_entity.AddTarget(target);
+			_entity.AddTarget(new BaseFunction<Vector2>(() => _target.position));
 		}
 
 		[Button]

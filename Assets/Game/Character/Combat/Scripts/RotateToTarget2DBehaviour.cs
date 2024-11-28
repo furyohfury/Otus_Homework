@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class LookAtTargetBehaviour : IEntityInit, IEntityUpdate
+	public sealed class RotateToTarget2DBehaviour : IEntityInit, IEntityUpdate
 	{
 		private Transform _entityTransform;
 		private SpriteRenderer _spriteRenderer;
@@ -18,13 +18,12 @@ namespace Game
 
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
-			if (!entity.TryGetTarget(out ReactiveVariable<Transform> targetTransform))
+			if (!entity.TryGetTarget(out var targetPos))
 			{
 				return;
 			}
 			
-			Vector3 targetPos = targetTransform.Value.position;
-			float delta = targetPos.x - _entityTransform.position.x;
+			float delta = targetPos.Invoke().x - _entityTransform.position.x;
 			if (delta >= 0 && _isLookingRight || delta < 0 && !_isLookingRight)
 			{
 				return;

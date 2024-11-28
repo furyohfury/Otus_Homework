@@ -12,6 +12,7 @@ namespace Game
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<MovementController>().AsSingle().WithArguments(_character);
+			Container.Bind<Camera>().FromComponentInHierarchy().AsCached();
 		}
 	}
 }

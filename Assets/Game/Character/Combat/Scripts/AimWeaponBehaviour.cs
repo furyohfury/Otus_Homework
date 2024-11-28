@@ -15,13 +15,13 @@ namespace Game
 
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
-			if (entity.TryGetTarget(out ReactiveVariable<Transform> target) == false)
+			if (entity.TryGetTarget(out var target) == false)
 			{
 				return;
 			}
 
 			var weaponTransform = _weapon.Value.transform;
-			weaponTransform.LookAtX(target.Value.position);
+			weaponTransform.LookAtX(target.Invoke());
 		}
 	}
 }

@@ -48,7 +48,7 @@ MonoBehaviour:
       type: BaseEvent
     - id: 32
       name: Target
-      type: ReactiveVariable<Transform>
+      type: IFunction<Vector2>
   - name: Physics
     indexes:
     - id: 11

@@ -21,7 +21,7 @@ namespace Atomic.Entities
         public const int JumpForce = 8; // ReactiveVariable<float>
         public const int JumpRequest = 9; // BaseEvent
         public const int JumpEvent = 12; // BaseEvent
-        public const int Target = 32; // ReactiveVariable<Transform>
+        public const int Target = 32; // IFunction<Vector2>
 
 
         ///Extensions
@@ -170,13 +170,13 @@ namespace Atomic.Entities
         public static void SetJumpEvent(this IEntity obj, BaseEvent value) => obj.SetValue(JumpEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<Transform> GetTarget(this IEntity obj) => obj.GetValue<ReactiveVariable<Transform>>(Target);
+        public static IFunction<Vector2> GetTarget(this IEntity obj) => obj.GetValue<IFunction<Vector2>>(Target);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetTarget(this IEntity obj, out ReactiveVariable<Transform> value) => obj.TryGetValue(Target, out value);
+        public static bool TryGetTarget(this IEntity obj, out IFunction<Vector2> value) => obj.TryGetValue(Target, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddTarget(this IEntity obj, ReactiveVariable<Transform> value) => obj.AddValue(Target, value);
+        public static bool AddTarget(this IEntity obj, IFunction<Vector2> value) => obj.AddValue(Target, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasTarget(this IEntity obj) => obj.HasValue(Target);
@@ -185,6 +185,6 @@ namespace Atomic.Entities
         public static bool DelTarget(this IEntity obj) => obj.DelValue(Target);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetTarget(this IEntity obj, ReactiveVariable<Transform> value) => obj.SetValue(Target, value);
+        public static void SetTarget(this IEntity obj, IFunction<Vector2> value) => obj.SetValue(Target, value);
     }
 }
