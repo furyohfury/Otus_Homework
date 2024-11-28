@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class MovementBehaviour : IEntityInit, IEntityFixedUpdate
+	public sealed class MovementByPhysicsBehaviour : IEntityInit, IEntityFixedUpdate
 	{
 		private IValue<Vector2> _moveDirection;
 		private IValue<float> _moveSpeed;
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
+
+		private Vector2 _previousMoveDirection;
 
 		public void Init(IEntity entity)
 		{
@@ -23,9 +25,17 @@ namespace Game
 		{
 			if (!_canMove.Value) return;
 
+			// 1st way
 			var velocity = _rigidbody.velocity;
 			velocity.x = _moveDirection.Value.x * _moveSpeed.Value;
 			_rigidbody.velocity = velocity;
+			
+			// 2nd way
+			// _rigidbody.AddForce(_moveDirection.Value * _moveSpeed.Value);
+			
+			// 3rd way
+			// _rigidbody.velocity += _moveDirection.Value - _previousMoveDirection;
+			// _previousMoveDirection = _moveDirection.Value;
 		}
 	}
 }

@@ -32,8 +32,6 @@ namespace Game
 		{
 			var input = Input.GetAxis("Horizontal");
 			var direction = new Vector2(input, 0);
-
-			direction.y = _rigidbody.velocity.y;
 			_moveDirection.Value = direction;
 
 			if (Input.GetKeyDown(KeyCode.Space))

@@ -65,6 +65,9 @@ MonoBehaviour:
     - id: 5
       name: VisualTransform
       type: Transform
+    - id: 35
+      name: SpriteRenderer
+      type: SpriteRenderer
   - name: Combat
     indexes:
     - id: 7

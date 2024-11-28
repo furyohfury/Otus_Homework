@@ -7,11 +7,13 @@ namespace Game
 	public sealed class LookAtTargetBehaviour : IEntityInit, IEntityUpdate
 	{
 		private Transform _entityTransform;
+		private SpriteRenderer _spriteRenderer;
 		private bool _isLookingRight = true;
 
 		public void Init(IEntity entity)
 		{
 			_entityTransform = entity.GetVisualTransform();
+			_spriteRenderer = entity.GetSpriteRenderer();
 		}
 
 		public void OnUpdate(IEntity entity, float deltaTime)
@@ -30,12 +32,14 @@ namespace Game
 
 			if (delta >= 0)
 			{
-				_entityTransform.eulerAngles = Vector3.zero;
+				// _entityTransform.eulerAngles = Vector3.zero;
+				_spriteRenderer.flipX = false;
 				_isLookingRight = true;
 			}
 			else
 			{
-				_entityTransform.eulerAngles = new Vector3(0, 180, 0);
+				// _entityTransform.eulerAngles = new Vector3(0, 180, 0);
+				_spriteRenderer.flipX = true;
 				_isLookingRight = false;
 			}
 		}

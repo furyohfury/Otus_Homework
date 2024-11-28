@@ -66,13 +66,39 @@ namespace a
 				_sword.DORotate(new Vector3(0, 0, -90f), 1f);
 			}
 		}
-
+		
 
 		[Button]
 		public void AddTarget()
 		{
 			var target = new ReactiveVariable<Transform>(_target);
 			_entity.AddTarget(target);
+		}
+
+		[Button]
+		public void GetAngle()
+		{
+			var angle = Vector3.Angle(_target.position - _weapon.position, _weapon.right);
+			Debug.Log(angle);
+		}
+		
+		[Button]
+		public void GetSignedAngle()
+		{
+			var angle = Vector3.SignedAngle(_target.position - _weapon.position, _weapon.right, Vector3.back);
+			Debug.Log(angle);
+		}
+
+
+		[SerializeField]
+		private Transform _weapon;
+		
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.blue;
+			Gizmos.DrawRay(_weapon.position, _weapon.right);
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(_weapon.position, _target.position - _weapon.position);
 		}
 	}
 }

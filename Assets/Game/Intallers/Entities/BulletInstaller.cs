@@ -36,7 +36,7 @@ namespace Game.Entities
 			entity.AddDeathEvent(new BaseEvent());
 			
 			entity.AddBehaviour(new BulletCollisionBehaviour());
-			entity.AddBehaviour(new MovementBehaviour());
+			entity.AddBehaviour(new MovementByTransformBehaviour());
 			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
 		}
 	}

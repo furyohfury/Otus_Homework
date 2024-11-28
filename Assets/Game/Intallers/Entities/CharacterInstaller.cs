@@ -15,6 +15,8 @@ namespace Game.Entities
 		private Animator _animator;
 		[SerializeField]
 		private Transform _transform;
+		[SerializeField]
+		private SpriteRenderer _spriteRenderer;
 
 		[Header("Movement")] [SerializeField] 
 		private ReactiveVariable<float> _moveSpeed;
@@ -53,6 +55,7 @@ namespace Game.Entities
 			entity.AddRigidbody(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
+			entity.AddSpriteRenderer(_spriteRenderer);
 		}
 
 		private void InitializeMovement(IEntity entity)
@@ -80,7 +83,7 @@ namespace Game.Entities
 			entity.AddJumpEvent(new BaseEvent());
 
 			// Behaviours
-			entity.AddBehaviour(new MovementBehaviour());
+			entity.AddBehaviour(new MovementByPhysicsBehaviour());
 			entity.AddBehaviour(new JumpBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new JumpVisualBehaviour());

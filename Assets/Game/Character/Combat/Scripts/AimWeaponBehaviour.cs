@@ -20,9 +20,8 @@ namespace Game
 				return;
 			}
 
-			var vectorToTarget = target.Value.position - entity.GetVisualTransform().position;
 			var weaponTransform = _weapon.Value.transform;
-			weaponTransform.LookAtX(vectorToTarget);
+			weaponTransform.LookAtX(target.Value.position);
 		}
 	}
 }
