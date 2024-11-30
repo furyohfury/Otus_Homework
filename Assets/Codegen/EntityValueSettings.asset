@@ -147,3 +147,11 @@ MonoBehaviour:
     - id: 37
       name: AbilityEvent
       type: BaseEvent
+    - id: 38
+      name: DashForce
+      type: ReactiveVariable<float>
+  - name: LevelObjects
+    indexes:
+    - id: 39
+      name: DestroyEvent
+      type: BaseEvent

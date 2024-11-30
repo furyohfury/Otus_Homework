@@ -100,5 +100,20 @@ namespace a
 			Gizmos.color = Color.red;
 			Gizmos.DrawRay(_weapon.position, _target.position - _weapon.position);
 		}
+
+		[SerializeField]
+		private Rigidbody2D _rigidbody2D;
+
+		[Button]
+		private void ApplyForce(Vector2 force, ForceMode2D mode)
+		{
+			_rigidbody2D.AddForce(force, mode);
+		}
+		
+		[Button]
+		private void ApplyVelocity(Vector2 velocity)
+		{
+			_rigidbody2D.velocity += velocity;
+		}
 	}
 }

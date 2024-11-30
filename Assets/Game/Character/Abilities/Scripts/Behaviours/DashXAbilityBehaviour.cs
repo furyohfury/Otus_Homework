@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using UnityEngine;
 
 namespace Game
 {
@@ -13,7 +14,7 @@ namespace Game
 		public void Init(IEntity entity)
 		{
             _dashForce = entity.GetDashForce();
-            _rigidBody = entity.GetRigidbody();
+            _rigidbody = entity.GetRigidbody();
 
 			_abilityEvent = entity.GetAbilityEvent();
 			_abilityEvent.Subscribe(OnDashAbility);
@@ -21,10 +22,10 @@ namespace Game
 
 		private void OnDashAbility()
 		{
-			var direction = _target - _rigidbody.position;
+			var direction = _target.Value - _rigidbody.position;
             var sign = Mathf.Sign(direction.x);
 
-            _rigidBody.AddForce(new Vector2(_dashForce.Value * sign, 0));
+            _rigidbody.AddForce(new Vector2(_dashForce.Value * sign, 0));
 		}
 
 		public void Dispose(IEntity entity)

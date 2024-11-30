@@ -15,6 +15,7 @@ namespace Atomic.Entities
         ///Keys
         public const int AbilityRequest = 36; // BaseEvent
         public const int AbilityEvent = 37; // BaseEvent
+        public const int DashForce = 38; // ReactiveVariable<float>
 
 
         ///Extensions
@@ -53,5 +54,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAbilityEvent(this IEntity obj, BaseEvent value) => obj.SetValue(AbilityEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<float> GetDashForce(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(DashForce);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetDashForce(this IEntity obj, out ReactiveVariable<float> value) => obj.TryGetValue(DashForce, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddDashForce(this IEntity obj, ReactiveVariable<float> value) => obj.AddValue(DashForce, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasDashForce(this IEntity obj) => obj.HasValue(DashForce);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelDashForce(this IEntity obj) => obj.DelValue(DashForce);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetDashForce(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(DashForce, value);
     }
 }
