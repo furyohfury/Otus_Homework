@@ -39,6 +39,9 @@ namespace Game.Entities
 
 		[Header("Life")] [SerializeField]
 		private int _health;
+		
+		[Header("Ability")] [SerializeField]
+		private float _dashForce;
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
@@ -123,7 +126,9 @@ namespace Game.Entities
 		private void InitializeAbilities(IEntity entity)
 		{
 			entity.AddAbilityEvent(new BaseEvent());
-			entity.AddBehaviour(new JumpAbilityBehaviour());
+			entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
+			// entity.AddBehaviour(new JumpAbilityBehaviour());
+			entity.AddBehaviour(new DashXAbilityBehaviour());
 		}
 	}
 }

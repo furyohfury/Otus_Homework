@@ -21,11 +21,16 @@ namespace Game
 		private void OnJumpEvent()
 		{
 			_rigidbody.AddForce(new Vector2(0, _jumpForce.Value), ForceMode2D.Impulse);
+			// _rigidbody.velocity += new Vector2(0, _jumpForce.Value);
 		}
 
 		public void Dispose(IEntity entity)
 		{
 			_jumpEvent.Unsubscribe(OnJumpEvent);
 		}
+		
+		// dash 2000 f
+		//jump 25 
+		// ms 100 f
 	}
 }

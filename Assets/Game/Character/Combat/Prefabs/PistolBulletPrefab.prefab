@@ -156,8 +156,7 @@ MonoBehaviour:
         _collider2D: {fileID: 1474826447498141390}
         _rigidbody2D: {fileID: 2805282642863956517}
         _damage: 1
-        _moveSpeed: 2
-        _moveDirection: {x: 1, y: 0}
+        _moveSpeed: 20
 --- !u!50 &2805282642863956517
 Rigidbody2D:
   serializedVersion: 4

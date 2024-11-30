@@ -68,13 +68,8 @@ namespace Game
 
 		private bool CanDestroy(Vector2 velocity)
 		{
-			if ((_velocityToDestroy.x > 0 && velocity.x > _velocityToDestroy.x)
-			    || (_velocityToDestroy.y > 0 && velocity.y > _velocityToDestroy.y))
-			{
-				return true;
-			}
-
-			return false;
+			return (_velocityToDestroy.x > 0 && velocity.x > _velocityToDestroy.x)
+			       || (_velocityToDestroy.y > 0 && velocity.y > _velocityToDestroy.y);
 		}
 
 		private void OnValidate()
