@@ -41,6 +41,8 @@ namespace Game.Entities
 		private float _machineGunSpreadAngle;
 		[SerializeField]
 		private float _attackDelay;
+		[SerializeField]
+		private Transform _weaponContainer;
 		
 
 		[Header("Life")] [SerializeField]
@@ -48,6 +50,8 @@ namespace Game.Entities
 		
 		[Header("Ability")] [SerializeField]
 		private float _dashForce;
+		[SerializeField]
+		private SceneEntity _stickyBombPrefab;
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
@@ -60,6 +64,19 @@ namespace Game.Entities
 			InitializeComponents(entity);
 			InitializeCombat(entity);
 			InitializeAbilities(entity);
+		}
+
+		private void InitializeLife(IEntity entity)
+		{
+			entity.AddHealth(_health);
+			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
+			entity.AddCanTakeDamage(new AndExpression());
+			entity.AddTakeDamageRequest(new BaseEvent<int>());
+			entity.AddTakeDamageEvent(new BaseEvent<int>());
+			entity.AddDeathEvent(new BaseEvent());
+
+			entity.AddBehaviour(new TakeDamageRequestBehaviour());
+			entity.AddBehaviour(new TakeDamageEventBehaviour());
 		}
 
 		private void InitializeComponents(IEntity entity)
@@ -108,6 +125,7 @@ namespace Game.Entities
 			entity.AddSword(_sword);
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
+			entity.AddWeaponContainer(_weaponContainer);
 			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
 			entity.AddFirePoint(_firePoint);
 			entity.AddAttackDelay(_attackDelay);
@@ -131,28 +149,17 @@ namespace Game.Entities
 			entity.AddBehaviour(new AimWeaponBehaviour());
 			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
 			// entity.AddBehaviour(new PistolShootBehaviour());
-			entity.AddBehaviour(new MachineGunShootBehaviour());
-		}
-
-		private void InitializeLife(IEntity entity)
-		{
-			entity.AddHealth(_health);
-			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
-			entity.AddCanTakeDamage(new AndExpression());
-			entity.AddTakeDamageRequest(new BaseEvent<int>());
-			entity.AddTakeDamageEvent(new BaseEvent<int>());
-			entity.AddDeathEvent(new BaseEvent());
-
-			entity.AddBehaviour(new TakeDamageRequestBehaviour());
-			entity.AddBehaviour(new TakeDamageEventBehaviour());
+			// entity.AddBehaviour(new MachineGunShootBehaviour());
 		}
 
 		private void InitializeAbilities(IEntity entity)
 		{
 			entity.AddAbilityEvent(new BaseEvent());
+			entity.AddStickyBombPrefab(_stickyBombPrefab);
 			entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
 			// entity.AddBehaviour(new JumpAbilityBehaviour());
-			entity.AddBehaviour(new DashXAbilityBehaviour());
+			// entity.AddBehaviour(new DashXAbilityBehaviour());
+			// entity.AddBehaviour(new FireStickyBombAbilityBehaviour());
 		}
 	}
 }

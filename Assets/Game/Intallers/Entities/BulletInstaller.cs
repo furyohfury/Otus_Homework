@@ -34,6 +34,7 @@ namespace Game.Entities
 			entity.AddBehaviour(new BulletCollisionBehaviour());
 			entity.AddBehaviour(new MovementByTransformBehaviour());
 			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
+			// TODO connect deathevent with pool
 		}
 	}
 }

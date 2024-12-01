@@ -5,6 +5,7 @@ using R3;
 using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Timer = Atomic.Elements.Timer;
 
 namespace Game
 {
@@ -41,10 +42,13 @@ namespace Game
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
 
-		private CompositeDisposable _disposable = new();
+		private IEntity _entity;
+		// private CompositeDisposable _disposable = new();
 		
 		public void Install(IEntity entity)
 		{
+			_entity = entity;
+			entity.AddRigidbody(_rigidbody);
 			if (_explosionEffect != null)
 			{
 				var effectMain = _explosionEffect.main;
@@ -57,10 +61,14 @@ namespace Game
 		private void OnCollisionEnter(Collider2D collider2D)
 		{
 			_rigidbody.simulated = false;
-			Observable
-				.Timer(TimeSpan.FromSeconds(_explosionDelay))
-				.Subscribe(_ => Explode())
-				.AddTo(_disposable);
+			var timer = new Timer(_explosionDelay);
+			timer.Start();
+			_entity.WhenUpdate(timer.Tick);
+			timer.OnEnded += Explode;
+			// Observable
+			// 	.Timer(TimeSpan.FromSeconds(_explosionDelay))
+			// 	.Subscribe(_ => Explode())
+			// 	.AddTo(_disposable);
 		}
 
 		private void Explode()
@@ -85,6 +93,7 @@ namespace Game
 
 				if (entity.TryGetRigidbody(out Rigidbody2D rb))
 				{
+					rb.velocity = new Vector2(rb.velocity.x, 0);
 					rb.AddExplosionForce2D(_explosionForce,
 						_transform.position,
 						_explosionRadius,
@@ -105,7 +114,7 @@ namespace Game
 				}
 			}
 			
-			_disposable.Clear();
+			// _disposable.Clear();
 			Object.Destroy(_transform.gameObject);
 		}
 	}

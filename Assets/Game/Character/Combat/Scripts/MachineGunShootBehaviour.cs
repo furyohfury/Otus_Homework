@@ -8,7 +8,7 @@ namespace Game
 	{
 		private BaseEvent _attackEvent;
 		private GameObject _machineGunPrefab;
-		private Transform _firePoint;
+		private IValue<Transform> _firePoint;
 		private IValue<float> _machineGunSpreadAngle;
 
 		public void Init(IEntity entity)
@@ -24,8 +24,8 @@ namespace Game
 		private void OnAttackEvent()
 		{
 			var spreadAngle = Random.Range(-_machineGunSpreadAngle.Value, _machineGunSpreadAngle.Value);
-			Quaternion rotation = _firePoint.rotation * Quaternion.Euler(new Vector3(0, 0, spreadAngle));
-			GameObject.Instantiate(_machineGunPrefab, _firePoint.position, rotation);
+			Quaternion rotation = _firePoint.Value.rotation * Quaternion.Euler(new Vector3(0, 0, spreadAngle));
+			GameObject.Instantiate(_machineGunPrefab, _firePoint.Value.position, rotation);
 		}
 
 		public void Dispose(IEntity entity)

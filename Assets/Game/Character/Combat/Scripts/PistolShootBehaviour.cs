@@ -8,7 +8,7 @@ namespace Game
 	{
 		private BaseEvent _attackEvent;
 		private GameObject _pistolBulletPrefab;
-		private Transform _firePoint;
+		private IValue<Transform> _firePoint;
 
 		public void Init(IEntity entity)
 		{
@@ -23,7 +23,7 @@ namespace Game
 			// TODO use pool with world?
 			
 			//can make pool HERE lol
-			GameObject.Instantiate(_pistolBulletPrefab, _firePoint.position, _firePoint.rotation);
+			GameObject.Instantiate(_pistolBulletPrefab, _firePoint.Value.position, _firePoint.Value.rotation);
 		}
 
 		public void Dispose(IEntity entity)

@@ -90,7 +90,7 @@ MonoBehaviour:
       type: GameObject
     - id: 30
       name: FirePoint
-      type: Transform
+      type: ReactiveVariable<Transform>
     - id: 31
       name: Ammo
       type: ReactiveVariable<int>
@@ -168,6 +168,9 @@ MonoBehaviour:
     - id: 38
       name: DashForce
       type: ReactiveVariable<float>
+    - id: 46
+      name: StickyBombPrefab
+      type: SceneEntity
   - name: LevelObjects
     indexes:
     - id: 39

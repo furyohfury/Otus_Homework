@@ -16,6 +16,7 @@ namespace Atomic.Entities
         public const int AbilityRequest = 36; // BaseEvent
         public const int AbilityEvent = 37; // BaseEvent
         public const int DashForce = 38; // ReactiveVariable<float>
+        public const int StickyBombPrefab = 46; // SceneEntity
 
 
         ///Extensions
@@ -72,5 +73,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetDashForce(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(DashForce, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static SceneEntity GetStickyBombPrefab(this IEntity obj) => obj.GetValue<SceneEntity>(StickyBombPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetStickyBombPrefab(this IEntity obj, out SceneEntity value) => obj.TryGetValue(StickyBombPrefab, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddStickyBombPrefab(this IEntity obj, SceneEntity value) => obj.AddValue(StickyBombPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasStickyBombPrefab(this IEntity obj) => obj.HasValue(StickyBombPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelStickyBombPrefab(this IEntity obj) => obj.DelValue(StickyBombPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetStickyBombPrefab(this IEntity obj, SceneEntity value) => obj.SetValue(StickyBombPrefab, value);
     }
 }

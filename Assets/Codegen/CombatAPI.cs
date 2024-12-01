@@ -19,7 +19,7 @@ namespace Atomic.Entities
         public const int CanAttack = 16; // AndExpression
         public const int Damage = 17; // ReactiveVariable<int>
         public const int PistolBulletPrefab = 29; // GameObject
-        public const int FirePoint = 30; // Transform
+        public const int FirePoint = 30; // ReactiveVariable<Transform>
         public const int Ammo = 31; // ReactiveVariable<int>
         public const int Weapon = 33; // ReactiveVariable<GameObject>
         public const int WeaponContainer = 40; // Transform
@@ -140,13 +140,13 @@ namespace Atomic.Entities
         public static void SetPistolBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(PistolBulletPrefab, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Transform GetFirePoint(this IEntity obj) => obj.GetValue<Transform>(FirePoint);
+        public static ReactiveVariable<Transform> GetFirePoint(this IEntity obj) => obj.GetValue<ReactiveVariable<Transform>>(FirePoint);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetFirePoint(this IEntity obj, out Transform value) => obj.TryGetValue(FirePoint, out value);
+        public static bool TryGetFirePoint(this IEntity obj, out ReactiveVariable<Transform> value) => obj.TryGetValue(FirePoint, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddFirePoint(this IEntity obj, Transform value) => obj.AddValue(FirePoint, value);
+        public static bool AddFirePoint(this IEntity obj, ReactiveVariable<Transform> value) => obj.AddValue(FirePoint, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasFirePoint(this IEntity obj) => obj.HasValue(FirePoint);
@@ -155,7 +155,7 @@ namespace Atomic.Entities
         public static bool DelFirePoint(this IEntity obj) => obj.DelValue(FirePoint);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetFirePoint(this IEntity obj, Transform value) => obj.SetValue(FirePoint, value);
+        public static void SetFirePoint(this IEntity obj, ReactiveVariable<Transform> value) => obj.SetValue(FirePoint, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ReactiveVariable<int> GetAmmo(this IEntity obj) => obj.GetValue<ReactiveVariable<int>>(Ammo);

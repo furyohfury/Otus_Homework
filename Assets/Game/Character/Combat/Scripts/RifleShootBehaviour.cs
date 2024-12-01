@@ -8,7 +8,7 @@ namespace Game
 	{
 		private BaseEvent _attackEvent;
 		private GameObject _rifleBulletPrefab;
-		private Transform _firePoint;
+		private IValue<Transform> _firePoint;
 
 		public void Init(IEntity entity)
 		{
@@ -20,7 +20,7 @@ namespace Game
 
 		private void OnAttackEvent()
 		{
-			GameObject.Instantiate(_rifleBulletPrefab, _firePoint.position, _firePoint.rotation);
+			GameObject.Instantiate(_rifleBulletPrefab, _firePoint.Value.position, _firePoint.Value.rotation);
 		}
 
 		public void Dispose(IEntity entity)
