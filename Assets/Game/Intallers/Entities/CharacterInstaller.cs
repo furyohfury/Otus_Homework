@@ -34,9 +34,7 @@ namespace Game.Entities
 		[SerializeField]
 		private Transform _firePoint;
 		[SerializeField]
-		private GameObject _pistolBulletPrefab;
-		[SerializeField]
-		private GameObject _machineGunBulletPrefab;
+		private GameObject _projectilePrefab;
 		[SerializeField]
 		private float _machineGunSpreadAngle;
 		[SerializeField]
@@ -141,8 +139,10 @@ namespace Game.Entities
 			canAttack.Append(attackTimer.IsEnded);
 			entity.AddCanAttack(canAttack);
 			
-			entity.AddPistolBulletPrefab(_pistolBulletPrefab);
-			entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
+			
+			// entity.AddPistolBulletPrefab(_pistolBulletPrefab);
+			// entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
+			entity.AddProjectilePrefab(_projectilePrefab);
 			entity.AddMachineGunSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
 			
 			entity.AddBehaviour(new AttackBehaviour());

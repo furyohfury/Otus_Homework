@@ -18,16 +18,14 @@ namespace Atomic.Entities
         public const int AttackEvent = 15; // BaseEvent
         public const int CanAttack = 16; // AndExpression
         public const int Damage = 17; // ReactiveVariable<int>
-        public const int PistolBulletPrefab = 29; // GameObject
         public const int FirePoint = 30; // ReactiveVariable<Transform>
         public const int Ammo = 31; // ReactiveVariable<int>
         public const int Weapon = 33; // ReactiveVariable<GameObject>
         public const int WeaponContainer = 40; // Transform
-        public const int RifleBulletPrefab = 41; // GameObject
         public const int MachineGunSpreadAngle = 42; // ReactiveVariable<float>
-        public const int MachineGunBulletPrefab = 43; // GameObject
         public const int AttackTimer = 44; // Timer
         public const int AttackDelay = 45; // ReactiveVariable<float>
+        public const int ProjectilePrefab = 47; // ReactiveVariable<GameObject>
 
 
         ///Extensions
@@ -122,24 +120,6 @@ namespace Atomic.Entities
         public static void SetDamage(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Damage, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject GetPistolBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(PistolBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetPistolBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(PistolBulletPrefab, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddPistolBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(PistolBulletPrefab, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasPistolBulletPrefab(this IEntity obj) => obj.HasValue(PistolBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelPistolBulletPrefab(this IEntity obj) => obj.DelValue(PistolBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetPistolBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(PistolBulletPrefab, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ReactiveVariable<Transform> GetFirePoint(this IEntity obj) => obj.GetValue<ReactiveVariable<Transform>>(FirePoint);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -212,24 +192,6 @@ namespace Atomic.Entities
         public static void SetWeaponContainer(this IEntity obj, Transform value) => obj.SetValue(WeaponContainer, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject GetRifleBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(RifleBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetRifleBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(RifleBulletPrefab, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddRifleBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(RifleBulletPrefab, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasRifleBulletPrefab(this IEntity obj) => obj.HasValue(RifleBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelRifleBulletPrefab(this IEntity obj) => obj.DelValue(RifleBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetRifleBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(RifleBulletPrefab, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ReactiveVariable<float> GetMachineGunSpreadAngle(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(MachineGunSpreadAngle);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -246,24 +208,6 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetMachineGunSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(MachineGunSpreadAngle, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject GetMachineGunBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(MachineGunBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetMachineGunBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(MachineGunBulletPrefab, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddMachineGunBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(MachineGunBulletPrefab, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasMachineGunBulletPrefab(this IEntity obj) => obj.HasValue(MachineGunBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelMachineGunBulletPrefab(this IEntity obj) => obj.DelValue(MachineGunBulletPrefab);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetMachineGunBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(MachineGunBulletPrefab, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Timer GetAttackTimer(this IEntity obj) => obj.GetValue<Timer>(AttackTimer);
@@ -300,5 +244,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAttackDelay(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(AttackDelay, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<GameObject> GetProjectilePrefab(this IEntity obj) => obj.GetValue<ReactiveVariable<GameObject>>(ProjectilePrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetProjectilePrefab(this IEntity obj, out ReactiveVariable<GameObject> value) => obj.TryGetValue(ProjectilePrefab, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddProjectilePrefab(this IEntity obj, ReactiveVariable<GameObject> value) => obj.AddValue(ProjectilePrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasProjectilePrefab(this IEntity obj) => obj.HasValue(ProjectilePrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelProjectilePrefab(this IEntity obj) => obj.DelValue(ProjectilePrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetProjectilePrefab(this IEntity obj, ReactiveVariable<GameObject> value) => obj.SetValue(ProjectilePrefab, value);
     }
 }

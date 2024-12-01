@@ -85,9 +85,6 @@ MonoBehaviour:
     - id: 17
       name: Damage
       type: ReactiveVariable<int>
-    - id: 29
-      name: PistolBulletPrefab
-      type: GameObject
     - id: 30
       name: FirePoint
       type: ReactiveVariable<Transform>
@@ -100,21 +97,18 @@ MonoBehaviour:
     - id: 40
       name: WeaponContainer
       type: Transform
-    - id: 41
-      name: RifleBulletPrefab
-      type: GameObject
     - id: 42
       name: MachineGunSpreadAngle
       type: ReactiveVariable<float>
-    - id: 43
-      name: MachineGunBulletPrefab
-      type: GameObject
     - id: 44
       name: AttackTimer
       type: Timer
     - id: 45
       name: AttackDelay
       type: ReactiveVariable<float>
+    - id: 47
+      name: ProjectilePrefab
+      type: ReactiveVariable<GameObject>
   - name: Sword
     indexes:
     - id: 14
