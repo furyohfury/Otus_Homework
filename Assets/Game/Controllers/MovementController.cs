@@ -74,16 +74,18 @@ namespace Game
 
 		private void Shooting()
 		{
-			if (Input.GetKeyDown(KeyCode.Q))
+			if (!Input.GetKey(KeyCode.Q))
 			{
-				if (_character.TryGetAttackRequest(out var request))
-				{
-					request.Invoke();
-				}
-				else
-				{
-					Debug.Log("No attackrequest on character");
-				}
+				return;
+			}
+			
+			if (_character.TryGetAttackRequest(out var request))
+			{
+				request.Invoke();
+			}
+			else
+			{
+				Debug.Log("No attackrequest on character");
 			}
 		}
 

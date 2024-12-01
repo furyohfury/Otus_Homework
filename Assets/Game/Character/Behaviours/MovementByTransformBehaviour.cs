@@ -16,7 +16,6 @@ namespace Game
 		public void Init(IEntity entity)
 		{
 			_moveDirection = entity.GetMoveDirection();
-			_canMove = entity.GetCanMove();
 			_moveSpeed = entity.GetMoveSpeed();
 			_transform = entity.GetVisualTransform();
 		}

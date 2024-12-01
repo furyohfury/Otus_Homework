@@ -22,6 +22,12 @@ namespace Atomic.Entities
         public const int FirePoint = 30; // Transform
         public const int Ammo = 31; // ReactiveVariable<int>
         public const int Weapon = 33; // ReactiveVariable<GameObject>
+        public const int WeaponContainer = 40; // Transform
+        public const int RifleBulletPrefab = 41; // GameObject
+        public const int MachineGunSpreadAngle = 42; // ReactiveVariable<float>
+        public const int MachineGunBulletPrefab = 43; // GameObject
+        public const int AttackTimer = 44; // Timer
+        public const int AttackDelay = 45; // ReactiveVariable<float>
 
 
         ///Extensions
@@ -186,5 +192,113 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetWeapon(this IEntity obj, ReactiveVariable<GameObject> value) => obj.SetValue(Weapon, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform GetWeaponContainer(this IEntity obj) => obj.GetValue<Transform>(WeaponContainer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetWeaponContainer(this IEntity obj, out Transform value) => obj.TryGetValue(WeaponContainer, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddWeaponContainer(this IEntity obj, Transform value) => obj.AddValue(WeaponContainer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasWeaponContainer(this IEntity obj) => obj.HasValue(WeaponContainer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelWeaponContainer(this IEntity obj) => obj.DelValue(WeaponContainer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetWeaponContainer(this IEntity obj, Transform value) => obj.SetValue(WeaponContainer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject GetRifleBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(RifleBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetRifleBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(RifleBulletPrefab, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddRifleBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(RifleBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasRifleBulletPrefab(this IEntity obj) => obj.HasValue(RifleBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelRifleBulletPrefab(this IEntity obj) => obj.DelValue(RifleBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetRifleBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(RifleBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<float> GetMachineGunSpreadAngle(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(MachineGunSpreadAngle);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetMachineGunSpreadAngle(this IEntity obj, out ReactiveVariable<float> value) => obj.TryGetValue(MachineGunSpreadAngle, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddMachineGunSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.AddValue(MachineGunSpreadAngle, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasMachineGunSpreadAngle(this IEntity obj) => obj.HasValue(MachineGunSpreadAngle);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelMachineGunSpreadAngle(this IEntity obj) => obj.DelValue(MachineGunSpreadAngle);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetMachineGunSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(MachineGunSpreadAngle, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject GetMachineGunBulletPrefab(this IEntity obj) => obj.GetValue<GameObject>(MachineGunBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetMachineGunBulletPrefab(this IEntity obj, out GameObject value) => obj.TryGetValue(MachineGunBulletPrefab, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddMachineGunBulletPrefab(this IEntity obj, GameObject value) => obj.AddValue(MachineGunBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasMachineGunBulletPrefab(this IEntity obj) => obj.HasValue(MachineGunBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelMachineGunBulletPrefab(this IEntity obj) => obj.DelValue(MachineGunBulletPrefab);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetMachineGunBulletPrefab(this IEntity obj, GameObject value) => obj.SetValue(MachineGunBulletPrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Timer GetAttackTimer(this IEntity obj) => obj.GetValue<Timer>(AttackTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAttackTimer(this IEntity obj, out Timer value) => obj.TryGetValue(AttackTimer, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAttackTimer(this IEntity obj, Timer value) => obj.AddValue(AttackTimer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAttackTimer(this IEntity obj) => obj.HasValue(AttackTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAttackTimer(this IEntity obj) => obj.DelValue(AttackTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAttackTimer(this IEntity obj, Timer value) => obj.SetValue(AttackTimer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<float> GetAttackDelay(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(AttackDelay);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAttackDelay(this IEntity obj, out ReactiveVariable<float> value) => obj.TryGetValue(AttackDelay, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAttackDelay(this IEntity obj, ReactiveVariable<float> value) => obj.AddValue(AttackDelay, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAttackDelay(this IEntity obj) => obj.HasValue(AttackDelay);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAttackDelay(this IEntity obj) => obj.DelValue(AttackDelay);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAttackDelay(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(AttackDelay, value);
     }
 }

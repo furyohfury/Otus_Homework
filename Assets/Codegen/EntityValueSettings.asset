@@ -97,6 +97,24 @@ MonoBehaviour:
     - id: 33
       name: Weapon
       type: ReactiveVariable<GameObject>
+    - id: 40
+      name: WeaponContainer
+      type: Transform
+    - id: 41
+      name: RifleBulletPrefab
+      type: GameObject
+    - id: 42
+      name: MachineGunSpreadAngle
+      type: ReactiveVariable<float>
+    - id: 43
+      name: MachineGunBulletPrefab
+      type: GameObject
+    - id: 44
+      name: AttackTimer
+      type: Timer
+    - id: 45
+      name: AttackDelay
+      type: ReactiveVariable<float>
   - name: Sword
     indexes:
     - id: 14

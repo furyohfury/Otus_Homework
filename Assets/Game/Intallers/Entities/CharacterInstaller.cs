@@ -30,11 +30,17 @@ namespace Game.Entities
 		[Header("Combat")] [SerializeField]
 		private SceneEntity _sword;
 		[SerializeField]
+		private GameObject _weapon;
+		[SerializeField]
 		private Transform _firePoint;
 		[SerializeField]
 		private GameObject _pistolBulletPrefab;
 		[SerializeField]
-		private GameObject _weapon;
+		private GameObject _machineGunBulletPrefab;
+		[SerializeField]
+		private float _machineGunSpreadAngle;
+		[SerializeField]
+		private float _attackDelay;
 		
 
 		[Header("Life")] [SerializeField]
@@ -48,6 +54,8 @@ namespace Game.Entities
 
 		public void Install(IEntity entity)
 		{
+			entity.AddCharacterTag();
+			InitializeLife(entity);
 			InitializeMovement(entity);
 			InitializeComponents(entity);
 			InitializeCombat(entity);
@@ -100,21 +108,37 @@ namespace Game.Entities
 			entity.AddSword(_sword);
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
-			entity.AddCanAttack(new AndExpression());
-			entity.AddFirePoint(_firePoint);
-			entity.AddPistolBulletPrefab(_pistolBulletPrefab);
 			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
+			entity.AddFirePoint(_firePoint);
+			entity.AddAttackDelay(_attackDelay);
+			
+			var attackTimer = new Timer(_attackDelay);
+			attackTimer.Start();
+			entity.WhenUpdate(attackTimer.Tick);
+			entity.GetAttackEvent().Subscribe(() => attackTimer.Start());
+			entity.AddAttackTimer(attackTimer);
+			
+			var canAttack = new AndExpression();
+			canAttack.Append(() => !entity.GetIsDead().Value);
+			canAttack.Append(attackTimer.IsEnded);
+			entity.AddCanAttack(canAttack);
+			
+			entity.AddPistolBulletPrefab(_pistolBulletPrefab);
+			entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
+			entity.AddMachineGunSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
 			
 			entity.AddBehaviour(new AttackBehaviour());
-			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
-			entity.AddBehaviour(new PistolShootBehaviour());
 			entity.AddBehaviour(new AimWeaponBehaviour());
+			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
+			// entity.AddBehaviour(new PistolShootBehaviour());
+			entity.AddBehaviour(new MachineGunShootBehaviour());
 		}
 
 		private void InitializeLife(IEntity entity)
 		{
 			entity.AddHealth(_health);
 			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
+			entity.AddCanTakeDamage(new AndExpression());
 			entity.AddTakeDamageRequest(new BaseEvent<int>());
 			entity.AddTakeDamageEvent(new BaseEvent<int>());
 			entity.AddDeathEvent(new BaseEvent());
