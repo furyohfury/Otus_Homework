@@ -3,28 +3,42 @@ using System.Linq;
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
 	[Serializable]
 	public class JumpAbilityAspect : IEntityAspect
 	{
+		// [SerializeField]
+		// private GameObject _projectilePrefab;
+		// [SerializeField]
+		// private GameObject _weaponPrefab;
 		[SerializeField]
-		private GameObject _weaponPrefab;
-		[SerializeField]
-		private Transform _firePoint;
-		
+		private WeaponConfig _weaponConfig;
+
 		public void Apply(IEntity entity)
 		{
 			if (entity.TryGetWeapon(out ReactiveVariable<GameObject> weapon))
 			{
-				var weaponGo = GameObject.Instantiate(_weaponPrefab, entity.GetWeaponContainer());
+				entity.GetProjectilePrefab().Value = _weaponConfig.ProjectilePrefab;
+				var weaponGo = Object.Instantiate(_weaponConfig.WeaponPrefab, entity.GetWeaponContainer());
 				weapon.Value = weaponGo;
-				entity.GetFirePoint().Value = _firePoint;
+				var firePoint = weaponGo
+				                .GetComponentsInChildren<Transform>()
+				                .SingleOrDefault(go => go.name == "FirePoint");
+
+				if (firePoint != null)
+				{
+					entity.GetFirePoint().Value = firePoint;
+				}
+				else
+				{
+					Debug.LogError("Nor firepoint on weapon");
+				}
 			}
-			
+
 			entity.AddBehaviour<PistolShootBehaviour>();
 			entity.AddBehaviour<JumpAbilityBehaviour>();
 		}
@@ -32,24 +46,6 @@ namespace Game
 		public void Discard(IEntity entity)
 		{
 			entity.DelBehaviour<JumpAbilityBehaviour>();
-		}
-
-		[Button]
-		private void GetFirePoint()
-		{
-			if (_weaponPrefab == null)
-			{
-				return;
-			}
-
-			var firePoint = _weaponPrefab
-			                .GetComponentsInChildren<Transform>()
-			                .SingleOrDefault(go => go.name == "FirePoint");
-
-			if (firePoint != null)
-			{
-				_firePoint = firePoint;
-			}
 		}
 	}
 }
