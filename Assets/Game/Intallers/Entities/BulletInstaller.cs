@@ -18,6 +18,8 @@ namespace Game.Entities
 		private int _damage;
 		[SerializeField]
 		private float _moveSpeed;
+		[SerializeField]
+		private Rigidbody2D _rigidbody;
 
 		public void Install(IEntity entity)
 		{
@@ -25,16 +27,18 @@ namespace Game.Entities
 			entity.AddVisualTransform(_visualTransform);
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
 			entity.AddTriggerReceiver(_triggerReceiver);
-			entity.AddTriggerEnterEvent(new BaseEvent<Collider2D>());
-			entity.AddTriggerExitEvent(new BaseEvent<Collider2D>());
+			// entity.AddTriggerEnterEvent(new BaseEvent<Collider2D>());
+			// entity.AddTriggerExitEvent(new BaseEvent<Collider2D>());
 			entity.AddCollider2D(_collider2D);
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddDeathEvent(new BaseEvent());
+			entity.AddRigidbody(_rigidbody);
 			
 			entity.AddBehaviour(new BulletCollisionBehaviour());
-			entity.AddBehaviour(new MovementByTransformBehaviour());
-			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
-			// TODO connect deathevent with pool
+			entity.AddBehaviour(new MovementByKinematicRbBehaviour());
+			
+			// entity.AddBehaviour(new MovementByTransformBehaviour());
+			// entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
 		}
 	}
 }

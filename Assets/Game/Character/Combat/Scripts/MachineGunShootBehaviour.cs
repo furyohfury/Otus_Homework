@@ -7,7 +7,7 @@ namespace Game
 	public sealed class MachineGunShootBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
-		private IValue<GameObject> _machineGunPrefab;
+		private IValue<SceneEntity> _machineGunPrefab;
 		private IValue<Transform> _firePoint;
 		private IValue<float> _machineGunSpreadAngle;
 

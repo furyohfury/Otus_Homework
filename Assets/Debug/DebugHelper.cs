@@ -95,6 +95,10 @@ namespace a
 		
 		private void OnDrawGizmos()
 		{
+			if (!_drawGizmos)
+			{
+				return;
+			}
 			Gizmos.color = Color.blue;
 			Gizmos.DrawRay(_weapon.position, _weapon.right);
 			Gizmos.color = Color.red;
@@ -103,6 +107,8 @@ namespace a
 
 		[SerializeField]
 		private Rigidbody2D _rigidbody2D;
+		[SerializeField]
+		private bool _drawGizmos;
 
 		[Button]
 		private void ApplyForce(Vector2 force, ForceMode2D mode)

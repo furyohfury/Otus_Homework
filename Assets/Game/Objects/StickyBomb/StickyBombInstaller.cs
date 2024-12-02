@@ -98,7 +98,6 @@ namespace Game
 						_transform.position,
 						_explosionRadius,
 						_explosionUpwardForce);
-					// TODO check if works on bullets
 				}
 
 				Timer<float> a = new();

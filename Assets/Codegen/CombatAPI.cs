@@ -25,7 +25,7 @@ namespace Atomic.Entities
         public const int MachineGunSpreadAngle = 42; // ReactiveVariable<float>
         public const int AttackTimer = 44; // Timer
         public const int AttackDelay = 45; // ReactiveVariable<float>
-        public const int ProjectilePrefab = 47; // ReactiveVariable<GameObject>
+        public const int ProjectilePrefab = 47; // ReactiveVariable<SceneEntity>
 
 
         ///Extensions
@@ -246,13 +246,13 @@ namespace Atomic.Entities
         public static void SetAttackDelay(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(AttackDelay, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<GameObject> GetProjectilePrefab(this IEntity obj) => obj.GetValue<ReactiveVariable<GameObject>>(ProjectilePrefab);
+        public static ReactiveVariable<SceneEntity> GetProjectilePrefab(this IEntity obj) => obj.GetValue<ReactiveVariable<SceneEntity>>(ProjectilePrefab);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetProjectilePrefab(this IEntity obj, out ReactiveVariable<GameObject> value) => obj.TryGetValue(ProjectilePrefab, out value);
+        public static bool TryGetProjectilePrefab(this IEntity obj, out ReactiveVariable<SceneEntity> value) => obj.TryGetValue(ProjectilePrefab, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddProjectilePrefab(this IEntity obj, ReactiveVariable<GameObject> value) => obj.AddValue(ProjectilePrefab, value);
+        public static bool AddProjectilePrefab(this IEntity obj, ReactiveVariable<SceneEntity> value) => obj.AddValue(ProjectilePrefab, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasProjectilePrefab(this IEntity obj) => obj.HasValue(ProjectilePrefab);
@@ -261,6 +261,6 @@ namespace Atomic.Entities
         public static bool DelProjectilePrefab(this IEntity obj) => obj.DelValue(ProjectilePrefab);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetProjectilePrefab(this IEntity obj, ReactiveVariable<GameObject> value) => obj.SetValue(ProjectilePrefab, value);
+        public static void SetProjectilePrefab(this IEntity obj, ReactiveVariable<SceneEntity> value) => obj.SetValue(ProjectilePrefab, value);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game.Entities
 {
 	[Serializable]
-	public sealed class CharacterInstaller : IEntityInstaller
+	public sealed class CharacterInstaller : SceneEntityInstallerBase
 	{
 		[Header("Components")]
 		[SerializeField]
@@ -19,9 +19,9 @@ namespace Game.Entities
 		private SpriteRenderer _spriteRenderer;
 
 		[Header("Movement")] [SerializeField] 
-		private ReactiveVariable<float> _moveSpeed;
+		private float _moveSpeed;
 		[SerializeField]
-		private ReactiveVariable<float> _jumpForce;
+		private float _jumpForce;
 		[SerializeField]
 		private Transform _groundCheckTransform;
 		[SerializeField]
@@ -34,7 +34,7 @@ namespace Game.Entities
 		[SerializeField]
 		private Transform _firePoint;
 		[SerializeField]
-		private GameObject _projectilePrefab;
+		private SceneEntity _projectilePrefab;
 		[SerializeField]
 		private float _machineGunSpreadAngle;
 		[SerializeField]
@@ -54,7 +54,7 @@ namespace Game.Entities
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
 
-		public void Install(IEntity entity)
+		public override void Install(IEntity entity)
 		{
 			entity.AddCharacterTag();
 			InitializeLife(entity);
@@ -88,7 +88,7 @@ namespace Game.Entities
 		private void InitializeMovement(IEntity entity)
 		{
 			// State
-			entity.AddMoveSpeed(_moveSpeed);
+			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>());
 			// CanMove init
 			_canMove.Append(() => true);
@@ -105,7 +105,7 @@ namespace Game.Entities
 
 			_canJump.Append(entity.GetIsGrounded());
 			entity.AddCanJump(_canJump);
-			entity.AddJumpForce(_jumpForce);
+			entity.AddJumpForce(new ReactiveVariable<float>(_jumpForce));
 			entity.AddJumpRequest(new BaseEvent());
 			entity.AddJumpEvent(new BaseEvent());
 

@@ -7,7 +7,7 @@ namespace Game
 	public sealed class RifleShootBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
-		private IValue<GameObject> _rifleBulletPrefab;
+		private IValue<SceneEntity> _rifleBulletPrefab;
 		private IValue<Transform> _firePoint;
 
 		public void Init(IEntity entity)

@@ -108,7 +108,7 @@ MonoBehaviour:
       type: ReactiveVariable<float>
     - id: 47
       name: ProjectilePrefab
-      type: ReactiveVariable<GameObject>
+      type: ReactiveVariable<SceneEntity>
   - name: Sword
     indexes:
     - id: 14

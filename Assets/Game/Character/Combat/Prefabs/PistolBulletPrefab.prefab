@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 132693629733587316}
   - component: {fileID: 6025802624882840659}
   - component: {fileID: 2653735324815664134}
+  - component: {fileID: 2279817161541546855}
   m_Layer: 8
   m_Name: PistolBulletPrefab
   m_TagString: Untagged
@@ -155,6 +156,28 @@ MonoBehaviour:
         _collider2D: {fileID: 1474826447498141390}
         _damage: 1
         _moveSpeed: 20
+        _rigidbody: {fileID: 2279817161541546855}
+--- !u!50 &2279817161541546855
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468969232599911292}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &3054570845314277075
 GameObject:
   m_ObjectHideFlags: 0

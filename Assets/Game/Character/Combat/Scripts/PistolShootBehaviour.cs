@@ -1,4 +1,6 @@
-﻿using Atomic.Elements;
+﻿using System;
+using System.Collections.Generic;
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
@@ -11,6 +13,8 @@ namespace Game
 		private IValue<Transform> _firePoint;
 		private IValue<GameObject> _weapon;
 		private Pool<SceneEntity> _pool;
+		
+		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
 
 		public void Init(IEntity entity)
 		{
@@ -20,17 +24,19 @@ namespace Game
 			_weapon = entity.GetWeapon();
 			_attackEvent.Subscribe(OnAttackEvent);
 
-			_pool = new(_weapon, _pistolBulletPrefab.Value, true);
+			_pool = new Pool<SceneEntity>(_weapon.Value.transform, _pistolBulletPrefab.Value, true);
 		}
 
 		private void OnAttackEvent()
 		{
 			// TODO how to get world transform?
-			var bullet = _pool.Get(_weapon.transform, _firePoint.Value.position, _firePoint.Value.rotation);
+			// TODO shoots with negative scale cuz of weapon rotation
+			var bullet = _pool.Get(_firePoint.Value.position, _firePoint.Value.rotation);
+			bullet.GetMoveDirection().Value = bullet.GetVisualTransform().right;
 			if (bullet.TryGetDeathEvent(out BaseEvent deathEvent))
 			{
-				deathEvent.Subscribe(ReturnToPool);
-				// TODO make deathevent BaseEvent<SceneEntity>
+				var subscription =  deathEvent.Subscribe(() => ReturnToPool(bullet));
+				_deathEventSubscriptions[bullet] = subscription;
 			}
 			else
 			{
@@ -38,9 +44,14 @@ namespace Game
 			}			
 		}
 
-		private void ReturnToPool(SceneEntity entity)
+		private void ReturnToPool(SceneEntity bullet)
 		{
-			_pool.Return(entity);
+			if (_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
+			{
+				bullet.GetDeathEvent().Unsubscribe(subscription);
+				_deathEventSubscriptions.Remove(bullet);
+			}
+			_pool.Return(bullet);
 		}
 
 		public void Dispose(IEntity entity)
@@ -50,7 +61,7 @@ namespace Game
 			{
 				if (bullet.TryGetDeathEvent(out BaseEvent deathEvent))
 				{
-					deathEvent.Unsubscribe(ReturnToPool);
+					deathEvent.Unsubscribe(() => ReturnToPool(bullet));
 					bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
 				}
 			}
