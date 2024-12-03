@@ -57,11 +57,13 @@ namespace Game
 		public void Dispose(IEntity entity)
 		{
 			_attackEvent.Unsubscribe(OnAttackEvent);
+
 			foreach (var bullet in _pool.ActiveItems)
 			{
-				if (bullet.TryGetDeathEvent(out BaseEvent deathEvent))
+				if (_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
 				{
-					deathEvent.Unsubscribe(() => ReturnToPool(bullet));
+					bullet.GetDeathEvent().Unsubscribe(subscription);
+					_deathEventSubscriptions.Remove(bullet);
 					bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
 				}
 			}
