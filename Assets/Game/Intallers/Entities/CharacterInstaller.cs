@@ -143,7 +143,7 @@ namespace Game.Entities
 			// entity.AddPistolBulletPrefab(_pistolBulletPrefab);
 			// entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
 			entity.AddProjectilePrefab(_projectilePrefab);
-			entity.AddMachineGunSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
+			entity.AddWeaponSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
 			
 			entity.AddBehaviour(new AttackBehaviour());
 			entity.AddBehaviour(new AimWeaponBehaviour());

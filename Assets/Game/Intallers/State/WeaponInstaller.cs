@@ -2,6 +2,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
@@ -10,10 +11,17 @@ namespace Game
 	{
 		[SerializeField]
 		private GameObject _weapon;
-		
+
 		public void Install(IEntity entity)
 		{
-			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
+			if (!entity.TryGetWeaponContainer(out Transform container))
+			{
+				Debug.LogWarning($"{entity.Name} doesn't have weapon container to install weapon");
+				return;
+			}
+			
+			var weaponGo = Object.Instantiate(_weapon, container);
+			entity.AddWeapon(new ReactiveVariable<GameObject>(weaponGo));
 		}
 	}
 }

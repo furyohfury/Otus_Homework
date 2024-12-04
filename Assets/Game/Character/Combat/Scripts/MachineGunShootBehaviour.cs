@@ -15,7 +15,7 @@ namespace Game
 		{
 			_machineGunPrefab = entity.GetProjectilePrefab();
 			_firePoint = entity.GetFirePoint();
-			_machineGunSpreadAngle = entity.GetMachineGunSpreadAngle();
+			_machineGunSpreadAngle = entity.GetWeaponSpreadAngle();
 
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnAttackEvent);

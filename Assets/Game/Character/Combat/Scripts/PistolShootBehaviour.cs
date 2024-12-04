@@ -60,12 +60,14 @@ namespace Game
 
 			foreach (var bullet in _pool.ActiveItems)
 			{
-				if (_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
+				if (!_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
 				{
-					bullet.GetDeathEvent().Unsubscribe(subscription);
-					_deathEventSubscriptions.Remove(bullet);
-					bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
+					continue;
 				}
+				
+				bullet.GetDeathEvent().Unsubscribe(subscription);
+				_deathEventSubscriptions.Remove(bullet);
+				bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
 			}
 
 			_pool.Dispose();

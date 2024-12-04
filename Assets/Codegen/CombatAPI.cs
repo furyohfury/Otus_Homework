@@ -7,6 +7,7 @@ using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using Atomic.Elements;
 using Game;
+using Atomic.Extensions;
 
 namespace Atomic.Entities
 {
@@ -22,7 +23,7 @@ namespace Atomic.Entities
         public const int Ammo = 31; // ReactiveVariable<int>
         public const int Weapon = 33; // ReactiveVariable<GameObject>
         public const int WeaponContainer = 40; // Transform
-        public const int MachineGunSpreadAngle = 42; // ReactiveVariable<float>
+        public const int WeaponSpreadAngle = 42; // ReactiveVariable<float>
         public const int AttackTimer = 44; // Timer
         public const int AttackDelay = 45; // ReactiveVariable<float>
         public const int ProjectilePrefab = 47; // ReactiveVariable<SceneEntity>
@@ -192,22 +193,22 @@ namespace Atomic.Entities
         public static void SetWeaponContainer(this IEntity obj, Transform value) => obj.SetValue(WeaponContainer, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<float> GetMachineGunSpreadAngle(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(MachineGunSpreadAngle);
+        public static ReactiveVariable<float> GetWeaponSpreadAngle(this IEntity obj) => obj.GetValue<ReactiveVariable<float>>(WeaponSpreadAngle);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetMachineGunSpreadAngle(this IEntity obj, out ReactiveVariable<float> value) => obj.TryGetValue(MachineGunSpreadAngle, out value);
+        public static bool TryGetWeaponSpreadAngle(this IEntity obj, out ReactiveVariable<float> value) => obj.TryGetValue(WeaponSpreadAngle, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddMachineGunSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.AddValue(MachineGunSpreadAngle, value);
+        public static bool AddWeaponSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.AddValue(WeaponSpreadAngle, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasMachineGunSpreadAngle(this IEntity obj) => obj.HasValue(MachineGunSpreadAngle);
+        public static bool HasWeaponSpreadAngle(this IEntity obj) => obj.HasValue(WeaponSpreadAngle);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelMachineGunSpreadAngle(this IEntity obj) => obj.DelValue(MachineGunSpreadAngle);
+        public static bool DelWeaponSpreadAngle(this IEntity obj) => obj.DelValue(WeaponSpreadAngle);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetMachineGunSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(MachineGunSpreadAngle, value);
+        public static void SetWeaponSpreadAngle(this IEntity obj, ReactiveVariable<float> value) => obj.SetValue(WeaponSpreadAngle, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Timer GetAttackTimer(this IEntity obj) => obj.GetValue<Timer>(AttackTimer);

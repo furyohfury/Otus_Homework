@@ -1,8 +1,10 @@
-﻿using Atomic.Entities;
+﻿using System;
+using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.Entities
+namespace Game
 {
+	[Serializable]
 	public sealed class HealthInstaller : IEntityInstaller
 	{
 		[SerializeField]

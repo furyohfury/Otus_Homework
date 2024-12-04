@@ -2843,6 +2843,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8107027897982037989, guid: 5e1033efa5c83ec46b5e8a20aeb8c5a7, type: 3}
     - target: {fileID: 4055670928769900324, guid: f21269a854415f84788fd219190c72c9, type: 3}
+      propertyPath: managedReferences[7840522892408258561]._numberOfUses
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055670928769900324, guid: f21269a854415f84788fd219190c72c9, type: 3}
       propertyPath: managedReferences[7840522892408258561]._weaponConfig
       value: 
       objectReference: {fileID: 11400000, guid: c4bf45a695addc940b9e8c3310269cfd, type: 2}

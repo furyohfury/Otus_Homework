@@ -20,7 +20,15 @@ namespace Game
 		{
 			entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
 			entity.AddActiveAspect(this);
-			// TODO use where? In ability itself?
+
+			if (entity.HasAttackDelay())
+			{
+				entity.GetAttackDelay().Value = _weaponConfig.ShootDelay;
+			}
+			else
+			{
+				entity.AddAttackDelay(new ReactiveVariable<float>(_weaponConfig.ShootDelay));
+			}
 			
 			if (entity.TryGetWeapon(out ReactiveVariable<GameObject> weapon))
 			{

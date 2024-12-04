@@ -7,6 +7,7 @@ using Atomic.Entities;
 using System.Runtime.CompilerServices;
 using Atomic.Elements;
 using Game;
+using Atomic.Extensions;
 
 namespace Atomic.Entities
 {

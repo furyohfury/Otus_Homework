@@ -19,6 +19,7 @@ MonoBehaviour:
   imports:
   - Atomic.Elements
   - Game
+  - Atomic.Extensions
   categories:
   - name: Movement
     indexes:
@@ -98,7 +99,7 @@ MonoBehaviour:
       name: WeaponContainer
       type: Transform
     - id: 42
-      name: MachineGunSpreadAngle
+      name: WeaponSpreadAngle
       type: ReactiveVariable<float>
     - id: 44
       name: AttackTimer
@@ -165,6 +166,12 @@ MonoBehaviour:
     - id: 46
       name: StickyBombPrefab
       type: SceneEntity
+    - id: 29
+      name: AbilityUseNumber
+      type: ReactiveVariable<int>
+    - id: 41
+      name: ActiveAspect
+      type: IEntityAspect
   - name: LevelObjects
     indexes:
     - id: 39

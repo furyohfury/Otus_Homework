@@ -23,7 +23,7 @@ namespace Game
 			var bomb = SceneEntity.Instantiate(_stickyBombPrefab, _firePoint.Value.position, _firePoint.Value.rotation);
 			var rigidbody = bomb.GetRigidbody();
 			var direction = rigidbody.transform.right;
-			rigidbody.AddForce(direction * 500);
+			rigidbody.AddForce(direction * 2000);
 		}
 
 		public void Dispose(IEntity entity)

@@ -65,10 +65,6 @@ namespace Game
 			timer.Start();
 			_entity.WhenUpdate(timer.Tick);
 			timer.OnEnded += Explode;
-			// Observable
-			// 	.Timer(TimeSpan.FromSeconds(_explosionDelay))
-			// 	.Subscribe(_ => Explode())
-			// 	.AddTo(_disposable);
 		}
 
 		private void Explode()
@@ -99,8 +95,6 @@ namespace Game
 						_explosionRadius,
 						_explosionUpwardForce);
 				}
-
-				Timer<float> a = new();
 
 				if (entity.TryGetDestroyEvent(out var destroyEvent)) // TODO mb wall tag
 				{
