@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic.Elements;
+﻿using Atomic.Elements;
 using Atomic.Entities;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -19,9 +18,13 @@ namespace a
 		[SerializeField]
 		private Transform _target;
 		[SerializeField]
-		private SceneEntity _entity;
-		
-
+		private SceneEntity _character;
+		[SerializeField]
+		private Transform _weapon;
+		[SerializeField]
+		private Rigidbody2D _rigidbody2D;
+		[SerializeField]
+		private bool _drawGizmos;
 
 		private void Start()
 		{
@@ -40,7 +43,7 @@ namespace a
 				Debug.Log("no hit");
 			}
 		}
-		
+
 		[Button]
 		public void CheckOverlapSphere()
 		{
@@ -66,13 +69,13 @@ namespace a
 				_sword.DORotate(new Vector3(0, 0, -90f), 1f);
 			}
 		}
-		
+
 
 		[Button]
 		public void AddTarget()
 		{
 			var target = new ReactiveVariable<Transform>(_target);
-			_entity.AddTarget(new BaseFunction<Vector2>(() => _target.position));
+			_character.AddTarget(new BaseFunction<Vector2>(() => _target.position));
 		}
 
 		[Button]
@@ -81,7 +84,7 @@ namespace a
 			var angle = Vector3.Angle(_target.position - _weapon.position, _weapon.right);
 			Debug.Log(angle);
 		}
-		
+
 		[Button]
 		public void GetSignedAngle()
 		{
@@ -90,36 +93,42 @@ namespace a
 		}
 
 
-		[SerializeField]
-		private Transform _weapon;
-		
 		private void OnDrawGizmos()
 		{
 			if (!_drawGizmos)
 			{
 				return;
 			}
+
 			Gizmos.color = Color.blue;
 			Gizmos.DrawRay(_weapon.position, _weapon.right);
 			Gizmos.color = Color.red;
 			Gizmos.DrawRay(_weapon.position, _target.position - _weapon.position);
 		}
 
-		[SerializeField]
-		private Rigidbody2D _rigidbody2D;
-		[SerializeField]
-		private bool _drawGizmos;
 
 		[Button]
 		private void ApplyForce(Vector2 force, ForceMode2D mode)
 		{
 			_rigidbody2D.AddForce(force, mode);
 		}
-		
+
 		[Button]
 		private void ApplyVelocity(Vector2 velocity)
 		{
 			_rigidbody2D.velocity += velocity;
+		}
+
+		[Button]
+		private void AddDamageVariable(int value)
+		{
+			_character.AddDamage(new ReactiveVariable<int>(value));
+		}
+		
+		[Button]
+		private void AddDamageValue(int value)
+		{
+			_character.AddDamage(value);
 		}
 	}
 }

@@ -1,15 +1,11 @@
-using System;
-using Atomic.Elements;
 using Atomic.Entities;
-using R3;
 using Unity.VisualScripting;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Timer = Atomic.Elements.Timer;
 
 namespace Game
 {
-	public class StickyBombInstaller : IEntityInstaller
+	public class StickyBombInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private int _explosionDamage = 5;
@@ -43,9 +39,8 @@ namespace Game
 		private TriggerReceiver _triggerReceiver;
 
 		private IEntity _entity;
-		// private CompositeDisposable _disposable = new();
-		
-		public void Install(IEntity entity)
+
+		public override void Install(IEntity entity)
 		{
 			_entity = entity;
 			entity.AddRigidbody(_rigidbody);
@@ -55,10 +50,10 @@ namespace Game
 				effectMain.stopAction = ParticleSystemStopAction.Destroy;
 			}
 
-			_triggerReceiver.OnTriggerEnter += OnCollisionEnter;
+			_triggerReceiver.OnTriggerEnter += OnCollided;
 		}
 
-		private void OnCollisionEnter(Collider2D collider2D)
+		private void OnCollided(Collider2D _)
 		{
 			_rigidbody.simulated = false;
 			var timer = new Timer(_explosionDelay);
@@ -71,7 +66,7 @@ namespace Game
 		{
 			if (_explosionEffect != null)
 			{
-				var effect = Object.Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
+				var effect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
 
 				if (_explosionSound != null)
 				{
@@ -106,9 +101,8 @@ namespace Game
 					request.Invoke(_explosionDamage);
 				}
 			}
-			
-			// _disposable.Clear();
-			Object.Destroy(_transform.gameObject);
+
+			Destroy(_transform.gameObject);
 		}
 	}
 }

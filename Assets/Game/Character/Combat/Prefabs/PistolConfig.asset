@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98ec82615574ad2b81a01be5e604cf0, type: 3}
-  m_Name: WeaponConfig
+  m_Name: PistolConfig
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 6025802624882840659, guid: 441eea0bdf0170a40974fc99514d8286, type: 3}
   _weaponPrefab: {fileID: 8107027897568768147, guid: 5e1033efa5c83ec46b5e8a20aeb8c5a7, type: 3}
-  _shootDelay: 1
+  _damage: 1
+  _shootDelay: 0.5
   _spreadAngle: 0
+  _ammoSize: 10

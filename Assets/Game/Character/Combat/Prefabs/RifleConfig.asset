@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98ec82615574ad2b81a01be5e604cf0, type: 3}
+  m_Name: RifleConfig
+  m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 6025802624882840659, guid: 441eea0bdf0170a40974fc99514d8286, type: 3}
+  _weaponPrefab: {fileID: 1711525038331977360, guid: e726b212b7331374f94883dfdd4fa434, type: 3}
+  _damage: 3
+  _shootDelay: 1
+  _spreadAngle: 0
+  _ammoSize: 5

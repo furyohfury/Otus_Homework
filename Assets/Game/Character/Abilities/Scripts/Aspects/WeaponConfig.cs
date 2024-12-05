@@ -9,14 +9,21 @@ namespace Game
 		public SceneEntity ProjectilePrefab => _projectilePrefab;
 		public GameObject WeaponPrefab => _weaponPrefab;
 		public float ShootDelay => _shootDelay;
+		public int Damage => _damage;
+		public float SpreadAngle => _spreadAngle;
+		public int AmmoSize => _ammoSize;
 
 		[SerializeField]
 		private SceneEntity _projectilePrefab;
 		[SerializeField]
 		private GameObject _weaponPrefab;
 		[SerializeField]
+		private int _damage;
+		[SerializeField]
 		private float _shootDelay;
-		// [SerializeReference]
-		// private IEntityInstaller[] _additionalParametersInstallers;
+		[SerializeField]
+		private float _spreadAngle;
+		[SerializeField]
+		private int _ammoSize;
 	}
 }

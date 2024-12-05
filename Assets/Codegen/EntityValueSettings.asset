@@ -110,6 +110,9 @@ MonoBehaviour:
     - id: 47
       name: ProjectilePrefab
       type: ReactiveVariable<SceneEntity>
+    - id: 43
+      name: AmmoSize
+      type: ReactiveVariable<int>
   - name: Sword
     indexes:
     - id: 14
@@ -170,8 +173,11 @@ MonoBehaviour:
       name: AbilityUseNumber
       type: ReactiveVariable<int>
     - id: 41
-      name: ActiveAspect
-      type: IEntityAspect
+      name: ActiveAbilityAspect
+      type: ReactiveVariable<IEntityAspect>
+    - id: 48
+      name: ApplyAbilityAspectRequest
+      type: BaseEvent<IEntityAspect>
   - name: LevelObjects
     indexes:
     - id: 39

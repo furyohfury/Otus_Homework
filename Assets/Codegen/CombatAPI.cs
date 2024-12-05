@@ -27,6 +27,7 @@ namespace Atomic.Entities
         public const int AttackTimer = 44; // Timer
         public const int AttackDelay = 45; // ReactiveVariable<float>
         public const int ProjectilePrefab = 47; // ReactiveVariable<SceneEntity>
+        public const int AmmoSize = 43; // ReactiveVariable<int>
 
 
         ///Extensions
@@ -263,5 +264,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetProjectilePrefab(this IEntity obj, ReactiveVariable<SceneEntity> value) => obj.SetValue(ProjectilePrefab, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<int> GetAmmoSize(this IEntity obj) => obj.GetValue<ReactiveVariable<int>>(AmmoSize);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAmmoSize(this IEntity obj, out ReactiveVariable<int> value) => obj.TryGetValue(AmmoSize, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAmmoSize(this IEntity obj, ReactiveVariable<int> value) => obj.AddValue(AmmoSize, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAmmoSize(this IEntity obj) => obj.HasValue(AmmoSize);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAmmoSize(this IEntity obj) => obj.DelValue(AmmoSize);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAmmoSize(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(AmmoSize, value);
     }
 }

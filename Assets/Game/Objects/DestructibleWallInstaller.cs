@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public class DestructibleWallInstaller : IEntityInstaller
+	public class DestructibleWallInstaller : SceneEntityInstallerBase
 	{
 		[Header("Config")] [SerializeField]
 		private Vector2 _velocityToDestroy;
@@ -22,7 +22,7 @@ namespace Game
 		[SerializeField]
 		private CollisionReceiver _collisionReceiver;
 
-		public void Install(IEntity entity)
+		public override void Install(IEntity entity)
 		{
 			if (_explosionEffect != null)
 			{
@@ -34,14 +34,14 @@ namespace Game
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
 
-			_collisionReceiver.OnCollisionEnter += OnCollision2DEnter;
+			_collisionReceiver.OnCollisionEnter += OnCollided;
 		}
 
 		private void DestroyWall()
 		{
 			if (_explosionEffect != null)
 			{
-				var effect = Object.Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
+				var effect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
 
 				if (_explosionSound != null)
 				{
@@ -49,10 +49,10 @@ namespace Game
 				}
 			}
 
-			Object.Destroy(_transform.gameObject);
+			Destroy(_transform.gameObject);
 		}
 
-		private void OnCollision2DEnter(Collision2D collision)
+		private void OnCollided(Collision2D collision)
 		{
 			if (!collision.TryGetEntity(out IEntity entity)
 			    || !entity.TryGetRigidbody(out Rigidbody2D rigidbody))

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6256871916335887344}
   - component: {fileID: 6256871916335887345}
   - component: {fileID: 6256871916335887346}
-  - component: {fileID: 6256871916335887347}
   - component: {fileID: 6256871916335887356}
+  - component: {fileID: 2079442284282269203}
   m_Layer: 8
   m_Name: Bomb
   m_TagString: Untagged
@@ -64,44 +64,10 @@ MonoBehaviour:
   autoRefresh: 0
   installOnAwake: 1
   installPipeline:
-  - {fileID: 6256871916335887347}
+  - {fileID: 2079442284282269203}
   onInstalled:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6256871916335887347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6256871916335887358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4449a408ebb644a08bf8405b221eb04e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoRefresh: 1
-  installers:
-  - rid: 2388721571176906754
-  logics: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 2388721571176906754
-      type: {class: StickyBombInstaller, ns: Game, asm: Assembly-CSharp}
-      data:
-        _explosionDamage: 5
-        _explosionForce: 2000
-        _explosionRadius: 10
-        _explosionDelay: 1
-        _explosionUpwardForce: 100
-        _stickingSound: {fileID: 0}
-        _explosionEffect: {fileID: 19876930, guid: ec61825cb06be72419bb09eee03af08c, type: 3}
-        _explosionSound: {fileID: 8300000, guid: 2c5e8332fb10b84498f81d32663414eb, type: 3}
-        _explosionVolume: 0.113
-        _rigidbody: {fileID: 6256871916335887356}
-        _transform: {fileID: 6256871916335887344}
-        _triggerReceiver: {fileID: 6256871918285571621}
 --- !u!50 &6256871916335887356
 Rigidbody2D:
   serializedVersion: 4
@@ -123,6 +89,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2079442284282269203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256871916335887358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979d0e3810e3d3c4abc1b6a0885f9d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionDamage: 5
+  _explosionForce: 2000
+  _explosionRadius: 10
+  _explosionDelay: 1
+  _explosionUpwardForce: 100
+  _stickingSound: {fileID: 0}
+  _explosionEffect: {fileID: 19876930, guid: ec61825cb06be72419bb09eee03af08c, type: 3}
+  _explosionSound: {fileID: 0}
+  _explosionVolume: 1
+  _rigidbody: {fileID: 6256871916335887356}
+  _transform: {fileID: 6256871916335887344}
+  _triggerReceiver: {fileID: 6256871918285571621}
 --- !u!1 &6256871916458174400
 GameObject:
   m_ObjectHideFlags: 0

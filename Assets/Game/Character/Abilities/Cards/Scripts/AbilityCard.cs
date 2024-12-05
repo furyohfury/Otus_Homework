@@ -11,16 +11,16 @@ namespace Game
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.TryGetEntity(out var entity) && entity.HasCharacterTag())
+			if (!other.TryGetEntity(out var entity) || !entity.HasCharacterTag())
 			{
-				ApplyAspect(entity);
-				Destroy(gameObject);
+				return;
 			}
-		}
 
-		private void ApplyAspect(IEntity entity)
-		{
-			entity.ApplyAspect(_aspect);
+			if (entity.TryGetApplyAbilityAspectRequest(out var request))
+			{
+				request.Invoke(_aspect);
+			}
+			Destroy(gameObject);
 		}
 	}
 }

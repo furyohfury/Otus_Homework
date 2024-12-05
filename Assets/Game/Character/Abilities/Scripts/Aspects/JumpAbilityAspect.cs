@@ -18,9 +18,22 @@ namespace Game
 
 		public void Apply(IEntity entity)
 		{
-			entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
-			entity.AddActiveAspect(this);
+			InitAbility(entity);
 
+			InitWeapon(entity);
+
+			InitBehaviours(entity);
+		}
+
+		private void InitAbility(IEntity entity)
+		{
+			entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
+			entity.AddActiveAbilityAspect(this);
+		}
+
+		private void InitWeapon(IEntity entity)
+		{
+			
 			if (entity.HasAttackDelay())
 			{
 				entity.GetAttackDelay().Value = _weaponConfig.ShootDelay;
@@ -29,7 +42,7 @@ namespace Game
 			{
 				entity.AddAttackDelay(new ReactiveVariable<float>(_weaponConfig.ShootDelay));
 			}
-			
+
 			if (entity.TryGetWeapon(out ReactiveVariable<GameObject> weapon))
 			{
 				entity.GetProjectilePrefab().Value = _weaponConfig.ProjectilePrefab;
@@ -45,10 +58,13 @@ namespace Game
 				}
 				else
 				{
-					Debug.LogError("Nor firepoint on weapon");
+					Debug.LogError($"No fire point on {weapon.Value.name}");
 				}
 			}
+		}
 
+		private void InitBehaviours(IEntity entity)
+		{
 			entity.AddBehaviour<PistolShootBehaviour>();
 			entity.AddBehaviour<JumpAbilityBehaviour>();
 

@@ -19,7 +19,8 @@ namespace Atomic.Entities
         public const int DashForce = 38; // ReactiveVariable<float>
         public const int StickyBombPrefab = 46; // SceneEntity
         public const int AbilityUseNumber = 29; // ReactiveVariable<int>
-        public const int ActiveAspect = 41; // IEntityAspect
+        public const int ActiveAbilityAspect = 41; // ReactiveVariable<IEntityAspect>
+        public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
 
 
         ///Extensions
@@ -114,21 +115,39 @@ namespace Atomic.Entities
         public static void SetAbilityUseNumber(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(AbilityUseNumber, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEntityAspect GetActiveAspect(this IEntity obj) => obj.GetValue<IEntityAspect>(ActiveAspect);
+        public static ReactiveVariable<IEntityAspect> GetActiveAbilityAspect(this IEntity obj) => obj.GetValue<ReactiveVariable<IEntityAspect>>(ActiveAbilityAspect);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetActiveAspect(this IEntity obj, out IEntityAspect value) => obj.TryGetValue(ActiveAspect, out value);
+        public static bool TryGetActiveAbilityAspect(this IEntity obj, out ReactiveVariable<IEntityAspect> value) => obj.TryGetValue(ActiveAbilityAspect, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddActiveAspect(this IEntity obj, IEntityAspect value) => obj.AddValue(ActiveAspect, value);
+        public static bool AddActiveAbilityAspect(this IEntity obj, ReactiveVariable<IEntityAspect> value) => obj.AddValue(ActiveAbilityAspect, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasActiveAspect(this IEntity obj) => obj.HasValue(ActiveAspect);
+        public static bool HasActiveAbilityAspect(this IEntity obj) => obj.HasValue(ActiveAbilityAspect);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelActiveAspect(this IEntity obj) => obj.DelValue(ActiveAspect);
+        public static bool DelActiveAbilityAspect(this IEntity obj) => obj.DelValue(ActiveAbilityAspect);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetActiveAspect(this IEntity obj, IEntityAspect value) => obj.SetValue(ActiveAspect, value);
+        public static void SetActiveAbilityAspect(this IEntity obj, ReactiveVariable<IEntityAspect> value) => obj.SetValue(ActiveAbilityAspect, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<IEntityAspect> GetApplyAbilityAspectRequest(this IEntity obj) => obj.GetValue<BaseEvent<IEntityAspect>>(ApplyAbilityAspectRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetApplyAbilityAspectRequest(this IEntity obj, out BaseEvent<IEntityAspect> value) => obj.TryGetValue(ApplyAbilityAspectRequest, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddApplyAbilityAspectRequest(this IEntity obj, BaseEvent<IEntityAspect> value) => obj.AddValue(ApplyAbilityAspectRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasApplyAbilityAspectRequest(this IEntity obj) => obj.HasValue(ApplyAbilityAspectRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelApplyAbilityAspectRequest(this IEntity obj) => obj.DelValue(ApplyAbilityAspectRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetApplyAbilityAspectRequest(this IEntity obj, BaseEvent<IEntityAspect> value) => obj.SetValue(ApplyAbilityAspectRequest, value);
     }
 }

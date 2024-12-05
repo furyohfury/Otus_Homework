@@ -18,8 +18,21 @@ namespace Game
 
 		public void Apply(IEntity entity)
 		{
+			InitAbility(entity);
+
+			InitWeapon(entity);
+
+			InitBehaviours(entity);
+		}
+
+		private void InitAbility(IEntity entity)
+		{
 			entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
-			entity.AddActiveAspect(this);
+			entity.AddActiveAbilityAspect(this);
+		}
+
+		private void InitWeapon(IEntity entity)
+		{
 			
 			if (entity.HasAttackDelay())
 			{
@@ -29,7 +42,7 @@ namespace Game
 			{
 				entity.AddAttackDelay(new ReactiveVariable<float>(_weaponConfig.ShootDelay));
 			}
-			
+
 			if (entity.TryGetWeapon(out ReactiveVariable<GameObject> weapon))
 			{
 				entity.GetProjectilePrefab().Value = _weaponConfig.ProjectilePrefab;
@@ -45,11 +58,14 @@ namespace Game
 				}
 				else
 				{
-					Debug.LogError("Nor firepoint on weapon");
+					Debug.LogError($"No fire point on {weapon.Value.name}");
 				}
 			}
+		}
 
-			entity.AddBehaviour<RifleShootBehaviour>();
+		private void InitBehaviours(IEntity entity)
+		{
+			entity.AddBehaviour<MachineGunShootBehaviour>();
 			entity.AddBehaviour<FireStickyBombAbilityBehaviour>();
 
 			if (!entity.HasBehaviour<AimWeaponBehaviour>())
@@ -65,8 +81,8 @@ namespace Game
 
 		public void Discard(IEntity entity)
 		{
-			entity.DelBehaviour<JumpAbilityBehaviour>();
-			entity.DelBehaviour<PistolShootBehaviour>();
+			entity.DelBehaviour<FireStickyBombAbilityBehaviour>();
+			entity.DelBehaviour<MachineGunShootBehaviour>();
 			entity.DelBehaviour<AimWeaponBehaviour>();
 
 			var weapon = entity.GetWeapon().Value;

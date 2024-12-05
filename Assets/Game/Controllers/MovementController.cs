@@ -58,7 +58,7 @@ namespace Game
 		{
 			var input = Input.GetAxis("Horizontal");
 			var direction = new Vector2(input, 0);
-			_moveDirection.Value = direction;
+			_character.GetMoveDirection().Value = direction;
 		}
 
 		private void Jumping()

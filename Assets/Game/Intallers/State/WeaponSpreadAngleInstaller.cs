@@ -10,7 +10,7 @@ namespace Game
 	{
 		[SerializeField]
 		private float _spreadAngle;
-		
+
 		public void Install(IEntity entity)
 		{
 			entity.AddWeaponSpreadAngle(new ReactiveVariable<float>(_spreadAngle));

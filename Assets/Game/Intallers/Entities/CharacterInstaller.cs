@@ -1,6 +1,7 @@
 ﻿using System;
 using Atomic.Elements;
 using Atomic.Entities;
+using Atomic.Extensions;
 using UnityEngine;
 
 namespace Game.Entities
@@ -18,7 +19,7 @@ namespace Game.Entities
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
 
-		[Header("Movement")] [SerializeField] 
+		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
 		[SerializeField]
 		private float _jumpForce;
@@ -26,7 +27,7 @@ namespace Game.Entities
 		private Transform _groundCheckTransform;
 		[SerializeField]
 		private LayerMask _groundLayer;
-		
+
 		[Header("Combat")] [SerializeField]
 		private SceneEntity _sword;
 		[SerializeField]
@@ -41,11 +42,11 @@ namespace Game.Entities
 		private float _attackDelay;
 		[SerializeField]
 		private Transform _weaponContainer;
-		
+
 
 		[Header("Life")] [SerializeField]
 		private int _health;
-		
+
 		[Header("Ability")] [SerializeField]
 		private float _dashForce;
 		[SerializeField]
@@ -127,24 +128,25 @@ namespace Game.Entities
 			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
 			entity.AddFirePoint(_firePoint);
 			entity.AddAttackDelay(_attackDelay);
-			
+
 			var attackTimer = new Timer(_attackDelay);
+			// entity.GetAttackDelay().Subscribe(delay => attackTimer.Duration = delay);
 			attackTimer.Start();
 			entity.WhenUpdate(attackTimer.Tick);
 			entity.GetAttackEvent().Subscribe(() => attackTimer.Start());
 			entity.AddAttackTimer(attackTimer);
-			
+
 			var canAttack = new AndExpression();
 			canAttack.Append(() => !entity.GetIsDead().Value);
 			canAttack.Append(attackTimer.IsEnded);
 			entity.AddCanAttack(canAttack);
-			
-			
+
+
 			// entity.AddPistolBulletPrefab(_pistolBulletPrefab);
 			// entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
 			entity.AddProjectilePrefab(_projectilePrefab);
 			entity.AddWeaponSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
-			
+
 			entity.AddBehaviour(new AttackBehaviour());
 			entity.AddBehaviour(new AimWeaponBehaviour());
 			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
@@ -157,6 +159,10 @@ namespace Game.Entities
 			entity.AddAbilityEvent(new BaseEvent());
 			entity.AddStickyBombPrefab(_stickyBombPrefab);
 			entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
+			entity.AddActiveAbilityAspect(new ReactiveVariable<IEntityAspect>());
+			entity.AddApplyAbilityAspectRequest(new BaseEvent<IEntityAspect>());
+
+			entity.AddBehaviour(new AbilityPickupBehaviour());
 			// entity.AddBehaviour(new JumpAbilityBehaviour());
 			// entity.AddBehaviour(new DashXAbilityBehaviour());
 			// entity.AddBehaviour(new FireStickyBombAbilityBehaviour());
