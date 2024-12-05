@@ -6,8 +6,8 @@ namespace Game
 {
 	public class AbilityCard : MonoBehaviour
 	{
-		[SerializeReference]
-		private IEntityAspect _aspect;
+		[SerializeField]
+		private AbilityAspect _aspect;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{

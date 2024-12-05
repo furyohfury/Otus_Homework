@@ -15,6 +15,6 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6025802624882840659, guid: 441eea0bdf0170a40974fc99514d8286, type: 3}
   _weaponPrefab: {fileID: 1711525038331977360, guid: e726b212b7331374f94883dfdd4fa434, type: 3}
   _damage: 3
-  _shootDelay: 1
+  _shootDelay: 2
   _spreadAngle: 0
   _ammoSize: 5

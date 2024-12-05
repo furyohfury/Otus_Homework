@@ -121,6 +121,7 @@ public sealed class AbilityAspect : IEntityAspect
 		var weapon = entity.GetWeapon().Value;
 		Object.Destroy(weapon);
 		entity.DelWeapon();
+		entity.DelProjectilePrefab();
 		entity.DelFirePoint();
 		entity.DelAmmo();
 		entity.DelAmmoSize();

@@ -163,6 +163,7 @@ namespace Game.Entities
 			entity.AddApplyAbilityAspectRequest(new BaseEvent<IEntityAspect>());
 
 			entity.AddBehaviour(new AbilityPickupBehaviour());
+			entity.AddBehaviour(new AbilityDiscardOnAmmoBehaviour());
 			// entity.AddBehaviour(new JumpAbilityBehaviour());
 			// entity.AddBehaviour(new DashXAbilityBehaviour());
 			// entity.AddBehaviour(new FireStickyBombAbilityBehaviour());
