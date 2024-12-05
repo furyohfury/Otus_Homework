@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-	[CreateAssetMenu(menuName = "Create WeaponConfig", fileName = "WeaponConfig")]
+	[CreateAssetMenu(menuName = "Create config", fileName = "Weapon config")]
 	public sealed class WeaponConfig : ScriptableObject
 	{
 		public SceneEntity ProjectilePrefab => _projectilePrefab;

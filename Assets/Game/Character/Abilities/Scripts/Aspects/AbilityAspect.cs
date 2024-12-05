@@ -40,13 +40,12 @@ public sealed class AbilityAspect : IEntityAspect
 			entity.AddWeapon(weapon);
 		}
 		
-		entity.GetProjectilePrefab().Value = _weaponConfig.ProjectilePrefab;
 		var weaponGo = Object.Instantiate(_weaponConfig.WeaponPrefab, entity.GetWeaponContainer());
 		weapon.Value = weaponGo;
 		var firePoint = weaponGo
 		                .GetComponentsInChildren<Transform>()
 		                .SingleOrDefault(go => go.name == "FirePoint");
-
+		
 		if (firePoint == default)
 		{
 			Debug.LogError($"No fire point on {weapon.Value.name}. Creating default");
@@ -56,6 +55,11 @@ public sealed class AbilityAspect : IEntityAspect
 		if (!entity.AddFirePoint(new ReactiveVariable<Transform>(firePoint)))
 		{
 			entity.GetFirePoint().Value = firePoint;
+		}
+		
+		if (!entity.AddProjectilePrefab(new ReactiveVariable<SceneEntity>(_weaponConfig.ProjectilePrefab)))
+		{
+			entity.GetProjectilePrefab().Value = _weaponConfig.ProjectilePrefab;
 		}
 
 		if (!entity.AddDamage(new ReactiveVariable<int>(_weaponConfig.Damage)))

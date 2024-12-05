@@ -1,13 +1,12 @@
 ﻿using Atomic.Entities;
-using Atomic.Extensions;
 using UnityEngine;
 
 namespace Game
 {
-	public class AbilityCard : MonoBehaviour
+	public sealed class AbilityCard : MonoBehaviour
 	{
 		[SerializeField]
-		private AbilityAspect _aspect;
+		private AbilityCardConfig _abilityCardConfig;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -18,8 +17,9 @@ namespace Game
 
 			if (entity.TryGetApplyAbilityAspectRequest(out var request))
 			{
-				request.Invoke(_aspect);
+				request.Invoke(_abilityCardConfig.Aspect);
 			}
+
 			Destroy(gameObject);
 		}
 	}
