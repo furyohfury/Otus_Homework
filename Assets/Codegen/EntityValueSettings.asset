@@ -144,6 +144,9 @@ MonoBehaviour:
     - id: 34
       name: DeathEvent
       type: BaseEvent
+    - id: 49
+      name: MaxHealth
+      type: ReactiveVariable<int>
   - name: Interaction
     indexes:
     - id: 23

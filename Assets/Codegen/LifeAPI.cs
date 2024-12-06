@@ -20,6 +20,7 @@ namespace Atomic.Entities
         public const int TakeDamageRequest = 27; // BaseEvent<int>
         public const int TakeDamageEvent = 28; // BaseEvent<int>
         public const int DeathEvent = 34; // BaseEvent
+        public const int MaxHealth = 49; // ReactiveVariable<int>
 
 
         ///Extensions
@@ -130,5 +131,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetDeathEvent(this IEntity obj, BaseEvent value) => obj.SetValue(DeathEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<int> GetMaxHealth(this IEntity obj) => obj.GetValue<ReactiveVariable<int>>(MaxHealth);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetMaxHealth(this IEntity obj, out ReactiveVariable<int> value) => obj.TryGetValue(MaxHealth, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddMaxHealth(this IEntity obj, ReactiveVariable<int> value) => obj.AddValue(MaxHealth, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasMaxHealth(this IEntity obj) => obj.HasValue(MaxHealth);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelMaxHealth(this IEntity obj) => obj.DelValue(MaxHealth);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetMaxHealth(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(MaxHealth, value);
     }
 }

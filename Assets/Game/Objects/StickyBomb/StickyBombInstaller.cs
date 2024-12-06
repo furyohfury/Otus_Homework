@@ -1,3 +1,4 @@
+using System;
 using Atomic.Entities;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,13 +24,13 @@ namespace Game
 
 		[Header("FX")]
 		[SerializeField]
-		private AudioClip _stickingSound;
-		[SerializeField]
 		private ParticleSystem _explosionEffect;
+		[SerializeField]
+		private AudioClip _timerSound;
 		[SerializeField]
 		private AudioClip _explosionSound;
 		[SerializeField] [Range(0.0f, 1.0f)]
-		private float _explosionVolume = 1.0f;
+		private float _soundVolume = 1.0f;
 
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
@@ -39,6 +40,7 @@ namespace Game
 		private TriggerReceiver _triggerReceiver;
 
 		private IEntity _entity;
+		private AudioSource _effectsContainer;
 
 		public override void Install(IEntity entity)
 		{
@@ -60,17 +62,31 @@ namespace Game
 			timer.Start();
 			_entity.WhenUpdate(timer.Tick);
 			timer.OnEnded += Explode;
+			var effectsGo = new GameObject
+			                {
+				                transform =
+				                {
+					                position = transform.position, rotation = Quaternion.identity
+				                }
+			                };
+			_effectsContainer = effectsGo.AddComponent<AudioSource>();
+			if (_timerSound != null)
+			{
+				_effectsContainer.PlayOneShot(_timerSound);
+			}
 		}
 
 		private void Explode()
 		{
 			if (_explosionEffect != null)
 			{
-				var effect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
-
+				var explosionEffect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity, _effectsContainer.transform);
+				var particleSystemMain = explosionEffect.main;
+				particleSystemMain.stopAction = ParticleSystemStopAction.Destroy;
+				
 				if (_explosionSound != null)
 				{
-					effect.AddComponent<AudioSource>().PlayOneShot(_explosionSound, _explosionVolume);
+					_effectsContainer.PlayOneShot(_explosionSound, _soundVolume);
 				}
 			}
 
@@ -104,5 +120,21 @@ namespace Game
 
 			Destroy(_transform.gameObject);
 		}
+
+#if UNITY_EDITOR
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawSphere(transform.position, _explosionRadius);
+		}
+
+		private void OnValidate()
+		{
+			if (_timerSound != null && Mathf.Abs(_explosionDelay - _timerSound.length) > 0.1)
+			{
+				Debug.LogWarning($"Installed delay and sound of it on sticky bomb are too different. Division is {_explosionDelay - _timerSound.length}");
+			}
+		}
+#endif
 	}
 }

@@ -1,10 +1,15 @@
-﻿using Atomic.Entities;
+﻿using System;
+using Atomic.Entities;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
+	[RequireComponent(typeof(Collider2D))]
 	public sealed class AbilityCard : MonoBehaviour
 	{
+		[SerializeField]
+		private Image _image;
 		[SerializeField]
 		private AbilityCardConfig _abilityCardConfig;
 

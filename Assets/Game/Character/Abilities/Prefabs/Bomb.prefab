@@ -103,13 +103,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionDamage: 5
   _explosionForce: 2000
-  _explosionRadius: 10
+  _explosionRadius: 5
   _explosionDelay: 1
-  _explosionUpwardForce: 100
-  _stickingSound: {fileID: 0}
+  _explosionUpwardForce: 200
   _explosionEffect: {fileID: 19876930, guid: ec61825cb06be72419bb09eee03af08c, type: 3}
-  _explosionSound: {fileID: 0}
-  _explosionVolume: 1
+  _timerSound: {fileID: 8300000, guid: 0b167ec3276015c45b66f232380f0a0e, type: 3}
+  _explosionSound: {fileID: 8300000, guid: aeff979cceb2c4e8598eeb0500112a13, type: 3}
+  _soundVolume: 1
   _rigidbody: {fileID: 6256871916335887356}
   _transform: {fileID: 6256871916335887344}
   _triggerReceiver: {fileID: 6256871918285571621}
