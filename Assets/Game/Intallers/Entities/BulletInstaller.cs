@@ -20,6 +20,9 @@ namespace Game.Entities
 		private float _moveSpeed;
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
+		[SerializeField]
+		private float _lifeDuration;
+		
 
 		public void Install(IEntity entity)
 		{
@@ -27,18 +30,24 @@ namespace Game.Entities
 			entity.AddVisualTransform(_visualTransform);
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
 			entity.AddTriggerReceiver(_triggerReceiver);
-			// entity.AddTriggerEnterEvent(new BaseEvent<Collider2D>());
-			// entity.AddTriggerExitEvent(new BaseEvent<Collider2D>());
 			entity.AddCollider2D(_collider2D);
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddDeathEvent(new BaseEvent());
 			entity.AddRigidbody(_rigidbody);
+
+			var lifetimeTimer = new Timer(_lifeDuration);
+			lifetimeTimer.Start();
+			entity.WhenUpdate(lifetimeTimer.Tick);
+			entity.AddLifetimeTimer(lifetimeTimer);
 			
+			InstallBehaviours(entity);
+		}
+
+		private static void InstallBehaviours(IEntity entity)
+		{
 			entity.AddBehaviour(new BulletCollisionBehaviour());
 			entity.AddBehaviour(new MovementByKinematicRbBehaviour());
-			
-			// entity.AddBehaviour(new MovementByTransformBehaviour());
-			// entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
+			entity.AddBehaviour<LifetimeBehaviour>();
 		}
 	}
 }

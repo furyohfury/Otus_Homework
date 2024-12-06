@@ -21,6 +21,7 @@ namespace Atomic.Entities
         public const int TakeDamageEvent = 28; // BaseEvent<int>
         public const int DeathEvent = 34; // BaseEvent
         public const int MaxHealth = 49; // ReactiveVariable<int>
+        public const int LifetimeTimer = 52; // Timer
 
 
         ///Extensions
@@ -149,5 +150,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetMaxHealth(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(MaxHealth, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Timer GetLifetimeTimer(this IEntity obj) => obj.GetValue<Timer>(LifetimeTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetLifetimeTimer(this IEntity obj, out Timer value) => obj.TryGetValue(LifetimeTimer, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddLifetimeTimer(this IEntity obj, Timer value) => obj.AddValue(LifetimeTimer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasLifetimeTimer(this IEntity obj) => obj.HasValue(LifetimeTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelLifetimeTimer(this IEntity obj) => obj.DelValue(LifetimeTimer);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetLifetimeTimer(this IEntity obj, Timer value) => obj.SetValue(LifetimeTimer, value);
     }
 }
