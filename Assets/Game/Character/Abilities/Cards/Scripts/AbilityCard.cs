@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 namespace Game
 {
-	[RequireComponent(typeof(Collider2D))]
-	public sealed class AbilityCard : MonoBehaviour
+	public sealed class AbilityCard : SceneEntityInstallerBase
 	{
 		[SerializeField]
-		private Image _image;
+		private SpriteRenderer _renderer;
 		[SerializeField]
 		private AbilityCardConfig _abilityCardConfig;
+		[SerializeField]
+		private TriggerReceiver _triggerReceiver;
 
-		private void OnTriggerEnter2D(Collider2D other)
+		public override void Install(IEntity entity)
+		{
+			_triggerReceiver.OnTriggerEnter += OnTrigger;
+		}
+
+		private void OnTrigger(Collider2D other)
 		{
 			if (!other.TryGetEntity(out var entity) || !entity.HasCharacterTag())
 			{

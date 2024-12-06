@@ -157,6 +157,7 @@ MonoBehaviour:
         _damage: 1
         _moveSpeed: 20
         _rigidbody: {fileID: 2279817161541546855}
+        _lifeDuration: 5
 --- !u!50 &2279817161541546855
 Rigidbody2D:
   serializedVersion: 4

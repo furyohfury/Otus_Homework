@@ -29,33 +29,36 @@ public sealed class AbilityAspect : IEntityAspect
 	private void InitAbility(IEntity entity)
 	{
 		entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
-		entity.AddActiveAbilityAspect(this);
+		if (!entity.AddActiveAbilityAspect(new ReactiveVariable<IEntityAspect>(this)))
+		{
+			entity.GetActiveAbilityAspect().Value = this;
+		}
 	}
 
 	private void InitWeapon(IEntity entity) // TODO mb raznesti
 	{
-		if (!entity.TryGetWeapon(out ReactiveVariable<GameObject> weapon))
-		{
-			weapon = new ReactiveVariable<GameObject>();
-			entity.AddWeapon(weapon);
-		}
-		
-		var weaponGo = Object.Instantiate(_weaponConfig.WeaponPrefab, entity.GetWeaponContainer());
-		weapon.Value = weaponGo;
-		var firePoint = weaponGo
-		                .GetComponentsInChildren<Transform>()
-		                .SingleOrDefault(go => go.name == "FirePoint");
-		
-		if (firePoint == default)
-		{
-			Debug.LogError($"No fire point on {weapon.Value.name}. Creating default");
-			firePoint = weaponGo.transform;
-		}
-		
-		if (!entity.AddFirePoint(new ReactiveVariable<Transform>(firePoint)))
-		{
-			entity.GetFirePoint().Value = firePoint;
-		}
+		// if (!entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+		// {
+		// 	weapon = new ReactiveVariable<SceneEntity>();
+		// 	entity.AddWeapon(weapon);
+		// }
+		//
+		// var weaponGo = Object.Instantiate(_weaponConfig.WeaponPrefab, entity.GetWeaponContainer());
+		// weapon.Value = weaponGo;
+		// var firePoint = weaponGo
+		//                 .GetComponentsInChildren<Transform>()
+		//                 .SingleOrDefault(go => go.name == "FirePoint");
+		//
+		// if (firePoint == default)
+		// {
+		// 	Debug.LogError($"No fire point on {weapon.Value.name}. Creating default");
+		// 	firePoint = weaponGo.transform;
+		// }
+		//
+		// if (!entity.AddFirePoint(new ReactiveVariable<Transform>(firePoint)))
+		// {
+		// 	entity.GetFirePoint().Value = firePoint;
+		// }
 		
 		if (!entity.AddProjectilePrefab(new ReactiveVariable<SceneEntity>(_weaponConfig.ProjectilePrefab)))
 		{

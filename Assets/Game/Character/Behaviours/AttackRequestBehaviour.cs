@@ -1,10 +1,9 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using UnityEngine;
 
 namespace Game
 {
-	public sealed class AttackBehaviour : IEntityInit, IEntityDispose
+	public sealed class AttackRequestBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
 		private BaseEvent _attackRequest;

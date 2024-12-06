@@ -26,6 +26,9 @@ namespace a
 		[SerializeField]
 		private bool _drawGizmos;
 
+		[SerializeField]
+		private Timer _timer;
+
 		private void Start()
 		{
 			defaultRot = _sword.rotation.eulerAngles;

@@ -4,23 +4,17 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class AimWeaponBehaviour : IEntityInit, IEntityUpdate
+	public sealed class AimWeaponBehaviour : IEntityUpdate
 	{
-		private IValue<GameObject> _weapon;
-
-		public void Init(IEntity entity)
-		{
-			_weapon = entity.GetWeapon();
-		}
-
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
-			if (entity.TryGetTarget(out var target) == false)
+			if (!entity.TryGetTarget(out IFunction<Vector2> target)
+			    || !entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
 			{
 				return;
 			}
 
-			var weaponTransform = _weapon.Value.transform;
+			var weaponTransform = weapon.Value.GetVisualTransform();
 			weaponTransform.LookAtX(target.Invoke());
 		}
 	}

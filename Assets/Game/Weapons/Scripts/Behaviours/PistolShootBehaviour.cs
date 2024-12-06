@@ -11,7 +11,7 @@ namespace Game
 		private BaseEvent _attackEvent;
 		private IValue<SceneEntity> _pistolBulletPrefab;
 		private IValue<Transform> _firePoint;
-		private IValue<GameObject> _weapon;
+		private Transform _transform;
 		private Pool<SceneEntity> _pool;
 		
 		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
@@ -21,15 +21,15 @@ namespace Game
 			_pistolBulletPrefab = entity.GetProjectilePrefab();
 			_firePoint = entity.GetFirePoint();
 			_attackEvent = entity.GetAttackEvent();
-			_weapon = entity.GetWeapon();
 			_attackEvent.Subscribe(OnAttackEvent);
 
-			_pool = new Pool<SceneEntity>(_weapon.Value.transform, _pistolBulletPrefab.Value, true);
+			_transform = entity.GetVisualTransform();
+			_pool = new Pool<SceneEntity>(_transform.transform, _pistolBulletPrefab.Value, true);
 		}
 
 		private void OnAttackEvent()
 		{
-			// TODO how to get world transform?
+			// TODO how to get world transform? Actually root is alright
 			// TODO shoots with negative scale cuz of weapon rotation
 			var bullet = _pool.Get(_firePoint.Value.position, _firePoint.Value.rotation);
 			bullet.GetMoveDirection().Value = bullet.GetVisualTransform().right;

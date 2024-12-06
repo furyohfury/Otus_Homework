@@ -28,26 +28,22 @@ namespace Game.Entities
 		[SerializeField]
 		private LayerMask _groundLayer;
 
-		[Header("Combat")] [SerializeField]
-		private SceneEntity _sword;
+		[Header("Combat")] 
+		// [SerializeField]
+		// private SceneEntity _sword;
 		[SerializeField]
-		private GameObject _weapon;
-		[SerializeField]
-		private Transform _firePoint;
-		[SerializeField]
-		private SceneEntity _projectilePrefab;
-		[SerializeField]
-		private float _machineGunSpreadAngle;
-		[SerializeField]
-		private float _attackDelay;
+		private SceneEntity _weapon;
+		
 		[SerializeField]
 		private Transform _weaponContainer;
 
 
-		[Header("Life")] [SerializeField]
+		[Header("Life")] 
+		[SerializeField]
 		private int _health;
 
-		[Header("Ability")] [SerializeField]
+		[Header("Ability")] 
+		[SerializeField]
 		private float _dashForce;
 		[SerializeField]
 		private SceneEntity _stickyBombPrefab;
@@ -121,37 +117,26 @@ namespace Game.Entities
 
 		private void InitializeCombat(IEntity entity)
 		{
-			entity.AddSword(_sword);
+			// State
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
 			entity.AddWeaponContainer(_weaponContainer);
-			entity.AddWeapon(new ReactiveVariable<GameObject>(_weapon));
-			entity.AddFirePoint(_firePoint);
-			entity.AddAttackDelay(_attackDelay);
-
-			var attackTimer = new Timer(_attackDelay);
-			// entity.GetAttackDelay().Subscribe(delay => attackTimer.Duration = delay);
-			attackTimer.Start();
-			entity.WhenUpdate(attackTimer.Tick);
-			entity.GetAttackEvent().Subscribe(() => attackTimer.Start());
-			entity.AddAttackTimer(attackTimer);
+			if (_weapon != null)
+			{
+				entity.AddWeapon(new ReactiveVariable<SceneEntity>(_weapon));
+			}
+			entity.AddEquipWeaponRequest(new BaseEvent<SceneEntity>());
+			entity.AddUnequipWeaponRequest(new BaseEvent<SceneEntity>());
 
 			var canAttack = new AndExpression();
 			canAttack.Append(() => !entity.GetIsDead().Value);
-			canAttack.Append(attackTimer.IsEnded);
 			entity.AddCanAttack(canAttack);
 
-
-			// entity.AddPistolBulletPrefab(_pistolBulletPrefab);
-			// entity.AddMachineGunBulletPrefab(_machineGunBulletPrefab);
-			entity.AddProjectilePrefab(_projectilePrefab);
-			entity.AddWeaponSpreadAngle(new ReactiveVariable<float>(_machineGunSpreadAngle));
-
-			entity.AddBehaviour(new AttackBehaviour());
+			// Behaviours
+			entity.AddBehaviour(new AttackRequestBehaviour());
 			entity.AddBehaviour(new AimWeaponBehaviour());
-			// entity.AddBehaviour(new SwordAttackAnimationBehaviour());
-			// entity.AddBehaviour(new PistolShootBehaviour());
-			// entity.AddBehaviour(new MachineGunShootBehaviour());
+			entity.AddBehaviour(new EquipWeaponBehaviour());
+			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
 		}
 
 		private void InitializeAbilities(IEntity entity)

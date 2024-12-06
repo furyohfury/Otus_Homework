@@ -82,7 +82,7 @@ MonoBehaviour:
       type: BaseEvent
     - id: 16
       name: CanAttack
-      type: AndExpression
+      type: IExpression<bool>
     - id: 17
       name: Damage
       type: ReactiveVariable<int>
@@ -94,7 +94,7 @@ MonoBehaviour:
       type: ReactiveVariable<int>
     - id: 33
       name: Weapon
-      type: ReactiveVariable<GameObject>
+      type: ReactiveVariable<SceneEntity>
     - id: 40
       name: WeaponContainer
       type: Transform
@@ -113,6 +113,12 @@ MonoBehaviour:
     - id: 43
       name: AmmoSize
       type: ReactiveVariable<int>
+    - id: 50
+      name: EquipWeaponRequest
+      type: BaseEvent<SceneEntity>
+    - id: 51
+      name: UnequipWeaponRequest
+      type: BaseEvent<SceneEntity>
   - name: Sword
     indexes:
     - id: 14
@@ -147,6 +153,9 @@ MonoBehaviour:
     - id: 49
       name: MaxHealth
       type: ReactiveVariable<int>
+    - id: 52
+      name: LifetimeTimer
+      type: Timer
   - name: Interaction
     indexes:
     - id: 23

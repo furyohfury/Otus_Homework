@@ -17,17 +17,19 @@ namespace Atomic.Entities
         public const int Sword = 7; // SceneEntity
         public const int AttackRequest = 13; // BaseEvent
         public const int AttackEvent = 15; // BaseEvent
-        public const int CanAttack = 16; // AndExpression
+        public const int CanAttack = 16; // IExpression<bool>
         public const int Damage = 17; // ReactiveVariable<int>
         public const int FirePoint = 30; // ReactiveVariable<Transform>
         public const int Ammo = 31; // ReactiveVariable<int>
-        public const int Weapon = 33; // ReactiveVariable<GameObject>
+        public const int Weapon = 33; // ReactiveVariable<SceneEntity>
         public const int WeaponContainer = 40; // Transform
         public const int WeaponSpreadAngle = 42; // ReactiveVariable<float>
         public const int AttackTimer = 44; // Timer
         public const int AttackDelay = 45; // ReactiveVariable<float>
         public const int ProjectilePrefab = 47; // ReactiveVariable<SceneEntity>
         public const int AmmoSize = 43; // ReactiveVariable<int>
+        public const int EquipWeaponRequest = 50; // BaseEvent<SceneEntity>
+        public const int UnequipWeaponRequest = 51; // BaseEvent<SceneEntity>
 
 
         ///Extensions
@@ -86,13 +88,13 @@ namespace Atomic.Entities
         public static void SetAttackEvent(this IEntity obj, BaseEvent value) => obj.SetValue(AttackEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static AndExpression GetCanAttack(this IEntity obj) => obj.GetValue<AndExpression>(CanAttack);
+        public static IExpression<bool> GetCanAttack(this IEntity obj) => obj.GetValue<IExpression<bool>>(CanAttack);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetCanAttack(this IEntity obj, out AndExpression value) => obj.TryGetValue(CanAttack, out value);
+        public static bool TryGetCanAttack(this IEntity obj, out IExpression<bool> value) => obj.TryGetValue(CanAttack, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddCanAttack(this IEntity obj, AndExpression value) => obj.AddValue(CanAttack, value);
+        public static bool AddCanAttack(this IEntity obj, IExpression<bool> value) => obj.AddValue(CanAttack, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasCanAttack(this IEntity obj) => obj.HasValue(CanAttack);
@@ -101,7 +103,7 @@ namespace Atomic.Entities
         public static bool DelCanAttack(this IEntity obj) => obj.DelValue(CanAttack);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetCanAttack(this IEntity obj, AndExpression value) => obj.SetValue(CanAttack, value);
+        public static void SetCanAttack(this IEntity obj, IExpression<bool> value) => obj.SetValue(CanAttack, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ReactiveVariable<int> GetDamage(this IEntity obj) => obj.GetValue<ReactiveVariable<int>>(Damage);
@@ -158,13 +160,13 @@ namespace Atomic.Entities
         public static void SetAmmo(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(Ammo, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<GameObject> GetWeapon(this IEntity obj) => obj.GetValue<ReactiveVariable<GameObject>>(Weapon);
+        public static ReactiveVariable<SceneEntity> GetWeapon(this IEntity obj) => obj.GetValue<ReactiveVariable<SceneEntity>>(Weapon);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetWeapon(this IEntity obj, out ReactiveVariable<GameObject> value) => obj.TryGetValue(Weapon, out value);
+        public static bool TryGetWeapon(this IEntity obj, out ReactiveVariable<SceneEntity> value) => obj.TryGetValue(Weapon, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddWeapon(this IEntity obj, ReactiveVariable<GameObject> value) => obj.AddValue(Weapon, value);
+        public static bool AddWeapon(this IEntity obj, ReactiveVariable<SceneEntity> value) => obj.AddValue(Weapon, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasWeapon(this IEntity obj) => obj.HasValue(Weapon);
@@ -173,7 +175,7 @@ namespace Atomic.Entities
         public static bool DelWeapon(this IEntity obj) => obj.DelValue(Weapon);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetWeapon(this IEntity obj, ReactiveVariable<GameObject> value) => obj.SetValue(Weapon, value);
+        public static void SetWeapon(this IEntity obj, ReactiveVariable<SceneEntity> value) => obj.SetValue(Weapon, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Transform GetWeaponContainer(this IEntity obj) => obj.GetValue<Transform>(WeaponContainer);
@@ -282,5 +284,41 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAmmoSize(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(AmmoSize, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<SceneEntity> GetEquipWeaponRequest(this IEntity obj) => obj.GetValue<BaseEvent<SceneEntity>>(EquipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetEquipWeaponRequest(this IEntity obj, out BaseEvent<SceneEntity> value) => obj.TryGetValue(EquipWeaponRequest, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddEquipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.AddValue(EquipWeaponRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasEquipWeaponRequest(this IEntity obj) => obj.HasValue(EquipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelEquipWeaponRequest(this IEntity obj) => obj.DelValue(EquipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetEquipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.SetValue(EquipWeaponRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<SceneEntity> GetUnequipWeaponRequest(this IEntity obj) => obj.GetValue<BaseEvent<SceneEntity>>(UnequipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetUnequipWeaponRequest(this IEntity obj, out BaseEvent<SceneEntity> value) => obj.TryGetValue(UnequipWeaponRequest, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddUnequipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.AddValue(UnequipWeaponRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasUnequipWeaponRequest(this IEntity obj) => obj.HasValue(UnequipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelUnequipWeaponRequest(this IEntity obj) => obj.DelValue(UnequipWeaponRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetUnequipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.SetValue(UnequipWeaponRequest, value);
     }
 }
