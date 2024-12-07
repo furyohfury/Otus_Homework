@@ -15,8 +15,6 @@ namespace Game.Entities
 		[SerializeField]
 		private Collider2D _collider2D;
 		[SerializeField]
-		private int _damage;
-		[SerializeField]
 		private float _moveSpeed;
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
@@ -28,7 +26,7 @@ namespace Game.Entities
 		{
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>(_visualTransform.right));
 			entity.AddVisualTransform(_visualTransform);
-			entity.AddDamage(new ReactiveVariable<int>(_damage));
+			entity.AddDamage(new ReactiveVariable<int>());
 			entity.AddTriggerReceiver(_triggerReceiver);
 			entity.AddCollider2D(_collider2D);
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));

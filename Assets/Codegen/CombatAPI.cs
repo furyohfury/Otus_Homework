@@ -29,7 +29,7 @@ namespace Atomic.Entities
         public const int ProjectilePrefab = 47; // ReactiveVariable<SceneEntity>
         public const int AmmoSize = 43; // ReactiveVariable<int>
         public const int EquipWeaponRequest = 50; // BaseEvent<SceneEntity>
-        public const int UnequipWeaponRequest = 51; // BaseEvent<SceneEntity>
+        public const int UnequipWeaponRequest = 51; // BaseEvent
 
 
         ///Extensions
@@ -304,13 +304,13 @@ namespace Atomic.Entities
         public static void SetEquipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.SetValue(EquipWeaponRequest, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static BaseEvent<SceneEntity> GetUnequipWeaponRequest(this IEntity obj) => obj.GetValue<BaseEvent<SceneEntity>>(UnequipWeaponRequest);
+        public static BaseEvent GetUnequipWeaponRequest(this IEntity obj) => obj.GetValue<BaseEvent>(UnequipWeaponRequest);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetUnequipWeaponRequest(this IEntity obj, out BaseEvent<SceneEntity> value) => obj.TryGetValue(UnequipWeaponRequest, out value);
+        public static bool TryGetUnequipWeaponRequest(this IEntity obj, out BaseEvent value) => obj.TryGetValue(UnequipWeaponRequest, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddUnequipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.AddValue(UnequipWeaponRequest, value);
+        public static bool AddUnequipWeaponRequest(this IEntity obj, BaseEvent value) => obj.AddValue(UnequipWeaponRequest, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasUnequipWeaponRequest(this IEntity obj) => obj.HasValue(UnequipWeaponRequest);
@@ -319,6 +319,6 @@ namespace Atomic.Entities
         public static bool DelUnequipWeaponRequest(this IEntity obj) => obj.DelValue(UnequipWeaponRequest);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetUnequipWeaponRequest(this IEntity obj, BaseEvent<SceneEntity> value) => obj.SetValue(UnequipWeaponRequest, value);
+        public static void SetUnequipWeaponRequest(this IEntity obj, BaseEvent value) => obj.SetValue(UnequipWeaponRequest, value);
     }
 }

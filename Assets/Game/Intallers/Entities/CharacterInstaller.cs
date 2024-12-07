@@ -126,7 +126,7 @@ namespace Game.Entities
 				entity.AddWeapon(new ReactiveVariable<SceneEntity>(_weapon));
 			}
 			entity.AddEquipWeaponRequest(new BaseEvent<SceneEntity>());
-			entity.AddUnequipWeaponRequest(new BaseEvent<SceneEntity>());
+			entity.AddUnequipWeaponRequest(new BaseEvent());
 
 			var canAttack = new AndExpression();
 			canAttack.Append(() => !entity.GetIsDead().Value);
@@ -142,13 +142,14 @@ namespace Game.Entities
 		private void InitializeAbilities(IEntity entity)
 		{
 			entity.AddAbilityEvent(new BaseEvent());
-			entity.AddStickyBombPrefab(_stickyBombPrefab);
-			entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
-			entity.AddActiveAbilityAspect(new ReactiveVariable<IEntityAspect>());
-			entity.AddApplyAbilityAspectRequest(new BaseEvent<IEntityAspect>());
+			// entity.AddStickyBombPrefab(_stickyBombPrefab);
+			// entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
+			entity.AddActiveAbilityAspects(new ReactiveVariable<IEntityAspect[]>());
+			// entity.AddApplyAbilityAspectRequest(new BaseEvent<IEntityAspect>());
+			entity.AddAbilityCardPickupEvent(new BaseEvent<AbilityCardConfig>());
 
 			entity.AddBehaviour(new AbilityPickupBehaviour());
-			entity.AddBehaviour(new AbilityDiscardOnAmmoBehaviour());
+			// entity.AddBehaviour(new AbilityDiscardOnAmmoBehaviour());
 			// entity.AddBehaviour(new JumpAbilityBehaviour());
 			// entity.AddBehaviour(new DashXAbilityBehaviour());
 			// entity.AddBehaviour(new FireStickyBombAbilityBehaviour());

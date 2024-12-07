@@ -9,13 +9,13 @@ namespace Game
 		private IEntity _entity;
 		private BaseEvent _abilityEvent;
 		private ReactiveVariable<int> _abilityUseNumber;
-		private ReactiveVariable<IEntityAspect> _activeAbilityAspect;
+		private ReactiveVariable<IEntityAspect[]> _activeAbilityAspects;
 
 		public void Init(IEntity entity)
 		{
 			_entity = entity;
 			_abilityUseNumber = entity.GetAbilityUseNumber();
-			_activeAbilityAspect = entity.GetActiveAbilityAspect();
+			_activeAbilityAspects = entity.GetActiveAbilityAspects();
 			_abilityEvent = entity.GetAbilityEvent();
 			_abilityEvent.Subscribe(OnAbilityUsed);
 		}
@@ -25,8 +25,11 @@ namespace Game
 			_abilityUseNumber.Value--;
 			if (_abilityUseNumber.Value <= 0)
 			{
-				_entity.DiscardAspect(_activeAbilityAspect.Value);
-				_activeAbilityAspect.Value = null;
+				foreach (var aspect in _activeAbilityAspects.Value)
+				{
+					aspect.Discard(_entity);
+				}
+				_activeAbilityAspects.Value = null;
 			}
 		}
 

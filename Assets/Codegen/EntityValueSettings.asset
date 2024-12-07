@@ -118,7 +118,7 @@ MonoBehaviour:
       type: BaseEvent<SceneEntity>
     - id: 51
       name: UnequipWeaponRequest
-      type: BaseEvent<SceneEntity>
+      type: BaseEvent
   - name: Sword
     indexes:
     - id: 14
@@ -185,11 +185,17 @@ MonoBehaviour:
       name: AbilityUseNumber
       type: ReactiveVariable<int>
     - id: 41
-      name: ActiveAbilityAspect
-      type: ReactiveVariable<IEntityAspect>
+      name: ActiveAbilityAspects
+      type: ReactiveVariable<IEntityAspect[]>
     - id: 48
       name: ApplyAbilityAspectRequest
       type: BaseEvent<IEntityAspect>
+    - id: 53
+      name: AbilityCardPickupEvent
+      type: BaseEvent<AbilityCardConfig>
+    - id: 54
+      name: AbilityCardConfig
+      type: ReactiveVariable<AbilityCardConfig>
   - name: LevelObjects
     indexes:
     - id: 39

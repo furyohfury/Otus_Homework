@@ -7,47 +7,46 @@ namespace Game
 {
 	public sealed class AbilityDiscardOnAmmoBehaviour : IEntityInit, IEntityDispose
 	{
-		private IEntity _entity;
+		private IEntity _character;
 
 		public void Init(IEntity entity)
 		{
-			_entity = entity;
-			entity.OnValueAdded += OnAmmoAdded;
+			_character = entity;
+			entity.OnValueAdded += OnWeaponAdded;
 		}
 
-		private void OnAmmoAdded(IEntity entity, int apiIndex, object value)
+		private void OnWeaponAdded(IEntity entity, int apiIndex, object value)
 		{
-			if (apiIndex != CombatAPI.Ammo)
+			if (apiIndex != CombatAPI.Weapon)
 			{
 				return;
 			}
 
-			if (!entity.TryGetActiveAbilityAspect(out ReactiveVariable<IEntityAspect> aspect)
-			    || aspect.Value == null)
-			{
-				Debug.LogError($"{entity.Name} has no active ability");
-				return;
-			}
-
-			entity.GetAmmo().Subscribe(OnAmmoChanged);
+			_character.GetWeapon().Value.GetAmmo().Subscribe(OnAmmoChanged);
 		}
 
 		private void OnAmmoChanged(int count)
 		{
-			if (count <= 0)
+			if (count > 0)
 			{
-				_entity.GetAmmo().Unsubscribe(OnAmmoChanged);
-				var activeAbilityAspect = _entity.GetActiveAbilityAspect();
-				activeAbilityAspect.Value.Discard(_entity);
-				activeAbilityAspect.Value = null;
+				return;
 			}
+			
+			_character.GetAmmo().Unsubscribe(OnAmmoChanged);
+			ReactiveVariable<IEntityAspect[]> activeAbilityAspects = _character.GetActiveAbilityAspects();
+			foreach (var aspect in activeAbilityAspects.Value)
+			{
+				aspect.Discard(_character);
+			}
+			activeAbilityAspects.Value = null;
 		}
 
 		public void Dispose(IEntity entity)
 		{
-			_entity.OnValueAdded -= OnAmmoAdded;
+			_character.OnValueAdded -= OnWeaponAdded;
 
-			if (entity.TryGetAmmo(out var ammo))
+			if (_character.TryGetWeapon(out var weapon)
+			    && weapon.Value.TryGetAmmo(out var ammo))
 			{
 				ammo.Unsubscribe(OnAmmoChanged);
 			}

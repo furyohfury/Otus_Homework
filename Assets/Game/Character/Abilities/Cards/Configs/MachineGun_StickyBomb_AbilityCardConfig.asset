@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42bd1def73c14c938ccb6cf757a67c65, type: 3}
+  m_Name: MachineGun_StickyBomb_AbilityCardConfig
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: b7181ab36b007bf4f9de07357cc3de30, type: 3}
+  _aspects:
+  - rid: 7840523029330001939
+  - rid: 7840523029330001937
+  references:
+    version: 2
+    RefIds:
+    - rid: 7840523029330001937
+      type: {class: FireStickyBombAbilityAspect, ns: Game, asm: Assembly-CSharp}
+      data:
+        _stickyBombPrefab: {fileID: 6256871916335887346, guid: 82dc254629e06e641b356d217fcc16a6, type: 3}
+        _numberOfUses: 1
+    - rid: 7840523029330001939
+      type: {class: WeaponAspect, ns: Game, asm: Assembly-CSharp}
+      data:
+        _weaponPrefab: {fileID: 5772500873039148391, guid: f5f701b2354367147b0ef5df18ea605f, type: 3}

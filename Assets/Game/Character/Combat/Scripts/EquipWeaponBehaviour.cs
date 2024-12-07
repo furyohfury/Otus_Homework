@@ -9,7 +9,7 @@ namespace Game
 		private IEntity _entity;
 		private Transform _weaponContainer;
 		private BaseEvent<SceneEntity> _equipWeaponRequest;
-		private BaseEvent<SceneEntity> _unequipWeaponRequest;
+		private BaseEvent _unequipWeaponRequest;
 
 		public void Init(IEntity entity)
 		{
@@ -25,13 +25,13 @@ namespace Game
 
 		private void OnWeaponEquip(SceneEntity weapon)
 		{
-			var weaponTransform = weapon.GetVisualTransform();
-			weaponTransform.SetParent(_weaponContainer);
-			_entity.AddWeapon(weapon);
+			var weaponGo = SceneEntity.Instantiate(weapon, _weaponContainer.position, _weaponContainer.rotation, _weaponContainer);
+			_entity.AddWeapon(weaponGo);
 		}
 
-		private void OnWeaponUnequip(SceneEntity weapon)
+		private void OnWeaponUnequip()
 		{
+			SceneEntity weapon = _entity.GetWeapon().Value;
 			Object.Destroy(weapon.gameObject);
 			_entity.DelWeapon();
 		}

@@ -19,8 +19,10 @@ namespace Atomic.Entities
         public const int DashForce = 38; // ReactiveVariable<float>
         public const int StickyBombPrefab = 46; // SceneEntity
         public const int AbilityUseNumber = 29; // ReactiveVariable<int>
-        public const int ActiveAbilityAspect = 41; // ReactiveVariable<IEntityAspect>
+        public const int ActiveAbilityAspects = 41; // ReactiveVariable<IEntityAspect[]>
         public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
+        public const int AbilityCardPickupEvent = 53; // BaseEvent<AbilityCardConfig>
+        public const int AbilityCardConfig = 54; // ReactiveVariable<AbilityCardConfig>
 
 
         ///Extensions
@@ -115,22 +117,22 @@ namespace Atomic.Entities
         public static void SetAbilityUseNumber(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(AbilityUseNumber, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<IEntityAspect> GetActiveAbilityAspect(this IEntity obj) => obj.GetValue<ReactiveVariable<IEntityAspect>>(ActiveAbilityAspect);
+        public static ReactiveVariable<IEntityAspect[]> GetActiveAbilityAspects(this IEntity obj) => obj.GetValue<ReactiveVariable<IEntityAspect[]>>(ActiveAbilityAspects);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetActiveAbilityAspect(this IEntity obj, out ReactiveVariable<IEntityAspect> value) => obj.TryGetValue(ActiveAbilityAspect, out value);
+        public static bool TryGetActiveAbilityAspects(this IEntity obj, out ReactiveVariable<IEntityAspect[]> value) => obj.TryGetValue(ActiveAbilityAspects, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddActiveAbilityAspect(this IEntity obj, ReactiveVariable<IEntityAspect> value) => obj.AddValue(ActiveAbilityAspect, value);
+        public static bool AddActiveAbilityAspects(this IEntity obj, ReactiveVariable<IEntityAspect[]> value) => obj.AddValue(ActiveAbilityAspects, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasActiveAbilityAspect(this IEntity obj) => obj.HasValue(ActiveAbilityAspect);
+        public static bool HasActiveAbilityAspects(this IEntity obj) => obj.HasValue(ActiveAbilityAspects);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelActiveAbilityAspect(this IEntity obj) => obj.DelValue(ActiveAbilityAspect);
+        public static bool DelActiveAbilityAspects(this IEntity obj) => obj.DelValue(ActiveAbilityAspects);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetActiveAbilityAspect(this IEntity obj, ReactiveVariable<IEntityAspect> value) => obj.SetValue(ActiveAbilityAspect, value);
+        public static void SetActiveAbilityAspects(this IEntity obj, ReactiveVariable<IEntityAspect[]> value) => obj.SetValue(ActiveAbilityAspects, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static BaseEvent<IEntityAspect> GetApplyAbilityAspectRequest(this IEntity obj) => obj.GetValue<BaseEvent<IEntityAspect>>(ApplyAbilityAspectRequest);
@@ -149,5 +151,41 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetApplyAbilityAspectRequest(this IEntity obj, BaseEvent<IEntityAspect> value) => obj.SetValue(ApplyAbilityAspectRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent<AbilityCardConfig> GetAbilityCardPickupEvent(this IEntity obj) => obj.GetValue<BaseEvent<AbilityCardConfig>>(AbilityCardPickupEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAbilityCardPickupEvent(this IEntity obj, out BaseEvent<AbilityCardConfig> value) => obj.TryGetValue(AbilityCardPickupEvent, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAbilityCardPickupEvent(this IEntity obj, BaseEvent<AbilityCardConfig> value) => obj.AddValue(AbilityCardPickupEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAbilityCardPickupEvent(this IEntity obj) => obj.HasValue(AbilityCardPickupEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAbilityCardPickupEvent(this IEntity obj) => obj.DelValue(AbilityCardPickupEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAbilityCardPickupEvent(this IEntity obj, BaseEvent<AbilityCardConfig> value) => obj.SetValue(AbilityCardPickupEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveVariable<AbilityCardConfig> GetAbilityCardConfig(this IEntity obj) => obj.GetValue<ReactiveVariable<AbilityCardConfig>>(AbilityCardConfig);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAbilityCardConfig(this IEntity obj, out ReactiveVariable<AbilityCardConfig> value) => obj.TryGetValue(AbilityCardConfig, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAbilityCardConfig(this IEntity obj, ReactiveVariable<AbilityCardConfig> value) => obj.AddValue(AbilityCardConfig, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAbilityCardConfig(this IEntity obj) => obj.HasValue(AbilityCardConfig);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAbilityCardConfig(this IEntity obj) => obj.DelValue(AbilityCardConfig);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAbilityCardConfig(this IEntity obj, ReactiveVariable<AbilityCardConfig> value) => obj.SetValue(AbilityCardConfig, value);
     }
 }

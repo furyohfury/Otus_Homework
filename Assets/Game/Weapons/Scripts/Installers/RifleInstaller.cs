@@ -1,11 +1,10 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
-using BaseEvent = Atomic.Elements.BaseEvent;
 
 namespace Game
 {
-	public class PistolInstaller : SceneEntityInstallerBase
+	public sealed class RifleInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
@@ -20,8 +19,8 @@ namespace Game
 		[SerializeField]
 		private int _ammoSize = 10;
 		[SerializeField]
-		private int  _damage = 1;
-		
+		private int _damage = 1;
+
 
 		public override void Install(IEntity entity)
 		{

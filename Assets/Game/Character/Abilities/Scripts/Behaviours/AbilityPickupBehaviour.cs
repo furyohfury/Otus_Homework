@@ -6,28 +6,39 @@ namespace Game
 {
 	public sealed class AbilityPickupBehaviour : IEntityInit, IEntityDispose
 	{
-		private IEntity _entity;
-		private ReactiveVariable<IEntityAspect> _activeAbilityAspect;
-		private BaseEvent<IEntityAspect> _applyAbilityAspectRequest;
+		private IEntity _characterEntity;
+		private BaseEvent<AbilityCardConfig> _pickupAbilityCardEvent;
+		private ReactiveVariable<IEntityAspect[]> _activeAbilityAspects;
 
 		public void Init(IEntity entity)
 		{
-			_entity = entity;
-			_activeAbilityAspect = entity.GetActiveAbilityAspect();
-			_applyAbilityAspectRequest = entity.GetApplyAbilityAspectRequest();
-			_applyAbilityAspectRequest.Subscribe(OnChangeAspect);
+			_characterEntity = entity;
+			_activeAbilityAspects = entity.GetActiveAbilityAspects();
+			_pickupAbilityCardEvent = entity.GetAbilityCardPickupEvent();
+			_pickupAbilityCardEvent.Subscribe(OnChangeAspect);
 		}
 
-		private void OnChangeAspect(IEntityAspect aspect)
+		private void OnChangeAspect(AbilityCardConfig cardConfig)
 		{
-			_activeAbilityAspect.Value?.Discard(_entity);
-			_activeAbilityAspect.Value = aspect;
-			_activeAbilityAspect.Value.Apply(_entity);
+			if (_activeAbilityAspects.Value != null)
+			{
+				foreach (var aspect in _activeAbilityAspects.Value)
+				{
+					aspect.Discard(_characterEntity);
+				}
+			}
+			
+			foreach (var aspect in cardConfig.Aspects)
+			{
+				aspect.Apply(_characterEntity);
+			}
+
+			_activeAbilityAspects.Value = cardConfig.Aspects;
 		}
 
 		public void Dispose(IEntity entity)
 		{
-			_activeAbilityAspect.Unsubscribe(OnChangeAspect);
+			_pickupAbilityCardEvent.Unsubscribe(OnChangeAspect);
 		}
 	}
 }

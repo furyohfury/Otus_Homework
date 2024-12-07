@@ -1,11 +1,10 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
-using BaseEvent = Atomic.Elements.BaseEvent;
 
 namespace Game
 {
-	public class PistolInstaller : SceneEntityInstallerBase
+	public class MachineGunInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
@@ -21,7 +20,9 @@ namespace Game
 		private int _ammoSize = 10;
 		[SerializeField]
 		private int  _damage = 1;
-		
+		[SerializeField]
+		private float _spreadAngle;
+
 
 		public override void Install(IEntity entity)
 		{
@@ -40,6 +41,7 @@ namespace Game
 		private void InstallWeaponParameters(IEntity entity)
 		{
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
+			entity.AddWeaponSpreadAngle(new ReactiveVariable<float>(_spreadAngle));
 			entity.AddFirePoint(new ReactiveVariable<Transform>(_firePoint));
 			entity.AddAttackDelay(new ReactiveVariable<float>(_attackDelay));
 			entity.AddProjectilePrefab(new ReactiveVariable<SceneEntity>(_projectilePrefab));
@@ -69,7 +71,7 @@ namespace Game
 		private void InstallBehaviours(IEntity entity)
 		{
 			entity.AddBehaviour<AttackRequestBehaviour>();
-			entity.AddBehaviour<SingleBulletWeaponBehaviour>();
+			entity.AddBehaviour<SpreadShootBehaviour>();
 			entity.AddBehaviour<SpendAmmoOnAttackBehaviour>();
 		}
 	}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public class DashXAbilityBehaviour : IEntityInit, IEntityDispose
+	public sealed class DashXAbilityBehaviour : IEntityInit, IEntityDispose
 	{
 		private IValue<float> _dashForce;
 		private Rigidbody2D _rigidbody;
@@ -28,7 +28,6 @@ namespace Game
 			var sign = Mathf.Sign(direction.x);
 
 			_rigidbody.AddForce(new Vector2(_dashForce.Value * sign, 0));
-			// _rigidbody.velocity += new Vector2(_dashForce.Value * sign, 0);
 		}
 
 		public void Dispose(IEntity entity)

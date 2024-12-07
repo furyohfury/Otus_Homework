@@ -7,10 +7,12 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class JumpAbilityAspect : IEntityAspect
+	public sealed class DashXAbilityAspect : IEntityAspect
 	{
 		[SerializeField]
 		private int _numberOfUses;
+		[SerializeField]
+		private float _dashForce = 2000f;
 
 		public void Apply(IEntity entity)
 		{
@@ -20,6 +22,7 @@ namespace Game
 
 		private void InitAbility(IEntity entity)
 		{
+			entity.AddDashForce(new ReactiveVariable<float>(_dashForce));
 			entity.AddAbilityUseNumber(new ReactiveVariable<int>(_numberOfUses));
 		}
 
@@ -35,15 +38,16 @@ namespace Game
 				entity.AddBehaviour<AbilityDiscardOnAmmoBehaviour>();
 			}
 
-			entity.AddBehaviour<JumpAbilityBehaviour>();
+			entity.AddBehaviour<DashXAbilityBehaviour>();
 		}
 
 		public void Discard(IEntity entity)
 		{
+			entity.DelDashForce();
 			entity.DelAbilityUseNumber();
 			entity.DelBehaviour<AbilityUseNumberBehaviour>();
 			entity.DelBehaviour<AbilityDiscardOnAmmoBehaviour>();
-			entity.DelBehaviour<JumpAbilityBehaviour>();
+			entity.DelBehaviour<DashXAbilityBehaviour>();
 		}
 	}
 }

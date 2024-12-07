@@ -14,7 +14,8 @@ namespace Game
 		{
 			_stickyBombPrefab = entity.GetStickyBombPrefab();
 			_abilityEvent = entity.GetAbilityEvent();
-			_firePoint = entity.GetFirePoint();
+			var weapon = entity.GetWeapon().Value;
+			_firePoint = weapon.GetFirePoint();
 			_abilityEvent.Subscribe(OnAbilityEvent);
 		}
 

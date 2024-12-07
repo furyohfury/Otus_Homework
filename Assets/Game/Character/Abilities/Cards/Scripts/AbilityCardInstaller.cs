@@ -1,11 +1,12 @@
 ﻿using System;
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
 {
-	public sealed class AbilityCard : SceneEntityInstallerBase
+	public sealed class AbilityCardInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private SpriteRenderer _renderer;
@@ -13,10 +14,13 @@ namespace Game
 		private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
+		private IEntity _entity;
 
 		public override void Install(IEntity entity)
 		{
+			_entity = entity;
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
+			entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(_abilityCardConfig));
 		}
 
 		private void OnTrigger(Collider2D other)
@@ -26,12 +30,22 @@ namespace Game
 				return;
 			}
 
-			if (entity.TryGetApplyAbilityAspectRequest(out var request))
+			if (entity.TryGetAbilityCardPickupEvent(out BaseEvent<AbilityCardConfig> pickupEvent))
 			{
-				request.Invoke(_abilityCardConfig.Aspect);
+				pickupEvent.Invoke(_abilityCardConfig);
 			}
 
 			Destroy(gameObject);
 		}
+
+#if UNITY_EDITOR
+		private void OnValidate()
+		{
+			if (_renderer != null && _abilityCardConfig != null)
+			{
+				_renderer.sprite = _abilityCardConfig.Sprite;
+			}
+		}
+#endif
 	}
 }

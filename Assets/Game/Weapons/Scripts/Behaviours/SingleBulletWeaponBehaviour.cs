@@ -6,18 +6,20 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class PistolShootBehaviour : IEntityInit, IEntityDispose
+	public sealed class SingleBulletWeaponBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
 		private IValue<SceneEntity> _pistolBulletPrefab;
 		private IValue<Transform> _firePoint;
 		private Transform _transform;
 		private Pool<SceneEntity> _pool;
+		private IValue<int> _damage;
 		
 		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
 
 		public void Init(IEntity entity)
 		{
+			_damage = entity.GetDamage();
 			_pistolBulletPrefab = entity.GetProjectilePrefab();
 			_firePoint = entity.GetFirePoint();
 			_attackEvent = entity.GetAttackEvent();
@@ -32,6 +34,8 @@ namespace Game
 			// TODO how to get world transform? Actually root is alright
 			// TODO shoots with negative scale cuz of weapon rotation
 			var bullet = _pool.Get(_firePoint.Value.position, _firePoint.Value.rotation);
+
+			bullet.GetDamage().Value = _damage.Value;
 			bullet.GetMoveDirection().Value = bullet.GetVisualTransform().right;
 			if (bullet.TryGetDeathEvent(out BaseEvent deathEvent))
 			{
