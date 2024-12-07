@@ -7,7 +7,7 @@ namespace Game
 	public sealed class RemoveActiveAbilityBehaviour : IEntityInit, IEntityDispose
 	{
 		private IEntity _character;
-		private ReactiveVariable<IEntityAspect[]> _activeAbilityAspects;
+		private ReactiveList<IEntityAspect> _activeAbilityAspects;
 		private BaseEvent _removeActiveAbilityEvent;
 
 		public void Init(IEntity entity)
@@ -20,12 +20,12 @@ namespace Game
 
 		private void OnRemoveActiveAbility()
 		{
-			foreach (var aspect in _activeAbilityAspects.Value)
+			foreach (var aspect in _activeAbilityAspects)
 			{
 				aspect.Discard(_character);
 			}
 
-			_activeAbilityAspects.Value = null;
+			_activeAbilityAspects.Clear();
 		}
 
 		public void Dispose(IEntity entity)

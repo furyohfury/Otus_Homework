@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Atomic.Elements;
 using Game;
 using Atomic.Extensions;
+using System.Collections.Generic;
 
 namespace Atomic.Entities
 {

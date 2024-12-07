@@ -143,11 +143,14 @@ namespace Game.Entities
 		{
 			// TODO add request and can use
 			entity.AddAbilityEvent(new BaseEvent());
-			entity.AddActiveAbilityAspects(new ReactiveVariable<IEntityAspect[]>());
+			entity.AddActiveAbilityAspects(new ReactiveList<IEntityAspect>());
 			entity.AddAbilityCardPickupEvent(new BaseEvent<AbilityCardConfig>());
+			entity.AddAbilityInventory(new ReactiveList<AbilityCardState>());
+			entity.AddRemoveActiveAbilityEvent(new BaseEvent());
 
 			entity.AddBehaviour(new AbilityPickupBehaviour());
 			entity.AddBehaviour(new RemoveActiveAbilityBehaviour());
+			entity.AddBehaviour(new AbilityInventoryBehaviour());
 		}
 	}
 }

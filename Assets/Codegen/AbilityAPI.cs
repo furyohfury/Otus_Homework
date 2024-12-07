@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Atomic.Elements;
 using Game;
 using Atomic.Extensions;
+using System.Collections.Generic;
 
 namespace Atomic.Entities
 {
@@ -19,11 +20,12 @@ namespace Atomic.Entities
         public const int DashForce = 38; // ReactiveVariable<float>
         public const int StickyBombPrefab = 46; // SceneEntity
         public const int AbilityUseNumber = 29; // ReactiveVariable<int>
-        public const int ActiveAbilityAspects = 41; // ReactiveVariable<IEntityAspect[]>
+        public const int ActiveAbilityAspects = 41; // ReactiveList<IEntityAspect>
         public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
         public const int AbilityCardPickupEvent = 53; // BaseEvent<AbilityCardConfig>
         public const int AbilityCardConfig = 54; // ReactiveVariable<AbilityCardConfig>
         public const int RemoveActiveAbilityEvent = 55; // BaseEvent
+        public const int AbilityInventory = 56; // ReactiveList<AbilityCardState>
 
 
         ///Extensions
@@ -118,13 +120,13 @@ namespace Atomic.Entities
         public static void SetAbilityUseNumber(this IEntity obj, ReactiveVariable<int> value) => obj.SetValue(AbilityUseNumber, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<IEntityAspect[]> GetActiveAbilityAspects(this IEntity obj) => obj.GetValue<ReactiveVariable<IEntityAspect[]>>(ActiveAbilityAspects);
+        public static ReactiveList<IEntityAspect> GetActiveAbilityAspects(this IEntity obj) => obj.GetValue<ReactiveList<IEntityAspect>>(ActiveAbilityAspects);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetActiveAbilityAspects(this IEntity obj, out ReactiveVariable<IEntityAspect[]> value) => obj.TryGetValue(ActiveAbilityAspects, out value);
+        public static bool TryGetActiveAbilityAspects(this IEntity obj, out ReactiveList<IEntityAspect> value) => obj.TryGetValue(ActiveAbilityAspects, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddActiveAbilityAspects(this IEntity obj, ReactiveVariable<IEntityAspect[]> value) => obj.AddValue(ActiveAbilityAspects, value);
+        public static bool AddActiveAbilityAspects(this IEntity obj, ReactiveList<IEntityAspect> value) => obj.AddValue(ActiveAbilityAspects, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasActiveAbilityAspects(this IEntity obj) => obj.HasValue(ActiveAbilityAspects);
@@ -133,7 +135,7 @@ namespace Atomic.Entities
         public static bool DelActiveAbilityAspects(this IEntity obj) => obj.DelValue(ActiveAbilityAspects);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetActiveAbilityAspects(this IEntity obj, ReactiveVariable<IEntityAspect[]> value) => obj.SetValue(ActiveAbilityAspects, value);
+        public static void SetActiveAbilityAspects(this IEntity obj, ReactiveList<IEntityAspect> value) => obj.SetValue(ActiveAbilityAspects, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static BaseEvent<IEntityAspect> GetApplyAbilityAspectRequest(this IEntity obj) => obj.GetValue<BaseEvent<IEntityAspect>>(ApplyAbilityAspectRequest);
@@ -206,5 +208,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetRemoveActiveAbilityEvent(this IEntity obj, BaseEvent value) => obj.SetValue(RemoveActiveAbilityEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ReactiveList<AbilityCardState> GetAbilityInventory(this IEntity obj) => obj.GetValue<ReactiveList<AbilityCardState>>(AbilityInventory);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAbilityInventory(this IEntity obj, out ReactiveList<AbilityCardState> value) => obj.TryGetValue(AbilityInventory, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAbilityInventory(this IEntity obj, ReactiveList<AbilityCardState> value) => obj.AddValue(AbilityInventory, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAbilityInventory(this IEntity obj) => obj.HasValue(AbilityInventory);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAbilityInventory(this IEntity obj) => obj.DelValue(AbilityInventory);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAbilityInventory(this IEntity obj, ReactiveList<AbilityCardState> value) => obj.SetValue(AbilityInventory, value);
     }
 }

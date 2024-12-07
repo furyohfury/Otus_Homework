@@ -20,6 +20,7 @@ MonoBehaviour:
   - Atomic.Elements
   - Game
   - Atomic.Extensions
+  - System.Collections.Generic
   categories:
   - name: Movement
     indexes:
@@ -186,7 +187,7 @@ MonoBehaviour:
       type: ReactiveVariable<int>
     - id: 41
       name: ActiveAbilityAspects
-      type: ReactiveVariable<IEntityAspect[]>
+      type: ReactiveList<IEntityAspect>
     - id: 48
       name: ApplyAbilityAspectRequest
       type: BaseEvent<IEntityAspect>
@@ -199,6 +200,9 @@ MonoBehaviour:
     - id: 55
       name: RemoveActiveAbilityEvent
       type: BaseEvent
+    - id: 56
+      name: AbilityInventory
+      type: ReactiveList<AbilityCardState>
   - name: LevelObjects
     indexes:
     - id: 39
