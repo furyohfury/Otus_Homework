@@ -196,6 +196,9 @@ MonoBehaviour:
     - id: 54
       name: AbilityCardConfig
       type: ReactiveVariable<AbilityCardConfig>
+    - id: 55
+      name: RemoveActiveAbilityEvent
+      type: BaseEvent
   - name: LevelObjects
     indexes:
     - id: 39

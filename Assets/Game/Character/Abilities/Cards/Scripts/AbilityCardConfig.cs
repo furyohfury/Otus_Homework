@@ -1,6 +1,5 @@
 ﻿using Atomic.Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -9,10 +8,7 @@ namespace Game
 	{
 		public Sprite Sprite;
 		public IEntityAspect[] Aspects => _aspects;
-		// [SerializeReference]
-		// public IEntityAspect WeaponAspect;
-		// [SerializeReference]
-		// public IEntityAspect AbilityAspect;
+
 		[SerializeReference]
 		private IEntityAspect[] _aspects;
 	}

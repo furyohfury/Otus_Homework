@@ -1,21 +1,20 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using Atomic.Extensions;
 
 namespace Game
 {
 	public sealed class AbilityUseNumberBehaviour : IEntityInit, IEntityDispose
 	{
-		private IEntity _entity;
+		private IEntity _character;
 		private BaseEvent _abilityEvent;
 		private ReactiveVariable<int> _abilityUseNumber;
-		private ReactiveVariable<IEntityAspect[]> _activeAbilityAspects;
+		private IEvent _removeActiveAbilityEvent;
 
 		public void Init(IEntity entity)
 		{
-			_entity = entity;
+			_removeActiveAbilityEvent = entity.GetRemoveActiveAbilityEvent();
+			_character = entity;
 			_abilityUseNumber = entity.GetAbilityUseNumber();
-			_activeAbilityAspects = entity.GetActiveAbilityAspects();
 			_abilityEvent = entity.GetAbilityEvent();
 			_abilityEvent.Subscribe(OnAbilityUsed);
 		}
@@ -25,11 +24,7 @@ namespace Game
 			_abilityUseNumber.Value--;
 			if (_abilityUseNumber.Value <= 0)
 			{
-				foreach (var aspect in _activeAbilityAspects.Value)
-				{
-					aspect.Discard(_entity);
-				}
-				_activeAbilityAspects.Value = null;
+				_removeActiveAbilityEvent.Invoke();
 			}
 		}
 

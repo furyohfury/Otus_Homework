@@ -23,6 +23,7 @@ namespace Atomic.Entities
         public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
         public const int AbilityCardPickupEvent = 53; // BaseEvent<AbilityCardConfig>
         public const int AbilityCardConfig = 54; // ReactiveVariable<AbilityCardConfig>
+        public const int RemoveActiveAbilityEvent = 55; // BaseEvent
 
 
         ///Extensions
@@ -187,5 +188,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAbilityCardConfig(this IEntity obj, ReactiveVariable<AbilityCardConfig> value) => obj.SetValue(AbilityCardConfig, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static BaseEvent GetRemoveActiveAbilityEvent(this IEntity obj) => obj.GetValue<BaseEvent>(RemoveActiveAbilityEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetRemoveActiveAbilityEvent(this IEntity obj, out BaseEvent value) => obj.TryGetValue(RemoveActiveAbilityEvent, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddRemoveActiveAbilityEvent(this IEntity obj, BaseEvent value) => obj.AddValue(RemoveActiveAbilityEvent, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasRemoveActiveAbilityEvent(this IEntity obj) => obj.HasValue(RemoveActiveAbilityEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelRemoveActiveAbilityEvent(this IEntity obj) => obj.DelValue(RemoveActiveAbilityEvent);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetRemoveActiveAbilityEvent(this IEntity obj, BaseEvent value) => obj.SetValue(RemoveActiveAbilityEvent, value);
     }
 }

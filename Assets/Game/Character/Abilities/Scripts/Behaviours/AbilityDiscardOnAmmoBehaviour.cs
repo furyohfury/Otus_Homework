@@ -1,16 +1,16 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
-using Atomic.Extensions;
-using UnityEngine;
 
 namespace Game
 {
 	public sealed class AbilityDiscardOnAmmoBehaviour : IEntityInit, IEntityDispose
 	{
 		private IEntity _character;
+		private IEvent _removeActiveAbilityEvent;
 
 		public void Init(IEntity entity)
 		{
+			_removeActiveAbilityEvent = entity.GetRemoveActiveAbilityEvent();
 			_character = entity;
 			entity.OnValueAdded += OnWeaponAdded;
 		}
@@ -31,14 +31,9 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			_character.GetAmmo().Unsubscribe(OnAmmoChanged);
-			ReactiveVariable<IEntityAspect[]> activeAbilityAspects = _character.GetActiveAbilityAspects();
-			foreach (var aspect in activeAbilityAspects.Value)
-			{
-				aspect.Discard(_character);
-			}
-			activeAbilityAspects.Value = null;
+			_removeActiveAbilityEvent.Invoke();
 		}
 
 		public void Dispose(IEntity entity)
