@@ -21,7 +21,11 @@ namespace Game
 		private Transform _transform;
 		[SerializeField]
 		private CollisionReceiver _collisionReceiver;
+		[SerializeField]
+		private TriggerReceiver _triggerReceiver;
 
+		private Vector2 _cachedVelocity;
+		
 		public override void Install(IEntity entity)
 		{
 			if (_explosionEffect != null)
@@ -34,7 +38,16 @@ namespace Game
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
 
+			_triggerReceiver.OnTriggerEnter += OnTriggerred;
 			_collisionReceiver.OnCollisionEnter += OnCollided;
+		}
+
+		private void OnTriggerred(Collider2D other)
+		{
+			if (other.TryGetEntity(out IEntity entity) && entity.TryGetRigidbody(out Rigidbody2D rigidbody2D))
+			{
+				_cachedVelocity = rigidbody2D.velocity;
+			}
 		}
 
 		private void DestroyWall()
@@ -52,24 +65,29 @@ namespace Game
 			Destroy(_transform.gameObject);
 		}
 
-		private void OnCollided(Collision2D collision)
+		private void OnCollided(Collision2D collision2D)
 		{
-			if (!collision.TryGetEntity(out IEntity entity)
-			    || !entity.TryGetRigidbody(out Rigidbody2D rigidbody))
+			if (!collision2D.TryGetEntity(out IEntity collisionEntity)
+			    || !collisionEntity.TryGetRigidbody(out Rigidbody2D collisionRb))
 			{
 				return;
 			}
 
-			if (CanDestroy(rigidbody.velocity))
+			if (CanDestroy(collision2D.relativeVelocity))
 			{
+				collisionRb.velocity = _cachedVelocity;
 				DestroyWall();
 			}
 		}
 
 		private bool CanDestroy(Vector2 velocity)
 		{
-			return (_velocityToDestroy.x > 0 && velocity.x > _velocityToDestroy.x)
-			       || (_velocityToDestroy.y > 0 && velocity.y > _velocityToDestroy.y);
+			if (_velocityToDestroy.x > 0)
+			{
+				return Mathf.Abs(velocity.x) > _velocityToDestroy.x;
+			}
+			
+			return Mathf.Abs(velocity.y) > _velocityToDestroy.y;
 		}
 
 		private void OnValidate()
