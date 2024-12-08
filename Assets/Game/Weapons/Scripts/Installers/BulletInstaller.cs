@@ -24,6 +24,7 @@ namespace Game.Entities
 
 		public void Install(IEntity entity)
 		{
+			entity.AddBulletTag();
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>(_visualTransform.right));
 			entity.AddVisualTransform(_visualTransform);
 			entity.AddDamage(new ReactiveVariable<int>());

@@ -1,8 +1,10 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using DG.Tweening;
+using Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace a
 {
@@ -28,6 +30,7 @@ namespace a
 
 		[SerializeField]
 		private Timer _timer;
+		private LevelManager _levelManager;
 
 		private void Start()
 		{

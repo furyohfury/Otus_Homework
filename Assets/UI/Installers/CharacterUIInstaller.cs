@@ -4,7 +4,7 @@ using Zenject;
 
 namespace UI
 {
-	public class CharacterUIInstaller : MonoInstaller
+	public sealed class CharacterUIInstaller : MonoInstaller
 	{
 		[SerializeField]
 		private SceneEntity _character;

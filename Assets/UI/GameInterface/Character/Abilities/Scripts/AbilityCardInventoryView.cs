@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI
 {
-	public sealed class AbilityCardInventoryView : MonoBehaviour
+	public sealed class AbilityCardInventoryView : MonoBehaviour // TODO unnecessary fade removal animation
 	{
 		[SerializeField]
 		private Transform _container;

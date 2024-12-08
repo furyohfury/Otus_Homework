@@ -10,15 +10,12 @@ namespace Game
 			var explosionDir = rb.position - explosionPosition;
 			var explosionDistance = explosionDir.magnitude / explosionRadius;
 
-			// Normalize without computing magnitude again
 			if (upwardsModifier == 0)
 			{
 				explosionDir /= explosionDistance;
 			}
 			else
 			{
-				// If you pass a non-zero value for the upwardsModifier parameter, the direction
-				// will be modified by subtracting that value from the Y component of the centre point.
 				explosionDir.y += upwardsModifier;
 				explosionDir.Normalize();
 			}
