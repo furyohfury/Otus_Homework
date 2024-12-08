@@ -6,12 +6,14 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class MovementByPhysicsBehaviour : IEntityInit, IEntityFixedUpdate
+	public sealed class MovementByPhysicsBehaviour : IEntityInit, IEntityFixedUpdate, IEntityEnable, IEntityDisable
 	{
 		private IValue<Vector2> _moveDirection;
 		private IValue<float> _moveSpeed;
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
+		private bool _isActive = true;
+		private Vector3 _cachedVelocity;
 
 		private Vector2 _previousMoveDirection;
 
@@ -25,39 +27,37 @@ namespace Game
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)
 		{
+			if (!_isActive)
+			{
+				return;
+			}
+			
 			if (!_canMove.Value)
 			{
 				return;
 			}
 
-			// 1st way
 			if (_moveDirection.Value == Vector2.zero)
 			{
 				return;
 			}
-
-			// var velocity = _rigidbody.velocity;
-			// velocity.x = _moveDirection.Value.x * _moveSpeed.Value;
-			// _rigidbody.velocity = velocity;
-			// _rigidbody.velocity += direction * (_moveSpeed.Value * deltaTime);
-
-			// 2nd way
+			
 			_rigidbody.AddForce(_moveDirection.Value * _moveSpeed.Value);
+		}
+		
+		public void Enable(IEntity entity)
+		{
+			_isActive = true;
+			_rigidbody.velocity = _cachedVelocity;
+			_rigidbody.isKinematic = false;
+		}
 
-			// 3rd way
-			// _rigidbody.velocity += _moveDirection.Value - _previousMoveDirection;
-			// _previousMoveDirection = _moveDirection.Value;
-
-			// 4th way
-			// Текущая скорость
-			// Vector2 targetVelocity = new Vector2(_moveDirection.Value.x * _moveSpeed.Value, _rigidbody.velocity.y);
-			//
-			// // Ускорение для быстрого набора скорости
-			// Vector2 velocityChange = targetVelocity - _rigidbody.velocity;
-			// velocityChange.x = Mathf.Clamp(velocityChange.x, -_acceleration * deltaTime, _acceleration * deltaTime);
-			//
-			// // Применяем силу
-			// _rigidbody.AddForce(velocityChange * _rigidbody.mass, ForceMode2D.Force);
+		public void Disable(IEntity entity)
+		{
+			_isActive = false;
+			_cachedVelocity = _rigidbody.velocity;
+			_rigidbody.velocity = Vector2.zero;
+			_rigidbody.isKinematic = true;
 		}
 	}
 }

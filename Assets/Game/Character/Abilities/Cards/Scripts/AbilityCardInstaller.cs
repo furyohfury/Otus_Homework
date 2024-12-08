@@ -14,11 +14,9 @@ namespace Game
 		private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
-		private IEntity _entity;
 
 		public override void Install(IEntity entity)
 		{
-			_entity = entity;
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
 			entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(_abilityCardConfig));
 		}
@@ -35,7 +33,7 @@ namespace Game
 				pickupEvent.Invoke(_abilityCardConfig);
 			}
 
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 
 #if UNITY_EDITOR

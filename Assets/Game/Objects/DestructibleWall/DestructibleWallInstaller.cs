@@ -62,7 +62,7 @@ namespace Game
 				}
 			}
 
-			Destroy(_transform.gameObject);
+			gameObject.SetActive(false);
 		}
 
 		private void OnCollided(Collision2D collision2D)

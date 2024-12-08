@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class RotateToTarget2DBehaviour : IEntityInit, IEntityUpdate
+	public sealed class RotateToTarget2DBehaviour : IEntityInit, IEntityUpdate, IEntityEnable, IEntityDisable
 	{
 		private Transform _entityTransform;
 		private SpriteRenderer _spriteRenderer;
 		private bool _isLookingRight = true;
+		private bool _isActive = true;
 
 		public void Init(IEntity entity)
 		{
@@ -18,6 +19,11 @@ namespace Game
 
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
+			if (!_isActive)
+			{
+				return;
+			}
+			
 			if (!entity.TryGetTarget(out var targetPos))
 			{
 				return;
@@ -31,16 +37,24 @@ namespace Game
 
 			if (delta >= 0)
 			{
-				// _entityTransform.eulerAngles = Vector3.zero;
 				_spriteRenderer.flipX = false;
 				_isLookingRight = true;
 			}
 			else
 			{
-				// _entityTransform.eulerAngles = new Vector3(0, 180, 0);
 				_spriteRenderer.flipX = true;
 				_isLookingRight = false;
 			}
+		}
+
+		public void Enable(IEntity entity)
+		{
+			_isActive = true;
+		}
+
+		public void Disable(IEntity entity)
+		{
+			_isActive = false;
 		}
 	}
 }

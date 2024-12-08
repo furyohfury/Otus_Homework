@@ -118,7 +118,7 @@ namespace Game
 				}
 			}
 
-			Destroy(_transform.gameObject);
+			gameObject.SetActive(false);
 		}
 
 #if UNITY_EDITOR
