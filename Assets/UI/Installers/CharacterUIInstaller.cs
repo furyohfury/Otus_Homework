@@ -12,11 +12,20 @@ namespace UI
 		private SingleTextFieldView _healthView;
 		[SerializeField]
 		private SingleTextFieldView _ammoView;
-		
+		[SerializeField]
+		private AbilityCardInventoryView _abilityCardInventoryView;
+
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesTo<CharacterHealthPresenter>().AsCached().WithArguments(_healthView, _character);
-			Container.BindInterfacesTo<CharacterAmmoPresenter>().AsCached().WithArguments(_ammoView, _character);
+			Container.BindInterfacesTo<CharacterHealthPresenter>()
+			         .AsCached()
+			         .WithArguments(_healthView, _character);
+			Container.BindInterfacesTo<CharacterAmmoPresenter>()
+			         .AsCached()
+			         .WithArguments(_ammoView, _character);
+			Container.BindInterfacesTo<AbilityCardInventoryPresenter>()
+			         .AsCached()
+			         .WithArguments(_abilityCardInventoryView, _character);
 		}
 	}
 }
