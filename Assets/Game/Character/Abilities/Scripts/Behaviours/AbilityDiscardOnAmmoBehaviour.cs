@@ -13,6 +13,10 @@ namespace Game
 			_removeActiveAbilityEvent = entity.GetRemoveActiveAbilityEvent();
 			_character = entity;
 			entity.OnValueAdded += OnWeaponAdded;
+			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+			{
+				weapon.Value.GetAmmo().Subscribe(OnAmmoChanged);
+			}
 		}
 
 		private void OnWeaponAdded(IEntity entity, int apiIndex, object value)
@@ -32,7 +36,6 @@ namespace Game
 				return;
 			}
 
-			_character.GetAmmo().Unsubscribe(OnAmmoChanged);
 			_removeActiveAbilityEvent.Invoke();
 		}
 
