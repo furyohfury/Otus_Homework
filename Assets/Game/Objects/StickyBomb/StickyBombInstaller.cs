@@ -1,5 +1,6 @@
 using System;
 using Atomic.Entities;
+using R3;
 using Unity.VisualScripting;
 using UnityEngine;
 using Timer = Atomic.Elements.Timer;
@@ -87,6 +88,11 @@ namespace Game
 				if (_explosionSound != null)
 				{
 					_effectsContainer.PlayOneShot(_explosionSound, _soundVolume);
+					_effectsContainer.clip = _explosionSound;
+					_effectsContainer.volume = _soundVolume;
+					_effectsContainer.Play();
+					Observable.Timer(TimeSpan.FromSeconds(_explosionSound.length))
+					          .Subscribe(_ => Destroy(_effectsContainer.gameObject));
 				}
 			}
 
