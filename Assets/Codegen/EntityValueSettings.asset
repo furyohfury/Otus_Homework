@@ -120,6 +120,9 @@ MonoBehaviour:
     - id: 51
       name: UnequipWeaponRequest
       type: BaseEvent
+    - id: 58
+      name: ShootAudioClip
+      type: AudioClip
   - name: Sword
     indexes:
     - id: 14
@@ -208,3 +211,8 @@ MonoBehaviour:
     - id: 39
       name: DestroyEvent
       type: BaseEvent
+  - name: Common
+    indexes:
+    - id: 57
+      name: AudioSource
+      type: AudioSource

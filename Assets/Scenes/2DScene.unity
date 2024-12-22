@@ -1675,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &622395784
 Transform:
   m_ObjectHideFlags: 0
@@ -1858,7 +1858,6 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  _sword: {fileID: 0}
   _target: {fileID: 0}
   _character: {fileID: 253108513}
   _weapon: {fileID: 0}

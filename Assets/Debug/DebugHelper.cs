@@ -1,9 +1,13 @@
-﻿using Atomic.Elements;
+﻿using System;
+using System.Threading.Tasks;
+using Atomic.Elements;
 using Atomic.Entities;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace a
@@ -115,6 +119,16 @@ namespace a
 		private void AddDamageValue(int value)
 		{
 			_character.AddDamage(value);
+		}
+
+		[Button]
+		private async UniTask SwitchScene()
+		{
+			DontDestroyOnLoad(this.gameObject);
+			SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Single);
+			var task = UniTask.Delay(TimeSpan.FromSeconds(5));
+			await UniTask.WhenAll(SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive).ToUniTask(), task);
+			SceneManager.UnloadSceneAsync("LoadingScreen");
 		}
 	}
 }

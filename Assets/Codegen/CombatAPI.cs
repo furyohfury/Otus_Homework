@@ -31,6 +31,7 @@ namespace Atomic.Entities
         public const int AmmoSize = 43; // ReactiveVariable<int>
         public const int EquipWeaponRequest = 50; // BaseEvent<SceneEntity>
         public const int UnequipWeaponRequest = 51; // BaseEvent
+        public const int ShootAudioClip = 58; // AudioClip
 
 
         ///Extensions
@@ -321,5 +322,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetUnequipWeaponRequest(this IEntity obj, BaseEvent value) => obj.SetValue(UnequipWeaponRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AudioClip GetShootAudioClip(this IEntity obj) => obj.GetValue<AudioClip>(ShootAudioClip);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetShootAudioClip(this IEntity obj, out AudioClip value) => obj.TryGetValue(ShootAudioClip, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddShootAudioClip(this IEntity obj, AudioClip value) => obj.AddValue(ShootAudioClip, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasShootAudioClip(this IEntity obj) => obj.HasValue(ShootAudioClip);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelShootAudioClip(this IEntity obj) => obj.DelValue(ShootAudioClip);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetShootAudioClip(this IEntity obj, AudioClip value) => obj.SetValue(ShootAudioClip, value);
     }
 }
