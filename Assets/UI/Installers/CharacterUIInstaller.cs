@@ -9,9 +9,9 @@ namespace UI
 		[SerializeField]
 		private SceneEntity _character;
 		[SerializeField]
-		private SingleTextFieldView _healthView;
+		private AmountView _healthView;
 		[SerializeField]
-		private SingleTextFieldView _ammoView;
+		private AmountView _ammoView;
 		[SerializeField]
 		private AbilityCardInventoryView _abilityCardInventoryView;
 

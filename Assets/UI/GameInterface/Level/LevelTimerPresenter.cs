@@ -7,12 +7,12 @@ namespace UI
 {
 	public sealed class LevelTimerPresenter : IInitializable, IDisposable
 	{
-		private readonly SingleTextFieldView _timerView;
+		private readonly AmountView _timerView;
 		private readonly LevelTimer _levelTimer;
 		private readonly CompositeDisposable _compositeDisposable = new();
 
 		[Inject]
-		public LevelTimerPresenter(SingleTextFieldView timerView, LevelTimer levelTimer)
+		public LevelTimerPresenter(AmountView timerView, LevelTimer levelTimer)
 		{
 			_timerView = timerView;
 			_levelTimer = levelTimer;

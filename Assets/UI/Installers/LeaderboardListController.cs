@@ -8,11 +8,11 @@ namespace UI
 {
 	public sealed class LeaderboardListController : IInitializable, IDisposable
 	{
-		private readonly SingleTextFieldView _leaderboardListView;
+		private readonly AmountView _leaderboardListView;
 		private readonly LevelManager _levelManager;
 		private readonly LeaderboardService _leaderboardService;
 
-		public LeaderboardListController(SingleTextFieldView leaderboardListView, LevelManager levelManager, LeaderboardService leaderboardService)
+		public LeaderboardListController(AmountView leaderboardListView, LevelManager levelManager, LeaderboardService leaderboardService)
 		{
 			_leaderboardListView = leaderboardListView;
 			_levelManager = levelManager;

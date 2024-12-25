@@ -29,24 +29,15 @@ namespace Game.Entities
 		private LayerMask _groundLayer;
 
 		[Header("Combat")] 
-		// [SerializeField]
-		// private SceneEntity _sword;
 		[SerializeField]
 		private SceneEntity _weapon;
 		
 		[SerializeField]
 		private Transform _weaponContainer;
 
-
 		[Header("Life")] 
 		[SerializeField]
 		private int _health;
-
-		[Header("Ability")] 
-		[SerializeField]
-		private float _dashForce;
-		[SerializeField]
-		private SceneEntity _stickyBombPrefab;
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();

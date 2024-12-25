@@ -8,12 +8,12 @@ namespace UI
 {
 	public sealed class CharacterHealthPresenter : IInitializable, IDisposable
 	{
-		private readonly SingleTextFieldView _healthUIView;
+		private readonly AmountView _healthUIView;
 		private readonly IEntity _character;
 		private ReactiveVariable<int> _health;
 
 		[Inject]
-		public CharacterHealthPresenter(SingleTextFieldView healthUIView, IEntity character)
+		public CharacterHealthPresenter(AmountView healthUIView, IEntity character)
 		{
 			_healthUIView = healthUIView;
 			_character = character;

@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1847001645}
+  _icon: {fileID: 0}
 --- !u!1 &43430341
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &43430342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -721,8 +722,8 @@ GameObject:
   m_Component:
   - component: {fileID: 253108512}
   - component: {fileID: 253108516}
-  - component: {fileID: 253108515}
-  - component: {fileID: 253108513}
+  - component: {fileID: 253108518}
+  - component: {fileID: 253108519}
   - component: {fileID: 253108517}
   m_Layer: 7
   m_Name: Character
@@ -749,37 +750,6 @@ Transform:
   m_Father: {fileID: 1139958324}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &253108513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253108511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoRefresh: 0
-  installOnAwake: 1
-  installPipeline:
-  - {fileID: 253108517}
-  onInstalled:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &253108515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253108511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603a745f80e14d1d8cd57cf70a50187f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &253108516
 Rigidbody2D:
   serializedVersion: 4
@@ -828,6 +798,37 @@ MonoBehaviour:
   _health: 5
   _dashForce: 2000
   _stickyBombPrefab: {fileID: 6256871916335887346, guid: 82dc254629e06e641b356d217fcc16a6, type: 3}
+--- !u!114 &253108518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253108511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603a745f80e14d1d8cd57cf70a50187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &253108519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253108511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRefresh: 0
+  installOnAwake: 1
+  installPipeline:
+  - {fileID: 253108517}
+  onInstalled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &272519912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,10 +1371,10 @@ RectTransform:
   m_Father: {fileID: 350406271}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 279, y: -810.21}
-  m_SizeDelta: {x: 422.1578, y: 88.3412}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 279, y: 269.78998}
+  m_SizeDelta: {x: 422.1578, y: 88.34119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &444302382
 MonoBehaviour:
@@ -1388,6 +1389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1082437427}
+  _icon: {fileID: 411101819}
 --- !u!1 &521100311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &622395784
 Transform:
   m_ObjectHideFlags: 0
@@ -1859,7 +1861,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _target: {fileID: 0}
-  _character: {fileID: 253108513}
+  _character: {fileID: 0}
   _weapon: {fileID: 0}
   _rigidbody2D: {fileID: 253108516}
   _drawGizmos: 0
@@ -2054,6 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 129297488}
+  _icon: {fileID: 0}
 --- !u!1 &726020514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c89d937a7b74aacbd99a181927d98a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 253108513}
+  _character: {fileID: 253108519}
   _entityWorld: {fileID: 1692652099}
   _pauseMenuView: {fileID: 1586324275}
 --- !u!4 &1181966950
@@ -3725,7 +3728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82752fed00d948f7a053c09fe615802c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 253108513}
+  source: {fileID: 253108519}
 --- !u!1 &1466970602
 GameObject:
   m_ObjectHideFlags: 0
@@ -4228,6 +4231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1466970604}
+  _icon: {fileID: 0}
 --- !u!1 &1661334122
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,7 +4716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925a3bf148eb42f1bb7880296cfc2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 253108513}
+  _character: {fileID: 253108519}
   _healthView: {fileID: 2031810021}
   _ammoView: {fileID: 444302382}
   _abilityCardInventoryView: {fileID: 1344051877}
@@ -5213,6 +5217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 2024650198}
+  _icon: {fileID: 79793672}
 --- !u!1 &2087038607
 GameObject:
   m_ObjectHideFlags: 3
@@ -6047,66 +6052,114 @@ CompositeCollider2D:
         Y: 48000000
       - X: -192000032
         Y: 48000000
-    - - X: 480000100
-        Y: 47999959
-      - X: 480000100
-        Y: 63999900
-      - X: 496000041
-        Y: 63999900
-      - X: 496000100
-        Y: 63999959
-      - X: 496000100
-        Y: 79999900
-      - X: 544000041
-        Y: 79999900
-      - X: 544000100
-        Y: 79999959
-      - X: 544000100
-        Y: 96000041
-      - X: 544000041
-        Y: 96000100
-      - X: 479999959
-        Y: 96000100
-      - X: 479999900
-        Y: 96000041
-      - X: 479999900
-        Y: 80000100
-      - X: 447999959
-        Y: 80000100
-      - X: 447999900
-        Y: 80000041
-      - X: 447999900
-        Y: 64000104
-      - X: 175999959
-        Y: 64000104
-      - X: 175999900
-        Y: 64000045
-      - X: 175999900
+    - - X: 480000000
+        Y: 64000000
+      - X: 496000000
+        Y: 64000000
+      - X: 496000000
+        Y: 96000000
+      - X: 480000000
+        Y: 96000000
+      - X: 480000000
+        Y: 80000000
+      - X: 464000000
+        Y: 80000000
+      - X: 464000000
+        Y: 48000000
+      - X: 480000000
+        Y: 48000000
+    - - X: 544000000
+        Y: 96000000
+      - X: 496000032
+        Y: 96000000
+      - X: 496000032
+        Y: 80000000
+      - X: 544000000
+        Y: 80000000
+    - - X: 463999968
+        Y: 80000000
+      - X: 448000000
+        Y: 80000000
+      - X: 448000000
+        Y: 64000004
+      - X: 416000032
+        Y: 64000004
+      - X: 416000032
+        Y: 48000000
+      - X: 463999968
+        Y: 48000000
+    - - X: 175999984
         Y: 64000004
       - X: -159999984
         Y: 64000004
       - X: -159999984
         Y: 48000000
-      - X: 31999900
+      - X: 175999984
         Y: 48000000
-      - X: 31999900
-        Y: 48000041
-      - X: 31999959
-        Y: 48000100
-      - X: 80000041
-        Y: 48000100
-      - X: 80000100
-        Y: 48000041
-      - X: 80000100
+    - - X: 191999984
+        Y: 64000004
+      - X: 176000000
+        Y: 64000004
+      - X: 176000000
         Y: 48000000
-      - X: 175999900
+      - X: 191999984
         Y: 48000000
-      - X: 175999900
-        Y: 47999959
-      - X: 175999959
-        Y: 47999900
-      - X: 480000041
-        Y: 47999900
+    - - X: 208000000
+        Y: 64000004
+      - X: 192000000
+        Y: 64000004
+      - X: 192000000
+        Y: 48000000
+      - X: 208000000
+        Y: 48000000
+    - - X: 239999984
+        Y: 64000004
+      - X: 208000016
+        Y: 64000004
+      - X: 208000016
+        Y: 48000000
+      - X: 239999984
+        Y: 48000000
+    - - X: 255999984
+        Y: 64000004
+      - X: 240000000
+        Y: 64000004
+      - X: 240000000
+        Y: 48000000
+      - X: 255999984
+        Y: 48000000
+    - - X: 319999968
+        Y: 64000004
+      - X: 256000000
+        Y: 64000004
+      - X: 256000000
+        Y: 48000000
+      - X: 319999968
+        Y: 48000000
+    - - X: 336000000
+        Y: 64000004
+      - X: 320000000
+        Y: 64000004
+      - X: 320000000
+        Y: 48000000
+      - X: 336000000
+        Y: 48000000
+    - - X: 383999968
+        Y: 64000004
+      - X: 336000032
+        Y: 64000004
+      - X: 336000032
+        Y: 48000000
+      - X: 383999968
+        Y: 48000000
+    - - X: 416000000
+        Y: 64000004
+      - X: 384000000
+        Y: 64000004
+      - X: 384000000
+        Y: 48000000
+      - X: 416000000
+        Y: 48000000
     - - X: -176000016
         Y: 64000004
       - X: -192000000
@@ -6125,16 +6178,16 @@ CompositeCollider2D:
         Y: 48000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 47.999973, y: 4.79999}
-      - {x: 48.00004, y: 6.39999}
-      - {x: 49.60001, y: 6.4000254}
-      - {x: 49.60004, y: 7.9999905}
-      - {x: 54.400013, y: 8.000026}
-      - {x: 54.399975, y: 9.60001}
-      - {x: 47.999992, y: 9.599975}
-      - {x: 47.99996, y: 8.00001}
-      - {x: 44.79999, y: 7.9999747}
-      - {x: 44.79996, y: 6.4000106}
+    - - {x: 47.999973, y: 4.8}
+      - {x: 48.00003, y: 6.4}
+      - {x: 49.600002, y: 6.400029}
+      - {x: 49.60003, y: 8}
+      - {x: 54.4, y: 8.00003}
+      - {x: 54.399967, y: 9.6}
+      - {x: 48, y: 9.599971}
+      - {x: 47.999973, y: 8}
+      - {x: 44.8, y: 7.9999704}
+      - {x: 44.799973, y: 6.4000006}
       - {x: -20.800001, y: 6.4000297}
       - {x: -20.80003, y: 14.400001}
       - {x: -22.4, y: 14.399971}
@@ -6229,7 +6282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852149613410737011, guid: 94a6fc607e3c98446aadd6c3a9549a28, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2852149613410737011, guid: 94a6fc607e3c98446aadd6c3a9549a28, type: 3}
       propertyPath: m_LocalPosition.x

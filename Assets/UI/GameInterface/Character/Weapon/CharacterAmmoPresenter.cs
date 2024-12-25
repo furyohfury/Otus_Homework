@@ -7,11 +7,11 @@ namespace UI
 {
 	public sealed class CharacterAmmoPresenter : IInitializable, IDisposable
 	{
-		private readonly SingleTextFieldView _ammoView;
+		private readonly AmountView _ammoView;
 		private readonly IEntity _character;
 
 		[Inject]
-		public CharacterAmmoPresenter(SingleTextFieldView ammoView, IEntity character)
+		public CharacterAmmoPresenter(AmountView ammoView, IEntity character)
 		{
 			_ammoView = ammoView;
 			_character = character;
@@ -20,7 +20,7 @@ namespace UI
 		public void Initialize()
 		{
 			_character.OnValueAdded += OnWeaponAdded;
-			_character.OnValueDeleted += OnWeaponDeleted;
+			_character.OnValueDeleted += OnWeaponRemoved;
 			
 			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
 			{
@@ -68,17 +68,20 @@ namespace UI
 			_ammoView.SetText(text);
 		}
 
-		private void OnWeaponDeleted(IEntity character, int index, object value)
+		private void OnWeaponRemoved(IEntity character, int index, object value)
 		{
 			if (_character.TryGetAmmo(out ReactiveVariable<int> ammo))
 			{
 				ammo.Unsubscribe(OnAmmoChanged);
 			}
+			
+			_ammoView.SetText(string.Empty);
 		}
 
 		public void Dispose()
 		{
 			_character.OnValueAdded -= OnWeaponAdded;
+			_character.OnValueDeleted += OnWeaponRemoved;
 		}
 	}
 }

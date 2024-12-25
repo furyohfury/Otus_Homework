@@ -27,10 +27,10 @@ namespace Game
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)
 		{
-			if (!_isActive)
-			{
-				return;
-			}
+			// if (!_isActive)
+			// {
+			// 	return;
+			// }
 			
 			if (!_canMove.Value)
 			{
@@ -47,14 +47,12 @@ namespace Game
 		
 		public void Enable(IEntity entity)
 		{
-			_isActive = true;
 			_rigidbody.velocity = _cachedVelocity;
 			_rigidbody.isKinematic = false;
 		}
 
 		public void Disable(IEntity entity)
 		{
-			_isActive = false;
 			_cachedVelocity = _rigidbody.velocity;
 			_rigidbody.velocity = Vector2.zero;
 			_rigidbody.isKinematic = true;

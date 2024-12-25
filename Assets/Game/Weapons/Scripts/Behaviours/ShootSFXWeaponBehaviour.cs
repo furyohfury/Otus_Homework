@@ -22,6 +22,7 @@ namespace Game
 		{
 			_audioSource.clip = _shootAudioClip;
 			_audioSource.Play();
+			// TODO last sound cant be played cuz of destroy. Mb check ammo and create oneshot GO
 		}
 
 		public void Dispose(IEntity entity)

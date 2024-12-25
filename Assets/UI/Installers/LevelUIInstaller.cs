@@ -7,7 +7,7 @@ namespace UI
 	public sealed class LevelUIInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private SingleTextFieldView _timerView;
+		private AmountView _timerView;
 		[SerializeField]
 		private Button _playButton;
 		[SerializeField]
@@ -17,7 +17,7 @@ namespace UI
 		[SerializeField]
 		private Button _mainMenuPausePanelButton;
 		[SerializeField]
-		private SingleTextFieldView _leaderboardListView;
+		private AmountView _leaderboardListView;
 		[SerializeField]
 		private GameObject _startMenuView;
 		[SerializeField]
