@@ -12,7 +12,6 @@ namespace Game
 		private IValue<float> _moveSpeed;
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
-		private bool _isActive = true;
 		private Vector3 _cachedVelocity;
 
 		private Vector2 _previousMoveDirection;
@@ -27,11 +26,6 @@ namespace Game
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)
 		{
-			// if (!_isActive)
-			// {
-			// 	return;
-			// }
-			
 			if (!_canMove.Value)
 			{
 				return;
