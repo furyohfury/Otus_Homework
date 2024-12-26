@@ -5,25 +5,25 @@ namespace Game
 {
 	public class Pool<T> where T : Component
 	{
-		public IReadOnlyCollection<T> ActiveItems => _activeItems;
+		public IReadOnlyCollection<T> GetActiveItems => ActiveItems;
 
-		private readonly Transform _container;
-		private readonly T _prefab;
-		private readonly int _initialSize;
-		private readonly int _maxSize;
+		protected readonly Transform Container;
+		protected readonly T Prefab;
+		protected readonly int InitialSize;
+		protected readonly int MaxSize;
 
-		private readonly Queue<T> _inactiveItems;
-		private readonly HashSet<T> _activeItems = new();
+		protected readonly Queue<T> InactiveItems;
+		protected readonly HashSet<T> ActiveItems = new();
 
 		public Pool(Transform parent, T prefab, bool fillOnCreate, int initialSize = 10, int maxSize = 20)
 		{
-			_initialSize = initialSize;
-			_maxSize = maxSize;
-			_prefab = prefab;
-			_inactiveItems = new Queue<T>(initialSize);
-			_container = new GameObject($"{prefab.name}Pool").transform;
-			_container.SetParent(parent);
-			_container.gameObject.SetActive(false);
+			InitialSize = initialSize;
+			MaxSize = maxSize;
+			Prefab = prefab;
+			InactiveItems = new Queue<T>(initialSize);
+			Container = new GameObject($"{prefab.name}Pool").transform;
+			Container.SetParent(parent);
+			Container.gameObject.SetActive(false);
 
 			if (fillOnCreate)
 			{
@@ -33,7 +33,7 @@ namespace Game
 
 		public virtual T Get(Transform parent, Vector2 pos, Quaternion rot)
 		{
-			if (_inactiveItems.TryDequeue(out var item))
+			if (InactiveItems.TryDequeue(out var item))
 			{
 				var transform = item.transform;
 				transform.parent = parent;
@@ -45,7 +45,7 @@ namespace Game
 				item = CreateItem(parent, pos, rot);
 			}
 
-			if (_activeItems.Add(item) == false)
+			if (ActiveItems.Add(item) == false)
 			{
 				Debug.LogError("Item from pool is already active");
 			}
@@ -55,20 +55,20 @@ namespace Game
 
 		public virtual T Get(Vector2 pos, Quaternion rot)
 		{
-			return Get(_container.root, pos, rot);
+			return Get(Container.root, pos, rot);
 		}
 
 		public virtual void Return(T item)
 		{
-			if (_activeItems.Remove(item) == false)
+			if (ActiveItems.Remove(item) == false)
 			{
 				Debug.LogError("Item is already inactive");
 			}
 
-			if (_inactiveItems.Count < _maxSize)
+			if (InactiveItems.Count < MaxSize)
 			{
-				_inactiveItems.Enqueue(item);
-				item.transform.SetParent(_container);
+				InactiveItems.Enqueue(item);
+				item.transform.SetParent(Container);
 			}
 			else
 			{
@@ -76,24 +76,24 @@ namespace Game
 			}
 		}
 
-		private T CreateItem(Transform parent, Vector2 pos, Quaternion rot)
+		protected virtual T CreateItem(Transform parent, Vector2 pos, Quaternion rot)
 		{
-			return Object.Instantiate(_prefab, pos, rot, parent);
+			return Object.Instantiate(Prefab, pos, rot, parent);
 		}
 
 		private void FillPool()
 		{
-			var pos = _container.transform.position;
-			for (var i = 0; i < _initialSize; i++)
+			var pos = Container.transform.position;
+			for (var i = 0; i < InitialSize; i++)
 			{
-				var newItem = CreateItem(_container, pos, Quaternion.identity);
-				_inactiveItems.Enqueue(newItem);
+				var newItem = CreateItem(Container, pos, Quaternion.identity);
+				InactiveItems.Enqueue(newItem);
 			}
 		}
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
-			Object.Destroy(_container.gameObject);
+			Object.Destroy(Container.gameObject);
 		}
 	}
 }

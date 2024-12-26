@@ -9,10 +9,10 @@ namespace Game
 	public sealed class SingleBulletWeaponBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
-		private IValue<SceneEntity> _pistolBulletPrefab;
+		private IValue<SceneEntity> _bulletPrefab;
 		private IValue<Transform> _firePoint;
 		private Transform _transform;
-		private Pool<SceneEntity> _pool;
+		private SceneEntityPool _pool;
 		private IValue<int> _damage;
 		
 		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
@@ -20,13 +20,13 @@ namespace Game
 		public void Init(IEntity entity)
 		{
 			_damage = entity.GetDamage();
-			_pistolBulletPrefab = entity.GetProjectilePrefab();
+			_bulletPrefab = entity.GetProjectilePrefab();
 			_firePoint = entity.GetFirePoint();
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnAttackEvent);
 
 			_transform = entity.GetVisualTransform();
-			_pool = new Pool<SceneEntity>(_transform.transform, _pistolBulletPrefab.Value, true);
+			_pool = new SceneEntityPool(_transform.transform, _bulletPrefab.Value, true);
 		}
 
 		private void OnAttackEvent()
@@ -62,7 +62,7 @@ namespace Game
 		{
 			_attackEvent.Unsubscribe(OnAttackEvent);
 
-			foreach (var bullet in _pool.ActiveItems)
+			foreach (var bullet in _pool.GetActiveItems)
 			{
 				if (!_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
 				{

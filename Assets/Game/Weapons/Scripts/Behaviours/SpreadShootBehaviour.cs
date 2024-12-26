@@ -15,7 +15,7 @@ namespace Game
 		private IValue<int> _damage;
 		private Transform _transform;
 		private IValue<SceneEntity> _bulletPrefab;
-		private Pool<SceneEntity> _pool;
+		private SceneEntityPool _pool;
 
 		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
 
@@ -29,7 +29,7 @@ namespace Game
 			_attackEvent.Subscribe(OnAttackEvent);
 
 			_transform = entity.GetVisualTransform();
-			_pool = new Pool<SceneEntity>(_transform.transform, _bulletPrefab.Value, true);
+			_pool = new SceneEntityPool(_transform.transform, _bulletPrefab.Value, true);
 		}
 
 		private void OnAttackEvent()
@@ -69,7 +69,7 @@ namespace Game
 		{
 			_attackEvent.Unsubscribe(OnAttackEvent);
 
-			foreach (var bullet in _pool.ActiveItems)
+			foreach (var bullet in _pool.GetActiveItems)
 			{
 				if (!_deathEventSubscriptions.TryGetValue(bullet, out var subscription))
 				{

@@ -15,10 +15,24 @@ namespace Game
 		
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<MovementController>().AsSingle().WithArguments(_character);
-			Container.Bind<Camera>().FromComponentInHierarchy().AsCached();
-			Container.Bind<SceneEntityWorld>().FromComponentInHierarchy().AsCached();
-			Container.BindInterfacesAndSelfTo<PauseController>().AsCached().WithArguments(_pauseMenuView);
+			Container.BindInterfacesAndSelfTo<MovementController>()
+			         .AsSingle()
+			         .WithArguments(_character);
+			
+			Container.Bind<Camera>()
+			         .FromComponentInHierarchy().AsCached();
+			
+			Container.Bind<IEntityWorld>()
+			         .To<SceneEntityWorld>()
+			         .FromComponentInHierarchy()
+			         .AsCached();
+			
+			// Container.BindInterfacesAndSelfTo<PauseController>()
+			//          .AsCached()
+			//          .WithArguments(_pauseMenuView);
+			
+			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
+			         .AsCached();
 		}
 	}
 }

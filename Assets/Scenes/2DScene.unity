@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &43430342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -796,8 +796,6 @@ MonoBehaviour:
   _weapon: {fileID: 0}
   _weaponContainer: {fileID: 1048354341}
   _health: 5
-  _dashForce: 2000
-  _stickyBombPrefab: {fileID: 6256871916335887346, guid: 82dc254629e06e641b356d217fcc16a6, type: 3}
 --- !u!114 &253108518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,7 +1675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &622395784
 Transform:
   m_ObjectHideFlags: 0
@@ -3966,7 +3964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1586324276
 RectTransform:
   m_ObjectHideFlags: 0

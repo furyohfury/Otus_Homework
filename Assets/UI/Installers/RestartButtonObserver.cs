@@ -13,11 +13,11 @@ namespace UI
 		private readonly GameObject _startMenuView;
 		private readonly GameObject _pauseMenuView;
 		private readonly LevelManager _levelManager;
-		private SceneEntityWorld _entityWorld;
+		private readonly IEntityWorld _entityWorld;
 
 		[Inject]
 		public RestartButtonObserver(Button restartButton, GameObject startMenuView, GameObject pauseMenuView, LevelManager levelManager
-			, SceneEntityWorld entityWorld)
+			, IEntityWorld entityWorld)
 		{
 			_restartButton = restartButton;
 			_startMenuView = startMenuView;
@@ -43,6 +43,7 @@ namespace UI
 					sceneEntity.gameObject.SetActive(true);
 				}
 			}
+
 			_levelManager.RestartLevel();
 		}
 
