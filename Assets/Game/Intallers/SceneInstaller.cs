@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using a;
+using Atomic.Entities;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,9 @@ namespace Game
 		
 		public override void InstallBindings()
 		{
+#if UNITY_EDITOR
+			Container.Bind<DebugHelper>().AsSingle(); // TODO delete
+#endif
 			Container.BindInterfacesAndSelfTo<MovementController>()
 			         .AsSingle()
 			         .WithArguments(_character);
@@ -32,7 +36,13 @@ namespace Game
 			//          .WithArguments(_pauseMenuView);
 			
 			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
-			         .AsCached();
+			         .AsSingle();
+
+			Container.Bind<GameStateManager>()
+			         .AsSingle();
+
+			Container.BindInterfacesAndSelfTo<EntityWorldStateController>()
+			         .AsSingle();
 		}
 	}
 }
