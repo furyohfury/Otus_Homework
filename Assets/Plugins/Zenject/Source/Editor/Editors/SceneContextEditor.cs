@@ -12,6 +12,7 @@ namespace Zenject
         SerializedProperty _contractNameProperty;
         SerializedProperty _parentNamesProperty;
         SerializedProperty _parentNewObjectsUnderSceneContextProperty;
+        SerializedProperty _kernel;
 
         public override void OnEnable()
         {
