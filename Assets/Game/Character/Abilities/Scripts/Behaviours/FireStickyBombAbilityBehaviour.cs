@@ -22,7 +22,7 @@ namespace Game
 		private void OnAbilityEvent()
 		{
 			var bomb = SceneEntity.Instantiate(_stickyBombPrefab, _firePoint.Value.position, _firePoint.Value.rotation);
-			var rigidbody = bomb.GetRigidbody();
+			var rigidbody = bomb.GetRigidbody2D();
 			var direction = rigidbody.transform.right;
 			rigidbody.AddForce(direction * 2000);
 		}

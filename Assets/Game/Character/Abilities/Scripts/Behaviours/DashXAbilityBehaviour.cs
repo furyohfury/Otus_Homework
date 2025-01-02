@@ -14,7 +14,7 @@ namespace Game
 		public void Init(IEntity entity)
 		{
 			_dashForce = entity.GetDashForce();
-			_rigidbody = entity.GetRigidbody();
+			_rigidbody = entity.GetRigidbody2D();
 			_target = entity.GetTarget();
 
 			_abilityEvent = entity.GetAbilityEvent();

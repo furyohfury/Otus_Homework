@@ -27,7 +27,7 @@ namespace Game
 				Debug.LogError("Cant find character movedirection");
 			}
 
-			_rigidbody = _character.GetRigidbody();
+			_rigidbody = _character.GetRigidbody2D();
 			SetMouseAsTarget();
 		}
 

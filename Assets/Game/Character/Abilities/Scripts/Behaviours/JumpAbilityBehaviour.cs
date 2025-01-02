@@ -12,7 +12,7 @@ namespace Game
 
 		public void Init(IEntity entity)
 		{
-			_rigidbody = entity.GetRigidbody();
+			_rigidbody = entity.GetRigidbody2D();
 			_abilityEvent = entity.GetAbilityEvent();
 			_jumpEvent = entity.GetJumpEvent();
 			_abilityEvent.Subscribe(OnJumpAbility);

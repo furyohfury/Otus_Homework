@@ -21,7 +21,7 @@ namespace Game
 			_moveDirection = entity.GetMoveDirection();
 			_canMove = entity.GetCanMove();
 			_moveSpeed = entity.GetMoveSpeed();
-			_rigidbody = entity.GetRigidbody();
+			_rigidbody = entity.GetRigidbody2D();
 		}
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)

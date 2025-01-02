@@ -54,7 +54,7 @@ MonoBehaviour:
   - name: Physics
     indexes:
     - id: 11
-      name: Rigidbody
+      name: Rigidbody2D
       type: Rigidbody2D
     - id: 21
       name: Collider2D

@@ -44,7 +44,7 @@ namespace Game
 
 		private void OnTriggerred(Collider2D other)
 		{
-			if (other.TryGetEntity(out IEntity entity) && entity.TryGetRigidbody(out Rigidbody2D rigidbody2D))
+			if (other.TryGetEntity(out IEntity entity) && entity.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
 			{
 				_cachedVelocity = rigidbody2D.velocity;
 			}
@@ -68,7 +68,7 @@ namespace Game
 		private void OnCollided(Collision2D collision2D)
 		{
 			if (!collision2D.TryGetEntity(out IEntity collisionEntity)
-			    || !collisionEntity.TryGetRigidbody(out Rigidbody2D collisionRb))
+			    || !collisionEntity.TryGetRigidbody2D(out Rigidbody2D collisionRb))
 			{
 				return;
 			}

@@ -67,7 +67,7 @@ namespace Game.Entities
 
 		private void InitializeComponents(IEntity entity)
 		{
-			entity.AddRigidbody(_rigidBody);
+			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_spriteRenderer);

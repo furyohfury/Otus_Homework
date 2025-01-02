@@ -46,7 +46,7 @@ namespace Game
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
-			entity.AddRigidbody(_rigidbody);
+			entity.AddRigidbody2D(_rigidbody);
 			if (_explosionEffect != null)
 			{
 				var effectMain = _explosionEffect.main;
@@ -104,7 +104,7 @@ namespace Game
 					continue;
 				}
 
-				if (entity.TryGetRigidbody(out Rigidbody2D rb))
+				if (entity.TryGetRigidbody2D(out Rigidbody2D rb))
 				{
 					rb.velocity = new Vector2(rb.velocity.x, 0);
 					rb.AddExplosionForce2D(_explosionForce,

@@ -15,28 +15,28 @@ namespace Atomic.Entities
     public static class PhysicsAPI
     {
         ///Keys
-        public const int Rigidbody = 11; // Rigidbody2D
+        public const int Rigidbody2D = 11; // Rigidbody2D
         public const int Collider2D = 21; // Collider2D
 
 
         ///Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Rigidbody2D GetRigidbody(this IEntity obj) => obj.GetValue<Rigidbody2D>(Rigidbody);
+        public static Rigidbody2D GetRigidbody2D(this IEntity obj) => obj.GetValue<Rigidbody2D>(Rigidbody2D);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetRigidbody(this IEntity obj, out Rigidbody2D value) => obj.TryGetValue(Rigidbody, out value);
+        public static bool TryGetRigidbody2D(this IEntity obj, out Rigidbody2D value) => obj.TryGetValue(Rigidbody2D, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddRigidbody(this IEntity obj, Rigidbody2D value) => obj.AddValue(Rigidbody, value);
+        public static bool AddRigidbody2D(this IEntity obj, Rigidbody2D value) => obj.AddValue(Rigidbody2D, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasRigidbody(this IEntity obj) => obj.HasValue(Rigidbody);
+        public static bool HasRigidbody2D(this IEntity obj) => obj.HasValue(Rigidbody2D);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelRigidbody(this IEntity obj) => obj.DelValue(Rigidbody);
+        public static bool DelRigidbody2D(this IEntity obj) => obj.DelValue(Rigidbody2D);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetRigidbody(this IEntity obj, Rigidbody2D value) => obj.SetValue(Rigidbody, value);
+        public static void SetRigidbody2D(this IEntity obj, Rigidbody2D value) => obj.SetValue(Rigidbody2D, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Collider2D GetCollider2D(this IEntity obj) => obj.GetValue<Collider2D>(Collider2D);

@@ -32,7 +32,7 @@ namespace Game.Entities
 			entity.AddCollider2D(_collider2D);
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddDeathEvent(new BaseEvent());
-			entity.AddRigidbody(_rigidbody);
+			entity.AddRigidbody2D(_rigidbody);
 
 			var lifetimeTimer = new Timer(_lifeDuration);
 			lifetimeTimer.Start();
