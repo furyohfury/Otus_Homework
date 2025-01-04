@@ -1274,6 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420227294}
   - component: {fileID: 420227293}
+  - component: {fileID: 420227295}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1316,6 +1317,7 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+  _kernel: {fileID: 420227295}
 --- !u!4 &420227294
 Transform:
   m_ObjectHideFlags: 0
@@ -1335,6 +1337,18 @@ Transform:
   m_Father: {fileID: 1782218315}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420227295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420227292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c8011858a14d2abf23d08f8fc54587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &444302380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651531017}
   - component: {fileID: 651531016}
+  - component: {fileID: 651531018}
   m_Layer: 0
   m_Name: Debug
   m_TagString: Untagged
@@ -1866,6 +1881,7 @@ MonoBehaviour:
   _timer:
     duration: 0
     loop: 0
+  _entity: {fileID: 651531018}
 --- !u!4 &651531017
 Transform:
   m_ObjectHideFlags: 0
@@ -1881,6 +1897,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &651531018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651531015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRefresh: 0
+  installOnAwake: 0
+  installPipeline: []
+  onInstalled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &655228659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,7 +2145,7 @@ MonoBehaviour:
   autoRefresh: 0
   installOnAwake: 1
   installPipeline:
-  - {fileID: 726020520}
+  - {fileID: 0}
   onInstalled:
     m_PersistentCalls:
       m_Calls: []

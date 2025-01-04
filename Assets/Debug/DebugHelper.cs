@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Atomic.Elements;
 using Atomic.Entities;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game;
+using Newtonsoft.Json;
+using SaveLoad;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,7 +37,24 @@ namespace a
 		[SerializeField]
 		private Timer _timer;
 		private LevelManager _levelManager;
+		private GameStateManager _gameStateManager;
+		private SaveLoadManager _saveLoadManager;
+		private DiContainer _diContainer;
+		[SerializeField]
+		private SceneEntity _entity;
 
+		[Inject]
+		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer)
+		{
+			_gameStateManager = gameStateManager;
+			_saveLoadManager = saveLoadManager;
+			_diContainer = diContainer;
+		}
+
+		private void Start()
+		{
+			_gameStateManager.ChangeState(GameState.Start);
+		}
 
 		[Button]
 		public void CheckOverlapPoint()
@@ -129,6 +150,49 @@ namespace a
 			var task = UniTask.Delay(TimeSpan.FromSeconds(5));
 			await UniTask.WhenAll(SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive).ToUniTask(), task);
 			SceneManager.UnloadSceneAsync("LoadingScreen");
+		}
+
+		[Button]
+		private void ChangeState(GameState state) => _gameStateManager.ChangeState(state);
+
+		[Button]
+		private void SaveState() => _saveLoadManager.Save();
+
+		[Button]
+		private void LoadState() => _saveLoadManager.Load();
+
+		[Button]
+		private void TypeDataPath() => Debug.Log(Application.persistentDataPath);
+
+		private string s = string.Empty;
+		[Button]
+		private void ReactiveVarSerialize()
+		{
+			_entity.AddHealth(new ReactiveVariable<int>(10));
+			s = JsonConvert.SerializeObject(_entity.Values);
+			foreach (KeyValuePair<int,object> keyValuePair in _entity.Values)
+			{
+				var type = keyValuePair.Value.GetType();
+				Debug.Log($"Type = {type}");
+			}
+			Debug.Log($"Serialized string = {s}");
+		}
+		
+		[Button]
+		private void ReactiveVarDeserialize()
+		{
+			var r = JsonConvert.DeserializeObject<object>(s);
+			_entity.SetValue(18, 10);
+		}
+
+		[Button]
+		private void PrintTypes()
+		{
+			var r = JsonConvert.DeserializeObject<Dictionary<int, object>>(s);
+			foreach (KeyValuePair<int,object> pair in r)
+			{
+				Debug.Log($"{pair.Value.GetType()}");
+			}
 		}
 	}
 }
