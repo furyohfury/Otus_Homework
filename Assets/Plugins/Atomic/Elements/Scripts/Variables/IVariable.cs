@@ -1,6 +1,6 @@
 namespace Atomic.Elements
 {
-    public interface IVariable<T> : IValue<T>, ISetter<T>
+    public interface IVariable<T> : IValue<T>, ISetter<T>, IValueBase
     {
         new T Value { get; set; }
 
@@ -13,5 +13,9 @@ namespace Atomic.Elements
         {
             set => this.Value = value;
         }
+        
+        object IValueBase.GetValue() => Value;
+        
+        void IValueBase.SetValue(object value) => Value = (T) value;
     }
 }
