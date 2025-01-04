@@ -1,12 +1,12 @@
 using Zenject;
 
-namespace SaveLoadHomework
+namespace SaveLoad
 {
     public abstract class SaveLoader<TData, TService> : ISaveLoader
     {
-        void ISaveLoader.LoadGame(IGameRepository repository, SceneContext context)
+        void ISaveLoader.LoadGame(IGameRepository repository, DiContainer container)
         {
-            var service = context.Container.Resolve<TService>();
+            var service = container.Resolve<TService>();    
             if (repository.TryGetData(out TData data))
             {
                 SetupData(service, data);
@@ -17,9 +17,9 @@ namespace SaveLoadHomework
             }
         }
 
-        void ISaveLoader.SaveGame(IGameRepository repository, SceneContext context)
+        void ISaveLoader.SaveGame(IGameRepository repository, DiContainer container)
         {
-            var service = context.Container.Resolve<TService>();
+            var service = container.Resolve<TService>();
             var data = ConvertToData(service);
             repository.SetData(data);
         }

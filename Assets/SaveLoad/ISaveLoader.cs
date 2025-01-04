@@ -1,11 +1,11 @@
 using Zenject;
 
-namespace SaveLoadHomework
+namespace SaveLoad
 {
     public interface ISaveLoader
     {
-        void LoadGame(IGameRepository repository, SceneContext context);
+        void LoadGame(IGameRepository repository, DiContainer container);
 
-        void SaveGame(IGameRepository repository, SceneContext context);
+        void SaveGame(IGameRepository repository, DiContainer container);
     }
 }
