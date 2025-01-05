@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: AbilityCards
+  m_EditorClassIdentifier: 
+  m_GroupName: AbilityCards
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ee6f207f16fea8d4eb28e671a03c06ec
+  m_SerializeEntries:
+  - m_GUID: 88e20911f360dc243846387ac21f3f32
+    m_Address: Assets/Game/Character/Abilities/Cards/Configs/MachineGun_StickyBomb_AbilityCardConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9c4fac3fbdfce2418a33fcab6531995
+    m_Address: Assets/Game/Character/Abilities/Cards/Configs/Rifle_DashX_AbilityCardConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: da798659650ec6e43b6988abf7a6f9ab
+    m_Address: Assets/Game/Character/Abilities/Cards/Configs/Pistol_SecondJump_AbilityCardConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8637a88b75bfc7546b0307a16896045a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ba7ba418c3291e04db1258dfa0a3eabb, type: 2}
+    - {fileID: 11400000, guid: a086028bcdeaa6043a86e26985f24a10, type: 2}
