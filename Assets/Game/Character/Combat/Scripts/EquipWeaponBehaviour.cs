@@ -31,9 +31,11 @@ namespace Game
 
 		private void OnWeaponUnequip()
 		{
-			SceneEntity weapon = _entity.GetWeapon().Value;
-			Object.Destroy(weapon.gameObject);
-			_entity.DelWeapon();
+			if (_entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+			{
+				Object.Destroy(weapon.Value.gameObject);
+				_entity.DelWeapon();
+			}
 		}
 
 		public void Dispose(IEntity entity)

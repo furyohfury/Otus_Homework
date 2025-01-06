@@ -12,7 +12,7 @@ namespace Game
 		[SerializeField]
 		private SceneEntityWorld _entityWorld;
 		[SerializeField]
-		private GameObject _pauseMenuView;
+		private Transform _worldTransform;
 		
 		public override void InstallBindings()
 		{
@@ -31,16 +31,13 @@ namespace Game
 			         .FromComponentInHierarchy()
 			         .AsCached();
 			
-			// Container.BindInterfacesAndSelfTo<PauseController>()
-			//          .AsCached()
-			//          .WithArguments(_pauseMenuView);
-			
-			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
-			         .AsSingle();
-
 			Container.Bind<GameStateManager>()
 			         .AsSingle();
-
+			
+			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
+			         .AsSingle()
+			         .WithArguments(_worldTransform);
+			
 			Container.BindInterfacesAndSelfTo<EntityWorldStateController>()
 			         .AsSingle();
 		}

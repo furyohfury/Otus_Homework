@@ -23,9 +23,10 @@ namespace Atomic.Entities
         public const int ActiveAbilityAspects = 41; // ReactiveList<IEntityAspect>
         public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
         public const int AbilityCardPickupEvent = 53; // BaseEvent<AbilityCardConfig>
-        public const int AbilityCardConfig = 54; // ReactiveVariable<AbilityCardConfig>
+        public const int AbilityCardConfig = 54; // AbilityCardConfig
         public const int RemoveActiveAbilityEvent = 55; // BaseEvent
         public const int AbilityInventory = 56; // ReactiveList<AbilityCardState>
+        public const int AbilityCardGUID = 59; // string
 
 
         ///Extensions
@@ -174,13 +175,13 @@ namespace Atomic.Entities
         public static void SetAbilityCardPickupEvent(this IEntity obj, BaseEvent<AbilityCardConfig> value) => obj.SetValue(AbilityCardPickupEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ReactiveVariable<AbilityCardConfig> GetAbilityCardConfig(this IEntity obj) => obj.GetValue<ReactiveVariable<AbilityCardConfig>>(AbilityCardConfig);
+        public static AbilityCardConfig GetAbilityCardConfig(this IEntity obj) => obj.GetValue<AbilityCardConfig>(AbilityCardConfig);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAbilityCardConfig(this IEntity obj, out ReactiveVariable<AbilityCardConfig> value) => obj.TryGetValue(AbilityCardConfig, out value);
+        public static bool TryGetAbilityCardConfig(this IEntity obj, out AbilityCardConfig value) => obj.TryGetValue(AbilityCardConfig, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddAbilityCardConfig(this IEntity obj, ReactiveVariable<AbilityCardConfig> value) => obj.AddValue(AbilityCardConfig, value);
+        public static bool AddAbilityCardConfig(this IEntity obj, AbilityCardConfig value) => obj.AddValue(AbilityCardConfig, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasAbilityCardConfig(this IEntity obj) => obj.HasValue(AbilityCardConfig);
@@ -189,7 +190,7 @@ namespace Atomic.Entities
         public static bool DelAbilityCardConfig(this IEntity obj) => obj.DelValue(AbilityCardConfig);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAbilityCardConfig(this IEntity obj, ReactiveVariable<AbilityCardConfig> value) => obj.SetValue(AbilityCardConfig, value);
+        public static void SetAbilityCardConfig(this IEntity obj, AbilityCardConfig value) => obj.SetValue(AbilityCardConfig, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static BaseEvent GetRemoveActiveAbilityEvent(this IEntity obj) => obj.GetValue<BaseEvent>(RemoveActiveAbilityEvent);
@@ -226,5 +227,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAbilityInventory(this IEntity obj, ReactiveList<AbilityCardState> value) => obj.SetValue(AbilityInventory, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string GetAbilityCardGUID(this IEntity obj) => obj.GetValue<string>(AbilityCardGUID);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAbilityCardGUID(this IEntity obj, out string value) => obj.TryGetValue(AbilityCardGUID, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAbilityCardGUID(this IEntity obj, string value) => obj.AddValue(AbilityCardGUID, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAbilityCardGUID(this IEntity obj) => obj.HasValue(AbilityCardGUID);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAbilityCardGUID(this IEntity obj) => obj.DelValue(AbilityCardGUID);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAbilityCardGUID(this IEntity obj, string value) => obj.SetValue(AbilityCardGUID, value);
     }
 }

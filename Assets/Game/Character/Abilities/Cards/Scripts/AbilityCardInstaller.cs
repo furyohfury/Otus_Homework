@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Atomic.Elements;
 using Atomic.Entities;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 namespace Game
 {
@@ -10,16 +12,39 @@ namespace Game
 	{
 		[SerializeField]
 		private SpriteRenderer _renderer;
+		// [SerializeField]
+		// private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
-		private AbilityCardConfig _abilityCardConfig;
+		private AssetReference _abilityCardConfigReference;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
+		[SerializeField]
+		private Transform _transform;
+
+		private AbilityCardConfig _config;
+		private SceneEntity _entity;
 
 		public override void Install(IEntity entity)
 		{
+			entity.AddAbilityCardTag();
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
-			entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(_abilityCardConfig));
+			entity.AddVisualTransform(_transform);
+			entity.AddSpriteRenderer(_renderer);
+			_entity = GetComponent<SceneEntity>(); // TODO redo this cringe hotya pohuy
+
+			InstallConfig(entity);
 		}
+
+		private async Task InstallConfig(IEntity entity)
+		{
+			AbilityCardConfig config = await _abilityCardConfigReference.LoadAssetAsync<AbilityCardConfig>().Task;
+			entity.AddAbilityCardConfig(config);
+			_config = config;
+			_renderer.sprite = config.Sprite;
+			entity.AddAbilityCardGUID(_abilityCardConfigReference.AssetGUID);
+		}
+
+		public void SetConfigReference(AssetReference reference) => _abilityCardConfigReference = reference;
 
 		private void OnTrigger(Collider2D other)
 		{
@@ -30,20 +55,31 @@ namespace Game
 
 			if (entity.TryGetAbilityCardPickupEvent(out BaseEvent<AbilityCardConfig> pickupEvent))
 			{
-				pickupEvent.Invoke(_abilityCardConfig);
+				pickupEvent.Invoke(_config);
 			}
 
-			gameObject.SetActive(false);
+			SceneEntityCreator.OnDestroyEntityRequest(_entity);
 		}
 
 #if UNITY_EDITOR
 		private void OnValidate()
 		{
-			if (_renderer != null && _abilityCardConfig != null)
+			var assetPath = AssetDatabase.GUIDToAssetPath(_abilityCardConfigReference.AssetGUID);
+			if (!string.IsNullOrEmpty(assetPath))
 			{
-				_renderer.sprite = _abilityCardConfig.Sprite;
+				var config = AssetDatabase.LoadAssetAtPath<AbilityCardConfig>(assetPath);
+				if (config != null && _renderer.sprite != config.Sprite)
+				{
+					_renderer.sprite = config.Sprite;
+					Debug.Log($"Sprite set to {_renderer.sprite.name} for {_renderer.name}");
+				}
 			}
 		}
 #endif
+
+		private void OnDestroy()
+		{
+			_abilityCardConfigReference.ReleaseAsset();
+		}
 	}
 }
