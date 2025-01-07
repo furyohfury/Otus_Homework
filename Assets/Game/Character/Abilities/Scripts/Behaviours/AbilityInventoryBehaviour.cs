@@ -4,6 +4,7 @@ using System.Linq;
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
+using UnityEngine.AddressableAssets;
 
 namespace Game
 {
@@ -12,10 +13,11 @@ namespace Game
 		private IEntity _character;
 
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
-		private IEvent<AbilityCardConfig> _abilityCardPickupEvent;
+		private BaseEvent<AssetReference> _abilityCardPickupEvent;
 		private List<AbilityCardState> _states;
 		private BaseEvent _removeActiveAbilityEvent;
 		private ReactiveList<AbilityCardState> _abilityInventory;
+		private AssetReference _configAssetReference;
 
 		public void Init(IEntity entity)
 		{
@@ -30,15 +32,19 @@ namespace Game
 			_abilityCardPickupEvent.Subscribe(OnAbilityPickUp);
 		}
 
-		private void OnAbilityPickUp(AbilityCardConfig config)
+		private async void OnAbilityPickUp(AssetReference assetReference)
 		{
+			_configAssetReference = assetReference;
+			
 			ReactiveVariable<SceneEntity> newWeapon = _character.GetWeapon();
 			ReactiveVariable<int> newWeaponAmmo = newWeapon.Value.GetAmmo();
+			var config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(assetReference);
 			AbilityCardState cardState = new AbilityCardState
 			                             {
-				                             Config = config, CurrentAmmo = newWeaponAmmo.Value
+				                             Config = config, 
+				                             CurrentAmmo = newWeaponAmmo.Value
 			                             };
-
+		
 			SubscribeStateToChanges(cardState);
 			_abilityInventory.Add(cardState);
 		}
@@ -73,6 +79,7 @@ namespace Game
 					_activeAbilityAspects.Add(configAspects[i]);
 				}
 			}
+			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 
 		private void SubscribeStateToChanges(AbilityCardState state)
@@ -85,6 +92,7 @@ namespace Game
 		public void Dispose(IEntity entity)
 		{
 			_abilityCardPickupEvent.Unsubscribe(OnAbilityPickUp);
+			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 	}
 }

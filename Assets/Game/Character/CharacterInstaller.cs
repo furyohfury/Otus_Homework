@@ -3,6 +3,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Game.Entities
 {
@@ -135,7 +136,7 @@ namespace Game.Entities
 			// TODO add request and can use
 			entity.AddAbilityEvent(new BaseEvent());
 			entity.AddActiveAbilityAspects(new ReactiveList<IEntityAspect>());
-			entity.AddAbilityCardPickupEvent(new BaseEvent<AbilityCardConfig>());
+			entity.AddAbilityCardPickupEvent(new BaseEvent<AssetReference>());
 			entity.AddAbilityInventory(new ReactiveList<AbilityCardState>());
 			entity.AddRemoveActiveAbilityEvent(new BaseEvent());
 

@@ -50,7 +50,9 @@ namespace a
 		private Image _adressableTestImage;
 		[SerializeField][TabGroup("Adressables")]
 		private AssetReference _assetReference;
-		
+
+		[TabGroup("Adressables")] [ShowInInspector]
+		public static IReadOnlyDictionary<string, int> AssetReferenceCount => AdressablesLoadManager.AssetReferenceCount;
 
 		[Inject]
 		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer)

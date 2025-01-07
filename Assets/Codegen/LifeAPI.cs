@@ -9,6 +9,7 @@ using Atomic.Elements;
 using Game;
 using Atomic.Extensions;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
 
 namespace Atomic.Entities
 {

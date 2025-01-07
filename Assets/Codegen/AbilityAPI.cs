@@ -9,6 +9,7 @@ using Atomic.Elements;
 using Game;
 using Atomic.Extensions;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
 
 namespace Atomic.Entities
 {
@@ -22,7 +23,7 @@ namespace Atomic.Entities
         public const int AbilityUseNumber = 29; // ReactiveVariable<int>
         public const int ActiveAbilityAspects = 41; // ReactiveList<IEntityAspect>
         public const int ApplyAbilityAspectRequest = 48; // BaseEvent<IEntityAspect>
-        public const int AbilityCardPickupEvent = 53; // BaseEvent<AbilityCardConfig>
+        public const int AbilityCardPickupEvent = 53; // BaseEvent<AssetReference>
         public const int AbilityCardConfig = 54; // AbilityCardConfig
         public const int RemoveActiveAbilityEvent = 55; // BaseEvent
         public const int AbilityInventory = 56; // ReactiveList<AbilityCardState>
@@ -157,13 +158,13 @@ namespace Atomic.Entities
         public static void SetApplyAbilityAspectRequest(this IEntity obj, BaseEvent<IEntityAspect> value) => obj.SetValue(ApplyAbilityAspectRequest, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static BaseEvent<AbilityCardConfig> GetAbilityCardPickupEvent(this IEntity obj) => obj.GetValue<BaseEvent<AbilityCardConfig>>(AbilityCardPickupEvent);
+        public static BaseEvent<AssetReference> GetAbilityCardPickupEvent(this IEntity obj) => obj.GetValue<BaseEvent<AssetReference>>(AbilityCardPickupEvent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAbilityCardPickupEvent(this IEntity obj, out BaseEvent<AbilityCardConfig> value) => obj.TryGetValue(AbilityCardPickupEvent, out value);
+        public static bool TryGetAbilityCardPickupEvent(this IEntity obj, out BaseEvent<AssetReference> value) => obj.TryGetValue(AbilityCardPickupEvent, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddAbilityCardPickupEvent(this IEntity obj, BaseEvent<AbilityCardConfig> value) => obj.AddValue(AbilityCardPickupEvent, value);
+        public static bool AddAbilityCardPickupEvent(this IEntity obj, BaseEvent<AssetReference> value) => obj.AddValue(AbilityCardPickupEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasAbilityCardPickupEvent(this IEntity obj) => obj.HasValue(AbilityCardPickupEvent);
@@ -172,7 +173,7 @@ namespace Atomic.Entities
         public static bool DelAbilityCardPickupEvent(this IEntity obj) => obj.DelValue(AbilityCardPickupEvent);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAbilityCardPickupEvent(this IEntity obj, BaseEvent<AbilityCardConfig> value) => obj.SetValue(AbilityCardPickupEvent, value);
+        public static void SetAbilityCardPickupEvent(this IEntity obj, BaseEvent<AssetReference> value) => obj.SetValue(AbilityCardPickupEvent, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AbilityCardConfig GetAbilityCardConfig(this IEntity obj) => obj.GetValue<AbilityCardConfig>(AbilityCardConfig);

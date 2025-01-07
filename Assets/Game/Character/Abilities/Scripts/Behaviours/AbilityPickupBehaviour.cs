@@ -1,15 +1,17 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
+using UnityEngine.AddressableAssets;
 
 namespace Game
 {
 	public sealed class AbilityPickupBehaviour : IEntityInit, IEntityDispose
 	{
 		private IEntity _characterEntity;
-		private BaseEvent<AbilityCardConfig> _pickupAbilityCardEvent;
+		private BaseEvent<AssetReference> _pickupAbilityCardEvent;
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
 		private IEvent _removeActiveAbilityEvent;
+		private AssetReference _configAssetReference;
 
 		public void Init(IEntity entity)
 		{
@@ -20,8 +22,10 @@ namespace Game
 			_pickupAbilityCardEvent.Subscribe(OnChangeAspect);
 		}
 
-		private void OnChangeAspect(AbilityCardConfig cardConfig)
+		private async void OnChangeAspect(AssetReference assetReference)
 		{
+			_configAssetReference = assetReference;
+			
 			if (_activeAbilityAspects != null)
 			{
 				foreach (var aspect in _activeAbilityAspects)
@@ -30,6 +34,7 @@ namespace Game
 				}
 			}
 
+			var cardConfig = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(assetReference);
 			foreach (var aspect in cardConfig.Aspects)
 			{
 				aspect.Apply(_characterEntity);
@@ -41,6 +46,7 @@ namespace Game
 			{
 				_activeAbilityAspects.Add(cardConfigAspects[i]);
 			}
+			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 
 		public void Dispose(IEntity entity)

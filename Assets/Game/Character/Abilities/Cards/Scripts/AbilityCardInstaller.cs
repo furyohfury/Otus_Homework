@@ -53,9 +53,9 @@ namespace Game
 				return;
 			}
 
-			if (entity.TryGetAbilityCardPickupEvent(out BaseEvent<AbilityCardConfig> pickupEvent))
+			if (entity.TryGetAbilityCardPickupEvent(out BaseEvent<AssetReference> pickupEvent))
 			{
-				pickupEvent.Invoke(_config);
+				pickupEvent.Invoke(_abilityCardConfigReference);
 			}
 
 			SceneEntityCreator.OnDestroyEntityRequest(_entity);
