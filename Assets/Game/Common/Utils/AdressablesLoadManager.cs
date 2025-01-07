@@ -9,6 +9,9 @@ namespace Game
 {
 	public static class AdressablesLoadManager
 	{
+		public static IReadOnlyDictionary<string, int> AssetReferenceCount => _assetReferenceCount;
+		public static IReadOnlyDictionary<string, Object> LoadedAssets => _assets;
+
 		private static readonly Dictionary<string, int> _assetReferenceCount = new();
 		private static readonly Dictionary<string, Object> _assets = new();
 
@@ -18,6 +21,9 @@ namespace Game
 
 			if (_assetReferenceCount.ContainsKey(guid))
 			{
+#if UNITY_EDITOR
+				Debug.Log($"Asset with GUID {guid} was loaded from preload");
+#endif
 				_assetReferenceCount[guid]++;
 				return (T)_assets[guid];
 			}
@@ -27,8 +33,12 @@ namespace Game
 			{
 				throw new InvalidOperationException($"Asset with GUID {guid} could not be loaded.");
 			}
+
 			_assetReferenceCount.Add(guid, 1);
 			_assets.Add(guid, asset);
+#if UNITY_EDITOR
+			Debug.Log($"Asset with GUID {guid} was loaded");
+#endif
 			return asset;
 		}
 
@@ -37,7 +47,7 @@ namespace Game
 			return await LoadAsset<T>(new AssetReference(guid));
 		}
 
-		public async static void ReleaseAsset(AssetReference assetReference)
+		public static async void ReleaseAsset(AssetReference assetReference)
 		{
 			string guid = assetReference.AssetGUID;
 
@@ -52,18 +62,24 @@ namespace Game
 				_assetReferenceCount[guid]--;
 				return;
 			}
-			
+
 			_assetReferenceCount[guid]--;
 			// If someone loaded asset in same frame, then dont release
 			await Task.Yield();
 			if (_assetReferenceCount[guid] < 1)
 			{
+#if UNITY_EDITOR
+				Debug.Log($"Asset with GUID {guid} was released");
+#endif
 				Addressables.Release(_assets[guid]);
 				_assetReferenceCount.Remove(guid);
 				_assets.Remove(guid);
 			}
 		}
 
-		public static void ReleaseAsset(string guid) => ReleaseAsset(new AssetReference(guid));
+		public static void ReleaseAsset(string guid)
+		{
+			ReleaseAsset(new AssetReference(guid));
+		}
 	}
 }
