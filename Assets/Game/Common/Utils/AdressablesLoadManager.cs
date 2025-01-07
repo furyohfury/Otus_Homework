@@ -37,7 +37,7 @@ namespace Game
 			return await LoadAsset<T>(new AssetReference(guid));
 		}
 
-		public static void ReleaseAsset(AssetReference assetReference)
+		public async static void ReleaseAsset(AssetReference assetReference)
 		{
 			string guid = assetReference.AssetGUID;
 
@@ -52,10 +52,16 @@ namespace Game
 				_assetReferenceCount[guid]--;
 				return;
 			}
-
-			_assetReferenceCount.Remove(guid);
-			_assets.Remove(guid);
-			Addressables.Release(_assets[guid]);
+			
+			_assetReferenceCount[guid]--;
+			// If someone loaded asset in same frame, then dont release
+			await Task.Yield();
+			if (_assetReferenceCount[guid] < 1)
+			{
+				Addressables.Release(_assets[guid]);
+				_assetReferenceCount.Remove(guid);
+				_assets.Remove(guid);
+			}
 		}
 
 		public static void ReleaseAsset(string guid) => ReleaseAsset(new AssetReference(guid));

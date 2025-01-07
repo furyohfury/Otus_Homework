@@ -11,37 +11,46 @@ using Newtonsoft.Json;
 using SaveLoad;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Zenject;
 
 namespace a
 {
 	public class DebugHelper : MonoBehaviour
 	{
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private Transform _transform;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private LayerMask _groundLayer;
 		private Vector3 defaultRot;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private Transform _target;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private SceneEntity _character;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private Transform _weapon;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private Rigidbody2D _rigidbody2D;
 		[SerializeField]
 		private bool _drawGizmos;
 
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private Timer _timer;
 		private LevelManager _levelManager;
 		private GameStateManager _gameStateManager;
 		private SaveLoadManager _saveLoadManager;
 		private DiContainer _diContainer;
-		[SerializeField]
+		[SerializeField][TabGroup("Entities")]
 		private SceneEntity _entity;
+
+		[SerializeField] [TabGroup("Adressables")]
+		private Image _adressableTestImage;
+		[SerializeField][TabGroup("Adressables")]
+		private AssetReference _assetReference;
+		
 
 		[Inject]
 		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer)
@@ -56,7 +65,7 @@ namespace a
 			_gameStateManager.ChangeState(GameState.Start);
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		public void CheckOverlapPoint()
 		{
 			if (Physics2D.OverlapPoint(_transform.position, _groundLayer) != null)
@@ -69,7 +78,7 @@ namespace a
 			}
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		public void CheckOverlapSphere()
 		{
 			if (Physics2D.OverlapCircle(_transform.position, 0.1f, _groundLayer) != null)
@@ -82,21 +91,21 @@ namespace a
 			}
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		public void AddTarget()
 		{
 			var target = new ReactiveVariable<Transform>(_target);
 			_character.AddTarget(new BaseFunction<Vector2>(() => _target.position));
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		public void GetAngle()
 		{
 			var angle = Vector3.Angle(_target.position - _weapon.position, _weapon.right);
 			Debug.Log(angle);
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		public void GetSignedAngle()
 		{
 			var angle = Vector3.SignedAngle(_target.position - _weapon.position, _weapon.right, Vector3.back);
@@ -118,54 +127,54 @@ namespace a
 		}
 
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		private void ApplyForce(Vector2 force, ForceMode2D mode)
 		{
 			_rigidbody2D.AddForce(force, mode);
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		private void ApplyVelocity(Vector2 velocity)
 		{
 			_rigidbody2D.velocity += velocity;
 		}
 
-		[Button]
+		[Button][TabGroup("Entities")]
 		private void AddDamageVariable(int value)
 		{
 			_character.AddDamage(new ReactiveVariable<int>(value));
 		}
 		
-		[Button]
+		[Button] [TabGroup("Entities")]
 		private void AddDamageValue(int value)
 		{
 			_character.AddDamage(value);
 		}
 
-		[Button]
-		private async UniTask SwitchScene()
-		{
-			DontDestroyOnLoad(this.gameObject);
-			SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Single);
-			var task = UniTask.Delay(TimeSpan.FromSeconds(5));
-			await UniTask.WhenAll(SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive).ToUniTask(), task);
-			SceneManager.UnloadSceneAsync("LoadingScreen");
-		}
+		// [Button]
+		// private async UniTask SwitchScene()
+		// {
+		// 	DontDestroyOnLoad(this.gameObject);
+		// 	SceneManager.LoadScene("LoadingScreen", LoadSceneMode.Single);
+		// 	var task = UniTask.Delay(TimeSpan.FromSeconds(5));
+		// 	await UniTask.WhenAll(SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive).ToUniTask(), task);
+		// 	SceneManager.UnloadSceneAsync("LoadingScreen");
+		// }
 
-		[Button]
+		[Button][TabGroup("SaveLoad|Lifecycle")]
 		private void ChangeState(GameState state) => _gameStateManager.ChangeState(state);
 
-		[Button]
+		[Button][TabGroup("SaveLoad|Lifecycle")]
 		private void SaveState() => _saveLoadManager.Save();
 
-		[Button]
+		[Button][TabGroup("SaveLoad|Lifecycle")]
 		private void LoadState() => _saveLoadManager.Load();
 
 		[Button]
 		private void TypeDataPath() => Debug.Log(Application.persistentDataPath);
 
 		private string s = string.Empty;
-		[Button]
+		[Button][TabGroup("Entities")]
 		private void ReactiveVarSerialize()
 		{
 			_entity.AddHealth(new ReactiveVariable<int>(10));
@@ -178,14 +187,14 @@ namespace a
 			Debug.Log($"Serialized string = {s}");
 		}
 		
-		[Button]
+		[Button][TabGroup("Entities")]
 		private void ReactiveVarDeserialize()
 		{
 			var r = JsonConvert.DeserializeObject<object>(s);
 			_entity.SetValue(18, 10);
 		}
 
-		[Button]
+		[Button][TabGroup("SaveLoad|Lifecycle")]
 		private void PrintTypes()
 		{
 			var r = JsonConvert.DeserializeObject<Dictionary<int, object>>(s);
@@ -193,6 +202,36 @@ namespace a
 			{
 				Debug.Log($"{pair.Value.GetType()}");
 			}
+		}
+
+		[Button][TabGroup("Adressables")]
+		private async void LoadAsset()
+		{
+			AsyncOperationHandle<Sprite> handle = _assetReference.LoadAssetAsync<Sprite>();
+			var image = await handle.Task;
+			if (handle.Status == AsyncOperationStatus.Succeeded)
+			{
+				_adressableTestImage.sprite = image;
+			}
+		}
+
+		[Button][TabGroup("Adressables")]
+		private void ReleaseAsset()
+		{
+			_assetReference.ReleaseAsset();
+		}
+		
+		[Button][TabGroup("Adressables")]
+		private async void LoadAssetWithManager()
+		{
+			Sprite image = await AdressablesLoadManager.LoadAsset<Sprite>(_assetReference);
+			_adressableTestImage.sprite = image;
+		}
+
+		[Button][TabGroup("Adressables")]
+		private void ReleaseAssetWithManager()
+		{
+			AdressablesLoadManager.ReleaseAsset(_assetReference);
 		}
 	}
 }

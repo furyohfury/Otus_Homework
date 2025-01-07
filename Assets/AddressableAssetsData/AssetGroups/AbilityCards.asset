@@ -18,15 +18,15 @@ MonoBehaviour:
   m_GUID: ee6f207f16fea8d4eb28e671a03c06ec
   m_SerializeEntries:
   - m_GUID: 88e20911f360dc243846387ac21f3f32
-    m_Address: Assets/Game/Character/Abilities/Cards/Configs/MachineGun_StickyBomb_AbilityCardConfig.asset
+    m_Address: MachineGun_StickyBomb_AbilityCardConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: c9c4fac3fbdfce2418a33fcab6531995
-    m_Address: Assets/Game/Character/Abilities/Cards/Configs/Rifle_DashX_AbilityCardConfig.asset
+    m_Address: Rifle_DashX_AbilityCardConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: da798659650ec6e43b6988abf7a6f9ab
-    m_Address: Assets/Game/Character/Abilities/Cards/Configs/Pistol_SecondJump_AbilityCardConfig.asset
+    m_Address: Pistol_SecondJump_AbilityCardConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -16,7 +16,19 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 973114d7b2926774a9f93d97b2b66859
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 9ba118402cd6db943b5925339257eee5
+    m_Address: Elevate_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b11c3c98e67f6042ad548e4d7def14a
+    m_Address: Godspeed_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b7181ab36b007bf4f9de07357cc3de30
+    m_Address: Purify_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8637a88b75bfc7546b0307a16896045a, type: 2}
   m_SchemaSet:

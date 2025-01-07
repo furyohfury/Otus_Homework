@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Atomic.Elements;
 using Atomic.Entities;
 using UnityEditor;
@@ -12,8 +11,6 @@ namespace Game
 	{
 		[SerializeField]
 		private SpriteRenderer _renderer;
-		// [SerializeField]
-		// private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
 		private AssetReference _abilityCardConfigReference;
 		[SerializeField]
@@ -37,14 +34,17 @@ namespace Game
 
 		private async Task InstallConfig(IEntity entity)
 		{
-			AbilityCardConfig config = await _abilityCardConfigReference.LoadAssetAsync<AbilityCardConfig>().Task;
+			AbilityCardConfig config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(_abilityCardConfigReference);
 			entity.AddAbilityCardConfig(config);
 			_config = config;
 			_renderer.sprite = config.Sprite;
 			entity.AddAbilityCardGUID(_abilityCardConfigReference.AssetGUID);
 		}
 
-		public void SetConfigReference(AssetReference reference) => _abilityCardConfigReference = reference;
+		public void SetConfigReference(AssetReference reference)
+		{
+			_abilityCardConfigReference = reference;
+		}
 
 		private void OnTrigger(Collider2D other)
 		{
@@ -64,6 +64,10 @@ namespace Game
 #if UNITY_EDITOR
 		private void OnValidate()
 		{
+			if (_renderer.sprite != null)
+			{
+				return;
+			}
 			var assetPath = AssetDatabase.GUIDToAssetPath(_abilityCardConfigReference.AssetGUID);
 			if (!string.IsNullOrEmpty(assetPath))
 			{
@@ -79,7 +83,7 @@ namespace Game
 
 		private void OnDestroy()
 		{
-			_abilityCardConfigReference.ReleaseAsset();
+			AdressablesLoadManager.ReleaseAsset(_abilityCardConfigReference);
 		}
 	}
 }
