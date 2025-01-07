@@ -10,7 +10,7 @@ namespace UI
 	public sealed class AbilityCardInventoryPresenter : IInitializable, IDisposable
 	{
 		private readonly AbilityCardInventoryView _abilityCardInventoryView;
-		private readonly IReactiveList<AbilityCardState> _characterInventory;
+		private readonly ReactiveList<AbilityCardState> _characterInventory;
 
 		[Inject]
 		public AbilityCardInventoryPresenter(AbilityCardInventoryView abilityCardInventoryView, IEntity character)
@@ -29,6 +29,7 @@ namespace UI
 		{
 			_characterInventory.OnItemInserted += OnCardAdded;
 			_characterInventory.OnItemDeleted += OnCardDeleted;
+			_characterInventory.OnCleared += OnCardsCleared;
 		}
 
 		private void OnCardAdded(int index, AbilityCardState state)
@@ -40,6 +41,11 @@ namespace UI
 		private void OnCardDeleted(int index, AbilityCardState value)
 		{
 			_abilityCardInventoryView.DeleteFirstCard();
+		}
+
+		private void OnCardsCleared()
+		{
+			_abilityCardInventoryView.ClearAllCards();
 		}
 
 		public void Dispose()

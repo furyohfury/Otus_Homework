@@ -31,5 +31,13 @@ namespace UI
 			var firstCardView = _abilityCardViews.Pop();
 			Destroy(firstCardView.gameObject);
 		}
+
+		public void ClearAllCards()
+		{
+			for (var i = 0; i < _abilityCardViews.Count; i++)
+			{
+				Destroy(_abilityCardViews.Pop().gameObject);
+			}
+		}
 	}
 }
