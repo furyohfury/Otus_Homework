@@ -19,6 +19,11 @@ namespace Game
 		{
 			string guid = assetReference.AssetGUID;
 
+			if (string.IsNullOrEmpty(guid))
+			{
+				throw new ArgumentException("GUID of asset was empty");
+			}
+
 			if (_assetReferenceCount.ContainsKey(guid))
 			{
 #if UNITY_EDITOR

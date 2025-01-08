@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoRefresh: 0
-  installOnAwake: 0
+  installOnAwake: 1
   installPipeline:
   - {fileID: 3197033900742610282}
   onInstalled:
