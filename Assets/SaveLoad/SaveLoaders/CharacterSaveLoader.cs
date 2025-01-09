@@ -56,7 +56,6 @@ namespace SaveLoad
 
 		private void ResetAbilityAndWeapons(IEntity playerEntity)
 		{
-			playerEntity.GetAbilityInventory().Clear();
 			if (playerEntity.TryGetAbilityInventory(out var inventory))
 			{
 				throw new NullReferenceException("No ability inventory found on player");
