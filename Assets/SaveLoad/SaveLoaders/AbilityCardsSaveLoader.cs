@@ -64,11 +64,10 @@ namespace SaveLoad
 		{
 			var pos = cardData.Position;
 			var rot = cardData.Rotation;
-			SceneEntity newCard = Object.Instantiate(_prefab, pos, rot);
+			SceneEntity newCard = SceneEntityCreator.OnCreateEntityInRoot(_prefab, pos, rot);
 			newCard.transform.localScale = cardData.Scale;
-			newCard.GetComponent<AbilityCardInstaller>().SetConfigReference(new AssetReference(cardData.AssetGuid)); // TODO pizdec ofc
-			world.AddEntity(newCard);
-			newCard.Install();
+			var installer = newCard.GetComponent<AbilityCardInstaller>();
+			installer.InstallConfig(newCard, new AssetReference(cardData.AssetGuid));
 		}
 	}
 }

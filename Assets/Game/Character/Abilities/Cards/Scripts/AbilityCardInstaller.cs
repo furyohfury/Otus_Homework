@@ -18,7 +18,6 @@ namespace Game
 		[SerializeField]
 		private Transform _transform;
 
-		private AbilityCardConfig _config;
 		private SceneEntity _entity;
 
 		public override void Install(IEntity entity)
@@ -27,23 +26,22 @@ namespace Game
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_renderer);
-			_entity = GetComponent<SceneEntity>(); // TODO redo this cringe hotya pohuy
+			_entity = GetComponent<SceneEntity>();
 
-			InstallConfig(entity);
+			if (_abilityCardConfigReference != null)
+			{
+				InstallConfig(entity, _abilityCardConfigReference);
+			}			
 		}
 
-		private async Task InstallConfig(IEntity entity)
+		public async Task InstallConfig(IEntity entity, AssetReference configAsset)
 		{
 			AbilityCardConfig config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(_abilityCardConfigReference);
-			entity.AddAbilityCardConfig(config);
-			_config = config;
-			_renderer.sprite = config.Sprite;
+			if (_renderer.sprite == null)
+			{
+				_renderer.sprite = config.Sprite;
+			}
 			entity.AddAbilityCardGUID(_abilityCardConfigReference.AssetGUID);
-		}
-
-		public void SetConfigReference(AssetReference reference)
-		{
-			_abilityCardConfigReference = reference;
 		}
 
 		private void OnTrigger(Collider2D other)

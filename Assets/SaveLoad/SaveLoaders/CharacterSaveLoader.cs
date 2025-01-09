@@ -61,6 +61,8 @@ namespace SaveLoad
 				throw new NullReferenceException("No ability inventory found on player");
 			}
 
+			// TODO if have time, make ClearAbilityInventoryEvent and fix behaviour
+			// but this should work for now
 			for (var i = 0; i < inventory.Count; i++)
 			{
 				if (playerEntity.TryGetRemoveActiveAbilityEvent(out var removeEvent))

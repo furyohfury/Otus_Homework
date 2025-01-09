@@ -12,17 +12,20 @@ namespace Game
 
 		private readonly IWinCondition[] _winConditions;
 		private readonly FinishLine _finishLine;
+		private IGameRepository _gameRepository;
 
 		[Inject]
-		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine)
+		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, IGameRepository gameRepository)
 		{
 			_winConditions = winConditions;
 			_finishLine = finishLine;
+			_gameRepository = gameRepository;
 		}
 
 		public void Initialize()
 		{
 			_finishLine.OnCrossed += CheckWinConditions;
+			_gameRepository.Save();
 		}
 
 		public void StartLevel()
@@ -33,6 +36,7 @@ namespace Game
 		public void RestartLevel()
 		{
 			// TODO 
+			_gameRepository.Load();
 			StartLevel();
 		}
 
