@@ -57,10 +57,24 @@ namespace SaveLoad
 		private void ResetAbilityAndWeapons(IEntity playerEntity)
 		{
 			playerEntity.GetAbilityInventory().Clear();
-			if (playerEntity.TryGetUnequipWeaponRequest(out var request))
+			if (playerEntity.TryGetAbilityInventory(out var inventory))
 			{
-				request.Invoke();
+				throw new NullReferenceException("No ability inventory found on player");
 			}
+
+			for (var i = 0; i < inventory.Count; i++)
+			{
+				if (playerEntity.TryGetRemoveActiveAbilityEvent(out var removeEvent))
+				{
+					removeEvent.Invoke();
+				}
+			}			
+
+			// TODO check if needed
+			// if (playerEntity.TryGetUnequipWeaponRequest(out var request))
+			// {
+			// 	request.Invoke();
+			// }
 		}
 	}
 }

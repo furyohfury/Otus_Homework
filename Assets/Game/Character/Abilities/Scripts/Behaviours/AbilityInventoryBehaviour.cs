@@ -14,8 +14,8 @@ namespace Game
 
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
 		private BaseEvent<AssetReference> _abilityCardPickupEvent;
-		private List<AbilityCardState> _states;
 		private BaseEvent _removeActiveAbilityEvent;
+		private List<AbilityCardState> _states;
 		private ReactiveList<AbilityCardState> _abilityInventory;
 		private AssetReference _configAssetReference;
 
@@ -34,10 +34,10 @@ namespace Game
 
 		private async void OnAbilityPickUp(AssetReference assetReference)
 		{
-			_configAssetReference = assetReference;
-			
 			ReactiveVariable<SceneEntity> newWeapon = _character.GetWeapon();
 			ReactiveVariable<int> newWeaponAmmo = newWeapon.Value.GetAmmo();
+			
+			_configAssetReference = assetReference;
 			var config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(assetReference);
 			AbilityCardState cardState = new AbilityCardState
 			                             {
