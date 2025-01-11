@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d573f4c870404d71a40f754ef4ba0064, type: 3}
   m_Name: SaveLoadersInstaller
   m_EditorClassIdentifier: 
-  _abilityCardPrefab: {fileID: 0}
+  _abilityCardPrefab: {fileID: 6390730940251013869, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}

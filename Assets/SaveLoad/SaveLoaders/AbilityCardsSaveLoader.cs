@@ -38,16 +38,29 @@ namespace SaveLoad
 
 		protected override void SetupData(IEntityWorld world, IEnumerable<AbilityCardData> data)
 		{
-			foreach (var cardData in data)
+			var dataArray = data.ToArray();
+			var sceneCards = world.GetEntitiesWithTag(TagAPI.AbilityCard).ToArray();
+			
+			var savedCardsDict = dataArray.ToDictionary(cardData => cardData.InstanceID);
+			var sceneCardsDict = sceneCards.ToDictionary(entity => entity.InstanceId);
+
+			foreach (var cardData in dataArray)
 			{
-				var existingCard = world.Entities.SingleOrDefault(entity => entity.InstanceId == cardData.InstanceID);
-				if (existingCard != default)
+				if (sceneCardsDict.TryGetValue(cardData.InstanceID, out var existingCard))
 				{
 					SetupExistingCard(existingCard, cardData);
 				}
 				else
 				{
 					CreateNewCard(world, cardData);
+				}
+			}
+
+			foreach (var sceneCard in sceneCards)
+			{
+				if (!savedCardsDict.ContainsKey(sceneCard.InstanceId))
+				{
+					SceneEntityCreator.OnDestroyEntityRequest(sceneCard as SceneEntity);
 				}
 			}
 		}
@@ -64,7 +77,7 @@ namespace SaveLoad
 		{
 			var pos = cardData.Position;
 			var rot = cardData.Rotation;
-			SceneEntity newCard = SceneEntityCreator.OnCreateEntityInRoot(_prefab, pos, rot);
+			SceneEntity newCard = SceneEntityCreator.OnCreateEntityInRootRequest(_prefab, pos, rot);
 			newCard.transform.localScale = cardData.Scale;
 			var installer = newCard.GetComponent<AbilityCardInstaller>();
 			installer.InstallConfig(newCard, new AssetReference(cardData.AssetGuid));

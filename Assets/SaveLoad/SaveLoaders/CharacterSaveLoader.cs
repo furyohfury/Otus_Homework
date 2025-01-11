@@ -56,20 +56,20 @@ namespace SaveLoad
 
 		private void ResetAbilityAndWeapons(IEntity playerEntity)
 		{
-			if (playerEntity.TryGetAbilityInventory(out var inventory))
+			if (playerEntity.TryGetAbilityInventory(out var inventory) == false)
 			{
 				throw new NullReferenceException("No ability inventory found on player");
 			}
 
 			// TODO if have time, make ClearAbilityInventoryEvent and fix behaviour
 			// but this should work for now
-			for (var i = 0; i < inventory.Count; i++)
+			for (int i = 0, count = inventory.Count; i < count; i++)
 			{
 				if (playerEntity.TryGetRemoveActiveAbilityEvent(out var removeEvent))
 				{
 					removeEvent.Invoke();
 				}
-			}			
+			}
 
 			// TODO check if needed
 			// if (playerEntity.TryGetUnequipWeaponRequest(out var request))

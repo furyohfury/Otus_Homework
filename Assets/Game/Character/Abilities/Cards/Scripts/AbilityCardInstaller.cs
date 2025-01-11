@@ -36,12 +36,13 @@ namespace Game
 
 		public async Task InstallConfig(IEntity entity, AssetReference configAsset)
 		{
-			AbilityCardConfig config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(_abilityCardConfigReference);
+			_abilityCardConfigReference = configAsset;
+			AbilityCardConfig config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(configAsset);
 			if (_renderer.sprite == null)
 			{
 				_renderer.sprite = config.Sprite;
 			}
-			entity.AddAbilityCardGUID(_abilityCardConfigReference.AssetGUID);
+			entity.AddAbilityCardGUID(configAsset.AssetGUID);
 		}
 
 		private void OnTrigger(Collider2D other)
