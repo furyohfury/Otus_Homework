@@ -113,7 +113,7 @@ namespace Game
 						_explosionUpwardForce);
 				}
 
-				if (entity.TryGetDestroyEvent(out var destroyEvent)) // TODO mb wall tag
+				if (entity.TryGetDestroyEvent(out var destroyEvent))
 				{
 					destroyEvent.Invoke();
 				}

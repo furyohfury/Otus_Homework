@@ -170,6 +170,7 @@ MonoBehaviour:
   _attackDelay: 0.2
   _ammoSize: 20
   _damage: 1
+  _spreadAngle: 8
 --- !u!1 &8107027897982037988
 GameObject:
   m_ObjectHideFlags: 0

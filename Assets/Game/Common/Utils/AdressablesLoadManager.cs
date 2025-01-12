@@ -69,8 +69,17 @@ namespace Game
 			}
 
 			_assetReferenceCount[guid]--;
+
 			// If someone loaded asset in same frame, then dont release
 			await Task.Yield();
+			if (_assetReferenceCount.TryGetValue(guid, out count) == false)
+			{
+#if UNITY_EDITOR
+				Debug.Log($"Asset with GUID {guid} was released by something already");
+#endif
+				return;
+			}
+
 			if (_assetReferenceCount[guid] < 1)
 			{
 #if UNITY_EDITOR

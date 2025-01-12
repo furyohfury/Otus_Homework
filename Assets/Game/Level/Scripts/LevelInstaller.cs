@@ -9,17 +9,34 @@ namespace Game
 	{
 		[SerializeField]
 		private SceneEntity[] _enemies;
+		[SerializeField]
+		private SceneEntity _character;
 		
 		public override void InstallBindings()
 		{
 			Container.Bind<EnemiesDeadWinCondition>().AsCached();
 			
-			Container.Bind<FinishLine>().FromComponentInHierarchy().AsSingle();
-			Container.Bind<EnemyService>().AsCached().WithArguments(_enemies);
-			Container.Bind<LevelTimer>().AsCached();
-			Container.BindInterfacesAndSelfTo<LevelTimerController>().AsCached();
-			Container.BindInterfacesAndSelfTo<LevelManager>().AsCached();
-			Container.BindInterfacesAndSelfTo<LeaderboardService>().AsCached();
+			Container.Bind<FinishLine>()
+			         .FromComponentInHierarchy()
+			         .AsSingle();
+			
+			Container.Bind<EnemyService>()
+			         .AsCached()
+			         .WithArguments(_enemies);
+			
+			Container.Bind<LevelTimer>()
+			         .AsCached();
+			
+			Container.BindInterfacesAndSelfTo<LevelManager>()
+			         .AsCached()
+			         .WithArguments(_character);
+			
+			Container.BindInterfacesAndSelfTo<LeaderboardService>()
+			         .AsCached();
+
+			Container.BindInterfacesTo<CharacterDeathObserver>()
+			         .AsCached()
+			         .WithArguments(_character);
 		}
 	}
 }

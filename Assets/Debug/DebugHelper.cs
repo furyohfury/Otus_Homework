@@ -55,11 +55,12 @@ namespace a
 		public static IReadOnlyDictionary<string, int> AssetReferenceCount => AdressablesLoadManager.AssetReferenceCount;
 
 		[Inject]
-		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer)
+		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer, LevelManager levelManager)
 		{
 			_gameStateManager = gameStateManager;
 			_saveLoadManager = saveLoadManager;
 			_diContainer = diContainer;
+			_levelManager = levelManager;
 		}
 
 		private void Start()
@@ -235,5 +236,14 @@ namespace a
 		{
 			AdressablesLoadManager.ReleaseAsset(_assetReference);
 		}
+
+		[Button] [TabGroup("Level")]
+		private void StartLevel() => _levelManager.StartLevel();
+		
+		[Button] [TabGroup("Level")]
+		private void FinishLevel() => _levelManager.FinishLevel();
+		
+		[Button] [TabGroup("Level")]
+		private void RestartLevel() => _levelManager.RestartLevel();
 	}
 }

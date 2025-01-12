@@ -40,8 +40,8 @@ namespace Game
 
 		public void Dispose(IEntity entity)
 		{
-			_equipWeaponRequest.Unsubscribe(OnWeaponEquip);
-			_unequipWeaponRequest.Unsubscribe(OnWeaponUnequip);
+			_equipWeaponRequest?.Unsubscribe(OnWeaponEquip);
+			_unequipWeaponRequest?.Unsubscribe(OnWeaponUnequip);
 		}
 	}
 }

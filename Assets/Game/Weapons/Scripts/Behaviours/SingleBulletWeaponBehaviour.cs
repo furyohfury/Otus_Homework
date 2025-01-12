@@ -31,7 +31,7 @@ namespace Game
 
 		private void OnAttackEvent()
 		{
-			// TODO how to get world transform? Actually root is alright
+			// TODO Unnes how to get world transform? Actually root is alright
 			// TODO shoots with negative scale cuz of weapon rotation
 			var bullet = _pool.Get(_firePoint.Value.position, _firePoint.Value.rotation);
 

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: []
+  _character: {fileID: 253108519}
 --- !u!1 &43027865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,8 +1146,8 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1181966949}
   - {fileID: 1896702738}
-  - {fileID: 8641114}
   - {fileID: 58452721}
+  - {fileID: 8641114}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2831,8 +2832,8 @@ Transform:
   m_Children:
   - {fileID: 253108512}
   - {fileID: 726020519}
-  - {fileID: 1208747243}
   - {fileID: 317920577}
+  - {fileID: 1208747243}
   - {fileID: 1598688616}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -3585,12 +3586,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Name
-      value: AbilityCard_Prefab
+      value: DoubleJumpCard
       objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1045923571131189572, guid: 00000000000000000000000000000000, type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -3605,7 +3606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3617,7 +3618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0674734
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4674,12 +4675,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Name
-      value: AbilityCard_Prefab (1)
+      value: DashCard
       objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -782884098313072976, guid: 00000000000000000000000000000000, type: 0}
+      objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -4706,7 +4707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0674734
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6053,7 +6054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852149613410737011, guid: 94a6fc607e3c98446aadd6c3a9549a28, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2852149613410737011, guid: 94a6fc607e3c98446aadd6c3a9549a28, type: 3}
       propertyPath: m_LocalPosition.x

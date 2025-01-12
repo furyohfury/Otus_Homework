@@ -1,32 +1,42 @@
 ﻿using System;
 using System.Diagnostics;
-using Debug = UnityEngine.Debug;
 
 namespace Game
 {
-	public sealed class LevelTimer
+	public sealed class LevelTimer : IGameTickable
 	{
 		public TimeSpan LevelTime => _stopwatch.Elapsed;
+
+		private TimeSpan _levelTime;
+		private bool _isActive;
 		private readonly Stopwatch _stopwatch = new();
 
-		public void StartTimer()
+		public void Tick(float deltaTime)
 		{
-			_stopwatch.Restart();
+			if (_isActive)
+			{
+				_levelTime = _levelTime.Add(TimeSpan.FromMilliseconds(deltaTime));
+			}
 		}
 
-		public void FinishTimer()
+		public void Start()
 		{
-			_stopwatch.Stop();
+			_isActive = true;
 		}
 
-		public void PauseTimer()
+		public void Finish()
 		{
-			_stopwatch.Stop();
+			_isActive = false;
 		}
 
-		public void ResumeTimer()
+		public void Pause()
 		{
-			_stopwatch.Start();
+			Finish();
+		}
+
+		public void Resume()
+		{
+			Start();
 		}
 	}
 }

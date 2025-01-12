@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
+using Atomic.Entities;
+using SaveLoad;
 using UnityEngine;
 using Zenject;
 
@@ -12,32 +15,45 @@ namespace Game
 
 		private readonly IWinCondition[] _winConditions;
 		private readonly FinishLine _finishLine;
-		private IGameRepository _gameRepository;
+		private readonly SaveLoadManager _saveLoadManager;
+		private readonly LevelTimer _levelTimer;
+		private readonly IEntity _character;
 
 		[Inject]
-		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, IGameRepository gameRepository)
+		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer
+			, IEntity character, SaveLoadManager saveLoadManager)
 		{
 			_winConditions = winConditions;
 			_finishLine = finishLine;
-			_gameRepository = gameRepository;
+			_levelTimer = levelTimer;
+			_character = character;
+			_saveLoadManager = saveLoadManager;
 		}
 
 		public void Initialize()
 		{
 			_finishLine.OnCrossed += CheckWinConditions;
-			_gameRepository.Save();
+			// _gameRepository.SaveState();
 		}
 
 		public void StartLevel()
 		{
+			_saveLoadManager.Save();
+			_levelTimer.Start();
+			_character.Enable();
 			OnLevelStarted?.Invoke();
+#if UNITY_EDITOR
+			Debug.Log("Level started");
+#endif
 		}
 
 		public void RestartLevel()
 		{
-			// TODO 
-			_gameRepository.Load();
+			_saveLoadManager.Load();
 			StartLevel();
+#if UNITY_EDITOR
+			Debug.Log("Level restarted");
+#endif
 		}
 
 		private void CheckWinConditions()
@@ -50,9 +66,13 @@ namespace Game
 			FinishLevel();
 		}
 
-		private void FinishLevel()
+		public void FinishLevel()
 		{
-			Debug.Log("Level end");
+			_character.Disable();
+			OnLevelFinished?.Invoke();
+#if UNITY_EDITOR
+			Debug.Log("Level finished");
+#endif
 		}
 
 		public void Dispose()
