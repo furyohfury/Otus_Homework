@@ -19,7 +19,7 @@ namespace Game
 #if UNITY_EDITOR
 			Container.Bind<DebugHelper>().AsSingle(); // TODO delete
 #endif
-			Container.BindInterfacesAndSelfTo<MovementController>()
+			Container.BindInterfacesAndSelfTo<InputController>()
 			         .AsSingle()
 			         .WithArguments(_character);
 			

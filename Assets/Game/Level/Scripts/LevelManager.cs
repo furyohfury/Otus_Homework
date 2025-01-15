@@ -13,21 +13,22 @@ namespace Game
 		public event Action OnLevelStarted;
 		public event Action OnLevelFinished;
 
+		public event Action OnLevelReset;
+
 		private readonly IWinCondition[] _winConditions;
 		private readonly FinishLine _finishLine;
 		private readonly SaveLoadManager _saveLoadManager;
 		private readonly LevelTimer _levelTimer;
-		private readonly IEntity _character;
+		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer
-			, IEntity character, SaveLoadManager saveLoadManager)
+		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer, SaveLoadManager saveLoadManager, GameStateManager gameStateManager)
 		{
 			_winConditions = winConditions;
 			_finishLine = finishLine;
 			_levelTimer = levelTimer;
-			_character = character;
 			_saveLoadManager = saveLoadManager;
+			_gameStateManager = gameStateManager;
 		}
 
 		public void Initialize()
@@ -40,19 +41,22 @@ namespace Game
 		{
 			_saveLoadManager.Save();
 			_levelTimer.Start();
-			_character.Enable();
+			_gameStateManager.ChangeState(GameState.Start);
 			OnLevelStarted?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level started");
 #endif
 		}
 
-		public void RestartLevel()
+		public void ResetLevel()
 		{
 			_saveLoadManager.Load();
-			StartLevel();
+			_levelTimer.Finish();
+			_levelTimer.Reset();
+			_gameStateManager.ChangeState(GameState.Pause);
+			OnLevelReset?.Invoke();
 #if UNITY_EDITOR
-			Debug.Log("Level restarted");
+			Debug.Log("Level reset");
 #endif
 		}
 
@@ -68,7 +72,7 @@ namespace Game
 
 		public void FinishLevel()
 		{
-			_character.Disable();
+			_gameStateManager.ChangeState(GameState.Pause);
 			OnLevelFinished?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level finished");

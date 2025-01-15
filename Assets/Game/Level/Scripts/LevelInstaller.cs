@@ -24,19 +24,14 @@ namespace Game
 			         .AsCached()
 			         .WithArguments(_enemies);
 			
-			Container.Bind<LevelTimer>()
+			Container.BindInterfacesAndSelfTo<LevelTimer>()
 			         .AsCached();
-			
+
 			Container.BindInterfacesAndSelfTo<LevelManager>()
-			         .AsCached()
-			         .WithArguments(_character);
+			         .AsCached();
 			
 			Container.BindInterfacesAndSelfTo<LeaderboardService>()
 			         .AsCached();
-
-			Container.BindInterfacesTo<CharacterDeathObserver>()
-			         .AsCached()
-			         .WithArguments(_character);
 		}
 	}
 }

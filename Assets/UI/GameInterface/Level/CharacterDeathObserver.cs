@@ -11,12 +11,14 @@ namespace UI
 		private readonly IEntity _character;
 		private IFunction<bool> _playerIsDead;
 		private readonly GameObject _gameOverCanvas;
+		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public CharacterDeathObserver(IEntity character, GameObject gameOverCanvas)
+		public CharacterDeathObserver(IEntity character, GameObject gameOverCanvas, GameStateManager gameStateManager)
 		{
 			_character = character;
 			_gameOverCanvas = gameOverCanvas;
+			_gameStateManager = gameStateManager;
 		}
 
 
@@ -35,7 +37,7 @@ namespace UI
 		{
 			if (_playerIsDead.Invoke())
 			{
-				_character.Disable();
+				_gameStateManager.ChangeState(GameState.Pause);
 				_gameOverCanvas.SetActive(true);
 			}
 		}

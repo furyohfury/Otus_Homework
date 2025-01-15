@@ -244,6 +244,6 @@ namespace a
 		private void FinishLevel() => _levelManager.FinishLevel();
 		
 		[Button] [TabGroup("Level")]
-		private void RestartLevel() => _levelManager.RestartLevel();
+		private void RestartLevel() => _levelManager.ResetLevel();
 	}
 }

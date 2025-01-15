@@ -6,18 +6,20 @@ using ITickable = Zenject.ITickable;
 
 namespace Game
 {
-	public sealed class MovementController : IInitializable, ITickable
+	public sealed class InputController : IInitializable, ITickable
 	{
 		private readonly IEntity _character;
 		private Rigidbody2D _rigidbody;
 		private ReactiveVariable<Vector2> _moveDirection;
 		private readonly Camera _camera;
+		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public MovementController(IEntity character, Camera camera)
+		public InputController(IEntity character, Camera camera, GameStateManager gameStateManager)
 		{
 			_character = character;
 			_camera = camera;
+			_gameStateManager = gameStateManager;
 		}
 
 		public void Initialize()
@@ -37,6 +39,18 @@ namespace Game
 			Jumping();
 			Shooting();
 			Ability();
+			Pausing();
+		}
+
+		private void Pausing()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				var state = _gameStateManager.State == GameState.Pause
+					? GameState.Resume
+					: GameState.Pause;
+				_gameStateManager.ChangeState(state);
+			}
 		}
 
 		private void SetMouseAsTarget()
@@ -78,7 +92,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			if (_character.TryGetAttackRequest(out var request))
 			{
 				request.Invoke();

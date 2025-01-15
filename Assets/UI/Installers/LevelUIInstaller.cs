@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using Atomic.Entities;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -19,32 +21,41 @@ namespace UI
 		[SerializeField]
 		private AmountView _leaderboardListView;
 		[SerializeField]
-		private GameObject _startMenuView;
+		private StartLevelMenuView _startMenuView;
 		[SerializeField]
-		private GameObject _pauseMenuView;
-		
+		private PauseMenuView _pauseMenuView;
+		[SerializeField] 
+		private ResetLevelMenuView _resetMenuView;
+
+		[SerializeField]
+		private SceneEntity _character;
+
+
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesTo<LevelTimerPresenter>()
 			         .AsCached()
 			         .WithArguments(_timerView);
-			Container.BindInterfacesTo<PlayButtonObserver>()
-			         .AsCached()
-			         .WithArguments(_playButton, _startMenuView);
-			Container.BindInterfacesTo<MainMenuButtonObserver>()
-			         .AsCached()
-			         .WithArguments(_mainMenuStartPanelButton);
 			
-			Container.BindInterfacesTo<MainMenuButtonObserver>()
-			         .AsCached()
-			         .WithArguments(_mainMenuPausePanelButton);
-
 			Container.BindInterfacesAndSelfTo<LeaderboardListController>()
 			         .AsCached()
 			         .WithArguments(_leaderboardListView);
-			Container.BindInterfacesAndSelfTo<RestartButtonObserver>()
+
+			Container.BindInterfacesAndSelfTo<CharacterDeathObserver>()
 			         .AsCached()
-			         .WithArguments(_restartButton, _startMenuView, _pauseMenuView);
+			         .WithArguments(_character, _pauseMenuView.gameObject);
+			
+			Container.BindInterfacesTo<StartLevelMenuPresenter>()
+			         .AsCached()
+			         .WithArguments(_startMenuView);
+			
+			Container.BindInterfacesTo<ResetLevelMenuPresenter>()
+			         .AsCached()
+			         .WithArguments(_resetMenuView);
+			
+			Container.BindInterfacesTo<PauseMenuPresenter>()
+			         .AsCached()
+			         .WithArguments(_pauseMenuView);
 		}
 	}
 }

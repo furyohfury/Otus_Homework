@@ -27,7 +27,7 @@ namespace UI
 
 		private void UpdateTimerView()
 		{
-			var time = _levelTimer.LevelTime.ToString(@"mm\:ss\:fff");
+			var time = _levelTimer.LevelTime.ToString(@"mm\:ss\:ff");
 			_timerView.SetText(time);
 		}
 

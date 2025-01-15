@@ -5,38 +5,27 @@ namespace Game
 {
 	public sealed class LevelTimer : IGameTickable
 	{
-		public TimeSpan LevelTime => _stopwatch.Elapsed;
+		public TimeSpan LevelTime => _levelTime;
 
 		private TimeSpan _levelTime;
 		private bool _isActive;
-		private readonly Stopwatch _stopwatch = new();
 
 		public void Tick(float deltaTime)
 		{
 			if (_isActive)
 			{
-				_levelTime = _levelTime.Add(TimeSpan.FromMilliseconds(deltaTime));
+				_levelTime = _levelTime.Add(TimeSpan.FromSeconds(deltaTime));
 			}
 		}
 
-		public void Start()
-		{
-			_isActive = true;
-		}
+		public void Start() => _isActive = true;
 
-		public void Finish()
-		{
-			_isActive = false;
-		}
+		public void Finish() => _isActive = false;
 
-		public void Pause()
-		{
-			Finish();
-		}
+		public void Pause() => Finish();
 
-		public void Resume()
-		{
-			Start();
-		}
+		public void Resume() => Start();
+
+		public void Reset() => _levelTime = TimeSpan.Zero;
 	}
 }

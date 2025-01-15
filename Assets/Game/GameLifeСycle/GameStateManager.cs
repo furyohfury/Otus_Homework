@@ -10,10 +10,15 @@ namespace Game
         
         public GameState State => _state;
         
-        private GameState _state;
+        private GameState _state = GameState.None;
 
         public void ChangeState(GameState state)
         {
+            if (_state == state)
+            {
+                return;
+            }
+            
             _state = state;
             OnStateChanged?.Invoke(state);
         }
@@ -21,6 +26,7 @@ namespace Game
 
     public enum GameState
     {
+        None,
         Start,
         Pause,
         Resume,
