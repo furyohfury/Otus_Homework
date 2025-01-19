@@ -25,7 +25,9 @@ namespace UI
 		[SerializeField]
 		private PauseMenuView _pauseMenuView;
 		[SerializeField] 
-		private ResetLevelMenuView _resetMenuView;
+		private GameOverMenuView _gameOverMenuView;
+		[SerializeField]
+		private FinishLevelMenuView _finishLevelMenuView;
 
 		[SerializeField]
 		private SceneEntity _character;
@@ -37,25 +39,30 @@ namespace UI
 			         .AsCached()
 			         .WithArguments(_timerView);
 			
-			Container.BindInterfacesAndSelfTo<LeaderboardListController>()
-			         .AsCached()
-			         .WithArguments(_leaderboardListView);
+			// Container.BindInterfacesAndSelfTo<LeaderboardListController>()
+			//          .AsCached()
+			//          .WithArguments(_leaderboardListView);
 
-			Container.BindInterfacesAndSelfTo<CharacterDeathObserver>()
-			         .AsCached()
-			         .WithArguments(_character, _pauseMenuView.gameObject);
-			
+			InstallLevelMenus();
+		}
+
+		private void InstallLevelMenus()
+		{
 			Container.BindInterfacesTo<StartLevelMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_startMenuView);
 			
-			Container.BindInterfacesTo<ResetLevelMenuPresenter>()
+			Container.BindInterfacesTo<GameOverMenuPresenter>()
 			         .AsCached()
-			         .WithArguments(_resetMenuView);
+			         .WithArguments(_gameOverMenuView, _character);
 			
 			Container.BindInterfacesTo<PauseMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_pauseMenuView);
+
+			Container.BindInterfacesTo<FinishLevelMenuPresenter>()
+			         .AsCached()
+			         .WithArguments(_finishLevelMenuView);
 		}
 	}
 }

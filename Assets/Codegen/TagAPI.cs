@@ -14,6 +14,7 @@ namespace Atomic.Entities
         public const int Bullet = 2;
         public const int DestructibleWall = 3;
         public const int AbilityCard = 4;
+        public const int Enemy = 5;
 
 
         ///Extensions
@@ -36,5 +37,10 @@ namespace Atomic.Entities
         public static bool NotAbilityCardTag(this IEntity obj) => !obj.HasTag(AbilityCard);
         public static bool AddAbilityCardTag(this IEntity obj) => obj.AddTag(AbilityCard);
         public static bool DelAbilityCardTag(this IEntity obj) => obj.DelTag(AbilityCard);
+        
+        public static bool HasEnemyTag(this IEntity obj) => obj.HasTag(Enemy);
+        public static bool NotEnemyTag(this IEntity obj) => !obj.HasTag(Enemy);
+        public static bool AddEnemyTag(this IEntity obj) => obj.AddTag(Enemy);
+        public static bool DelEnemyTag(this IEntity obj) => obj.DelTag(Enemy);
     }
 }

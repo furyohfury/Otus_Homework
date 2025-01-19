@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Atomic.Entities;
 using Zenject;
 
@@ -10,17 +9,20 @@ namespace Game
 	{
 		public bool EnemiesDead => _activeEnemies.Count <= 0;
 
-		private readonly List<IEntity> _enemies;
+		private HashSet<IEntity> _enemies;
 		private HashSet<IEntity> _activeEnemies;
+		private readonly IEntityWorld _entityWorld;
 
 		[Inject]
-		public EnemyService(IEnumerable<IEntity> enemies)
+		public EnemyService(IEntityWorld entityWorld)
 		{
-			_enemies = enemies.ToList();
+			_entityWorld = entityWorld;
 		}
 
 		public void Initialize()
 		{
+			var worldEnemies = _entityWorld.GetEntitiesWithTag(TagAPI.Enemy);
+			_enemies = new HashSet<IEntity>(worldEnemies);
 			_activeEnemies = new HashSet<IEntity>(_enemies);
 			foreach (var enemy in _enemies)
 			{
@@ -31,9 +33,10 @@ namespace Game
 		public void Reset()
 		{
 			_activeEnemies.Clear();
-			for (var i = 0; i < _enemies.Count; i++)
+
+			foreach (var enemy in _enemies)
 			{
-				_activeEnemies.Add(_enemies[i]);
+				_activeEnemies.Add(enemy);
 			}
 		}
 

@@ -20,21 +20,33 @@ namespace UI
 
 		public void Initialize()
 		{
+			_levelManager.OnLevelStarted += OnLevelStarted;
+			_levelManager.OnLevelFinished += OnLevelFinished;
+			
 			_view.OnResumeButtonClicked += OnResumeButtonClicked;
 			_view.OnResetButtonClicked += OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
+		}
+
+		private void OnLevelStarted()
+		{
 			_gameStateManager.OnStateChanged += OnStateChanged;
+		}
+
+		private void OnLevelFinished()
+		{
+			_gameStateManager.OnStateChanged -= OnStateChanged;
 		}
 
 		private void OnResumeButtonClicked()
 		{
-			DeactivateView();
+			HideView();
 			_gameStateManager.ChangeState(GameState.Resume);
 		}
 
 		private void OnResetButtonClicked()
 		{
-			DeactivateView();
+			HideView();
 			_levelManager.ResetLevel();
 		}
 
@@ -45,23 +57,32 @@ namespace UI
 
 		private void OnStateChanged(GameState state)
 		{
-			if (state == GameState.Resume)
+			if (state == GameState.Resume && _view.isActiveAndEnabled)
 			{
-				DeactivateView();
+				HideView();
 			}
 
-			if (state == GameState.Pause)
+			if (state == GameState.Pause && _view.isActiveAndEnabled == false)
 			{
-				ActivateView();
+				ShowView();
 			}
 		}
 
-		private void ActivateView() => _view.gameObject.SetActive(true);
+		private void ShowView()
+		{
+			_view.gameObject.SetActive(true);
+		}
 
-		private void DeactivateView() => _view.gameObject.SetActive(false);
+		private void HideView()
+		{
+			_view.gameObject.SetActive(false);
+		}
 
 		public void Dispose()
 		{
+			_levelManager.OnLevelStarted -= OnLevelStarted;
+			_levelManager.OnLevelFinished -= OnLevelFinished;
+			
 			_view.OnResumeButtonClicked -= OnResumeButtonClicked;
 			_view.OnResetButtonClicked -= OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked -= OnMainMenuButtonClicked;

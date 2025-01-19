@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-	public sealed class ResetLevelMenuView : MonoBehaviour
+	public sealed class GameOverMenuView : MonoBehaviour
 	{
 		public event UnityAction OnResetButtonClicked
 		{

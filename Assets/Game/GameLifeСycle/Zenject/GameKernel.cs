@@ -32,7 +32,7 @@ namespace Game
 		public override void Update()
 		{
 			base.Update();
-			if (_gameStateManager.State is GameState.Pause or GameState.Finish)
+			if (_gameStateManager.State is GameState.None or GameState.Pause or GameState.Finish)
 			{
 				return;
 			}
@@ -47,7 +47,7 @@ namespace Game
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
-			if (_gameStateManager.State is GameState.Pause or GameState.Finish)
+			if (_gameStateManager.State is GameState.None or GameState.Pause or GameState.Finish)
 			{
 				return;
 			}
@@ -62,7 +62,7 @@ namespace Game
 		public override void LateUpdate()
 		{
 			base.LateUpdate();
-			if (_gameStateManager.State is GameState.Pause or GameState.Finish)
+			if (_gameStateManager.State is GameState.None or GameState.Pause or GameState.Finish)
 			{
 				return;
 			}

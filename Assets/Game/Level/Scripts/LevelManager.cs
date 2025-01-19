@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using Atomic.Entities;
 using SaveLoad;
@@ -19,29 +18,31 @@ namespace Game
 		private readonly FinishLine _finishLine;
 		private readonly SaveLoadManager _saveLoadManager;
 		private readonly LevelTimer _levelTimer;
-		private readonly GameStateManager _gameStateManager;
+		private readonly IEntityWorld _entityWorld;
 
 		[Inject]
-		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer, SaveLoadManager saveLoadManager, GameStateManager gameStateManager)
+		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer, SaveLoadManager saveLoadManager,
+			IEntityWorld entityWorld)
 		{
 			_winConditions = winConditions;
 			_finishLine = finishLine;
 			_levelTimer = levelTimer;
 			_saveLoadManager = saveLoadManager;
-			_gameStateManager = gameStateManager;
+			_entityWorld = entityWorld;
 		}
 
 		public void Initialize()
 		{
 			_finishLine.OnCrossed += CheckWinConditions;
+			_saveLoadManager.Save();
 			// _gameRepository.SaveState();
 		}
 
 		public void StartLevel()
 		{
-			_saveLoadManager.Save();
+			// _saveLoadManager.Save();
 			_levelTimer.Start();
-			_gameStateManager.ChangeState(GameState.Start);
+			_entityWorld.EnableEntities();
 			OnLevelStarted?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level started");
@@ -53,7 +54,6 @@ namespace Game
 			_saveLoadManager.Load();
 			_levelTimer.Finish();
 			_levelTimer.Reset();
-			_gameStateManager.ChangeState(GameState.Pause);
 			OnLevelReset?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level reset");
@@ -72,7 +72,7 @@ namespace Game
 
 		public void FinishLevel()
 		{
-			_gameStateManager.ChangeState(GameState.Pause);
+			_entityWorld.DisableEntities();
 			OnLevelFinished?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level finished");

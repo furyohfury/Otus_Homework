@@ -44,12 +44,24 @@ namespace Game
 
 		private void Pausing()
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (!Input.GetKeyDown(KeyCode.Escape))
 			{
-				var state = _gameStateManager.State == GameState.Pause
-					? GameState.Resume
-					: GameState.Pause;
-				_gameStateManager.ChangeState(state);
+				return;
+			}
+
+			var currentState = _gameStateManager.State;
+			if (currentState is GameState.None)
+			{
+				return;
+			}
+
+			if (currentState is GameState.Resume or GameState.Start)
+			{
+				_gameStateManager.ChangeState(GameState.Pause);
+			}
+			else
+			{
+				_gameStateManager.ChangeState(GameState.Resume);
 			}
 		}
 

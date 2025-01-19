@@ -54,6 +54,9 @@ namespace a
 		[TabGroup("Adressables")] [ShowInInspector]
 		public static IReadOnlyDictionary<string, int> AssetReferenceCount => AdressablesLoadManager.AssetReferenceCount;
 
+		[TabGroup("SaveLoad|Lifecycle")] [ShowInInspector]
+		public GameState State => _gameStateManager.State;
+
 		[Inject]
 		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer, LevelManager levelManager)
 		{

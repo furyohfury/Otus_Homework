@@ -26,13 +26,26 @@ namespace Game
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy().AsCached();
 			
+			
+			InstallGameLifeCycle();
+			InstallEntitiesSystem();
+		}
+
+		private void InstallGameLifeCycle()
+		{
+			Container.Bind<GameStateManager>()
+			         .AsSingle();
+
+			Container.Bind<GameLauncher>()
+			         .AsCached();  // TODO hz naschet etogo
+		}
+
+		private void InstallEntitiesSystem()
+		{
 			Container.Bind<IEntityWorld>()
 			         .To<SceneEntityWorld>()
 			         .FromComponentInHierarchy()
 			         .AsCached();
-			
-			Container.Bind<GameStateManager>()
-			         .AsSingle();
 			
 			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
 			         .AsSingle()
