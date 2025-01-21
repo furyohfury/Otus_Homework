@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Game;
 using Zenject;
 
@@ -8,13 +9,14 @@ namespace UI
 	{
 		private readonly FinishLevelMenuView _view;
 		private readonly LevelManager _levelManager;
-		// private LeaderboardService _leaderboardService; TODO 
+		private readonly Leaderboard _leaderboard;
 
 		[Inject]
-		public FinishLevelMenuPresenter(FinishLevelMenuView view, LevelManager levelManager)
+		public FinishLevelMenuPresenter(FinishLevelMenuView view, LevelManager levelManager, Leaderboard leaderboard)
 		{
 			_view = view;
 			_levelManager = levelManager;
+			_leaderboard = leaderboard;
 		}
 
 		public void Initialize()
@@ -42,6 +44,17 @@ namespace UI
 
 		private void ShowView()
 		{
+			var leaderboardTime = _leaderboard.Times;
+			var sb = new StringBuilder();
+			for (int i = 0, count = leaderboardTime.Count; i < count; i++)
+			{
+				if (leaderboardTime[i] != default)
+				{
+					sb.AppendLine(leaderboardTime[i].ToString("g"));
+				}
+			}
+
+			_view.UpdateLeaderboard(sb.ToString());
 			_view.gameObject.SetActive(true);
 		}
 

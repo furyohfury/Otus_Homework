@@ -23,5 +23,10 @@ namespace UI
 		private Button _mainMenuButton;
 		[SerializeField]
 		private AmountView _leaderboard;
+
+		public void UpdateLeaderboard(string text)
+		{
+			_leaderboard.SetText(text);
+		}
 	}
 }
