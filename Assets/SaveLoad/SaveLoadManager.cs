@@ -22,7 +22,7 @@ namespace SaveLoad
 
 		private void OnEnable()
 		{
-			SceneManager.activeSceneChanged += OnSceneChanged; // TODO unnes mb kak to pomenyat no vrode ne tak vajno
+			SceneManager.activeSceneChanged += OnSceneChanged; // TODO unnes mb kak to pomenyat no vrode ne tak vajno. Tipa svoy singleton scene manager
 		}
 
 		private void Start()

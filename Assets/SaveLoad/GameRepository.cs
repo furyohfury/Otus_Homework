@@ -51,7 +51,7 @@ namespace SaveLoad
 
 		public bool TryGetData<T>(out T value)
 		{
-			if (_gameState.TryGetValue(typeof(T).FullName, out var serializedData))
+			if (_gameState.TryGetValue(typeof(T).FullName!, out var serializedData))
 			{
 				value = JsonConvert.DeserializeObject<T>(serializedData, new JsonSerializerSettings
 				                                                         {
@@ -72,7 +72,7 @@ namespace SaveLoad
 				                                                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 				                                                        TypeNameHandling = TypeNameHandling.Objects
 			                                                        });
-			_gameState[typeof(T).FullName] = serializedData;
+			_gameState[typeof(T).FullName!] = serializedData;
 		}
 	}
 }

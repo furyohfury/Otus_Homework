@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Game;
-using Newtonsoft.Json;
 using ObservableCollections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 using IInitializable = Zenject.IInitializable;
 
 namespace SaveLoad
@@ -14,11 +13,13 @@ namespace SaveLoad
 	public sealed class LeaderboardSaveLoader : IInitializable, IDisposable
 	{
 		private readonly Leaderboard _leaderboard;
-		private readonly string _savePath = Path.Combine(Application.persistentDataPath, "Leaderboards.json");
+		private readonly IGameRepository _gameRepository;
 
-		public LeaderboardSaveLoader(Leaderboard leaderboard)
+		[Inject]
+		public LeaderboardSaveLoader(Leaderboard leaderboard, IGameRepository gameRepository)
 		{
 			_leaderboard = leaderboard;
+			_gameRepository = gameRepository;
 		}
 
 		public void Initialize()
@@ -29,24 +30,33 @@ namespace SaveLoad
 
 		private void LoadLeaderboards()
 		{
-			var saveFile = File.ReadAllText(_savePath);
-			Dictionary<string, List<TimeSpan>> savedLeaderboard = JsonConvert.DeserializeObject<Dictionary<string, List<TimeSpan>>>(saveFile);
+			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
+			{
+				Debug.LogWarning("Couldn't find leaderboards data");
+				return;
+			}
+
 			var scene = SceneManager.GetActiveScene().name;
-			var currentSceneLeaderboard = savedLeaderboard[scene];
+			var currentSceneLeaderboard = scenesLeaderboards[scene];
 			_leaderboard.SetLeaderboard(currentSceneLeaderboard);
 		}
 
 		private void Save()
 		{
-			var saveFile = File.ReadAllText(_savePath);
-			Dictionary<string, List<TimeSpan>> savedLeaderboard = JsonConvert.DeserializeObject<Dictionary<string, List<TimeSpan>>>(saveFile);
 			var scene = SceneManager.GetActiveScene().name;
 			var currentSceneLeaderboard = _leaderboard.Times.ToList();
 
-			if (savedLeaderboard.TryAdd(scene, currentSceneLeaderboard) == false)
+			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
 			{
-				savedLeaderboard[scene] = currentSceneLeaderboard;
+				scenesLeaderboards = new Dictionary<string, List<TimeSpan>>();
 			}
+
+			if (scenesLeaderboards.TryAdd(scene, currentSceneLeaderboard) == false)
+			{
+				scenesLeaderboards[scene] = currentSceneLeaderboard;
+			}
+
+			_gameRepository.SetData(scenesLeaderboards);
 		}
 
 		private void OnTimesChanged(in NotifyCollectionChangedEventArgs<TimeSpan> _)
