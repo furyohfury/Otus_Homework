@@ -8,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game;
 using Newtonsoft.Json;
+using ObservableCollections;
 using SaveLoad;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -57,13 +58,20 @@ namespace a
 		[TabGroup("SaveLoad|Lifecycle")] [ShowInInspector]
 		public GameState State => _gameStateManager.State;
 
+		[TabGroup("Level")] [ShowInInspector]
+		private IReadOnlyObservableList<TimeSpan> _leaderboard => _lb.Times;
+
+		private Leaderboard _lb;
+
 		[Inject]
-		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer, LevelManager levelManager)
+		private void Construct(GameStateManager gameStateManager, SaveLoadManager saveLoadManager, DiContainer diContainer, LevelManager levelManager,
+			Leaderboard lb)
 		{
 			_gameStateManager = gameStateManager;
 			_saveLoadManager = saveLoadManager;
 			_diContainer = diContainer;
 			_levelManager = levelManager;
+			_lb = lb;
 		}
 
 		private void Start()

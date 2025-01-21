@@ -30,7 +30,7 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<LevelManager>()
 			         .AsCached();
 			
-			Container.BindInterfacesAndSelfTo<LeaderboardService>()
+			Container.BindInterfacesAndSelfTo<Leaderboard>()
 			         .AsCached();
 		}
 	}

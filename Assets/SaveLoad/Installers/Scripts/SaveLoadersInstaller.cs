@@ -15,11 +15,14 @@ namespace SaveLoad
 			Container.Bind<ISaveLoader>()
 			         .To<CharacterSaveLoader>()
 			         .AsCached();
-			
+
 			Container.Bind<ISaveLoader>()
 			         .To<AbilityCardsSaveLoader>()
 			         .AsCached()
 			         .WithArguments(_abilityCardPrefab);
+
+			Container.BindInterfacesTo<LeaderboardSaveLoader>()
+			         .AsCached();
 		}
 	}
 }
