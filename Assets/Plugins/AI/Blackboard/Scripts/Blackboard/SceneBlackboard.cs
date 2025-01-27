@@ -75,7 +75,9 @@ namespace Atomic.AI
         public bool TryGetStruct<T>(int key, out Ref<T> value) where T : struct 
             => this.blackboard.TryGetStruct(key, out value);
 
-        public void SetTag(int key) => this.blackboard.SetTag(key);
+        [FoldoutGroup("Debug")]
+        [Button, HideInEditorMode]
+        public void SetTag([BlackboardKey] int key) => this.blackboard.SetTag(key);
 
         [FoldoutGroup("Debug")]
         [Button, HideInEditorMode]

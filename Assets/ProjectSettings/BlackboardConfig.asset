@@ -16,48 +16,16 @@ MonoBehaviour:
   directoryPath: Assets/Scripts/CodeGen
   className: BlackboardAPI
   imports:
-  - Game.Engine
   - UnityEngine
+  - Atomic.Entities
+  - Atomic.Elements
   keys:
   - id: 0
-    name: UNDEFINED
+    name: 
     type: 
   - id: 1
-    name: Character
-    type: 'GameObject : class'
-  - id: 2
-    name: TreeService
-    type: 'TreeService : class'
-  - id: 3
     name: Target
-    type: 'GameObject : class'
-  - id: 4
-    name: NoTreesView
-    type: 'GameObject : class'
-  - id: 5
-    name: StoppingDistance
+    type: 'SceneEntity : class'
+  - id: 2
+    name: AttackRange
     type: float
-  - id: 6
-    name: Barn
-    type: 'GameObject : class'
-  - id: 7
-    name: FullBarnView
-    type: 'GameObject : class'
-  - id: 8
-    name: Waypoints
-    type: 'Transform[] : class'
-  - id: 9
-    name: WaypointIndex
-    type: int
-  - id: 10
-    name: WaypointPause
-    type: float
-  - id: 11
-    name: WaypointTime
-    type: float
-  - id: 12
-    name: Enemy
-    type: 'GameObject : class'
-  - id: 13
-    name: AudioSource
-    type: 'Component : class'
