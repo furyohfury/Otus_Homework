@@ -12,6 +12,7 @@ namespace Game
 
 		private readonly LevelManager _levelManager;
 		private readonly LevelTimer _levelTimer;
+		private const int LEADERBOARD_SIZE = 5;
 
 		[Inject]
 		public Leaderboard(LevelManager levelManager, LevelTimer levelTimer)
@@ -23,6 +24,10 @@ namespace Game
 		public void Initialize()
 		{
 			_levelManager.OnLevelFinished += OnLevelFinished;
+			for (int i = 0; i < LEADERBOARD_SIZE; i++)
+			{
+				_times.Add(default);
+			}
 		}
 
 		public void SetLeaderboard(IList<TimeSpan> times)

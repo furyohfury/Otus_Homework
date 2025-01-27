@@ -58,8 +58,8 @@ namespace a
 		[TabGroup("SaveLoad|Lifecycle")] [ShowInInspector]
 		public GameState State => _gameStateManager.State;
 
-		[TabGroup("Level")] [ShowInInspector]
-		private IReadOnlyObservableList<TimeSpan> _leaderboard => _lb.Times;
+		// [TabGroup("Level")] [ShowInInspector]
+		// private List<TimeSpan> _leaderboard => _lb.Times.ToList();
 
 		private Leaderboard _lb;
 

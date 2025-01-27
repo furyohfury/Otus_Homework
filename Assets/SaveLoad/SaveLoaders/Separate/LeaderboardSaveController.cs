@@ -34,7 +34,8 @@ namespace SaveLoad
 		{
 			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
 			{
-				Debug.LogWarning("Couldn't find leaderboards data");
+				Debug.LogWarning("Couldn't find leaderboards data. Creating new...");
+				_gameRepository.SetData(new Dictionary<string, List<TimeSpan>>());
 				return;
 			}
 

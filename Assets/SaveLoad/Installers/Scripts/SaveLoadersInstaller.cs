@@ -20,9 +20,6 @@ namespace SaveLoad
 			         .To<AbilityCardsSaveLoader>()
 			         .AsCached()
 			         .WithArguments(_abilityCardPrefab);
-
-			Container.BindInterfacesTo<LeaderboardSaveLoader>()
-			         .AsCached();
 		}
 	}
 }

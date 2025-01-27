@@ -3,14 +3,20 @@ using System.IO;
 using Atomic.Elements;
 using Newtonsoft.Json;
 using UnityEngine;
+using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class GameRepository : IGameRepository
+	public sealed class GameRepository : IGameRepository, IInitializable
 	{
 		private const string SAVE_FILE_NAME = "SaveFile.txt";
-		private string SaveFilePath => string.Concat(Application.persistentDataPath, "/", SAVE_FILE_NAME);
+		private static string SaveFilePath => string.Concat(Application.persistentDataPath, "/", SAVE_FILE_NAME);
 		private Dictionary<string, string> _gameState = new();
+
+		public void Initialize()
+		{
+			LoadState();
+		}
 
 		public void LoadState()
 		{
@@ -61,7 +67,7 @@ namespace SaveLoad
 			}
 
 			value = default;
-			Debug.LogError($"Couldn't get data of {typeof(T).FullName} from save repository");
+			Debug.LogWarning($"Couldn't get data of {typeof(T).FullName} from save repository");
 			return false;
 		}
 

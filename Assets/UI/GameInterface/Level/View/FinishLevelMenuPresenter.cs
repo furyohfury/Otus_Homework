@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Game;
+using ObservableCollections;
 using Zenject;
 
 namespace UI
@@ -21,9 +22,20 @@ namespace UI
 
 		public void Initialize()
 		{
+			_levelManager.OnLevelFinished += OnLevelFinished;
+			_leaderboard.Times.CollectionChanged += OnLeaderboardChanged;
 			_view.OnRetryButtonClicked += OnRetryButtonClicked;
 			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
-			_levelManager.OnLevelFinished += OnLevelFinished;
+		}
+
+		private void OnLeaderboardChanged(in NotifyCollectionChangedEventArgs<TimeSpan> e)
+		{
+			UpdateLeaderboardText();
+		}
+
+		private void OnLevelFinished()
+		{
+			ShowView();
 		}
 
 		private void OnRetryButtonClicked()
@@ -37,12 +49,7 @@ namespace UI
 			// TODO common logic
 		}
 
-		private void OnLevelFinished()
-		{
-			ShowView();
-		}
-
-		private void ShowView()
+		private void UpdateLeaderboardText()
 		{
 			var leaderboardTime = _leaderboard.Times;
 			var sb = new StringBuilder();
@@ -55,6 +62,10 @@ namespace UI
 			}
 
 			_view.UpdateLeaderboard(sb.ToString());
+		}
+
+		private void ShowView()
+		{
 			_view.gameObject.SetActive(true);
 		}
 

@@ -10,8 +10,7 @@ namespace SaveLoad
 
 		public override void InstallBindings()
 		{
-			Container.Bind<IGameRepository>()
-			         .To<GameRepository>()
+			Container.BindInterfacesAndSelfTo<GameRepository>()
 			         .AsSingle()
 			         .NonLazy();
 			

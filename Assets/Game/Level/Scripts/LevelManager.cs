@@ -64,10 +64,8 @@ namespace Game
 		{
 			if (_winConditions.All(cond => cond.IsMet))
 			{
-				OnLevelFinished?.Invoke();
+				FinishLevel();
 			}
-
-			FinishLevel();
 		}
 
 		public void FinishLevel()
