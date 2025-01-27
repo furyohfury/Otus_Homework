@@ -10,16 +10,18 @@ using IInitializable = Zenject.IInitializable;
 
 namespace SaveLoad
 {
-	public sealed class LeaderboardSaveLoader : IInitializable, IDisposable
+	public sealed class LeaderboardSaveController : IInitializable, IDisposable
 	{
 		private readonly Leaderboard _leaderboard;
 		private readonly IGameRepository _gameRepository;
+		private string _sceneName;
 
 		[Inject]
-		public LeaderboardSaveLoader(Leaderboard leaderboard, IGameRepository gameRepository)
+		public LeaderboardSaveController(Leaderboard leaderboard, IGameRepository gameRepository)
 		{
 			_leaderboard = leaderboard;
 			_gameRepository = gameRepository;
+			_sceneName = SceneManager.GetActiveScene().name;
 		}
 
 		public void Initialize()
@@ -36,14 +38,12 @@ namespace SaveLoad
 				return;
 			}
 
-			var scene = SceneManager.GetActiveScene().name;
-			var currentSceneLeaderboard = scenesLeaderboards[scene];
+			var currentSceneLeaderboard = scenesLeaderboards[_sceneName];
 			_leaderboard.SetLeaderboard(currentSceneLeaderboard);
 		}
 
 		private void Save()
 		{
-			var scene = SceneManager.GetActiveScene().name;
 			var currentSceneLeaderboard = _leaderboard.Times.ToList();
 
 			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
@@ -51,12 +51,10 @@ namespace SaveLoad
 				scenesLeaderboards = new Dictionary<string, List<TimeSpan>>();
 			}
 
-			if (scenesLeaderboards.TryAdd(scene, currentSceneLeaderboard) == false)
-			{
-				scenesLeaderboards[scene] = currentSceneLeaderboard;
-			}
+			scenesLeaderboards[_sceneName] = currentSceneLeaderboard;
 
 			_gameRepository.SetData(scenesLeaderboards);
+			_gameRepository.SaveState();
 		}
 
 		private void OnTimesChanged(in NotifyCollectionChangedEventArgs<TimeSpan> _)

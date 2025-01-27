@@ -31,6 +31,9 @@ namespace Game
 
 			Container.BindInterfacesAndSelfTo<Leaderboard>()
 			         .AsCached();
+
+			Container.BindInterfacesTo<LeaderboardSaveController>()
+			         .AsCached();
 		}
 	}
 }
