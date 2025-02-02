@@ -71,6 +71,7 @@ namespace Game
 		public void FinishLevel()
 		{
 			_entityWorld.DisableEntities();
+			_levelTimer.Finish();
 			OnLevelFinished?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level finished");

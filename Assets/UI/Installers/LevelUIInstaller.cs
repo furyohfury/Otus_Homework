@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Atomic.Entities;
+using Game;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -28,6 +29,10 @@ namespace UI
 		private GameOverMenuView _gameOverMenuView;
 		[SerializeField]
 		private FinishLevelMenuView _finishLevelMenuView;
+		[SerializeField]
+		private CupsListView _cupsListView;
+		[SerializeField]
+		private LevelCupsTimesConfig _levelCupsTimesConfig;
 
 		[SerializeField]
 		private SceneEntity _character;
@@ -44,6 +49,17 @@ namespace UI
 			//          .WithArguments(_leaderboardListView);
 
 			InstallLevelMenus();
+
+			Container.Bind<CupsListView>()
+			         .FromInstance(_cupsListView)
+			         .AsSingle();
+			
+			Container.Bind<LevelCupsTimesConfig>()
+			         .FromInstance(_levelCupsTimesConfig)
+			         .AsSingle();
+			
+			Container.BindInterfacesTo<CupsListPresenter>()
+			         .AsCached();
 		}
 
 		private void InstallLevelMenus()

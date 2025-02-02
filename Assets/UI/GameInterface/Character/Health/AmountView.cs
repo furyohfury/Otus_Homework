@@ -16,5 +16,9 @@ namespace UI
 		public void SetText(string text) => _text.text = text;
 
 		public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
+
+		public void SetTextActive(bool active) => _text.gameObject.SetActive(active);
+		
+		public void SetIconActive(bool active) => _icon.gameObject.SetActive(active);
 	}
 }
