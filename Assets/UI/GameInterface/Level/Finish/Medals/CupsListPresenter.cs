@@ -38,7 +38,7 @@ namespace UI
 			foreach (var cup in timesConfig.Keys)
 			{
 				var time = timesConfig[cup];
-				var timeText = time.ToString("g");
+				var timeText = time.ToString(@"m\:ss\:fff");
 				_cupsListView.SetCupTimeText(cup, timeText);
 			}
 		}

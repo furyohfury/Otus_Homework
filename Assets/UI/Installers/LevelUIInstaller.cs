@@ -50,6 +50,14 @@ namespace UI
 
 			InstallLevelMenus();
 
+			Container.BindInterfacesTo<LeaderboardPresenter>()
+			         .AsCached()
+			         .WithArguments(_startMenuView.LeaderboardView);
+			
+			Container.BindInterfacesTo<LeaderboardPresenter>()
+			         .AsCached()
+			         .WithArguments(_finishLevelMenuView.LeaderboardView);
+
 			Container.Bind<CupsListView>()
 			         .FromInstance(_cupsListView)
 			         .AsSingle();

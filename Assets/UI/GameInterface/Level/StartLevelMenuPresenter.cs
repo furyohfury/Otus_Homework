@@ -9,7 +9,6 @@ namespace UI
 		private readonly StartLevelMenuView _view;
 		private readonly LevelManager _levelManager;
 		private readonly GameStateManager _gameStateManager;
-		// private LeaderboardService _leaderboardService; TODO 
 
 		[Inject]
 		public StartLevelMenuPresenter(StartLevelMenuView view, LevelManager levelManager, GameStateManager gameStateManager)

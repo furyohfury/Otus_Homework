@@ -17,16 +17,13 @@ namespace UI
 			remove => _mainMenuButton.onClick.RemoveListener(value);
 		}
 
+		public AmountView LeaderboardView => _leaderboard;
+
 		[SerializeField]
 		private Button _retryButton;
 		[SerializeField]
 		private Button _mainMenuButton;
 		[SerializeField]
 		private AmountView _leaderboard;
-
-		public void UpdateLeaderboard(string text)
-		{
-			_leaderboard.SetText(text);
-		}
 	}
 }

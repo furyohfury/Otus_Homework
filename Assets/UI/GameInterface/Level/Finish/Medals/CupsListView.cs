@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UI
 {
-	public sealed class CupsListView : SerializedMonoBehaviour
+	public sealed class CupsListView : SerializedMonoBehaviour // TODO put into finishlevelview or not? Then presenter too
 	{
 		[SerializeField]
 		private Dictionary<Cups, AmountView> _cupsView;

@@ -16,6 +16,8 @@ namespace UI
 			add => _mainMenuButton.onClick.AddListener(value);
 			remove => _mainMenuButton.onClick.RemoveListener(value);
 		}
+		
+		public AmountView LeaderboardView => _leaderboard;
 
 		[SerializeField]
 		private Button _playButton;
