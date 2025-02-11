@@ -167,6 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1422f39c104d0aab52103a40565ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _enemies: []
   _character: {fileID: 253108519}
 --- !u!1 &43027865
@@ -430,6 +439,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9ab1dd4dfa41f9ae171648f8b9f4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _timerView: {fileID: 1603529686}
   _playButton: {fileID: 655228661}
   _mainMenuStartPanelButton: {fileID: 333082991}
@@ -1875,7 +1893,7 @@ MonoBehaviour:
     - rid: 6917281165523288067
       type: {class: StateMachine, ns: Atomic.AI, asm: Atomic.AI.StateMachine}
       data:
-        name: State Name
+        name: Root
         behaviours: []
         enterActions: []
         exitActions: []
@@ -1887,7 +1905,7 @@ MonoBehaviour:
         - sourceState: 0
           targetState: 1
           conditions:
-          - rid: 6917281165523288071
+          - rid: 8260953281364754432
           actions: []
     - rid: 6917281165523288068
       type: {class: PatrolOnPositionState, ns: Game, asm: Assembly-CSharp}
@@ -1897,7 +1915,7 @@ MonoBehaviour:
           m_Bits: 128
     - rid: 6917281165523288070
       type: {class: AttackState, ns: Game, asm: Assembly-CSharp}
-    - rid: 6917281165523288071
+    - rid: 8260953281364754432
       type: {class: HasTargetBlackboardCondition, ns: Game, asm: Assembly-CSharp}
 --- !u!114 &400929675
 MonoBehaviour:
@@ -1912,21 +1930,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   installers:
-  - rid: 6917281165523288064
   - rid: 6917281165523288072
+  - rid: 8260953281364754433
   references:
     version: 2
     RefIds:
-    - rid: 6917281165523288064
-      type: {class: EntityBlackboardInstaller, ns: Game, asm: Assembly-CSharp}
-      data:
-        key: 3
-        value: {fileID: 400929676}
     - rid: 6917281165523288072
       type: {class: FloatInstaller, ns: Atomic.AI, asm: Modules.AI.Blackboard}
       data:
         key: 2
         value: 5
+    - rid: 8260953281364754433
+      type: {class: EntityBlackboardInstaller, ns: Game, asm: Assembly-CSharp}
+      data:
+        key: 3
+        value: {fileID: 400929676}
 --- !u!114 &400929676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2503,8 +2521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 548, y: 56.999985}
-  m_SizeDelta: {x: 431, y: 1.0000305}
+  m_AnchoredPosition: {x: 557, y: 0}
+  m_SizeDelta: {x: 646.4314, y: 320.876}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576862419
 MonoBehaviour:
@@ -4628,6 +4646,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c89d937a7b74aacbd99a181927d98a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _character: {fileID: 253108519}
   _entityWorld: {fileID: 1692652099}
   _worldTransform: {fileID: 1139958324}
@@ -7459,6 +7486,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925a3bf148eb42f1bb7880296cfc2aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _character: {fileID: 253108519}
   _healthView: {fileID: 2031810021}
   _ammoView: {fileID: 444302382}
