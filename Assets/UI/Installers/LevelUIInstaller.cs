@@ -43,10 +43,6 @@ namespace UI
 			Container.BindInterfacesTo<LevelTimerPresenter>()
 			         .AsCached()
 			         .WithArguments(_timerView);
-			
-			// Container.BindInterfacesAndSelfTo<LeaderboardListController>()
-			//          .AsCached()
-			//          .WithArguments(_leaderboardListView);
 
 			InstallLevelMenus();
 
