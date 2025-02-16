@@ -17,7 +17,7 @@ namespace Game
 		public override void InstallBindings()
 		{
 #if UNITY_EDITOR
-			Container.Bind<DebugHelper>().AsSingle(); // TODO delete
+			Container.Bind<DebugHelper>().AsSingle();
 #endif
 			Container.BindInterfacesAndSelfTo<InputController>()
 			         .AsSingle()
@@ -49,7 +49,8 @@ namespace Game
 			
 			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
 			         .AsSingle()
-			         .WithArguments(_worldTransform);
+			         .WithArguments(_worldTransform)
+			         .NonLazy();
 			
 			Container.BindInterfacesAndSelfTo<EntityWorldStateController>()
 			         .AsSingle();
