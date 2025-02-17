@@ -8,33 +8,48 @@ using UnityEngine;
 namespace Game
 {
 	[CreateAssetMenu(fileName = "LevelCupsTimesConfig", menuName = "Create config/Level Cups Times")]
-	public sealed class LevelCupsTimesConfig : SerializedScriptableObject
+	public sealed class LevelCupsTimesConfig : SerializedScriptableObject // TODO rename to level config
 	{
 		public string LevelName => _levelName;
+		public string SceneName => _sceneName;
+		public bool HasTargetTimes => _hasTargetTimes;
 
 		[SerializeField]
 		private string _levelName;
 
 		[SerializeField]
-		private Dictionary<Cups, int> _targetTimeInSeconds;
+		private string _sceneName;
 
-		public Dictionary<Cups, TimeSpan> GetTargetTimes()
+		[SerializeField]
+		private bool _hasTargetTimes;
+
+		[SerializeField]
+		private Dictionary<Cups, int> _targetTimeInSeconds; // TODO hide if upper is false with Odin
+
+		public Dictionary<Cups, TimeSpan> TryGetLevelTargetTimes(out Dictionary<Cups, TimeSpan> targetTimes)
 		{
-			var times = new Dictionary<Cups, TimeSpan>();
-			foreach (KeyValuePair<Cups, int> pair in _targetTimeInSeconds)
+			if (_hasTargetTimes == false)
 			{
-				var time = TimeSpan.FromSeconds(pair.Value);
-				times.Add(pair.Key, time);
+				targetTimes = default;
+				return false;
 			}
 
-			return times;
+			targetTimes = new Dictionary<Cups, TimeSpan>();
+			foreach (KeyValuePair<Cups, int> kvp in _targetTimeInSeconds)
+			{
+				var time = TimeSpan.FromSeconds(kvp.Value);
+				times.Add(kvp.Key, time);
+			}
+
+			return true;
 		}
 
 #if UNITY_EDITOR
 		private void OnValidate()
 		{
 			if (string.IsNullOrEmpty(_levelName) == false
-			    && EditorBuildSettings.scenes.Any(scene => scene.path == string.Concat("Assets/", "Scenes/", _levelName, ".unity")) == false)
+			    && EditorBuildSettings.scenes.Any(
+					scene => scene.path == string.Concat("Assets/", "Scenes/", _levelName, ".unity")) == false)
 			{
 				Debug.LogError($"No scene with name: {_levelName}");
 			}
