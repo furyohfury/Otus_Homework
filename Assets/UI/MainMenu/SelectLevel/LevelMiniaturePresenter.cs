@@ -11,21 +11,21 @@ namespace UI
 	{
 		private readonly string _levelName;
 		private readonly LevelMiniatureView _view;
-		private readonly LevelCupsTimesConfig _levelCupsTimesConfig;
 		private readonly List<TimeSpan> _savedResults;
 		private readonly Sprite _icon;
 
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
+		private readonly Dictionary<Cups, TimeSpan> _targetTimes;
 
-		public LevelMiniaturePresenter(string levelName, Sprite icon, LevelMiniatureView view, LevelCupsTimesConfig levelCupsTimesConfig
-			, List<TimeSpan> savedResults, Dictionary<Cups, Sprite> cupsSprites)
+		public LevelMiniaturePresenter(string levelName, Sprite icon, LevelMiniatureView view
+			, List<TimeSpan> savedResults, Dictionary<Cups, Sprite> cupsSprites, Dictionary<Cups, TimeSpan> targetTimes)
 		{
 			_levelName = levelName;
 			_icon = icon;
 			_view = view;
-			_levelCupsTimesConfig = levelCupsTimesConfig;
 			_savedResults = savedResults;
 			_cupsSprites = cupsSprites;
+			_targetTimes = targetTimes;
 		}
 
 		public void Init()
@@ -49,15 +49,13 @@ namespace UI
 
 		private void InitCupAndBestTime()
 		{
-			Dictionary<Cups, TimeSpan> targetTimes = _levelCupsTimesConfig.GetTargetTimes();
-
 			string bestTimeText = "No results yet";
 			if (_savedResults != null) // TODO if not initialized. Where it defines
 			{
 				TimeSpan bestTime = _savedResults.Min();
 				bestTimeText = bestTime.ToString(@"m\:ss\:fff");
 
-				var bestCup = targetTimes
+				var bestCup = _targetTimes
 				              .Where(kvp => kvp.Value > bestTime)
 				              .OrderBy(kvp => kvp.Value)
 				              .Select(kvp => kvp.Key)
@@ -74,7 +72,7 @@ namespace UI
 		private void OnChooseLevelButtonClicked()
 		{
 			var sceneName = _view.SceneName.text;
-			SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+			SceneManager.LoadScene(sceneName, LoadSceneMode.Single); // TODO different manager
 		}
 
 		public void Dispose()

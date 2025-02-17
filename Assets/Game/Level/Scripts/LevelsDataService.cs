@@ -1,83 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Game
 {
-	public sealed class LevelData
-	{
-		public string Name;
-		public List<TimeSpan> Results;
-
-		public LevelData(string name, List<TimeSpan> results = null)
-		{
-			Name = name;
-			Results = results;
-		}
-	}
-
-	public sealed class LevelResultsSaveLoader : SaveLoader<ICollection<LevelData>, LevelsDataService>
-	{
-		protected override ICollection<LevelData> ConvertToData(LevelsDataService service)
-		{
-			var names = service.GetNames();
-			var savedData = new List<LevelData>();
-			
-			for (int i = 0, length = names.Length; i < length; i++)
-			{
-				if (service.TryGetLevelResults(names[i], out var results))
-				{
-					savedData.Add(new LevelData(names[i], results));
-				}
-				else
-				{
-					savedData.Add(new LevelData(names[i]));
-				}
-			}
-
-			return savedData;
-		}
-
-		protected override void SetupData(LevelsDataService service, ICollection<LevelData> data)
-		{
-			for(int i = 0, length = data.Length; i < length; i++)
-			{
-				if (data[i].Results != null)
-				{
-					service.SetResult(data[i].Name, data.Results);
-				}				
-			}
-		}
-	}
-
 	public sealed class LevelsDataService
-	{	
-		//TODO ctor
+	{
+		public string CurrentLevel => SceneManager.GetActiveScene().name; // TODO make some scenemanager having current level name?
 
-		private LevelCupsTimesConfig[] _configs;
-		private Dictionary<string, List<TimeSpan>> _results; // separate class for results?
+		private readonly Dictionary<string, LevelConfig> _configs;
+		private readonly Dictionary<string, List<TimeSpan>> _results = new(); // TODO mb separate class for results?
+
+		[Inject]
+		public LevelsDataService(LevelConfig[] configs)
+		{
+			_configs = configs.ToDictionary(
+				config => config.LevelName,
+				config => config);
+		}
+
+		public string[] GetNames()
+		{
+			return _configs
+			       .Keys
+			       .ToArray();
+		}
+
+		public Sprite GetLevelIcon(string levelName)
+		{
+			return _configs[levelName].Icon;
+		}
 
 		public void SetResult(string levelName, List<TimeSpan> results)
 		{
 			_results[levelName] = results;
 		}
 
-		public string[] GetNames()
+		public bool TryGetLevelTargetTimes(string levelName, out Dictionary<Cups, TimeSpan> targetTimes)
 		{
-			return _configs
-				.Select(config => config.LevelName)
-				.ToArray();
-		}
-			
-		public bool TryGetLevelTargetTimes(string levelName, out Dictionary<Cups, List<TimeSpan>> targetTimes)
-		{
-			var config = _configs.SingleOrDefault(config => config.LevelName == levelName);
-			if (config == default)
+			if (_configs.TryGetValue(levelName, out LevelConfig config) == false)
 			{
 				throw new NullReferenceException($"No listed level with name: {levelName}");
 			}
 
-			if (config.TryHasTargetTimes(out targetTimes) == false)
+			if (config.TryGetLevelTargetTimes(out targetTimes) == false)
 			{
 				targetTimes = default;
 				return false;
@@ -85,16 +54,10 @@ namespace Game
 
 			return true;
 		}
-		
+
 		public bool TryGetLevelResults(string levelName, out List<TimeSpan> levelResults)
 		{
-			if (_results.TryGetValue(levelName, levelResults) == false)
-			{
-				levelResults = default;
-				return false;
-			}
-
-			return true;
+			return _results.TryGetValue(levelName, out levelResults);
 		}
 	}
 }

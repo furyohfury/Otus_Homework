@@ -20,6 +20,10 @@ namespace SaveLoad
 			         .To<AbilityCardsSaveLoader>()
 			         .AsCached()
 			         .WithArguments(_abilityCardPrefab);
+
+			Container.Bind<ISaveLoader>()
+			         .To<LevelResultsSaveLoader>()
+			         .AsCached();
 		}
 	}
 }

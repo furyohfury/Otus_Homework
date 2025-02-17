@@ -10,8 +10,6 @@ namespace UI
 		[SerializeField]
 		private LevelMiniatureView _levelMiniatureViewPrefab;
 		[SerializeField] [Space]
-		private Dictionary<string, LevelCupsTimesConfig> _cupsTimesConfigs;
-		[SerializeField] [Space]
 		private Dictionary<Cups, Sprite> _cupsSprite;
 		[SerializeField] [Space]
 		private Dictionary<string, Sprite> _levelsIcons;
@@ -31,7 +29,7 @@ namespace UI
 			
 			Container.BindInterfacesAndSelfTo<LevelMiniaturePresenterFactory>()
 			         .AsCached()
-			         .WithArguments(_cupsTimesConfigs, _cupsSprite, _levelsIcons);
+			         .WithArguments(_cupsSprite);
 
 			Container.BindInterfacesAndSelfTo<SelectLevelMenuPresenter>()
 			         .AsCached();

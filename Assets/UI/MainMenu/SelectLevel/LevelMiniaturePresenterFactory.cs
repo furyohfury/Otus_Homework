@@ -9,30 +9,27 @@ namespace UI
 {
 	public sealed class LevelMiniaturePresenterFactory
 	{
-		private readonly Dictionary<string, LevelCupsTimesConfig> _cupsTimesConfigs;
-		private readonly Dictionary<string, Sprite> _levelIcons;
+		private readonly LevelsDataService _levelsDataService;
 
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
 
 		[Inject]
-		public LevelMiniaturePresenterFactory(Dictionary<string, LevelCupsTimesConfig> cupsTimesConfigs
-			, IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites, Dictionary<string, Sprite> levelIcons)
+		public LevelMiniaturePresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites, LevelsDataService levelsDataService)
 		{
-			_cupsTimesConfigs = cupsTimesConfigs;
 			_cupsSprites = cupsSprites;
-			_levelIcons = levelIcons;
+			_levelsDataService = levelsDataService;
 		}
 
 		public LevelMiniaturePresenter Create(string level, List<TimeSpan> levelResults, LevelMiniatureView view)
 		{
-			var cupConfig = _cupsTimesConfigs[level];
-			var icon = _levelIcons[level];
+			_levelsDataService.TryGetLevelTargetTimes(level, out Dictionary<Cups, TimeSpan> targetTimes);
+			var icon = _levelsDataService.GetLevelIcon(level);
 			var presenter = new LevelMiniaturePresenter(level,
 				icon,
 				view,
-				cupConfig,
 				levelResults,
-				_cupsSprites);
+				_cupsSprites,
+				targetTimes);
 
 			presenter.Init();
 

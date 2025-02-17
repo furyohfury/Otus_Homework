@@ -1,4 +1,3 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +21,8 @@ namespace SaveLoad
 
 		private void OnEnable()
 		{
-			SceneManager.activeSceneChanged += OnSceneChanged; // TODO unnes mb kak to pomenyat no vrode ne tak vajno. Tipa svoy singleton scene manager
+			SceneManager.activeSceneChanged +=
+				OnSceneChanged; // TODO unnes mb kak to pomenyat no vrode ne tak vajno. Tipa svoy singleton scene manager
 		}
 
 		private void Start()

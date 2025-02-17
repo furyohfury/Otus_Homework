@@ -8,11 +8,12 @@ using UnityEngine;
 namespace Game
 {
 	[CreateAssetMenu(fileName = "LevelCupsTimesConfig", menuName = "Create config/Level Cups Times")]
-	public sealed class LevelCupsTimesConfig : SerializedScriptableObject // TODO rename to level config
+	public sealed class LevelConfig : SerializedScriptableObject
 	{
 		public string LevelName => _levelName;
 		public string SceneName => _sceneName;
 		public bool HasTargetTimes => _hasTargetTimes;
+		public Sprite Icon => _previewIcon;
 
 		[SerializeField]
 		private string _levelName;
@@ -20,13 +21,16 @@ namespace Game
 		[SerializeField]
 		private string _sceneName;
 
+		[SerializeField] [PreviewField]
+		private Sprite _previewIcon;
+
 		[SerializeField]
 		private bool _hasTargetTimes;
 
-		[SerializeField]
-		private Dictionary<Cups, int> _targetTimeInSeconds; // TODO hide if upper is false with Odin
+		[SerializeField] [ShowIf("_hasTargetTimes")]
+		private Dictionary<Cups, int> _targetTimeInSeconds;
 
-		public Dictionary<Cups, TimeSpan> TryGetLevelTargetTimes(out Dictionary<Cups, TimeSpan> targetTimes)
+		public bool TryGetLevelTargetTimes(out Dictionary<Cups, TimeSpan> targetTimes)
 		{
 			if (_hasTargetTimes == false)
 			{
@@ -38,7 +42,7 @@ namespace Game
 			foreach (KeyValuePair<Cups, int> kvp in _targetTimeInSeconds)
 			{
 				var time = TimeSpan.FromSeconds(kvp.Value);
-				times.Add(kvp.Key, time);
+				targetTimes.Add(kvp.Key, time);
 			}
 
 			return true;

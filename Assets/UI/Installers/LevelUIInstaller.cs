@@ -2,6 +2,7 @@
 using Atomic.Entities;
 using Game;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -29,10 +30,10 @@ namespace UI
 		private GameOverMenuView _gameOverMenuView;
 		[SerializeField]
 		private FinishLevelMenuView _finishLevelMenuView;
+		[FormerlySerializedAs("_cupsListView")] [SerializeField]
+		private FinishLevelCupsListView _finishLevelCupsListView;
 		[SerializeField]
-		private CupsListView _cupsListView;
-		[SerializeField]
-		private LevelCupsTimesConfig _levelCupsTimesConfig;
+		private LevelConfig _levelConfig;
 
 		[SerializeField]
 		private SceneEntity _character;
@@ -54,15 +55,15 @@ namespace UI
 			         .AsCached()
 			         .WithArguments(_finishLevelMenuView.LeaderboardView);
 
-			Container.Bind<CupsListView>()
-			         .FromInstance(_cupsListView)
+			Container.Bind<FinishLevelCupsListView>()
+			         .FromInstance(_finishLevelCupsListView)
 			         .AsSingle();
 			
-			Container.Bind<LevelCupsTimesConfig>()
-			         .FromInstance(_levelCupsTimesConfig)
+			Container.Bind<LevelConfig>()
+			         .FromInstance(_levelConfig)
 			         .AsSingle();
 			
-			Container.BindInterfacesTo<CupsListPresenter>()
+			Container.BindInterfacesTo<FinishLevelCupsListPresenter>()
 			         .AsCached();
 		}
 
