@@ -7,11 +7,11 @@ namespace Game
 {
 	public sealed class SceneEntityPool : Pool<SceneEntity>
 	{
-		private readonly IEvent<Object> _spawnWorldEvent;
-		private readonly IEvent<Object> _destroyWorldEvent;
+		private readonly IEvent<IEntity> _spawnWorldEvent;
+		private readonly IEvent<IEntity> _destroyWorldEvent;
 
 		public SceneEntityPool(Transform parent, SceneEntity prefab, bool fillOnCreate, int initialSize = 10, int maxSize = 20
-			, IEvent<Object> spawnWorldEvent = null, IEvent<Object> destroyWorldEvent = null)
+			, IEvent<IEntity> spawnWorldEvent = null, IEvent<IEntity> destroyWorldEvent = null)
 			: base(parent, prefab, false, initialSize, maxSize)
 		{
 			_spawnWorldEvent = spawnWorldEvent;

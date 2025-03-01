@@ -246,10 +246,10 @@ MonoBehaviour:
       type: AnimatorEventReceiver
     - id: 71
       name: SpawnWorldEvent
-      type: IEvent<Object>
+      type: IEvent<IEntity>
     - id: 72
       name: DestroyWorldEvent
-      type: IEvent<Object>
+      type: IEvent<IEntity>
   - name: Audio
     indexes:
     - id: 60

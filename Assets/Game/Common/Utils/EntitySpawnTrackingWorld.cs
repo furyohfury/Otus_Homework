@@ -24,46 +24,36 @@ namespace Game
 			for (int i = 0, count = _world.EntityCount; i < count; i++)
 			{
 				var entity = _world.Entities[i];
-				if (entity.TryGetSpawnWorldEvent(out IEvent<Object> spawnEvent))
+				if (entity.TryGetSpawnWorldEvent(out IEvent<IEntity> spawnEvent))
 				{
 					spawnEvent.Subscribe(OnEntitySpawned);
 				}
 
-				if (entity.TryGetDestroyWorldEvent(out IEvent<Object> destroyEvent))
+				if (entity.TryGetDestroyWorldEvent(out IEvent<IEntity> destroyEvent))
 				{
 					destroyEvent.Subscribe(OnEntityDestroyed);
 				}
 			}
 		}
 
-		private void OnEntitySpawned(Object obj)
+		private void OnEntitySpawned(IEntity entity)
 		{
-			if (obj is not IEntity sceneEntity)
-			{
-				return;
-			}
-
-			_world.AddEntity(sceneEntity);
-			if (sceneEntity.TryGetSpawnWorldEvent(out IEvent<Object> spawnEvent))
+			_world.AddEntity(entity);
+			if (entity.TryGetSpawnWorldEvent(out IEvent<IEntity> spawnEvent))
 			{
 				spawnEvent.Subscribe(OnEntitySpawned);
 			}
 		}
 
-		private void OnEntityDestroyed(Object obj)
+		private void OnEntityDestroyed(IEntity entity)
 		{
-			if (obj is not IEntity sceneEntity)
-			{
-				return;
-			}
-
-			_world.DelEntity(sceneEntity);
-			if (sceneEntity.TryGetSpawnWorldEvent(out IEvent<Object> spawnEvent))
+			_world.DelEntity(entity);
+			if (entity.TryGetSpawnWorldEvent(out IEvent<IEntity> spawnEvent))
 			{
 				spawnEvent.Unsubscribe(OnEntitySpawned);
 			}
 
-			if (sceneEntity.TryGetDestroyWorldEvent(out IEvent<Object> destroyEvent))
+			if (entity.TryGetDestroyWorldEvent(out IEvent<IEntity> destroyEvent))
 			{
 				destroyEvent.Unsubscribe(OnEntityDestroyed);
 			}

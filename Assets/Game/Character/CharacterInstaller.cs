@@ -52,8 +52,8 @@ namespace Game.Entities
 			InitializeComponents(entity);
 			InitializeCombat(entity);
 			InitializeAbilities(entity);
-			entity.AddSpawnWorldEvent(new BaseEvent<Object>());
-			entity.AddDestroyWorldEvent(new BaseEvent<Object>());
+			entity.AddSpawnWorldEvent(new BaseEvent<IEntity>());
+			entity.AddDestroyWorldEvent(new BaseEvent<IEntity>());
 		}
 
 		private void InitializeLife(IEntity entity)

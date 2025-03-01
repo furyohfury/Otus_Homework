@@ -9,7 +9,7 @@ namespace Game
 		private BaseEvent _abilityEvent;
 		private SceneEntity _stickyBombPrefab;
 		private IValue<Transform> _firePoint;
-		private IEvent<Object> _spawnWorldEvent;
+		private IEvent<IEntity> _spawnWorldEvent;
 
 		public void Init(IEntity entity)
 		{
@@ -18,7 +18,7 @@ namespace Game
 			var weapon = entity.GetWeapon().Value;
 			_firePoint = weapon.GetFirePoint();
 			_abilityEvent.Subscribe(OnAbilityEvent);
-			if (entity.TryGetSpawnWorldEvent(out IEvent<Object> spawnEvent))
+			if (entity.TryGetSpawnWorldEvent(out IEvent<IEntity> spawnEvent))
 			{
 				_spawnWorldEvent = spawnEvent;
 			}

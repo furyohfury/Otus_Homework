@@ -1,7 +1,5 @@
-using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using R3;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Timer = Atomic.Elements.Timer;
@@ -41,7 +39,7 @@ namespace Game
 		private Transform _transform;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
-		[SerializeField] 
+		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
 		private AudioSource _audioSource;

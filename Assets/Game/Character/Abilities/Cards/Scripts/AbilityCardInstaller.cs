@@ -19,7 +19,7 @@ namespace Game
 		private Transform _transform;
 
 		private SceneEntity _entity;
-		private BaseEvent<Object> _destroyWorldEvent;
+		private BaseEvent<IEntity> _destroyWorldEvent;
 
 		public override void Install(IEntity entity)
 		{
@@ -27,7 +27,7 @@ namespace Game
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_renderer);
-			_destroyWorldEvent = new BaseEvent<Object>();
+			_destroyWorldEvent = new BaseEvent<IEntity>();
 			entity.AddDestroyWorldEvent(_destroyWorldEvent);
 			_entity = GetComponent<SceneEntity>();
 
