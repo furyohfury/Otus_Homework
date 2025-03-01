@@ -1,11 +1,10 @@
-﻿using System;
-using Atomic.Elements;
+﻿using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-	public sealed class SwordInstaller : SceneEntityInstallerBase
+	public sealed class LizardStickWeaponInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private Transform _transform;
@@ -13,12 +12,6 @@ namespace Game.Entities
 		private TriggerReceiver _triggerReceiver;
 		[SerializeField]
 		private Collider2D _collider2D;
-		[SerializeField]
-		private Vector3 _attackRotationAngle;
-		[SerializeField]
-		private float _slashSpeed;
-		[SerializeField]
-		private float _reverseSlashSpeed;
 		[SerializeField]
 		private int _damage;
 		[SerializeField]
@@ -45,13 +38,10 @@ namespace Game.Entities
 		private void InstallWeaponParameters(IEntity entity)
 		{
 			// Old
-			entity.AddAttackRotationAngle(_attackRotationAngle);
 			entity.AddTriggerReceiver(_triggerReceiver);
 			entity.AddTriggerEnterEvent(new BaseEvent<Collider2D>());
 			entity.AddTriggerExitEvent(new BaseEvent<Collider2D>());
 			entity.AddCollider2D(_collider2D);
-			entity.AddSlashSpeed(_slashSpeed);
-			entity.AddReverseSlashSpeed(_reverseSlashSpeed);
 
 			entity.AddBehaviour(new MeleeWeaponCollisionBehaviour());
 
@@ -86,12 +76,7 @@ namespace Game.Entities
 		{
 			entity.AddBehaviour<AttackRequestBehaviour>();
 			entity.AddBehaviour<MeleeWeaponCollisionBehaviour>();
-			entity.AddBehaviour<MeleeWeaponAttackAnimationBehaviour>();
 			entity.AddBehaviour<MeleeWeaponColliderActivationBehaviour>();
-			
-			// entity.AddBehaviour<MeleeWeaponDeflectProjectilesBehaviour>();
-			// TODO doesnt work cuz BulletCollisionBehaviour has destroy event activation
-			// mb should check there if collision is melee deflecting weapon but i dunno
 		}
 	}
 }

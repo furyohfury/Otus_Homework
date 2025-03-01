@@ -14,6 +14,12 @@ namespace Game
 
 		public void Apply(IEntity entity)
 		{
+			if (entity.TryGetWeapon(out var _)
+			    && entity.TryGetUnequipWeaponRequest(out BaseEvent unequipRequest))
+			{
+				unequipRequest.Invoke();
+			}
+			
 			if (!entity.TryGetEquipWeaponRequest(out BaseEvent<SceneEntity> request))
 			{
 				Debug.LogError($"{entity.Name} has no equip weapon request");

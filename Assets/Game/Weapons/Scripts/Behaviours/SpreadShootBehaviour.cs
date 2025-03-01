@@ -27,15 +27,20 @@ namespace Game
 			_firePoint = entity.GetFirePoint();
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnAttackEvent);
-
 			_transform = entity.GetVisualTransform();
-			_pool = new SceneEntityPool(_transform.transform, _bulletPrefab.Value, true);
+
+			if (entity.TryGetSpawnWorldEvent(out var spawnEvent) && entity.TryGetDestroyWorldEvent(out var destroyEvent))
+			{
+				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true, spawnWorldEvent: spawnEvent, destroyWorldEvent: destroyEvent);
+			}
+			else
+			{
+				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true);
+			}
 		}
 
 		private void OnAttackEvent()
 		{
-			// TODO how to get world transform? Actually root is alright
-			// TODO shoots with negative scale cuz of weapon rotation
 			var spreadAngle = _weaponSpreadAngle.Value;
 			var randomAngle = Random.Range(-spreadAngle, spreadAngle);
 			var rotation = _firePoint.Value.rotation * Quaternion.Euler(new Vector3(0, 0, randomAngle));

@@ -1,35 +1,31 @@
-using Atomic.Elements;
+﻿using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
 namespace Game
 {
-	public sealed class BulletCollisionBehaviour : IEntityInit, IEntityDispose
+	public sealed class MeleeWeaponCollisionBehaviour : IEntityInit, IEntityDispose
 	{
 		private IValue<int> _damage;
 		private TriggerReceiver _triggerReceiver;
-		private BaseEvent _deathEvent;
 
 		public void Init(IEntity entity)
 		{
 			_damage = entity.GetDamage();
-			_deathEvent = entity.GetDeathEvent();
 			_triggerReceiver = entity.GetTriggerReceiver();
 			_triggerReceiver.OnTriggerEnter += OnTriggerEntered;
 		}
 
-		private void OnTriggerEntered(Collider2D other)
+		private void OnTriggerEntered(Collider2D collider)
 		{
-			if (other.TryGetEntity(out var entity)
-			    && entity.HasHealth()
-			    && entity.TryGetTakeDamageRequest(out var request))
+			if (!collider.TryGetEntity(out IEntity other) || !other.HasHealth())
 			{
-				request.Invoke(_damage.Value);
+				return;
 			}
 
-			if (other.isTrigger == false)
+			if (other.TryGetTakeDamageRequest(out BaseEvent<int> request))
 			{
-				_deathEvent.Invoke();
+				request.Invoke(_damage.Value);
 			}
 		}
 

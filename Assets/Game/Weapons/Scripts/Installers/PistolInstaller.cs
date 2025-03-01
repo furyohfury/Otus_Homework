@@ -64,6 +64,8 @@ namespace Game
 		{
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
+			entity.AddSpawnWorldEvent(new BaseEvent<Object>());
+			entity.AddDestroyWorldEvent(new BaseEvent<Object>());
 		}
 
 		private void InstallBehaviours(IEntity entity)

@@ -14,7 +14,7 @@ namespace Game
 		private Transform _transform;
 		private SceneEntityPool _pool;
 		private IValue<int> _damage;
-		
+
 		private readonly Dictionary<SceneEntity, Action> _deathEventSubscriptions = new();
 
 		public void Init(IEntity entity)
@@ -24,28 +24,33 @@ namespace Game
 			_firePoint = entity.GetFirePoint();
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnAttackEvent);
-
 			_transform = entity.GetVisualTransform();
-			_pool = new SceneEntityPool(_transform.transform, _bulletPrefab.Value, true);
+
+			if (entity.TryGetSpawnWorldEvent(out var spawnEvent) && entity.TryGetDestroyWorldEvent(out var destroyEvent))
+			{
+				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true, spawnWorldEvent: spawnEvent, destroyWorldEvent: destroyEvent);
+			}
+			else
+			{
+				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true);
+			}
 		}
 
 		private void OnAttackEvent()
 		{
-			// TODO Unnes how to get world transform? Actually root is alright
-			// TODO shoots with negative scale cuz of weapon rotation
 			var bullet = _pool.Get(_firePoint.Value.position, _firePoint.Value.rotation);
 
 			bullet.GetDamage().Value = _damage.Value;
 			bullet.GetMoveDirection().Value = bullet.GetVisualTransform().right;
 			if (bullet.TryGetDeathEvent(out BaseEvent deathEvent))
 			{
-				var subscription =  deathEvent.Subscribe(() => ReturnToPool(bullet));
+				var subscription = deathEvent.Subscribe(() => ReturnToPool(bullet));
 				_deathEventSubscriptions[bullet] = subscription;
 			}
 			else
 			{
 				Debug.LogError("Bullet has no death event");
-			}			
+			}
 		}
 
 		private void ReturnToPool(SceneEntity bullet)
@@ -55,6 +60,7 @@ namespace Game
 				bullet.GetDeathEvent().Unsubscribe(subscription);
 				_deathEventSubscriptions.Remove(bullet);
 			}
+
 			_pool.Return(bullet);
 		}
 
@@ -68,7 +74,7 @@ namespace Game
 				{
 					continue;
 				}
-				
+
 				bullet.GetDeathEvent().Unsubscribe(subscription);
 				_deathEventSubscriptions.Remove(bullet);
 				bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
