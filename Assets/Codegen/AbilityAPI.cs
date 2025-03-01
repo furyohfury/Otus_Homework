@@ -28,6 +28,7 @@ namespace Atomic.Entities
         public const int RemoveActiveAbilityEvent = 55; // BaseEvent
         public const int AbilityInventory = 56; // ReactiveList<AbilityCardState>
         public const int AbilityCardGUID = 59; // string
+        public const int CanUseAbility = 70; // IFunction<bool>
 
 
         ///Extensions
@@ -246,5 +247,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAbilityCardGUID(this IEntity obj, string value) => obj.SetValue(AbilityCardGUID, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IFunction<bool> GetCanUseAbility(this IEntity obj) => obj.GetValue<IFunction<bool>>(CanUseAbility);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetCanUseAbility(this IEntity obj, out IFunction<bool> value) => obj.TryGetValue(CanUseAbility, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddCanUseAbility(this IEntity obj, IFunction<bool> value) => obj.AddValue(CanUseAbility, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasCanUseAbility(this IEntity obj) => obj.HasValue(CanUseAbility);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelCanUseAbility(this IEntity obj) => obj.DelValue(CanUseAbility);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetCanUseAbility(this IEntity obj, IFunction<bool> value) => obj.SetValue(CanUseAbility, value);
     }
 }
