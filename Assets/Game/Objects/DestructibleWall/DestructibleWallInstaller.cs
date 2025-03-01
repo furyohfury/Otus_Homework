@@ -1,6 +1,5 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -10,33 +9,41 @@ namespace Game
 		[Header("Config")] [SerializeField]
 		private Vector2 _velocityToDestroy;
 
-		[Header("FX")] [SerializeField]
+		[Header("VFX")] [SerializeField]
 		private ParticleSystem _explosionEffect;
+		[Header("SFX")] [SerializeField]
+		private AudioSource _audioSource;
 		[SerializeField]
 		private AudioClip _explosionSound;
 		[SerializeField] [Range(0.0f, 1.0f)]
 		private float _explosionVolume = 1.0f;
 
+		[Header("Components")] [SerializeField]
+		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
 		private Transform _transform;
 		[SerializeField]
 		private CollisionReceiver _collisionReceiver;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
+		[SerializeField] 
+		private Collider2D _collider;
 
+		private IEntity _entity;
 		private Vector2 _cachedVelocity;
-		
+		private IEvent<IEntity> _destroyWorldEvent;
+		private bool _broken;
+
 		public override void Install(IEntity entity)
 		{
-			if (_explosionEffect != null)
-			{
-				var effectMain = _explosionEffect.main;
-				effectMain.stopAction = ParticleSystemStopAction.Destroy;
-			}
+			_entity = entity;
 
 			var destroyEvent = new BaseEvent();
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
+
+			_destroyWorldEvent = new BaseEvent<IEntity>();
+			entity.AddDestroyWorldEvent(_destroyWorldEvent);
 
 			_triggerReceiver.OnTriggerEnter += OnTriggerred;
 			_collisionReceiver.OnCollisionEnter += OnCollided;
@@ -44,30 +51,17 @@ namespace Game
 
 		private void OnTriggerred(Collider2D other)
 		{
-			if (other.TryGetEntity(out IEntity entity) && entity.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
+			if (other.TryGetEntity(out IEntity entity)
+			    && entity.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
 			{
 				_cachedVelocity = rigidbody2D.velocity;
 			}
 		}
 
-		private void DestroyWall()
-		{
-			if (_explosionEffect != null)
-			{
-				var effect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity);
-
-				if (_explosionSound != null)
-				{
-					effect.AddComponent<AudioSource>().PlayOneShot(_explosionSound, _explosionVolume);
-				}
-			}
-
-			gameObject.SetActive(false);
-		}
-
 		private void OnCollided(Collision2D collision2D)
 		{
-			if (!collision2D.TryGetEntity(out IEntity collisionEntity)
+			if (_broken
+				|| !collision2D.TryGetEntity(out IEntity collisionEntity)
 			    || !collisionEntity.TryGetRigidbody2D(out Rigidbody2D collisionRb))
 			{
 				return;
@@ -75,7 +69,9 @@ namespace Game
 
 			if (CanDestroy(collision2D.relativeVelocity))
 			{
+				_broken = true;
 				collisionRb.velocity = _cachedVelocity;
+				_collider.enabled = false;
 				DestroyWall();
 			}
 		}
@@ -86,10 +82,28 @@ namespace Game
 			{
 				return Mathf.Abs(velocity.x) > _velocityToDestroy.x;
 			}
-			
+
 			return Mathf.Abs(velocity.y) > _velocityToDestroy.y;
 		}
 
+		private void DestroyWall()
+		{
+			_spriteRenderer.enabled = false;
+			_explosionEffect.Play();
+			_audioSource.PlayOneShot(_explosionSound, _explosionVolume);
+			var timer = new Timer(_explosionSound.length);
+			_entity.WhenUpdate(timer.Tick);
+			timer.Start();
+			timer.OnEnded += Destroy;
+		}
+
+		private void Destroy()
+		{
+			_destroyWorldEvent.Invoke(_entity);
+			Destroy(gameObject);
+		}
+
+#if UNITY_EDITOR
 		private void OnValidate()
 		{
 			if (_velocityToDestroy.x != 0 && _velocityToDestroy.y != 0)
@@ -98,5 +112,6 @@ namespace Game
 				Debug.LogError("Wall can be destroyed only by velocity from one side");
 			}
 		}
+#endif
 	}
 }
