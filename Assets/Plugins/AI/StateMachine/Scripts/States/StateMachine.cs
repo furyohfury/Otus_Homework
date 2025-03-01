@@ -54,23 +54,24 @@ namespace Atomic.AI
             if (this.transitionMap.Count > 0)
             {
                 //Switch to next state:
-                List<StateTransition> transitions = this.transitionMap[this.currentState];
-
-                for (int i = 0, count = transitions.Count; i < count; i++)
+                if (transitionMap.TryGetValue(this.currentState, out List<StateTransition> transitions))
                 {
-                    StateTransition transition = transitions[i];
-                    if (transition.Check(blackboard))
+                    for (int i = 0, count = transitions.Count; i < count; i++)
                     {
-                        IState previousState = this.states[this.currentState];
-                        previousState.OnExit(blackboard);
+                        StateTransition transition = transitions[i];
+                        if (transition.Check(blackboard))
+                        {
+                            IState previousState = this.states[this.currentState];
+                            previousState.OnExit(blackboard);
 
-                        transition.Perform(blackboard);
+                            transition.Perform(blackboard);
 
-                        this.currentState = transition.targetState;
+                            this.currentState = transition.targetState;
 
-                        IState nextState = this.states[this.currentState];
-                        nextState.OnEnter(blackboard);
-                        break;
+                            IState nextState = this.states[this.currentState];
+                            nextState.OnEnter(blackboard);
+                            break;
+                        }
                     }
                 }
             }

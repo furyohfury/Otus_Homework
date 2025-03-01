@@ -1,12 +1,19 @@
+using UnityEngine;
 using Zenject;
 
 namespace SaveLoad
 {
-    public abstract class SaveLoader<TData, TService> : ISaveLoader
+    public abstract class SaveLoader<TData, TService> : ISaveLoader where TService : class
     {
         void ISaveLoader.LoadGame(IGameRepository repository, DiContainer container)
         {
-            var service = container.Resolve<TService>();    
+            var service = container.TryResolve<TService>();
+            if (service == null)
+            {
+                Debug.LogWarning($"Can't resolve service {typeof(TService).Name}");
+                return;
+            }
+            
             if (repository.TryGetData(out TData data))
             {
                 SetupData(service, data);

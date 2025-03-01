@@ -25,7 +25,19 @@ MonoBehaviour:
     type: 
   - id: 1
     name: Target
-    type: 'SceneEntity : class'
+    type: 'Transform : class'
   - id: 2
     name: AttackRange
+    type: float
+  - id: 3
+    name: Waypoints
+    type: 'Transform[] : class'
+  - id: 4
+    name: Entity
+    type: 'SceneEntity : class'
+  - id: 5
+    name: WaypointIndex
+    type: int
+  - id: 6
+    name: StoppingDistance
     type: float

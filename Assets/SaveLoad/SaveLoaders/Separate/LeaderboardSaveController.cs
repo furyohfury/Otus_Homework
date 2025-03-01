@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Game;
 using ObservableCollections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 using IInitializable = Zenject.IInitializable;
 
@@ -13,54 +11,44 @@ namespace SaveLoad
 	public sealed class LeaderboardSaveController : IInitializable, IDisposable
 	{
 		private readonly Leaderboard _leaderboard;
-		private readonly IGameRepository _gameRepository;
-		private string _sceneName;
+		private readonly LevelsDataService _levelsDataService;
+		private readonly SaveLoadManager _saveLoadManager;
+		private string _levelName;
 
 		[Inject]
-		public LeaderboardSaveController(Leaderboard leaderboard, IGameRepository gameRepository)
+		public LeaderboardSaveController(Leaderboard leaderboard, LevelsDataService levelsDataService, SaveLoadManager saveLoadManager)
 		{
 			_leaderboard = leaderboard;
-			_gameRepository = gameRepository;
-			_sceneName = SceneManager.GetActiveScene().name;
+			_levelsDataService = levelsDataService;
+			_saveLoadManager = saveLoadManager;
 		}
 
 		public void Initialize()
 		{
+			_levelName = _levelsDataService.GetCurrentLevel();
+
 			_leaderboard.Times.CollectionChanged += OnTimesChanged;
 			LoadLeaderboards();
 		}
 
 		private void LoadLeaderboards()
 		{
-			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
+			if (_levelsDataService.TryGetLevelResults(_levelName, out List<TimeSpan> results))
 			{
-				Debug.LogWarning("Couldn't find leaderboards data. Creating new...");
-				_gameRepository.SetData(new Dictionary<string, List<TimeSpan>>());
-				return;
+				_leaderboard.SetLeaderboard(results);
 			}
-
-			var currentSceneLeaderboard = scenesLeaderboards[_sceneName];
-			_leaderboard.SetLeaderboard(currentSceneLeaderboard);
-		}
-
-		private void Save()
-		{
-			var currentSceneLeaderboard = _leaderboard.Times.ToList();
-
-			if (_gameRepository.TryGetData(out Dictionary<string, List<TimeSpan>> scenesLeaderboards) == false)
-			{
-				scenesLeaderboards = new Dictionary<string, List<TimeSpan>>();
-			}
-
-			scenesLeaderboards[_sceneName] = currentSceneLeaderboard;
-
-			_gameRepository.SetData(scenesLeaderboards);
-			_gameRepository.SaveState();
 		}
 
 		private void OnTimesChanged(in NotifyCollectionChangedEventArgs<TimeSpan> _)
 		{
 			Save();
+		}
+
+		private void Save()
+		{
+			List<TimeSpan> currentSceneLeaderboard = _leaderboard.Times.ToList();
+			_levelsDataService.SetResult(_levelName, currentSceneLeaderboard);
+			_saveLoadManager.SaveSpecific<LevelResultsSaveLoader>();
 		}
 
 		public void Dispose()

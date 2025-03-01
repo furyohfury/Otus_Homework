@@ -10,8 +10,6 @@ namespace Game
 		[SerializeField]
 		private SceneEntity _character;
 		[SerializeField]
-		private SceneEntityWorld _entityWorld;
-		[SerializeField]
 		private Transform _worldTransform;
 		
 		public override void InstallBindings()
@@ -43,7 +41,6 @@ namespace Game
 		private void InstallEntitiesSystem()
 		{
 			Container.Bind<IEntityWorld>()
-			         .To<SceneEntityWorld>()
 			         .FromComponentInHierarchy()
 			         .AsCached();
 			

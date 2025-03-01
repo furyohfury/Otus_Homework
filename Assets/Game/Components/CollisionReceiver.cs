@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -6,11 +7,17 @@ namespace Game
 	public class CollisionReceiver : MonoBehaviour
 	{
 		public event Action<Collision2D> OnCollisionEnter;
+		public event Action<Collision2D> OnCollisionStay; 
 		public event Action<Collision2D> OnCollisionExit;
 
 		private void OnCollisionEnter2D(Collision2D other)
 		{
 			OnCollisionEnter?.Invoke(other);
+		}
+
+		private void OnCollisionStay2D(Collision2D other)
+		{
+			OnCollisionStay?.Invoke(other);
 		}
 
 		private void OnCollisionExit2D(Collision2D other)

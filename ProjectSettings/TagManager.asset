@@ -17,8 +17,8 @@ TagManager:
   - Ground
   - Character
   - CharacterProjectile
-  - 
-  - Resource
+  - Enemy
+  - EnemyProjectile
   - 
   - 
   - 

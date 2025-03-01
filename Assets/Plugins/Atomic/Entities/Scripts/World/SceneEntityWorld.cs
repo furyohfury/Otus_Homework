@@ -12,11 +12,11 @@ namespace Atomic.Entities
     [AddComponentMenu("Atomic/Entities/Entity World")]
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(-1000)]
-    public sealed class SceneEntityWorld : MonoBehaviour, IEntityWorld
+    public class SceneEntityWorld : MonoBehaviour, IEntityWorld
     {
         #region Main
 
-        private readonly EntityWorld _world = new();
+        protected readonly EntityWorld _world = new();
 
         [SerializeField]
         private bool autoRefresh = true;
@@ -52,14 +52,14 @@ namespace Atomic.Entities
             }
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             if (this.scanEntities)
             {
                 this.AddAllEntitiesFromScene(this.includeInactiveOnScan);
             }
         }
-
+        
         private void OnValidate()
         {
 #if UNITY_EDITOR

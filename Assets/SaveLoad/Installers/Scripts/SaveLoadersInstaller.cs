@@ -16,10 +16,10 @@ namespace SaveLoad
 			         .To<CharacterSaveLoader>()
 			         .AsCached();
 
-			Container.Bind<ISaveLoader>()
-			         .To<AbilityCardsSaveLoader>()
-			         .AsCached()
-			         .WithArguments(_abilityCardPrefab);
+			// Container.Bind<ISaveLoader>()
+			//          .To<AbilityCardsSaveLoader>()
+			//          .AsCached()
+			//          .WithArguments(_abilityCardPrefab);
 
 			Container.Bind<ISaveLoader>()
 			         .To<LevelResultsSaveLoader>()

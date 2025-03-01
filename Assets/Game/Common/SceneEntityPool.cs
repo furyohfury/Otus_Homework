@@ -1,17 +1,32 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
 	public sealed class SceneEntityPool : Pool<SceneEntity>
 	{
-		public SceneEntityPool(Transform parent, SceneEntity prefab, bool fillOnCreate, int initialSize = 10, int maxSize = 20) : base(parent, prefab
-			, fillOnCreate, initialSize, maxSize)
-		{ }
+		private readonly IEvent<Object> _spawnWorldEvent;
+		private readonly IEvent<Object> _destroyWorldEvent;
+
+		public SceneEntityPool(Transform parent, SceneEntity prefab, bool fillOnCreate, int initialSize = 10, int maxSize = 20
+			, IEvent<Object> spawnWorldEvent = null, IEvent<Object> destroyWorldEvent = null)
+			: base(parent, prefab, false, initialSize, maxSize)
+		{
+			_spawnWorldEvent = spawnWorldEvent;
+			_destroyWorldEvent = destroyWorldEvent;
+			if (fillOnCreate)
+			{
+				FillPool();
+			}
+		}
 
 		protected override SceneEntity CreateItem(Transform parent, Vector2 pos, Quaternion rot)
 		{
-			return SceneEntityCreator.OnCreateEntityRequest.Invoke(Prefab, pos, rot, parent);
+			var newItem = Object.Instantiate(Prefab, pos, rot, parent);
+			_spawnWorldEvent?.Invoke(newItem);
+			return newItem;
 		}
 
 		public override void Dispose()
@@ -19,12 +34,14 @@ namespace Game
 			base.Dispose();
 			foreach (var entity in ActiveItems)
 			{
-				SceneEntityCreator.OnDestroyEntityRequest(entity);
+				_destroyWorldEvent?.Invoke(entity);
+				Object.Destroy(entity.gameObject);
 			}
-			
+
 			foreach (var entity in InactiveItems)
 			{
-				SceneEntityCreator.OnDestroyEntityRequest(entity);
+				_destroyWorldEvent?.Invoke(entity);
+				Object.Destroy(entity.gameObject);
 			}
 		}
 	}

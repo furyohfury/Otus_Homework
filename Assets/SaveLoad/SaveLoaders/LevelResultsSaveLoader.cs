@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game;
 
 namespace SaveLoad
@@ -7,12 +8,12 @@ namespace SaveLoad
 	{
 		protected override IList<LevelData> ConvertToData(LevelsDataService service)
 		{
-			var names = service.GetNames();
+			var names = service.GetLevelNames();
 			var savedData = new List<LevelData>();
 			
 			for (int i = 0, length = names.Length; i < length; i++)
 			{
-				if (service.TryGetLevelResults(names[i], out var results))
+				if (service.TryGetLevelResults(names[i], out List<TimeSpan> results))
 				{
 					savedData.Add(new LevelData(names[i], results));
 				}

@@ -20,11 +20,13 @@ namespace UI
 			_levelsDataService = levelsDataService;
 		}
 
-		public LevelMiniaturePresenter Create(string level, List<TimeSpan> levelResults, LevelMiniatureView view)
+		public LevelMiniaturePresenter Create(string level, LevelMiniatureView view, List<TimeSpan> levelResults = null)
 		{
 			_levelsDataService.TryGetLevelTargetTimes(level, out Dictionary<Cups, TimeSpan> targetTimes);
 			var icon = _levelsDataService.GetLevelIcon(level);
+			var scene = _levelsDataService.GetSceneName(level);
 			var presenter = new LevelMiniaturePresenter(level,
+				scene,
 				icon,
 				view,
 				levelResults,

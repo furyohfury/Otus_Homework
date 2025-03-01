@@ -1,7 +1,8 @@
 using System;
+using Atomic.Elements;
 using Atomic.Entities;
 using R3;
-using Unity.VisualScripting;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Timer = Atomic.Elements.Timer;
 
@@ -24,87 +25,71 @@ namespace Game
 
 
 		[Header("FX")]
-		[SerializeField]
+		[SerializeField] [Required]
 		private ParticleSystem _explosionEffect;
-		[SerializeField]
+		[SerializeField] [Required]
 		private AudioClip _timerSound;
-		[SerializeField]
+		[SerializeField] [Required]
 		private AudioClip _explosionSound;
 		[SerializeField] [Range(0.0f, 1.0f)]
 		private float _soundVolume = 1.0f;
 
+		[Header("Components")]
 		[SerializeField]
 		private Rigidbody2D _rigidbody;
 		[SerializeField]
 		private Transform _transform;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
+		[SerializeField] 
+		private SpriteRenderer _spriteRenderer;
+		[SerializeField]
+		private AudioSource _audioSource;
 
 		private IEntity _entity;
-		private AudioSource _effectsContainer;
+		private bool _isActivated;
 
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
 			entity.AddRigidbody2D(_rigidbody);
-			if (_explosionEffect != null)
-			{
-				var effectMain = _explosionEffect.main;
-				effectMain.stopAction = ParticleSystemStopAction.Destroy;
-			}
-
 			_triggerReceiver.OnTriggerEnter += OnCollided;
 		}
 
-		private void OnCollided(Collider2D _)
+		private void OnCollided(Collider2D collision)
 		{
+			if (collision.isTrigger
+			    || _isActivated)
+			{
+				return;
+			}
+
+			_isActivated = true;
 			_rigidbody.simulated = false;
 			var timer = new Timer(_explosionDelay);
 			timer.Start();
 			_entity.WhenUpdate(timer.Tick);
+			_audioSource.PlayOneShot(_timerSound, _soundVolume);
 			timer.OnEnded += Explode;
-			var effectsGo = new GameObject
-			                {
-				                transform =
-				                {
-					                position = transform.position, rotation = Quaternion.identity
-				                }
-			                };
-			_effectsContainer = effectsGo.AddComponent<AudioSource>();
-			if (_timerSound != null)
-			{
-				_effectsContainer.PlayOneShot(_timerSound);
-			}
 		}
 
 		private void Explode()
 		{
-			if (_explosionEffect != null)
-			{
-				var explosionEffect = Instantiate(_explosionEffect, _transform.position, Quaternion.identity, _effectsContainer.transform);
-				var particleSystemMain = explosionEffect.main;
-				particleSystemMain.stopAction = ParticleSystemStopAction.Destroy;
-				
-				if (_explosionSound != null)
-				{
-					_effectsContainer.PlayOneShot(_explosionSound, _soundVolume);
-					_effectsContainer.clip = _explosionSound;
-					_effectsContainer.volume = _soundVolume;
-					_effectsContainer.Play();
-					Observable.Timer(TimeSpan.FromSeconds(_explosionSound.length))
-					          .Subscribe(_ => Destroy(_effectsContainer.gameObject));
-				}
-			}
+			ProcessCollisionsWithEntities();
+			ProcessVisuals();
+		}
 
+		private void ProcessCollisionsWithEntities()
+		{
 			var colliders = Physics2D.OverlapCircleAll(_transform.position, _explosionRadius);
-			foreach (var hit in colliders)
+			foreach (var other in colliders)
 			{
-				if (!hit.TryGetEntity(out IEntity entity))
+				if (!other.TryGetEntity(out IEntity otherEntity))
 				{
 					continue;
 				}
 
-				if (entity.TryGetRigidbody2D(out Rigidbody2D rb))
+				if (otherEntity.TryGetRigidbody2D(out Rigidbody2D rb))
 				{
 					rb.velocity = new Vector2(rb.velocity.x, 0);
 					rb.AddExplosionForce2D(_explosionForce,
@@ -113,32 +98,47 @@ namespace Game
 						_explosionUpwardForce);
 				}
 
-				if (entity.TryGetDestroyEvent(out var destroyEvent))
+				if (otherEntity.TryGetDestroyEvent(out BaseEvent destroyEvent))
 				{
 					destroyEvent.Invoke();
 				}
 
-				if (!entity.HasCharacterTag() && entity.TryGetTakeDamageRequest(out var request))
+				if (!otherEntity.HasCharacterTag() && otherEntity.TryGetTakeDamageRequest(out BaseEvent<int> request))
 				{
 					request.Invoke(_explosionDamage);
 				}
 			}
+		}
 
-			gameObject.SetActive(false);
+		private void ProcessVisuals()
+		{
+			_spriteRenderer.enabled = false;
+			_explosionEffect.Play();
+			_audioSource.PlayOneShot(_explosionSound, _soundVolume);
+			var timer = new Timer(_explosionSound.length);
+			_entity.WhenUpdate(timer.Tick);
+			timer.Start();
+			timer.OnEnded += Destroy;
+		}
+
+		private void Destroy()
+		{
+			Destroy(gameObject);
 		}
 
 #if UNITY_EDITOR
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.red;
-			Gizmos.DrawSphere(transform.position, _explosionRadius);
+			Gizmos.DrawWireSphere(transform.position, _explosionRadius);
 		}
 
 		private void OnValidate()
 		{
 			if (_timerSound != null && Mathf.Abs(_explosionDelay - _timerSound.length) > 0.1)
 			{
-				Debug.LogWarning($"Installed delay and sound of it on sticky bomb are too different. Division is {_explosionDelay - _timerSound.length}");
+				Debug.LogWarning(
+					$"Installed delay and sound of it on sticky bomb are too different. Difference is {_explosionDelay - _timerSound.length}");
 			}
 		}
 #endif

@@ -22,9 +22,9 @@ namespace UI
 			_character.OnValueAdded += OnWeaponAdded;
 			_character.OnValueDeleted += OnWeaponRemoved;
 			
-			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
+			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
 			{
-				ReactiveVariable<int> ammo = weapon.Value.GetAmmo();
 				ammo.Subscribe(OnAmmoChanged);
 				OnAmmoChanged(ammo.Value);
 			}
@@ -40,12 +40,13 @@ namespace UI
 			{
 				return;
 			}
-
-			ReactiveVariable<SceneEntity> weapon = character.GetWeapon();
-			ReactiveVariable<int> ammo = weapon.Value.GetAmmo();
 			
-			OnAmmoChanged(ammo.Value);
-			ammo.Subscribe(OnAmmoChanged);
+			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
+			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
+			{
+				ammo.Subscribe(OnAmmoChanged);
+				OnAmmoChanged(ammo.Value);
+			}
 		}
 
 		private void OnAmmoChanged(int count)

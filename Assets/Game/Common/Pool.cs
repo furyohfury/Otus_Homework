@@ -81,7 +81,7 @@ namespace Game
 			return Object.Instantiate(Prefab, pos, rot, parent);
 		}
 
-		private void FillPool()
+		protected void FillPool()
 		{
 			var pos = Container.transform.position;
 			for (var i = 0; i < InitialSize; i++)

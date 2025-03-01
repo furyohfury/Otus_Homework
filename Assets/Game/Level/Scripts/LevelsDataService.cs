@@ -9,9 +9,8 @@ namespace Game
 {
 	public sealed class LevelsDataService
 	{
-		public string CurrentLevel => SceneManager.GetActiveScene().name; // TODO make some scenemanager having current level name?
-
 		private readonly Dictionary<string, LevelConfig> _configs;
+
 		private readonly Dictionary<string, List<TimeSpan>> _results = new(); // TODO mb separate class for results?
 
 		[Inject]
@@ -22,16 +21,34 @@ namespace Game
 				config => config);
 		}
 
-		public string[] GetNames()
+		public string[] GetLevelNames()
 		{
 			return _configs
 			       .Keys
 			       .ToArray();
 		}
 
+		public string GetSceneName(string levelName)
+		{
+			return _configs[levelName].SceneName;
+		}
+
 		public Sprite GetLevelIcon(string levelName)
 		{
 			return _configs[levelName].Icon;
+		}
+
+		public string GetCurrentLevel()
+		{
+			var currentScene = SceneManager.GetActiveScene().name;
+			var currentLevel = _configs.Keys.SingleOrDefault(key => _configs[key].SceneName == currentScene);
+
+			if (currentLevel == default)
+			{
+				throw new NullReferenceException("No config with current scene name");
+			}
+
+			return currentLevel;
 		}
 
 		public void SetResult(string levelName, List<TimeSpan> results)

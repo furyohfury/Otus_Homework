@@ -35,7 +35,7 @@ namespace Game
 		{
 			_finishLine.OnCrossed += CheckWinConditions;
 			_saveLoadManager.Save();
-			// _gameRepository.SaveState();
+			_entityWorld.DisableEntities();
 		}
 
 		public void StartLevel()
@@ -54,18 +54,11 @@ namespace Game
 			_saveLoadManager.Load();
 			_levelTimer.Finish();
 			_levelTimer.Reset();
+			_entityWorld.DisableEntities();
 			OnLevelReset?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level reset");
 #endif
-		}
-
-		private void CheckWinConditions()
-		{
-			if (_winConditions.All(cond => cond.IsMet))
-			{
-				FinishLevel();
-			}
 		}
 
 		public void FinishLevel()
@@ -76,6 +69,14 @@ namespace Game
 #if UNITY_EDITOR
 			Debug.Log("Level finished");
 #endif
+		}
+
+		private void CheckWinConditions()
+		{
+			if (_winConditions.All(cond => cond.IsMet))
+			{
+				FinishLevel();
+			}
 		}
 
 		public void Dispose()

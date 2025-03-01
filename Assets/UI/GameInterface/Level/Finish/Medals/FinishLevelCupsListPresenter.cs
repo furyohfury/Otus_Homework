@@ -33,7 +33,7 @@ namespace UI
 
 		private void SetTimesText()
 		{
-			var currentLevel = _levelsDataService.CurrentLevel;
+			var currentLevel = _levelsDataService.GetCurrentLevel();
 			_levelsDataService.TryGetLevelTargetTimes(currentLevel, out Dictionary<Cups, TimeSpan> targetTimes);
 			foreach (var cup in targetTimes.Keys)
 			{
@@ -50,7 +50,7 @@ namespace UI
 
 		private void OnLevelFinished()
 		{
-			var currentLevel = _levelsDataService.CurrentLevel;
+			var currentLevel = _levelsDataService.GetCurrentLevel();
 			_levelsDataService.TryGetLevelTargetTimes(currentLevel, out Dictionary<Cups, TimeSpan> targetTimes);
 			TimeSpan levelTime = _levelTimer.LevelTime;
 

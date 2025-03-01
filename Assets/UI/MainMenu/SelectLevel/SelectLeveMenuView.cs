@@ -11,7 +11,7 @@ namespace UI
 		private Transform _container;
 		private SelectLevelMenuPresenter _presenter;
 		private LevelMiniatureViewFactory _levelMiniatureViewFactory;
-		private List<LevelMiniatureView> _views = new();
+		private readonly List<LevelMiniatureView> _views = new();
 
 		[SerializeField]
 		private Button _closeButton;
@@ -38,9 +38,10 @@ namespace UI
 
 		private void SpawnLevelsViews()
 		{
-			for (int i = 0, count = _presenter.Levels.Length; i < count; i++)
+			var levels = _presenter.GetLevels();
+			for (int i = 0, count = levels.Length; i < count; i++)
 			{
-				var level = _presenter.Levels[i];
+				var level = levels[i];
 				var miniatureView = _levelMiniatureViewFactory.Create(_container);
 				_views.Add(miniatureView);
 				_presenter.OnLevelMiniatureViewCreated(miniatureView, level);
@@ -53,9 +54,11 @@ namespace UI
 			gameObject.SetActive(false);
 			for (int i = 0, count = _views.Count; i < count; i++)
 			{
-				Destroy(_views[i].gameObject);
-				_views.Remove(_views[i]);
+				var view = _views[i];
+				Destroy(view.gameObject);
 			}
+
+			_views.Clear();
 		}
 	}
 }
