@@ -6,38 +6,42 @@ namespace Game
 {
 	public sealed class ShootSFXWeaponBehaviour : IEntityInit, IEntityDispose
 	{
+		private IEntity _self;
 		private BaseEvent _attackEvent;
 		private AudioSource _audioSource;
 		private AudioClip _shootAudioClip;
-		private ReactiveVariable<int> _ammo;
-		private ReactiveVariable<Transform> _firePoint;
+		private Transform _soundSpawnPoint;
 
 		public void Init(IEntity entity)
 		{
-			_ammo = entity.GetAmmo();
-			_firePoint = entity.GetFirePoint();
+			_self = entity;
+			_soundSpawnPoint = entity.TryGetFirePoint(out var firePoint)
+				? firePoint.Value
+				: entity.GetVisualTransform();
+
 			_audioSource = entity.GetAudioSource();
 			_shootAudioClip = entity.GetShootAudioClip();
-			
+
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnWeaponShoot);
 		}
 
 		private void OnWeaponShoot()
 		{
-			if (_ammo.Value > 1)
+			if (_self.TryGetAmmo(out ReactiveVariable<int> ammo) == false
+			    || ammo.Value > 0)
 			{
-				_audioSource.clip = _shootAudioClip;
-				_audioSource.Play();
+				_audioSource.PlayOneShot(_shootAudioClip);
+				return;
 			}
 
 			var source = new GameObject();
-			source.transform.SetPositionAndRotation(_firePoint.Value.position, _firePoint.Value.rotation);
-			// var audioSource = source.AddComponent<AudioSource>();
-			// audioSource.clip = _shootAudioClip;
-			// audioSource.volume = _audioSource.volume;
-			// audioSource.Play(); // TODO destroy this thing somehow
-			// TODO last sound cant be played cuz of destroy. Mb check ammo and create oneshot GO
+			source.transform.SetPositionAndRotation(_soundSpawnPoint.position, _soundSpawnPoint.rotation);
+			source.transform.SetParent(_soundSpawnPoint.root);
+			var audioSource = source.AddComponent<AudioSource>();
+			audioSource.PlayOneShot(_shootAudioClip, _audioSource.volume);
+
+			Object.Destroy(source, _shootAudioClip.length);
 		}
 
 		public void Dispose(IEntity entity)

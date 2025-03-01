@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class WeaponFXInstaller : SceneEntityInstallerBase
+	public sealed class WeaponSFXInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private AudioSource _audioSource;
