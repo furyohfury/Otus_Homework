@@ -1,5 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game
@@ -7,14 +8,11 @@ namespace Game
 	public sealed class RotateToTarget2DBehaviour : IEntityInit, IEntityUpdate, IEntityEnable, IEntityDisable
 	{
 		private Transform _entityTransform;
-		private SpriteRenderer _spriteRenderer;
-		private bool _isLookingRight = true;
 		private bool _isActive = true;
 
 		public void Init(IEntity entity)
 		{
 			_entityTransform = entity.GetVisualTransform();
-			_spriteRenderer = entity.GetSpriteRenderer();
 		}
 
 		public void OnUpdate(IEntity entity, float deltaTime)
@@ -24,27 +22,25 @@ namespace Game
 				return;
 			}
 			
-			if (!entity.TryGetTarget(out var targetPos))
-			{
-				return;
-			}
-			
-			float delta = targetPos.Invoke().x - _entityTransform.position.x;
-			if (delta >= 0 && _isLookingRight || delta < 0 && !_isLookingRight)
+			if (!entity.TryGetTarget(out var target))
 			{
 				return;
 			}
 
-			if (delta >= 0)
+			Vector2 targetPos = target.Invoke();
+			var direction = Mathf.Sign(targetPos.x - _entityTransform.position.x);
+
+			Vector3 scale = _entityTransform.localScale;
+			if (direction > 0 && scale.x < 0)
 			{
-				_spriteRenderer.flipX = false;
-				_isLookingRight = true;
+				scale.x = Mathf.Abs(scale.x);
 			}
-			else
+			else if (direction < 0 && scale.x > 0)
 			{
-				_spriteRenderer.flipX = true;
-				_isLookingRight = false;
+				scale.x = -Mathf.Abs(scale.x);
 			}
+            
+			_entityTransform.localScale = scale;
 		}
 
 		public void Enable(IEntity entity)

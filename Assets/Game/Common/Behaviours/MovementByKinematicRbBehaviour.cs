@@ -26,7 +26,7 @@ namespace Game
 			{
 				return;
 			}
-			var translation = _moveDirection.Value * (_moveSpeed.Value * deltaTime);
+			var translation = _moveDirection.Value.normalized * (_moveSpeed.Value * deltaTime);
 			_rigidbody.MovePosition(_rigidbody.position + translation);
 		}
 		

@@ -1,38 +1,44 @@
-﻿using Atomic.Elements;
+﻿using System;
+using Atomic.Elements;
 using Atomic.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game
 {
-	public sealed class AimWeaponBehaviour : IEntityUpdate, IEntityEnable, IEntityDisable
+	public sealed class AimWeaponBehaviour : IEntityUpdate
 	{
-		private bool _isActive = true;
-		
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
-			if (!_isActive)
-			{
-				return;
-			}
-			
-			if (!entity.TryGetTarget(out IFunction<Vector2> target)
-			    || !entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+
+			if (entity.TryGetTarget(out IFunction<Vector2> target) == false
+			    || entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon) == false)
 			{
 				return;
 			}
 
 			var weaponTransform = weapon.Value.GetVisualTransform();
-			weaponTransform.LookAtX(target.Invoke());
-		}
+			Vector2 targetPos = target.Invoke();
+			Vector2 weaponPos = weaponTransform.position;
+			Vector2 weaponScale = weaponTransform.localScale;
 
-		public void Enable(IEntity entity)
-		{
-			_isActive = true;
-		}
+			// Вычисляем направление к цели
+			Vector2 direction = (targetPos - weaponPos).normalized;
+			var sign = Mathf.Sign(targetPos.x - weaponPos.x);
+			if (sign > 0)
+			{
+				weaponTransform.localScale = new Vector2(Math.Abs(weaponScale.x), Math.Abs(weaponScale.y));
+			}
+			else
+			{
+				weaponTransform.localScale = new Vector2(-Math.Abs(weaponScale.x), -Math.Abs(weaponScale.y));
+			}
 
-		public void Disable(IEntity entity)
-		{
-			_isActive = false;
+			// Вычисляем угол вращения в градусах
+			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+			// Поворачиваем оружие по оси Z
+			weaponTransform.rotation = Quaternion.Euler(0, 0, angle);
 		}
 	}
 }

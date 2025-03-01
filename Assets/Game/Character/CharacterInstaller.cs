@@ -4,6 +4,7 @@ using Atomic.Entities;
 using Atomic.Extensions;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Object = UnityEngine.Object;
 
 namespace Game.Entities
 {
@@ -39,7 +40,7 @@ namespace Game.Entities
 		[Header("Life")] 
 		[SerializeField]
 		private int _health;
-
+		
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
 
@@ -51,6 +52,8 @@ namespace Game.Entities
 			InitializeComponents(entity);
 			InitializeCombat(entity);
 			InitializeAbilities(entity);
+			entity.AddSpawnWorldEvent(new BaseEvent<Object>());
+			entity.AddDestroyWorldEvent(new BaseEvent<Object>());
 		}
 
 		private void InitializeLife(IEntity entity)
@@ -64,6 +67,7 @@ namespace Game.Entities
 
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
+			entity.AddBehaviour(new DeathEventBehaviour());
 		}
 
 		private void InitializeComponents(IEntity entity)
@@ -133,7 +137,10 @@ namespace Game.Entities
 
 		private void InitializeAbilities(IEntity entity)
 		{
-			// TODO add request and can use
+			entity.AddAbilityRequest(new BaseEvent());
+			var canUseAbility = new AndExpression();
+			canUseAbility.Append(() => !entity.GetIsDead().Value);
+			entity.AddCanUseAbility(canUseAbility);
 			entity.AddAbilityEvent(new BaseEvent());
 			entity.AddActiveAbilityAspects(new ReactiveList<IEntityAspect>());
 			entity.AddAbilityCardPickupEvent(new BaseEvent<AssetReference>());
@@ -143,6 +150,7 @@ namespace Game.Entities
 			entity.AddBehaviour(new AbilityPickupBehaviour());
 			entity.AddBehaviour(new RemoveActiveAbilityBehaviour());
 			entity.AddBehaviour(new AbilityInventoryBehaviour());
+			entity.AddBehaviour<AbilityRequestBehaviour>();
 		}
 	}
 }

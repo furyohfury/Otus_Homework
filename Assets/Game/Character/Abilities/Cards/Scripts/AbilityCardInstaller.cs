@@ -19,6 +19,7 @@ namespace Game
 		private Transform _transform;
 
 		private SceneEntity _entity;
+		private BaseEvent<Object> _destroyWorldEvent;
 
 		public override void Install(IEntity entity)
 		{
@@ -26,12 +27,14 @@ namespace Game
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_renderer);
+			_destroyWorldEvent = new BaseEvent<Object>();
+			entity.AddDestroyWorldEvent(_destroyWorldEvent);
 			_entity = GetComponent<SceneEntity>();
 
 			if (_abilityCardConfigReference != null)
 			{
 				InstallConfig(entity, _abilityCardConfigReference);
-			}			
+			}
 		}
 
 		public async Task InstallConfig(IEntity entity, AssetReference configAsset)
@@ -42,6 +45,7 @@ namespace Game
 			{
 				_renderer.sprite = config.Sprite;
 			}
+
 			entity.AddAbilityCardGUID(configAsset.AssetGUID);
 		}
 
@@ -57,7 +61,8 @@ namespace Game
 				pickupEvent.Invoke(_abilityCardConfigReference);
 			}
 
-			SceneEntityCreator.OnDestroyEntityRequest(_entity);
+			_destroyWorldEvent.Invoke(_entity);
+			Destroy(gameObject);
 		}
 
 #if UNITY_EDITOR
@@ -67,6 +72,7 @@ namespace Game
 			{
 				return;
 			}
+
 			var assetPath = AssetDatabase.GUIDToAssetPath(_abilityCardConfigReference.AssetGUID);
 			if (!string.IsNullOrEmpty(assetPath))
 			{
@@ -74,7 +80,6 @@ namespace Game
 				if (config != null && _renderer.sprite != config.Sprite)
 				{
 					_renderer.sprite = config.Sprite;
-					Debug.Log($"Sprite set to {_renderer.sprite.name} for {_renderer.name}");
 				}
 			}
 		}

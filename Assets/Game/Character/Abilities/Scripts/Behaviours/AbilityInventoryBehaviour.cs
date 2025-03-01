@@ -45,7 +45,7 @@ namespace Game
 				                             CurrentAmmo = newWeaponAmmo.Value
 			                             };
 		
-			SubscribeStateToChanges(cardState);
+			SubscribeStateToAmmoChanges(cardState);
 			_abilityInventory.Add(cardState);
 		}
 
@@ -70,7 +70,7 @@ namespace Game
 
 				var characterWeapon = _character.GetWeapon().Value;
 				characterWeapon.GetAmmo().Value = lastState.CurrentAmmo;
-				SubscribeStateToChanges(lastState);
+				SubscribeStateToAmmoChanges(lastState);
 
 				_activeAbilityAspects.Clear();
 				IEntityAspect[] configAspects = lastState.Config.Aspects;
@@ -82,7 +82,7 @@ namespace Game
 			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 
-		private void SubscribeStateToChanges(AbilityCardState state)
+		private void SubscribeStateToAmmoChanges(AbilityCardState state)
 		{
 			var characterWeapon = _character.GetWeapon().Value;
 			ReactiveVariable<int> ammo = characterWeapon.GetAmmo();

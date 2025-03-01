@@ -26,6 +26,10 @@ namespace Game
 		private void OnWeaponEquip(SceneEntity weapon)
 		{
 			var weaponGo = SceneEntity.Instantiate(weapon, _weaponContainer.position, _weaponContainer.rotation, _weaponContainer);
+			if (_entity.TryGetSpawnWorldEvent(out IEvent<Object> spawnWorldEvent))
+			{
+				spawnWorldEvent.Invoke(weaponGo);
+			}
 			_entity.AddWeapon(weaponGo);
 		}
 
@@ -33,6 +37,10 @@ namespace Game
 		{
 			if (_entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
 			{
+				if (_entity.TryGetDestroyWorldEvent(out IEvent<Object> destroyWorldEvent))
+				{
+					destroyWorldEvent.Invoke(weapon.Value);
+				}
 				Object.Destroy(weapon.Value.gameObject);
 				_entity.DelWeapon();
 			}

@@ -13,9 +13,10 @@ namespace Game
 			_removeActiveAbilityEvent = entity.GetRemoveActiveAbilityEvent();
 			_character = entity;
 			entity.OnValueAdded += OnWeaponAdded;
-			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
+			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
 			{
-				weapon.Value.GetAmmo().Subscribe(OnAmmoChanged);
+				ammo.Subscribe(OnAmmoChanged);
 			}
 		}
 
@@ -26,7 +27,11 @@ namespace Game
 				return;
 			}
 
-			_character.GetWeapon().Value.GetAmmo().Subscribe(OnAmmoChanged);
+			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
+			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
+			{
+				ammo.Subscribe(OnAmmoChanged);
+			}
 		}
 
 		private void OnAmmoChanged(int count)

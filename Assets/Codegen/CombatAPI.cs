@@ -33,6 +33,9 @@ namespace Atomic.Entities
         public const int EquipWeaponRequest = 50; // BaseEvent<SceneEntity>
         public const int UnequipWeaponRequest = 51; // BaseEvent
         public const int ShootAudioClip = 58; // AudioClip
+        public const int AttackVFX = 64; // ParticleSystem
+        public const int ExplosionVFX = 68; // ParticleSystem
+        public const int ExplosionSFX = 69; // AudioClip
 
 
         ///Extensions
@@ -341,5 +344,59 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetShootAudioClip(this IEntity obj, AudioClip value) => obj.SetValue(ShootAudioClip, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ParticleSystem GetAttackVFX(this IEntity obj) => obj.GetValue<ParticleSystem>(AttackVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAttackVFX(this IEntity obj, out ParticleSystem value) => obj.TryGetValue(AttackVFX, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAttackVFX(this IEntity obj, ParticleSystem value) => obj.AddValue(AttackVFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAttackVFX(this IEntity obj) => obj.HasValue(AttackVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAttackVFX(this IEntity obj) => obj.DelValue(AttackVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAttackVFX(this IEntity obj, ParticleSystem value) => obj.SetValue(AttackVFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ParticleSystem GetExplosionVFX(this IEntity obj) => obj.GetValue<ParticleSystem>(ExplosionVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetExplosionVFX(this IEntity obj, out ParticleSystem value) => obj.TryGetValue(ExplosionVFX, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddExplosionVFX(this IEntity obj, ParticleSystem value) => obj.AddValue(ExplosionVFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasExplosionVFX(this IEntity obj) => obj.HasValue(ExplosionVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelExplosionVFX(this IEntity obj) => obj.DelValue(ExplosionVFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetExplosionVFX(this IEntity obj, ParticleSystem value) => obj.SetValue(ExplosionVFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AudioClip GetExplosionSFX(this IEntity obj) => obj.GetValue<AudioClip>(ExplosionSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetExplosionSFX(this IEntity obj, out AudioClip value) => obj.TryGetValue(ExplosionSFX, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddExplosionSFX(this IEntity obj, AudioClip value) => obj.AddValue(ExplosionSFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasExplosionSFX(this IEntity obj) => obj.HasValue(ExplosionSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelExplosionSFX(this IEntity obj) => obj.DelValue(ExplosionSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetExplosionSFX(this IEntity obj, AudioClip value) => obj.SetValue(ExplosionSFX, value);
     }
 }

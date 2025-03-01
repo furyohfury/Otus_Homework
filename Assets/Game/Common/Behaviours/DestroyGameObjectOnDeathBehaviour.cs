@@ -12,11 +12,9 @@ namespace Game
 		public void Init(IEntity entity)
 		{
 			_deathEvent = entity.GetDeathEvent();
-			if (entity is SceneEntity sceneEntity)
-			{
-				_entity = sceneEntity;
-				_deathEvent.Subscribe(OnDeath);
-			}
+			_deathEvent.Subscribe(OnDeath);
+			// _entity = (SceneEntity)entity;
+			// TODO
 		}
 
 		private void OnDeath()

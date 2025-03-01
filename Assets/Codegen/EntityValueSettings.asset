@@ -124,6 +124,15 @@ MonoBehaviour:
     - id: 58
       name: ShootAudioClip
       type: AudioClip
+    - id: 64
+      name: AttackVFX
+      type: ParticleSystem
+    - id: 68
+      name: ExplosionVFX
+      type: ParticleSystem
+    - id: 69
+      name: ExplosionSFX
+      type: AudioClip
   - name: Sword
     indexes:
     - id: 14
@@ -133,8 +142,14 @@ MonoBehaviour:
       name: SlashSpeed
       type: ReactiveVariable<float>
     - id: 25
-      name: RestoreSlashSpeed
+      name: ReverseSlashSpeed
       type: ReactiveVariable<float>
+    - id: 65
+      name: ActivateColliderEvent
+      type: BaseEvent
+    - id: 66
+      name: DeactivateColliderEvent
+      type: BaseEvent
   - name: Life
     indexes:
     - id: 18
@@ -210,6 +225,9 @@ MonoBehaviour:
     - id: 59
       name: AbilityCardGUID
       type: string
+    - id: 70
+      name: CanUseAbility
+      type: IFunction<bool>
   - name: LevelObjects
     indexes:
     - id: 39
@@ -220,3 +238,26 @@ MonoBehaviour:
     - id: 57
       name: AudioSource
       type: AudioSource
+    - id: 62
+      name: SceneEntity
+      type: SceneEntity
+    - id: 67
+      name: AnimatorEventReceiver
+      type: AnimatorEventReceiver
+    - id: 71
+      name: SpawnWorldEvent
+      type: IEvent<Object>
+    - id: 72
+      name: DestroyWorldEvent
+      type: IEvent<Object>
+  - name: Audio
+    indexes:
+    - id: 60
+      name: FootstepsSounds
+      type: AudioClip[]
+    - id: 61
+      name: DeathSounds
+      type: AudioClip[]
+    - id: 63
+      name: TakeDamageSounds
+      type: AudioClip[]
