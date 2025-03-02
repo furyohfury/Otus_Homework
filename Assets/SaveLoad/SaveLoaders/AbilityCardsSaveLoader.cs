@@ -3,17 +3,20 @@ using System.Linq;
 using Atomic.Entities;
 using Game;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+using Zenject;
 
 namespace SaveLoad
 {
 	public sealed class AbilityCardsSaveLoader : SaveLoader<IEnumerable<AbilityCardData>, IEntityWorld>
 	{
 		private readonly SceneEntity _prefab;
+		private readonly AbilityCardConfigs _abilityCardConfigs;
 
-		public AbilityCardsSaveLoader(SceneEntity prefab)
+		[Inject]
+		public AbilityCardsSaveLoader(SceneEntity prefab, AbilityCardConfigs abilityCardConfigs)
 		{
 			_prefab = prefab;
+			_abilityCardConfigs = abilityCardConfigs;
 		}
 
 		protected override IEnumerable<AbilityCardData> ConvertToData(IEntityWorld world)
@@ -24,13 +27,14 @@ namespace SaveLoad
 			for (var i = 0; i < data.Length; i++)
 			{
 				IEntity card = abilityCards[i];
+				var config = card.GetAbilityCardConfig();
 				var transform = card.GetVisualTransform();
 
 				data[i] = new AbilityCardData(card.InstanceId,
+					config.Value.Id,
 					transform.position,
 					transform.rotation,
-					transform.localScale,
-					card.GetAbilityCardGUID());
+					transform.localScale);
 			}
 
 			return data;
@@ -38,15 +42,15 @@ namespace SaveLoad
 
 		protected override void SetupData(IEntityWorld world, IEnumerable<AbilityCardData> data)
 		{
-			var dataArray = data.ToArray();
-			var sceneCards = world.GetEntitiesWithTag(TagAPI.AbilityCard).ToArray();
-			
-			var savedCardsDict = dataArray.ToDictionary(cardData => cardData.InstanceID);
-			var sceneCardsDict = sceneCards.ToDictionary(entity => entity.InstanceId);
+			AbilityCardData[] dataArray = data.ToArray();
+			IEntity[] sceneCards = world.GetEntitiesWithTag(TagAPI.AbilityCard).ToArray();
+
+			Dictionary<int, AbilityCardData> savedCardsDict = dataArray.ToDictionary(cardData => cardData.InstanceID);
+			Dictionary<int, IEntity> sceneCardsDict = sceneCards.ToDictionary(entity => entity.InstanceId);
 
 			foreach (var cardData in dataArray)
 			{
-				if (sceneCardsDict.TryGetValue(cardData.InstanceID, out var existingCard))
+				if (sceneCardsDict.TryGetValue(cardData.InstanceID, out IEntity existingCard))
 				{
 					SetupExistingCard(existingCard, cardData);
 				}
@@ -56,11 +60,11 @@ namespace SaveLoad
 				}
 			}
 
-			foreach (var sceneCard in sceneCards)
+			foreach (IEntity sceneCard in sceneCards)
 			{
 				if (!savedCardsDict.ContainsKey(sceneCard.InstanceId))
 				{
-					SceneEntityCreator.OnDestroyEntityRequest(sceneCard as SceneEntity);
+					SceneEntity.Destroy(sceneCard);
 				}
 			}
 		}
@@ -77,10 +81,16 @@ namespace SaveLoad
 		{
 			var pos = cardData.Position;
 			var rot = cardData.Rotation;
-			SceneEntity newCard = SceneEntityCreator.OnCreateEntityInRootRequest(_prefab, pos, rot);
-			newCard.transform.localScale = cardData.Scale;
-			var installer = newCard.GetComponent<AbilityCardInstaller>();
-			installer.InstallConfig(newCard, new AssetReference(cardData.AssetGuid));
+			if (world is SceneEntityWorld sceneEntityWorld)	
+			{
+				SceneEntity newCard = SceneEntity.Instantiate(_prefab, pos, rot, sceneEntityWorld.transform);
+				newCard.transform.localScale = cardData.Scale;
+
+				var id = cardData.Id;
+				var config = _abilityCardConfigs.Configs[id];
+				var installer = newCard.GetComponent<AbilityCardInstaller>();
+				installer.SetConfig(config);
+			}
 		}
 	}
 }

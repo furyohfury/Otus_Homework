@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89abfa699e034b35a469d4976197c319, type: 3}
+  m_Name: AbilityCardConfigs
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _configs:
+  - {fileID: 11400000, guid: 88e20911f360dc243846387ac21f3f32, type: 2}
+  - {fileID: 11400000, guid: da798659650ec6e43b6988abf7a6f9ab, type: 2}
+  - {fileID: 11400000, guid: c9c4fac3fbdfce2418a33fcab6531995, type: 2}
