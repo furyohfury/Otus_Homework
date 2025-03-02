@@ -17,9 +17,28 @@ namespace Game
 #if UNITY_EDITOR
 			Container.Bind<DebugHelper>().AsSingle();
 #endif
-			Container.BindInterfacesAndSelfTo<InputController>()
+			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
 			         .AsSingle()
 			         .WithArguments(_character);
+			
+			Container.BindInterfacesAndSelfTo<PlayerJumpController>()
+			         .AsSingle()
+			         .WithArguments(_character);
+			
+			Container.BindInterfacesAndSelfTo<PlayerXAxisMovementController>()
+			         .AsSingle()
+			         .WithArguments(_character);
+			
+			Container.BindInterfacesAndSelfTo<PlayerAttackController>()
+			         .AsSingle()
+			         .WithArguments(_character);
+			
+			Container.BindInterfacesAndSelfTo<PlayerAbilityController>()
+			         .AsSingle()
+			         .WithArguments(_character);
+
+			Container.BindInterfacesAndSelfTo<GamePauseController>()
+			         .AsSingle();
 			
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy().AsCached();

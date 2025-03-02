@@ -491,7 +491,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Name
-      value: AbilityCard_Prefab
+      value: machineguncard
       objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Sprite
@@ -10571,7 +10571,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139958323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ab1d872a1942baaa511b2157361480, type: 3}
+  m_Script: {fileID: 11500000, guid: ad3a3ede6b224e529f623d5ca96c67f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   autoRefresh: 1

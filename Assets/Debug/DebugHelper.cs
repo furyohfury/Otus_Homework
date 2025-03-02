@@ -109,7 +109,7 @@ namespace a
 		public void AddTarget()
 		{
 			var target = new ReactiveVariable<Transform>(_target);
-			_character.AddTarget(new BaseFunction<Vector2>(() => _target.position));
+			// _character.AddTarget(new BaseFunction<Vector2>(() => _target.position));
 		}
 
 		[Button][TabGroup("Entities")]
