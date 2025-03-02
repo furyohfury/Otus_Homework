@@ -19,8 +19,6 @@ namespace Atomic.Entities
         public const int AudioSource = 57; // AudioSource
         public const int SceneEntity = 62; // SceneEntity
         public const int AnimatorEventReceiver = 67; // AnimatorEventReceiver
-        public const int SpawnWorldEvent = 71; // IEvent<IEntity>
-        public const int DestroyWorldEvent = 72; // IEvent<IEntity>
 
 
         ///Extensions
@@ -77,41 +75,5 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAnimatorEventReceiver(this IEntity obj, AnimatorEventReceiver value) => obj.SetValue(AnimatorEventReceiver, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEvent<IEntity> GetSpawnWorldEvent(this IEntity obj) => obj.GetValue<IEvent<IEntity>>(SpawnWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetSpawnWorldEvent(this IEntity obj, out IEvent<IEntity> value) => obj.TryGetValue(SpawnWorldEvent, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddSpawnWorldEvent(this IEntity obj, IEvent<IEntity> value) => obj.AddValue(SpawnWorldEvent, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasSpawnWorldEvent(this IEntity obj) => obj.HasValue(SpawnWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelSpawnWorldEvent(this IEntity obj) => obj.DelValue(SpawnWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetSpawnWorldEvent(this IEntity obj, IEvent<IEntity> value) => obj.SetValue(SpawnWorldEvent, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IEvent<IEntity> GetDestroyWorldEvent(this IEntity obj) => obj.GetValue<IEvent<IEntity>>(DestroyWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetDestroyWorldEvent(this IEntity obj, out IEvent<IEntity> value) => obj.TryGetValue(DestroyWorldEvent, out value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddDestroyWorldEvent(this IEntity obj, IEvent<IEntity> value) => obj.AddValue(DestroyWorldEvent, value);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasDestroyWorldEvent(this IEntity obj) => obj.HasValue(DestroyWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelDestroyWorldEvent(this IEntity obj) => obj.DelValue(DestroyWorldEvent);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetDestroyWorldEvent(this IEntity obj, IEvent<IEntity> value) => obj.SetValue(DestroyWorldEvent, value);
     }
 }
