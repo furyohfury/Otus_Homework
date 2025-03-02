@@ -141,7 +141,7 @@ namespace Game.Entities
 			entity.AddCanUseAbility(canUseAbility);
 			entity.AddAbilityEvent(new BaseEvent());
 			entity.AddActiveAbilityAspects(new ReactiveList<IEntityAspect>());
-			entity.AddAbilityCardPickupEvent(new BaseEvent<AssetReference>());
+			entity.AddAbilityCardPickupEvent(new BaseEvent<AbilityCardConfig>());
 			entity.AddAbilityInventory(new ReactiveList<AbilityCardState>());
 			entity.AddRemoveActiveAbilityEvent(new BaseEvent());
 

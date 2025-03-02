@@ -1,5 +1,4 @@
 ﻿using Atomic.Extensions;
-using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Game
@@ -7,7 +6,7 @@ namespace Game
 	[CreateAssetMenu(fileName = "AbilityCardConfig", menuName = "Create config/Ability card config")]
 	public sealed class AbilityCardConfig : ScriptableObject
 	{
-		[JsonIgnore]
+		public string Id;
 		public Sprite Sprite;
 		public IEntityAspect[] Aspects => _aspects;
 

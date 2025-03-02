@@ -8,7 +8,7 @@ namespace Game
 	public sealed class AbilityPickupBehaviour : IEntityInit, IEntityDispose
 	{
 		private IEntity _characterEntity;
-		private BaseEvent<AssetReference> _pickupAbilityCardEvent;
+		private IEvent<AbilityCardConfig> _pickupAbilityCardEvent;
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
 		private IEvent _removeActiveAbilityEvent;
 		private AssetReference _configAssetReference;
@@ -22,10 +22,8 @@ namespace Game
 			_pickupAbilityCardEvent.Subscribe(OnChangeAspect);
 		}
 
-		private async void OnChangeAspect(AssetReference assetReference)
+		private void OnChangeAspect(AbilityCardConfig abilityCardConfig)
 		{
-			_configAssetReference = assetReference;
-			
 			if (_activeAbilityAspects != null)
 			{
 				foreach (var aspect in _activeAbilityAspects)
@@ -34,19 +32,20 @@ namespace Game
 				}
 			}
 
-			var cardConfig = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(assetReference);
-			foreach (var aspect in cardConfig.Aspects)
+			foreach (var aspect in abilityCardConfig.Aspects)
 			{
 				aspect.Apply(_characterEntity);
 			}
 
-			_activeAbilityAspects.Clear();
-			IEntityAspect[] cardConfigAspects = cardConfig.Aspects;
-			for (int i = 0; i < cardConfigAspects.Length; i++)
+			if (_activeAbilityAspects != null)
 			{
-				_activeAbilityAspects.Add(cardConfigAspects[i]);
+				_activeAbilityAspects.Clear();
+				IEntityAspect[] cardConfigAspects = abilityCardConfig.Aspects;
+				for (int i = 0; i < cardConfigAspects.Length; i++)
+				{
+					_activeAbilityAspects.Add(cardConfigAspects[i]);
+				}
 			}
-			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 
 		public void Dispose(IEntity entity)

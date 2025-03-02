@@ -212,10 +212,10 @@ MonoBehaviour:
       type: BaseEvent<IEntityAspect>
     - id: 53
       name: AbilityCardPickupEvent
-      type: BaseEvent<AssetReference>
+      type: IEvent<AbilityCardConfig>
     - id: 54
       name: AbilityCardConfig
-      type: AbilityCardConfig
+      type: ReactiveVariable<AbilityCardConfig>
     - id: 55
       name: RemoveActiveAbilityEvent
       type: BaseEvent
@@ -244,12 +244,6 @@ MonoBehaviour:
     - id: 67
       name: AnimatorEventReceiver
       type: AnimatorEventReceiver
-    - id: 71
-      name: SpawnWorldEvent
-      type: IEvent<IEntity>
-    - id: 72
-      name: DestroyWorldEvent
-      type: IEvent<IEntity>
   - name: Audio
     indexes:
     - id: 60

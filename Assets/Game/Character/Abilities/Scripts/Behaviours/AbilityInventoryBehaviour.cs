@@ -13,11 +13,10 @@ namespace Game
 		private IEntity _character;
 
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
-		private BaseEvent<AssetReference> _abilityCardPickupEvent;
+		private IEvent<AbilityCardConfig> _abilityCardPickupEvent;
 		private BaseEvent _removeActiveAbilityEvent;
 		private List<AbilityCardState> _states;
 		private ReactiveList<AbilityCardState> _abilityInventory;
-		private AssetReference _configAssetReference;
 
 		public void Init(IEntity entity)
 		{
@@ -32,16 +31,14 @@ namespace Game
 			_abilityCardPickupEvent.Subscribe(OnAbilityPickUp);
 		}
 
-		private async void OnAbilityPickUp(AssetReference assetReference)
+		private async void OnAbilityPickUp(AbilityCardConfig abilityCardConfig)
 		{
 			ReactiveVariable<SceneEntity> newWeapon = _character.GetWeapon();
 			ReactiveVariable<int> newWeaponAmmo = newWeapon.Value.GetAmmo();
 			
-			_configAssetReference = assetReference;
-			var config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(assetReference);
 			AbilityCardState cardState = new AbilityCardState
 			                             {
-				                             Config = config, 
+				                             Config = abilityCardConfig, 
 				                             CurrentAmmo = newWeaponAmmo.Value
 			                             };
 		
@@ -79,7 +76,6 @@ namespace Game
 					_activeAbilityAspects.Add(configAspects[i]);
 				}
 			}
-			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 
 		private void SubscribeStateToAmmoChanges(AbilityCardState state)
@@ -92,7 +88,6 @@ namespace Game
 		public void Dispose(IEntity entity)
 		{
 			_abilityCardPickupEvent.Unsubscribe(OnAbilityPickUp);
-			AdressablesLoadManager.ReleaseAsset(_configAssetReference);
 		}
 	}
 }

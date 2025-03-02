@@ -1,93 +1,82 @@
-﻿using System.Threading.Tasks;
-using Atomic.Elements;
+﻿using Atomic.Elements;
 using Atomic.Entities;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Game
 {
 	public sealed class AbilityCardInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
-		private SpriteRenderer _renderer;
+		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
-		private AssetReference _abilityCardConfigReference;
+		private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
 		[SerializeField]
 		private Transform _transform;
 
-		private SceneEntity _entity;
-		private BaseEvent<IEntity> _destroyWorldEvent;
+		private IEntity _entity;
 
 		public override void Install(IEntity entity)
 		{
-			entity.AddAbilityCardTag();
-			_triggerReceiver.OnTriggerEnter += OnTrigger;
-			entity.AddVisualTransform(_transform);
-			entity.AddSpriteRenderer(_renderer);
-			_destroyWorldEvent = new BaseEvent<IEntity>();
-			entity.AddDestroyWorldEvent(_destroyWorldEvent);
-			_entity = GetComponent<SceneEntity>();
+			_entity = entity;
 
-			if (_abilityCardConfigReference != null)
-			{
-				InstallConfig(entity, _abilityCardConfigReference);
-			}
+			entity.AddAbilityCardTag();
+			entity.AddVisualTransform(_transform);
+			entity.AddSpriteRenderer(_spriteRenderer);
+			_triggerReceiver.OnTriggerEnter += OnTrigger;
+			entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(_abilityCardConfig));
 		}
 
-		public async Task InstallConfig(IEntity entity, AssetReference configAsset)
+		public void SetConfig(AbilityCardConfig abilityCardConfig)
 		{
-			_abilityCardConfigReference = configAsset;
-			AbilityCardConfig config = await AdressablesLoadManager.LoadAsset<AbilityCardConfig>(configAsset);
-			if (_renderer.sprite == null)
+			_abilityCardConfig = abilityCardConfig;
+			if (_entity.TryGetAbilityCardConfig(out ReactiveVariable<AbilityCardConfig> config) == false)
 			{
-				_renderer.sprite = config.Sprite;
+				_entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(abilityCardConfig));
+			}
+			else
+			{
+				config.Value = abilityCardConfig;
 			}
 
-			entity.AddAbilityCardGUID(configAsset.AssetGUID);
+			SetSpriteFromConfig();
 		}
 
 		private void OnTrigger(Collider2D other)
 		{
-			if (!other.TryGetEntity(out var entity) || !entity.HasCharacterTag())
+			if (!other.TryGetEntity(out var collidedEntity) || !collidedEntity.HasCharacterTag())
 			{
 				return;
 			}
 
-			if (entity.TryGetAbilityCardPickupEvent(out BaseEvent<AssetReference> pickupEvent))
+			if (collidedEntity.TryGetAbilityCardPickupEvent(out IEvent<AbilityCardConfig> pickupEvent))
 			{
-				pickupEvent.Invoke(_abilityCardConfigReference);
+				pickupEvent.Invoke(_abilityCardConfig);
 			}
 
-			_destroyWorldEvent.Invoke(_entity);
-			Destroy(gameObject);
+			SceneEntity.Destroy(_entity);
 		}
 
 #if UNITY_EDITOR
 		private void OnValidate()
 		{
-			if (_renderer.sprite != null)
+			if (_spriteRenderer.sprite != null
+			    || _abilityCardConfig == null)
 			{
 				return;
 			}
 
-			var assetPath = AssetDatabase.GUIDToAssetPath(_abilityCardConfigReference.AssetGUID);
-			if (!string.IsNullOrEmpty(assetPath))
+			if (_spriteRenderer.sprite != _abilityCardConfig.Sprite)
 			{
-				var config = AssetDatabase.LoadAssetAtPath<AbilityCardConfig>(assetPath);
-				if (config != null && _renderer.sprite != config.Sprite)
-				{
-					_renderer.sprite = config.Sprite;
-				}
+				SetSpriteFromConfig();
 			}
 		}
-#endif
 
-		private void OnDestroy()
+		private void SetSpriteFromConfig()
 		{
-			AdressablesLoadManager.ReleaseAsset(_abilityCardConfigReference);
+			_spriteRenderer.sprite = _abilityCardConfig.Sprite;
 		}
+#endif
 	}
 }

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: AbilityCardsSprites
+  m_EditorClassIdentifier: 
+  m_GroupName: AbilityCardsSprites
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 06a80ba05541d464abf9e6ca9429fbcb
+  m_SerializeEntries:
+  - m_GUID: 9ba118402cd6db943b5925339257eee5
+    m_Address: Elevate_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b11c3c98e67f6042ad548e4d7def14a
+    m_Address: Godspeed_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b7181ab36b007bf4f9de07357cc3de30
+    m_Address: Purify_Soul_Card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8637a88b75bfc7546b0307a16896045a, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b10ec29b96ee8a443a56ed62245cff07, type: 2}
+    - {fileID: 11400000, guid: 7004afbb1a729f143b7b59f100706803, type: 2}
