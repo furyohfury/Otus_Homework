@@ -58,8 +58,21 @@ namespace Atomic.Entities
             {
                 this.AddAllEntitiesFromScene(this.includeInactiveOnScan);
             }
+
+            SceneEntity.OnInstantiated += OnCreatedEntity;
+            SceneEntity.OnDestroyed += OnDestroyEntity;
         }
-        
+
+        private void OnCreatedEntity(SceneEntity sceneEntity)
+        {
+	        AddEntity(sceneEntity);
+        }
+
+        private void OnDestroyEntity(SceneEntity sceneEntity)
+        {
+	        DelEntity(sceneEntity);
+        }
+
         private void OnValidate()
         {
 #if UNITY_EDITOR

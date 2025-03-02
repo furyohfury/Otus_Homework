@@ -72,6 +72,7 @@ namespace Atomic.Entities
 
         private void OnDestroy()
         {
+            Dispose();
             _sceneEntityMap.Remove(entity);
         }
         
@@ -402,13 +403,34 @@ namespace Atomic.Entities
 
         #region Static
 
+        public static event Action<SceneEntity> OnInstantiated; 
+        public static event Action<SceneEntity> OnDestroyed; 
+
         private static readonly Dictionary<IEntity, SceneEntity> _sceneEntityMap = new();
 
-        public static SceneEntity Instantiate(SceneEntity prefab, Transform parent)
+        public static SceneEntity Instantiate(SceneEntity prefab, Transform parent = null)
         {
-            SceneEntity entity = GameObject.Instantiate(prefab, parent);
-            entity.Install();
-            return entity;
+            if (parent == null)
+            {
+                SceneEntity entity = GameObject.Instantiate(prefab);
+                entity.Install();
+                OnInstantiated?.Invoke(entity);
+                return entity;
+            }
+            else
+            {
+                SceneEntity entity = GameObject.Instantiate(prefab, parent);
+                entity.Install();
+                OnInstantiated?.Invoke(entity);
+                return entity;
+            }
+        }
+
+        public static SceneEntity Instantiate(SceneEntity prefab, Vector3 pos, Quaternion rot, Transform parent = null)
+        {
+            var sceneEntity = Instantiate(prefab, parent);
+            sceneEntity.transform.SetPositionAndRotation(pos, rot);
+            return sceneEntity;
         }
         
         public static SceneEntity Instantiate(
@@ -429,6 +451,7 @@ namespace Atomic.Entities
             sceneEntity.AddBehaviours(behaviours);
 
             sceneEntity.Install();
+            OnInstantiated?.Invoke(sceneEntity);
             return sceneEntity;
         }
 
@@ -474,6 +497,25 @@ namespace Atomic.Entities
             }
 
             return _sceneEntityMap.TryGetValue(entity, out result);
+        }
+
+        public static void Destroy(SceneEntity sceneEntity)
+        {
+            _sceneEntityMap.Remove(sceneEntity);
+            OnDestroyed?.Invoke(sceneEntity);
+            GameObject.Destroy(sceneEntity.gameObject);
+        }
+
+        public static bool Destroy(IEntity entityToDestroy)
+        {
+            if (TryCast(entityToDestroy, out var sceneEntity))
+            {
+                Destroy(sceneEntity);
+                return true;
+            }
+            
+            Debug.LogError($"Couldnt cast entity {entityToDestroy.Name} to SceneEntity to destroy it");
+            return false;
         }
 
         #endregion
