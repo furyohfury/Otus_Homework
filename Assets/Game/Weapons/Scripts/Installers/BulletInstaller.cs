@@ -38,6 +38,8 @@ namespace Game.Entities
 			lifetimeTimer.Start();
 			entity.WhenUpdate(lifetimeTimer.Tick);
 			entity.AddLifetimeTimer(lifetimeTimer);
+
+			
 			
 			InstallBehaviours(entity);
 		}

@@ -26,14 +26,7 @@ namespace Game
 			_attackEvent.Subscribe(OnAttackEvent);
 			_transform = entity.GetVisualTransform();
 
-			if (entity.TryGetSpawnWorldEvent(out var spawnEvent) && entity.TryGetDestroyWorldEvent(out var destroyEvent))
-			{
-				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true, spawnWorldEvent: spawnEvent, destroyWorldEvent: destroyEvent);
-			}
-			else
-			{
-				_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true);
-			}
+			_pool = new SceneEntityPool(_transform, _bulletPrefab.Value, true);
 		}
 
 		private void OnAttackEvent()

@@ -121,7 +121,7 @@ namespace Game
 
 		private void Destroy()
 		{
-			Destroy(gameObject);
+			SceneEntity.Destroy(_entity);
 		}
 
 #if UNITY_EDITOR

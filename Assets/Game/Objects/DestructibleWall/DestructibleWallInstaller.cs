@@ -31,7 +31,6 @@ namespace Game
 
 		private IEntity _entity;
 		private Vector2 _cachedVelocity;
-		private IEvent<IEntity> _destroyWorldEvent;
 		private bool _broken;
 
 		public override void Install(IEntity entity)
@@ -41,9 +40,6 @@ namespace Game
 			var destroyEvent = new BaseEvent();
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
-
-			_destroyWorldEvent = new BaseEvent<IEntity>();
-			entity.AddDestroyWorldEvent(_destroyWorldEvent);
 
 			_triggerReceiver.OnTriggerEnter += OnTriggerred;
 			_collisionReceiver.OnCollisionEnter += OnCollided;
@@ -99,8 +95,7 @@ namespace Game
 
 		private void Destroy()
 		{
-			_destroyWorldEvent.Invoke(_entity);
-			Destroy(gameObject);
+			SceneEntity.Destroy(_entity);
 		}
 
 #if UNITY_EDITOR

@@ -7,19 +7,19 @@ namespace Game
 	public sealed class DestroyGameObjectOnDeathBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _deathEvent;
-		private SceneEntity _entity;
+		private IEntity _entity;
 
 		public void Init(IEntity entity)
 		{
 			_deathEvent = entity.GetDeathEvent();
 			_deathEvent.Subscribe(OnDeath);
-			// _entity = (SceneEntity)entity;
-			// TODO
+
+			_entity = entity;
 		}
 
 		private void OnDeath()
 		{
-			Object.Destroy(_entity);
+			SceneEntity.Destroy(_entity);
 		}
 
 		public void Dispose(IEntity entity)
