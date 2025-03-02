@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SaveLoadersInstaller
   m_EditorClassIdentifier: 
   _abilityCardPrefab: {fileID: 6390730940251013869, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+  _abilityCardConfigs: {fileID: 11400000, guid: 05a604b297f4de04f9cadc1de0e05e1a, type: 2}

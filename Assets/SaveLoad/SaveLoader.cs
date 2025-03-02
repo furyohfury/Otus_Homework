@@ -37,7 +37,7 @@ namespace SaveLoad
 
         protected virtual void SetupByDefault(TService service)
         {
-            throw new System.Exception($"Didn't find data to service: {service.GetType().Name}");
+            Debug.LogError($"Didn't find data of type {typeof(TData).Name} to service: {service.GetType().Name}");
         }
     }
 }

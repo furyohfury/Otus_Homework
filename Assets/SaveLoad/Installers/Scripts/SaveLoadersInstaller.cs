@@ -9,17 +9,19 @@ namespace SaveLoad
 	{
 		[SerializeField]
 		private SceneEntity _abilityCardPrefab;
-
+		[SerializeField]
+		private AbilityCardConfigs _abilityCardConfigs;
+		
 		public override void InstallBindings()
 		{
 			Container.Bind<ISaveLoader>()
 			         .To<CharacterSaveLoader>()
 			         .AsCached();
 
-			// Container.Bind<ISaveLoader>()
-			//          .To<AbilityCardsSaveLoader>()
-			//          .AsCached()
-			//          .WithArguments(_abilityCardPrefab);
+			Container.Bind<ISaveLoader>()
+			         .To<AbilityCardsSaveLoader>()
+			         .AsCached()
+			         .WithArguments(_abilityCardPrefab, _abilityCardConfigs);
 
 			Container.Bind<ISaveLoader>()
 			         .To<LevelResultsSaveLoader>()
