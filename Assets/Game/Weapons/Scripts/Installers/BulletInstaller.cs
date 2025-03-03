@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game.Entities
 {
 	[Serializable]
-	public sealed class BulletInstaller : IEntityInstaller
+	public sealed class BulletInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private Transform _visualTransform;
@@ -22,7 +22,7 @@ namespace Game.Entities
 		private float _lifeDuration;
 		
 
-		public void Install(IEntity entity)
+		public override void Install(IEntity entity)
 		{
 			entity.AddBulletTag();
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>(_visualTransform.right));
@@ -38,8 +38,6 @@ namespace Game.Entities
 			lifetimeTimer.Start();
 			entity.WhenUpdate(lifetimeTimer.Tick);
 			entity.AddLifetimeTimer(lifetimeTimer);
-
-			
 			
 			InstallBehaviours(entity);
 		}
