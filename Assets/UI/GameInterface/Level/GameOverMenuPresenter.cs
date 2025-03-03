@@ -2,8 +2,10 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using Game;
+using SceneManagement;
 using UnityEngine;
 using Zenject;
+using SceneNames = Game.SceneNames;
 
 namespace UI
 {
@@ -46,7 +48,7 @@ namespace UI
 
 		private void OnMainMenuButtonClicked()
 		{
-			// TODO common logic
+			SceneSystem.SwitchToScene(SceneNames.MAIN_MENU_SCENE);
 		}
 
 		public void Tick(float deltaTime)
