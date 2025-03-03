@@ -50,6 +50,8 @@ namespace Atomic.Entities
             {
                 _world.Name = name;
             }
+            SceneEntity.OnInstantiated += OnCreatedEntity;
+            SceneEntity.OnDestroyed += OnDestroyEntity;
         }
 
         protected virtual void Start()
@@ -58,9 +60,6 @@ namespace Atomic.Entities
             {
                 this.AddAllEntitiesFromScene(this.includeInactiveOnScan);
             }
-
-            SceneEntity.OnInstantiated += OnCreatedEntity;
-            SceneEntity.OnDestroyed += OnDestroyEntity;
         }
 
         private void OnCreatedEntity(SceneEntity sceneEntity)
