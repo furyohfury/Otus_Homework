@@ -11,12 +11,19 @@ namespace SaveLoad
 		private SceneEntity _abilityCardPrefab;
 		[SerializeField]
 		private AbilityCardConfigs _abilityCardConfigs;
-		
+		[SerializeField]
+		private EnemyPrefabs _enemyPrefabs;
+		[SerializeField]
+		private SceneEntity _destructibleWallPrefab;
+		[SerializeField] 
+		private WeaponPrefabs _weaponPrefabs;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<ISaveLoader>()
 			         .To<CharacterSaveLoader>()
-			         .AsCached();
+			         .AsCached()
+			         .WithArguments(_weaponPrefabs.Prefabs);
 
 			Container.Bind<ISaveLoader>()
 			         .To<AbilityCardsSaveLoader>()
@@ -26,6 +33,16 @@ namespace SaveLoad
 			Container.Bind<ISaveLoader>()
 			         .To<LevelResultsSaveLoader>()
 			         .AsCached();
+
+			Container.Bind<ISaveLoader>()
+			         .To<EnemiesSaveLoader>()
+			         .AsCached()
+			         .WithArguments(_enemyPrefabs.Prefabs);
+			
+			Container.Bind<ISaveLoader>()
+			         .To<DestructibleWallsSaveLoader>()
+			         .AsCached()
+			         .WithArguments(_destructibleWallPrefab);
 		}
 	}
 }
