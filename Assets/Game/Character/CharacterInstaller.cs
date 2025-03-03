@@ -61,11 +61,15 @@ namespace Game.Entities
 			entity.AddCanTakeDamage(new AndExpression());
 			entity.AddTakeDamageRequest(new BaseEvent<int>());
 			entity.AddTakeDamageEvent(new BaseEvent<int>());
+			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
 
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
-			entity.AddBehaviour(new DeathEventBehaviour());
+			entity.AddBehaviour(new DeathRequestBehaviour());
+			entity.AddBehaviour(new DeathRequestBehaviour());
+			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
+			entity.AddBehaviour(new DeathSFXBehaviour());
 		}
 
 		private void InitializeComponents(IEntity entity)

@@ -6,6 +6,8 @@ namespace Game
 {
 	public sealed class MeleeEnemyInstaller : SceneEntityInstallerBase
 	{
+		[SerializeField] 
+		private string _id;
 		[Header("Components")]
 		[SerializeField]
 		private Rigidbody2D _rigidBody;
@@ -38,6 +40,7 @@ namespace Game
 		public override void Install(IEntity entity)
 		{
 			entity.AddEnemyTag();
+			entity.AddId(_id);
 			InitializeLife(entity);
 			InitializeMovement(entity);
 			InitializeComponents(entity);
@@ -51,12 +54,17 @@ namespace Game
 			entity.AddCanTakeDamage(new AndExpression());
 			entity.AddTakeDamageRequest(new BaseEvent<int>());
 			entity.AddTakeDamageEvent(new BaseEvent<int>());
+			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
 
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
+			entity.AddBehaviour(new DeathRequestBehaviour());
+			entity.AddBehaviour(new DeathSFXBehaviour());
+			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
 			entity.AddBehaviour(new DeathEventBehaviour());
-			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour()); // TODO redo with anims
+			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
+			
 		}
 
 		private void InitializeComponents(IEntity entity)
