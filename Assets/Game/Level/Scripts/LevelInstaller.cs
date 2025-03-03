@@ -14,15 +14,12 @@ namespace Game
 
 		public override void InstallBindings()
 		{
-			Container.Bind<EnemiesDeadWinCondition>().AsCached();
-
 			Container.Bind<FinishLine>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
 
-			Container.Bind<EnemyService>()
-			         .AsCached()
-			         .WithArguments(_enemies);
+			Container.BindInterfacesAndSelfTo<EnemyService>()
+			         .AsCached();
 
 			Container.BindInterfacesAndSelfTo<LevelTimer>()
 			         .AsCached();
@@ -34,6 +31,10 @@ namespace Game
 			         .AsCached();
 
 			Container.BindInterfacesTo<LeaderboardSaveController>()
+			         .AsCached();
+
+			Container.Bind<IWinCondition>()
+			         .To<EnemiesDeadWinCondition>()
 			         .AsCached();
 		}
 	}

@@ -7,10 +7,10 @@ namespace Game
 {
 	public sealed class EnemyService : IInitializable, IDisposable
 	{
-		public bool EnemiesDead => _activeEnemies.Count <= 0;
+		public bool EnemiesDead => _enemies.Count <= 0;
+		public IReadOnlyCollection<IEntity> Enemies => _enemies;
 
 		private HashSet<IEntity> _enemies;
-		private HashSet<IEntity> _activeEnemies;
 		private readonly IEntityWorld _entityWorld;
 
 		[Inject]
@@ -21,30 +21,35 @@ namespace Game
 
 		public void Initialize()
 		{
-			var worldEnemies = _entityWorld.GetEntitiesWithTag(TagAPI.Enemy);
+			UpdateEnemies();
+		}
+
+		private void UpdateEnemies()
+		{
+			IReadOnlyList<IEntity> worldEnemies = _entityWorld.GetEntitiesWithTag(TagAPI.Enemy);
 			_enemies = new HashSet<IEntity>(worldEnemies);
-			_activeEnemies = new HashSet<IEntity>(_enemies);
 			foreach (var enemy in _enemies)
 			{
-				enemy.GetDeathEvent().Subscribe(() => _activeEnemies.Remove(enemy));
+				if (enemy.TryGetDeathEvent(out var deathEvent))
+				{
+					deathEvent.Subscribe(() => _enemies.Remove(enemy));
+				}
 			}
 		}
 
 		public void Reset()
 		{
-			_activeEnemies.Clear();
-
-			foreach (var enemy in _enemies)
-			{
-				_activeEnemies.Add(enemy);
-			}
+			UpdateEnemies();
 		}
 
 		public void Dispose()
 		{
 			foreach (var enemy in _enemies)
 			{
-				enemy.GetDeathEvent().Unsubscribe(() => _activeEnemies.Remove(enemy));
+				if (enemy.TryGetDeathEvent(out var deathEvent))
+				{
+					deathEvent.Unsubscribe(() => _enemies.Remove(enemy));
+				}
 			}
 		}
 	}

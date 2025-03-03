@@ -11,7 +11,6 @@ namespace Game
 	{
 		public event Action OnLevelStarted;
 		public event Action OnLevelFinished;
-
 		public event Action OnLevelReset;
 
 		private readonly IWinCondition[] _winConditions;
@@ -19,16 +18,18 @@ namespace Game
 		private readonly SaveLoadManager _saveLoadManager;
 		private readonly LevelTimer _levelTimer;
 		private readonly IEntityWorld _entityWorld;
+		private EnemyService _enemyService;
 
 		[Inject]
 		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer, SaveLoadManager saveLoadManager,
-			IEntityWorld entityWorld)
+			IEntityWorld entityWorld, EnemyService enemyService)
 		{
 			_winConditions = winConditions;
 			_finishLine = finishLine;
 			_levelTimer = levelTimer;
 			_saveLoadManager = saveLoadManager;
 			_entityWorld = entityWorld;
+			_enemyService = enemyService;
 		}
 
 		public void Initialize()
@@ -55,6 +56,7 @@ namespace Game
 			_levelTimer.Finish();
 			_levelTimer.Reset();
 			_entityWorld.DisableEntities();
+			_enemyService.Reset();
 			OnLevelReset?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level reset");
