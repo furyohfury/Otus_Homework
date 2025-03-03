@@ -48,7 +48,6 @@ namespace Game
 			{
 				_sequence.Restart();
 			}
-			// TODO collider activation in separate bh mb
 		}
 
 		private void OnSlashStarted()

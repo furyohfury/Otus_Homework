@@ -26,7 +26,7 @@ namespace Game
 			_levelManager.OnLevelFinished += OnLevelFinished;
 			for (int i = 0; i < LEADERBOARD_SIZE; i++)
 			{
-				_times.Add(default); // TODO 5 cringe
+				_times.Add(default);
 			}
 		}
 
