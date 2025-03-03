@@ -1,6 +1,5 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using UnityEngine;
 
 namespace Game
 {
@@ -19,6 +18,7 @@ namespace Game
 
 		private void OnDeath()
 		{
+			_deathEvent.Unsubscribe(OnDeath);
 			SceneEntity.Destroy(_entity);
 		}
 

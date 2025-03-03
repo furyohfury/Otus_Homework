@@ -1,23 +1,24 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using UnityEngine;
 
 namespace Game
 {
-	public sealed class DeathEventBehaviour : IEntityInit, IEntityDispose
+	public sealed class DeathStopAnimatorBehaviour : IEntityInit, IEntityDispose
 	{
 		private IEvent _deathRequest;
-		private BaseEvent _deathEvent;
+		private Animator _animator;
 
 		public void Init(IEntity entity)
 		{
+			_animator = entity.GetAnimator();
 			_deathRequest = entity.GetDeathRequest();
 			_deathRequest.Subscribe(OnDeathRequest);
-			_deathEvent = entity.GetDeathEvent();
 		}
 
 		private void OnDeathRequest()
 		{
-			_deathEvent.Invoke();
+			_animator.speed = 0;
 		}
 
 		public void Dispose(IEntity entity)
