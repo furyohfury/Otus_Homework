@@ -36,7 +36,10 @@ namespace Game
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
+			entity.AddTag(TagAPI.DestructibleWall);
 
+			entity.AddVisualTransform(_transform);
+			
 			var destroyEvent = new BaseEvent();
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
