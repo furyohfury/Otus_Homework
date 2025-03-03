@@ -11,12 +11,41 @@ namespace Game
 		private SceneEntity _character;
 		[SerializeField]
 		private Transform _worldTransform;
-		
+		[SerializeField] 
+		private Transform _backGroundTransform;
+
 		public override void InstallBindings()
 		{
 #if UNITY_EDITOR
 			Container.Bind<DebugHelper>().AsSingle();
 #endif
+			Container.Bind<Transform>()
+			         .WithId("WorldTransform")
+			         .FromInstance(_worldTransform)
+			         .AsSingle();
+			
+			InstalllPlayerInputControllers();
+
+			Container.BindInterfacesAndSelfTo<GamePauseController>()
+			         .AsSingle();
+			
+			Container.Bind<Camera>()
+			         .FromComponentInHierarchy().AsCached();
+
+			Container.BindInterfacesAndSelfTo<CharacterDeathObserver>()
+			         .AsSingle()
+			         .WithArguments(_character);
+
+			Container.BindInterfacesAndSelfTo<BackgroundController>()
+			         .AsSingle()
+			         .WithArguments(_backGroundTransform);
+			
+			InstallGameLifeCycle();
+			InstallEntitiesSystem();
+		}
+
+		private void InstalllPlayerInputControllers()
+		{
 			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
 			         .AsSingle()
 			         .WithArguments(_character);
@@ -36,16 +65,6 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<PlayerAbilityController>()
 			         .AsSingle()
 			         .WithArguments(_character);
-
-			Container.BindInterfacesAndSelfTo<GamePauseController>()
-			         .AsSingle();
-			
-			Container.Bind<Camera>()
-			         .FromComponentInHierarchy().AsCached();
-			
-			
-			InstallGameLifeCycle();
-			InstallEntitiesSystem();
 		}
 
 		private void InstallGameLifeCycle()
@@ -62,11 +81,6 @@ namespace Game
 			Container.Bind<IEntityWorld>()
 			         .FromComponentInHierarchy()
 			         .AsCached();
-			
-			Container.BindInterfacesAndSelfTo<SceneEntityCreator>()
-			         .AsSingle()
-			         .WithArguments(_worldTransform)
-			         .NonLazy();
 			
 			Container.BindInterfacesAndSelfTo<EntityWorldStateController>()
 			         .AsSingle();
