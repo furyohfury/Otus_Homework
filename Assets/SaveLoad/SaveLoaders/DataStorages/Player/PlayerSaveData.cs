@@ -10,8 +10,9 @@ namespace SaveLoad
 		public float MoveSpeed;
 		public Vector3 Velocity;
 		public float JumpForce;
+		public string WeaponId;
 
-		public PlayerSaveData(Vector3 position, Quaternion rotation, int health, float moveSpeed, Vector3 velocity, float jumpForce)
+		public PlayerSaveData(Vector3 position, Quaternion rotation, int health, float moveSpeed, Vector3 velocity, float jumpForce, string weaponId)
 		{
 			Position = position;
 			Rotation = rotation;
@@ -19,6 +20,7 @@ namespace SaveLoad
 			MoveSpeed = moveSpeed;
 			Velocity = velocity;
 			JumpForce = jumpForce;
+			WeaponId = weaponId;
 		}
 	}
 }
