@@ -25,6 +25,7 @@ namespace Game
 
 		public override void Install(IEntity entity)
 		{
+			entity.AddId("Pistol");
 			InstallInteractions(entity);
 			InstallComponents(entity);
 			InstallWeaponParameters(entity);

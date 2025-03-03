@@ -30,6 +30,7 @@ namespace Game.Entities
 
 		public override void Install(IEntity entity)
 		{
+			entity.AddId("Sword");
 			InstallInteractions(entity);
 			InstallComponents(entity);
 			InstallWeaponParameters(entity);
@@ -44,7 +45,6 @@ namespace Game.Entities
 
 		private void InstallWeaponParameters(IEntity entity)
 		{
-			// Old
 			entity.AddAttackRotationAngle(_attackRotationAngle);
 			entity.AddTriggerReceiver(_triggerReceiver);
 			entity.AddTriggerEnterEvent(new BaseEvent<Collider2D>());
@@ -55,7 +55,6 @@ namespace Game.Entities
 
 			entity.AddBehaviour(new MeleeWeaponCollisionBehaviour());
 
-			// New
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
 			entity.AddAttackDelay(new ReactiveVariable<float>(_attackDelay));
 			entity.AddAmmo(new ReactiveVariable<int>(_ammo));
