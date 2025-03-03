@@ -1,11 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
+using Zenject;
 
 namespace SaveLoad
 {
 	public sealed class CharacterSaveLoader : SaveLoader<PlayerSaveData, IEntityWorld>
 	{
+		private readonly Dictionary<string, SceneEntity> _weaponPrefabs;
+
+		[Inject]
+		public CharacterSaveLoader(Dictionary<string, SceneEntity> weaponPrefabs)
+		{
+			_weaponPrefabs = weaponPrefabs;
+		}
+
 		protected override PlayerSaveData ConvertToData(IEntityWorld world)
 		{
 			var playerEntity = world.GetEntityWithTag(TagAPI.Character);
@@ -22,12 +33,23 @@ namespace SaveLoad
 				throw new Exception("No transform/rb in player entity");
 			}
 
+			string weaponId = string.Empty;
+			if (playerEntity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon))
+			{
+				weaponId = weapon.Value.GetId();
+			}
+			else
+			{
+				weaponId = string.Empty;
+			}
+
 			return new PlayerSaveData(playerTransform.position,
 				playerTransform.rotation,
 				playerEntity.GetHealth().Value,
 				playerEntity.GetMoveSpeed().Value,
 				playerRB.velocity,
-				playerEntity.GetJumpForce().Value);
+				playerEntity.GetJumpForce().Value,
+				weaponId);
 		}
 
 		protected override void SetupData(IEntityWorld world, PlayerSaveData data)
@@ -35,7 +57,7 @@ namespace SaveLoad
 			var playerEntity = world.GetEntityWithTag(TagAPI.Character);
 
 			SetMovementData(data, playerEntity);
-			ResetAbilityAndWeapons(playerEntity);
+			ResetAbilityAndWeapons(playerEntity, data);
 		}
 
 		private void SetMovementData(PlayerSaveData data, IEntity playerEntity)
@@ -54,15 +76,13 @@ namespace SaveLoad
 			playerEntity.GetJumpForce().Value = data.JumpForce;
 		}
 
-		private void ResetAbilityAndWeapons(IEntity playerEntity)
+		private void ResetAbilityAndWeapons(IEntity playerEntity, PlayerSaveData data)
 		{
 			if (playerEntity.TryGetAbilityInventory(out var inventory) == false)
 			{
 				throw new NullReferenceException("No ability inventory found on player");
 			}
 
-			// TODO if have time, make ClearAbilityInventoryEvent and fix behaviour
-			// but this should work for now
 			for (int i = 0, count = inventory.Count; i < count; i++)
 			{
 				if (playerEntity.TryGetRemoveActiveAbilityEvent(out var removeEvent))
@@ -71,11 +91,11 @@ namespace SaveLoad
 				}
 			}
 
-			// TODO check if needed
-			// if (playerEntity.TryGetUnequipWeaponRequest(out var request))
-			// {
-			// 	request.Invoke();
-			// }
+			if (string.IsNullOrEmpty(data.WeaponId) == false)
+			{
+				var weapon = _weaponPrefabs[data.WeaponId];
+				playerEntity.GetEquipWeaponRequest().Invoke(weapon);
+			}
 		}
 	}
 }
