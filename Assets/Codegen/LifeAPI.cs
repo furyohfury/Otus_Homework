@@ -24,6 +24,7 @@ namespace Atomic.Entities
         public const int DeathEvent = 34; // BaseEvent
         public const int MaxHealth = 49; // ReactiveVariable<int>
         public const int LifetimeTimer = 52; // Timer
+        public const int DeathRequest = 72; // IEvent
 
 
         ///Extensions
@@ -170,5 +171,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetLifetimeTimer(this IEntity obj, Timer value) => obj.SetValue(LifetimeTimer, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static IEvent GetDeathRequest(this IEntity obj) => obj.GetValue<IEvent>(DeathRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetDeathRequest(this IEntity obj, out IEvent value) => obj.TryGetValue(DeathRequest, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddDeathRequest(this IEntity obj, IEvent value) => obj.AddValue(DeathRequest, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasDeathRequest(this IEntity obj) => obj.HasValue(DeathRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelDeathRequest(this IEntity obj) => obj.DelValue(DeathRequest);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetDeathRequest(this IEntity obj, IEvent value) => obj.SetValue(DeathRequest, value);
     }
 }

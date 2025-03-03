@@ -19,6 +19,7 @@ namespace Atomic.Entities
         public const int AudioSource = 57; // AudioSource
         public const int SceneEntity = 62; // SceneEntity
         public const int AnimatorEventReceiver = 67; // AnimatorEventReceiver
+        public const int Id = 71; // string
 
 
         ///Extensions
@@ -75,5 +76,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAnimatorEventReceiver(this IEntity obj, AnimatorEventReceiver value) => obj.SetValue(AnimatorEventReceiver, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string GetId(this IEntity obj) => obj.GetValue<string>(Id);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetId(this IEntity obj, out string value) => obj.TryGetValue(Id, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddId(this IEntity obj, string value) => obj.AddValue(Id, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasId(this IEntity obj) => obj.HasValue(Id);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelId(this IEntity obj) => obj.DelValue(Id);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetId(this IEntity obj, string value) => obj.SetValue(Id, value);
     }
 }

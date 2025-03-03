@@ -176,6 +176,9 @@ MonoBehaviour:
     - id: 52
       name: LifetimeTimer
       type: Timer
+    - id: 72
+      name: DeathRequest
+      type: IEvent
   - name: Interaction
     indexes:
     - id: 23
@@ -244,6 +247,9 @@ MonoBehaviour:
     - id: 67
       name: AnimatorEventReceiver
       type: AnimatorEventReceiver
+    - id: 71
+      name: Id
+      type: string
   - name: Audio
     indexes:
     - id: 60
