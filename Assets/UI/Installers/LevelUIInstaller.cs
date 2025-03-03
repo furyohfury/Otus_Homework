@@ -32,8 +32,8 @@ namespace UI
 		private FinishLevelMenuView _finishLevelMenuView;
 		[FormerlySerializedAs("_cupsListView")] [SerializeField]
 		private FinishLevelCupsListView _finishLevelCupsListView;
-		[SerializeField]
-		private LevelConfig _levelConfig;
+		[SerializeField] 
+		private AmountView _enemyCount;
 
 		[SerializeField]
 		private SceneEntity _character;
@@ -59,12 +59,16 @@ namespace UI
 			         .FromInstance(_finishLevelCupsListView)
 			         .AsSingle();
 			
-			Container.Bind<LevelConfig>()
-			         .FromInstance(_levelConfig)
-			         .AsSingle();
-			
 			Container.BindInterfacesTo<FinishLevelCupsListPresenter>()
 			         .AsCached();
+
+			Container.BindInterfacesAndSelfTo<CharacterDeathUIObserver>()
+			         .AsSingle()
+			         .WithArguments(_character, _gameOverMenuView);
+			
+			Container.BindInterfacesAndSelfTo<EnemyCountUIController>()
+			         .AsSingle()
+			         .WithArguments(_enemyCount);
 		}
 
 		private void InstallLevelMenus()
