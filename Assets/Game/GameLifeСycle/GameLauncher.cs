@@ -2,7 +2,7 @@
 
 namespace Game
 {
-	public sealed class GameLauncher : IInitializable
+	public sealed class GameLauncher : IInitializable // TODO fix
 	{
 		private readonly GameStateManager _gameStateManager;
 

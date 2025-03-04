@@ -5,7 +5,7 @@ using Zenject;
 
 namespace UI
 {
-	public sealed class SelectLevelMenuInstaller : MonoInstaller // TODO all dictionaries to configs
+	public sealed class SelectLevelMenuInstaller : MonoInstaller // TODO dictionaries to configs
 	{
 		[SerializeField]
 		private LevelMiniatureView _levelMiniatureViewPrefab;
@@ -23,20 +23,30 @@ namespace UI
 		
 		public override void InstallBindings()
 		{
+			InstallFactories();
+			InstallSelectLevelMenu();
+			
 			Container.BindInterfacesAndSelfTo<MainMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_selectLeveMenuView, _mainMenuView);
-			
+
+		}
+
+		private void InstallFactories()
+		{
 			Container.BindInterfacesAndSelfTo<LevelMiniaturePresenterFactory>()
 			         .AsCached()
 			         .WithArguments(_cupsSprite);
 
-			Container.BindInterfacesAndSelfTo<SelectLevelMenuPresenter>()
-			         .AsCached();
-
 			Container.BindInterfacesAndSelfTo<LevelMiniatureViewFactory>()
 			         .AsCached()
 			         .WithArguments(_levelMiniatureViewPrefab);
+		}
+
+		private void InstallSelectLevelMenu()
+		{
+			Container.BindInterfacesAndSelfTo<SelectLevelMenuPresenter>()
+			         .AsCached();
 
 			Container.BindInterfacesAndSelfTo<SelectLeveMenuView>()
 			         .FromInstance(_selectLeveMenuView)

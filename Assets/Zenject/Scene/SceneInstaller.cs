@@ -1,5 +1,5 @@
-﻿using a;
-using Atomic.Entities;
+﻿using Atomic.Entities;
+using GameDebug;
 using UnityEngine;
 using Zenject;
 
@@ -11,24 +11,19 @@ namespace Game
 		private SceneEntity _character;
 		[SerializeField]
 		private Transform _worldTransform;
-		[SerializeField] 
+		[SerializeField]
 		private Transform _backGroundTransform;
 
 		public override void InstallBindings()
 		{
-#if UNITY_EDITOR
-			Container.Bind<DebugHelper>().AsSingle();
-#endif
+			InstallGameLifeCycle();
+			InstallEntitiesSystem();
+
 			Container.Bind<Transform>()
 			         .WithId("WorldTransform")
 			         .FromInstance(_worldTransform)
 			         .AsSingle();
-			
-			InstalllPlayerInputControllers();
 
-			Container.BindInterfacesAndSelfTo<GamePauseController>()
-			         .AsSingle();
-			
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy().AsCached();
 
@@ -39,32 +34,10 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<BackgroundController>()
 			         .AsSingle()
 			         .WithArguments(_backGroundTransform);
-			
-			InstallGameLifeCycle();
-			InstallEntitiesSystem();
-		}
 
-		private void InstalllPlayerInputControllers()
-		{
-			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
-			         .AsSingle()
-			         .WithArguments(_character);
-			
-			Container.BindInterfacesAndSelfTo<PlayerJumpController>()
-			         .AsSingle()
-			         .WithArguments(_character);
-			
-			Container.BindInterfacesAndSelfTo<PlayerXAxisMovementController>()
-			         .AsSingle()
-			         .WithArguments(_character);
-			
-			Container.BindInterfacesAndSelfTo<PlayerAttackController>()
-			         .AsSingle()
-			         .WithArguments(_character);
-			
-			Container.BindInterfacesAndSelfTo<PlayerAbilityController>()
-			         .AsSingle()
-			         .WithArguments(_character);
+#if UNITY_EDITOR
+			Container.Bind<DebugHelper>().AsSingle();
+#endif
 		}
 
 		private void InstallGameLifeCycle()
@@ -73,7 +46,10 @@ namespace Game
 			         .AsSingle();
 
 			Container.Bind<GameLauncher>()
-			         .AsCached();  // TODO hz naschet etogo
+			         .AsCached();
+
+			Container.BindInterfacesAndSelfTo<GamePauseController>()
+			         .AsSingle();
 		}
 
 		private void InstallEntitiesSystem()
@@ -81,7 +57,7 @@ namespace Game
 			Container.Bind<IEntityWorld>()
 			         .FromComponentInHierarchy()
 			         .AsCached();
-			
+
 			Container.BindInterfacesAndSelfTo<EntityWorldStateController>()
 			         .AsSingle();
 		}

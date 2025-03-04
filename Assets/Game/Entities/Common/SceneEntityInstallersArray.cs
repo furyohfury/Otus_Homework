@@ -7,7 +7,7 @@ namespace Game
 	{
 		[SerializeField]
 		private SceneEntityInstallerBase[] _installers;
-		
+
 		public override void Install(IEntity entity)
 		{
 			for (int i = 0, count = _installers.Length; i < count; i++)
