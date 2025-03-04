@@ -9,12 +9,12 @@ namespace Game
 	public sealed class MovementAnimatorBehaviour : IEntityInit, IEntityUpdate, IEntityEnable, IEntityDisable
 	{
 		private const string ANIMATOR_MOVE_PARAM = "IsMoving";
-		
+
 		private Animator _animator;
 		private IValue<Vector2> _moveDirection;
 		private int _moveAnimationHash;
 		private bool _isActive = true;
-		
+
 		public void Init(IEntity entity)
 		{
 			_animator = entity.GetAnimator();
@@ -42,10 +42,11 @@ namespace Game
 			{
 				return;
 			}
+
 			var isMoving = _moveDirection.Value != Vector2.zero;
 			_animator.SetBool(_moveAnimationHash, isMoving);
 		}
-		
+
 		public void Enable(IEntity entity)
 		{
 			_isActive = true;

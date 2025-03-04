@@ -2,7 +2,6 @@
 using System.Linq;
 using Atomic.Entities;
 using Game;
-using UnityEngine;
 using Zenject;
 
 namespace SaveLoad
@@ -81,7 +80,7 @@ namespace SaveLoad
 		{
 			var pos = cardData.Position;
 			var rot = cardData.Rotation;
-			if (world is SceneEntityWorld sceneEntityWorld)	
+			if (world is SceneEntityWorld sceneEntityWorld)
 			{
 				SceneEntity newCard = SceneEntity.Instantiate(_prefab, pos, rot, sceneEntityWorld.transform);
 				newCard.transform.localScale = cardData.Scale;

@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic.Entities;
+﻿using Atomic.Entities;
 using UnityEngine;
 
 namespace Game

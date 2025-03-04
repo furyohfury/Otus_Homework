@@ -23,7 +23,7 @@ namespace UI
 		{
 			_levelManager.OnLevelStarted += OnLevelStarted;
 			_levelManager.OnLevelFinished += OnLevelFinished;
-			
+
 			_view.OnResumeButtonClicked += OnResumeButtonClicked;
 			_view.OnResetButtonClicked += OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
@@ -83,7 +83,7 @@ namespace UI
 		{
 			_levelManager.OnLevelStarted -= OnLevelStarted;
 			_levelManager.OnLevelFinished -= OnLevelFinished;
-			
+
 			_view.OnResumeButtonClicked -= OnResumeButtonClicked;
 			_view.OnResetButtonClicked -= OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked -= OnMainMenuButtonClicked;

@@ -5,7 +5,7 @@ namespace Game
 {
 	public sealed class WeaponVFXInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField] 
+		[SerializeField]
 		private ParticleSystem _attackVFX;
 
 		public override void Install(IEntity entity)

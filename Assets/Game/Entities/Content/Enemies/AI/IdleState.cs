@@ -18,12 +18,10 @@ namespace Game
 
 		public void OnUpdate(IBlackboard blackboard, float deltaTime)
 		{
-			
 		}
 
 		public void OnExit(IBlackboard blackboard)
 		{
-			
 		}
 	}
 }

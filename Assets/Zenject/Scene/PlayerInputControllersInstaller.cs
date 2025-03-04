@@ -6,7 +6,7 @@ namespace Game
 {
 	public sealed class PlayerInputControllersInstaller : MonoInstaller
 	{
-		[SerializeField] 
+		[SerializeField]
 		private SceneEntity _character;
 
 		public override void InstallBindings()
@@ -14,19 +14,19 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
 			         .AsSingle()
 			         .WithArguments(_character);
-			
+
 			Container.BindInterfacesAndSelfTo<PlayerJumpController>()
 			         .AsSingle()
 			         .WithArguments(_character);
-			
+
 			Container.BindInterfacesAndSelfTo<PlayerXAxisMovementController>()
 			         .AsSingle()
 			         .WithArguments(_character);
-			
+
 			Container.BindInterfacesAndSelfTo<PlayerAttackController>()
 			         .AsSingle()
 			         .WithArguments(_character);
-			
+
 			Container.BindInterfacesAndSelfTo<PlayerAbilityController>()
 			         .AsSingle()
 			         .WithArguments(_character);

@@ -21,7 +21,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			weapon.Value.GetAttackRequest().Invoke();
 		}
 

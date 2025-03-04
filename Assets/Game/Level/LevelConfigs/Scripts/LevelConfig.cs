@@ -53,7 +53,7 @@ namespace Game
 		{
 			if (string.IsNullOrEmpty(_sceneName) == false
 			    && EditorBuildSettings.scenes.Any(
-					scene => scene.path == string.Concat("Assets/", "Scenes/", _sceneName, ".unity")) == false)
+				    scene => scene.path == string.Concat("Assets/", "Scenes/", _sceneName, ".unity")) == false)
 			{
 				Debug.LogError($"No scene with name: {_sceneName}");
 			}

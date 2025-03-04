@@ -23,7 +23,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			ammo.Value = Mathf.Max(0, ammo.Value - 1);
 		}
 

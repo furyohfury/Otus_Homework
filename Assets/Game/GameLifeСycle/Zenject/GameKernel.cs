@@ -36,7 +36,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			float deltaTime = Time.deltaTime;
 			foreach (var tickable in _tickables)
 			{
@@ -51,7 +51,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			float deltaTime = Time.fixedDeltaTime;
 			foreach (var tickable in _fixedTickables)
 			{
@@ -66,7 +66,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			float deltaTime = Time.deltaTime;
 			foreach (var tickable in _lateTickables)
 			{

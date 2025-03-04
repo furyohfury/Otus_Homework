@@ -17,7 +17,7 @@ namespace Game
 
 		public void Init(IEntity entity)
 		{
-			if (entity.TryGetWeapon(out var weapon) 
+			if (entity.TryGetWeapon(out var weapon)
 			    && weapon.Value.TryGetAttackEvent(out var attackEvent))
 			{
 				_weaponAttackEvent = attackEvent;
@@ -30,7 +30,7 @@ namespace Game
 
 			entity.OnValueDeleted += OnWeaponUnequipped;
 			entity.OnValueAdded += OnChangeEquipped;
-			
+
 			_animator = entity.GetAnimator();
 			HandleDifferentParametersCase();
 		}
@@ -42,7 +42,7 @@ namespace Game
 				return;
 			}
 
-			var weapon = (ReactiveVariable<SceneEntity>) value;
+			var weapon = (ReactiveVariable<SceneEntity>)value;
 			_weaponAttackEvent = weapon.Value.GetAttackEvent();
 			_weaponAttackEvent.Subscribe(OnAttackEvent);
 		}
@@ -53,8 +53,8 @@ namespace Game
 			{
 				return;
 			}
-			
-			var weapon = (ReactiveVariable<SceneEntity>) value;
+
+			var weapon = (ReactiveVariable<SceneEntity>)value;
 			_weaponAttackEvent = weapon.Value.GetAttackEvent();
 			_weaponAttackEvent.Unsubscribe(OnAttackEvent);
 		}

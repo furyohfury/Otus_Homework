@@ -64,8 +64,6 @@ namespace Game
 		{
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
-			
-			
 		}
 
 		private void InstallBehaviours(IEntity entity)

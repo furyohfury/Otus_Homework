@@ -1,15 +1,15 @@
 namespace SaveLoad
 {
-    public interface IGameRepository
-    {
-        void LoadState();
+	public interface IGameRepository
+	{
+		void LoadState();
 
-        void SaveState();
-        
-        T GetData<T>();
+		void SaveState();
 
-        bool TryGetData<T>(out T value);
+		T GetData<T>();
 
-        void SetData<T>(T value);
-    }
+		bool TryGetData<T>(out T value);
+
+		void SetData<T>(T value);
+	}
 }

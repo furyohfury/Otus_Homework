@@ -9,7 +9,7 @@ namespace Game
 		private Animator _animator;
 		private int _jumpAnimationHash;
 		private IEvent _jumpEvent;
-		
+
 		public void Init(IEntity entity)
 		{
 			_animator = entity.GetAnimator();

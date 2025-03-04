@@ -15,10 +15,10 @@ namespace Game
 		{
 			_entity = entity;
 			_weaponContainer = entity.GetWeaponContainer();
-			
+
 			_equipWeaponRequest = entity.GetEquipWeaponRequest();
 			_equipWeaponRequest.Subscribe(OnWeaponEquip);
-			
+
 			_unequipWeaponRequest = entity.GetUnequipWeaponRequest();
 			_unequipWeaponRequest.Subscribe(OnWeaponUnequip);
 		}

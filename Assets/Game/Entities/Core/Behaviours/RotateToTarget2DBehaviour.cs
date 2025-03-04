@@ -1,6 +1,4 @@
-﻿using Atomic.Elements;
-using Atomic.Entities;
-using Unity.Mathematics;
+﻿using Atomic.Entities;
 using UnityEngine;
 
 namespace Game
@@ -21,7 +19,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			if (!entity.TryGetTarget(out var target))
 			{
 				return;
@@ -39,7 +37,7 @@ namespace Game
 			{
 				scale.x = -Mathf.Abs(scale.x);
 			}
-            
+
 			_entityTransform.localScale = scale;
 		}
 

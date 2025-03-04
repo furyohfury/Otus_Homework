@@ -6,7 +6,7 @@ namespace Game
 {
 	public sealed class MeleeEnemyInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField] 
+		[SerializeField]
 		private string _id;
 		[Header("Components")]
 		[SerializeField]
@@ -64,7 +64,6 @@ namespace Game
 			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
 			entity.AddBehaviour(new DeathEventBehaviour());
 			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
-			
 		}
 
 		private void InitializeComponents(IEntity entity)

@@ -22,7 +22,7 @@ namespace Game
 		{
 			HandleButtons();
 		}
-		
+
 		public Vector3 GetMousePosition()
 		{
 			return Input.mousePosition;

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Atomic.Elements;
 using Newtonsoft.Json;
 using UnityEngine;
 using Zenject;
@@ -75,8 +74,8 @@ namespace SaveLoad
 		{
 			var serializedData = JsonConvert.SerializeObject(value, new JsonSerializerSettings
 			                                                        {
-				                                                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-				                                                        TypeNameHandling = TypeNameHandling.Objects
+				                                                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+				                                                        , TypeNameHandling = TypeNameHandling.Objects
 			                                                        });
 			_gameState[typeof(T).FullName!] = serializedData;
 		}

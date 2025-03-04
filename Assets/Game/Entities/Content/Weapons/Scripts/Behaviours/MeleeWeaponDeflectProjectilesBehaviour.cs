@@ -17,9 +17,9 @@ namespace Game
 		private void OnTriggerEnter(Collider2D other)
 		{
 			if (other.TryGetEntity(out var entity) == false
-				|| entity.HasBulletTag() == false
-				|| entity.TryGetVisualTransform(out var transform) == false
-				|| transform.gameObject.layer != Layers.EnemyProjectile)
+			    || entity.HasBulletTag() == false
+			    || entity.TryGetVisualTransform(out var transform) == false
+			    || transform.gameObject.layer != Layers.EnemyProjectile)
 			{
 				return;
 			}

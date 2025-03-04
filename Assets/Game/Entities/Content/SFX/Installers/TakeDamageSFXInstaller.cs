@@ -5,9 +5,9 @@ namespace Game
 {
 	public sealed class TakeDamageSFXInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField] 
+		[SerializeField]
 		private AudioClip[] _takeDamageSounds;
-		[SerializeField] 
+		[SerializeField]
 		private AudioSource _audioSource;
 
 		public override void Install(IEntity entity)

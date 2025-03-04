@@ -46,10 +46,11 @@ namespace SaveLoad
 			{
 				return;
 			}
+
 			var world = Object.FindObjectOfType<SceneEntityWorld>();
 			var worldTransform = world.transform;
 			IEnumerable<EnemyData> enemyDatas = data.ToList();
-			
+
 			foreach (var sceneEnemy in sceneEnemies)
 			{
 				if (enemyDatas.Any(enemyData => enemyData.InstanceId == sceneEnemy.InstanceId) == false)
@@ -57,7 +58,7 @@ namespace SaveLoad
 					SceneEntity.Destroy(sceneEnemy);
 				}
 			}
-			
+
 			foreach (var enemyData in enemyDatas)
 			{
 				var sceneEnemy = sceneEnemies.SingleOrDefault(sceneEnemy => sceneEnemy.InstanceId == enemyData.InstanceId);

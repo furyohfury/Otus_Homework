@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
-using SaveLoad;
 using Zenject;
 
 namespace UI
@@ -12,7 +11,7 @@ namespace UI
 
 		private readonly LevelMiniaturePresenterFactory _presenterFactory;
 		private readonly LevelsDataService _levelsDataService;
-		private List<LevelMiniaturePresenter> _levelMiniaturePresenters = new();
+		private readonly List<LevelMiniaturePresenter> _levelMiniaturePresenters = new();
 
 		[Inject]
 		public SelectLevelMenuPresenter(LevelMiniaturePresenterFactory presenterFactory, LevelsDataService levelsDataService)
@@ -37,7 +36,7 @@ namespace UI
 			{
 				presenter = _presenterFactory.Create(level, miniatureView);
 			}
-			
+
 			_levelMiniaturePresenters.Add(presenter);
 		}
 
@@ -52,6 +51,7 @@ namespace UI
 			{
 				levelMiniaturePresenter.Dispose();
 			}
+
 			_levelMiniaturePresenters.Clear();
 		}
 

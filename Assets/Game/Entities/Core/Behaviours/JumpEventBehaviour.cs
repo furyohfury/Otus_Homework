@@ -28,7 +28,7 @@ namespace Game
 		{
 			_jumpEvent.Unsubscribe(OnJumpEvent);
 		}
-		
+
 		// dash 2000 f
 		//jump 25 
 		// ms 100 f

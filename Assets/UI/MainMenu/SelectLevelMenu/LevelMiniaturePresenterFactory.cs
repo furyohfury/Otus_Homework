@@ -14,7 +14,8 @@ namespace UI
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
 
 		[Inject]
-		public LevelMiniaturePresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites, LevelsDataService levelsDataService)
+		public LevelMiniaturePresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites
+			, LevelsDataService levelsDataService)
 		{
 			_cupsSprites = cupsSprites;
 			_levelsDataService = levelsDataService;

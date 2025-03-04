@@ -23,7 +23,7 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			_jumpEvent.Invoke();
 		}
 

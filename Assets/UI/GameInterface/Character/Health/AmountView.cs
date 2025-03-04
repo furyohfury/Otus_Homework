@@ -10,15 +10,27 @@ namespace UI
 		[SerializeField]
 		private TMP_Text _text;
 
-		[SerializeField][PreviewField]
+		[SerializeField] [PreviewField]
 		private Image _icon;
 
-		public void SetText(string text) => _text.text = text;
+		public void SetText(string text)
+		{
+			_text.text = text;
+		}
 
-		public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
+		public void SetIcon(Sprite sprite)
+		{
+			_icon.sprite = sprite;
+		}
 
-		public void SetTextActive(bool active) => _text.gameObject.SetActive(active);
-		
-		public void SetIconActive(bool active) => _icon.gameObject.SetActive(active);
+		public void SetTextActive(bool active)
+		{
+			_text.gameObject.SetActive(active);
+		}
+
+		public void SetIconActive(bool active)
+		{
+			_icon.gameObject.SetActive(active);
+		}
 	}
 }

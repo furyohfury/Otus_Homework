@@ -15,7 +15,7 @@ namespace SaveLoad
 		private EnemyPrefabs _enemyPrefabs;
 		[SerializeField]
 		private SceneEntity _destructibleWallPrefab;
-		[SerializeField] 
+		[SerializeField]
 		private WeaponPrefabs _weaponPrefabs;
 
 		public override void InstallBindings()
@@ -38,7 +38,7 @@ namespace SaveLoad
 			         .To<EnemiesSaveLoader>()
 			         .AsCached()
 			         .WithArguments(_enemyPrefabs.Prefabs);
-			
+
 			Container.Bind<ISaveLoader>()
 			         .To<DestructibleWallsSaveLoader>()
 			         .AsCached()

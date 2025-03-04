@@ -2,8 +2,8 @@
 {
 	public enum Cups : byte
 	{
-		Bronze,
-		Silver,
-		Golden
+		Bronze
+		, Silver
+		, Golden
 	}
 }

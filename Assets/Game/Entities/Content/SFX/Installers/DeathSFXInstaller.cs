@@ -5,9 +5,9 @@ namespace Game
 {
 	public sealed class DeathSFXInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField] 
+		[SerializeField]
 		private AudioClip[] _deathSounds;
-		[SerializeField] 
+		[SerializeField]
 		private AudioSource _audioSource;
 
 		public override void Install(IEntity entity)

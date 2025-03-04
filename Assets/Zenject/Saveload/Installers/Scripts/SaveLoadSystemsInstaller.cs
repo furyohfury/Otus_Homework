@@ -13,7 +13,7 @@ namespace SaveLoad
 			Container.BindInterfacesAndSelfTo<GameRepository>()
 			         .AsSingle()
 			         .NonLazy();
-			
+
 			Container.Bind<SaveLoadManager>()
 			         .FromInstance(_saveLoadManager)
 			         .AsSingle()

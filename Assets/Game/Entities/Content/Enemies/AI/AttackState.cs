@@ -35,6 +35,7 @@ namespace Game
 				{
 					moveDirection.Value = Vector2.zero;
 				}
+
 				_attackRequest.Invoke();
 			}
 			else

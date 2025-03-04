@@ -4,7 +4,6 @@ using System.Linq;
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
-using UnityEngine.AddressableAssets;
 
 namespace Game
 {
@@ -35,13 +34,12 @@ namespace Game
 		{
 			ReactiveVariable<SceneEntity> newWeapon = _character.GetWeapon();
 			ReactiveVariable<int> newWeaponAmmo = newWeapon.Value.GetAmmo();
-			
+
 			AbilityCardState cardState = new AbilityCardState
 			                             {
-				                             Config = abilityCardConfig, 
-				                             CurrentAmmo = newWeaponAmmo.Value
+				                             Config = abilityCardConfig, CurrentAmmo = newWeaponAmmo.Value
 			                             };
-		
+
 			SubscribeStateToAmmoChanges(cardState);
 			_abilityInventory.Add(cardState);
 		}

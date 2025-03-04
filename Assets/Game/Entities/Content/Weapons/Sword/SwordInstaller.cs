@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic.Elements;
+﻿using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
@@ -87,7 +86,7 @@ namespace Game.Entities
 			entity.AddBehaviour<MeleeWeaponCollisionBehaviour>();
 			entity.AddBehaviour<MeleeWeaponAttackAnimationBehaviour>();
 			entity.AddBehaviour<MeleeWeaponColliderActivationBehaviour>();
-			
+
 			// entity.AddBehaviour<MeleeWeaponDeflectProjectilesBehaviour>();
 			// TODO doesnt work cuz BulletCollisionBehaviour has destroy event activation
 			// mb should check there if collision is melee deflecting weapon but i dunno

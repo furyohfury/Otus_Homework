@@ -10,7 +10,7 @@ namespace Game
 		private BaseEvent _attackEvent;
 		private BaseEvent _deactivateColliderEvent;
 		private BaseEvent _activateColliderEvent;
-		
+
 		private Transform _transform;
 		private IValue<Vector3> _attackRotationAngle;
 		private IValue<float> _slashSpeed;

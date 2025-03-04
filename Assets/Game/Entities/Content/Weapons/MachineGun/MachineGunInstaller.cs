@@ -19,7 +19,7 @@ namespace Game
 		[SerializeField]
 		private int _ammoSize = 10;
 		[SerializeField]
-		private int  _damage = 1;
+		private int _damage = 1;
 		[SerializeField]
 		private float _spreadAngle;
 
@@ -67,8 +67,6 @@ namespace Game
 		{
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());
-			
-			
 		}
 
 		private void InstallBehaviours(IEntity entity)

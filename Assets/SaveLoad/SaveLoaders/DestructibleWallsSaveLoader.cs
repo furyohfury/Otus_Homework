@@ -39,7 +39,7 @@ namespace SaveLoad
 			var world = Object.FindObjectOfType<SceneEntityWorld>();
 			var worldTransform = world.transform;
 			IEnumerable<DestructibleWallData> destructibleWallDatas = data.ToArray();
-			
+
 			foreach (var sceneWall in sceneWalls)
 			{
 				if (destructibleWallDatas.Any(wallData => wallData.InstanceId == sceneWall.InstanceId) == false)
@@ -47,7 +47,7 @@ namespace SaveLoad
 					SceneEntity.Destroy(sceneWall);
 				}
 			}
-			
+
 			foreach (var wallData in destructibleWallDatas)
 			{
 				var sceneWall = sceneWalls.SingleOrDefault(sceneEnemy => sceneEnemy.InstanceId == wallData.InstanceId);
@@ -61,9 +61,9 @@ namespace SaveLoad
 		private void CreateNewWall(DestructibleWallData wallData, Transform worldTransform)
 		{
 			SceneEntity.Instantiate(
-				_prefab, 
-				wallData.Position, 
-				wallData.Rotation, 
+				_prefab,
+				wallData.Position,
+				wallData.Rotation,
 				worldTransform);
 		}
 	}

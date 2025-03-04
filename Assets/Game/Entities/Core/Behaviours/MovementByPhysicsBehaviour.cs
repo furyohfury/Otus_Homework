@@ -35,10 +35,10 @@ namespace Game
 			{
 				return;
 			}
-			
+
 			_rigidbody.AddForce(_moveDirection.Value * _moveSpeed.Value);
 		}
-		
+
 		public void Enable(IEntity entity)
 		{
 			_rigidbody.velocity = _cachedVelocity;

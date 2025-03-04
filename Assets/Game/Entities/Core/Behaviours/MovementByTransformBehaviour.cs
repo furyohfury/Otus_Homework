@@ -25,10 +25,11 @@ namespace Game
 			{
 				return;
 			}
+
 			var translation = _moveDirection.Value * (_moveSpeed.Value * deltaTime);
 			_transform.Translate(translation, Space.World);
 		}
-		
+
 		public void Enable(IEntity entity)
 		{
 			_isActive = true;

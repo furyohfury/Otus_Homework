@@ -4,7 +4,6 @@ using System.Linq;
 using Game;
 using SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {

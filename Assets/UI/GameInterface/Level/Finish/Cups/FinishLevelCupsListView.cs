@@ -10,7 +10,10 @@ namespace UI
 		[SerializeField]
 		private Dictionary<Cups, AmountView> _cupsView;
 
-		public void SetCupViewActive(Cups cup, bool active) => _cupsView[cup].SetIconActive(active);
+		public void SetCupViewActive(Cups cup, bool active)
+		{
+			_cupsView[cup].SetIconActive(active);
+		}
 
 		public void SetCupTimeText(Cups cup, string text)
 		{
@@ -20,7 +23,7 @@ namespace UI
 
 		public void HideAll()
 		{
-			foreach (var cup in _cupsView.Keys)		
+			foreach (var cup in _cupsView.Keys)
 			{
 				SetCupViewActive(cup, false);
 			}

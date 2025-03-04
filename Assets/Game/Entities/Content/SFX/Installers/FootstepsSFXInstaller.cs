@@ -5,9 +5,9 @@ namespace Game
 {
 	public sealed class FootstepsSFXInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField] 
+		[SerializeField]
 		private AudioClip[] _sounds;
-		[SerializeField] 
+		[SerializeField]
 		private AudioSource _audioSource;
 
 		public override void Install(IEntity entity)

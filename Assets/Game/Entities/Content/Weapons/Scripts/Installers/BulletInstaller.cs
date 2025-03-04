@@ -20,7 +20,7 @@ namespace Game.Entities
 		private Rigidbody2D _rigidbody;
 		[SerializeField]
 		private float _lifeDuration;
-		
+
 
 		public override void Install(IEntity entity)
 		{
@@ -38,7 +38,7 @@ namespace Game.Entities
 			lifetimeTimer.Start();
 			entity.WhenUpdate(lifetimeTimer.Tick);
 			entity.AddLifetimeTimer(lifetimeTimer);
-			
+
 			InstallBehaviours(entity);
 		}
 

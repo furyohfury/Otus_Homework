@@ -3,8 +3,6 @@ using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using Object = UnityEngine.Object;
 
 namespace Game.Entities
 {
@@ -30,17 +28,17 @@ namespace Game.Entities
 		[SerializeField]
 		private LayerMask _groundLayer;
 
-		[Header("Combat")] 
+		[Header("Combat")]
 		[SerializeField]
 		private SceneEntity _weapon;
-		
+
 		[SerializeField]
 		private Transform _weaponContainer;
 
-		[Header("Life")] 
+		[Header("Life")]
 		[SerializeField]
 		private int _health;
-		
+
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
 
@@ -123,6 +121,7 @@ namespace Game.Entities
 			{
 				entity.AddWeapon(new ReactiveVariable<SceneEntity>(_weapon));
 			}
+
 			entity.AddEquipWeaponRequest(new BaseEvent<SceneEntity>());
 			entity.AddUnequipWeaponRequest(new BaseEvent());
 

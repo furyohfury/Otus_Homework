@@ -26,7 +26,7 @@ namespace Game
 		private CollisionReceiver _collisionReceiver;
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
-		[SerializeField] 
+		[SerializeField]
 		private Collider2D _collider;
 
 		private IEntity _entity;
@@ -39,7 +39,7 @@ namespace Game
 			entity.AddTag(TagAPI.DestructibleWall);
 
 			entity.AddVisualTransform(_transform);
-			
+
 			var destroyEvent = new BaseEvent();
 			destroyEvent.Subscribe(DestroyWall);
 			entity.AddDestroyEvent(destroyEvent);
@@ -60,7 +60,7 @@ namespace Game
 		private void OnCollided(Collision2D collision2D)
 		{
 			if (_broken
-				|| !collision2D.TryGetEntity(out IEntity collisionEntity)
+			    || !collision2D.TryGetEntity(out IEntity collisionEntity)
 			    || !collisionEntity.TryGetRigidbody2D(out Rigidbody2D collisionRb))
 			{
 				return;

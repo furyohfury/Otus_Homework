@@ -28,7 +28,7 @@ namespace Game
 				command.Execute(_character);
 			}
 		}
-		
+
 		public void Dispose()
 		{
 			_inputListener.OnCommand -= OnMoveXCommand;

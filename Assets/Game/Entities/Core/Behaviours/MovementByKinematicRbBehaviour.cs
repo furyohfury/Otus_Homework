@@ -10,7 +10,7 @@ namespace Game
 		private IValue<float> _moveSpeed;
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
-		
+
 		private bool _isActive = true;
 
 		public void Init(IEntity entity)
@@ -26,10 +26,11 @@ namespace Game
 			{
 				return;
 			}
+
 			var translation = _moveDirection.Value.normalized * (_moveSpeed.Value * deltaTime);
 			_rigidbody.MovePosition(_rigidbody.position + translation);
 		}
-		
+
 		public void Enable(IEntity entity)
 		{
 			_isActive = true;

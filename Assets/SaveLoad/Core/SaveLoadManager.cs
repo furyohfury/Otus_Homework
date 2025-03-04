@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -55,20 +54,20 @@ namespace SaveLoad
 			}
 
 			_repository.SaveState();
-			
+
 #if UNITY_EDITOR
 			Debug.Log("State saved by SaveLoadManager");
 #endif
 		}
 
-		public void SaveSpecific<T>() where T: ISaveLoader
+		public void SaveSpecific<T>() where T : ISaveLoader
 		{
 			var saveLoaders = _saveLoaders.OfType<T>();
 			foreach (var saveLoader in saveLoaders)
 			{
 				saveLoader.SaveGame(_repository, _diContainer);
 			}
-			
+
 			_repository.SaveState();
 		}
 

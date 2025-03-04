@@ -8,7 +8,7 @@ namespace Game
 	public class FinishLine : MonoBehaviour
 	{
 		public event Action OnCrossed;
-		
+
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (other.TryGetEntity(out IEntity entity)

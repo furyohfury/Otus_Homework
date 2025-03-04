@@ -1,7 +1,6 @@
 ﻿using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Game
@@ -10,7 +9,6 @@ namespace Game
 	{
 		public void OnUpdate(IEntity entity, float deltaTime)
 		{
-
 			if (entity.TryGetTarget(out IFunction<Vector2> target) == false
 			    || entity.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon) == false)
 			{

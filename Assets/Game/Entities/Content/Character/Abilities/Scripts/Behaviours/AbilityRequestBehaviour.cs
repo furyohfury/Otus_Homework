@@ -19,7 +19,7 @@ namespace Game
 
 		private void OnAbilityRequest()
 		{
-			if (_canUseAbility.Invoke() == true)
+			if (_canUseAbility.Invoke())
 			{
 				_abilityEvent.Invoke();
 			}

@@ -10,7 +10,7 @@ namespace SaveLoad
 		{
 			var names = service.GetLevelNames();
 			var savedData = new List<LevelData>();
-			
+
 			for (int i = 0, length = names.Length; i < length; i++)
 			{
 				if (service.TryGetLevelResults(names[i], out List<TimeSpan> results))
@@ -28,12 +28,12 @@ namespace SaveLoad
 
 		protected override void SetupData(LevelsDataService service, IList<LevelData> data)
 		{
-			for(int i = 0, length = data.Count; i < length; i++)
+			for (int i = 0, length = data.Count; i < length; i++)
 			{
 				if (data[i].Results != null)
 				{
 					service.SetResult(data[i].Name, data[i].Results);
-				}				
+				}
 			}
 		}
 	}

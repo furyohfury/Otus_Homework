@@ -21,7 +21,7 @@ namespace UI
 		{
 			_character.OnValueAdded += OnWeaponAdded;
 			_character.OnValueDeleted += OnWeaponRemoved;
-			
+
 			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
 			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
 			{
@@ -40,7 +40,7 @@ namespace UI
 			{
 				return;
 			}
-			
+
 			if (_character.TryGetWeapon(out ReactiveVariable<SceneEntity> weapon)
 			    && weapon.Value.TryGetAmmo(out ReactiveVariable<int> ammo))
 			{
@@ -59,7 +59,7 @@ namespace UI
 				{
 					ammo.Unsubscribe(OnAmmoChanged);
 				}
-				
+
 				return;
 			}
 
@@ -75,7 +75,7 @@ namespace UI
 			{
 				ammo.Unsubscribe(OnAmmoChanged);
 			}
-			
+
 			_ammoView.SetText(string.Empty);
 		}
 

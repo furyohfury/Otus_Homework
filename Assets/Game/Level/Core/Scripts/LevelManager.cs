@@ -18,7 +18,7 @@ namespace Game
 		private readonly SaveLoadManager _saveLoadManager;
 		private readonly LevelTimer _levelTimer;
 		private readonly IEntityWorld _entityWorld;
-		private EnemyService _enemyService;
+		private readonly EnemyService _enemyService;
 
 		[Inject]
 		public LevelManager(IWinCondition[] winConditions, FinishLine finishLine, LevelTimer levelTimer, SaveLoadManager saveLoadManager,

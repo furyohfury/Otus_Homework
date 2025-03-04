@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Game
 {
@@ -18,14 +17,29 @@ namespace Game
 			}
 		}
 
-		public void Start() => _isActive = true;
+		public void Start()
+		{
+			_isActive = true;
+		}
 
-		public void Finish() => _isActive = false;
+		public void Finish()
+		{
+			_isActive = false;
+		}
 
-		public void Pause() => Finish();
+		public void Pause()
+		{
+			Finish();
+		}
 
-		public void Resume() => Start();
+		public void Resume()
+		{
+			Start();
+		}
 
-		public void Reset() => _levelTime = TimeSpan.Zero;
+		public void Reset()
+		{
+			_levelTime = TimeSpan.Zero;
+		}
 	}
 }
