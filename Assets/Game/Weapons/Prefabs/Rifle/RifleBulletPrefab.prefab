@@ -165,7 +165,7 @@ MonoBehaviour:
   _visualTransform: {fileID: 5611463153405327856}
   _triggerReceiver: {fileID: 3332105820072777598}
   _collider2D: {fileID: 1474826447498141390}
-  _moveSpeed: 10
+  _moveSpeed: 30
   _rigidbody: {fileID: 2279817161541546855}
   _lifeDuration: 5
 --- !u!1 &3054570845314277075
