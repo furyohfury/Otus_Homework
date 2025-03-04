@@ -72,7 +72,6 @@ namespace Atomic.Entities
 
         private void OnDestroy()
         {
-            Dispose();
             _sceneEntityMap.Remove(entity);
         }
         

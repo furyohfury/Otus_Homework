@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlackboardConfig
   m_EditorClassIdentifier: 
   Namespace: Game
-  directoryPath: Assets/Scripts/CodeGen
+  directoryPath: Assets/CodeGen
   className: BlackboardAPI
   imports:
   - UnityEngine
