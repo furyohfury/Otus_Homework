@@ -35,10 +35,10 @@ namespace SaveLoad
 
 		protected override void SetupData(IEntityWorld service, IEnumerable<DestructibleWallData> data)
 		{
-			var sceneWalls = service.GetEntitiesWithTag(TagAPI.DestructibleWall);
+			var sceneWalls = service.GetEntitiesWithTag(TagAPI.DestructibleWall).ToArray();
 			var world = Object.FindObjectOfType<SceneEntityWorld>();
 			var worldTransform = world.transform;
-			IEnumerable<DestructibleWallData> destructibleWallDatas = data.ToList();
+			IEnumerable<DestructibleWallData> destructibleWallDatas = data.ToArray();
 			
 			foreach (var sceneWall in sceneWalls)
 			{
