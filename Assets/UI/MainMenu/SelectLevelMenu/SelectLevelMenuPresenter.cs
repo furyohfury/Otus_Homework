@@ -12,6 +12,7 @@ namespace UI
 
 		private readonly LevelMiniaturePresenterFactory _presenterFactory;
 		private readonly LevelsDataService _levelsDataService;
+		private List<LevelMiniaturePresenter> _levelMiniaturePresenters = new();
 
 		[Inject]
 		public SelectLevelMenuPresenter(LevelMiniaturePresenterFactory presenterFactory, LevelsDataService levelsDataService)
@@ -27,19 +28,31 @@ namespace UI
 
 		public void OnLevelMiniatureViewCreated(LevelMiniatureView miniatureView, string level)
 		{
+			LevelMiniaturePresenter presenter;
 			if (_savedResults.TryGetValue(level, out List<TimeSpan> levelResults))
 			{
-				_presenterFactory.Create(level, miniatureView, levelResults);
+				presenter = _presenterFactory.Create(level, miniatureView, levelResults);
 			}
 			else
 			{
-				_presenterFactory.Create(level, miniatureView);
+				presenter = _presenterFactory.Create(level, miniatureView);
 			}
+			
+			_levelMiniaturePresenters.Add(presenter);
 		}
 
 		public void OnViewShown()
 		{
 			LoadResultsData();
+		}
+
+		public void Clear()
+		{
+			foreach (var levelMiniaturePresenter in _levelMiniaturePresenters)
+			{
+				levelMiniaturePresenter.Dispose();
+			}
+			_levelMiniaturePresenters.Clear();
 		}
 
 		private void LoadResultsData()

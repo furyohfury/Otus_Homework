@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game;
+using SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,7 +74,7 @@ namespace UI
 
 		private void OnChooseLevelButtonClicked()
 		{
-			SceneManager.LoadScene(_scene, LoadSceneMode.Single); // TODO different manager
+			SceneSystem.SwitchToScene(_scene);
 		}
 
 		public void Dispose()
