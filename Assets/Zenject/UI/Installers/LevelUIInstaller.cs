@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Atomic.Entities;
-using Game;
+﻿using Atomic.Entities;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -26,13 +24,13 @@ namespace UI
 		private StartLevelMenuView _startMenuView;
 		[SerializeField]
 		private PauseMenuView _pauseMenuView;
-		[SerializeField] 
+		[SerializeField]
 		private GameOverMenuView _gameOverMenuView;
 		[SerializeField]
 		private FinishLevelMenuView _finishLevelMenuView;
 		[FormerlySerializedAs("_cupsListView")] [SerializeField]
 		private FinishLevelCupsListView _finishLevelCupsListView;
-		[SerializeField] 
+		[SerializeField]
 		private AmountView _enemyCount;
 
 		[SerializeField]
@@ -50,7 +48,7 @@ namespace UI
 			Container.BindInterfacesTo<LeaderboardPresenter>()
 			         .AsCached()
 			         .WithArguments(_startMenuView.LeaderboardView);
-			
+
 			Container.BindInterfacesTo<LeaderboardPresenter>()
 			         .AsCached()
 			         .WithArguments(_finishLevelMenuView.LeaderboardView);
@@ -58,14 +56,14 @@ namespace UI
 			Container.Bind<FinishLevelCupsListView>()
 			         .FromInstance(_finishLevelCupsListView)
 			         .AsSingle();
-			
+
 			Container.BindInterfacesTo<FinishLevelCupsListPresenter>()
 			         .AsCached();
 
 			Container.BindInterfacesAndSelfTo<CharacterDeathUIObserver>()
 			         .AsSingle()
 			         .WithArguments(_character, _gameOverMenuView);
-			
+
 			Container.BindInterfacesAndSelfTo<EnemyCountUIController>()
 			         .AsSingle()
 			         .WithArguments(_enemyCount);
@@ -76,11 +74,11 @@ namespace UI
 			Container.BindInterfacesTo<StartLevelMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_startMenuView);
-			
+
 			Container.BindInterfacesTo<GameOverMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_gameOverMenuView, _character);
-			
+
 			Container.BindInterfacesTo<PauseMenuPresenter>()
 			         .AsCached()
 			         .WithArguments(_pauseMenuView);

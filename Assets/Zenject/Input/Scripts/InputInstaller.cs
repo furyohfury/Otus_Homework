@@ -8,7 +8,7 @@ namespace Game
 	{
 		[SerializeField]
 		private InputMap _inputMap;
-		
+
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<InputListener>()

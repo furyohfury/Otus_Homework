@@ -11,13 +11,13 @@ namespace UI
 			add => _continueButton.onClick.AddListener(value);
 			remove => _continueButton.onClick.RemoveListener(value);
 		}
-		
+
 		public event UnityAction OnSelectLevelButtonClicked
 		{
 			add => _selectLevelButton.onClick.AddListener(value);
 			remove => _selectLevelButton.onClick.RemoveListener(value);
 		}
-		
+
 		public event UnityAction OnExitButtonClicked
 		{
 			add => _exitButton.onClick.AddListener(value);

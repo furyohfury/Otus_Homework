@@ -7,7 +7,7 @@ namespace Game
 	{
 		[SerializeField]
 		private LevelConfig[] _cupsTimesConfigs;
-		
+
 		public override void InstallBindings()
 		{
 			Container.Bind<LevelConfig[]>()

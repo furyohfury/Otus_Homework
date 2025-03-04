@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 #if UNITY_EDITOR
-	using UnityEditor;
+using UnityEditor;
 #endif
 
 namespace UI
