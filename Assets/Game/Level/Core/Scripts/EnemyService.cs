@@ -44,6 +44,10 @@ namespace Game
 
 		public void Dispose()
 		{
+			if (_enemies == null)
+			{
+				return;
+			}
 			foreach (var enemy in _enemies)
 			{
 				if (enemy.TryGetDeathEvent(out var deathEvent))

@@ -30,7 +30,7 @@ namespace Game
 			_abilityCardPickupEvent.Subscribe(OnAbilityPickUp);
 		}
 
-		private async void OnAbilityPickUp(AbilityCardConfig abilityCardConfig)
+		private void OnAbilityPickUp(AbilityCardConfig abilityCardConfig)
 		{
 			ReactiveVariable<SceneEntity> newWeapon = _character.GetWeapon();
 			ReactiveVariable<int> newWeaponAmmo = newWeapon.Value.GetAmmo();

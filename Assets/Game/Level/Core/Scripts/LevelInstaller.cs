@@ -8,8 +8,6 @@ namespace Game
 	public sealed class LevelInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private SceneEntity[] _enemies;
-		[SerializeField]
 		private SceneEntity _character;
 
 		public override void InstallBindings()
