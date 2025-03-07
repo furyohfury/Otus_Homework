@@ -34,20 +34,10 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<BackgroundController>()
 			         .AsSingle()
 			         .WithArguments(_backGroundTransform);
-
-#if UNITY_EDITOR
-			Container.Bind<DebugHelper>().AsSingle();
-#endif
 		}
 
 		private void InstallGameLifeCycle()
 		{
-			Container.Bind<GameStateManager>()
-			         .AsSingle();
-
-			Container.Bind<GameLauncher>()
-			         .AsCached();
-
 			Container.BindInterfacesAndSelfTo<GamePauseController>()
 			         .AsSingle();
 		}

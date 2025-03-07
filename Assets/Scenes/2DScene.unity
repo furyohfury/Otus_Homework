@@ -176,7 +176,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _enemies: []
   _character: {fileID: 253108519}
 --- !u!1 &28594348
 GameObject:
@@ -3218,14 +3217,13 @@ GameObject:
   m_Component:
   - component: {fileID: 651531017}
   - component: {fileID: 651531016}
-  - component: {fileID: 651531018}
   m_Layer: 0
   m_Name: '[DEBUG]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &651531016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3250,7 +3248,7 @@ MonoBehaviour:
   _timer:
     duration: 0
     loop: 0
-  _entity: {fileID: 651531018}
+  _entity: {fileID: 0}
   _adressableTestImage: {fileID: 1105899017}
   _assetReference:
     m_AssetGUID: 9b11c3c98e67f6042ad548e4d7def14a
@@ -3273,24 +3271,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &651531018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651531015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoRefresh: 0
-  installOnAwake: 0
-  installPipeline: []
-  onInstalled:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &655228659
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,12 +18,19 @@ namespace Game
 
 		public override void Start()
 		{
-			_gameStateManager.OnStateChanged += OnStartGame;
+			if (_gameStateManager.State is GameState.Resume or GameState.Start)
+			{
+				base.Start();
+			}
+			else
+			{
+				_gameStateManager.OnStateChanged += OnStartGame;
+			}
 		}
 
 		private void OnStartGame(GameState state)
 		{
-			if (state == GameState.Start)
+			if (state is GameState.Start or GameState.Resume)
 			{
 				base.Start();
 			}
