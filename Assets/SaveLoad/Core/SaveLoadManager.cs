@@ -28,7 +28,7 @@ namespace SaveLoad
 		private void Start()
 		{
 			UpdateContainer();
-			Load();
+			_repository.LoadState();
 		}
 
 		[Button]
