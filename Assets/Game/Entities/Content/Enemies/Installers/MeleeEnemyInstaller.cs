@@ -43,7 +43,7 @@ namespace Game
 			entity.AddId(_id);
 			InitializeLife(entity);
 			InitializeMovement(entity);
-			InitializeComponents(entity);
+			InitializeUnityComponents(entity);
 			InitializeCombat(entity);
 		}
 
@@ -66,13 +66,15 @@ namespace Game
 			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
 		}
 
-		private void InitializeComponents(IEntity entity)
+		private void InitializeUnityComponents(IEntity entity)
 		{
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_spriteRenderer);
 			entity.AddAnimatorEventReceiver(_animatorEventReceiver);
+			
+			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
 
 		private void InitializeMovement(IEntity entity)

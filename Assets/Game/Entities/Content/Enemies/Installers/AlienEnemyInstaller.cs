@@ -68,6 +68,8 @@ namespace Game
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_spriteRenderer);
+			
+			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
 
 		private void InitializeMovement(IEntity entity)

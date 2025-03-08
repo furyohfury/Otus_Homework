@@ -47,7 +47,7 @@ namespace Game.Entities
 			entity.AddCharacterTag();
 			InitializeLife(entity);
 			InitializeMovement(entity);
-			InitializeComponents(entity);
+			InitializeUnityComponents(entity);
 			InitializeCombat(entity);
 			InitializeAbilities(entity);
 		}
@@ -70,12 +70,14 @@ namespace Game.Entities
 			entity.AddBehaviour(new DeathSFXBehaviour());
 		}
 
-		private void InitializeComponents(IEntity entity)
+		private void InitializeUnityComponents(IEntity entity)
 		{
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_spriteRenderer);
+			
+			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
 
 		private void InitializeMovement(IEntity entity)
