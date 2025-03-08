@@ -28,7 +28,8 @@ namespace SaveLoad
 		private void Start()
 		{
 			UpdateContainer();
-			_repository.LoadState();
+			// _repository.LoadState();
+			Load();
 		}
 
 		[Button]
@@ -43,6 +44,15 @@ namespace SaveLoad
 #if UNITY_EDITOR
 			Debug.Log("State loaded by SaveLoadManager");
 #endif
+		}
+
+		public void LoadSpecific<T>() where T : ISaveLoader
+		{
+			var saveLoaders = _saveLoaders.OfType<T>();
+			foreach (var saveLoader in saveLoaders)
+			{
+				saveLoader.LoadGame(_repository, _diContainer);
+			}
 		}
 
 		[Button]
