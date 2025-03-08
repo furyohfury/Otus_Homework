@@ -1,5 +1,6 @@
 ﻿using System;
 using Game;
+using SceneManagement;
 using Zenject;
 
 namespace UI
@@ -36,7 +37,7 @@ namespace UI
 
 		private void OnMainMenuButtonClicked()
 		{
-			// TODO common logic
+			SceneSystem.SwitchToScene(SceneNames.MAIN_MENU_SCENE);
 		}
 
 		private void ShowView()
