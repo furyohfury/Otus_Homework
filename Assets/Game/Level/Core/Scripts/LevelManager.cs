@@ -35,6 +35,7 @@ namespace Game
 		public void Initialize()
 		{
 			_finishLine.OnCrossed += CheckWinConditions;
+			_saveLoadManager.LoadSpecific<LevelResultsSaveLoader>();
 			_saveLoadManager.Save();
 			_entityWorld.DisableEntities();
 		}
@@ -67,6 +68,7 @@ namespace Game
 		{
 			_entityWorld.DisableEntities();
 			_levelTimer.Finish();
+			_saveLoadManager.SaveSpecific<LevelResultsSaveLoader>();
 			OnLevelFinished?.Invoke();
 #if UNITY_EDITOR
 			Debug.Log("Level finished");

@@ -20,6 +20,7 @@ namespace UI
 		public void Initialize()
 		{
 			_leaderboard.Times.CollectionChanged += OnLeaderboardChanged;
+			UpdateLeaderboardText();
 		}
 
 		private void OnLeaderboardChanged(in NotifyCollectionChangedEventArgs<TimeSpan> e)
