@@ -18,6 +18,10 @@ namespace SaveLoad
 			         .FromInstance(_saveLoadManager)
 			         .AsSingle()
 			         .NonLazy();
+
+			Container.BindInterfacesAndSelfTo<LaunchSaveLoadersController>()
+			         .AsSingle()
+			         .NonLazy();
 		}
 	}
 }
