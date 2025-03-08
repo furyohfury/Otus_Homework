@@ -25,11 +25,11 @@ namespace SaveLoad
 			SceneManager.activeSceneChanged += OnSceneChanged;
 		}
 
-		private void Start()
+		private void Awake()
 		{
 			UpdateContainer();
-			// _repository.LoadState();
-			Load();
+			_repository.LoadState();
+			// Load();
 		}
 
 		[Button]

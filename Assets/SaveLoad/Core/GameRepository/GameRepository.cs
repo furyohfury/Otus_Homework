@@ -2,20 +2,16 @@
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
-using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class GameRepository : IGameRepository, IInitializable
+	public sealed class GameRepository : IGameRepository
 	{
+		public IReadOnlyDictionary<string, string> GameState => _gameState;
+		
 		private const string SAVE_FILE_NAME = "SaveFile.txt";
 		private static string SaveFilePath => string.Concat(Application.persistentDataPath, "/", SAVE_FILE_NAME);
 		private Dictionary<string, string> _gameState = new();
-
-		public void Initialize()
-		{
-			LoadState();
-		}
 
 		public void LoadState()
 		{
