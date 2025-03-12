@@ -76,7 +76,7 @@ namespace Game
 
 				bullet.GetDeathEvent().Unsubscribe(subscription);
 				_deathEventSubscriptions.Remove(bullet);
-				bullet.AddBehaviour<DestroyGameObjectOnDeathBehaviour>();
+				bullet.AddBehaviour<DestroyEntityOnDeathBehaviour>();
 			}
 
 			_pool.Dispose();

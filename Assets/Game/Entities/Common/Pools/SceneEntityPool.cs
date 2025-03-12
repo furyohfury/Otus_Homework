@@ -16,9 +16,13 @@ namespace Game
 
 		protected override SceneEntity CreateItem(Transform parent, Vector2 pos, Quaternion rot)
 		{
-			var newItem = SceneEntity.Instantiate(Prefab, parent);
-			newItem.transform.SetPositionAndRotation(pos, rot);
+			var newItem = SceneEntity.Instantiate(Prefab, pos, rot, parent);
 			return newItem;
+		}
+
+		protected override void DestroyItem(SceneEntity item)
+		{
+			SceneEntity.Destroy(item);
 		}
 
 		public override void Dispose()

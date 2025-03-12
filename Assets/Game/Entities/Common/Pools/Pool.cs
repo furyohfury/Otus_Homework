@@ -72,8 +72,13 @@ namespace Game
 			}
 			else
 			{
-				Object.Destroy(item.gameObject);
+				DestroyItem(item);
 			}
+		}
+
+		protected virtual void DestroyItem(T item)
+		{
+			Object.Destroy(item.gameObject);
 		}
 
 		protected virtual T CreateItem(Transform parent, Vector2 pos, Quaternion rot)
