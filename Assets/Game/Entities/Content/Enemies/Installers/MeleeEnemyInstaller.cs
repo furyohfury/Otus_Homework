@@ -60,10 +60,9 @@ namespace Game
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
 			entity.AddBehaviour(new DeathRequestBehaviour());
-			entity.AddBehaviour(new DeathSFXBehaviour());
 			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
 			entity.AddBehaviour(new DeathEventBehaviour());
-			entity.AddBehaviour(new DestroyGameObjectOnDeathBehaviour());
+			entity.AddBehaviour(new DestroyEntityOnDeathBehaviour());
 		}
 
 		private void InitializeUnityComponents(IEntity entity)
