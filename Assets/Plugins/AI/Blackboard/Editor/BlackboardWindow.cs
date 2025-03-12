@@ -123,6 +123,8 @@ namespace Atomic.AI
                 if (GUILayout.Button("+", GUILayout.Width(50)))
                 {
                     this.config.NewKey(_newKeyName, _newKeyType);
+                    EditorUtility.SetDirty(this.config);
+                    AssetDatabase.SaveAssets();
                     _newKeyName = NEW_KEY_NAME;
                     _newKeyType = NEW_KEY_TYPE;
                 }

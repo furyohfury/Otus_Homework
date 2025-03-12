@@ -41,3 +41,6 @@ MonoBehaviour:
   - id: 6
     name: StoppingDistance
     type: float
+  - id: 7
+    name: DetectRange
+    type: float
