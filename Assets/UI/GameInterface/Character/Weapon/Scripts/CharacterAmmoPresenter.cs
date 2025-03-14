@@ -1,6 +1,7 @@
 ﻿using System;
 using Atomic.Elements;
 using Atomic.Entities;
+using Game;
 using Zenject;
 
 namespace UI
@@ -8,17 +9,20 @@ namespace UI
 	public sealed class CharacterAmmoPresenter : IInitializable, IDisposable
 	{
 		private readonly AmountView _ammoView;
-		private readonly IEntity _character;
+		private readonly PlayerService _playerService;
+
+		private IEntity _character;
 
 		[Inject]
-		public CharacterAmmoPresenter(AmountView ammoView, IEntity character)
+		public CharacterAmmoPresenter(AmountView ammoView, PlayerService playerService)
 		{
 			_ammoView = ammoView;
-			_character = character;
+			_playerService = playerService;
 		}
 
 		public void Initialize()
 		{
+			_character = _playerService.Player;
 			_character.OnValueAdded += OnWeaponAdded;
 			_character.OnValueDeleted += OnWeaponRemoved;
 

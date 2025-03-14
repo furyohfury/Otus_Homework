@@ -11,19 +11,20 @@ namespace UI
 {
 	public sealed class GameOverMenuPresenter : IInitializable, IDisposable, IGameTickable
 	{
+		private readonly PlayerService _playerService;
+		private IFunction<bool> _playerIsDead;
+
 		private readonly GameOverMenuView _view;
 		private readonly LevelManager _levelManager;
-		private readonly IEntity _character;
-		private IFunction<bool> _playerIsDead;
 		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public GameOverMenuPresenter(GameOverMenuView view, LevelManager levelManager, IEntity character, GameStateManager gameStateManager)
+		public GameOverMenuPresenter(GameOverMenuView view, LevelManager levelManager, GameStateManager gameStateManager, PlayerService playerService)
 		{
 			_view = view;
 			_levelManager = levelManager;
-			_character = character;
 			_gameStateManager = gameStateManager;
+			_playerService = playerService;
 		}
 
 		public void Initialize()
@@ -31,7 +32,7 @@ namespace UI
 			_view.OnResetButtonClicked += OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
 
-			if (_character.TryGetIsDead(out BaseFunction<bool> isDead) == false)
+			if (_playerService.Player.TryGetIsDead(out BaseFunction<bool> isDead) == false)
 			{
 				Debug.LogError("Cant find isDead on player");
 				return;

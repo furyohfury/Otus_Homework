@@ -11,13 +11,15 @@ namespace UI
 	{
 		private readonly AbilityCardInventoryView _abilityCardInventoryView;
 		private readonly ReactiveList<AbilityCardState> _characterInventory;
+		private readonly PlayerService _playerService;
 
 		[Inject]
-		public AbilityCardInventoryPresenter(AbilityCardInventoryView abilityCardInventoryView, IEntity character)
+		public AbilityCardInventoryPresenter(AbilityCardInventoryView abilityCardInventoryView, PlayerService playerService)
 		{
 			_abilityCardInventoryView = abilityCardInventoryView;
+			_playerService = playerService;
 
-			if (!character.TryGetAbilityInventory(out ReactiveList<AbilityCardState> characterInventory))
+			if (!_playerService.Player.TryGetAbilityInventory(out ReactiveList<AbilityCardState> characterInventory))
 			{
 				throw new NullReferenceException("Presenter cant find ability inventory on character");
 			}

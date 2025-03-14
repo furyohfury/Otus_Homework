@@ -7,20 +7,20 @@ namespace Game
 {
 	public sealed class CharacterDeathObserver : IInitializable, IGameTickable
 	{
-		private readonly IEntity _character;
+		private readonly PlayerService _playerService;
 		private IFunction<bool> _playerIsDead;
 		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public CharacterDeathObserver(IEntity character, GameStateManager gameStateManager)
+		public CharacterDeathObserver(GameStateManager gameStateManager, PlayerService playerService)
 		{
-			_character = character;
 			_gameStateManager = gameStateManager;
+			_playerService = playerService;
 		}
 
 		public void Initialize()
 		{
-			if (_character.TryGetIsDead(out BaseFunction<bool> isDead) == false)
+			if (_playerService.Player.TryGetIsDead(out BaseFunction<bool> isDead) == false)
 			{
 				Debug.LogError("Cant find isDead on player");
 				return;

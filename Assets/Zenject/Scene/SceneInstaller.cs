@@ -24,12 +24,15 @@ namespace Game
 			         .FromInstance(_worldTransform)
 			         .AsSingle();
 
+			Container.Bind<PlayerService>()
+			         .AsSingle()
+			         .WithArguments(_character);
+
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy().AsCached();
 
 			Container.BindInterfacesAndSelfTo<CharacterDeathObserver>()
-			         .AsSingle()
-			         .WithArguments(_character);
+			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<BackgroundController>()
 			         .AsSingle()

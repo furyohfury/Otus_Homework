@@ -8,21 +8,21 @@ namespace UI
 {
 	public sealed class CharacterDeathUIObserver : IInitializable, IGameTickable
 	{
-		private readonly IEntity _character;
+		private readonly PlayerService _playerService;
 		private IFunction<bool> _playerIsDead;
 		private readonly GameOverMenuView _gameOverMenuView;
 
 		[Inject]
-		public CharacterDeathUIObserver(IEntity character, GameOverMenuView gameOverMenuView)
+		public CharacterDeathUIObserver(GameOverMenuView gameOverMenuView, PlayerService playerService)
 		{
-			_character = character;
 			_gameOverMenuView = gameOverMenuView;
+			_playerService = playerService;
 		}
 
 
 		public void Initialize()
 		{
-			if (_character.TryGetIsDead(out BaseFunction<bool> isDead) == false)
+			if (_playerService.Player.TryGetIsDead(out BaseFunction<bool> isDead) == false)
 			{
 				Debug.LogError("Cant find isDead on player");
 				return;

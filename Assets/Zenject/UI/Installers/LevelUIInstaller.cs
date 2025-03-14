@@ -33,10 +33,6 @@ namespace UI
 		[SerializeField]
 		private AmountView _enemyCount;
 
-		[SerializeField]
-		private SceneEntity _character;
-
-
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesTo<LevelTimerPresenter>()
@@ -62,7 +58,7 @@ namespace UI
 
 			Container.BindInterfacesAndSelfTo<CharacterDeathUIObserver>()
 			         .AsSingle()
-			         .WithArguments(_character, _gameOverMenuView);
+			         .WithArguments(_gameOverMenuView);
 
 			Container.BindInterfacesAndSelfTo<EnemyCountUIController>()
 			         .AsSingle()
@@ -77,7 +73,7 @@ namespace UI
 
 			Container.BindInterfacesTo<GameOverMenuPresenter>()
 			         .AsCached()
-			         .WithArguments(_gameOverMenuView, _character);
+			         .WithArguments(_gameOverMenuView);
 
 			Container.BindInterfacesTo<PauseMenuPresenter>()
 			         .AsCached()

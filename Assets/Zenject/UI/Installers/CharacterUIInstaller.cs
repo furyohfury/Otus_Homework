@@ -7,8 +7,6 @@ namespace UI
 	public sealed class CharacterUIInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private SceneEntity _character;
-		[SerializeField]
 		private AmountView _healthView;
 		[SerializeField]
 		private AmountView _ammoView;
@@ -19,13 +17,13 @@ namespace UI
 		{
 			Container.BindInterfacesTo<CharacterHealthPresenter>()
 			         .AsCached()
-			         .WithArguments(_healthView, _character);
+			         .WithArguments(_healthView);
 			Container.BindInterfacesTo<CharacterAmmoPresenter>()
 			         .AsCached()
-			         .WithArguments(_ammoView, _character);
+			         .WithArguments(_ammoView);
 			Container.BindInterfacesTo<AbilityCardInventoryPresenter>()
 			         .AsCached()
-			         .WithArguments(_abilityCardInventoryView, _character);
+			         .WithArguments(_abilityCardInventoryView);
 		}
 	}
 }
