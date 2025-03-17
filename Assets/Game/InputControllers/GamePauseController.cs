@@ -5,28 +5,23 @@ namespace Game
 {
 	public sealed class GamePauseController : IInitializable, IDisposable
 	{
-		private readonly InputListener _inputListener;
+		private readonly InputReader _inputReader;
 		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public GamePauseController(InputListener inputListener, GameStateManager gameStateManager)
+		public GamePauseController(InputReader inputReader, GameStateManager gameStateManager)
 		{
-			_inputListener = inputListener;
+			_inputReader = inputReader;
 			_gameStateManager = gameStateManager;
 		}
 
 		public void Initialize()
 		{
-			_inputListener.OnCommand += OnPauseCommand;
+			_inputReader.OnPaused += OnPause;
 		}
 
-		private void OnPauseCommand(InputCommand command)
+		private void OnPause()
 		{
-			if (command is not PauseCommand)
-			{
-				return;
-			}
-
 			var currentState = _gameStateManager.State;
 			if (currentState is GameState.None)
 			{
@@ -45,7 +40,7 @@ namespace Game
 
 		public void Dispose()
 		{
-			_inputListener.OnCommand -= OnPauseCommand;
+			_inputReader.OnPaused -= OnPause;
 		}
 	}
 }

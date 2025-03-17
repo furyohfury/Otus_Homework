@@ -7,34 +7,35 @@ namespace Game
 {
 	public sealed class PlayerTargetController : IInitializable
 	{
-		private readonly IEntity _character;
+		private readonly PlayerService _playerService;
 		private readonly Camera _camera;
-		private readonly InputListener _inputListener;
+		private readonly InputReader _inputReader;
 
 		[Inject]
-		public PlayerTargetController(IEntity character, Camera camera, InputListener inputListener)
+		public PlayerTargetController(Camera camera, InputReader inputReader, PlayerService playerService)
 		{
-			_character = character;
 			_camera = camera;
-			_inputListener = inputListener;
+			_inputReader = inputReader;
+			_playerService = playerService;
 		}
 
 		public void Initialize()
 		{
-			AddTargetToCharacter();
+			var playerEntity = _playerService.Player;
+			AddTargetToCharacter(playerEntity);
 		}
 
-		private void AddTargetToCharacter()
+		private void AddTargetToCharacter(IEntity playerEntity)
 		{
-			if (_character.AddTarget(new BaseFunction<Vector2>(GetMouseWorldPosition)) == false)
+			if (playerEntity.AddTarget(new BaseFunction<Vector2>(GetMouseWorldPosition)) == false)
 			{
-				_character.SetTarget(new BaseFunction<Vector2>(GetMouseWorldPosition));
+				playerEntity.SetTarget(new BaseFunction<Vector2>(GetMouseWorldPosition));
 			}
 		}
 
 		private Vector2 GetMouseWorldPosition()
 		{
-			var mousePosition = _inputListener.GetMousePosition();
+			var mousePosition = InputReader.MousePosition;
 			var cameraOffset = Mathf.Abs(_camera.transform.position.z);
 			var mouseOffsetPosition = new Vector3(
 				mousePosition.x,
