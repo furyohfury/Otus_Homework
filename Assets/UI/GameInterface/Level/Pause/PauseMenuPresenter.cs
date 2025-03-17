@@ -8,35 +8,23 @@ namespace UI
 	public sealed class PauseMenuPresenter : IInitializable, IDisposable // TODO appears when char dies
 	{
 		private readonly PauseMenuView _view;
-		private readonly LevelManager _levelManager;
 		private readonly GameStateManager _gameStateManager;
+		private LevelManager _levelManager;
 
 		[Inject]
-		public PauseMenuPresenter(PauseMenuView view, LevelManager levelManager, GameStateManager gameStateManager)
+		public PauseMenuPresenter(PauseMenuView view, GameStateManager gameStateManager, LevelManager levelManager)
 		{
 			_view = view;
-			_levelManager = levelManager;
 			_gameStateManager = gameStateManager;
+			_levelManager = levelManager;
 		}
 
 		public void Initialize()
 		{
-			_levelManager.OnLevelStarted += OnLevelStarted;
-			_levelManager.OnLevelFinished += OnLevelFinished;
-
+			_gameStateManager.OnStateChanged += OnStateChanged;
 			_view.OnResumeButtonClicked += OnResumeButtonClicked;
 			_view.OnResetButtonClicked += OnResetButtonClicked;
 			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
-		}
-
-		private void OnLevelStarted()
-		{
-			_gameStateManager.OnStateChanged += OnStateChanged;
-		}
-
-		private void OnLevelFinished()
-		{
-			_gameStateManager.OnStateChanged -= OnStateChanged;
 		}
 
 		private void OnResumeButtonClicked()
@@ -81,8 +69,7 @@ namespace UI
 
 		public void Dispose()
 		{
-			_levelManager.OnLevelStarted -= OnLevelStarted;
-			_levelManager.OnLevelFinished -= OnLevelFinished;
+			_gameStateManager.OnStateChanged -= OnStateChanged;
 
 			_view.OnResumeButtonClicked -= OnResumeButtonClicked;
 			_view.OnResetButtonClicked -= OnResetButtonClicked;

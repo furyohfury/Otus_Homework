@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SceneManagement;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -13,6 +14,10 @@ namespace Game
 
 			Container.BindInterfacesAndSelfTo<GameLauncher>()
 			         .AsCached()
+			         .NonLazy();
+
+			Container.BindInterfacesAndSelfTo<UnpauseOnSceneSwitchObserver>()
+			         .AsSingle()
 			         .NonLazy();
 		}
 	}
