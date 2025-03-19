@@ -1,8 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
 
 namespace Game
 {
@@ -11,21 +9,13 @@ namespace Game
 		private readonly InputControls _inputControls;
 		private readonly string _scheme;
 
-		[Inject]
-		public KeyboardInputRebinder(InputControls inputControls)
+		public KeyboardInputRebinder(InputControls inputControls, IRebindSaveLoader rebindSaveLoader) : base(rebindSaveLoader)
 		{
 			_inputControls = inputControls;
 			_scheme = _inputControls.KeyboardScheme.name;
 		}
 
-		[Button]
-		private void RebindJump()
-		{
-			// RebindAction(_inputControls.Gameplay.Jump, "");
-			// Rebind(action, "");
-		}
-
-		public override async UniTask<string> MakeInteractiveRebind(string action, string oldPath)
+		protected override async UniTask<string> Rebind(string action, string oldPath)
 		{
 			var inputAction = _inputControls.FindAction(action);
 
@@ -37,7 +27,9 @@ namespace Game
 
 			if (bindingIndex == -1)
 			{
+#if UNITY_EDITOR
 				Debug.LogError($"Input action for scheme {_scheme} with path: {oldPath} not found");
+#endif
 				inputAction.Enable();
 				return null;
 			}
@@ -52,9 +44,11 @@ namespace Game
 				           inputAction.ApplyBindingOverride(bindingIndex, operation.selectedControl.path);
 				           inputAction.Enable();
 				           newPath = operation.selectedControl.path;
+#if UNITY_EDITOR
 				           string formattedPath = InputControlPath.ToHumanReadableString(inputAction.bindings[bindingIndex].effectivePath
 					           , InputControlPath.HumanReadableStringOptions.OmitDevice);
 				           Debug.Log($"New bind for {action} : {formattedPath}");
+#endif
 
 				           // TODO saving
 				           operation.Dispose();
@@ -65,8 +59,7 @@ namespace Game
 			return await tcs.Task;
 		}
 
-		[Button]
-		public void RemoveJumpRebind()
+		public void RemoveRebind()
 		{
 			InputAction jumpAction = _inputControls.Gameplay.Jump;
 			jumpAction.RemoveBindingOverride(0);

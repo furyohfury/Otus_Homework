@@ -8,7 +8,9 @@ namespace Game
 		[SerializeField]
 		private RebindMenuView _rebindMenuView;
 		[SerializeField]
-		private InputRebindMenuConfig _rebindMenuConfig;
+		private InputRebindMenuConfig _keyboardRebindMenuConfig;
+		[SerializeField]
+		private InputRebindMenuConfig _gamepadRebindMenuConfig;
 		
 		public override void InstallBindings()
 		{
@@ -18,7 +20,7 @@ namespace Game
 
 			Container.BindInterfacesAndSelfTo<RebindMenuPresenter>()
 			         .AsSingle()
-			         .WithArguments(_rebindMenuConfig);
+			         .WithArguments(_gamepadRebindMenuConfig);
 		}
 	}
 }

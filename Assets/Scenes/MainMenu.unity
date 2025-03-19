@@ -516,7 +516,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _rebindMenuView: {fileID: 925804987}
-  _rebindMenuConfig: {fileID: 11400000, guid: 2e1046a9b0d3c0a46acdd77741f7e7be, type: 2}
+  _keyboardRebindMenuConfig: {fileID: 11400000, guid: 2e1046a9b0d3c0a46acdd77741f7e7be, type: 2}
+  _gamepadRebindMenuConfig: {fileID: 11400000, guid: 1f0ea12191db7a84a9a975c28a9fd453, type: 2}
 --- !u!1 &559182496
 GameObject:
   m_ObjectHideFlags: 0

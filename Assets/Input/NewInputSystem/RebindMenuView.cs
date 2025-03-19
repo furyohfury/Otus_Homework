@@ -10,14 +10,9 @@ namespace Game
 		[SerializeField]
 		private Transform _container;
 
-		public RebindButtonView CreateRebindView(string actionDisplayName, string bindText)
+		public RebindButtonView CreateRebindView()
 		{
-			var view = Instantiate(_rebindButtonViewPrefab, _container);
-			view.SetInputActionName(actionDisplayName);
-			view.SetBindText(bindText);
-			view.gameObject.name = $"Rebind{actionDisplayName}View";
-
-			return view;
+			return Instantiate(_rebindButtonViewPrefab, _container);
 		}
 	}
 }

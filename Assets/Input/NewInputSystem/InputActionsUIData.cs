@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -6,7 +7,8 @@ namespace Game
 	public struct InputActionsUIData
 	{
 		public string Action;
-		public string Path;
+		[FormerlySerializedAs("Path")] 
+		public string DefaultPath;
 		public string ActionDisplayName;
 	}
 }

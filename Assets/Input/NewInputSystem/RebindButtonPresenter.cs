@@ -7,23 +7,33 @@ namespace Game
 		private readonly RebindButtonView _view;
 		private readonly InputRebinder _inputRebinder;
 		private readonly InputActionsUIData _data;
+		private readonly string _startingPath;
 
-		public RebindButtonPresenter(RebindButtonView view, InputRebinder inputRebinder, InputActionsUIData data)
+		public RebindButtonPresenter(RebindButtonView view, InputRebinder inputRebinder, InputActionsUIData data, string startingPath)
 		{
 			_view = view;
 			_inputRebinder = inputRebinder;
 			_data = data;
+			_startingPath = startingPath;
 		}
 
 		public void Init()
 		{
 			_view.OnKeyRebindButtonPressed += OnKeyRebindButtonPressed;
 			_view.OnResetButtonPressed += OnResetButtonPressed;
+			InitializeView();
+		}
+
+		private void InitializeView()
+		{
+			var displayName = _data.ActionDisplayName;
+			_view.SetInputActionName(displayName);
+			_view.SetBindText(_startingPath);
 		}
 
 		private async void OnKeyRebindButtonPressed()
 		{
-			var newPath = await _inputRebinder.MakeInteractiveRebind(_data.Action, _data.Path);
+			var newPath = await _inputRebinder.MakeInteractiveRebind(_data.Action, _data.DefaultPath);
 			var formattedPath = InputControlPath.ToHumanReadableString(newPath, InputControlPath.HumanReadableStringOptions.OmitDevice);
 			_view.SetBindText(formattedPath);
 		}
