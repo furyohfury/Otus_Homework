@@ -14,7 +14,7 @@ namespace Game
 			Container.Bind<InputControls>()
 			         .AsSingle();
 
-			Container.Bind<InputRebinder>()
+			Container.Bind(typeof(IInitializable), typeof(InputRebinder))
 			         .To<GamepadInputRebinder>()
 			         .AsCached()
 			         .NonLazy();
@@ -25,9 +25,6 @@ namespace Game
 			Container.Bind<IRebindSaveLoader>()
 			         .To<RebindSaveLoader>()
 			         .AsCached();
-
-			Container.BindInterfacesTo<RebindSaveLaunchController>()
-			         .AsSingle();
 		}
 	}
 }
