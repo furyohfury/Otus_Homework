@@ -4,15 +4,15 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
-	public sealed class GamepadInputRebinder : InputRebinder
+	public sealed class XboxGamepadInputRebinder : InputRebinder
 	{
 		private readonly InputControls _inputControls;
 		private readonly string _scheme;
 
-		public GamepadInputRebinder(InputControls inputControls, IRebindSaveLoader rebindSaveLoader) : base(rebindSaveLoader)
+		public XboxGamepadInputRebinder(InputControls inputControls, IRebindSaveLoader rebindSaveLoader) : base(rebindSaveLoader)
 		{
 			_inputControls = inputControls;
-			_scheme = _inputControls.GamepadScheme.name;
+			_scheme = _inputControls.XboxGamepadScheme.name;
 		}
 
 		protected override async UniTask<string> Rebind(string action, string oldPath)

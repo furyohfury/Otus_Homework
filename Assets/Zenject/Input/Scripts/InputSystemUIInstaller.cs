@@ -10,7 +10,7 @@ namespace Game
 		[SerializeField]
 		private InputRebindMenuConfig _keyboardRebindMenuConfig;
 		[SerializeField]
-		private InputRebindMenuConfig _gamepadRebindMenuConfig;
+		private InputRebindMenuConfig _xboxGamepadRebindMenuConfig;
 		
 		public override void InstallBindings()
 		{
@@ -20,7 +20,7 @@ namespace Game
 
 			Container.BindInterfacesAndSelfTo<RebindMenuPresenter>()
 			         .AsSingle()
-			         .WithArguments(_gamepadRebindMenuConfig);
+			         .WithArguments(_xboxGamepadRebindMenuConfig);
 		}
 	}
 }

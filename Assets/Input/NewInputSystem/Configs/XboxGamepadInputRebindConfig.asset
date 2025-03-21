@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 992b8e73a5a249418881887c6c4ce53f, type: 3}
-  m_Name: GamepadInputRebindConfig
+  m_Name: XboxGamepadInputRebindConfig
   m_EditorClassIdentifier: 
   Scheme: Gamepad
   Data:
   - Action: Jump
-    Path: <Gamepad>/buttonSouth
+    DefaultPath: <XInputController>/buttonSouth
     ActionDisplayName: Jump
   - Action: Movement
-    Path: <Gamepad>/leftStick
+    DefaultPath: <XInputController>/leftStick
     ActionDisplayName: Moving

@@ -125,10 +125,10 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""ed84f7c5-2a93-4419-8e27-951784e6c4f3"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<XInputController>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""XboxGamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -147,10 +147,10 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""9c5f4932-cf6d-4409-a3ec-a69aa07140fb"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""XboxGamepad"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -169,10 +169,10 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""31376f97-32ad-4a2d-b498-4c352365a153"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""XboxGamepad"",
                     ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -191,10 +191,10 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""f0673289-c86e-4f5c-9ff2-b9789ac92a62"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""XboxGamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -233,7 +233,7 @@ namespace Game
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""XboxGamepad"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -259,22 +259,12 @@ namespace Game
             ]
         },
         {
-            ""name"": ""Gamepad"",
-            ""bindingGroup"": ""Gamepad"",
+            ""name"": ""XboxGamepad"",
+            ""bindingGroup"": ""XboxGamepad"",
             ""devices"": [
                 {
                     ""devicePath"": ""<XInputController>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<DualShockGamepad>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<SwitchProControllerHID>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -444,13 +434,13 @@ namespace Game
                 return asset.controlSchemes[m_KeyboardSchemeIndex];
             }
         }
-        private int m_GamepadSchemeIndex = -1;
-        public InputControlScheme GamepadScheme
+        private int m_XboxGamepadSchemeIndex = -1;
+        public InputControlScheme XboxGamepadScheme
         {
             get
             {
-                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
-                return asset.controlSchemes[m_GamepadSchemeIndex];
+                if (m_XboxGamepadSchemeIndex == -1) m_XboxGamepadSchemeIndex = asset.FindControlSchemeIndex("XboxGamepad");
+                return asset.controlSchemes[m_XboxGamepadSchemeIndex];
             }
         }
         public interface IGameplayActions

@@ -15,7 +15,7 @@ namespace Game
 			         .AsSingle();
 
 			Container.Bind(typeof(IInitializable), typeof(InputRebinder))
-			         .To<GamepadInputRebinder>()
+			         .To<XboxGamepadInputRebinder>()
 			         .AsCached()
 			         .NonLazy();
 
