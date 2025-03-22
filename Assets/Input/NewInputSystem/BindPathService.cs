@@ -11,27 +11,41 @@ namespace Game
 			_inputControls = inputControls;
 		}
 
-		public string GetPath(string action, string scheme = null)
+		public string GetDefaultPath(string action, string scheme)
 		{
-			var inputAction = _inputControls.FindAction(action);
-			if (scheme == null)
-			{
-				return inputAction.bindings[0].path;
-			}
+			var bindingIndex = GetBindingIndex(action, scheme, out var inputAction);
+			return bindingIndex != -1
+				? inputAction.bindings[bindingIndex].path
+				: null;
+		}
 
-			int bindingIndex = 0;
-			bindingIndex = inputAction.bindings.IndexOf(b =>
-				b.groups != null
-				&& b.groups.Contains(scheme));
+		public string GetPath(string action, string scheme)
+		{
+			var bindingIndex = GetBindingIndex(action, scheme, out var inputAction);
 
 			return bindingIndex != -1
 				? inputAction.bindings[bindingIndex].effectivePath
 				: null;
 		}
 
-		public string GetFormattedPath(string action, string scheme)
+		public string GetDisplayName(string action, string scheme, string defaultPath = null)
 		{
-			return InputControlPath.ToHumanReadableString(GetPath(action, scheme), InputControlPath.HumanReadableStringOptions.UseShortNames);
+			var bindingIndex = GetBindingIndex(action, scheme, out var inputAction, defaultPath);
+
+			return bindingIndex != -1
+				? inputAction.GetBindingDisplayString(bindingIndex)
+				: null;
+		}
+
+		private int GetBindingIndex(string action, string scheme, out InputAction inputAction, string defaultPath = null)
+		{
+			inputAction = _inputControls.FindAction(action);
+
+			int bindingIndex = inputAction.bindings.IndexOf(b =>
+				b.groups != null
+				&& b.groups.Contains(scheme)
+				&& (defaultPath == null || b.path == defaultPath));
+			return bindingIndex;
 		}
 	}
 }

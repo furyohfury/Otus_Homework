@@ -24,6 +24,8 @@ namespace Game
 			return newPath;
 		}
 
-		protected abstract UniTask<string> Rebind(string action, string oldPath);
+		protected abstract UniTask<string> Rebind(string action, string defaultPath);
+
+		public abstract void RemoveRebind(string action, string defaultPath);
 	}
 }

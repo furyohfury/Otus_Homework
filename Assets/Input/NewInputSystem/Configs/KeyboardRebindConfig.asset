@@ -14,9 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scheme: Keyboard
   Data:
+  - Action: Movement
+    DefaultPath: <Keyboard>/a
+    ActionDisplayName: Left
+  - Action: Movement
+    DefaultPath: <Keyboard>/d
+    ActionDisplayName: Right
+  - Action: Movement
+    DefaultPath: <Keyboard>/w
+    ActionDisplayName: Up
+  - Action: Movement
+    DefaultPath: <Keyboard>/s
+    ActionDisplayName: Down
   - Action: Jump
-    Path: <Keyboard>/space
+    DefaultPath: <Keyboard>/space
     ActionDisplayName: Jump
+  - Action: Ability
+    DefaultPath: <Keyboard>/e
+    ActionDisplayName: Use ability
   - Action: Attack
-    Path: <Mouse>/leftButton
+    DefaultPath: <Mouse>/leftButton
     ActionDisplayName: Attack/Shoot

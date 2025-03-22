@@ -18,6 +18,12 @@ namespace UI
 			remove => _selectLevelButton.onClick.RemoveListener(value);
 		}
 
+		public event UnityAction OnSettingsButtonPressed
+		{
+			add => _settingsButton.onClick.AddListener(value);
+			remove => _settingsButton.onClick.RemoveListener(value);
+		}
+
 		public event UnityAction OnExitButtonClicked
 		{
 			add => _exitButton.onClick.AddListener(value);
@@ -28,6 +34,8 @@ namespace UI
 		private Button _continueButton;
 		[SerializeField]
 		private Button _selectLevelButton;
+		[SerializeField]
+		private Button _settingsButton;
 		[SerializeField]
 		private Button _exitButton;
 	}

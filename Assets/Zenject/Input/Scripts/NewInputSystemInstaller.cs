@@ -14,8 +14,13 @@ namespace Game
 			Container.Bind<InputControls>()
 			         .AsSingle();
 
-			Container.Bind(typeof(IInitializable), typeof(InputRebinder))
+			Container.Bind(typeof(IInitializable), typeof(XboxGamepadInputRebinder))
 			         .To<XboxGamepadInputRebinder>()
+			         .AsCached()
+			         .NonLazy();
+			
+			Container.Bind(typeof(IInitializable), typeof(KeyboardInputRebinder))
+			         .To<KeyboardInputRebinder>()
 			         .AsCached()
 			         .NonLazy();
 

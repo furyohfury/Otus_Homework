@@ -9,7 +9,6 @@ namespace Game
 		private readonly RebindMenuView _rebindMenuView;
 		private readonly InputRebinder _inputRebinder;
 		private readonly BindPathService _bindPathService;
-		private readonly List<RebindButtonPresenter> _presenters = new();
 
 		[Inject]
 		public RebindMenuPresenter(InputRebindMenuConfig rebindMenuConfig, RebindMenuView rebindMenuView, InputRebinder inputRebinder
@@ -33,9 +32,7 @@ namespace Game
 			for (int i = 0, count = data.Length; i < count; i++)
 			{
 				var view = _rebindMenuView.CreateRebindView();
-				var currentPath = _bindPathService.GetFormattedPath(data[i].Action, _rebindMenuConfig.Scheme);
-				var presenter = new RebindButtonPresenter(view, _inputRebinder, data[i], currentPath);
-				_presenters.Add(presenter);
+				var presenter = new RebindButtonPresenter(view, _inputRebinder, data[i], _bindPathService, _rebindMenuConfig.Scheme);
 				presenter.Init();
 			}
 		}

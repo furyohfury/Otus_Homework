@@ -10,18 +10,21 @@ namespace UI
 	{
 		private readonly MainMenuView _view;
 		private readonly SelectLeveMenuView _selectLevelMenuView;
+		private SettingsMenuView _settingsMenuView;
 
 		[Inject]
-		public MainMenuPresenter(SelectLeveMenuView selectLevelMenuView, MainMenuView view)
+		public MainMenuPresenter(SelectLeveMenuView selectLevelMenuView, MainMenuView view, SettingsMenuView settingsMenuView)
 		{
 			_selectLevelMenuView = selectLevelMenuView;
 			_view = view;
+			_settingsMenuView = settingsMenuView;
 		}
 
 		public void Initialize()
 		{
 			_view.OnContinueButtonClicked += OnContinueButtonClicked;
 			_view.OnSelectLevelButtonClicked += OnSelectLevelButtonClicked;
+			_view.OnSettingsButtonPressed += OnSettingsButtonClicked;
 			_view.OnExitButtonClicked += OnExitButtonClicked;
 		}
 
@@ -32,6 +35,15 @@ namespace UI
 		private void OnSelectLevelButtonClicked()
 		{
 			_selectLevelMenuView.Show();
+		}
+
+		private void OnSettingsButtonClicked()
+		{
+			var viewGO = _settingsMenuView.gameObject;
+			if (viewGO.activeInHierarchy == false)
+			{
+				viewGO.SetActive(true);
+			}
 		}
 
 		private void OnExitButtonClicked()
@@ -45,6 +57,10 @@ namespace UI
 
 		public void Dispose()
 		{
+			_view.OnContinueButtonClicked -= OnContinueButtonClicked;
+			_view.OnSelectLevelButtonClicked -= OnSelectLevelButtonClicked;
+			_view.OnSettingsButtonPressed -= OnSettingsButtonClicked;
+			_view.OnExitButtonClicked -= OnExitButtonClicked;
 		}
 	}
 }

@@ -15,20 +15,14 @@ namespace Game
 			_scheme = _inputControls.XboxGamepadScheme.name;
 		}
 
-		protected override async UniTask<string> Rebind(string action, string oldPath)
+		protected override async UniTask<string> Rebind(string action, string defaultPath)
 		{
-			var inputAction = _inputControls.FindAction(action);
-
-			int bindingIndex = inputAction.bindings.IndexOf(b =>
-				b.groups != null
-				&& b.groups.Contains(_scheme)
-				&& b.path == oldPath
-			);
+			var bindingIndex = GetBindingIndex(action, defaultPath, out var inputAction);
 
 			if (bindingIndex == -1)
 			{
 #if UNITY_EDITOR
-				Debug.LogError($"Input action for scheme {_scheme} with path: {oldPath} not found");
+				Debug.LogError($"Input action for scheme {_scheme} with path: {defaultPath} not found");
 #endif
 				inputAction.Enable();
 				return null;
@@ -49,7 +43,6 @@ namespace Game
 					           , InputControlPath.HumanReadableStringOptions.OmitDevice);
 				           Debug.Log($"New bind for {action} : {formattedPath}");
 #endif
-				           // TODO saving
 				           operation.Dispose();
 				           tcs.TrySetResult(newPath);
 			           })
@@ -58,10 +51,25 @@ namespace Game
 			return await tcs.Task;
 		}
 
-		public void RemoveRebind()
+		private int GetBindingIndex(string action, string defaultPath, out InputAction inputAction)
 		{
-			InputAction jumpAction = _inputControls.Gameplay.Jump;
-			jumpAction.RemoveBindingOverride(0);
+			inputAction = _inputControls.FindAction(action);
+
+			int bindingIndex = inputAction.bindings.IndexOf(b =>
+				b.groups != null
+				&& b.groups.Contains(_scheme)
+				&& b.path == defaultPath
+			);
+			return bindingIndex;
+		}
+
+		public override void RemoveRebind(string action, string defaultPath)
+		{
+			var bindingIndex = GetBindingIndex(action, defaultPath, out InputAction inputAction);
+			if (bindingIndex != -1)
+			{
+				inputAction.RemoveBindingOverride(bindingIndex);
+			}
 		}
 	}
 }

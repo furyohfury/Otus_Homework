@@ -7,7 +7,6 @@ namespace Game
 	public struct InputActionsUIData
 	{
 		public string Action;
-		[FormerlySerializedAs("Path")] 
 		public string DefaultPath;
 		public string ActionDisplayName;
 	}
