@@ -15,5 +15,5 @@ MonoBehaviour:
   _abilityCardPrefab: {fileID: 6390730940251013869, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
   _abilityCardConfigs: {fileID: 11400000, guid: 05a604b297f4de04f9cadc1de0e05e1a, type: 2}
   _enemyPrefabs: {fileID: 11400000, guid: 4f28b4f3a5d08154db65e1e52c9dfd71, type: 2}
-  _destructibleWallPrefab: {fileID: 3686698733612285952, guid: 9abccef71f53f8a4b93d1eba88d73cc5, type: 3}
+  _levelEntitiesPrefabs: {fileID: 11400000, guid: c7fa39a9ac8f9bf4182000b19853e6ee, type: 2}
   _weaponPrefabs: {fileID: 11400000, guid: 2b3bea299895a84418680ce8e0067449, type: 2}

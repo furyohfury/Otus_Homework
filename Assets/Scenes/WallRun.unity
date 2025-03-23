@@ -6028,8 +6028,9 @@ MonoBehaviour:
     SerializationNodes: []
   _character: {fileID: 3034692061667593328}
   _worldTransform: {fileID: 3034692062944513891}
-  _enemiesContainer: {fileID: 1702166919}
-  _abilityCardsContainer: {fileID: 0}
+  _enemiesContainer: {fileID: 1072429271}
+  _abilityCardsContainer: {fileID: 1702166919}
+  _levelEntitiesContainer: {fileID: 747608621}
   _backGroundTransform: {fileID: 3034692062650816571}
 --- !u!1 &3034692062885728051
 GameObject:
