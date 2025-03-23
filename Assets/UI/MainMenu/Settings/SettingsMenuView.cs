@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using System;
+using Game;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -41,7 +42,7 @@ namespace UI
 		private RebindMenuView _gamepadRebindMenu;
 
 		[SerializeField]
-		private GameObject[] _views;
+		private GameObject[] _tabs;
 
 		public void SetKeyboardViewActive(bool active) => _keyboardRebindMenu.gameObject.SetActive(active);
 		
@@ -49,9 +50,9 @@ namespace UI
 
 		public void HideAll()
 		{
-			for (int i = 0, count = _views.Length; i < count; i++)
+			for (int i = 0, count = _tabs.Length; i < count; i++)
 			{
-				_views[i].SetActive(false);
+				_tabs[i].SetActive(false);
 			}
 		}
 	}
