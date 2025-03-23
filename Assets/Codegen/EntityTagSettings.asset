@@ -9,16 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: a706ae8edd90d5141b60d18515a86fc3, type: 3}
   m_Name: EntityTagSettings
   m_EditorClassIdentifier: Assembly-CSharp-Editor-firstpass:Atomic.Entities:TagsConfig
-  namespace: Atomic.Entities
-  directoryPath: Assets/Codegen
-  className: TagAPI
-  items:
-  - id: 1
-    type: Character
-  - id: 2
-    type: Bullet
-  - id: 3
-    type: DestructibleWall

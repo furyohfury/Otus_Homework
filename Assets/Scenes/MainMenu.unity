@@ -2618,7 +2618,7 @@ MonoBehaviour:
   _gamepadControlsButton: {fileID: 943171558}
   _keyboardRebindMenu: {fileID: 101674312}
   _gamepadRebindMenu: {fileID: 925804987}
-  _views:
+  _tabs:
   - {fileID: 925804985}
   - {fileID: 101674311}
 --- !u!114 &1780571561

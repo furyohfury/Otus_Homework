@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86f3e4e6e824a5e96f232a05c18c24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: Spike
   _triggerReceiver: {fileID: 6488461877492329124}
   _damage: 2
   _damageCooldown: 2

@@ -8,6 +8,8 @@ namespace Game
 	{
 		[Header("Config")] [SerializeField]
 		private Vector2 _velocityToDestroy;
+		[SerializeField] 
+		private string _id = "DestructibleWall";
 
 		[Header("VFX")] [SerializeField]
 		private ParticleSystem _explosionEffect;
@@ -37,6 +39,8 @@ namespace Game
 		{
 			_entity = entity;
 			entity.AddTag(TagAPI.DestructibleWall);
+			entity.AddTag(TagAPI.LevelEntity);
+			entity.AddId(_id);
 
 			entity.AddVisualTransform(_transform);
 

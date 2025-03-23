@@ -8,6 +8,8 @@ namespace Game
 	public sealed class SpikesInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
+		private string _id = "Spikes";
+		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
 		[SerializeField]
 		private int _damage;
@@ -16,10 +18,13 @@ namespace Game
 
 		private IEntity _entity;
 		private readonly HashSet<IEntity> _damagedEntities = new();
+		
 
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
+			entity.AddTag(TagAPI.LevelEntity);
+			entity.AddId(_id);
 			_triggerReceiver.OnTriggerStay += OnCollided;
 		}
 

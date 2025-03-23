@@ -14,7 +14,7 @@ namespace SaveLoad
 		[SerializeField]
 		private EnemyPrefabs _enemyPrefabs;
 		[SerializeField]
-		private SceneEntity _destructibleWallPrefab;
+		private LevelEntitiesPrefabs _levelEntitiesPrefabs;
 		[SerializeField]
 		private WeaponPrefabs _weaponPrefabs;
 
@@ -40,9 +40,9 @@ namespace SaveLoad
 			         .WithArguments(_enemyPrefabs.Prefabs);
 
 			Container.Bind<ISaveLoader>()
-			         .To<DestructibleWallsSaveLoader>()
+			         .To<LevelEntitiesSaveLoader>()
 			         .AsCached()
-			         .WithArguments(_destructibleWallPrefab);
+			         .WithArguments(_levelEntitiesPrefabs.Prefabs);
 		}
 	}
 }

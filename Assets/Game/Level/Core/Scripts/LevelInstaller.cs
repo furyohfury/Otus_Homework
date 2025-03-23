@@ -7,24 +7,20 @@ namespace Game
 {
 	public sealed class LevelInstaller : MonoInstaller
 	{
-
 		public override void InstallBindings()
 		{
 			Container.Bind<FinishLine>()
 			         .FromComponentInHierarchy()
 			         .AsSingle();
 
-			Container.BindInterfacesAndSelfTo<EnemyService>()
-			         .AsCached();
-
 			Container.BindInterfacesAndSelfTo<LevelTimer>()
-			         .AsCached();
+			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<LevelManager>()
-			         .AsCached();
+			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<Leaderboard>()
-			         .AsCached();
+			         .AsSingle();
 
 			Container.BindInterfacesTo<LeaderboardSaveController>()
 			         .AsCached();

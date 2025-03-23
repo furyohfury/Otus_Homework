@@ -6,7 +6,7 @@ using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class AbilityCardsSaveLoader : SaveLoader<IEnumerable<AbilityCardData>, IEntityWorld>
+	public sealed class AbilityCardsSaveLoader : SaveLoader<IEnumerable<AbilityCardData>, AbilityCardsService>
 	{
 		private readonly SceneEntity _prefab;
 		private readonly AbilityCardConfigs _abilityCardConfigs;
@@ -18,9 +18,9 @@ namespace SaveLoad
 			_abilityCardConfigs = abilityCardConfigs;
 		}
 
-		protected override IEnumerable<AbilityCardData> ConvertToData(IEntityWorld world)
+		protected override IEnumerable<AbilityCardData> ConvertToData(AbilityCardsService service)
 		{
-			IReadOnlyList<IEntity> abilityCards = world.GetEntitiesWithTag(TagAPI.AbilityCard);
+			var abilityCards = service.GetAbilityCards();
 			AbilityCardData[] data = new AbilityCardData[abilityCards.Count];
 
 			for (var i = 0; i < data.Length; i++)
@@ -39,31 +39,30 @@ namespace SaveLoad
 			return data;
 		}
 
-		protected override void SetupData(IEntityWorld world, IEnumerable<AbilityCardData> data)
+		protected override void SetupData(AbilityCardsService service, IEnumerable<AbilityCardData> data)
 		{
-			AbilityCardData[] dataArray = data.ToArray();
-			IEntity[] sceneCards = world.GetEntitiesWithTag(TagAPI.AbilityCard).ToArray();
+			List<IEntity> sceneCards = service.GetAbilityCards().ToList();
+			var dataArray = data.ToArray();
 
-			Dictionary<int, AbilityCardData> savedCardsDict = dataArray.ToDictionary(cardData => cardData.InstanceID);
-			Dictionary<int, IEntity> sceneCardsDict = sceneCards.ToDictionary(entity => entity.InstanceId);
-
-			foreach (var cardData in dataArray)
+			foreach (IEntity sceneCard in sceneCards)
 			{
-				if (sceneCardsDict.TryGetValue(cardData.InstanceID, out IEntity existingCard))
+				bool cardIsSaved = dataArray.Any(cardData => cardData.InstanceID == sceneCard.InstanceId);
+				if (cardIsSaved == false)
+				{
+					DestroyCard(sceneCard);
+				}
+			}
+			
+			foreach (AbilityCardData cardData in dataArray)
+			{
+				var existingCard = sceneCards.SingleOrDefault(card => card.InstanceId == cardData.InstanceID);
+				if (existingCard != default)
 				{
 					SetupExistingCard(existingCard, cardData);
 				}
 				else
 				{
-					CreateNewCard(world, cardData);
-				}
-			}
-
-			foreach (IEntity sceneCard in sceneCards)
-			{
-				if (!savedCardsDict.ContainsKey(sceneCard.InstanceId))
-				{
-					SceneEntity.Destroy(sceneCard);
+					CreateNewCard(service, cardData);
 				}
 			}
 		}
@@ -76,20 +75,23 @@ namespace SaveLoad
 			cardTransform.localScale = cardData.Scale;
 		}
 
-		private void CreateNewCard(IEntityWorld world, AbilityCardData cardData)
+		private void CreateNewCard(AbilityCardsService service, AbilityCardData cardData)
 		{
 			var pos = cardData.Position;
 			var rot = cardData.Rotation;
-			if (world is SceneEntityWorld sceneEntityWorld)
-			{
-				SceneEntity newCard = SceneEntity.Instantiate(_prefab, pos, rot, sceneEntityWorld.transform);
-				newCard.transform.localScale = cardData.Scale;
 
-				var id = cardData.Id;
-				var config = _abilityCardConfigs.Configs[id];
-				var installer = newCard.GetComponent<AbilityCardInstaller>();
-				installer.SetConfig(config);
-			}
+			SceneEntity newCard = SceneEntity.Instantiate(_prefab, pos, rot, service.Container);
+			newCard.transform.localScale = cardData.Scale;
+
+			var id = cardData.Id;
+			var config = _abilityCardConfigs.Configs[id];
+			var installer = newCard.GetComponent<AbilityCardInstaller>();
+			installer.SetConfig(config);
+		}
+
+		private void DestroyCard(IEntity sceneCard)
+		{
+			SceneEntity.Destroy(sceneCard);
 		}
 	}
 }

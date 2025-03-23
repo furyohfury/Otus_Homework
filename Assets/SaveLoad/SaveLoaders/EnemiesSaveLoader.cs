@@ -47,8 +47,6 @@ namespace SaveLoad
 				return;
 			}
 
-			var world = Object.FindObjectOfType<SceneEntityWorld>();
-			var worldTransform = world.transform;
 			IEnumerable<EnemyData> enemyDatas = data.ToList();
 
 			foreach (var sceneEnemy in sceneEnemies)
@@ -68,7 +66,7 @@ namespace SaveLoad
 				}
 				else
 				{
-					CreateNewEnemy(enemyData, worldTransform);
+					CreateNewEnemy(enemyData, service.Container);
 				}
 			}
 		}
@@ -80,13 +78,13 @@ namespace SaveLoad
 			sceneEnemy.GetHealth().Value = enemyData.Health;
 		}
 
-		private void CreateNewEnemy(EnemyData enemyData, Transform worldTransform)
+		private void CreateNewEnemy(EnemyData enemyData, Transform container)
 		{
 			var id = enemyData.Id;
 			var prefab = _prefabs[id];
 			var pos = enemyData.Position;
 			var rot = enemyData.Rotation;
-			var newEnemy = SceneEntity.Instantiate(prefab, pos, rot, worldTransform);
+			var newEnemy = SceneEntity.Instantiate(prefab, pos, rot, container);
 			newEnemy.GetHealth().Value = enemyData.Health;
 		}
 	}
