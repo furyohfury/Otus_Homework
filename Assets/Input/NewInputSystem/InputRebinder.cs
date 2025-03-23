@@ -24,8 +24,13 @@ namespace Game
 			return newPath;
 		}
 
-		protected abstract UniTask<string> Rebind(string action, string defaultPath);
+		public void RemoveRebind(string action, string defaultPath)
+		{
+			RemoveBindOverride(action, defaultPath);
+			_rebindSaveLoader.Save();
+		}
 
-		public abstract void RemoveRebind(string action, string defaultPath);
+		protected abstract UniTask<string> Rebind(string action, string defaultPath);
+		protected abstract void RemoveBindOverride(string action, string defaultPath);
 	}
 }

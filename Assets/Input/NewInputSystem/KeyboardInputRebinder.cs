@@ -63,7 +63,7 @@ namespace Game
 			return bindingIndex;
 		}
 
-		public override void RemoveRebind(string action, string defaultPath)
+		protected override void RemoveBindOverride(string action, string defaultPath)
 		{
 			var bindingIndex = GetBindingIndex(action, defaultPath, out InputAction inputAction);
 			if (bindingIndex != -1)
