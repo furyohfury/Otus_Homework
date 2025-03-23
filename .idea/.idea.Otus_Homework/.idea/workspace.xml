@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Scripts" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="af43e158-97c6-4f0e-a818-497d14ed34e1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PresetManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PresetManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/SceneTemplateSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/VFXManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/VFXManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Tenth_Equipment" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;furyohfury&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/furyohfury/Otus_Homework.git&quot;,
+    &quot;accountId&quot;: &quot;a2e18259-44c4-45bb-be53-147d9ae8195d&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/bfff7c0b1952412cb8118dddd204a124b800/cb/83cbd8e3/02000028.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1737dad767154cafa7636ee6f0bacdd663e00/94/ff903592/SerializedScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1737dad767154cafa7636ee6f0bacdd663e00/fa/8d9ae8dc/SerializedMonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/02/2b48056d/KeyCode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/26/e3ad55aa/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/39/ee92d2e7/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/49/2a72d033/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/5d/918fbe6f/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/71/2438ed52/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/84/3a930b6f/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/90/9a5372c8/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/b3/cb256b6d/ObjectPool`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/e5/b6c014a9/Component.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7c4f5778998644beb3ac9edcc27c194a24800/80/bfbaf364/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7f859c700f9f483a9bf98dfe22acee6e1200/fb/06266f1e/EntityLinkExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82a2fd073ee449928e161903460426d72ae00/6d/8897fd91/TweenExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/880832f2c4e2458090401bbb74a86b24a8a00/71/3494c152/JsonPropertyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bfff7c0b1952412cb8118dddd204a124b800/0d/6806d956/ContextInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bfff7c0b1952412cb8118dddd204a124b800/53/fa0b8181/IGroup`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bfff7c0b1952412cb8118dddd204a124b800/b3/debf2496/Entity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bfff7c0b1952412cb8118dddd204a124b800/c8/6cc9d280/IExecuteSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../HFSM-Practice/Assets/Game/Scripts/Engine/AI/Sensor/SensorDataGizmos.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Codegen/InteractionAPI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.cysharp.r3@9b18209448/Runtime/MonoBehaviourExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.cysharp.r3@9b18209448/Runtime/UnityProviderInitializer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.common@6.0.3/Editor/ImagePacker/ImagePackNode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.common@6.0.3/Editor/ImagePacker/ImagePacker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.common@6.0.3/Editor/InternalBridge/InternalEditorBridge.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.common@6.0.3/Editor/TextureGenerator/TextureGeneratorHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.psdimporter@6.0.4/Editor/PSDImporterEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.sprite@1.0.0/Editor/Interface/IEvent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.sprite@1.0.0/Editor/SpriteEditorModule/SpriteFrameModule/SpriteFrameModuleBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.sprite@1.0.0/Tests/Editor/SpritePackageTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@1.0.0/Editor/CreateTileFromPaletteAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/AddressablesImpl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.vscode@1.2.5/Editor/ProjectGeneration/AssemblyNameProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.vscode@1.2.5/Editor/ProjectGeneration/ProjectGeneration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.vscode@1.2.5/Editor/VSCodeScriptEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.3.0/InputSystem/Actions/InputAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.3.0/InputSystem/Actions/InputActionRebindingExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.3.0/InputSystem/Actions/InputBinding.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.3.0/InputSystem/Controls/InputControlPath.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Editor/Lighting/ProbeVolume/ProbeGIBaking.Dilate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Editor/Lighting/ProbeVolume/ProbeGIBaking.VirtualOffset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Editor/ShaderGenerator/CSharpToHLSL.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Editor/Volume/VolumeComponentProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.7/Runtime/Utilities/CoreRenderPipelinePreferences.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.20.1/Tests/Editor/CacheServer/ByteArrayStream.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.20.1/Tests/Editor/CacheServer/TestDownloadItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.testtools.codecoverage@1.0.1/Samples~/Tutorial/Asteroids/Tests/WeaponTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_EditorCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Tests/Runtime/TMP_RuntimeTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/EventSystem/EventSystemEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/CanvasScalerEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ScrollbarEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ToggleEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/InputModules/PointerInputModule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/CanvasUpdateRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Dropdown.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/FontUpdateTracker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Graphic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/GraphicRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutRebuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/RectMask2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/SetPropertyUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Text.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Toggle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/AssertionFailureOnOutputVertexCount.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/CanvasElementsMaintainValidPositionsWhenCameraOrthoSizeIsZero.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/CanvasWidthAssertionErrorWithRectTransform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/RootCanvasTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Canvas/UISystemProfilerAddMarkerWithNullObjectDoesNotCrash.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/CanvasRenderer/ParentCanvasIsSane.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/EventSystem/InterceptedEventsPreviewTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/InputField/CharacterLimitValidation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/InputField/ContentValidation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/RectMask2D/RectMask2DCulling.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/Text/FontCreatedByScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/UnityEvent/UnityEventInvoke.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Button/ButtonTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/NestedCanvas.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/RectTransformValidAfterEnable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/SiblingOrderChangesLayout.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/EventSystem/SelectableTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/ImageTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/MaskTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Image/ImageTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Layout/AspectRatioFitterTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Layout/GridLayoutGroupTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Layout/HorizonalLayoutGroupTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/ScrollRect/ScrollRectStableLayout.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Slider/SliderTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/TextEditor/TextEditorTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Util/ConcreteGraphic.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/SettingsProvider/ProjectSettings/CustomPropertyProviderSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/SettingsProvider/ProjectSettings/TypeOptionsSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/Interface/Licenses/License.CCA3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/SemanticVersion.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/UnitPreservation.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="NamedScopeManager">
+    <scope name="Scripts" pattern="file:Assets/Game//*||file:Assets/UI//*" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="SWEA" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2kmHI0tg2n4aXffOdW7erqYbgbH" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Backend notifications&quot;: &quot;Backend notifications&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-RiderAndroid&quot;: &quot;Android SDK&quot;,
+    &quot;Notification.DoNotAsk-Backend notifications&quot;: &quot;true&quot;,
+    &quot;Notification.DoNotAsk-RiderAndroid&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.36020944&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;RiderCSharpLiveTemplatesSettingsId&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.21393035&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\fury\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\fury\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\fury\\AppData\\Local\\Symbols\\src&quot;
+    ]
+  }
+}</component>
+  <component name="RiderProblemsViewState">
+    <hideBySeverity>
+      <option value="15" />
+      <option value="16" />
+      <option value="20" />
+      <option value="300" />
+    </hideBySeverity>
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="E:\Programs\Unity\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath E:\Programs\Unity\Projects\Otus_Homework -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\Programs\Unity\Projects\Otus_Homework" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="E:\Programs\Unity\Editor\2021.3.7f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\Programs\Unity\Projects\Otus_Homework -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\Programs\Unity\Projects\Otus_Homework" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager">
+    <option name="remove_strategy" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="af43e158-97c6-4f0e-a818-497d14ed34e1" name="Changes" comment="" />
+      <created>1723881748337</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723881748337</updated>
+      <workItem from="1723881749594" duration="276000" />
+      <workItem from="1723883442038" duration="10774000" />
+      <workItem from="1723969067697" duration="4536000" />
+      <workItem from="1723978189258" duration="272000" />
+      <workItem from="1723978754278" duration="683000" />
+      <workItem from="1723979467985" duration="2303000" />
+      <workItem from="1723986820066" duration="12626000" />
+      <workItem from="1724005696004" duration="20000" />
+      <workItem from="1724038127325" duration="58000" />
+      <workItem from="1724075689882" duration="5134000" />
+      <workItem from="1724162365667" duration="12264000" />
+      <workItem from="1724250137966" duration="13413000" />
+      <workItem from="1724335654877" duration="14820000" />
+      <workItem from="1724352999765" duration="144000" />
+      <workItem from="1724421948880" duration="10630000" />
+      <workItem from="1724477306957" duration="22941000" />
+      <workItem from="1724568393412" duration="30173000" />
+      <workItem from="1724611142279" duration="895000" />
+      <workItem from="1724681200073" duration="14636000" />
+      <workItem from="1724698410186" duration="231000" />
+      <workItem from="1724767902205" duration="11677000" />
+      <workItem from="1724853302137" duration="9396000" />
+      <workItem from="1724866482318" duration="1468000" />
+      <workItem from="1725102279701" duration="3331000" />
+      <workItem from="1725173330735" duration="12063000" />
+      <workItem from="1725216788390" duration="521000" />
+      <workItem from="1725285308011" duration="10732000" />
+      <workItem from="1725372600697" duration="3835000" />
+      <workItem from="1725458584819" duration="5176000" />
+      <workItem from="1725471775790" duration="2654000" />
+      <workItem from="1725475072567" duration="498000" />
+      <workItem from="1725544238669" duration="9920000" />
+      <workItem from="1725630629679" duration="2938000" />
+      <workItem from="1725634247882" duration="7641000" />
+      <workItem from="1725686722320" duration="4226000" />
+      <workItem from="1725697999061" duration="12230000" />
+      <workItem from="1725793864898" duration="5710000" />
+      <workItem from="1725892254335" duration="11393000" />
+      <workItem from="1725976920714" duration="5450000" />
+      <workItem from="1726063330569" duration="12970000" />
+      <workItem from="1726154182020" duration="6745000" />
+      <workItem from="1726253981512" duration="62000" />
+      <workItem from="1726306608243" duration="9401000" />
+      <workItem from="1726339839828" duration="94000" />
+      <workItem from="1726376952490" duration="19969000" />
+      <workItem from="1726494983413" duration="9560000" />
+      <workItem from="1726580918105" duration="9900000" />
+      <workItem from="1726592255931" duration="914000" />
+      <workItem from="1726593306885" duration="802000" />
+      <workItem from="1726668316983" duration="11000000" />
+      <workItem from="1726757091586" duration="7649000" />
+      <workItem from="1726902755811" duration="5468000" />
+      <workItem from="1726990217440" duration="10683000" />
+      <workItem from="1727193359792" duration="1156000" />
+      <workItem from="1727616697179" duration="4600000" />
+      <workItem from="1727706013366" duration="7336000" />
+      <workItem from="1727791516724" duration="6904000" />
+      <workItem from="1728130340196" duration="2315000" />
+      <workItem from="1728488635477" duration="1624000" />
+      <workItem from="1728568141463" duration="4568000" />
+      <workItem from="1728726788684" duration="3671000" />
+      <workItem from="1728807955174" duration="3016000" />
+      <workItem from="1728923454628" duration="4563000" />
+      <workItem from="1729097926034" duration="4454000" />
+      <workItem from="1729141720995" duration="2562000" />
+      <workItem from="1729232081456" duration="9896000" />
+      <workItem from="1729337899824" duration="16412000" />
+      <workItem from="1729404448544" duration="24560000" />
+      <workItem from="1729607545459" duration="8620000" />
+      <workItem from="1729703360327" duration="3680000" />
+      <workItem from="1729707222921" duration="122000" />
+      <workItem from="1729778476232" duration="7779000" />
+      <workItem from="1729947999639" duration="240000" />
+      <workItem from="1729948602529" duration="4666000" />
+      <workItem from="1730022905538" duration="18027000" />
+      <workItem from="1730136052286" duration="1107000" />
+      <workItem from="1730296004878" duration="16342000" />
+      <workItem from="1730385929009" duration="7987000" />
+      <workItem from="1731061508511" duration="21881000" />
+      <workItem from="1731134877471" duration="19871000" />
+      <workItem from="1731242785538" duration="13250000" />
+      <workItem from="1731308523834" duration="8591000" />
+      <workItem from="1731344089752" duration="1653000" />
+      <workItem from="1731419964728" duration="3887000" />
+      <workItem from="1731597758951" duration="2266000" />
+      <workItem from="1731755140631" duration="18676000" />
+      <workItem from="1731848052204" duration="4382000" />
+      <workItem from="1731935500629" duration="4967000" />
+      <workItem from="1731945241396" duration="8561000" />
+      <workItem from="1732041698136" duration="837000" />
+      <workItem from="1732111308619" duration="2431000" />
+      <workItem from="1732116098806" duration="854000" />
+      <workItem from="1732117854603" duration="400000" />
+      <workItem from="1732119874233" duration="2066000" />
+      <workItem from="1732197858473" duration="5232000" />
+      <workItem from="1732286743601" duration="1233000" />
+      <workItem from="1732434778212" duration="25362000" />
+      <workItem from="1732544556439" duration="12377000" />
+      <workItem from="1732634802443" duration="8719000" />
+      <workItem from="1732719802413" duration="6428000" />
+      <workItem from="1732801949583" duration="11781000" />
+      <workItem from="1732888849037" duration="8313000" />
+      <workItem from="1732950965428" duration="20971000" />
+      <workItem from="1733034568974" duration="6069000" />
+      <workItem from="1733043685329" duration="17783000" />
+      <workItem from="1733148950803" duration="12650000" />
+      <workItem from="1733235086662" duration="7669000" />
+      <workItem from="1733290833637" duration="13358000" />
+      <workItem from="1733389658943" duration="24310000" />
+      <workItem from="1733475415258" duration="26151000" />
+      <workItem from="1733553980844" duration="42511000" />
+      <workItem from="1733640254379" duration="34239000" />
+      <workItem from="1733850491404" duration="2632000" />
+      <workItem from="1734205108246" duration="599000" />
+      <workItem from="1734789952332" duration="6099000" />
+      <workItem from="1734853663469" duration="10667000" />
+      <workItem from="1734964562643" duration="9466000" />
+      <workItem from="1735049231516" duration="6320000" />
+      <workItem from="1735135617591" duration="9581000" />
+      <workItem from="1735220812536" duration="9794000" />
+      <workItem from="1735309354732" duration="4969000" />
+      <workItem from="1735321055754" duration="1878000" />
+      <workItem from="1735755907563" duration="1368000" />
+      <workItem from="1735804579696" duration="22658000" />
+      <workItem from="1735890586833" duration="10818000" />
+      <workItem from="1735904724929" duration="5039000" />
+      <workItem from="1735983230158" duration="8116000" />
+      <workItem from="1736008037975" duration="2667000" />
+      <workItem from="1736069101785" duration="3088000" />
+      <workItem from="1736078270698" duration="20441000" />
+      <workItem from="1736170433400" duration="13425000" />
+      <workItem from="1736259142959" duration="16315000" />
+      <workItem from="1736330245408" duration="7122000" />
+      <workItem from="1736431788423" duration="6836000" />
+      <workItem from="1736523418770" duration="6789000" />
+      <workItem from="1736586838580" duration="12416000" />
+      <workItem from="1736664478068" duration="7402000" />
+      <workItem from="1736779011015" duration="4718000" />
+      <workItem from="1736867119845" duration="8446000" />
+      <workItem from="1736951292461" duration="6584000" />
+      <workItem from="1737037102907" duration="3367000" />
+      <workItem from="1737190456486" duration="7110000" />
+      <workItem from="1737269316053" duration="19075000" />
+      <workItem from="1737382773237" duration="9825000" />
+      <workItem from="1737467634467" duration="6153000" />
+      <workItem from="1737555108231" duration="1257000" />
+      <workItem from="1737641349117" duration="5041000" />
+      <workItem from="1737795536543" duration="4062000" />
+      <workItem from="1737888049465" duration="3094000" />
+      <workItem from="1737988580569" duration="9549000" />
+      <workItem from="1738073807928" duration="613000" />
+      <workItem from="1738160150048" duration="1476000" />
+      <workItem from="1738248125174" duration="1929000" />
+      <workItem from="1738478412939" duration="9567000" />
+      <workItem from="1738593090651" duration="9183000" />
+      <workItem from="1738680037362" duration="6996000" />
+      <workItem from="1738855140739" duration="5686000" />
+      <workItem from="1738999521944" duration="13088000" />
+      <workItem from="1739198727881" duration="10314000" />
+      <workItem from="1739282668315" duration="8707000" />
+      <workItem from="1739373413360" duration="206000" />
+      <workItem from="1739373766191" duration="7463000" />
+      <workItem from="1739456829126" duration="655000" />
+      <workItem from="1739543235008" duration="8198000" />
+      <workItem from="1739605420388" duration="10712000" />
+      <workItem from="1739692723526" duration="8643000" />
+      <workItem from="1739801345824" duration="7842000" />
+      <workItem from="1739888544311" duration="6100000" />
+      <workItem from="1740062108200" duration="7319000" />
+      <workItem from="1740293149868" duration="12875000" />
+      <workItem from="1740401254462" duration="8997000" />
+      <workItem from="1740471626554" duration="12575000" />
+      <workItem from="1740549435452" duration="23544000" />
+      <workItem from="1740639999020" duration="10638000" />
+      <workItem from="1740732026265" duration="18032000" />
+      <workItem from="1740809978462" duration="39327000" />
+      <workItem from="1740895155800" duration="32650000" />
+      <workItem from="1740944125683" duration="266000" />
+      <workItem from="1740981475455" duration="30653000" />
+      <workItem from="1741098147099" duration="11299000" />
+      <workItem from="1741280904396" duration="3514000" />
+      <workItem from="1741285159677" duration="1000" />
+      <workItem from="1741285264958" duration="203000" />
+      <workItem from="1741369158437" duration="2651000" />
+      <workItem from="1741412555239" duration="8586000" />
+      <workItem from="1741713466528" duration="594000" />
+      <workItem from="1741788794766" duration="10552000" />
+      <workItem from="1741802837326" duration="272000" />
+      <workItem from="1741874893178" duration="4181000" />
+      <workItem from="1741960787878" duration="9030000" />
+      <workItem from="1742018004306" duration="16049000" />
+      <workItem from="1742114920262" duration="10809000" />
+      <workItem from="1742220550552" duration="8761000" />
+      <workItem from="1742395624993" duration="5493000" />
+      <workItem from="1742480256664" duration="4358000" />
+      <workItem from="1742620752650" duration="4832000" />
+      <workItem from="1742642907857" duration="723000" />
+      <workItem from="1742644280438" duration="9082000" />
+      <workItem from="1742670547449" duration="3040000" />
+      <workItem from="1742674609468" duration="1204000" />
+      <workItem from="1742711369561" duration="6567000" />
+      <workItem from="1742750472707" duration="819000" />
+      <workItem from="1742752413942" duration="199000" />
+      <workItem from="1742752620287" duration="1565000" />
+    </task>
+    <task id="LOCAL-00052" summary="fix/compilable">
+      <option name="closed" value="true" />
+      <created>1726068828841</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1726068828841</updated>
+    </task>
+    <task id="LOCAL-00053" summary="chore/removed config">
+      <option name="closed" value="true" />
+      <created>1726071788356</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1726071788356</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feat/startturn effects and endturntask">
+      <option name="closed" value="true" />
+      <created>1726073360852</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1726073360852</updated>
+    </task>
+    <task id="LOCAL-00055" summary="feat/cringe particles on hit">
+      <option name="closed" value="true" />
+      <created>1726074795024</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1726074795024</updated>
+    </task>
+    <task id="LOCAL-00056" summary="fix/audio player instead of source">
+      <option name="closed" value="true" />
+      <created>1726079190859</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1726079190859</updated>
+    </task>
+    <task id="LOCAL-00057" summary="fix/freeze compile">
+      <option name="closed" value="true" />
+      <created>1726159564680</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1726159564680</updated>
+    </task>
+    <task id="LOCAL-00058" summary="chore/remade team component into player component">
+      <option name="closed" value="true" />
+      <created>1726415492460</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1726415492460</updated>
+    </task>
+    <task id="LOCAL-00059" summary="chore/vse ploho">
+      <option name="closed" value="true" />
+      <created>1726423040660</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1726423040660</updated>
+    </task>
+    <task id="LOCAL-00060" summary="chore/vampiric compilable">
+      <option name="closed" value="true" />
+      <created>1726503260135</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1726503260135</updated>
+    </task>
+    <task id="LOCAL-00061" summary="feat/bad projectile">
+      <option name="closed" value="true" />
+      <created>1726508209634</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1726508209634</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fix/different abilities sounds">
+      <option name="closed" value="true" />
+      <created>1726589756946</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1726589756946</updated>
+    </task>
+    <task id="LOCAL-00063" summary="fix/another damage all particles place">
+      <option name="closed" value="true" />
+      <created>1726590252679</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1726590252679</updated>
+    </task>
+    <task id="LOCAL-00064" summary="style/rename icombatevent to iffect">
+      <option name="closed" value="true" />
+      <created>1726591972316</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1726591972316</updated>
+    </task>
+    <task id="LOCAL-00065" summary="chore/currentplayer in runner and DealDamageVisualTask.cs deleted">
+      <option name="closed" value="true" />
+      <created>1726593995062</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1726593995062</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fix/game over logic">
+      <option name="closed" value="true" />
+      <created>1726673062686</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1726673062686</updated>
+    </task>
+    <task id="LOCAL-00067" summary="style/mass code cleanup">
+      <option name="closed" value="true" />
+      <created>1726673201993</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1726673201993</updated>
+    </task>
+    <task id="LOCAL-00068" summary="fix/components">
+      <option name="closed" value="true" />
+      <created>1726673439964</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1726673439964</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fix/events">
+      <option name="closed" value="true" />
+      <created>1726675248069</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1726675248069</updated>
+    </task>
+    <task id="LOCAL-00070" summary="hell no">
+      <option name="closed" value="true" />
+      <created>1726676629618</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1726676629619</updated>
+    </task>
+    <task id="LOCAL-00071" summary="start">
+      <option name="closed" value="true" />
+      <created>1726681735137</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1726681735137</updated>
+    </task>
+    <task id="LOCAL-00072" summary="tz">
+      <option name="closed" value="true" />
+      <created>1726681847716</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1726681847716</updated>
+    </task>
+    <task id="LOCAL-00073" summary="chore/time manager">
+      <option name="closed" value="true" />
+      <created>1726770298305</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1726770298305</updated>
+    </task>
+    <task id="LOCAL-00074" summary="ntng">
+      <option name="closed" value="true" />
+      <created>1727030023024</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1727030023024</updated>
+    </task>
+    <task id="LOCAL-00075" summary="chore/scene">
+      <option name="closed" value="true" />
+      <created>1727791574897</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1727791574897</updated>
+    </task>
+    <task id="LOCAL-00076" summary="chore/compile">
+      <option name="closed" value="true" />
+      <created>1727806366229</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1727806366229</updated>
+    </task>
+    <task id="LOCAL-00077" summary="g">
+      <option name="closed" value="true" />
+      <created>1728929051678</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1728929051678</updated>
+    </task>
+    <task id="LOCAL-00078" summary="start of separating">
+      <option name="closed" value="true" />
+      <created>1729416461229</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1729416461229</updated>
+    </task>
+    <task id="LOCAL-00079" summary="hz">
+      <option name="closed" value="true" />
+      <created>1729432883395</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1729432883395</updated>
+    </task>
+    <task id="LOCAL-00080" summary="d">
+      <option name="closed" value="true" />
+      <created>1729449293866</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1729449293866</updated>
+    </task>
+    <task id="LOCAL-00081" summary="fix/compilable">
+      <option name="closed" value="true" />
+      <created>1729612078239</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1729612078240</updated>
+    </task>
+    <task id="LOCAL-00082" summary="fix/crutched servertimemanager initialization">
+      <option name="closed" value="true" />
+      <created>1729612588241</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1729612588241</updated>
+    </task>
+    <task id="LOCAL-00083" summary="fix/compile fixes">
+      <option name="closed" value="true" />
+      <created>1729707319620</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1729707319620</updated>
+    </task>
+    <task id="LOCAL-00084" summary="fix/chests saveload settings">
+      <option name="closed" value="true" />
+      <created>1729787863854</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1729787863854</updated>
+    </task>
+    <task id="LOCAL-00085" summary="style/scene tweaks">
+      <option name="closed" value="true" />
+      <created>1729789017060</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1729789017060</updated>
+    </task>
+    <task id="LOCAL-00086" summary="style/code cleanup">
+      <option name="closed" value="true" />
+      <created>1729789196027</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1729789196027</updated>
+    </task>
+    <task id="LOCAL-00087" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1729948694362</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1729948694362</updated>
+    </task>
+    <task id="LOCAL-00088" summary="feat/add needed logic">
+      <option name="closed" value="true" />
+      <created>1730050301200</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1730050301200</updated>
+    </task>
+    <task id="LOCAL-00089" summary="style/cleanup">
+      <option name="closed" value="true" />
+      <created>1730052053093</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1730052053093</updated>
+    </task>
+    <task id="LOCAL-00090" summary="fix/make another Btree">
+      <option name="closed" value="true" />
+      <created>1730304237477</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1730304237477</updated>
+    </task>
+    <task id="LOCAL-00091" summary="style/cleanup with 3 branches">
+      <option name="closed" value="true" />
+      <created>1730312474419</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1730312474419</updated>
+    </task>
+    <task id="LOCAL-00092" summary="fix/two branch tree">
+      <option name="closed" value="true" />
+      <created>1730395125625</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1730395125625</updated>
+    </task>
+    <task id="LOCAL-00093" summary="initial">
+      <option name="closed" value="true" />
+      <created>1731062280784</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1731062280784</updated>
+    </task>
+    <task id="LOCAL-00094" summary="feat/equipment">
+      <option name="closed" value="true" />
+      <created>1731155659768</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1731155659768</updated>
+    </task>
+    <task id="LOCAL-00095" summary="style/code cleanup">
+      <option name="closed" value="true" />
+      <created>1731156701710</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1731156701710</updated>
+    </task>
+    <task id="LOCAL-00096" summary="fix/separate components for equipment">
+      <option name="closed" value="true" />
+      <created>1731158264047</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1731158264047</updated>
+    </task>
+    <task id="LOCAL-00097" summary="refac/add function of  equipmentitem to inventoryitem">
+      <option name="closed" value="true" />
+      <created>1731251877926</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1731251877926</updated>
+    </task>
+    <task id="LOCAL-00098" summary="feat/add equipment controller to connect w/ inventory">
+      <option name="closed" value="true" />
+      <created>1731322253333</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1731322253333</updated>
+    </task>
+    <task id="LOCAL-00099" summary="style/remove unused and code cleanup">
+      <option name="closed" value="true" />
+      <created>1731322316193</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1731322316193</updated>
+    </task>
+    <task id="LOCAL-00100" summary="initial setup">
+      <option name="closed" value="true" />
+      <created>1732116469697</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1732116469697</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="dc05ef49-d2f1-4041-9486-8739e8f78afb" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/Eighth_EventBus" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="dc05ef49-d2f1-4041-9486-8739e8f78afb">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="chore/scene" />
+    <MESSAGE value="chore/compile" />
+    <MESSAGE value="g" />
+    <MESSAGE value="start of separating" />
+    <MESSAGE value="hz" />
+    <MESSAGE value="d" />
+    <MESSAGE value="fix/compilable" />
+    <MESSAGE value="fix/crutched servertimemanager initialization" />
+    <MESSAGE value="fix/compile fixes" />
+    <MESSAGE value="fix/chests saveload settings" />
+    <MESSAGE value="style/scene tweaks" />
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="feat/add needed logic" />
+    <MESSAGE value="style/cleanup" />
+    <MESSAGE value="fix/make another Btree" />
+    <MESSAGE value="style/cleanup with 3 branches" />
+    <MESSAGE value="fix/two branch tree" />
+    <MESSAGE value="initial" />
+    <MESSAGE value="feat/equipment" />
+    <MESSAGE value="style/code cleanup" />
+    <MESSAGE value="fix/separate components for equipment" />
+    <MESSAGE value="refac/add function of  equipmentitem to inventoryitem" />
+    <MESSAGE value="feat/add equipment controller to connect w/ inventory" />
+    <MESSAGE value="style/remove unused and code cleanup" />
+    <MESSAGE value="initial setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial setup" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#System.Collections.Generic.KeyValuePair`2" memberName="value" />
+        <PinnedItemInfo parentTag="Type#Atomic.Entities.EntityWorld" memberName="EntityCount" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
+        <watch expression="evt" />
+        <watch expression="((Atomic.Entities.EntityWorld) _world).EntityCount" />
+        <watch expression="Results = Expanding will force enumeration of the object" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,47 @@
+Index: Assets/Game/Pipeline/Tasks/Logic/AIInputTask.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Linq;\r\nusing Cysharp.Threading.Tasks;\r\nusing Entities;\r\nusing UI;\r\nusing UnityEngine;\r\nusing Zenject;\r\nusing Random = UnityEngine.Random;\r\n\r\nnamespace EventBus\r\n{\r\n\tpublic class AIInputTask : EventTask\r\n\t{\r\n\t\tprivate readonly EventBus _eventBus;\r\n\t\tprivate readonly HeroListView _playerHeroListView;\r\n\t\tprivate readonly CurrentHeroService _currentHeroService;\r\n\r\n\t\t[Inject]\r\n\t\tpublic AIInputTask(EventBus eventBus, UIService uiservice, CurrentHeroService currentHeroService)\r\n\t\t{\r\n\t\t\t_eventBus = eventBus;\r\n\t\t\t_playerHeroListView = uiservice.GetBluePlayer();\r\n\t\t\t_currentHeroService = currentHeroService;\r\n\t\t}\r\n\r\n\t\tprotected override async void OnRun()\r\n\t\t{\r\n\t\t\tDebug.Log(\"AI input task OnRun\");\r\n\r\n\t\t\tawait UniTask.Delay(TimeSpan.FromSeconds(1));\r\n\t\t\tvar currentHero = _currentHeroService.CurrentHero;\r\n\r\n\t\t\tif (currentHero.HasData<FrozenComponent>())\r\n\t\t\t{\r\n\t\t\t\t_eventBus.RaiseEvent(new RemoveFrozenEvent(currentHero));\r\n\t\t\t\tFinish();\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\r\n\r\n\t\t\tvar playerHeroViews = _playerHeroListView.GetViews();\r\n\t\t\tvar activePlayerHeroView = playerHeroViews.Where(view => view.isActiveAndEnabled).ToArray();\r\n\r\n\t\t\tif (!activePlayerHeroView.Any())\r\n\t\t\t{\r\n\t\t\t\tDebug.Log(\"No targets\");\r\n\t\t\t\treturn;\r\n\t\t\t}\r\n\r\n\t\t\tvar index = Random.Range(0, activePlayerHeroView.Length);\r\n\t\t\tvar hero = activePlayerHeroView[index];\r\n\r\n\t\t\tif (currentHero.TryGetData(out AttackWrongTargetComponent attackWrongTargetComponent))\r\n\t\t\t{\r\n\t\t\t\t_eventBus.RaiseEvent(new AttackWrongTargetEvent(attackWrongTargetComponent.Probability,\r\n\t\t\t\t\thero.GetComponent<HeroEntity>()));\r\n\t\t\t}\r\n\t\t\telse\r\n\t\t\t{\r\n\t\t\t\t_eventBus.RaiseEvent(new AttackEvent(currentHero, hero.GetComponent<HeroEntity>()));\r\n\t\t\t}\r\n\r\n\t\t\tFinish();\r\n\t\t}\r\n\t}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Game/Pipeline/Tasks/Logic/AIInputTask.cs b/Assets/Game/Pipeline/Tasks/Logic/AIInputTask.cs
+--- a/Assets/Game/Pipeline/Tasks/Logic/AIInputTask.cs	(revision 740bc197533d1bfe9d395359e872398999fb2669)
++++ b/Assets/Game/Pipeline/Tasks/Logic/AIInputTask.cs	(date 1726677320768)
+@@ -12,17 +12,25 @@
+ 	public class AIInputTask : EventTask
+ 	{
+ 		private readonly EventBus _eventBus;
+-		private readonly HeroListView _playerHeroListView;
++		private HeroListView _enemyHeroListView;
+ 		private readonly CurrentHeroService _currentHeroService;
++		private readonly UIService _uiService;
+ 
+ 		[Inject]
+ 		public AIInputTask(EventBus eventBus, UIService uiservice, CurrentHeroService currentHeroService)
+ 		{
+ 			_eventBus = eventBus;
+-			_playerHeroListView = uiservice.GetBluePlayer();
++			_uiService = uiservice;
+ 			_currentHeroService = currentHeroService;
+ 		}
+ 
++		public void SetPlayer(Player player)
++		{
++			_enemyHeroListView = player == Player.Blue
++				? _uiService.GetRedPlayer()
++				: _uiService.GetBluePlayer();
++		}
++
+ 		protected override async void OnRun()
+ 		{
+ 			Debug.Log("AI input task OnRun");
+@@ -38,7 +46,7 @@
+ 			}
+ 
+ 
+-			var playerHeroViews = _playerHeroListView.GetViews();
++			var playerHeroViews = _enemyHeroListView.GetViews();
+ 			var activePlayerHeroView = playerHeroViews.Where(view => view.isActiveAndEnabled).ToArray();
+ 
+ 			if (!activePlayerHeroView.Any())
