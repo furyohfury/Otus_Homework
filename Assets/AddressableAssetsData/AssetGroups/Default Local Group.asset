@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f2d5b225d555a044a6ee4c94df4a05a
+    m_Address: Assets/Game/Configs/PreloadAssetsConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8637a88b75bfc7546b0307a16896045a, type: 2}
   m_SchemaSet:
