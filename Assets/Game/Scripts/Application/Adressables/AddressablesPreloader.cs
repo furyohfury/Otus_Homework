@@ -6,7 +6,7 @@ namespace SampleGame
 {
 	public static class AddressablesPreloader
 	{
-		private const string PATH = "Assets/Game/Configs/PreloadAssetsConfig.asset";
+		private const string PATH = "PreloadAssetsConfig";
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		public static async void PreloadEverything()

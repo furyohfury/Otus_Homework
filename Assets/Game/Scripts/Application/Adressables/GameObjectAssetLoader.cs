@@ -36,12 +36,13 @@ namespace SampleGame
 
 		private void OnCompleted(AsyncOperationHandle<GameObject> handle)
 		{
-			_diContainer.InstantiatePrefab(handle.Result, _spawnPoint.parent);
+			_diContainer.InstantiatePrefab(handle.Result, _spawnPoint.position, _spawnPoint.rotation, _spawnPoint.parent);
+			Destroy(_spawnPoint.gameObject);
 		}
 
 		private void OnDestroy()
 		{
-			_assetReference.Release();
+			_assetReference.ReleaseAsset();
 		}
 	}
 }

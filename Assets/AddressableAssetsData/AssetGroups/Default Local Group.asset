@@ -23,17 +23,37 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e4558fee079a4560a88243884ada50e
-    m_Address: Assets/Game/Prefabs/UI/MenuScreen.prefab
+    m_Address: MenuScreen
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4d3b77ff19d204d1cb351de63cb12c50
-    m_Address: Assets/Game/Prefabs/UI/PauseScreen.prefab
+    m_Address: PauseScreen
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f2d5b225d555a044a6ee4c94df4a05a
-    m_Address: Assets/Game/Configs/PreloadAssetsConfig.asset
+    m_Address: PreloadAssetsConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfbf4d98ce8ce044f9024746522f5ff5
+    m_Address: Location4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b3e766df24c8ec40a33f4c05fb85eb4
+    m_Address: Location3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6f75e2cce5f48f45b5a15a7a8576ffd
+    m_Address: Location2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdf944a3aa8b4f04e911c7c294c1708a
+    m_Address: Location1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
