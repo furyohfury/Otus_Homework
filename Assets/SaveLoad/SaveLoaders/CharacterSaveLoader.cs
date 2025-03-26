@@ -47,7 +47,7 @@ namespace SaveLoad
 				playerTransform.rotation,
 				playerEntity.GetHealth().Value,
 				playerEntity.GetMoveSpeed().Value,
-				playerRB.velocity,
+				playerRB.linearVelocity,
 				playerEntity.GetJumpForce().Value,
 				weaponId);
 		}
@@ -72,7 +72,7 @@ namespace SaveLoad
 			playerTransform.rotation = data.Rotation;
 			playerEntity.GetHealth().Value = data.Health;
 			playerEntity.GetMoveSpeed().Value = data.MoveSpeed;
-			playerRB.velocity = data.Velocity;
+			playerRB.linearVelocity = data.Velocity;
 			playerEntity.GetJumpForce().Value = data.JumpForce;
 		}
 

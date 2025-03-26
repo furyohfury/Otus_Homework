@@ -143,7 +143,7 @@ namespace GameDebug
 		[Button] [TabGroup("Entities")]
 		private void ApplyVelocity(Vector2 velocity)
 		{
-			_rigidbody2D.velocity += velocity;
+			_rigidbody2D.linearVelocity += velocity;
 		}
 
 		[Button] [TabGroup("Entities")]

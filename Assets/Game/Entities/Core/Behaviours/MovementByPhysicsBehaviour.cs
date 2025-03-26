@@ -41,14 +41,14 @@ namespace Game
 
 		public void Enable(IEntity entity)
 		{
-			_rigidbody.velocity = _cachedVelocity;
+			_rigidbody.linearVelocity = _cachedVelocity;
 			_rigidbody.isKinematic = false;
 		}
 
 		public void Disable(IEntity entity)
 		{
-			_cachedVelocity = _rigidbody.velocity;
-			_rigidbody.velocity = Vector2.zero;
+			_cachedVelocity = _rigidbody.linearVelocity;
+			_rigidbody.linearVelocity = Vector2.zero;
 			_rigidbody.isKinematic = true;
 		}
 	}

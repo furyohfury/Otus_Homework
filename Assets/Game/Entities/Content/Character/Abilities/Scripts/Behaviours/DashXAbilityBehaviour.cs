@@ -23,7 +23,7 @@ namespace Game
 
 		private void OnDashAbility()
 		{
-			_rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+			_rigidbody.linearVelocity = new Vector2(0, _rigidbody.linearVelocity.y);
 			var direction = _target.Invoke() - _rigidbody.position;
 			var sign = Mathf.Sign(direction.x);
 

@@ -89,7 +89,7 @@ namespace Game
 
 				if (otherEntity.TryGetRigidbody2D(out Rigidbody2D rb))
 				{
-					rb.velocity = new Vector2(rb.velocity.x, 0);
+					rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
 					rb.AddExplosionForce2D(_explosionForce,
 						_transform.position,
 						_explosionRadius,

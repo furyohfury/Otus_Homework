@@ -57,7 +57,7 @@ namespace Game
 			if (other.TryGetEntity(out IEntity entity)
 			    && entity.TryGetRigidbody2D(out Rigidbody2D rigidbody2D))
 			{
-				_cachedVelocity = rigidbody2D.velocity;
+				_cachedVelocity = rigidbody2D.linearVelocity;
 			}
 		}
 
@@ -73,7 +73,7 @@ namespace Game
 			if (CanDestroy(collision2D.relativeVelocity))
 			{
 				_broken = true;
-				collisionRb.velocity = _cachedVelocity;
+				collisionRb.linearVelocity = _cachedVelocity;
 				_collider.enabled = false;
 				DestroyWall();
 			}

@@ -20,7 +20,7 @@ namespace Game
 
 		private void OnJumpAbility()
 		{
-			_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+			_rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, 0);
 			_jumpEvent.Invoke();
 		}
 
