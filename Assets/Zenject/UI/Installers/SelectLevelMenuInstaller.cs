@@ -1,18 +1,14 @@
-﻿using System.Collections.Generic;
-using Game;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace UI
 {
-	public sealed class SelectLevelMenuInstaller : MonoInstaller // TODO dictionaries to configs
+	public sealed class SelectLevelMenuInstaller : MonoInstaller
 	{
 		[SerializeField]
 		private LevelCardView _levelCardViewPrefab;
 		[SerializeField] [Space]
-		private Dictionary<Cups, Sprite> _cupsSprite;
-		[SerializeField] [Space]
-		private Dictionary<string, Sprite> _levelsIcons;
+		private LevelCardCupSprites _cupSprites;
 		[SerializeField]
 		private Transform _container;
 		[SerializeField]
@@ -35,7 +31,7 @@ namespace UI
 		{
 			Container.BindInterfacesAndSelfTo<LevelCardPresenterFactory>()
 			         .AsCached()
-			         .WithArguments(_cupsSprite);
+			         .WithArguments(_cupSprites.CupSprites);
 
 			Container.BindInterfacesAndSelfTo<LevelCardViewFactory>()
 			         .AsCached()
