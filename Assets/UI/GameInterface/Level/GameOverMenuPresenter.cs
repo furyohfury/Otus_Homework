@@ -14,23 +14,21 @@ namespace UI
 		private readonly PlayerService _playerService;
 		private IFunction<bool> _playerIsDead;
 
-		private readonly GameOverMenuView _view;
+		private readonly GameOverMenuView _gameOverView;
 		private readonly LevelManager _levelManager;
-		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public GameOverMenuPresenter(GameOverMenuView view, LevelManager levelManager, GameStateManager gameStateManager, PlayerService playerService)
+		public GameOverMenuPresenter(GameOverMenuView view, LevelManager levelManager, PlayerService playerService)
 		{
-			_view = view;
+			_gameOverView = view;
 			_levelManager = levelManager;
-			_gameStateManager = gameStateManager;
 			_playerService = playerService;
 		}
 
 		public void Initialize()
 		{
-			_view.OnResetButtonClicked += OnResetButtonClicked;
-			_view.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
+			_gameOverView.OnResetButtonClicked += OnResetButtonClicked;
+			_gameOverView.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
 
 			if (_playerService.Player.TryGetIsDead(out BaseFunction<bool> isDead) == false)
 			{
@@ -43,7 +41,7 @@ namespace UI
 
 		private void OnResetButtonClicked()
 		{
-			_view.gameObject.SetActive(false);
+			_gameOverView.gameObject.SetActive(false);
 			_levelManager.ResetLevel();
 		}
 
@@ -56,15 +54,15 @@ namespace UI
 		{
 			if (_playerIsDead.Invoke())
 			{
-				_gameStateManager.ChangeState(GameState.Pause);
-				_view.gameObject.SetActive(true);
+				_levelManager.PauseLevel();
+				_gameOverView.gameObject.SetActive(true);
 			}
 		}
 
 		public void Dispose()
 		{
-			_view.OnResetButtonClicked -= OnResetButtonClicked;
-			_view.OnMainMenuButtonClicked -= OnMainMenuButtonClicked;
+			_gameOverView.OnResetButtonClicked -= OnResetButtonClicked;
+			_gameOverView.OnMainMenuButtonClicked -= OnMainMenuButtonClicked;
 		}
 	}
 }
