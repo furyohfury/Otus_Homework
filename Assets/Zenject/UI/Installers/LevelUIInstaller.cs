@@ -56,10 +56,6 @@ namespace UI
 			Container.BindInterfacesTo<FinishLevelCupsListPresenter>()
 			         .AsCached();
 
-			Container.BindInterfacesAndSelfTo<CharacterDeathUIObserver>()
-			         .AsSingle()
-			         .WithArguments(_gameOverMenuView);
-
 			Container.BindInterfacesAndSelfTo<EnemyCountUIController>()
 			         .AsSingle()
 			         .WithArguments(_enemyCount);
