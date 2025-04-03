@@ -9,12 +9,12 @@ namespace UI
 	{
 		private Dictionary<string, List<TimeSpan>> _savedResults;
 
-		private readonly LevelMiniaturePresenterFactory _presenterFactory;
+		private readonly LevelCardPresenterFactory _presenterFactory;
 		private readonly LevelsDataService _levelsDataService;
-		private readonly List<LevelMiniaturePresenter> _levelMiniaturePresenters = new();
+		private readonly List<LevelCardPresenter> _levelMiniaturePresenters = new();
 
 		[Inject]
-		public SelectLevelMenuPresenter(LevelMiniaturePresenterFactory presenterFactory, LevelsDataService levelsDataService)
+		public SelectLevelMenuPresenter(LevelCardPresenterFactory presenterFactory, LevelsDataService levelsDataService)
 		{
 			_presenterFactory = presenterFactory;
 			_levelsDataService = levelsDataService;
@@ -25,16 +25,16 @@ namespace UI
 			return _levelsDataService.GetLevelNames();
 		}
 
-		public void OnLevelMiniatureViewCreated(LevelMiniatureView miniatureView, string level)
+		public void OnLevelMiniatureViewCreated(LevelCardView cardView, string level)
 		{
-			LevelMiniaturePresenter presenter;
+			LevelCardPresenter presenter;
 			if (_savedResults.TryGetValue(level, out List<TimeSpan> levelResults))
 			{
-				presenter = _presenterFactory.Create(level, miniatureView, levelResults);
+				presenter = _presenterFactory.Create(level, cardView, levelResults);
 			}
 			else
 			{
-				presenter = _presenterFactory.Create(level, miniatureView);
+				presenter = _presenterFactory.Create(level, cardView);
 			}
 
 			_levelMiniaturePresenters.Add(presenter);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-	public sealed class LevelMiniatureView : MonoBehaviour
+	public sealed class LevelCardView : MonoBehaviour
 	{
 		public event UnityAction OnChooseLevelButtonClicked
 		{

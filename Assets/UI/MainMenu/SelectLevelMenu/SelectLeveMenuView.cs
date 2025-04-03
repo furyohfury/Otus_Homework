@@ -10,17 +10,17 @@ namespace UI
 		[SerializeField]
 		private Transform _container;
 		private SelectLevelMenuPresenter _presenter;
-		private LevelMiniatureViewFactory _levelMiniatureViewFactory;
-		private readonly List<LevelMiniatureView> _views = new();
+		private LevelCardViewFactory _levelCardViewFactory;
+		private readonly List<LevelCardView> _views = new();
 
 		[SerializeField]
 		private Button _closeButton;
 
 		[Inject]
-		private void Construct(SelectLevelMenuPresenter presenter, LevelMiniatureViewFactory levelMiniatureViewFactory)
+		private void Construct(SelectLevelMenuPresenter presenter, LevelCardViewFactory levelCardViewFactory)
 		{
 			_presenter = presenter;
-			_levelMiniatureViewFactory = levelMiniatureViewFactory;
+			_levelCardViewFactory = levelCardViewFactory;
 		}
 
 		public void Show()
@@ -42,7 +42,7 @@ namespace UI
 			for (int i = 0, count = levels.Length; i < count; i++)
 			{
 				var level = levels[i];
-				var miniatureView = _levelMiniatureViewFactory.Create(_container);
+				var miniatureView = _levelCardViewFactory.Create(_container);
 				_views.Add(miniatureView);
 				_presenter.OnLevelMiniatureViewCreated(miniatureView, level);
 			}

@@ -7,26 +7,26 @@ using Zenject;
 
 namespace UI
 {
-	public sealed class LevelMiniaturePresenterFactory
+	public sealed class LevelCardPresenterFactory
 	{
 		private readonly LevelsDataService _levelsDataService;
 
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
 
 		[Inject]
-		public LevelMiniaturePresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites
+		public LevelCardPresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites
 			, LevelsDataService levelsDataService)
 		{
 			_cupsSprites = cupsSprites;
 			_levelsDataService = levelsDataService;
 		}
 
-		public LevelMiniaturePresenter Create(string level, LevelMiniatureView view, List<TimeSpan> levelResults = null)
+		public LevelCardPresenter Create(string level, LevelCardView view, List<TimeSpan> levelResults = null)
 		{
 			_levelsDataService.TryGetLevelTargetTimes(level, out Dictionary<Cups, TimeSpan> targetTimes);
 			var icon = _levelsDataService.GetLevelIcon(level);
 			var scene = _levelsDataService.GetSceneName(level);
-			var presenter = new LevelMiniaturePresenter(level,
+			var presenter = new LevelCardPresenter(level,
 				scene,
 				icon,
 				view,

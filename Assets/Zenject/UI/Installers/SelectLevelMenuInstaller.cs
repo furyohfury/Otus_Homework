@@ -8,7 +8,7 @@ namespace UI
 	public sealed class SelectLevelMenuInstaller : MonoInstaller // TODO dictionaries to configs
 	{
 		[SerializeField]
-		private LevelMiniatureView _levelMiniatureViewPrefab;
+		private LevelCardView _levelCardViewPrefab;
 		[SerializeField] [Space]
 		private Dictionary<Cups, Sprite> _cupsSprite;
 		[SerializeField] [Space]
@@ -33,13 +33,13 @@ namespace UI
 
 		private void InstallFactories()
 		{
-			Container.BindInterfacesAndSelfTo<LevelMiniaturePresenterFactory>()
+			Container.BindInterfacesAndSelfTo<LevelCardPresenterFactory>()
 			         .AsCached()
 			         .WithArguments(_cupsSprite);
 
-			Container.BindInterfacesAndSelfTo<LevelMiniatureViewFactory>()
+			Container.BindInterfacesAndSelfTo<LevelCardViewFactory>()
 			         .AsCached()
-			         .WithArguments(_levelMiniatureViewPrefab);
+			         .WithArguments(_levelCardViewPrefab);
 		}
 
 		private void InstallSelectLevelMenu()

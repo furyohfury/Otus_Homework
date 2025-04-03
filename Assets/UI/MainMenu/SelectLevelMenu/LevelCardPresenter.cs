@@ -7,18 +7,18 @@ using UnityEngine;
 
 namespace UI
 {
-	public sealed class LevelMiniaturePresenter
+	public sealed class LevelCardPresenter
 	{
 		private readonly string _levelName;
 		private readonly string _scene;
-		private readonly LevelMiniatureView _view;
+		private readonly LevelCardView _view;
 		private readonly List<TimeSpan> _savedResults;
 		private readonly Sprite _icon;
 
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
 		private readonly Dictionary<Cups, TimeSpan> _targetTimes;
 
-		public LevelMiniaturePresenter(string levelName, string scene, Sprite icon, LevelMiniatureView view
+		public LevelCardPresenter(string levelName, string scene, Sprite icon, LevelCardView view
 			, List<TimeSpan> savedResults, Dictionary<Cups, Sprite> cupsSprites, Dictionary<Cups, TimeSpan> targetTimes)
 		{
 			_levelName = levelName;
