@@ -93,7 +93,7 @@ namespace Game
 			entity.AddIsGrounded(isGrounded);
 
 			// Behaviours
-			entity.AddBehaviour(new MovementByPhysicsBehaviour());
+			entity.AddBehaviour(new MovementByPhysicsAxisXBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());
 			entity.AddBehaviour(new RotateToTarget2DBehaviour());
 		}

@@ -105,7 +105,7 @@ namespace Game.Entities
 			entity.AddJumpEvent(new BaseEvent());
 
 			// Behaviours
-			entity.AddBehaviour(new MovementByPhysicsBehaviour());
+			entity.AddBehaviour(new MovementByPhysicsAxisXBehaviour());
 			entity.AddBehaviour(new JumpRequestBehaviour());
 			entity.AddBehaviour(new JumpEventBehaviour());
 			entity.AddBehaviour(new MovementAnimatorBehaviour());

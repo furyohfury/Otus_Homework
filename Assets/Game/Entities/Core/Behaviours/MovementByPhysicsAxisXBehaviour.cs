@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class MovementByPhysicsBehaviour : IEntityInit, IEntityFixedUpdate, IEntityEnable, IEntityDisable
+	public sealed class MovementByPhysicsAxisXBehaviour : IEntityInit, IEntityFixedUpdate, IEntityEnable, IEntityDisable
 	{
 		private IValue<Vector2> _moveDirection;
 		private IValue<float> _moveSpeed;
@@ -36,20 +36,20 @@ namespace Game
 				return;
 			}
 
-			_rigidbody.AddForce(_moveDirection.Value * _moveSpeed.Value);
+			_rigidbody.AddForce(new Vector2(_moveDirection.Value.x * _moveSpeed.Value, 0));
 		}
 
 		public void Enable(IEntity entity)
 		{
 			_rigidbody.linearVelocity = _cachedVelocity;
-			_rigidbody.isKinematic = false;
+			_rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		}
 
 		public void Disable(IEntity entity)
 		{
 			_cachedVelocity = _rigidbody.linearVelocity;
 			_rigidbody.linearVelocity = Vector2.zero;
-			_rigidbody.isKinematic = true;
+			_rigidbody.bodyType = RigidbodyType2D.Kinematic;
 		}
 	}
 }
