@@ -11,6 +11,8 @@ namespace Game
 		private string _id = "Spikes";
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
+		[SerializeField] 
+		private Transform _transform;
 		[SerializeField]
 		private int _damage;
 		[SerializeField]
@@ -18,13 +20,14 @@ namespace Game
 
 		private IEntity _entity;
 		private readonly HashSet<IEntity> _damagedEntities = new();
-		
+
 
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
 			entity.AddTag(TagAPI.LevelEntity);
 			entity.AddId(_id);
+			entity.AddVisualTransform(_transform);
 			_triggerReceiver.OnTriggerStay += OnCollided;
 		}
 
