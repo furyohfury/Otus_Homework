@@ -18,6 +18,15 @@ namespace Game
 			}
 		}
 
+		public static Vector2 RightStickDirection
+		{
+			get
+			{
+				var val = Gamepad.current.rightStick.ReadValue();
+				return val.normalized;
+			}
+		}
+
 		public event Action<Vector2> OnMove;
 		public event Action OnJumped;
 		public event Action OnAttacked;
