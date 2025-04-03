@@ -51,6 +51,18 @@ namespace Game
 #endif
 		}
 
+		public void PauseLevel()
+		{
+			_levelTimer.Pause();
+			_entityWorld.DisableEntities();
+		}
+
+		public void ResumeLevel()
+		{
+			_levelTimer.Resume();
+			_entityWorld.EnableEntities();
+		}
+
 		public void ResetLevel()
 		{
 			_saveLoadManager.Load();
