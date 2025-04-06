@@ -245,12 +245,20 @@ namespace Atomic.Entities
 
         public bool DelTag(int tag)
         {
-            return entity.DelTag(tag);
+            bool result = entity.DelTag(tag);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool ClearTags()
         {
-            return entity.ClearTags();
+            bool result = entity.ClearTags();
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool HasTag(int tag)
@@ -260,7 +268,11 @@ namespace Atomic.Entities
 
         public bool AddTag(int tag)
         {
-            return entity.AddTag(tag);
+            bool result = entity.AddTag(tag);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         #endregion
@@ -318,27 +330,45 @@ namespace Atomic.Entities
 
         public bool AddValue(int id, object value)
         {
-            return entity.AddValue(id, value);
+            bool result = entity.AddValue(id, value);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool DelValue(int id)
         {
-            return entity.DelValue(id);
+            bool result = entity.DelValue(id);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool DelValue(int id, out object removed)
         {
-            return entity.DelValue(id, out removed);
+            bool result = entity.DelValue(id, out removed);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public void SetValue(int id, object value)
         {
             entity.SetValue(id, value);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
         }
 
         public void SetValue(int id, object value, out object previous)
         {
             entity.SetValue(id, value, out previous);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
         }
 
         public bool HasValue(int id)
@@ -348,7 +378,11 @@ namespace Atomic.Entities
 
         public bool ClearValues()
         {
-            return entity.ClearValues();
+            bool result = entity.ClearValues();
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         #endregion
@@ -380,12 +414,20 @@ namespace Atomic.Entities
 
         public bool AddBehaviour(IEntityBehaviour behaviour)
         {
-            return entity.AddBehaviour(behaviour);
+            bool result = entity.AddBehaviour(behaviour);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool DelBehaviour(IEntityBehaviour behaviour)
         {
-            return entity.DelBehaviour(behaviour);
+            bool result = entity.DelBehaviour(behaviour);
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         public bool HasBehaviour(IEntityBehaviour behaviour)
@@ -395,7 +437,11 @@ namespace Atomic.Entities
 
         public bool ClearBehaviours()
         {
-            return entity.ClearBehaviours();
+            bool result = entity.ClearBehaviours();
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
+            return result;
         }
 
         #endregion
@@ -409,20 +455,18 @@ namespace Atomic.Entities
 
         public static SceneEntity Instantiate(SceneEntity prefab, Transform parent = null)
         {
+            SceneEntity entity;
             if (parent == null)
             {
-                SceneEntity entity = GameObject.Instantiate(prefab);
-                entity.Install();
-                OnInstantiated?.Invoke(entity);
-                return entity;
+                entity = GameObject.Instantiate(prefab);
             }
             else
             {
-                SceneEntity entity = GameObject.Instantiate(prefab, parent);
-                entity.Install();
-                OnInstantiated?.Invoke(entity);
-                return entity;
+                entity = GameObject.Instantiate(prefab, parent);
             }
+            entity.Install();
+            OnInstantiated?.Invoke(entity);
+            return entity;
         }
 
         public static SceneEntity Instantiate(SceneEntity prefab, Vector3 pos, Quaternion rot, Transform parent = null)
@@ -549,11 +593,14 @@ namespace Atomic.Entities
 
         private void SetRefreshCallbackToInstallers()
         {
-            foreach (SceneEntityInstallerBase installer in this.installPipeline)
+            if (this.installPipeline != null)
             {
-                if (installer != null)
+                foreach (SceneEntityInstallerBase installer in this.installPipeline)
                 {
-                    installer.mRefreshCallback = this.RefreshInEditMode;
+                    if (installer != null)
+                    {
+                        installer.mRefreshCallback = this.RefreshInEditMode;
+                    }
                 }
             }
         }
@@ -588,6 +635,9 @@ namespace Atomic.Entities
                 this.InitInEditMode();
                 this.EnableInEditMode();
             }
+#if UNITY_EDITOR && ODIN_INSPECTOR
+            InvalidateDebugCache();
+#endif
         }
 
         private bool ExecuteAlwaysAnnotated(IEntityBehaviour entity)
@@ -636,9 +686,9 @@ namespace Atomic.Entities
 
             foreach (IEntityBehaviour behaviour in entity.Behaviours)
             {
-                if (behaviour is IEntityEnable dispose && this.ExecuteAlwaysAnnotated(behaviour))
+                if (behaviour is IEntityEnable enable && this.ExecuteAlwaysAnnotated(behaviour))
                 {
-                    dispose.Enable(entity);
+                    enable.Enable(entity);
                 }
             }
         }
@@ -652,9 +702,9 @@ namespace Atomic.Entities
 
             foreach (IEntityBehaviour behaviour in entity.Behaviours)
             {
-                if (behaviour is IEntityInit dispose && this.ExecuteAlwaysAnnotated(behaviour))
+                if (behaviour is IEntityInit init && this.ExecuteAlwaysAnnotated(behaviour))
                 {
-                    dispose.Init(entity);
+                    init.Init(entity);
                 }
             }
         }
@@ -681,6 +731,23 @@ namespace Atomic.Entities
 
 #if UNITY_EDITOR && ODIN_INSPECTOR
 
+        // Кэш и флаги для отладочных списков
+        private bool _tagElementsDirty = true;
+        private List<TagElement> _tagElementsCache = new List<TagElement>();
+
+        private bool _valueElementsDirty = true;
+        private List<ValueElement> _valueElementsCache = new List<ValueElement>();
+
+        private bool _logicElementsDirty = true;
+        private List<LogicElement> _logicElementsCache = new List<LogicElement>();
+
+        private void InvalidateDebugCache()
+        {
+            _tagElementsDirty = true;
+            _valueElementsDirty = true;
+            _logicElementsDirty = true;
+        }
+
         [FoldoutGroup("Debug")]
         [ShowInInspector, ReadOnly]
         [LabelText("Name")]
@@ -705,9 +772,7 @@ namespace Atomic.Entities
             get { return entity?.Enabled ?? false; }
         }
 
-        ///Tags
-        private static readonly List<TagElement> _tagElememtsCache = new();
-
+        /// Теги
         [InlineProperty]
         private struct TagElement : IComparable<TagElement>
         {
@@ -740,26 +805,22 @@ namespace Atomic.Entities
         {
             get
             {
-                _tagElememtsCache.Clear();
-
-                IReadOnlyCollection<int> tags = entity?.Tags;
-                if (tags == null)
+                if (_tagElementsDirty)
                 {
-                    return _tagElememtsCache;
+                    _tagElementsCache.Clear();
+                    IReadOnlyCollection<int> tags = entity?.Tags;
+                    if (tags != null)
+                    {
+                        foreach (int tag in tags)
+                        {
+                            string name = TagNameFormatter?.GetName(tag) ?? tag.ToString();
+                            _tagElementsCache.Add(new TagElement(name, tag));
+                        }
+                        _tagElementsCache.Sort();
+                    }
+                    _tagElementsDirty = false;
                 }
-
-                foreach (int tag in tags)
-                {
-                    string name = TagNameFormatter?.GetName(tag) ?? tag.ToString();
-                    _tagElememtsCache.Add(new TagElement(name, tag));
-                }
-
-                _tagElememtsCache.Sort();
-                return _tagElememtsCache;
-            }
-            set
-            {
-                /** noting... **/
+                return _tagElementsCache;
             }
         }
 
@@ -773,9 +834,7 @@ namespace Atomic.Entities
             if (entity != null) this.DelTag(TagElememts[index].id);
         }
 
-        ///Values
-        private static readonly List<ValueElement> _valueElementsCache = new();
-
+        /// Значения
         [InlineProperty]
         private struct ValueElement : IComparable<ValueElement>
         {
@@ -813,24 +872,23 @@ namespace Atomic.Entities
         {
             get
             {
-                _valueElementsCache.Clear();
-
-                IReadOnlyDictionary<int, object> values = entity?.Values;
-                if (values == null)
+                if (_valueElementsDirty)
                 {
-                    return _valueElementsCache;
+                    _valueElementsCache.Clear();
+                    IReadOnlyDictionary<int, object> values = entity?.Values;
+                    if (values != null)
+                    {
+                        foreach ((int id, object value) in values)
+                        {
+                            string name = ValueNameFormatter?.GetName(id) ?? id.ToString();
+                            _valueElementsCache.Add(new ValueElement(name, value, id));
+                        }
+                        _valueElementsCache.Sort();
+                    }
+                    _valueElementsDirty = false;
                 }
-
-                foreach ((int id, object value) in values)
-                {
-                    string name = ValueNameFormatter?.GetName(id) ?? id.ToString();
-                    _valueElementsCache.Add(new ValueElement(name, value, id));
-                }
-
-                _valueElementsCache.Sort();
                 return _valueElementsCache;
             }
-
             set
             {
                 /** noting... **/
@@ -847,10 +905,7 @@ namespace Atomic.Entities
             if (entity != null) this.DelValue(ValueElements[index].id);
         }
 
-
-        ///Logics
-        private static readonly List<LogicElement> _logicElementsCache = new();
-
+        /// Логика (Behaviours)
         [InlineProperty]
         private struct LogicElement : IComparable<LogicElement>
         {
@@ -884,21 +939,20 @@ namespace Atomic.Entities
         {
             get
             {
-                _logicElementsCache.Clear();
-
-                var behaviours = entity?.Behaviours;
-                if (behaviours == null)
+                if (_logicElementsDirty)
                 {
-                    return _logicElementsCache;
+                    _logicElementsCache.Clear();
+                    var behaviours = entity?.Behaviours;
+                    if (behaviours != null)
+                    {
+                        foreach (var behaviour in behaviours)
+                        {
+                            _logicElementsCache.Add(new LogicElement(behaviour.GetType().Name, behaviour));
+                        }
+                        _logicElementsCache.Sort();
+                    }
+                    _logicElementsDirty = false;
                 }
-
-                foreach (var behaviour in behaviours)
-                {
-                    string name = behaviour.GetType().Name;
-                    _logicElementsCache.Add(new LogicElement(name, behaviour));
-                }
-
-                _logicElementsCache.Sort();
                 return _logicElementsCache;
             }
             set
@@ -917,7 +971,7 @@ namespace Atomic.Entities
             if (entity != null) this.DelBehaviour(LogicElements[index].value);
         }
 
-        ///Add Element 
+        /// Добавление элемента (пример вызова установки)
         [PropertySpace]
         [FoldoutGroup("Debug")]
         [Button("Install")]
