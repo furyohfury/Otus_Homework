@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209246262318712}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1612209246984282859}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1612209246262318661
 AudioSource:
@@ -46,6 +46,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -201,13 +202,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209246926476881}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1612209246984282859}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1612209246926476892
 BoxCollider2D:
@@ -217,12 +218,33 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209246926476881}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.113429785, y: 0.27547574}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -232,8 +254,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.3, y: 1.61}
+  m_Size: {x: 2.5268598, y: 3.5869403}
   m_EdgeRadius: 0
 --- !u!114 &1612209246926476883
 MonoBehaviour:
@@ -275,6 +296,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209246984282858}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -285,7 +307,6 @@ Transform:
   - {fileID: 1612209247723667970}
   - {fileID: 1612209246262318713}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1612209246984282871
 MonoBehaviour:
@@ -301,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!50 &1612209246984282870
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -312,10 +333,16 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -384,6 +411,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209246992905445}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.58, y: -0.55, z: 0}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
@@ -391,7 +419,6 @@ Transform:
   m_Children:
   - {fileID: 7412438105186947045}
   m_Father: {fileID: 3701087100538183422}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1612209247723667969
 GameObject:
@@ -419,6 +446,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209247723667969}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -426,7 +454,6 @@ Transform:
   m_Children:
   - {fileID: 1612209248167189520}
   m_Father: {fileID: 1612209246984282859}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1612209247723667971
 MonoBehaviour:
@@ -532,10 +559,13 @@ MonoBehaviour:
           actions: []
     - rid: 8260953372865855493
       type: {class: IdleState, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 8260953372865855494
       type: {class: AttackState, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 8260953372865855495
       type: {class: HasTargetBlackboardCondition, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 8260953372865855496
       type: {class: NotBlackboardCondition, ns: Atomic.AI, asm: Atomic.AI.Elements}
       data:
@@ -543,6 +573,7 @@ MonoBehaviour:
           rid: 8260953372865855497
     - rid: 8260953372865855497
       type: {class: HasTargetBlackboardCondition, ns: Game, asm: Assembly-CSharp}
+      data: 
 --- !u!1 &1612209248167189527
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,13 +598,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612209248167189527}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1612209247723667970}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1612209248167189521
 MonoBehaviour:
@@ -598,13 +629,16 @@ MonoBehaviour:
     RefIds:
     - rid: 6694032479627509761
       type: {class: DetectRangeAIGizmos, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 8260953304545624076
       type: {class: AttackRangeAIGizmos, ns: Game, asm: Assembly-CSharp}
+      data: 
 --- !u!1001 &1612209246296499397
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1612209246984282859}
     m_Modifications:
     - target: {fileID: 2667064323068355264, guid: 77be1b8f1402d744cb067e39258fcedc, type: 3}
@@ -712,6 +746,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2667064324438211131, guid: 77be1b8f1402d744cb067e39258fcedc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1612209246992905446}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77be1b8f1402d744cb067e39258fcedc, type: 3}
 --- !u!212 &3701087100155706652 stripped
 SpriteRenderer:
@@ -733,6 +773,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1612209246992905446}
     m_Modifications:
     - target: {fileID: 4065406724800946224, guid: 31a1187fbeaf0f54b886068ce6947e74, type: 3}
@@ -784,6 +825,9 @@ PrefabInstance:
       value: ToxicSpitWeapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31a1187fbeaf0f54b886068ce6947e74, type: 3}
 --- !u!114 &5063098425635572243 stripped
 MonoBehaviour:

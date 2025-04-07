@@ -47,6 +47,7 @@ namespace Game
 		private void InitializeLife(IEntity entity)
 		{
 			entity.AddHealth(new ReactiveVariable<int>(_health));
+			entity.AddMaxHealth(new ReactiveVariable<int>(_health));
 			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
 			entity.AddCanTakeDamage(new AndExpression());
 			entity.AddTakeDamageRequest(new BaseEvent<int>());

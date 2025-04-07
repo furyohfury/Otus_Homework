@@ -254,10 +254,15 @@ MonoBehaviour:
     indexes:
     - id: 60
       name: FootstepsSounds
-      type: AudioClip[]
+      type: 'AudioClip[]'
     - id: 61
       name: DeathSounds
-      type: AudioClip[]
+      type: 'AudioClip[]'
     - id: 63
       name: TakeDamageSounds
-      type: AudioClip[]
+      type: 'AudioClip[]'
+  - name: UI
+    indexes:
+    - id: 73
+      name: HealthBar
+      type: HealthBar
