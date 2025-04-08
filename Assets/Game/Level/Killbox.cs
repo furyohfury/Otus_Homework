@@ -16,10 +16,17 @@ namespace Game
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.TryGetEntity(out var entity)
-			    && entity.TryGetHealth(out var health))
+			if (other.TryGetEntity(out var entity) == false)
+			{
+				return;
+			}
+			if (entity.TryGetHealth(out var health))
 			{
 				health.Value = 0;
+			}
+			else if (entity.TryGetDeathRequest(out var request))
+			{
+				request.Invoke();
 			}
 		}
 	}

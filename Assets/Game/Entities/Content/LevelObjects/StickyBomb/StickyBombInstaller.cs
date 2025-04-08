@@ -50,8 +50,14 @@ namespace Game
 		public override void Install(IEntity entity)
 		{
 			_entity = entity;
-			entity.AddRigidbody2D(_rigidbody);
 			_triggerReceiver.OnTriggerEnter += OnCollided;
+			
+			entity.AddRigidbody2D(_rigidbody);
+			entity.AddDeathRequest(new BaseEvent());
+			entity.AddDeathEvent(new BaseEvent());
+			
+			entity.AddBehaviour<DeathEventBehaviour>();
+			entity.AddBehaviour<DestroyEntityOnDeathBehaviour>();
 		}
 
 		private void OnCollided(Collider2D collision)

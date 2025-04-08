@@ -37,7 +37,7 @@ namespace SaveLoad
 
 		protected override void SetupData(LevelEntitiesService service, IEnumerable<LevelEntityData> data)
 		{
-			var sceneEntities = service.GetLevelEntities();
+			var sceneEntities = service.GetLevelEntities().ToArray();
 			IEnumerable<LevelEntityData> levelEntityDatas = data.ToArray();
 
 			foreach (var sceneEntity in sceneEntities)
