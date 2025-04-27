@@ -17,6 +17,10 @@ namespace Game
 		private Transform _transform;
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
+		[SerializeField]
+		private Transform _weaponContainer;
+		[SerializeField] 
+		private GameObject _worldUI;
 
 		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
@@ -24,9 +28,6 @@ namespace Game
 		[Header("Combat")]
 		[SerializeField]
 		private SceneEntity _weapon;
-
-		[SerializeField]
-		private Transform _weaponContainer;
 
 		[Header("Life")]
 		[SerializeField]
@@ -42,6 +43,7 @@ namespace Game
 			InitializeMovement(entity);
 			InitializeUnityComponents(entity);
 			InitializeCombat(entity);
+			InitializeUI(entity);
 		}
 
 		private void InitializeLife(IEntity entity)
@@ -107,6 +109,13 @@ namespace Game
 			entity.AddBehaviour(new AimWeaponBehaviour());
 			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
 			entity.AddBehaviour(new AttackAnimatorBehaviour());
+		}
+
+		private void InitializeUI(IEntity entity)
+		{
+			entity.AddEntityWorldUI(_worldUI);
+
+			entity.AddBehaviour<UIFollowTransformBehaviour>();
 		}
 	}
 }

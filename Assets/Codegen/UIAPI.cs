@@ -17,6 +17,7 @@ namespace Atomic.Entities
     {
         ///Keys
         public const int HealthBar = 73; // HealthBar
+        public const int EntityWorldUI = 74; // GameObject
 
 
         ///Extensions
@@ -37,5 +38,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetHealthBar(this IEntity obj, HealthBar value) => obj.SetValue(HealthBar, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject GetEntityWorldUI(this IEntity obj) => obj.GetValue<GameObject>(EntityWorldUI);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetEntityWorldUI(this IEntity obj, out GameObject value) => obj.TryGetValue(EntityWorldUI, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddEntityWorldUI(this IEntity obj, GameObject value) => obj.AddValue(EntityWorldUI, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasEntityWorldUI(this IEntity obj) => obj.HasValue(EntityWorldUI);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelEntityWorldUI(this IEntity obj) => obj.DelValue(EntityWorldUI);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetEntityWorldUI(this IEntity obj, GameObject value) => obj.SetValue(EntityWorldUI, value);
     }
 }

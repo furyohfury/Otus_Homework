@@ -266,3 +266,6 @@ MonoBehaviour:
     - id: 73
       name: HealthBar
       type: HealthBar
+    - id: 74
+      name: EntityWorldUI
+      type: GameObject
