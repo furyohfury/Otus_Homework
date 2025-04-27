@@ -5,12 +5,21 @@ namespace UI
 {
 	public sealed class AbilityCardView : MonoBehaviour
 	{
+		public Image Icon => _icon;
+		
 		[SerializeField]
 		private Image _icon;
+		[SerializeField]
+		private LayoutElement _layoutElement;
 
 		public void SetIcon(Sprite sprite)
 		{
-			_icon.sprite = sprite;
+			Icon.sprite = sprite;
+		}
+
+		public void IgnoreLayout(bool ignore)
+		{
+			_layoutElement.ignoreLayout = ignore;
 		}
 	}
 }

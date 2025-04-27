@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace UI
@@ -9,6 +10,8 @@ namespace UI
 		private Transform _container;
 		[SerializeField]
 		private AbilityCardView _abilityCardViewPrefab;
+		[SerializeField]
+		private float _cardDestroyAnimationDuration = 0.5f;
 
 		private readonly Stack<AbilityCardView> _abilityCardViews = new();
 
@@ -26,8 +29,14 @@ namespace UI
 				return;
 			}
 
-			var firstCardView = _abilityCardViews.Pop();
-			Destroy(firstCardView.gameObject);
+			AbilityCardView firstCardView = _abilityCardViews.Pop();
+			firstCardView.IgnoreLayout(true);
+			var cardTransform = firstCardView.transform;
+			DOTween.Sequence()
+			       .Append(cardTransform.DOMoveY(cardTransform.position.y + 50, _cardDestroyAnimationDuration))
+			       .SetEase(Ease.OutExpo)
+			       .Join(firstCardView.Icon.DOFade(0, _cardDestroyAnimationDuration))
+			       .OnComplete(() => Destroy(firstCardView.gameObject));
 		}
 
 		public void ClearAllCards()
