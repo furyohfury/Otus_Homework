@@ -47,17 +47,5 @@ namespace Game
 
 			return true;
 		}
-
-#if UNITY_EDITOR
-		private void OnValidate()
-		{
-			if (string.IsNullOrEmpty(_sceneName) == false
-			    && EditorBuildSettings.scenes.Any(
-				    scene => scene.path == string.Concat("Assets/", "Scenes/", _sceneName, ".unity")) == false)
-			{
-				Debug.LogError($"No scene with name: {_sceneName}");
-			}
-		}
-#endif
 	}
 }
