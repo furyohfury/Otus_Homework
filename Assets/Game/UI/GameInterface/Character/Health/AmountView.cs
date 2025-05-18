@@ -10,8 +10,11 @@ namespace UI
 		[SerializeField]
 		private TMP_Text _text;
 
-		[SerializeField] [PreviewField]
+		[SerializeField]
 		private Image _icon;
+
+		[SerializeField] [PreviewField]
+		private Sprite _sprite;
 
 		public void SetText(string text)
 		{
@@ -31,6 +34,14 @@ namespace UI
 		public void SetIconActive(bool active)
 		{
 			_icon.gameObject.SetActive(active);
+		}
+
+		private void OnValidate()
+		{
+			if (_sprite != null)
+			{
+				_icon.sprite = _sprite;
+			}
 		}
 	}
 }
