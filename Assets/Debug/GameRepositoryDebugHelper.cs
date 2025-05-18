@@ -15,7 +15,7 @@ namespace GameDebug
 
 		private void Awake()
 		{
-			var projectContext = FindObjectOfType<ProjectContext>();
+			var projectContext = FindFirstObjectByType<ProjectContext>();
 			_gameRepository = projectContext.Container.Resolve<GameRepository>();
 		}
 	}
