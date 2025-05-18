@@ -19,6 +19,8 @@ namespace Game
 		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
 		private AnimatorEventReceiver _animatorEventReceiver;
+		[SerializeField] 
+		private GameObject _worldUI;
 
 		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
@@ -45,10 +47,12 @@ namespace Game
 			InitializeMovement(entity);
 			InitializeUnityComponents(entity);
 			InitializeCombat(entity);
+			InitializeUI(entity);
 		}
 
 		private void InitializeLife(IEntity entity)
 		{
+			entity.AddMaxHealth(new ReactiveVariable<int>(_health));
 			entity.AddHealth(new ReactiveVariable<int>(_health));
 			entity.AddIsDead(new BaseFunction<bool>(() => entity.GetHealth().Value <= 0));
 			entity.AddCanTakeDamage(new AndExpression());
@@ -117,6 +121,13 @@ namespace Game
 			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
 			entity.AddBehaviour(new AttackAnimatorBehaviour());
 			entity.AddBehaviour<MeleeWeaponHitByAnimatorBehaviour>();
+		}
+		
+		private void InitializeUI(IEntity entity)
+		{
+			entity.AddEntityWorldUI(_worldUI);
+
+			entity.AddBehaviour<UIFollowTransformBehaviour>();
 		}
 	}
 }
