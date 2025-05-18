@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   local: 0
   namespace: Atomic.Entities
-  directoryPath: Assets/Codegen
+  directoryPath: Assets/Game/Codegen
   suffix: API
   imports:
   - Atomic.Elements
