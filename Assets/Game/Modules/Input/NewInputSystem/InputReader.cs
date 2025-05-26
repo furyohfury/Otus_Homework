@@ -22,6 +22,11 @@ namespace Game
 		{
 			get
 			{
+				if (Gamepad.current == null)
+				{
+					return Vector2.zero;
+				}
+				
 				var val = Gamepad.current.rightStick.ReadValue();
 				return val.normalized;
 			}
