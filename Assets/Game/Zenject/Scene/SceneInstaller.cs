@@ -34,10 +34,6 @@ namespace Game
 
 			Container.Bind<Camera>()
 			         .FromComponentInHierarchy().AsCached();
-
-			Container.BindInterfacesAndSelfTo<BackgroundController>()
-			         .AsSingle()
-			         .WithArguments(_backGroundTransform);
 		}
 
 		private void InstallServices()
