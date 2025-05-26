@@ -16,8 +16,6 @@ namespace Game.Entities
 		private Animator _animator;
 		[SerializeField]
 		private Transform _transform;
-		[SerializeField]
-		private SpriteRenderer _spriteRenderer;
 
 		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
@@ -75,7 +73,6 @@ namespace Game.Entities
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
-			entity.AddSpriteRenderer(_spriteRenderer);
 			
 			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
