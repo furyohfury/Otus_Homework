@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rifle_DashX_AbilityCardConfig
   m_EditorClassIdentifier: 
   Id: Rifle_DashX
-  Sprite: {fileID: 21300000, guid: 9b11c3c98e67f6042ad548e4d7def14a, type: 3}
+  Sprite: {fileID: 21300000, guid: ccaeb2a71df14974ab47f9b90e532476, type: 3}
   _aspects:
   - rid: 7840523029330001940
   - rid: 7840523029330001941

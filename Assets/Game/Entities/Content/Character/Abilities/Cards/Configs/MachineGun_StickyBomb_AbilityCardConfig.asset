@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MachineGun_StickyBomb_AbilityCardConfig
   m_EditorClassIdentifier: 
   Id: MachineGun_StickyBomb
-  Sprite: {fileID: 21300000, guid: b7181ab36b007bf4f9de07357cc3de30, type: 3}
+  Sprite: {fileID: 21300000, guid: 98bd4b446ef9cd342b9a2601a7eeb036, type: 3}
   _aspects:
   - rid: 7840523029330001939
   - rid: 7840523029330001937
