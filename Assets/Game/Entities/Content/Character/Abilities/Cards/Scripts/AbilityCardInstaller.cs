@@ -1,5 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
@@ -73,6 +74,7 @@ namespace Game
 			}
 		}
 
+		[Button]
 		private void SetSpriteFromConfig()
 		{
 			_spriteRenderer.sprite = _abilityCardConfig.Sprite;
