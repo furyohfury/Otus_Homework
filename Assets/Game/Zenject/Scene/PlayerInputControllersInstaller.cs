@@ -8,22 +8,6 @@ namespace Game
 	{
 		public override void InstallBindings()
 		{
-			// Container.BindInterfacesAndSelfTo<PlayerJumpController>()
-			//          .AsSingle()
-			//          .WithArguments(_character);
-			//
-			// Container.BindInterfacesAndSelfTo<PlayerXAxisMovementController>()
-			//          .AsSingle()
-			//          .WithArguments(_character);
-			//
-			// Container.BindInterfacesAndSelfTo<PlayerAttackController>()
-			//          .AsSingle()
-			//          .WithArguments(_character);
-			//
-			// Container.BindInterfacesAndSelfTo<PlayerAbilityController>()
-			//          .AsSingle()
-			//          .WithArguments(_character);
-			
 			Container.BindInterfacesAndSelfTo<PlayerController>()
 			         .AsSingle()
 			         .NonLazy();
