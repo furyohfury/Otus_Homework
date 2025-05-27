@@ -239,10 +239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionDamage: 5
-  _explosionForce: 5000
+  _explosionForce: 2700
   _explosionRadius: 5
   _explosionDelay: 1
-  _explosionUpwardForce: 2000
+  _explosionUpwardForce: 3000
   _explosionEffect: {fileID: 6161929213807687914}
   _timerSound: {fileID: 8300000, guid: 0b167ec3276015c45b66f232380f0a0e, type: 3}
   _explosionSound: {fileID: 8300000, guid: 64fb9477894fa2e4a997518fbb1c2f15, type: 3}
