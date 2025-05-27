@@ -73,7 +73,7 @@ namespace Game.Entities
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
-			
+
 			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
 

@@ -9,7 +9,7 @@ namespace UI
 	{
 		private readonly PauseMenuView _view;
 		private readonly GameStateManager _gameStateManager;
-		private LevelManager _levelManager;
+		private readonly LevelManager _levelManager;
 
 		[Inject]
 		public PauseMenuPresenter(PauseMenuView view, GameStateManager gameStateManager, LevelManager levelManager)

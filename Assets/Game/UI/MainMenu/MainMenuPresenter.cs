@@ -10,7 +10,7 @@ namespace UI
 	{
 		private readonly MainMenuView _view;
 		private readonly SelectLeveMenuView _selectLevelMenuView;
-		private SettingsMenuView _settingsMenuView;
+		private readonly SettingsMenuView _settingsMenuView;
 
 		[Inject]
 		public MainMenuPresenter(SelectLeveMenuView selectLevelMenuView, MainMenuView view, SettingsMenuView settingsMenuView)

@@ -7,7 +7,7 @@ namespace UI
 	{
 		[SerializeField]
 		private SettingsMenuView _settingsMenuView;
-		
+
 		public override void InstallBindings()
 		{
 			Container.Bind<SettingsMenuView>()

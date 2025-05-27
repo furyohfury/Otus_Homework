@@ -5,11 +5,11 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class InputReader : 
-		IInitializable, 
-		ITickable, 
-		IDisposable, 
-		InputControls.IGameplayActions, 
+	public sealed class InputReader :
+		IInitializable,
+		ITickable,
+		IDisposable,
+		InputControls.IGameplayActions,
 		InputControls.IUIActions // TODO in separate reader
 	{
 		public static Vector2 MousePosition
@@ -31,7 +31,7 @@ namespace Game
 				{
 					return Vector2.zero;
 				}
-				
+
 				var val = Gamepad.current.rightStick.ReadValue();
 				return val.normalized;
 			}
@@ -95,7 +95,6 @@ namespace Game
 
 		void InputControls.IGameplayActions.OnAttack(InputAction.CallbackContext context)
 		{
-			
 		}
 
 		void InputControls.IGameplayActions.OnAbility(InputAction.CallbackContext context)

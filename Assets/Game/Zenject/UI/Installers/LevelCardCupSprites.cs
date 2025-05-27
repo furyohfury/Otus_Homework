@@ -9,7 +9,7 @@ namespace UI
 	public sealed class LevelCardCupSprites : SerializedScriptableObject
 	{
 		public Dictionary<Cups, Sprite> CupSprites => _cupSprites;
-		
+
 		[SerializeField]
 		private Dictionary<Cups, Sprite> _cupSprites;
 	}

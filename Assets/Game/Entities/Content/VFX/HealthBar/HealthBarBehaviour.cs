@@ -19,7 +19,7 @@ namespace Game
 
 		private void OnHealthChanged(int health)
 		{
-			_healthBar.SetBar((float) health / _maxHealth.Value);
+			_healthBar.SetBar((float)health / _maxHealth.Value);
 		}
 
 		public void Dispose(IEntity entity)

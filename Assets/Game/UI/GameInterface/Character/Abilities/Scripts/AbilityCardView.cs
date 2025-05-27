@@ -6,7 +6,7 @@ namespace UI
 	public sealed class AbilityCardView : MonoBehaviour
 	{
 		public Image Icon => _icon;
-		
+
 		[SerializeField]
 		private Image _icon;
 		[SerializeField]

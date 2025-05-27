@@ -19,7 +19,7 @@ namespace Game
 		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
 		private AnimatorEventReceiver _animatorEventReceiver;
-		[SerializeField] 
+		[SerializeField]
 		private GameObject _worldUI;
 
 		[Header("Movement")] [SerializeField]
@@ -76,7 +76,7 @@ namespace Game
 			entity.AddVisualTransform(_transform);
 			entity.AddSpriteRenderer(_spriteRenderer);
 			entity.AddAnimatorEventReceiver(_animatorEventReceiver);
-			
+
 			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
 
@@ -122,7 +122,7 @@ namespace Game
 			entity.AddBehaviour(new AttackAnimatorBehaviour());
 			entity.AddBehaviour<MeleeWeaponHitByAnimatorBehaviour>();
 		}
-		
+
 		private void InitializeUI(IEntity entity)
 		{
 			entity.AddEntityWorldUI(_worldUI);

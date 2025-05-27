@@ -51,11 +51,11 @@ namespace Game
 		{
 			_entity = entity;
 			_triggerReceiver.OnTriggerEnter += OnCollided;
-			
+
 			entity.AddRigidbody2D(_rigidbody);
 			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
-			
+
 			entity.AddBehaviour<DeathEventBehaviour>();
 			entity.AddBehaviour<DestroyEntityOnDeathBehaviour>();
 		}

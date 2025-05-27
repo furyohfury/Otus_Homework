@@ -14,9 +14,9 @@ namespace Game
 		private Transform _enemiesContainer;
 		[SerializeField]
 		private Transform _abilityCardsContainer;
-		[SerializeField] 
+		[SerializeField]
 		private Transform _levelEntitiesContainer;
-		
+
 		[SerializeField]
 		private Transform _backGroundTransform;
 
@@ -41,7 +41,7 @@ namespace Game
 			Container.Bind<PlayerService>()
 			         .AsSingle()
 			         .WithArguments(_character);
-			
+
 			Container.BindInterfacesAndSelfTo<EnemyService>()
 			         .AsSingle()
 			         .WithArguments(_enemiesContainer);
@@ -49,7 +49,7 @@ namespace Game
 			Container.Bind<AbilityCardsService>()
 			         .AsSingle()
 			         .WithArguments(_abilityCardsContainer);
-			
+
 			Container.Bind<LevelEntitiesService>()
 			         .AsSingle()
 			         .WithArguments(_levelEntitiesContainer);

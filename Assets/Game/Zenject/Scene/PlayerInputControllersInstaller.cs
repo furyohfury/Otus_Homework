@@ -1,6 +1,4 @@
-﻿using Atomic.Entities;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 namespace Game
 {
@@ -11,7 +9,7 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<PlayerController>()
 			         .AsSingle()
 			         .NonLazy();
-			
+
 			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
 			         .AsSingle();
 		}

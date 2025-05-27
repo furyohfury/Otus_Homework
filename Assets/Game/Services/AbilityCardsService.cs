@@ -16,7 +16,7 @@ namespace Game
 			_entityWorld = entityWorld;
 			_container = container;
 		}
-		
+
 		public IReadOnlyList<IEntity> GetAbilityCards()
 		{
 			return _entityWorld.GetEntitiesWithTag(TagAPI.AbilityCard);

@@ -52,7 +52,7 @@ namespace SaveLoad
 					DestroyCard(sceneCard);
 				}
 			}
-			
+
 			foreach (AbilityCardData cardData in dataArray)
 			{
 				var existingCard = sceneCards.SingleOrDefault(card => card.InstanceId == cardData.InstanceID);

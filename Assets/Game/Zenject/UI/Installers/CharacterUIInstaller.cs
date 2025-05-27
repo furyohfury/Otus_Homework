@@ -1,5 +1,4 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace UI

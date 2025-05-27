@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -18,9 +17,9 @@ namespace Game
 
 		private XboxGamepadInputRebinder _xboxGamepadInputRebinder;
 		private KeyboardInputRebinder _keyboardInputRebinder;
-		
+
 		[Inject]
-		public void Construct (XboxGamepadInputRebinder xboxGamepadInputRebinder, KeyboardInputRebinder keyboardInputRebinder)
+		public void Construct(XboxGamepadInputRebinder xboxGamepadInputRebinder, KeyboardInputRebinder keyboardInputRebinder)
 		{
 			_xboxGamepadInputRebinder = xboxGamepadInputRebinder;
 			_keyboardInputRebinder = keyboardInputRebinder;

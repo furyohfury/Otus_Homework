@@ -20,6 +20,7 @@ namespace Game
 			{
 				return;
 			}
+
 			if (entity.TryGetHealth(out var health))
 			{
 				health.Value = 0;

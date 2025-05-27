@@ -11,7 +11,7 @@ namespace Game
 		private string _id = "Spikes";
 		[SerializeField]
 		private TriggerReceiver _triggerReceiver;
-		[SerializeField] 
+		[SerializeField]
 		private Transform _transform;
 		[SerializeField]
 		private int _damage;

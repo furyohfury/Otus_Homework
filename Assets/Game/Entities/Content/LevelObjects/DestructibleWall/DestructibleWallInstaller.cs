@@ -8,7 +8,7 @@ namespace Game
 	{
 		[Header("Config")] [SerializeField]
 		private Vector2 _velocityToDestroy;
-		[SerializeField] 
+		[SerializeField]
 		private string _id = "DestructibleWall";
 
 		[Header("VFX")] [SerializeField]

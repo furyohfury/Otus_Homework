@@ -7,7 +7,7 @@ namespace Game
 	{
 		[SerializeField]
 		private Image _bar;
-		
+
 		public void SetBar(float ratio)
 		{
 			_bar.fillAmount = Mathf.Clamp01(ratio);
