@@ -5,7 +5,12 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class InputReader : IInitializable, ITickable, IDisposable, InputControls.IGameplayActions, InputControls.IUIActions
+	public sealed class InputReader : 
+		IInitializable, 
+		ITickable, 
+		IDisposable, 
+		InputControls.IGameplayActions, 
+		InputControls.IUIActions // TODO in separate reader
 	{
 		public static Vector2 MousePosition
 		{
@@ -67,7 +72,8 @@ namespace Game
 
 		private void CheckAttackInput()
 		{
-			if (_attackPressed)
+			var isPressed = _inputControls.Gameplay.Attack.IsPressed();
+			if (isPressed)
 			{
 				OnAttacked?.Invoke();
 			}
@@ -89,16 +95,7 @@ namespace Game
 
 		void InputControls.IGameplayActions.OnAttack(InputAction.CallbackContext context)
 		{
-			var phase = context.phase;
-			if (phase == InputActionPhase.Performed)
-			{
-				_attackPressed = true;
-			}
-
-			if (phase == InputActionPhase.Canceled)
-			{
-				_attackPressed = false;
-			}
+			
 		}
 
 		void InputControls.IGameplayActions.OnAbility(InputAction.CallbackContext context)
