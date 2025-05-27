@@ -42,6 +42,7 @@ namespace Game
 			{
 				if (_self.TryGetMoveDirection(out ReactiveVariable<Vector2> moveDirection))
 				{
+					direction.Normalize();
 					moveDirection.Value = new Vector2(direction.x, 0);
 				}
 			}
