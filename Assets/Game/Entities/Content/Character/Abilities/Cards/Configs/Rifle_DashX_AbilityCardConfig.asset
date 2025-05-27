@@ -28,4 +28,4 @@ MonoBehaviour:
       type: {class: DashXAbilityAspect, ns: Game, asm: Assembly-CSharp}
       data:
         _numberOfUses: 1
-        _dashForce: 4000
+        _dashForce: 1300

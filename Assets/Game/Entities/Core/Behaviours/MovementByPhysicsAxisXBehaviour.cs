@@ -13,8 +13,8 @@ namespace Game
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
 		private Vector3 _cachedVelocity;
-
-		private Vector2 _previousMoveDirection;
+		private IFunction<bool> _isGrounded;
+		private float _wallCheckDistance = 0.7f;
 
 		public void Init(IEntity entity)
 		{
@@ -22,6 +22,7 @@ namespace Game
 			_canMove = entity.GetCanMove();
 			_moveSpeed = entity.GetMoveSpeed();
 			_rigidbody = entity.GetRigidbody2D();
+			_isGrounded = entity.GetIsGrounded();
 		}
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)
@@ -31,12 +32,36 @@ namespace Game
 				return;
 			}
 
-			if (_moveDirection.Value == Vector2.zero)
+			var direction = _moveDirection.Value;
+			if (direction == Vector2.zero)
 			{
 				return;
 			}
 
-			_rigidbody.AddForce(new Vector2(_moveDirection.Value.x * _moveSpeed.Value, 0));
+			bool touchingRightWall = Physics2D.Raycast(_rigidbody.position, Vector2.right, _wallCheckDistance, 1 << 6);
+			bool touchingLeftWall = Physics2D.Raycast(_rigidbody.position, Vector2.left, _wallCheckDistance, 1 << 6);
+
+			if ((touchingRightWall && direction.x > 0)
+			    || (touchingLeftWall && direction.x < 0))
+			{
+				return;
+			}
+
+			float currentVelocityX = _rigidbody.linearVelocityX;
+			float targetVelocityX = direction.x * _moveSpeed.Value;
+
+			if (direction.x != 0)
+			{
+				if (Mathf.Approximately(Mathf.Sign(currentVelocityX), direction.x) && Mathf.Abs(currentVelocityX) >= Mathf.Abs(targetVelocityX))
+				{
+					return;
+				}
+
+				float velocityDiff = targetVelocityX - currentVelocityX;
+				float impulse = _rigidbody.mass * velocityDiff;
+
+				_rigidbody.AddForce(new Vector2(impulse, 0), ForceMode2D.Impulse);
+			}
 		}
 
 		public void Enable(IEntity entity)

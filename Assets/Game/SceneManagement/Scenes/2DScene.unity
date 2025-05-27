@@ -1697,10 +1697,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 8
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 5
-  m_Material: {fileID: 6200000, guid: 028204446279c0a488587ca04c99427c, type: 2}
+  m_GravityScale: 9
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1726,8 +1726,8 @@ MonoBehaviour:
   _rigidBody: {fileID: 253108516}
   _animator: {fileID: 2013082476041097114}
   _transform: {fileID: 253108512}
-  _moveSpeed: 100
-  _jumpForce: 25
+  _moveSpeed: 11
+  _jumpForce: 20
   _groundCheckTransform: {fileID: 1878565144}
   _groundLayer:
     serializedVersion: 2
@@ -10336,6 +10336,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol_DoubleJump
       objectReference: {fileID: 0}
+    - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11530,8 +11534,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 352747296}
   - {fileID: 1623736743}
+  - {fileID: 352747296}
   - {fileID: 141014608}
   - {fileID: 1675397982}
   - {fileID: 1703279187}
@@ -30423,7 +30427,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: b3d2cbd64d2b99f4f90f3dee898c3660, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -34967,6 +34971,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1702226665}
     m_Modifications:
+    - target: {fileID: 9106130811389171444, guid: 246a3874af07e7644a57553463476e59, type: 3}
+      propertyPath: _health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106130811389171444, guid: 246a3874af07e7644a57553463476e59, type: 3}
+      propertyPath: _moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106130811389171445, guid: 246a3874af07e7644a57553463476e59, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106130811389171445, guid: 246a3874af07e7644a57553463476e59, type: 3}
+      propertyPath: m_GravityScale
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106130811389171445, guid: 246a3874af07e7644a57553463476e59, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9106130811389171448, guid: 246a3874af07e7644a57553463476e59, type: 3}
       propertyPath: m_Name
       value: LizardIdleEnemy
