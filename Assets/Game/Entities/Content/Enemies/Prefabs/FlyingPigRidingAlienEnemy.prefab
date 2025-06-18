@@ -386,7 +386,11 @@ MonoBehaviour:
   _rigidBody: {fileID: 8652061949270504739}
   _animator: {fileID: 7748802789432753503}
   _transform: {fileID: 2485656415865638086}
-  _spriteRenderer: {fileID: 6098291758399522490}
+  _spriteRenderer:
+  - {fileID: 6098291758399522490}
+  - {fileID: 331461954003224749}
+  - {fileID: 1446357185103766004}
+  - {fileID: 5411511985933754483}
   _weaponContainer: {fileID: 9127453751482730317}
   _worldUI: {fileID: 2651446093601074743}
   _moveSpeed: 3

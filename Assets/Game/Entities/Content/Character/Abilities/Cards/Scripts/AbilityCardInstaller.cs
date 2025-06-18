@@ -8,7 +8,7 @@ namespace Game
 	public sealed class AbilityCardInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
-		private SpriteRenderer _spriteRenderer;
+		private SpriteRenderer[] _spriteRenderer;
 		[SerializeField]
 		private AbilityCardConfig _abilityCardConfig;
 		[SerializeField]
@@ -24,7 +24,7 @@ namespace Game
 
 			entity.AddAbilityCardTag();
 			entity.AddVisualTransform(_transform);
-			entity.AddSpriteRenderer(_spriteRenderer);
+			entity.AddSpriteRenderers(_spriteRenderer);
 			_triggerReceiver.OnTriggerEnter += OnTrigger;
 			entity.AddAbilityCardConfig(new ReactiveVariable<AbilityCardConfig>(_abilityCardConfig));
 		}
@@ -60,24 +60,13 @@ namespace Game
 		}
 
 #if UNITY_EDITOR
-		private void OnValidate()
-		{
-			if (_spriteRenderer.sprite != null
-			    || _abilityCardConfig == null)
-			{
-				return;
-			}
-
-			if (_spriteRenderer.sprite != _abilityCardConfig.Sprite)
-			{
-				SetSpriteFromConfig();
-			}
-		}
-
 		[Button]
 		private void SetSpriteFromConfig()
 		{
-			_spriteRenderer.sprite = _abilityCardConfig.Sprite;
+			if (_spriteRenderer.Length > 0)
+			{
+				_spriteRenderer[0].sprite = _abilityCardConfig.Sprite;
+			}
 		}
 #endif
 	}

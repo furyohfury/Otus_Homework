@@ -16,7 +16,7 @@ namespace Game
 		[SerializeField]
 		private Transform _transform;
 		[SerializeField]
-		private SpriteRenderer _spriteRenderer;
+		private SpriteRenderer[] _spriteRenderer;
 		[SerializeField]
 		private Transform _weaponContainer;
 		[SerializeField]
@@ -69,7 +69,7 @@ namespace Game
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
-			entity.AddSpriteRenderer(_spriteRenderer);
+			entity.AddSpriteRenderers(_spriteRenderer);
 
 			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}

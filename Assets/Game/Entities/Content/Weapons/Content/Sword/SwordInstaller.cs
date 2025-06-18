@@ -21,7 +21,7 @@ namespace Game.Entities
 		[SerializeField]
 		private int _damage;
 		[SerializeField]
-		private SpriteRenderer _spriteRenderer;
+		private SpriteRenderer[] _spriteRenderer;
 		[SerializeField]
 		private float _attackDelay;
 		[SerializeField]
@@ -38,7 +38,7 @@ namespace Game.Entities
 
 		private void InstallComponents(IEntity entity)
 		{
-			entity.AddSpriteRenderer(_spriteRenderer);
+			entity.AddSpriteRenderers(_spriteRenderer);
 			entity.AddVisualTransform(_transform);
 		}
 

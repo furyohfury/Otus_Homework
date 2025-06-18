@@ -18,7 +18,7 @@ namespace Atomic.Entities
         ///Keys
         public const int Animator = 10; // Animator
         public const int VisualTransform = 5; // Transform
-        public const int SpriteRenderer = 35; // SpriteRenderer
+        public const int SpriteRenderers = 35; // SpriteRenderer[]
 
 
         ///Extensions
@@ -59,21 +59,21 @@ namespace Atomic.Entities
         public static void SetVisualTransform(this IEntity obj, Transform value) => obj.SetValue(VisualTransform, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static SpriteRenderer GetSpriteRenderer(this IEntity obj) => obj.GetValue<SpriteRenderer>(SpriteRenderer);
+        public static SpriteRenderer[] GetSpriteRenderers(this IEntity obj) => obj.GetValue<SpriteRenderer[]>(SpriteRenderers);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetSpriteRenderer(this IEntity obj, out SpriteRenderer value) => obj.TryGetValue(SpriteRenderer, out value);
+        public static bool TryGetSpriteRenderers(this IEntity obj, out SpriteRenderer[] value) => obj.TryGetValue(SpriteRenderers, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddSpriteRenderer(this IEntity obj, SpriteRenderer value) => obj.AddValue(SpriteRenderer, value);
+        public static bool AddSpriteRenderers(this IEntity obj, SpriteRenderer[] value) => obj.AddValue(SpriteRenderers, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasSpriteRenderer(this IEntity obj) => obj.HasValue(SpriteRenderer);
+        public static bool HasSpriteRenderers(this IEntity obj) => obj.HasValue(SpriteRenderers);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool DelSpriteRenderer(this IEntity obj) => obj.DelValue(SpriteRenderer);
+        public static bool DelSpriteRenderers(this IEntity obj) => obj.DelValue(SpriteRenderers);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetSpriteRenderer(this IEntity obj, SpriteRenderer value) => obj.SetValue(SpriteRenderer, value);
+        public static void SetSpriteRenderers(this IEntity obj, SpriteRenderer[] value) => obj.SetValue(SpriteRenderers, value);
     }
 }

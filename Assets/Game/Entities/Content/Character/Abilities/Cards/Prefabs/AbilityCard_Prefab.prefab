@@ -68,7 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce1f5c4420f4522b511efc43fe08a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 3197033899501655547}
+  _spriteRenderer:
+  - {fileID: 3197033899501655547}
   _abilityCardConfig: {fileID: 0}
   _triggerReceiver: {fileID: 3197033899160531625}
   _transform: {fileID: 6390730940251013870}

@@ -8,7 +8,7 @@ namespace Game
 	public class PistolInstaller : SceneEntityInstallerBase
 	{
 		[SerializeField]
-		private SpriteRenderer _spriteRenderer;
+		private SpriteRenderer[] _spriteRenderer;
 		[SerializeField]
 		private Transform _firePoint;
 		[SerializeField]
@@ -34,7 +34,7 @@ namespace Game
 
 		private void InstallComponents(IEntity entity)
 		{
-			entity.AddSpriteRenderer(_spriteRenderer);
+			entity.AddSpriteRenderers(_spriteRenderer);
 			entity.AddVisualTransform(_transform);
 		}
 

@@ -881,7 +881,8 @@ MonoBehaviour:
   _triggerReceiver: {fileID: 9106130813339010753}
   _collider2D: {fileID: 9106130813339010754}
   _damage: 2
-  _spriteRenderer: {fileID: 2182916272456751624}
+  _spriteRenderer:
+  - {fileID: 0}
   _attackDelay: 2
   _ammo: 999999
 --- !u!1 &9106130811389171448
@@ -1001,7 +1002,11 @@ MonoBehaviour:
   _rigidBody: {fileID: 9106130811389171445}
   _animator: {fileID: 5710576740293362926}
   _transform: {fileID: 9106130811389171451}
-  _spriteRenderer: {fileID: 2182916272772136694}
+  _spriteRenderer:
+  - {fileID: 2182916272772136694}
+  - {fileID: 2182916272480317878}
+  - {fileID: 2182916272456751624}
+  - {fileID: 0}
   _animatorEventReceiver: {fileID: 9106130812246617755}
   _worldUI: {fileID: 716438844842664568}
   _moveSpeed: 5
