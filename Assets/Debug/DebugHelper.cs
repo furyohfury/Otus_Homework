@@ -45,9 +45,6 @@ namespace GameDebug
 		[SerializeField] [TabGroup("Adressables")]
 		private AssetReference _assetReference;
 
-		[TabGroup("Adressables")] [ShowInInspector]
-		public static IReadOnlyDictionary<string, int> AssetReferenceCount => AdressablesLoadManager.AssetReferenceCount;
-
 		[TabGroup("SaveLoad|Lifecycle")] [ShowInInspector]
 		public GameState State => _gameStateManager.State;
 
@@ -242,18 +239,6 @@ namespace GameDebug
 			_assetReference.ReleaseAsset();
 		}
 
-		[Button] [TabGroup("Adressables")]
-		private async void LoadAssetWithManager()
-		{
-			Sprite image = await AdressablesLoadManager.LoadAsset<Sprite>(_assetReference);
-			_adressableTestImage.sprite = image;
-		}
-
-		[Button] [TabGroup("Adressables")]
-		private void ReleaseAssetWithManager()
-		{
-			AdressablesLoadManager.ReleaseAsset(_assetReference);
-		}
 
 		[Button] [TabGroup("Level")]
 		private void StartLevel()
