@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Atomic.Elements;
 using Atomic.Entities;
 using Cysharp.Threading.Tasks;
@@ -12,9 +13,11 @@ namespace Game
 		[SerializeField]
 		private Color _glowColor = Color.red;
 		[SerializeField]
-		private float _duration = 0.3f;
+		private float _duration = 0.2f;
 		private SpriteRenderer[] _spriteRenderers;
 		private ReactiveVariable<int> _health;
+
+		private CancellationTokenSource _cts = new();
 
 		public void Init(IEntity entity)
 		{
@@ -32,8 +35,15 @@ namespace Game
 				_spriteRenderers[i].color = _glowColor;
 			}
 
-			await UniTask.Delay(TimeSpan.FromSeconds(_duration));
-			
+			try
+			{
+				await UniTask.Delay(TimeSpan.FromSeconds(_duration), cancellationToken: _cts.Token);
+			}
+			catch
+			{
+				return;
+			}
+
 			for (var i = 0; i < _spriteRenderers.Length; i++)
 			{
 				_spriteRenderers[i].color = initialColors[i];
@@ -43,6 +53,7 @@ namespace Game
 		public void Dispose(IEntity entity)
 		{
 			_health.Unsubscribe(OnTakeDamage);
+			_cts.Cancel();
 		}
 	}
 }

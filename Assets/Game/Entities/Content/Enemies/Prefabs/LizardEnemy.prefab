@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 2182916272562966967}
   - component: {fileID: 5710576740293362926}
   - component: {fileID: 9106130812246617755}
+  - component: {fileID: 7145400541679694429}
   m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
@@ -391,6 +392,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5db79d3d5ec44e3b7873b38fca9a95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7145400541679694429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182916272562966966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4449a408ebb644a08bf8405b221eb04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRefresh: 0
+  installers:
+  - rid: 1824624573907468526
+  logics:
+  - rid: 1824624573907468524
+  references:
+    version: 2
+    RefIds:
+    - rid: 1824624573907468524
+      type: {class: GlowRedOnTakeDamageBehaviour, ns: Game, asm: Assembly-CSharp}
+      data:
+        _glowColor: {r: 1, g: 0, b: 0, a: 1}
+        _duration: 0.3
+    - rid: 1824624573907468526
+      type: {class: SpriteRenderersInstaller, ns: Game, asm: Assembly-CSharp}
+      data:
+        _spriteRenderers:
+        - {fileID: 2182916272580116130}
+        - {fileID: 2182916272772136694}
+        - {fileID: 2182916272480317878}
+        - {fileID: 2182916272456751624}
 --- !u!1 &2182916272580116132
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,10 +973,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 8
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 5
-  m_Material: {fileID: 6200000, guid: 028204446279c0a488587ca04c99427c, type: 2}
+  m_GravityScale: 9
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -980,6 +1014,7 @@ MonoBehaviour:
   autoRefresh: 0
   installOnAwake: 1
   installPipeline:
+  - {fileID: 7145400541679694429}
   - {fileID: 9106130811389171444}
   - {fileID: 9106130811965496966}
   - {fileID: 2555153647034283908}
@@ -1009,13 +1044,13 @@ MonoBehaviour:
   - {fileID: 0}
   _animatorEventReceiver: {fileID: 9106130812246617755}
   _worldUI: {fileID: 716438844842664568}
-  _moveSpeed: 5
+  _moveSpeed: 8
   _groundCheckTransform: {fileID: 9106130812163183113}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
   _weapon: {fileID: 9106130811345666978}
-  _health: 10
+  _health: 5
 --- !u!1 &9106130811965496969
 GameObject:
   m_ObjectHideFlags: 0
