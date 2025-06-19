@@ -61,7 +61,7 @@ namespace Game
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
 			entity.AddBehaviour(new DeathRequestBehaviour());
 			entity.AddBehaviour(new DeathEventBehaviour());
-			entity.AddBehaviour(new DestroyEntityOnDeathBehaviour());
+			entity.AddBehaviour(new DeactivateEntityOnDeathBehaviour());
 		}
 
 		private void InitializeUnityComponents(IEntity entity)
