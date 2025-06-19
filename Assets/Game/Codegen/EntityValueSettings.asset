@@ -269,3 +269,6 @@ MonoBehaviour:
     - id: 74
       name: EntityWorldUI
       type: GameObject
+    - id: 75
+      name: AimLine
+      type: LineRenderer

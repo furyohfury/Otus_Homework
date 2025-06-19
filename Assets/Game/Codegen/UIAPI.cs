@@ -18,6 +18,7 @@ namespace Atomic.Entities
         ///Keys
         public const int HealthBar = 73; // HealthBar
         public const int EntityWorldUI = 74; // GameObject
+        public const int AimLine = 75; // LineRenderer
 
 
         ///Extensions
@@ -56,5 +57,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetEntityWorldUI(this IEntity obj, GameObject value) => obj.SetValue(EntityWorldUI, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static LineRenderer GetAimLine(this IEntity obj) => obj.GetValue<LineRenderer>(AimLine);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetAimLine(this IEntity obj, out LineRenderer value) => obj.TryGetValue(AimLine, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddAimLine(this IEntity obj, LineRenderer value) => obj.AddValue(AimLine, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAimLine(this IEntity obj) => obj.HasValue(AimLine);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelAimLine(this IEntity obj) => obj.DelValue(AimLine);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAimLine(this IEntity obj, LineRenderer value) => obj.SetValue(AimLine, value);
     }
 }

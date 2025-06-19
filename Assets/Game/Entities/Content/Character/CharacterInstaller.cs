@@ -16,6 +16,8 @@ namespace Game.Entities
 		private Animator _animator;
 		[SerializeField]
 		private Transform _transform;
+		[SerializeField]
+		private LineRenderer _aimLine;
 
 		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
@@ -127,12 +129,14 @@ namespace Game.Entities
 			var canAttack = new AndExpression();
 			canAttack.Append(() => !entity.GetIsDead().Value);
 			entity.AddCanAttack(canAttack);
+			entity.AddAimLine(_aimLine);
 
 			// Behaviours
 			entity.AddBehaviour(new AttackRequestBehaviour());
 			entity.AddBehaviour(new AimWeaponBehaviour());
 			entity.AddBehaviour(new EquipWeaponBehaviour());
 			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
+			entity.AddBehaviour<WeaponAimLineBehaviour>();
 		}
 
 		private void InitializeAbilities(IEntity entity)
