@@ -23,6 +23,7 @@ namespace Game
 				return;
 			}
 
+			_aimLine.enabled = true;
 			var firePointPosition = firePoint.Value.position + firePoint.Value.right * 0.1f;
 			_aimLine.SetPosition(0, firePointPosition);
 			_aimLine.SetPosition(1, target.Invoke());
