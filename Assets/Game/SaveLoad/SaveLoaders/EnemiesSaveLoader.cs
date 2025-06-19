@@ -17,8 +17,8 @@ namespace SaveLoad
 
 		protected override IEnumerable<EnemyData> ConvertToData(EnemyService service)
 		{
-			var enemies = service.Enemies;
-			var saveData = new List<EnemyData>();
+			var enemies = service.GetEnemies(true);
+			var saveData = new List<EnemyData>(enemies.Count);
 			foreach (var enemy in enemies)
 			{
 				Transform enemyTransform = enemy.GetVisualTransform();
@@ -41,33 +41,20 @@ namespace SaveLoad
 
 		protected override void SetupData(EnemyService service, IEnumerable<EnemyData> data)
 		{
-			var sceneEnemies = service.Enemies;
-			if (sceneEnemies == null)
+			IReadOnlyCollection<IEntity> sceneEnemies = service.GetEnemies(true);
+			if (sceneEnemies == null || sceneEnemies.Count <= 0)
 			{
 				return;
 			}
 
-			IEnumerable<EnemyData> enemyDatas = data.ToList();
+			var dict = sceneEnemies.ToDictionary(enemy => enemy.InstanceId);
 
-			foreach (var sceneEnemy in sceneEnemies)
+			foreach (EnemyData enemyData in data)
 			{
-				if (enemyDatas.Any(enemyData => enemyData.InstanceId == sceneEnemy.InstanceId) == false)
-				{
-					SceneEntity.Destroy(sceneEnemy);
-				}
-			}
-
-			foreach (var enemyData in enemyDatas)
-			{
-				var sceneEnemy = sceneEnemies.SingleOrDefault(sceneEnemy => sceneEnemy.InstanceId == enemyData.InstanceId);
-				if (sceneEnemy != default)
-				{
-					SetupExistingEnemy(sceneEnemy, enemyData);
-				}
-				else
-				{
-					CreateNewEnemy(enemyData, service.Container);
-				}
+				var sceneEnemy = dict[enemyData.InstanceId];
+				SceneEntity sceneEntity = SceneEntity.Cast(sceneEnemy);
+				sceneEntity.gameObject.SetActive(true);
+				SetupExistingEnemy(sceneEnemy, enemyData);
 			}
 		}
 
@@ -76,16 +63,6 @@ namespace SaveLoad
 			var enemyTransform = sceneEnemy.GetVisualTransform();
 			enemyTransform.SetPositionAndRotation(enemyData.Position, enemyData.Rotation);
 			sceneEnemy.GetHealth().Value = enemyData.Health;
-		}
-
-		private void CreateNewEnemy(EnemyData enemyData, Transform container)
-		{
-			var id = enemyData.Id;
-			var prefab = _prefabs[id];
-			var pos = enemyData.Position;
-			var rot = enemyData.Rotation;
-			var newEnemy = SceneEntity.Instantiate(prefab, pos, rot, container);
-			newEnemy.GetHealth().Value = enemyData.Health;
 		}
 	}
 }

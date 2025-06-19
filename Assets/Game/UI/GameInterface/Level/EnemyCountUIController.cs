@@ -15,7 +15,7 @@ namespace UI
 
 		public void Tick(float deltaTime)
 		{
-			var enemiesCount = _enemyService.Enemies.Count;
+			var enemiesCount = _enemyService.GetEnemies(false).Count; // TODO reactive
 			_amountView.SetText(enemiesCount.ToString());
 		}
 	}

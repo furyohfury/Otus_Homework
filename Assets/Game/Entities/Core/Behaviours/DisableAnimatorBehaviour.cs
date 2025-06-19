@@ -21,7 +21,9 @@ namespace Game
 
 		private void CacheAnimatorSpeed()
 		{
-			_cachedSpeed = _animator.speed;
+			_cachedSpeed = _animator.speed != 0
+				? _animator.speed
+				: 1;
 		}
 
 		public void Disable(IEntity entity)

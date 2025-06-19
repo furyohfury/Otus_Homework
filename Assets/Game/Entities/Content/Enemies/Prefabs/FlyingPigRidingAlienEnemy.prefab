@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 402944372249658893}
   - component: {fileID: 7748802789432753503}
   - component: {fileID: 8602858713818955703}
+  - component: {fileID: 8955313514560584219}
   m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
@@ -153,6 +154,18 @@ MonoBehaviour:
         - {fileID: 331461954003224749}
         - {fileID: 1446357185103766004}
         - {fileID: 5411511985933754483}
+--- !u!210 &8955313514560584219
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922518346151694045}
+  m_Enabled: 1
+  m_SortingLayerID: -1149906635
+  m_SortingLayer: -1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &1004479804225440613
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +455,7 @@ GameObject:
   - component: {fileID: 4924235610753336644}
   - component: {fileID: 4312412101022602095}
   - component: {fileID: 6421226497016568632}
+  - component: {fileID: 7748944404246039337}
   m_Layer: 9
   m_Name: UI
   m_TagString: Untagged
@@ -492,6 +506,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4847460963660736002}
+--- !u!210 &7748944404246039337
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651446093601074743}
+  m_Enabled: 1
+  m_SortingLayerID: -1149906635
+  m_SortingLayer: -1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &2721648319001400389
 GameObject:
   m_ObjectHideFlags: 0
