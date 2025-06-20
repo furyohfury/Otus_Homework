@@ -16,6 +16,7 @@ namespace Atomic.Entities
         public const int AbilityCard = 4;
         public const int Enemy = 5;
         public const int LevelEntity = 6;
+        public const int WorldEntity = 7;
 
 
         ///Extensions
@@ -48,5 +49,10 @@ namespace Atomic.Entities
         public static bool NotLevelEntity(this IEntity obj) => !obj.HasTag(LevelEntity);
         public static bool AddLevelEntity(this IEntity obj) => obj.AddTag(LevelEntity);
         public static bool DelLevelEntity(this IEntity obj) => obj.DelTag(LevelEntity);
+        
+        public static bool HasWorldEntity(this IEntity obj) => obj.HasTag(WorldEntity);
+        public static bool NotWorldEntity(this IEntity obj) => !obj.HasTag(WorldEntity);
+        public static bool AddWorldEntity(this IEntity obj) => obj.AddTag(WorldEntity);
+        public static bool DelWorldEntity(this IEntity obj) => obj.DelTag(WorldEntity);
     }
 }

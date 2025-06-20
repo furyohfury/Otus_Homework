@@ -49,6 +49,7 @@ namespace Game
 
 		public override void Install(IEntity entity)
 		{
+			entity.AddTag(TagAPI.WorldEntity);
 			_entity = entity;
 			_triggerReceiver.OnTriggerEnter += OnCollided;
 

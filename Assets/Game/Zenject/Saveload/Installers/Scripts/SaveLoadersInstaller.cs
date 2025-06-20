@@ -43,6 +43,14 @@ namespace SaveLoad
 			         .To<LevelEntitiesSaveLoader>()
 			         .AsCached()
 			         .WithArguments(_levelEntitiesPrefabs.Prefabs);
+			
+			Container.Bind<ISaveLoader>()
+			         .To<ProjectilesSaveLoader>()
+			         .AsCached();
+
+			Container.Bind<ISaveLoader>()
+			         .To<WorldEntitiesSaveLoader>()
+			         .AsCached();
 		}
 	}
 }

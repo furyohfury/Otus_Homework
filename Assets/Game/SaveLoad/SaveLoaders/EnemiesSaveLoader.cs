@@ -63,6 +63,18 @@ namespace SaveLoad
 			var enemyTransform = sceneEnemy.GetVisualTransform();
 			enemyTransform.SetPositionAndRotation(enemyData.Position, enemyData.Rotation);
 			sceneEnemy.GetHealth().Value = enemyData.Health;
+			EnableEnemy(sceneEnemy);
+		}
+
+		private static void EnableEnemy(IEntity sceneEnemy)
+		{
+			SpriteRenderer[] spriteRenderers = sceneEnemy.GetSpriteRenderers();
+			for (int i = 0, count = spriteRenderers.Length; i < count; i++)
+			{
+				spriteRenderers[i].enabled = true;
+			}
+
+			sceneEnemy.GetRigidbody2D().simulated = true;
 		}
 	}
 }

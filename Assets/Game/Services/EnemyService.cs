@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Atomic.Entities;
 using UnityEngine;
@@ -37,7 +36,7 @@ namespace Game
 
 			return _enemies;
 		}
-		
+
 		private void UpdateEnemies()
 		{
 			IReadOnlyList<IEntity> worldEnemies = _entityWorld.GetEntitiesWithTag(TagAPI.Enemy);

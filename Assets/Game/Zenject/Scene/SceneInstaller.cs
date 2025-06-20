@@ -1,4 +1,5 @@
 ﻿using Atomic.Entities;
+using SaveLoad;
 using UnityEngine;
 using Zenject;
 
@@ -53,6 +54,12 @@ namespace Game
 			Container.Bind<LevelEntitiesService>()
 			         .AsSingle()
 			         .WithArguments(_levelEntitiesContainer);
+
+			Container.Bind<ProjectileService>()
+			         .AsSingle();
+
+			Container.Bind<WorldEntitiesService>()
+			         .AsSingle();
 		}
 
 		private void InstallGameLifeCycle()

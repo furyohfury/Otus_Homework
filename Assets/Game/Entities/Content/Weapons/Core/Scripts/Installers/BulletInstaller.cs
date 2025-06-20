@@ -21,7 +21,6 @@ namespace Game.Entities
 		[SerializeField]
 		private float _lifeDuration;
 
-
 		public override void Install(IEntity entity)
 		{
 			entity.AddBulletTag();

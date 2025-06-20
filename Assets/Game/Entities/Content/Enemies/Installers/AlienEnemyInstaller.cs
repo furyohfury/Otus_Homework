@@ -60,7 +60,9 @@ namespace Game
 			entity.AddBehaviour(new TakeDamageRequestBehaviour());
 			entity.AddBehaviour(new TakeDamageEventBehaviour());
 			entity.AddBehaviour(new DeathRequestBehaviour());
-			entity.AddBehaviour(new DeathEventBehaviour());
+			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
+			entity.AddBehaviour(new DisablePhysicsOnDeathRequestBehaviour());
+			entity.AddBehaviour(new DisableSpritesOnDeathRequestBehaviour());
 			entity.AddBehaviour(new DeactivateEntityOnDeathBehaviour());
 		}
 

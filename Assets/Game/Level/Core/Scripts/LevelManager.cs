@@ -42,7 +42,6 @@ namespace Game
 
 		public void StartLevel()
 		{
-			// _saveLoadManager.Save();
 			_levelTimer.Start();
 			_entityWorld.EnableEntities();
 			OnLevelStarted?.Invoke();
