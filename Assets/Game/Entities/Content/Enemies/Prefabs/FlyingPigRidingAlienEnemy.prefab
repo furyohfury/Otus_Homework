@@ -97,7 +97,7 @@ Transform:
   m_Children:
   - {fileID: 7978872672147535334}
   - {fileID: 9127453751482730317}
-  m_Father: {fileID: 2485656415865638086}
+  m_Father: {fileID: 5782618519422220760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7748802789432753503
 Animator:
@@ -163,7 +163,7 @@ SortingGroup:
   m_GameObject: {fileID: 922518346151694045}
   m_Enabled: 1
   m_SortingLayerID: -1149906635
-  m_SortingLayer: -1
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &1004479804225440613
@@ -199,7 +199,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7406407910016399760}
-  m_Father: {fileID: 2485656415865638086}
+  m_Father: {fileID: 5782618519422220760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2682183255215293140
 MonoBehaviour:
@@ -353,7 +353,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2485656415865638086}
+  - {fileID: 402944372249658893}
+  - {fileID: 6564149619633005767}
+  - {fileID: 9181849191444980490}
+  - {fileID: 23753723424473190}
   - {fileID: 4924235610753336644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -433,7 +436,7 @@ MonoBehaviour:
   _id: FlyingPigRidingAlienEnemy
   _rigidBody: {fileID: 8652061949270504739}
   _animator: {fileID: 7748802789432753503}
-  _transform: {fileID: 2485656415865638086}
+  _transform: {fileID: 5782618519422220760}
   _spriteRenderer:
   - {fileID: 6098291758399522490}
   - {fileID: 331461954003224749}
@@ -515,7 +518,7 @@ SortingGroup:
   m_GameObject: {fileID: 2651446093601074743}
   m_Enabled: 1
   m_SortingLayerID: -1149906635
-  m_SortingLayer: -1
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &2721648319001400389
@@ -665,41 +668,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &3018001329151529361
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2485656415865638086}
-  m_Layer: 9
-  m_Name: Transform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2485656415865638086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3018001329151529361}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 402944372249658893}
-  - {fileID: 6564149619633005767}
-  - {fileID: 9181849191444980490}
-  - {fileID: 23753723424473190}
-  m_Father: {fileID: 5782618519422220760}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4305889223068283252
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +898,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2485656415865638086}
+  m_Father: {fileID: 5782618519422220760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &6264582815754955305
 AudioSource:
@@ -1105,7 +1073,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2485656415865638086}
+  m_Father: {fileID: 5782618519422220760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4051103208282860913
 BoxCollider2D:
