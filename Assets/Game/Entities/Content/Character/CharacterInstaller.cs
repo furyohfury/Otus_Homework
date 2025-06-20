@@ -62,12 +62,12 @@ namespace Game.Entities
 			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
 
-			entity.AddBehaviour(new TakeDamageRequestBehaviour());
-			entity.AddBehaviour(new TakeDamageEventBehaviour());
-			entity.AddBehaviour(new DeathRequestBehaviour());
-			entity.AddBehaviour(new DeathRequestBehaviour());
-			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
-			entity.AddBehaviour(new DeathSFXBehaviour());
+			entity.AddBehaviour<TakeDamageRequestBehaviour>();
+			entity.AddBehaviour<TakeDamageEventBehaviour>();
+			entity.AddBehaviour<DeathRequestBehaviour>();
+			entity.AddBehaviour<DeathRequestBehaviour>();
+			entity.AddBehaviour<DeathStopAnimatorBehaviour>();
+			entity.AddBehaviour<DeathSFXBehaviour>();
 		}
 
 		private void InitializeUnityComponents(IEntity entity)
@@ -104,12 +104,12 @@ namespace Game.Entities
 			entity.AddJumpEvent(new BaseEvent());
 
 			// Behaviours
-			entity.AddBehaviour(new MovementByPhysicsAxisXBehaviour());
-			entity.AddBehaviour(new JumpRequestBehaviour());
-			entity.AddBehaviour(new JumpEventBehaviour());
-			entity.AddBehaviour(new MovementAnimatorBehaviour());
-			entity.AddBehaviour(new JumpVisualBehaviour());
-			entity.AddBehaviour(new RotateToTarget2DBehaviour());
+			entity.AddBehaviour<MovementByPhysicsAxisXBehaviour>();
+			entity.AddBehaviour<JumpRequestBehaviour>();
+			entity.AddBehaviour<JumpEventBehaviour>();
+			entity.AddBehaviour<MovementAnimatorBehaviour>();
+			entity.AddBehaviour<JumpVisualBehaviour>();
+			entity.AddBehaviour<RotateToTarget2DBehaviour>();
 		}
 
 		private void InitializeCombat(IEntity entity)
@@ -132,10 +132,10 @@ namespace Game.Entities
 			entity.AddAimLine(_aimLine);
 
 			// Behaviours
-			entity.AddBehaviour(new AttackRequestBehaviour());
-			entity.AddBehaviour(new AimWeaponBehaviour());
-			entity.AddBehaviour(new EquipWeaponBehaviour());
-			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
+			entity.AddBehaviour<AttackRequestBehaviour>();
+			entity.AddBehaviour<AimWeaponBehaviour>();
+			entity.AddBehaviour<EquipWeaponBehaviour>();
+			entity.AddBehaviour<UseWeaponOnAttackBehaviour>();
 			entity.AddBehaviour<WeaponAimLineBehaviour>();
 		}
 
@@ -151,9 +151,9 @@ namespace Game.Entities
 			entity.AddAbilityInventory(new ReactiveList<AbilityCardState>());
 			entity.AddRemoveActiveAbilityEvent(new BaseEvent());
 
-			entity.AddBehaviour(new AbilityPickupBehaviour());
-			entity.AddBehaviour(new RemoveActiveAbilityBehaviour());
-			entity.AddBehaviour(new AbilityInventoryBehaviour());
+			entity.AddBehaviour<AbilityPickupBehaviour>();
+			entity.AddBehaviour<RemoveActiveAbilityBehaviour>();
+			entity.AddBehaviour<AbilityInventoryBehaviour>();
 			entity.AddBehaviour<AbilityRequestBehaviour>();
 		}
 	}

@@ -43,7 +43,7 @@ namespace Game.Entities
 			entity.AddTriggerExitEvent(new BaseEvent<Collider2D>());
 			entity.AddCollider2D(_collider2D);
 
-			entity.AddBehaviour(new MeleeWeaponCollisionBehaviour());
+			entity.AddBehaviour<MeleeWeaponCollisionBehaviour>();
 
 			// New
 			entity.AddDamage(new ReactiveVariable<int>(_damage));

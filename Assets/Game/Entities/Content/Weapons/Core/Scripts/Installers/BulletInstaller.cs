@@ -43,8 +43,8 @@ namespace Game.Entities
 
 		private static void InstallBehaviours(IEntity entity)
 		{
-			entity.AddBehaviour(new BulletCollisionBehaviour());
-			entity.AddBehaviour(new MovementByKinematicRbBehaviour());
+			entity.AddBehaviour<BulletCollisionBehaviour>();
+			entity.AddBehaviour<MovementByKinematicRbBehaviour>();
 			entity.AddBehaviour<LifetimeBehaviour>();
 			entity.AddBehaviour<DestroyEntityOnDeathEventBehaviour>();
 		}

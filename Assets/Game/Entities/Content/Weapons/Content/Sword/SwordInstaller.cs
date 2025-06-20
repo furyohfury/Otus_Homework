@@ -52,7 +52,7 @@ namespace Game.Entities
 			entity.AddSlashSpeed(_slashSpeed);
 			entity.AddReverseSlashSpeed(_reverseSlashSpeed);
 
-			entity.AddBehaviour(new MeleeWeaponCollisionBehaviour());
+			entity.AddBehaviour<MeleeWeaponCollisionBehaviour>();
 
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
 			entity.AddAttackDelay(new ReactiveVariable<float>(_attackDelay));

@@ -61,13 +61,13 @@ namespace Game
 			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
 
-			entity.AddBehaviour(new TakeDamageRequestBehaviour());
-			entity.AddBehaviour(new TakeDamageEventBehaviour());
-			entity.AddBehaviour(new DeathRequestBehaviour());
-			entity.AddBehaviour(new DeathStopAnimatorBehaviour());
-			entity.AddBehaviour(new DisablePhysicsOnDeathRequestBehaviour());
-			entity.AddBehaviour(new DisableSpritesOnDeathRequestBehaviour());
-			entity.AddBehaviour(new DeactivateEntityOnDeathBehaviour());
+			entity.AddBehaviour<TakeDamageRequestBehaviour>();
+			entity.AddBehaviour<TakeDamageEventBehaviour>();
+			entity.AddBehaviour<DeathRequestBehaviour>();
+			entity.AddBehaviour<DeathStopAnimatorBehaviour>();
+			entity.AddBehaviour<DisablePhysicsOnDeathRequestBehaviour>();
+			entity.AddBehaviour<DisableSpritesOnDeathRequestBehaviour>();
+			entity.AddBehaviour<DisableEntityOnDeathRequestBehaviour>();
 		}
 
 		private void InitializeUnityComponents(IEntity entity)
@@ -98,9 +98,9 @@ namespace Game
 			entity.AddIsGrounded(isGrounded);
 
 			// Behaviours
-			entity.AddBehaviour(new MovementByPhysicsAxisXBehaviour());
-			entity.AddBehaviour(new MovementAnimatorBehaviour());
-			entity.AddBehaviour(new RotateToTarget2DBehaviour());
+			entity.AddBehaviour<MovementByPhysicsAxisXBehaviour>();
+			entity.AddBehaviour<MovementAnimatorBehaviour>();
+			entity.AddBehaviour<RotateToTarget2DBehaviour>();
 		}
 
 		private void InitializeCombat(IEntity entity)
@@ -118,9 +118,9 @@ namespace Game
 			entity.AddCanAttack(canAttack);
 
 			// Behaviours
-			entity.AddBehaviour(new AttackRequestBehaviour());
-			entity.AddBehaviour(new UseWeaponOnAttackBehaviour());
-			entity.AddBehaviour(new AttackAnimatorBehaviour());
+			entity.AddBehaviour<AttackRequestBehaviour>();
+			entity.AddBehaviour<UseWeaponOnAttackBehaviour>();
+			entity.AddBehaviour<AttackAnimatorBehaviour>();
 			entity.AddBehaviour<MeleeWeaponHitByAnimatorBehaviour>();
 		}
 
