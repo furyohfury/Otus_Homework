@@ -22,11 +22,11 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 21300000, guid: fd5efe4190becd649b4c8848674292a2, type: 3}
-    - time: 0.06666667
+    - time: 0.033333335
       value: {fileID: 21300000, guid: 586834a5ddd5f8a479f74e4cb48387f4, type: 3}
-    - time: 0.15
+    - time: 0.11666667
       value: {fileID: 21300000, guid: 15203f7613674164f9c7ef6c4623a7be, type: 3}
-    - time: 0.21666667
+    - time: 0.2
       value: {fileID: 21300000, guid: f2117a0e20cf93a41a5dcd0701397bc1, type: 3}
     - time: 0.28333333
       value: {fileID: 21300000, guid: 573dc809c6a36cd49a6fc0a94d69b067, type: 3}
@@ -34,7 +34,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: 37bd2c9b1a7f8b44fad24384346ba3fb, type: 3}
     - time: 0.43333334
       value: {fileID: 21300000, guid: 466982b6f5e37d149acc779397eda112, type: 3}
-    - time: 0.5
+    - time: 0.51666665
       value: {fileID: 21300000, guid: 00d3823eb41d68b4aa1fce354ab562ea, type: 3}
     attribute: m_Sprite
     path: 
@@ -71,7 +71,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.5333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -92,7 +92,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.51666665
-    functionName: DestroyObject
+    functionName: AnimationEnded
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
