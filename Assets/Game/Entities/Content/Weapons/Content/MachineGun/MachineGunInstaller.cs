@@ -72,7 +72,7 @@ namespace Game
 		private void InstallBehaviours(IEntity entity)
 		{
 			entity.AddBehaviour<AttackRequestBehaviour>();
-			entity.AddBehaviour<SpreadShootBehaviour>();
+			entity.AddBehaviour<SpreadAngleWeaponBehaviour>();
 			entity.AddBehaviour<SpendAmmoOnAttackBehaviour>();
 		}
 	}

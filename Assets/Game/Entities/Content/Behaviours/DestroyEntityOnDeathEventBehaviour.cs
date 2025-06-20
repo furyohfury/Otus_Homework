@@ -3,7 +3,7 @@ using Atomic.Entities;
 
 namespace Game
 {
-	public sealed class DestroyEntityOnDeathBehaviour : IEntityInit, IEntityDispose
+	public sealed class DestroyEntityOnDeathEventBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _deathEvent;
 		private IEntity _entity;

@@ -57,8 +57,8 @@ namespace Game
 			entity.AddDeathRequest(new BaseEvent());
 			entity.AddDeathEvent(new BaseEvent());
 
-			entity.AddBehaviour<DeathEventBehaviour>();
-			entity.AddBehaviour<DestroyEntityOnDeathBehaviour>();
+			entity.AddBehaviour<DeathRequestToEventBehaviour>();
+			entity.AddBehaviour<DestroyEntityOnDeathEventBehaviour>();
 		}
 
 		private void OnCollided(Collider2D collision)

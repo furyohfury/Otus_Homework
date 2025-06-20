@@ -46,6 +46,7 @@ namespace Game.Entities
 			entity.AddBehaviour(new BulletCollisionBehaviour());
 			entity.AddBehaviour(new MovementByKinematicRbBehaviour());
 			entity.AddBehaviour<LifetimeBehaviour>();
+			entity.AddBehaviour<DestroyEntityOnDeathEventBehaviour>();
 		}
 	}
 }
