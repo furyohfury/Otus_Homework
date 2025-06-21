@@ -19,6 +19,7 @@ namespace Atomic.Entities
         public const int FootstepsSounds = 60; // AudioClip[]
         public const int DeathSounds = 61; // AudioClip[]
         public const int TakeDamageSounds = 63; // AudioClip[]
+        public const int ShootSFX = 76; // AudioClip[]
 
 
         ///Extensions
@@ -75,5 +76,23 @@ namespace Atomic.Entities
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetTakeDamageSounds(this IEntity obj, AudioClip[] value) => obj.SetValue(TakeDamageSounds, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AudioClip[] GetShootSFX(this IEntity obj) => obj.GetValue<AudioClip[]>(ShootSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryGetShootSFX(this IEntity obj, out AudioClip[] value) => obj.TryGetValue(ShootSFX, out value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool AddShootSFX(this IEntity obj, AudioClip[] value) => obj.AddValue(ShootSFX, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasShootSFX(this IEntity obj) => obj.HasValue(ShootSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool DelShootSFX(this IEntity obj) => obj.DelValue(ShootSFX);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetShootSFX(this IEntity obj, AudioClip[] value) => obj.SetValue(ShootSFX, value);
     }
 }

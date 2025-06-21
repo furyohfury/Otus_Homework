@@ -17,6 +17,7 @@ namespace Atomic.Entities
         public const int Enemy = 5;
         public const int LevelEntity = 6;
         public const int WorldEntity = 7;
+        public const int Weapon = 8;
 
 
         ///Extensions
@@ -45,14 +46,14 @@ namespace Atomic.Entities
         public static bool AddEnemyTag(this IEntity obj) => obj.AddTag(Enemy);
         public static bool DelEnemyTag(this IEntity obj) => obj.DelTag(Enemy);
         
-        public static bool HasLevelEntity(this IEntity obj) => obj.HasTag(LevelEntity);
-        public static bool NotLevelEntity(this IEntity obj) => !obj.HasTag(LevelEntity);
-        public static bool AddLevelEntity(this IEntity obj) => obj.AddTag(LevelEntity);
-        public static bool DelLevelEntity(this IEntity obj) => obj.DelTag(LevelEntity);
+        public static bool HasLevelEntityTag(this IEntity obj) => obj.HasTag(LevelEntity);
+        public static bool NotLevelEntityTag(this IEntity obj) => !obj.HasTag(LevelEntity);
+        public static bool AddLevelEntityTag(this IEntity obj) => obj.AddTag(LevelEntity);
+        public static bool DelLevelEntityTag(this IEntity obj) => obj.DelTag(LevelEntity);
         
-        public static bool HasWorldEntity(this IEntity obj) => obj.HasTag(WorldEntity);
-        public static bool NotWorldEntity(this IEntity obj) => !obj.HasTag(WorldEntity);
-        public static bool AddWorldEntity(this IEntity obj) => obj.AddTag(WorldEntity);
-        public static bool DelWorldEntity(this IEntity obj) => obj.DelTag(WorldEntity);
+        public static bool HasWeaponTag(this IEntity obj) => obj.HasTag(Weapon);
+        public static bool NotWeaponTag(this IEntity obj) => !obj.HasTag(Weapon);
+        public static bool AddWeaponTag(this IEntity obj) => obj.AddTag(Weapon);
+        public static bool DelWeaponTag(this IEntity obj) => obj.DelTag(Weapon);
     }
 }

@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6472972534596676026}
   - component: {fileID: 264319602450261412}
-  - component: {fileID: 6260025114565493683}
+  - component: {fileID: 5231032505439013958}
   m_Layer: 9
   m_Name: SFX
   m_TagString: Untagged
@@ -180,14 +180,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 5
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -265,7 +265,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6260025114565493683
+--- !u!114 &5231032505439013958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,11 +274,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 6930702994373737285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6758bb30319d4ae9a2a5c91ec2a0b92f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4449a408ebb644a08bf8405b221eb04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 264319602450261412}
-  _shootSFX: {fileID: 8300000, guid: 81764b23e5b364bcdbebf662664d45f4, type: 3}
+  autoRefresh: 1
+  installers:
+  - rid: 1824624635350614381
+  - rid: 1824624635350614386
+  logics:
+  - rid: 1824624635350614384
+  references:
+    version: 2
+    RefIds:
+    - rid: 1824624635350614381
+      type: {class: ComponentEntityInstaller, ns: Atomic.Entities, asm: Atomic.Entities}
+      data:
+        id: 57
+        value: {fileID: 264319602450261412}
+    - rid: 1824624635350614384
+      type: {class: ShootSFXWeaponBehaviour, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 1824624635350614386
+      type: {class: ShootSFXInstaller, ns: Game, asm: Assembly-CSharp}
+      data:
+        _clips:
+        - {fileID: 8300000, guid: 81764b23e5b364bcdbebf662664d45f4, type: 3}
 --- !u!1 &8107027897568768147
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +312,7 @@ GameObject:
   - component: {fileID: 5772500873039148391}
   - component: {fileID: 56889285646310288}
   m_Layer: 7
-  m_Name: Pistol
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,8 +365,9 @@ MonoBehaviour:
   installOnAwake: 1
   installPipeline:
   - {fileID: 56889285646310288}
-  - {fileID: 6260025114565493683}
+  - {fileID: 0}
   - {fileID: 3431173979895424264}
+  - {fileID: 5231032505439013958}
   onInstalled:
     m_PersistentCalls:
       m_Calls: []
@@ -362,8 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caaa4847b4ba484abb72f3167ac872a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer:
-  - {fileID: 0}
+  _spriteRenderers: []
   _firePoint: {fileID: 8107027897982037989}
   _projectilePrefab: {fileID: 6025802624882840659, guid: 441eea0bdf0170a40974fc99514d8286, type: 3}
   _transform: {fileID: 8107027897568768145}

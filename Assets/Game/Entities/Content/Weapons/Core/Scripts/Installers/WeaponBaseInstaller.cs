@@ -1,13 +1,15 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using Sirenix.OdinInspector;
 using UnityEngine;
-using BaseEvent = Atomic.Elements.BaseEvent;
 
 namespace Game
 {
-	public class PistolInstaller : SceneEntityInstallerBase
+	public sealed class WeaponBaseInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField]
+		[SerializeField][Required]
+		private string _id;
+		[SerializeField] [Header("Components")]
 		private SpriteRenderer[] _spriteRenderers;
 		[SerializeField]
 		private Transform _firePoint;
@@ -15,7 +17,7 @@ namespace Game
 		private SceneEntity _projectilePrefab;
 		[SerializeField]
 		private Transform _transform;
-		[SerializeField]
+		[SerializeField][Header("Parameters")]
 		private float _attackDelay = 0.3f;
 		[SerializeField]
 		private int _ammoSize = 10;
@@ -25,10 +27,12 @@ namespace Game
 
 		public override void Install(IEntity entity)
 		{
-			entity.AddId("Pistol");
-			InstallInteractions(entity);
+			entity.AddId(_id);
+			entity.AddTag(TagAPI.Weapon);
+			InstallShootEvents(entity);
 			InstallComponents(entity);
 			InstallWeaponParameters(entity);
+			InstallShootConditions(entity);
 			InstallBehaviours(entity);
 		}
 
@@ -36,17 +40,20 @@ namespace Game
 		{
 			entity.AddSpriteRenderers(_spriteRenderers);
 			entity.AddVisualTransform(_transform);
+			entity.AddFirePoint(new ReactiveVariable<Transform>(_firePoint));
+			entity.AddProjectilePrefab(new ReactiveVariable<SceneEntity>(_projectilePrefab));
 		}
 
 		private void InstallWeaponParameters(IEntity entity)
 		{
 			entity.AddDamage(new ReactiveVariable<int>(_damage));
-			entity.AddFirePoint(new ReactiveVariable<Transform>(_firePoint));
 			entity.AddAttackDelay(new ReactiveVariable<float>(_attackDelay));
-			entity.AddProjectilePrefab(new ReactiveVariable<SceneEntity>(_projectilePrefab));
 			entity.AddAmmoSize(new ReactiveVariable<int>(_ammoSize));
 			entity.AddAmmo(new ReactiveVariable<int>(_ammoSize));
+		}
 
+		private void InstallShootConditions(IEntity entity)
+		{
 			var attackTimer = new Timer(_attackDelay);
 			entity.WhenUpdate(attackTimer.Tick);
 			entity.GetAttackEvent().Subscribe(() => attackTimer.Start());
@@ -61,7 +68,7 @@ namespace Game
 			entity.AddCanAttack(canAttack);
 		}
 
-		private void InstallInteractions(IEntity entity)
+		private void InstallShootEvents(IEntity entity)
 		{
 			entity.AddAttackRequest(new BaseEvent());
 			entity.AddAttackEvent(new BaseEvent());

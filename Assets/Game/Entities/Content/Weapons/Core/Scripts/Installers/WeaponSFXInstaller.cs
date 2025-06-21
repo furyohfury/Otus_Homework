@@ -13,7 +13,7 @@ namespace Game
 		public override void Install(IEntity entity)
 		{
 			entity.AddAudioSource(_audioSource);
-			entity.AddShootAudioClip(_shootSFX);
+			// entity.AddShootAudioClip(_shootSFX);
 
 			entity.AddBehaviour<ShootSFXWeaponBehaviour>();
 		}

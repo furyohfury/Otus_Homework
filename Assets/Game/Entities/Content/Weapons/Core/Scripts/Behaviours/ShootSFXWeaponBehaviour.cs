@@ -1,5 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
@@ -9,7 +10,7 @@ namespace Game
 		private IEntity _self;
 		private BaseEvent _attackEvent;
 		private AudioSource _audioSource;
-		private AudioClip _shootAudioClip;
+		private AudioClip[] _shootSFXs;
 		private Transform _soundSpawnPoint;
 
 		public void Init(IEntity entity)
@@ -20,7 +21,7 @@ namespace Game
 				: entity.GetVisualTransform();
 
 			_audioSource = entity.GetAudioSource();
-			_shootAudioClip = entity.GetShootAudioClip();
+			_shootSFXs = entity.GetShootSFX();
 
 			_attackEvent = entity.GetAttackEvent();
 			_attackEvent.Subscribe(OnWeaponShoot);
@@ -28,19 +29,20 @@ namespace Game
 
 		private void OnWeaponShoot()
 		{
+			var clip = _shootSFXs[Random.Range(0, _shootSFXs.Length)];
 			if (_self.TryGetAmmo(out ReactiveVariable<int> ammo) == false
 			    || ammo.Value > 0)
 			{
-				_audioSource.PlayOneShot(_shootAudioClip);
+				_audioSource.PlayOneShot(clip);
 				return;
 			}
 
 			var source = new GameObject();
 			source.transform.SetParent(_soundSpawnPoint.root);
 			var audioSource = source.AddComponent<AudioSource>();
-			audioSource.PlayOneShot(_shootAudioClip, _audioSource.volume);
+			audioSource.PlayOneShot(clip, _audioSource.volume);
 
-			Object.Destroy(source, _shootAudioClip.length);
+			DOVirtual.DelayedCall(clip.length, () => Object.Destroy(source));
 		}
 
 		public void Dispose(IEntity entity)
