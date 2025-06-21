@@ -2,6 +2,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Entities
@@ -18,6 +19,8 @@ namespace Game.Entities
 		private Transform _transform;
 		[SerializeField]
 		private LineRenderer _aimLine;
+		[SerializeField]
+		private SpriteRenderer[] _spriteRenderers;
 
 		[Header("Movement")] [SerializeField]
 		private float _moveSpeed;
@@ -76,6 +79,7 @@ namespace Game.Entities
 			entity.AddRigidbody2D(_rigidBody);
 			entity.AddAnimator(_animator);
 			entity.AddVisualTransform(_transform);
+			entity.AddSpriteRenderers(_spriteRenderers);
 
 			entity.AddBehaviour<DisableAnimatorBehaviour>();
 		}
@@ -155,6 +159,12 @@ namespace Game.Entities
 			entity.AddBehaviour<RemoveActiveAbilityBehaviour>();
 			entity.AddBehaviour<AbilityInventoryBehaviour>();
 			entity.AddBehaviour<AbilityRequestBehaviour>();
+		}
+
+		[Button]
+		private void CollectSpriteRenderers()
+		{
+			_spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 		}
 	}
 }

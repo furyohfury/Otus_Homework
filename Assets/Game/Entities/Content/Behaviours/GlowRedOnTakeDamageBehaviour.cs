@@ -2,7 +2,7 @@
 using System.Threading;
 using Atomic.Elements;
 using Atomic.Entities;
-using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Game
@@ -26,7 +26,7 @@ namespace Game
 			_health.Subscribe(OnTakeDamage);
 		}
 
-		private async void OnTakeDamage(int _)
+		private void OnTakeDamage(int _)
 		{
 			var initialColors = new Color[_spriteRenderers.Length];
 			for (var i = 0; i < _spriteRenderers.Length; i++)
@@ -35,15 +35,11 @@ namespace Game
 				_spriteRenderers[i].color = _glowColor;
 			}
 
-			try
-			{
-				await UniTask.Delay(TimeSpan.FromSeconds(_duration), cancellationToken: _cts.Token);
-			}
-			catch
-			{
-				return;
-			}
+			DOVirtual.DelayedCall(_duration, () => RestoreColors(initialColors));
+		}
 
+		private void RestoreColors(Color[] initialColors)
+		{
 			for (var i = 0; i < _spriteRenderers.Length; i++)
 			{
 				_spriteRenderers[i].color = initialColors[i];
