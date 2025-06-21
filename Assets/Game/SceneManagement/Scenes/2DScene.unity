@@ -6944,6 +6944,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4004508034403904811, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: _health
       value: 1
@@ -12444,6 +12448,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4004508034403904811, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: _health
       value: 1
@@ -13973,6 +13981,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingPigRidingAlienEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5782618519422220760, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.65
@@ -14068,6 +14080,10 @@ PrefabInstance:
     - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: m_Name
       value: FlyingPigRidingAlienEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2371164446523324971, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: 'managedReferences[1824624587834130435]'
@@ -31324,6 +31340,10 @@ PrefabInstance:
     - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: m_Name
       value: FlyingPigRidingAlienEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015718414193348347, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2371164446523324971, guid: adbb40fc220ece3409c7713b5e7d1844, type: 3}
       propertyPath: 'managedReferences[1824624587834130432]'

@@ -23,7 +23,7 @@ MonoBehaviour:
     - rid: 7840523029330001940
       type: {class: WeaponAspect, ns: Game, asm: Assembly-CSharp}
       data:
-        _weaponPrefab: {fileID: 5772500873039148391, guid: b60239c0316848a4d8e381562ae477b5, type: 3}
+        _weaponPrefab: {fileID: 9005951276933230594, guid: 06bae7fb3a5ffae4c9f386962e1a71a6, type: 3}
     - rid: 7840523029330001941
       type: {class: DashXAbilityAspect, ns: Game, asm: Assembly-CSharp}
       data:
