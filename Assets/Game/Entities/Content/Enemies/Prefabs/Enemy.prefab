@@ -283,8 +283,10 @@ MonoBehaviour:
   autoRefresh: 1
   installers:
   - rid: 1824624635350614443
+  - rid: 1824624635350614445
   logics:
   - rid: 1824624635350614444
+  - rid: 1824624635350614446
   references:
     version: 2
     RefIds:
@@ -294,6 +296,13 @@ MonoBehaviour:
         _healthBar: {fileID: 6748511523907123388}
     - rid: 1824624635350614444
       type: {class: HealthBarBehaviour, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 1824624635350614445
+      type: {class: WorldUIInstaller, ns: Game, asm: Assembly-CSharp}
+      data:
+        _ui: {fileID: 716438844842664568}
+    - rid: 1824624635350614446
+      type: {class: WorldUIBehaviour, ns: Game, asm: Assembly-CSharp}
       data: 
 --- !u!1 &3882597092498126863
 GameObject:
