@@ -105,7 +105,7 @@ namespace Game
 			}
 		}
 
-		void InputControls.IUIActions.OnPause(InputAction.CallbackContext context)
+		void InputControls.IGameplayActions.OnPause(InputAction.CallbackContext context)
 		{
 			if (context.phase == InputActionPhase.Performed)
 			{

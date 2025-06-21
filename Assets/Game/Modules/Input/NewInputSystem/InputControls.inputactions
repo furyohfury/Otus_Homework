@@ -15,10 +15,19 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "6cd5b469-907e-4093-bb1d-491c901f774e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "458df8e0-e26f-4496-b377-0c70be7fd782",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +45,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "9bb6c90a-d928-4c5e-a844-71016798bdc4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -111,6 +120,28 @@
                 },
                 {
                     "name": "",
+                    "id": "47ed86f2-4395-40c9-acc7-10bc5aabd21a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3547261-5468-4946-b97d-58650af2db63",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XboxGamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "bfcbd0eb-7578-4c91-b137-2f6ade7bd1fc",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -180,41 +211,8 @@
         {
             "name": "UI",
             "id": "64327013-77f0-424c-8c87-2b74e004a0b2",
-            "actions": [
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "25c4d150-6ced-4b38-b065-627026a2c424",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "600fd488-5d5c-47e9-bb16-3489fc61f851",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "774a3a21-b397-4abe-b958-1390a1d566a7",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XboxGamepad",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

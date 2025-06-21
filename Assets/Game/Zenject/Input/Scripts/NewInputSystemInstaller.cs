@@ -30,6 +30,9 @@ namespace Game
 			Container.Bind<IRebindSaveLoader>()
 			         .To<RebindSaveLoader>()
 			         .AsCached();
+
+			Container.BindInterfacesAndSelfTo<InputMapsSwitcher>()
+			         .AsSingle();
 		}
 	}
 }
