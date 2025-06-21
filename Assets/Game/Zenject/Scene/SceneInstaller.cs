@@ -1,5 +1,6 @@
 ﻿using Atomic.Entities;
 using SaveLoad;
+using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 
@@ -26,15 +27,23 @@ namespace Game
 			InstallGameLifeCycle();
 			InstallEntitiesSystem();
 			InstallServices();
+			InstallCameraSystems();
+		}
 
-			Container.Bind<Transform>()
-			         .WithId("WorldTransform")
-			         .FromInstance(_worldTransform)
+		private void InstallCameraSystems()
+		{
+			Container.Bind<Camera>()
+			         .FromComponentInHierarchy().AsSingle();
+
+			Container.BindInterfacesAndSelfTo<CameraShaker>()
 			         .AsSingle();
 
+			Container.Bind<CinemachineImpulseSource>()
+			         .FromComponentInHierarchy()
+			         .AsCached();
 
-			Container.Bind<Camera>()
-			         .FromComponentInHierarchy().AsCached();
+			Container.BindInterfacesAndSelfTo<CameraShakeController>()
+			         .AsSingle();
 		}
 
 		private void InstallServices()
