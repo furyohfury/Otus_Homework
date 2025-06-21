@@ -10,13 +10,11 @@ namespace Game
 		private IEntity _characterEntity;
 		private IEvent<AbilityCardConfig> _pickupAbilityCardEvent;
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
-		private IEvent _removeActiveAbilityEvent;
 		private AssetReference _configAssetReference;
 
 		public void Init(IEntity entity)
 		{
 			_characterEntity = entity;
-			_removeActiveAbilityEvent = entity.GetRemoveActiveAbilityEvent();
 			_activeAbilityAspects = entity.GetActiveAbilityAspects();
 			_pickupAbilityCardEvent = entity.GetAbilityCardPickupEvent();
 			_pickupAbilityCardEvent.Subscribe(OnChangeAspect);
