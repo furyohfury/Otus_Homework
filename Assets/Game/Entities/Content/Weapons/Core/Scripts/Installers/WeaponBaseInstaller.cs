@@ -7,7 +7,7 @@ namespace Game
 {
 	public sealed class WeaponBaseInstaller : SceneEntityInstallerBase
 	{
-		[SerializeField][Required]
+		[SerializeField] [Required]
 		private string _id;
 		[SerializeField] [Header("Components")]
 		private SpriteRenderer[] _spriteRenderers;
@@ -17,7 +17,7 @@ namespace Game
 		private SceneEntity _projectilePrefab;
 		[SerializeField]
 		private Transform _transform;
-		[SerializeField][Header("Parameters")]
+		[SerializeField] [Header("Parameters")]
 		private float _attackDelay = 0.3f;
 		[SerializeField]
 		private int _ammoSize = 10;
