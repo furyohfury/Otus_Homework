@@ -28,4 +28,4 @@ MonoBehaviour:
     - rid: 7840523029330001939
       type: {class: WeaponAspect, ns: Game, asm: Assembly-CSharp}
       data:
-        _weaponPrefab: {fileID: 5772500873039148391, guid: f5f701b2354367147b0ef5df18ea605f, type: 3}
+        _weaponPrefab: {fileID: 6527347804895958593, guid: 32b60069c21258a4f9bc5db11d62915d, type: 3}
