@@ -8,7 +8,7 @@ namespace Game
 {
 	public sealed class EnemyService : IInitializable
 	{
-		public bool EnemiesDead => _enemies.Count <= 0;
+		public bool EnemiesDead => GetEnemies(false).Count <= 0;
 		public Transform Container => _container;
 
 		private HashSet<IEntity> _enemies;
