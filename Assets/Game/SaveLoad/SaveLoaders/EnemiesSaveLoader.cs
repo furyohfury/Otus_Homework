@@ -74,7 +74,10 @@ namespace SaveLoad
 				spriteRenderers[i].enabled = true;
 			}
 
+			sceneEnemy.GetAnimator().CrossFade("idle", 0);
+			sceneEnemy.GetMoveDirection().Value = Vector2.zero;
 			sceneEnemy.GetRigidbody2D().simulated = true;
+			sceneEnemy.Enable();
 		}
 	}
 }
