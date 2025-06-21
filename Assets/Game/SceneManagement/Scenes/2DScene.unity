@@ -291,6 +291,91 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!1001 &14577789
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1224362706}
+    m_Modifications:
+    - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_Name
+      value: Rifle_Dash (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018119907444141244, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ccaeb2a71df14974ab47f9b90e532476, type: 3}
+    - target: {fileID: 3197033899501655547, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197033900742610282, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: _abilityCardConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 13a76d6a875b87e4ea4b48aa02ceb9c3, type: 2}
+    - target: {fileID: 3197033900742610282, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: _abilityCardConfigReference.m_AssetGUID
+      value: c9c4fac3fbdfce2418a33fcab6531995
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013869, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: installOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
 --- !u!1 &33359136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3236,6 +3321,11 @@ MonoBehaviour:
   _text: {fileID: 1082437427}
   _icon: {fileID: 411101819}
   _sprite: {fileID: 21300000, guid: d75be6f651322884980bcec221af71c6, type: 3}
+--- !u!4 &450475561 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6390730940251013870, guid: 30fb9d9ae2bce5b4eb77af8614a5e6b1, type: 3}
+  m_PrefabInstance: {fileID: 14577789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &521100311
 GameObject:
   m_ObjectHideFlags: 0
@@ -9443,6 +9533,7 @@ Transform:
   m_Children:
   - {fileID: 1208747243}
   - {fileID: 1598688616}
+  - {fileID: 450475561}
   - {fileID: 961683478}
   - {fileID: 945222405}
   m_Father: {fileID: 1139958324}
