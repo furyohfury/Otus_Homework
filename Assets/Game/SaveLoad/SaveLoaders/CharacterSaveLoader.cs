@@ -57,7 +57,8 @@ namespace SaveLoad
 			var playerEntity = world.GetEntityWithTag(TagAPI.Character);
 
 			SetMovementData(data, playerEntity);
-			ResetAbilityAndWeapons(playerEntity, data);
+			ResetWeapon(playerEntity, data);
+			ResetAbility(playerEntity, data);
 		}
 
 		private void SetMovementData(PlayerSaveData data, IEntity playerEntity)
@@ -76,7 +77,23 @@ namespace SaveLoad
 			playerEntity.GetJumpForce().Value = data.JumpForce;
 		}
 
-		private void ResetAbilityAndWeapons(IEntity playerEntity, PlayerSaveData data)
+		private void ResetWeapon(IEntity playerEntity, PlayerSaveData data)
+		{
+			if (playerEntity.TryGetWeapon(out var equippedWeapon))
+			{
+				playerEntity.GetUnequipWeaponRequest().Invoke();
+			}
+			
+			if (string.IsNullOrEmpty(data.WeaponId))
+			{
+				return;
+			}
+
+			var weapon = _weaponPrefabs[data.WeaponId];
+			playerEntity.GetEquipWeaponRequest().Invoke(weapon);
+		}
+
+		private void ResetAbility(IEntity playerEntity, PlayerSaveData data)
 		{
 			if (playerEntity.TryGetAbilityInventory(out var inventory) == false)
 			{
@@ -89,12 +106,6 @@ namespace SaveLoad
 				{
 					removeEvent.Invoke();
 				}
-			}
-
-			if (string.IsNullOrEmpty(data.WeaponId) == false)
-			{
-				var weapon = _weaponPrefabs[data.WeaponId];
-				playerEntity.GetEquipWeaponRequest().Invoke(weapon);
 			}
 		}
 	}
