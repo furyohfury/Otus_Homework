@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class FootstepsSFXInstaller : SceneEntityInstallerBase
+	public sealed class DeathSFXInstallerOld : SceneEntityInstallerBase
 	{
 		[SerializeField]
-		private AudioClip[] _sounds;
+		private AudioClip[] _deathSounds;
 		[SerializeField]
 		private AudioSource _audioSource;
 
 		public override void Install(IEntity entity)
 		{
-			entity.AddFootstepsSounds(_sounds);
-			entity.AddBehaviour<FootstepsSFXBehaviour>();
+			entity.AddDeathSounds(_deathSounds);
+			entity.AddBehaviour<DeathSFXBehaviour>();
 
 			if (entity.HasAudioSource() == false)
 			{

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class TakeDamageSFXInstaller : SceneEntityInstallerBase
+	public sealed class TakeDamageSFXInstallerOld : SceneEntityInstallerBase
 	{
 		[SerializeField]
 		private AudioClip[] _takeDamageSounds;

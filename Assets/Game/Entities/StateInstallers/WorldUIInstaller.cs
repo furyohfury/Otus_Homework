@@ -5,14 +5,14 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class AnimatedVFXInstaller : IEntityInstaller
+	public sealed class WorldUIInstaller : IEntityInstaller
 	{
 		[SerializeField]
-		private AnimatedVFX _vfx;
-
+		private GameObject _ui;
+		
 		public void Install(IEntity entity)
 		{
-			entity.AddAttackVFX(_vfx);
+			entity.AddEntityWorldUI(_ui);
 		}
 	}
 }

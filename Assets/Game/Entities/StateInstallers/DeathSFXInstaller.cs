@@ -5,14 +5,14 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class AnimatedVFXInstaller : IEntityInstaller
+	public sealed class DeathSFXInstaller : IEntityInstaller
 	{
 		[SerializeField]
-		private AnimatedVFX _vfx;
+		private AudioClip[] _sfxs;
 
 		public void Install(IEntity entity)
 		{
-			entity.AddAttackVFX(_vfx);
+			entity.AddDeathSounds(_sfxs);
 		}
 	}
 }

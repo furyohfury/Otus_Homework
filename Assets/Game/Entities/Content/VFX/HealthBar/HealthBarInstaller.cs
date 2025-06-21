@@ -3,16 +3,14 @@ using UnityEngine;
 
 namespace Game
 {
-	public sealed class HealthBarInstaller : SceneEntityInstallerBase
+	public sealed class HealthBarInstaller : IEntityInstaller
 	{
 		[SerializeField]
 		private HealthBar _healthBar;
 
-		public override void Install(IEntity entity)
+		public void Install(IEntity entity)
 		{
 			entity.AddHealthBar(_healthBar);
-
-			entity.AddBehaviour<HealthBarBehaviour>();
 		}
 	}
 }
