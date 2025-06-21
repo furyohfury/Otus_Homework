@@ -36,7 +36,6 @@ namespace Game
 			}
 
 			var source = new GameObject();
-			source.transform.SetPositionAndRotation(_soundSpawnPoint.position, _soundSpawnPoint.rotation);
 			source.transform.SetParent(_soundSpawnPoint.root);
 			var audioSource = source.AddComponent<AudioSource>();
 			audioSource.PlayOneShot(_shootAudioClip, _audioSource.volume);
