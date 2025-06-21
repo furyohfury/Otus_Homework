@@ -7,7 +7,7 @@ namespace Game
 	public sealed class AttackVFXWeaponBehaviour : IEntityInit, IEntityDispose
 	{
 		private BaseEvent _attackEvent;
-		private ParticleSystem _attackVFX;
+		private AnimatedVFX _attackVFX;
 
 		public void Init(IEntity entity)
 		{
@@ -18,7 +18,7 @@ namespace Game
 
 		private void OnAttack()
 		{
-			_attackVFX.Play();
+			_attackVFX.Show();
 		}
 
 		public void Dispose(IEntity entity)

@@ -10,14 +10,13 @@ namespace Game
 	public sealed class DeathEventAfterVFXBehaviour : IEntityInit, IEntityDispose
 	{
 		[SerializeField]
-		private AnimatedVFX _vfxPrefab;
+		private AnimatedVFX _vfx;
 		[SerializeField]
 		private Transform _container;
 
 		private Transform _transform;
 		private IEvent _deathRequest;
 		private BaseEvent _deathEvent;
-		private AnimatedVFX _activeVFX;
 
 		public void Init(IEntity entity)
 		{
@@ -29,28 +28,24 @@ namespace Game
 
 		private void OnDeath()
 		{
-			_activeVFX = SpawnVFX();
-			_activeVFX.OnEnded += OnActiveVFXEnded;
+			SpawnVFX();
+			_vfx.OnEnded += OnActiveVFXEnded;
 		}
 
 		private void OnActiveVFXEnded()
 		{
-			_activeVFX.OnEnded -= OnActiveVFXEnded;
+			_vfx.OnEnded -= OnActiveVFXEnded;
 			_deathEvent.Invoke();
 		}
 
-		private AnimatedVFX SpawnVFX()
+		private void SpawnVFX()
 		{
-			return Object.Instantiate(_vfxPrefab, _container);
+			_vfx.Show();
 		}
 
 		public void Dispose(IEntity entity)
 		{
-			if (_activeVFX != null)
-			{
-				_activeVFX.OnEnded -= OnActiveVFXEnded;
-			}
-
+			_vfx.OnEnded -= OnActiveVFXEnded;
 			_deathRequest.Unsubscribe(OnDeath);
 		}
 	}

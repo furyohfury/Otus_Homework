@@ -126,7 +126,7 @@ MonoBehaviour:
       type: AudioClip
     - id: 64
       name: AttackVFX
-      type: ParticleSystem
+      type: AnimatedVFX
     - id: 68
       name: ExplosionVFX
       type: ParticleSystem

@@ -33,7 +33,7 @@ namespace Atomic.Entities
         public const int EquipWeaponRequest = 50; // BaseEvent<SceneEntity>
         public const int UnequipWeaponRequest = 51; // BaseEvent
         public const int ShootAudioClip = 58; // AudioClip
-        public const int AttackVFX = 64; // ParticleSystem
+        public const int AttackVFX = 64; // AnimatedVFX
         public const int ExplosionVFX = 68; // ParticleSystem
         public const int ExplosionSFX = 69; // AudioClip
 
@@ -346,13 +346,13 @@ namespace Atomic.Entities
         public static void SetShootAudioClip(this IEntity obj, AudioClip value) => obj.SetValue(ShootAudioClip, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ParticleSystem GetAttackVFX(this IEntity obj) => obj.GetValue<ParticleSystem>(AttackVFX);
+        public static AnimatedVFX GetAttackVFX(this IEntity obj) => obj.GetValue<AnimatedVFX>(AttackVFX);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryGetAttackVFX(this IEntity obj, out ParticleSystem value) => obj.TryGetValue(AttackVFX, out value);
+        public static bool TryGetAttackVFX(this IEntity obj, out AnimatedVFX value) => obj.TryGetValue(AttackVFX, out value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AddAttackVFX(this IEntity obj, ParticleSystem value) => obj.AddValue(AttackVFX, value);
+        public static bool AddAttackVFX(this IEntity obj, AnimatedVFX value) => obj.AddValue(AttackVFX, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasAttackVFX(this IEntity obj) => obj.HasValue(AttackVFX);
@@ -361,7 +361,7 @@ namespace Atomic.Entities
         public static bool DelAttackVFX(this IEntity obj) => obj.DelValue(AttackVFX);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAttackVFX(this IEntity obj, ParticleSystem value) => obj.SetValue(AttackVFX, value);
+        public static void SetAttackVFX(this IEntity obj, AnimatedVFX value) => obj.SetValue(AttackVFX, value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ParticleSystem GetExplosionVFX(this IEntity obj) => obj.GetValue<ParticleSystem>(ExplosionVFX);

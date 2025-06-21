@@ -7,10 +7,21 @@ namespace Game
 	{
 		public event Action OnEnded; 
 		
-		public void AnimationEnded()
+		public void EndAndDestroy()
 		{
 			OnEnded?.Invoke();
 			Destroy(gameObject);
+		}
+
+		public void EndAndHide()
+		{
+			OnEnded?.Invoke();
+			gameObject.SetActive(false);
+		}
+		
+		public void Show()
+		{
+			gameObject.SetActive(true);
 		}
 	}
 }
