@@ -128,7 +128,7 @@ namespace Game
 		{
 			entity.AddEntityWorldUI(_worldUI);
 
-			entity.AddBehaviour<UIFollowTransformBehaviour>();
+			entity.AddBehaviour<WorldUIBehaviour>();
 		}
 	}
 }
