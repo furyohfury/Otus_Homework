@@ -52,17 +52,6 @@ namespace Game
 
 		private void OnPlayerAttack()
 		{
-			Debug.Log("On player attack");
-			if (_playerService.Player.TryGetWeapon(out var weapon) == false)
-			{
-				Debug.Log("Player has no weapon");
-			}
-
-			if (weapon.Value.GetCanAttack().Invoke() == false)
-			{
-				Debug.Log("Players weapon cant attack");
-			}
-
 			ShakeCamera();
 		}
 
