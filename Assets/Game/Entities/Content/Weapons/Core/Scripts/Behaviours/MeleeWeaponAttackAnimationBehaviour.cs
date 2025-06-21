@@ -60,11 +60,6 @@ namespace Game
 			_deactivateColliderEvent.Invoke();
 		}
 
-		public void Dispose(IEntity entity)
-		{
-			_attackEvent.Unsubscribe(OnAttack);
-		}
-
 		public void Enable(IEntity entity)
 		{
 			if (_sequence.IsActive() && _sequence.IsComplete() == false)
@@ -79,6 +74,12 @@ namespace Game
 			{
 				_sequence.Pause();
 			}
+		}
+
+		public void Dispose(IEntity entity)
+		{
+			_attackEvent.Unsubscribe(OnAttack);
+			_sequence?.Kill();
 		}
 	}
 }

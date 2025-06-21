@@ -42,6 +42,7 @@ namespace Game
 
 		public void Dispose(IEntity entity)
 		{
+			Debug.Log("Tween killed");
 			_tween?.Kill();
 		}
 	}
