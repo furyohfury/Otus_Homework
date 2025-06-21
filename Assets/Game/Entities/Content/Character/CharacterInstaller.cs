@@ -41,6 +41,7 @@ namespace Game.Entities
 
 		private readonly AndExpression _canMove = new();
 		private readonly AndExpression _canJump = new();
+		private float _groundCheckPointOffset;
 
 		public override void Install(IEntity entity)
 		{
@@ -85,14 +86,13 @@ namespace Game.Entities
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>());
 			// CanMove init
-			_canMove.Append(() => true);
 			entity.AddCanMove(_canMove);
 
 			// CanJump init
-			var distance = ((Vector2)_groundCheckTransform.position - _rigidBody.position).magnitude;
+			_groundCheckPointOffset = ((Vector2)_groundCheckTransform.position - _rigidBody.position).magnitude;
 			var isGrounded = new BaseFunction<bool>(() =>
 			{
-				var i = Physics2D.Raycast(_rigidBody.position, Vector2.down, distance, _groundLayer);
+				var i = Physics2D.Raycast(_rigidBody.position, Vector2.down, _groundCheckPointOffset);
 				return i != default;
 			});
 			entity.AddIsGrounded(isGrounded);

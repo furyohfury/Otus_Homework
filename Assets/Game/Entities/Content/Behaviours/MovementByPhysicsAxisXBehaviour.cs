@@ -13,7 +13,6 @@ namespace Game
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
 		private Vector3 _cachedVelocity;
-		private IFunction<bool> _isGrounded;
 		private float _wallCheckDistance = 0.7f;
 
 		public void Init(IEntity entity)
@@ -22,7 +21,6 @@ namespace Game
 			_canMove = entity.GetCanMove();
 			_moveSpeed = entity.GetMoveSpeed();
 			_rigidbody = entity.GetRigidbody2D();
-			_isGrounded = entity.GetIsGrounded();
 		}
 
 		public void OnFixedUpdate(IEntity entity, float deltaTime)
