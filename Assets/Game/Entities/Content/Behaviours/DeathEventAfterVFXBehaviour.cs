@@ -2,7 +2,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Game
 {
@@ -11,16 +10,12 @@ namespace Game
 	{
 		[SerializeField]
 		private AnimatedVFX _vfx;
-		[SerializeField]
-		private Transform _container;
 
-		private Transform _transform;
 		private IEvent _deathRequest;
 		private BaseEvent _deathEvent;
 
 		public void Init(IEntity entity)
 		{
-			_transform = entity.GetVisualTransform();
 			_deathRequest = entity.GetDeathRequest();
 			_deathRequest.Subscribe(OnDeath);
 			_deathEvent = entity.GetDeathEvent();
