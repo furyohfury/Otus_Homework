@@ -59,6 +59,7 @@ namespace SaveLoad
 			SetMovementData(data, playerEntity);
 			ResetWeapon(playerEntity, data);
 			ResetAbility(playerEntity, data);
+			ResetVelocity(playerEntity);
 		}
 
 		private void SetMovementData(PlayerSaveData data, IEntity playerEntity)
@@ -107,6 +108,12 @@ namespace SaveLoad
 					removeEvent.Invoke();
 				}
 			}
+		}
+
+		private static void ResetVelocity(IEntity playerEntity)
+		{
+			playerEntity.GetRigidbody2D().linearVelocity = Vector2.zero;
+			playerEntity.GetMoveDirection().Value = Vector2.zero;
 		}
 	}
 }
