@@ -36,15 +36,6 @@ namespace Game
 				return;
 			}
 
-			bool touchingRightWall = Physics2D.Raycast(_rigidbody.position, Vector2.right, _wallCheckDistance, 1 << 6);
-			bool touchingLeftWall = Physics2D.Raycast(_rigidbody.position, Vector2.left, _wallCheckDistance, 1 << 6);
-
-			if ((touchingRightWall && direction.x > 0)
-			    || (touchingLeftWall && direction.x < 0))
-			{
-				return;
-			}
-
 			float currentVelocityX = _rigidbody.linearVelocityX;
 			float targetVelocityX = direction.x * _moveSpeed.Value;
 

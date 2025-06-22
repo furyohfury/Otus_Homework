@@ -3126,6 +3126,7 @@ GameObject:
   - component: {fileID: 9008534523711389567}
   - component: {fileID: 4456438541717391644}
   - component: {fileID: 5387390219930535932}
+  - component: {fileID: 7663532096658476378}
   m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
@@ -3209,6 +3210,7 @@ MonoBehaviour:
   installOnAwake: 1
   installPipeline:
   - {fileID: 5387390219930535932}
+  - {fileID: 7663532096658476378}
   - {fileID: 7724615958233888400}
   - {fileID: 6040685670890236614}
   onInstalled:
@@ -3267,6 +3269,29 @@ MonoBehaviour:
   _weapon: {fileID: 0}
   _weaponContainer: {fileID: 6752759495786247562}
   _health: 20
+--- !u!114 &7663532096658476378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395733031779638120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4449a408ebb644a08bf8405b221eb04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRefresh: 1
+  installers: []
+  logics:
+  - rid: 1824624662117613811
+  references:
+    version: 2
+    RefIds:
+    - rid: 1824624662117613811
+      type: {class: SwitchPhysicsMaterialInAirBehaviour, ns: Game, asm: Assembly-CSharp}
+      data:
+        _inAirMaterial: {fileID: 6200000, guid: 028204446279c0a488587ca04c99427c, type: 2}
 --- !u!1 &6486287497379719182
 GameObject:
   m_ObjectHideFlags: 0

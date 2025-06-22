@@ -42,8 +42,6 @@ namespace Game.Entities
 		[SerializeField]
 		private int _health;
 
-		private readonly AndExpression _canMove = new();
-		private readonly AndExpression _canJump = new();
 		private float _groundCheckPointOffset;
 
 		public override void Install(IEntity entity)
@@ -90,19 +88,27 @@ namespace Game.Entities
 			entity.AddMoveSpeed(new ReactiveVariable<float>(_moveSpeed));
 			entity.AddMoveDirection(new ReactiveVariable<Vector2>());
 			// CanMove init
-			entity.AddCanMove(_canMove);
+			var canMove = new AndExpression();
+			canMove.Append(() => entity.GetIsDead().Value == false);
+			entity.AddCanMove(canMove);
 
 			// CanJump init
 			_groundCheckPointOffset = ((Vector2)_groundCheckTransform.position - _rigidBody.position).magnitude;
 			var isGrounded = new BaseFunction<bool>(() =>
 			{
-				var i = Physics2D.Raycast(_rigidBody.position, Vector2.down, _groundCheckPointOffset);
-				return i != default;
+				RaycastHit2D hit = Physics2D.Raycast(
+					_rigidBody.position,
+					Vector2.down,
+					_groundCheckPointOffset,
+					_groundLayer);
+				return hit != default;
 			});
 			entity.AddIsGrounded(isGrounded);
 
-			_canJump.Append(entity.GetIsGrounded());
-			entity.AddCanJump(_canJump);
+			var canJump = new AndExpression();
+			canJump.Append(() => entity.GetIsDead().Value == false);
+			canJump.Append(entity.GetIsGrounded().Invoke);
+			entity.AddCanJump(canJump);
 			entity.AddJumpForce(new ReactiveVariable<float>(_jumpForce));
 			entity.AddJumpRequest(new BaseEvent());
 			entity.AddJumpEvent(new BaseEvent());
