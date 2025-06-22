@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b2baa563ee14cc89edc7aeac14605fa, type: 3}
-  m_Name: 2DScene_LevelConfig
+  m_Name: SunnyDay_LevelConfig
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -49,7 +49,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 3
-      Data: 25
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 3
-      Data: 20
+      Data: 9
     - Name: 
       Entry: 8
       Data: 
@@ -73,7 +73,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 3
-      Data: 15
+      Data: 8
     - Name: 
       Entry: 8
       Data: 
@@ -83,7 +83,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _levelName: 2DScene
-  _sceneName: 2DScene
-  _previewIcon: {fileID: 21300000, guid: 827597a8ebd47b44e84f0f50cd30aa37, type: 3}
+  _levelName: SunnyDay
+  _sceneName: SunnyDay
+  _previewIcon: {fileID: 21300000, guid: 1a7cd7d59f965a744953f9204932b284, type: 3}
   _hasTargetTimes: 1
