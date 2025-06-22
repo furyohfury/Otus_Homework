@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Game
 {
 	[Serializable]
-	public sealed class GlowRedOnTakeDamageBehaviour : IEntityInit, IEntityDispose
+	public sealed class GlowRedOnTakeDamageBehaviour : IEntityInit, IEntityEnable, IEntityDisable, IEntityDispose
 	{
 		[SerializeField]
 		private Color _glowColor = Color.red;
@@ -18,6 +18,7 @@ namespace Game
 		private ReactiveVariable<int> _health;
 
 		private CancellationTokenSource _cts = new();
+		private Tween _restoreTween;
 
 		public void Init(IEntity entity)
 		{
@@ -28,6 +29,11 @@ namespace Game
 
 		private void OnTakeDamage(int _)
 		{
+			if (_restoreTween != null)
+			{
+				return;
+			}
+			
 			var initialColors = new Color[_spriteRenderers.Length];
 			for (var i = 0; i < _spriteRenderers.Length; i++)
 			{
@@ -35,7 +41,11 @@ namespace Game
 				_spriteRenderers[i].color = _glowColor;
 			}
 
-			DOVirtual.DelayedCall(_duration, () => RestoreColors(initialColors));
+			_restoreTween = DOVirtual.DelayedCall(_duration, () =>
+			{
+				RestoreColors(initialColors);
+				_restoreTween = null;
+			});
 		}
 
 		private void RestoreColors(Color[] initialColors)
@@ -44,6 +54,16 @@ namespace Game
 			{
 				_spriteRenderers[i].color = initialColors[i];
 			}
+		}
+
+		public void Enable(IEntity entity)
+		{
+			_restoreTween?.Play();
+		}
+
+		public void Disable(IEntity entity)
+		{
+			_restoreTween?.Pause();
 		}
 
 		public void Dispose(IEntity entity)
