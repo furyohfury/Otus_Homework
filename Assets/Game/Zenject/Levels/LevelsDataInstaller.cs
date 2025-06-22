@@ -3,7 +3,8 @@ using Zenject;
 
 namespace Game
 {
-	public class LevelsDataInstaller : MonoInstaller
+	[CreateAssetMenu(fileName = "LevelsDataInstaller", menuName = "Create installer/LevelsDataInstaller")]
+	public class LevelsDataInstaller : ScriptableObjectInstaller
 	{
 		[SerializeField]
 		private LevelConfig[] _cupsTimesConfigs;
