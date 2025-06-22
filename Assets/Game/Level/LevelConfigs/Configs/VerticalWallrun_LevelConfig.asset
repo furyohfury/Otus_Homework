@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b2baa563ee14cc89edc7aeac14605fa, type: 3}
-  m_Name: WallRun_LevelConfig
+  m_Name: VerticalWallrun_LevelConfig
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -49,7 +49,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 3
-      Data: 15
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -61,7 +61,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 3
-      Data: 11
+      Data: 9
     - Name: 
       Entry: 8
       Data: 
@@ -83,7 +83,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _levelName: WallRun
-  _sceneName: WallRun
-  _previewIcon: {fileID: 21300000, guid: 65142a83a292d024c94519291242c863, type: 3}
+  _levelName: Vertical wallrun
+  _sceneName: VerticalWallrun
+  _previewIcon: {fileID: 21300000, guid: 1a7cd7d59f965a744953f9204932b284, type: 3}
   _hasTargetTimes: 1
