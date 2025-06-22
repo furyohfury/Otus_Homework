@@ -13,7 +13,6 @@ namespace Game
 		private Rigidbody2D _rigidbody;
 		private AndExpression _canMove;
 		private Vector3 _cachedVelocity;
-		private float _wallCheckDistance = 0.7f;
 
 		public void Init(IEntity entity)
 		{
