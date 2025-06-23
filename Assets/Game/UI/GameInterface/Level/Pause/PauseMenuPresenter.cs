@@ -5,7 +5,7 @@ using Zenject;
 
 namespace UI
 {
-	public sealed class PauseMenuPresenter : IInitializable, IDisposable // TODO appears when char dies
+	public sealed class PauseMenuPresenter : IInitializable, IDisposable
 	{
 		private readonly PauseMenuView _view;
 		private readonly GameStateManager _gameStateManager;

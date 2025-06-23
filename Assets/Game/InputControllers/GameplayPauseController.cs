@@ -1,15 +1,16 @@
 ﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-	public sealed class GamePauseController : IInitializable, IDisposable
+	public sealed class GameplayPauseController : IInitializable, IDisposable
 	{
 		private readonly InputReader _inputReader;
 		private readonly GameStateManager _gameStateManager;
 
 		[Inject]
-		public GamePauseController(InputReader inputReader, GameStateManager gameStateManager)
+		public GameplayPauseController(InputReader inputReader, GameStateManager gameStateManager)
 		{
 			_inputReader = inputReader;
 			_gameStateManager = gameStateManager;
@@ -31,10 +32,12 @@ namespace Game
 			if (currentState is GameState.Resume or GameState.Start)
 			{
 				_gameStateManager.ChangeState(GameState.Pause);
+				Debug.Log("Game paused");
 			}
 			else
 			{
 				_gameStateManager.ChangeState(GameState.Resume);
+				Debug.Log("Game resumed");
 			}
 		}
 

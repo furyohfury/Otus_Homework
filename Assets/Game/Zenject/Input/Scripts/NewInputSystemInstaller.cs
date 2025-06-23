@@ -11,6 +11,12 @@ namespace Game
 			Container.BindInterfacesAndSelfTo<InputReader>()
 			         .AsSingle();
 
+			Container.BindInterfacesAndSelfTo<GameplayPauseController>()
+			         .AsSingle();
+
+			Container.BindInterfacesAndSelfTo<UIInputReader>()
+			         .AsSingle();
+
 			Container.Bind<InputControls>()
 			         .AsSingle();
 

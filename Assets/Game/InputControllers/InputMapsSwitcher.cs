@@ -17,6 +17,11 @@ namespace Game
 		public void Initialize()
 		{
 			_gameStateManager.OnStateChanged += OnStateChanged;
+#if UNITY_EDITOR
+			_inputControls.Gameplay.Enable();
+#else
+			_inputControls.UI.Enable();
+#endif
 		}
 
 		private void OnStateChanged(GameState state)

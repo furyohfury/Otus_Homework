@@ -70,7 +70,7 @@ namespace Game
 
 		private void InstallGameLifeCycle()
 		{
-			Container.BindInterfacesAndSelfTo<GamePauseController>()
+			Container.BindInterfacesAndSelfTo<UIPauseController>()
 			         .AsSingle();
 		}
 

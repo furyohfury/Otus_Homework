@@ -9,8 +9,7 @@ namespace Game
 		IInitializable,
 		ITickable,
 		IDisposable,
-		InputControls.IGameplayActions,
-		InputControls.IUIActions // TODO in separate reader
+		InputControls.IGameplayActions
 	{
 		public static Vector2 MousePosition
 		{
@@ -55,14 +54,6 @@ namespace Game
 		public void Initialize()
 		{
 			_inputControls.Gameplay.SetCallbacks(this);
-			_inputControls.UI.SetCallbacks(this);
-			EnableMaps();
-		}
-
-		private void EnableMaps()
-		{
-			_inputControls.Gameplay.Enable();
-			_inputControls.UI.Enable();
 		}
 
 		public void Tick()
