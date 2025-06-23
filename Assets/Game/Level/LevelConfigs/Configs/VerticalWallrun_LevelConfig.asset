@@ -83,7 +83,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _levelName: Vertical wallrun
+  _levelName: Vertical Wallrun
   _sceneName: VerticalWallrun
   _previewIcon: {fileID: 21300000, guid: 1a7cd7d59f965a744953f9204932b284, type: 3}
   _hasTargetTimes: 1

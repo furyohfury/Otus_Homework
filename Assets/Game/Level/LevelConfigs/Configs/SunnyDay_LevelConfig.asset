@@ -83,7 +83,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _levelName: SunnyDay
+  _levelName: Sunny Day
   _sceneName: SunnyDay
-  _previewIcon: {fileID: 21300000, guid: 1a7cd7d59f965a744953f9204932b284, type: 3}
+  _previewIcon: {fileID: 21300000, guid: 02a2e9c5747fb1d4eb16f460c4a16df6, type: 3}
   _hasTargetTimes: 1
