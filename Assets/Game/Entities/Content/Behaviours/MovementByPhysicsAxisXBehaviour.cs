@@ -64,5 +64,10 @@ namespace Game
 			_rigidbody.linearVelocity = Vector2.zero;
 			_rigidbody.bodyType = RigidbodyType2D.Kinematic;
 		}
+
+		public void SetCachedVelocityToZero()
+		{
+			_cachedVelocity = Vector2.zero;
+		}
 	}
 }

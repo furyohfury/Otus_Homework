@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Atomic.Elements;
 using Atomic.Entities;
 using DG.Tweening;
@@ -16,8 +15,8 @@ namespace Game
 		private float _duration = 0.2f;
 		private SpriteRenderer[] _spriteRenderers;
 		private ReactiveVariable<int> _health;
+		private Color[] _initialColors;
 
-		private CancellationTokenSource _cts = new();
 		private Tween _restoreTween;
 
 		public void Init(IEntity entity)
@@ -25,6 +24,11 @@ namespace Game
 			_spriteRenderers = entity.GetSpriteRenderers();
 			_health = entity.GetHealth();
 			_health.Subscribe(OnTakeDamage);
+			_initialColors = new Color[_spriteRenderers.Length];
+			for (var i = 0; i < _spriteRenderers.Length; i++)
+			{
+				_initialColors[i] = _spriteRenderers[i].color;
+			}
 		}
 
 		private void OnTakeDamage(int _)
@@ -33,26 +37,25 @@ namespace Game
 			{
 				return;
 			}
-			
-			var initialColors = new Color[_spriteRenderers.Length];
+
 			for (var i = 0; i < _spriteRenderers.Length; i++)
 			{
-				initialColors[i] = _spriteRenderers[i].color;
+				_initialColors[i] = _spriteRenderers[i].color;
 				_spriteRenderers[i].color = _glowColor;
 			}
 
 			_restoreTween = DOVirtual.DelayedCall(_duration, () =>
 			{
-				RestoreColors(initialColors);
+				RestoreColors();
 				_restoreTween = null;
 			});
 		}
 
-		private void RestoreColors(Color[] initialColors)
+		public void RestoreColors()
 		{
 			for (var i = 0; i < _spriteRenderers.Length; i++)
 			{
-				_spriteRenderers[i].color = initialColors[i];
+				_spriteRenderers[i].color = _initialColors[i];
 			}
 		}
 
@@ -69,7 +72,7 @@ namespace Game
 		public void Dispose(IEntity entity)
 		{
 			_health.Unsubscribe(OnTakeDamage);
-			_cts.Cancel();
+			_restoreTween.Kill();
 		}
 	}
 }
