@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Atomic.Elements;
 using Atomic.Entities;
+using Game;
 using UnityEngine;
 using Zenject;
 
@@ -47,7 +48,6 @@ namespace SaveLoad
 				playerTransform.rotation,
 				playerEntity.GetHealth().Value,
 				playerEntity.GetMoveSpeed().Value,
-				playerRB.linearVelocity,
 				playerEntity.GetJumpForce().Value,
 				weaponId);
 		}
@@ -64,8 +64,7 @@ namespace SaveLoad
 
 		private void SetMovementData(PlayerSaveData data, IEntity playerEntity)
 		{
-			if (!playerEntity.TryGetVisualTransform(out Transform playerTransform)
-			    || !playerEntity.TryGetRigidbody2D(out Rigidbody2D playerRB))
+			if (!playerEntity.TryGetVisualTransform(out Transform playerTransform))
 			{
 				throw new Exception("No transform/rb in player entity");
 			}
@@ -74,7 +73,6 @@ namespace SaveLoad
 			playerTransform.rotation = data.Rotation;
 			playerEntity.GetHealth().Value = data.Health;
 			playerEntity.GetMoveSpeed().Value = data.MoveSpeed;
-			playerRB.linearVelocity = data.Velocity;
 			playerEntity.GetJumpForce().Value = data.JumpForce;
 		}
 
@@ -114,6 +112,7 @@ namespace SaveLoad
 		{
 			playerEntity.GetRigidbody2D().linearVelocity = Vector2.zero;
 			playerEntity.GetMoveDirection().Value = Vector2.zero;
+			playerEntity.GetBehaviour<MovementByPhysicsAxisXBehaviour>().SetCachedVelocityToZero();
 		}
 	}
 }

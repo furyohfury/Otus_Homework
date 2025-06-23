@@ -77,7 +77,8 @@ namespace SaveLoad
 			sceneEnemy.GetAnimator().CrossFade("idle", 0);
 			sceneEnemy.GetMoveDirection().Value = Vector2.zero;
 			sceneEnemy.GetRigidbody2D().simulated = true;
-			sceneEnemy.Enable();
+			var glowRedOnTakeDamageBehaviour = sceneEnemy.GetBehaviour<GlowRedOnTakeDamageBehaviour>();
+			glowRedOnTakeDamageBehaviour.RestoreColors();
 		}
 	}
 }
