@@ -51,24 +51,26 @@ namespace UI
 
 		private void InitCupAndBestTime()
 		{
-			if (_savedResults != null) // TODO if not initialized. Where it defines
+			if (_savedResults == null)
 			{
-				TimeSpan bestTime = _savedResults.Where(time => time != default)
-				                                 .Min();
-				var bestTimeText = bestTime.ToString(@"m\:ss\:fff");
-
-				var bestCup = _targetTimes
-				              .Where(kvp => kvp.Value > bestTime)
-				              .OrderBy(kvp => kvp.Value)
-				              .Select(kvp => kvp.Key)
-				              .FirstOrDefault();
-				if (bestCup != default)
-				{
-					_view.CupIcon.sprite = _cupsSprites[bestCup];
-				}
-
-				_view.BestTime.text = bestTimeText;
+				return;
 			}
+			
+			TimeSpan bestTime = _savedResults.Where(time => time != default)
+			                                 .Min();
+			var bestTimeText = bestTime.ToString(@"m\:ss\:fff");
+
+			var bestCup = _targetTimes
+			              .Where(kvp => kvp.Value > bestTime)
+			              .OrderBy(kvp => kvp.Value)
+			              .Select(kvp => kvp.Key)
+			              .FirstOrDefault();
+			if (bestCup != default)
+			{
+				_view.CupIcon.sprite = _cupsSprites[bestCup];
+			}
+
+			_view.BestTime.text = bestTimeText;
 		}
 
 		private void OnChooseLevelButtonClicked()
