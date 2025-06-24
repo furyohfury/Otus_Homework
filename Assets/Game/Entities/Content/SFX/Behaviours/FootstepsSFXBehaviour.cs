@@ -28,7 +28,7 @@ namespace Game
 				return;
 			}
 
-			var clip = _footstepsSounds[Random.Range(0, _footstepsSounds.Length - 1)];
+			var clip = _footstepsSounds[Random.Range(0, _footstepsSounds.Length)];
 			_audioSource.PlayOneShot(clip);
 		}
 	}

@@ -13466,6 +13466,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: managedReferences[1824624635350614433]._sfxs.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 82b9e7907a6c3154b86a53c1be46ff71, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f43edb311d1c4d74fa9b4b86c9157fa6, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fa438d00f348394a8f0f6c053659a36, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1241db8d81c902d4db1bc5e06ba500b3, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 524ca5d8ba6570f47a403855a9d2cf29, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f1fa4fa8b3675843abe9345bbefffdd, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4abc431d61ba42a4197ca0aba3bad8d3, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8300000, guid: db210683cc12f49488148d7e59a51aec, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[8]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4bcc738c9307a9d4784ce4e137f5aefb, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[9]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 17a55e09664ccf54392bb53bbf824804, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[10]'
+      value: 
+      objectReference: {fileID: 8300000, guid: add3298d47405fd4da3a313bbc049fe2, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[11]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 826b5ab8735d6ff4c9e018ef29045829, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[12]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 95f5d05b56992b54db766ac6cd05a7d4, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[13]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 33d255937ea9cb74dbaf46d7a552672d, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[14]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ec804530ad09cd4093a5ef030cfc7ec, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[15]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 466266db15b02104584d921885bcaa8a, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[16]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 64d4d5a88368ecf4e9d81d94341ac235, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[17]'
+      value: 
+      objectReference: {fileID: 8300000, guid: c11ecc89dec9e1a428e927466942ba39, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[18]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ca3f7b75bbc47c45a464277174030a4, type: 3}
+    - target: {fileID: 6040685670890236614, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
+      propertyPath: 'managedReferences[1824624635350614433]._sfxs.Array.data[19]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 31ce2f4f55b79d743ae941e2bc3a8dfa, type: 3}
     - target: {fileID: 6395733031779638120, guid: c5bddfa95f9c0394fa56784bc296b9c7, type: 3}
       propertyPath: m_Name
       value: Character
