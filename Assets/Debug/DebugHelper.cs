@@ -13,6 +13,7 @@ namespace GameDebug
 {
 	public class DebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField] [TabGroup("Entities")]
 		private Transform _transform;
 		[SerializeField] [TabGroup("Entities")]
@@ -235,5 +236,6 @@ namespace GameDebug
 		{
 			_levelManager.ResetLevel();
 		}
+#endif
 	}
 }

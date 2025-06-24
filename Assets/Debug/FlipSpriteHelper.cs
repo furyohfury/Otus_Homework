@@ -5,11 +5,12 @@ namespace GameDebug
 {
 	public class FlipSpriteHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private GameObject _target;
 
 		[Button]
-		private void  FlipAllX(bool flip)
+		private void FlipAllX(bool flip)
 		{
 			var renderers = GetComponentsInChildren<SpriteRenderer>();
 			for (int i = 0, count = renderers.Length; i < count; i++)
@@ -17,5 +18,6 @@ namespace GameDebug
 				renderers[i].flipX = flip;
 			}
 		}
+#endif
 	}
 }

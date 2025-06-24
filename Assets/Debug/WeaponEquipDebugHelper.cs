@@ -6,6 +6,7 @@ namespace GameDebug
 {
 	public sealed class WeaponEquipDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private SceneEntity _prefab;
 		[SerializeField]
@@ -17,5 +18,6 @@ namespace GameDebug
 			_player.GetUnequipWeaponRequest().Invoke();
 			_player.GetEquipWeaponRequest().Invoke(_prefab);
 		}
+#endif
 	}
 }

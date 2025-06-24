@@ -5,6 +5,7 @@ namespace GameDebug
 {
 	public sealed class AnimatorSpeedDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private Animator _animator;
 
@@ -13,5 +14,6 @@ namespace GameDebug
 		{
 			Debug.Log(_animator.speed);
 		}
+#endif
 	}
 }

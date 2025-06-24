@@ -6,6 +6,7 @@ namespace GameDebug
 {
 	public class DeathVFXDebug : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private SpriteRenderer _spriteRenderer;
 		[SerializeField]
@@ -18,7 +19,7 @@ namespace GameDebug
 		{
 			_spriteRenderer.material.SetFloat("Vector1_51DDBE76", f);
 		}
-		
+
 		[Button]
 		private void DissolveDeath()
 		{
@@ -37,11 +38,12 @@ namespace GameDebug
 			_spriteRenderer.enabled = false;
 			Instantiate(_explodePrefab, _spriteRenderer.transform.position, Quaternion.identity);
 		}
-		
+
 		[Button]
 		private void ResetExplode()
 		{
 			_spriteRenderer.enabled = true;
 		}
+#endif
 	}
 }

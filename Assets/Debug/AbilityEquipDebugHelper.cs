@@ -1,5 +1,4 @@
-﻿using System;
-using Atomic.Entities;
+﻿using Atomic.Entities;
 using Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,6 +7,7 @@ namespace GameDebug
 {
 	public sealed class AbilityEquipDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private AbilityCardConfig _config;
 		[SerializeField]
@@ -19,5 +19,6 @@ namespace GameDebug
 			_player.GetRemoveActiveAbilityEvent().Invoke();
 			_player.GetAbilityCardPickupEvent().Invoke(_config);
 		}
+#endif
 	}
 }

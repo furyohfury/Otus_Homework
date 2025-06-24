@@ -7,9 +7,10 @@ namespace GameDebug
 {
 	public sealed class GameStateDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[ShowInInspector]
 		public GameState CurrentGameState => _gameStateManager.State;
-		
+
 		private GameStateManager _gameStateManager;
 
 		[Inject]
@@ -17,5 +18,6 @@ namespace GameDebug
 		{
 			_gameStateManager = gameStateManager;
 		}
+#endif
 	}
 }

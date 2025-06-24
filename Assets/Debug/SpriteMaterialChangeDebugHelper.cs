@@ -6,6 +6,7 @@ namespace GameDebug
 {
 	public sealed class SpriteMaterialChangeDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[SerializeField]
 		private SpriteRenderer[] _spriteRenderers;
 		[SerializeField]
@@ -20,7 +21,7 @@ namespace GameDebug
 			                   .Where(spriteRenderer => spriteRenderer.sharedMaterial == _defaultMaterial)
 			                   .ToArray();
 		}
-		
+
 		[Button]
 		private void ChangeMaterialToSpriteRenderers()
 		{
@@ -29,5 +30,6 @@ namespace GameDebug
 				_spriteRenderers[i].sharedMaterial = _litMaterial;
 			}
 		}
+#endif
 	}
 }

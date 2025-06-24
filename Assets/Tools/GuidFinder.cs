@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GuidFinder
 {
+#if UNITY_EDITOR
+	
 	[MenuItem("Tools/Find Asset by GUID")]
 	public static void FindAssetByGUID()
 	{
@@ -20,4 +22,5 @@ public class GuidFinder
 			Debug.LogWarning("GUID not found: " + targetGUID);
 		}
 	}
+#endif
 }

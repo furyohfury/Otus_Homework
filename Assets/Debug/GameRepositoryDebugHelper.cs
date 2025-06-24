@@ -8,6 +8,7 @@ namespace GameDebug
 {
 	public class GameRepositoryDebugHelper : MonoBehaviour
 	{
+#if UNITY_EDITOR
 		[ShowInInspector]
 		public IReadOnlyDictionary<string, string> gamestate => _gameRepository.GameState;
 
@@ -18,5 +19,6 @@ namespace GameDebug
 			var projectContext = FindFirstObjectByType<ProjectContext>();
 			_gameRepository = projectContext.Container.Resolve<GameRepository>();
 		}
+#endif
 	}
 }
