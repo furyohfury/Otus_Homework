@@ -7,7 +7,6 @@ namespace GameDebug
 {
 	public sealed class LaunchGameDebugHelper : MonoBehaviour
 	{
-#if UNITY_EDITOR
 		private LevelManager _levelManager;
 
 		[Inject]
@@ -23,6 +22,5 @@ namespace GameDebug
 				_levelManager.StartLevel();
 			}
 		}
-#endif
 	}
 }

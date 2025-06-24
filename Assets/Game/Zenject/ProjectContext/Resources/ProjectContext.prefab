@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 507db113ba61f534aa6b5052a9e8c523, type: 2}
   - {fileID: 11400000, guid: d04c525a077ed5342ae4a43a09ed8750, type: 2}
   - {fileID: 11400000, guid: 3cea6ddd3668cbf489269a9057de0c6b, type: 2}
-  - {fileID: 11400000, guid: 507db113ba61f534aa6b5052a9e8c523, type: 2}
   - {fileID: 11400000, guid: 68f96da46a5e39f45b4114ad064c2491, type: 2}
   - {fileID: 11400000, guid: eac31a257dfb46d4685c2d6a0da87c12, type: 2}
   _monoInstallers: []
