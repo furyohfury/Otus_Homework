@@ -3,19 +3,22 @@ using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class SaveLoadSystemsInstaller : MonoInstaller
+	[CreateAssetMenu(fileName = "SaveLoadSystemsInstaller", menuName = "Create installer/SaveLoad/SaveLoadSystemsInstaller")]
+	public sealed class SaveLoadSystemsInstaller : ScriptableObjectInstaller
 	{
-		[SerializeField]
-		private SaveLoadManager _saveLoadManager;
-
 		public override void InstallBindings()
 		{
+#if UNITY_EDITOR
 			Container.BindInterfacesAndSelfTo<GameRepository>()
 			         .AsSingle()
 			         .NonLazy();
+#else
+			Container.BindInterfacesAndSelfTo<CryptingGameRepository>()
+			         .AsSingle()
+			         .NonLazy();
+#endif
 
-			Container.Bind<SaveLoadManager>()
-			         .FromInstance(_saveLoadManager)
+			Container.BindInterfacesAndSelfTo<SaveLoadManager>()
 			         .AsSingle()
 			         .NonLazy();
 
