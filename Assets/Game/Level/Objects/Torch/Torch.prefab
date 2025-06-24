@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7453418396905250072}
   - component: {fileID: 8442833591516138460}
   - component: {fileID: 8762879917909597229}
+  - component: {fileID: 7316691966223732743}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -111,6 +112,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7316691966223732743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554229068464860238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299035c54504215a5768e68edf09a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0009384155
+      value: 1.1997757
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5016215
+      value: 1.0002216
+      inSlope: -0.0007972594
+      outSlope: -0.0007972594
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9985962
+      value: 1.1991158
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 0
+    m_RotationOrder: 4
+  duration: 1
+  loop: 1
+  light2D: {fileID: 6854056656632400310}
 --- !u!1 &3327179816568634008
 GameObject:
   m_ObjectHideFlags: 0
