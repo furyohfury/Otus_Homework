@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -21,12 +22,14 @@ namespace GameDebug
 		{
 			if (_switched == false && Keyboard.current.jKey.wasPressedThisFrame)
 			{
+				_switched = true;
 				StartCoroutine(LoadScene());
 			}
-			
+
 			if (_switched == false && Keyboard.current.hKey.wasPressedThisFrame)
 			{
-				StartCoroutine(LoadSceneSingle());
+				_switched = true;
+				LoadSceneSingle().Forget();
 			}
 		}
 
@@ -38,43 +41,34 @@ namespace GameDebug
 			{
 				yield return null;
 			}
+
 			var sceneByName = SceneManager.GetSceneByName("GothicChurch");
 			SceneManager.SetActiveScene(sceneByName);
 		}
-		
-		private IEnumerator LoadSceneSingle()
+
+		private async UniTask LoadSceneSingle()
 		{
-			// Выгружаем неиспользуемые ресурсы
-			AsyncOperation unloadOp = Resources.UnloadUnusedAssets();
-			while (!unloadOp.isDone) yield return null;
-
-			// Загружаем новую сцену
-			AsyncOperation loadOp = SceneManager.LoadSceneAsync("GothicChurch", LoadSceneMode.Single);
-			if (loadOp != null)
+			var handle = SceneManager.LoadSceneAsync("GothicChurch", LoadSceneMode.Single);
+			while (handle.isDone == false)
 			{
-				loadOp.allowSceneActivation = true;
-
-				while (!loadOp.isDone) yield return null;
+				await UniTask.Yield();
 			}
-
-			// Принудительная активация
-			SceneManager.SetActiveScene(SceneManager.GetSceneByName("GothicChurch"));
 		}
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
 			Debug.Log($"[SceneLoaded] Имя сцены: {scene.name}, LoadSceneMode: {mode}");
 			// Посмотрим активные камеры
-			foreach (var cam in Camera.allCameras)
-			{
-				Debug.Log($"Camera: {cam.name}, enabled={cam.enabled}, depth={cam.depth}, cullingMask={cam.cullingMask}");
-			}
+			// foreach (var cam in Camera.allCameras)
+			// {
+			// 	Debug.Log($"Camera: {cam.name}, enabled={cam.enabled}, depth={cam.depth}, cullingMask={cam.cullingMask}");
+			// }
 			// Посмотрим существующие EventSystem
-			var eventSystems = FindObjectsOfType<UnityEngine.EventSystems.EventSystem>();
-			Debug.Log($"Найдено EventSystem: {eventSystems.Length}");
+			// var eventSystems = FindObjectsOfType<UnityEngine.EventSystems.EventSystem>();
+			// Debug.Log($"Найдено EventSystem: {eventSystems.Length}");
 		}
 
-		void OnDestroy()
+		private void OnDestroy()
 		{
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 		}

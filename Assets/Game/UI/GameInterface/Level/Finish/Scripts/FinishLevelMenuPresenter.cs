@@ -35,9 +35,9 @@ namespace UI
 			_levelManager.ResetLevel();
 		}
 
-		private void OnMainMenuButtonClicked()
+		private async void OnMainMenuButtonClicked()
 		{
-			SceneSystem.SwitchToScene(SceneNames.MAIN_MENU_SCENE);
+			await SceneSystem.SwitchToScene(SceneNames.MAIN_MENU_SCENE);
 		}
 
 		private void ShowView()

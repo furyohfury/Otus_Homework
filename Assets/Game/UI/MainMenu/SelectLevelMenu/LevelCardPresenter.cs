@@ -73,9 +73,9 @@ namespace UI
 			_view.BestTime.text = bestTimeText;
 		}
 
-		private void OnChooseLevelButtonClicked()
+		private async void OnChooseLevelButtonClicked()
 		{
-			SceneSystem.SwitchToScene(_scene);
+			await SceneSystem.SwitchToScene(_scene);
 		}
 
 		public void Dispose()

@@ -8,19 +8,14 @@ namespace SaveLoad
 	{
 		public override void InstallBindings()
 		{
-			Debug.Log("Installing saveloadsystems");
 			Container.BindInterfacesAndSelfTo<GameRepository>()
-			         .AsSingle()
-			         .NonLazy();
+			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<SaveLoadManager>()
-			         .AsSingle()
-			         .NonLazy();
+			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<LaunchSaveLoadersController>()
-			         .AsSingle()
-			         .NonLazy();
-			Debug.Log("Successfully installed saveloadsystems");
+			         .AsSingle();
 		}
 	}
 }

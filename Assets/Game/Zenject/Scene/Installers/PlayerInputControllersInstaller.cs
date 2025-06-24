@@ -8,7 +8,7 @@ namespace Game
 		{
 			Container.BindInterfacesAndSelfTo<PlayerController>()
 			         .AsSingle()
-			         .NonLazy();
+			         ;
 
 			Container.BindInterfacesAndSelfTo<PlayerTargetController>()
 			         .AsSingle();

@@ -2167,12 +2167,6 @@ MonoBehaviour:
     loop: 0
   _entity: {fileID: 0}
   _adressableTestImage: {fileID: 1105899017}
-  _assetReference:
-    m_AssetGUID: 9b11c3c98e67f6042ad548e4d7def14a
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
 --- !u!4 &651531017
 Transform:
   m_ObjectHideFlags: 0
@@ -10982,6 +10976,10 @@ PrefabInstance:
     - target: {fileID: 1090603143202875099, guid: 9011c01a9dd32ff43b3414d98c7ae3c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1560078520145497642, guid: 9011c01a9dd32ff43b3414d98c7ae3c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1560078520145497642, guid: 9011c01a9dd32ff43b3414d98c7ae3c9, type: 3}
       propertyPath: m_Resource

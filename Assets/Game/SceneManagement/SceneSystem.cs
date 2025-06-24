@@ -32,8 +32,7 @@ namespace SceneControls
 			var task = SceneManager.LoadSceneAsync(LOADING_SCREEN_SCENE_NAME, LoadSceneMode.Additive).ToUniTask();
 			await task;
 			var loadingScreenScene = SceneManager.GetSceneByName(LOADING_SCREEN_SCENE_NAME);
-			var sceneLoaded = SceneManager.SetActiveScene(loadingScreenScene);
-			Debug.Log($"Loading screen scene loaded =  {sceneLoaded}");
+			SceneManager.SetActiveScene(loadingScreenScene);
 		}
 		
 	}

@@ -14,11 +14,11 @@ namespace Game
 
 			Container.BindInterfacesAndSelfTo<GameLauncher>()
 			         .AsCached()
-			         .NonLazy();
+			         ;
 
 			Container.BindInterfacesAndSelfTo<UnpauseOnSceneSwitchObserver>()
 			         .AsSingle()
-			         .NonLazy();
+			         ;
 		}
 	}
 }
