@@ -3268,7 +3268,7 @@ MonoBehaviour:
     m_Bits: 64
   _weapon: {fileID: 0}
   _weaponContainer: {fileID: 6752759495786247562}
-  _health: 20
+  _health: 5
 --- !u!114 &7663532096658476378
 MonoBehaviour:
   m_ObjectHideFlags: 0

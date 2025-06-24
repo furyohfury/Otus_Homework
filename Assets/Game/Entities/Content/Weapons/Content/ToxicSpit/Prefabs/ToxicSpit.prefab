@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8928148423852900684, guid: a5f314d514fe8a948b7d4f806a8028aa, type: 3}
       propertyPath: _damage
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8928148423852900684, guid: a5f314d514fe8a948b7d4f806a8028aa, type: 3}
       propertyPath: _ammoSize

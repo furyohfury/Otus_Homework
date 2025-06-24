@@ -93,6 +93,10 @@ PrefabInstance:
       value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 8928148423852900684, guid: a5f314d514fe8a948b7d4f806a8028aa, type: 3}
+      propertyPath: _damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928148423852900684, guid: a5f314d514fe8a948b7d4f806a8028aa, type: 3}
       propertyPath: _projectilePrefab
       value: 
       objectReference: {fileID: 6668997989222660375, guid: 715ec8d219201ad43b9e2810bd57b0e3, type: 3}
