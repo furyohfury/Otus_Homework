@@ -151,6 +151,50 @@ Transform:
   - {fileID: 253108512}
   m_Father: {fileID: 1139958324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &27840196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27840197}
+  - component: {fileID: 27840198}
+  m_Layer: 0
+  m_Name: editoronlyremover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &27840197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27840196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1849976188}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &27840198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27840196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1147dcf66140418f8a6c8ee2e341e28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &43027866 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2804642961762546414, guid: 3f5affc9e176d7b46a7650352f2bd1da, type: 3}
@@ -913,7 +957,7 @@ GameObject:
   - component: {fileID: 622395784}
   m_Layer: 0
   m_Name: '[UI]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1893,7 +1937,7 @@ GameObject:
   - component: {fileID: 1039406494}
   m_Layer: 0
   m_Name: '[LEVEL]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1931,7 +1975,7 @@ GameObject:
   - component: {fileID: 1103820104}
   m_Layer: 0
   m_Name: '[CAMERA]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2698,7 +2742,7 @@ GameObject:
   - component: {fileID: 1631485707}
   m_Layer: 0
   m_Name: '[BACKGROUND]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2889,7 +2933,7 @@ GameObject:
   - component: {fileID: 1782218315}
   m_Layer: 0
   m_Name: '[CONTEXT]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3133,6 +3177,7 @@ Transform:
   - {fileID: 1271840494}
   - {fileID: 280063067}
   - {fileID: 1757289385}
+  - {fileID: 27840197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896286447
@@ -3193,7 +3238,7 @@ GameObject:
   - component: {fileID: 1896680501}
   m_Layer: 0
   m_Name: '[WORLD]'
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
