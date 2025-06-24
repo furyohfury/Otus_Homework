@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace Game
@@ -15,13 +14,13 @@ namespace Game
 		private float time;
 		private float baseIntensity;
 
-		void Start()
+		private void Start()
 		{
 			baseIntensity = light2D.intensity;
 			time = 0f;
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (duration <= 0f) return;
 
