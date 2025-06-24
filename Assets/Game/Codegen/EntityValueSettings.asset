@@ -21,7 +21,6 @@ MonoBehaviour:
   - Game
   - Atomic.Extensions
   - System.Collections.Generic
-  - UnityEngine.AddressableAssets
   categories:
   - name: Movement
     indexes:

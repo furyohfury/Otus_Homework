@@ -1,7 +1,6 @@
 ﻿using Atomic.Elements;
 using Atomic.Entities;
 using Atomic.Extensions;
-using UnityEngine.AddressableAssets;
 
 namespace Game
 {
@@ -10,7 +9,6 @@ namespace Game
 		private IEntity _characterEntity;
 		private IEvent<AbilityCardConfig> _pickupAbilityCardEvent;
 		private ReactiveList<IEntityAspect> _activeAbilityAspects;
-		private AssetReference _configAssetReference;
 
 		public void Init(IEntity entity)
 		{

@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 using SaveLoad;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 using Zenject;
 
@@ -42,8 +40,6 @@ namespace GameDebug
 
 		[SerializeField] [TabGroup("Adressables")]
 		private Image _adressableTestImage;
-		[SerializeField] [TabGroup("Adressables")]
-		private AssetReference _assetReference;
 
 		[TabGroup("SaveLoad|Lifecycle")] [ShowInInspector]
 		public GameState State => _gameStateManager.State;
@@ -221,24 +217,6 @@ namespace GameDebug
 				Debug.Log($"{pair.Value.GetType()}");
 			}
 		}
-
-		[Button] [TabGroup("Adressables")]
-		private async void LoadAsset()
-		{
-			AsyncOperationHandle<Sprite> handle = _assetReference.LoadAssetAsync<Sprite>();
-			var image = await handle.Task;
-			if (handle.Status == AsyncOperationStatus.Succeeded)
-			{
-				_adressableTestImage.sprite = image;
-			}
-		}
-
-		[Button] [TabGroup("Adressables")]
-		private void ReleaseAsset()
-		{
-			_assetReference.ReleaseAsset();
-		}
-
 
 		[Button] [TabGroup("Level")]
 		private void StartLevel()
