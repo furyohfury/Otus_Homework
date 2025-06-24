@@ -3,12 +3,12 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class InputMapsSwitcher : IInitializable, IDisposable
+	public sealed class InputMapsStateSwitcher : IInitializable, IDisposable
 	{
 		private readonly InputControls _inputControls;
 		private readonly GameStateManager _gameStateManager;
 
-		public InputMapsSwitcher(InputControls inputControls, GameStateManager gameStateManager)
+		public InputMapsStateSwitcher(InputControls inputControls, GameStateManager gameStateManager)
 		{
 			_inputControls = inputControls;
 			_gameStateManager = gameStateManager;

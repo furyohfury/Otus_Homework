@@ -12,8 +12,6 @@ namespace GameDebug
 
 		private void Awake()
 		{
-			Debug.LogError("Show console in build");
-			Debug.Log("SceneSwitchDebug Awake");
 			SceneManager.sceneLoaded += OnSceneLoaded;
 			DontDestroyOnLoad(gameObject);
 		}
@@ -29,7 +27,7 @@ namespace GameDebug
 			if (_switched == false && Keyboard.current.hKey.wasPressedThisFrame)
 			{
 				_switched = true;
-				LoadSceneSingle().Forget();
+				LoadSceneSingle();
 			}
 		}
 
@@ -46,13 +44,9 @@ namespace GameDebug
 			SceneManager.SetActiveScene(sceneByName);
 		}
 
-		private async UniTask LoadSceneSingle()
+		private void LoadSceneSingle()
 		{
-			var handle = SceneManager.LoadSceneAsync("GothicChurch", LoadSceneMode.Single);
-			while (handle.isDone == false)
-			{
-				await UniTask.Yield();
-			}
+			SceneManager.LoadScene("GothicChurch", LoadSceneMode.Single);
 		}
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

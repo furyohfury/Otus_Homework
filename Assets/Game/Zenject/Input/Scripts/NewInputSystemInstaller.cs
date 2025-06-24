@@ -37,7 +37,7 @@ namespace Game
 			         .To<RebindSaveLoader>()
 			         .AsCached();
 
-			Container.BindInterfacesAndSelfTo<InputMapsSwitcher>()
+			Container.BindInterfacesAndSelfTo<InputMapsStateSwitcher>()
 			         .AsSingle();
 		}
 	}

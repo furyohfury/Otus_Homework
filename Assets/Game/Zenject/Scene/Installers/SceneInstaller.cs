@@ -72,6 +72,9 @@ namespace Game
 		{
 			Container.BindInterfacesAndSelfTo<UIPauseController>()
 			         .AsSingle();
+
+			Container.BindInterfacesAndSelfTo<InputMapsLevelSwitcher>()
+			         .AsSingle().NonLazy();
 		}
 
 		private void InstallEntitiesSystem()
