@@ -8,15 +8,10 @@ namespace SaveLoad
 	{
 		public override void InstallBindings()
 		{
-#if UNITY_EDITOR
+			Debug.Log("Installing saveloadsystems");
 			Container.BindInterfacesAndSelfTo<GameRepository>()
 			         .AsSingle()
 			         .NonLazy();
-#else
-			Container.BindInterfacesAndSelfTo<CryptingGameRepository>()
-			         .AsSingle()
-			         .NonLazy();
-#endif
 
 			Container.BindInterfacesAndSelfTo<SaveLoadManager>()
 			         .AsSingle()
@@ -25,6 +20,7 @@ namespace SaveLoad
 			Container.BindInterfacesAndSelfTo<LaunchSaveLoadersController>()
 			         .AsSingle()
 			         .NonLazy();
+			Debug.Log("Successfully installed saveloadsystems");
 		}
 	}
 }

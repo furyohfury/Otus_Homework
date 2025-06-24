@@ -61,6 +61,7 @@ namespace Game
 
 #if UNITY_EDITOR
 		[Button]
+#endif
 		private void SetSpriteFromConfig()
 		{
 			if (_spriteRenderer.Length > 0)
@@ -68,6 +69,5 @@ namespace Game
 				_spriteRenderer[0].sprite = _abilityCardConfig.Sprite;
 			}
 		}
-#endif
 	}
 }

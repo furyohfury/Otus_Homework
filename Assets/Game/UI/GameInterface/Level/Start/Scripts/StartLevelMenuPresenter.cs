@@ -1,6 +1,6 @@
 ﻿using System;
 using Game;
-using SceneManagement;
+using SceneControls;
 using Zenject;
 
 namespace UI

@@ -3,7 +3,7 @@ using Game;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace SceneManagement
+namespace SceneControls
 {
 	public sealed class UnpauseOnSceneSwitchObserver : IInitializable, IDisposable
 	{

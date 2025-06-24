@@ -2,7 +2,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using Game;
-using SceneManagement;
+using SceneControls;
 using UnityEngine;
 using Zenject;
 using SceneNames = Game.SceneNames;
