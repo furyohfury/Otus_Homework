@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ProgressionModels;
@@ -11,6 +12,7 @@ namespace PlayFabSystem
 	{
 		public static string PlayerName;
 		public static bool IsLogged;
+		public static bool AttemptedLogin;
 
 		public static async UniTask Login(string username)
 		{
@@ -19,10 +21,11 @@ namespace PlayFabSystem
 				await PlayfabLogger.LoginWithUsername(username);
 				await PlayfabDisplayNameChanger.ChangeDisplayName(username);
 				PlayerName = username;
+				IsLogged = true;
 			}
 			finally
 			{
-				IsLogged = true;
+				AttemptedLogin = true;
 			}
 		}
 
