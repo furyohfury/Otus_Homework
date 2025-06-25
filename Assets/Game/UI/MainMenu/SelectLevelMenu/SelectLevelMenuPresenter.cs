@@ -10,11 +10,11 @@ namespace UI
 		private Dictionary<string, List<TimeSpan>> _savedResults;
 
 		private readonly LevelCardPresenterFactory _presenterFactory;
-		private readonly LevelsDataService _levelsDataService;
+		private readonly ILevelsDataService _levelsDataService;
 		private readonly List<LevelCardPresenter> _levelMiniaturePresenters = new();
 
 		[Inject]
-		public SelectLevelMenuPresenter(LevelCardPresenterFactory presenterFactory, LevelsDataService levelsDataService)
+		public SelectLevelMenuPresenter(LevelCardPresenterFactory presenterFactory, ILevelsDataService levelsDataService)
 		{
 			_presenterFactory = presenterFactory;
 			_levelsDataService = levelsDataService;

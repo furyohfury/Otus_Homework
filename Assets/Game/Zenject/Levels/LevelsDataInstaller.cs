@@ -8,6 +8,8 @@ namespace Game
 	{
 		[SerializeField]
 		private LevelConfig[] _cupsTimesConfigs;
+		[SerializeField] 
+		private PlayfabLevelNames _playfabLevelNames;
 
 		public override void InstallBindings()
 		{
@@ -15,7 +17,16 @@ namespace Game
 			         .FromInstance(_cupsTimesConfigs)
 			         .AsSingle();
 
-			Container.Bind<LevelsDataService>()
+			Container.Bind<PlayfabLevelNames>()
+			         .FromInstance(_playfabLevelNames)
+			         .AsSingle();
+			
+			// Container.Bind<ILevelsDataService>()
+			//          .To<LevelsDataService>()
+			//          .AsSingle();
+
+			Container.Bind<ILevelsDataService>()
+			         .To<PlayfabLevelsDataService>()
 			         .AsSingle();
 		}
 	}

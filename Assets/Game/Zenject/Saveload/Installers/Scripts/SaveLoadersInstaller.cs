@@ -30,8 +30,12 @@ namespace SaveLoad
 			         .AsCached()
 			         .WithArguments(_abilityCardPrefab, _abilityCardConfigs);
 
+			// Container.Bind<ISaveLoader>()
+			//          .To<LevelResultsSaveLoader>()
+			//          .AsCached();
+			
 			Container.Bind<ISaveLoader>()
-			         .To<LevelResultsSaveLoader>()
+			         .To<PlayfabLevelResultsSaveLoader>()
 			         .AsCached();
 
 			Container.Bind<ISaveLoader>()

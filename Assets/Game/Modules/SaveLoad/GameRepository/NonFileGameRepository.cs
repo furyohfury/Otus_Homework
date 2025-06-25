@@ -5,7 +5,7 @@ using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class NetworkGameRepository : IGameRepository, IInitializable
+	public sealed class NonFileGameRepository : IGameRepository, IInitializable
 	{
 		public IReadOnlyDictionary<string, string> GameState => _gameState;
 		private Dictionary<string, string> _gameState = new();

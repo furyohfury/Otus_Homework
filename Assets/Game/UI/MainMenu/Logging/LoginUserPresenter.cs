@@ -39,6 +39,7 @@ namespace UI
 				try
 				{
 					await PlayfabManager.Login(usernameFieldText);
+					_loginUserView.gameObject.SetActive(false);
 					ContinueLogged();
 					return;
 				}
@@ -46,7 +47,7 @@ namespace UI
 				{
 				}
 			}
-
+			_loginUserView.gameObject.SetActive(false);
 			ContinueUnlogged();
 		}
 

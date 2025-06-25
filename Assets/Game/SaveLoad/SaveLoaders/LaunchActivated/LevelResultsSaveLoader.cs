@@ -4,9 +4,9 @@ using Game;
 
 namespace SaveLoad
 {
-	public sealed class LevelResultsSaveLoader : SaveLoader<IList<LevelData>, LevelsDataService>
+	public sealed class LevelResultsSaveLoader : SaveLoader<IList<LevelData>, ILevelsDataService>
 	{
-		protected override IList<LevelData> ConvertToData(LevelsDataService service)
+		protected override IList<LevelData> ConvertToData(ILevelsDataService service)
 		{
 			var names = service.GetLevelNames();
 			var savedData = new List<LevelData>();
@@ -26,7 +26,7 @@ namespace SaveLoad
 			return savedData;
 		}
 
-		protected override void SetupData(LevelsDataService service, IList<LevelData> data)
+		protected override void SetupData(ILevelsDataService service, IList<LevelData> data)
 		{
 			for (int i = 0, length = data.Count; i < length; i++)
 			{

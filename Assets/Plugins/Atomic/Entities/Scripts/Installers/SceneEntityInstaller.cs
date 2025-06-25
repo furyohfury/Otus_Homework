@@ -2,6 +2,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
@@ -9,6 +10,7 @@ using Sirenix.OdinInspector;
 
 namespace Atomic.Entities
 {
+    [MovedFrom("Atomic/Entities")]
     [AddComponentMenu("Atomic/Entities/Entity Installer")]
     public class SceneEntityInstaller : SceneEntityInstallerBase
     {

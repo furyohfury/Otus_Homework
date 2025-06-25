@@ -8,13 +8,20 @@ namespace SaveLoad
 	{
 		public override void InstallBindings()
 		{
+#if UNITY_WEBGL
+			Container.BindInterfacesAndSelfTo<NonFileGameRepository>()
+			         .AsSingle();
+#else
 			Container.BindInterfacesAndSelfTo<GameRepository>()
 			         .AsSingle();
-
+#endif
 			Container.BindInterfacesAndSelfTo<SaveLoadManager>()
 			         .AsSingle();
 
 			Container.BindInterfacesAndSelfTo<LaunchSaveLoadersController>()
+			         .AsSingle();
+
+			Container.BindInterfacesAndSelfTo<PlayfabLoggedObserver>()
 			         .AsSingle();
 		}
 	}

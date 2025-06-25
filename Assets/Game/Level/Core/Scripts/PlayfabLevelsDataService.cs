@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PlayFabSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Game
 {
-	public sealed class LevelsDataService : ILevelsDataService
+	public sealed class PlayfabLevelsDataService : ILevelsDataService
 	{
 		private readonly Dictionary<string, LevelConfig> _configs;
+		private readonly Dictionary<string, List<TimeSpan>> _results = new();
 
-		private readonly Dictionary<string, List<TimeSpan>> _results = new(); // TODO mb separate class for results?
+		private readonly PlayfabLevelNames _playfabLevelNames;
 
 		[Inject]
-		public LevelsDataService(LevelConfig[] configs)
+		public PlayfabLevelsDataService(LevelConfig[] configs, PlayfabLevelNames playfabLevelNames)
 		{
+			_playfabLevelNames = playfabLevelNames;
 			_configs = configs.ToDictionary(
 				config => config.LevelName,
 				config => config);
@@ -51,11 +54,6 @@ namespace Game
 			return currentLevel;
 		}
 
-		public void SetResult(string levelName, List<TimeSpan> results)
-		{
-			_results[levelName] = results;
-		}
-
 		public bool TryGetLevelTargetTimes(string levelName, out Dictionary<Cups, TimeSpan> targetTimes)
 		{
 			if (_configs.TryGetValue(levelName, out LevelConfig config) == false)
@@ -70,6 +68,21 @@ namespace Game
 			}
 
 			return true;
+		}
+
+		public void SetResult(string levelName, List<TimeSpan> results)
+		{
+			_results[levelName] = results;
+			var levelStatName = _playfabLevelNames.PlayfabStatisticName[levelName];
+
+			var result = results
+			             .OrderBy(result => result)
+			             .FirstOrDefault(result => result != TimeSpan.Zero)
+			             .Milliseconds;
+			if (result != default)
+			{
+				PlayfabManager.SetScoreToLevel(levelStatName, result);
+			}
 		}
 
 		public bool TryGetLevelResults(string levelName, out List<TimeSpan> levelResults)

@@ -10,14 +10,14 @@ namespace UI
 		private readonly FinishLevelCupsListView _finishLevelCupsListView;
 		private readonly LevelManager _levelManager;
 		private readonly LevelTimer _levelTimer;
-		private readonly LevelsDataService _levelsDataService;
+		private readonly ILevelsDataService _levelsDataService;
 
 		[Inject]
 		public FinishLevelCupsListPresenter(
 			FinishLevelCupsListView finishLevelCupsListView,
 			LevelManager levelManager,
 			LevelTimer levelTimer,
-			LevelsDataService levelsDataService)
+			ILevelsDataService levelsDataService)
 		{
 			_finishLevelCupsListView = finishLevelCupsListView;
 			_levelManager = levelManager;

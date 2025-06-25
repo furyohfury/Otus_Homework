@@ -9,13 +9,13 @@ namespace UI
 {
 	public sealed class LevelCardPresenterFactory
 	{
-		private readonly LevelsDataService _levelsDataService;
+		private readonly ILevelsDataService _levelsDataService;
 
 		private readonly Dictionary<Cups, Sprite> _cupsSprites;
 
 		[Inject]
 		public LevelCardPresenterFactory(IGameRepository gameRepository, Dictionary<Cups, Sprite> cupsSprites
-			, LevelsDataService levelsDataService)
+			, ILevelsDataService levelsDataService)
 		{
 			_cupsSprites = cupsSprites;
 			_levelsDataService = levelsDataService;

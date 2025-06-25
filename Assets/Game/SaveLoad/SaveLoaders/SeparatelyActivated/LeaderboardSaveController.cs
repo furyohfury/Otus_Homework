@@ -11,12 +11,12 @@ namespace SaveLoad
 	public sealed class LeaderboardSaveController : IInitializable, IDisposable
 	{
 		private readonly Leaderboard _leaderboard;
-		private readonly LevelsDataService _levelsDataService;
+		private readonly ILevelsDataService _levelsDataService;
 		private readonly SaveLoadManager _saveLoadManager;
 		private string _levelName;
 
 		[Inject]
-		public LeaderboardSaveController(Leaderboard leaderboard, LevelsDataService levelsDataService, SaveLoadManager saveLoadManager)
+		public LeaderboardSaveController(Leaderboard leaderboard, ILevelsDataService levelsDataService, SaveLoadManager saveLoadManager)
 		{
 			_leaderboard = leaderboard;
 			_levelsDataService = levelsDataService;
