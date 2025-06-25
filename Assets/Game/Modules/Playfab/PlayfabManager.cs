@@ -9,18 +9,27 @@ namespace PlayFabSystem
 {
 	public static class PlayfabManager
 	{
+		public static string PlayerName;
+		public static bool IsLogged;
+
 		public static async UniTask Login(string username)
 		{
-			await PlayfabLogger.LoginWithUsername(username);
-
-			await PlayfabDisplayNameChanger.ChangeDisplayName(username);
+			try
+			{
+				await PlayfabLogger.LoginWithUsername(username);
+				await PlayfabDisplayNameChanger.ChangeDisplayName(username);
+				PlayerName = username;
+			}
+			finally
+			{
+				IsLogged = true;
+			}
 		}
 
-		public static void GetLeaderboard()
+		public static UniTask<List<EntityLeaderboardEntry>> GetLeaderboard(string sceneName)
 		{
-			//tODO
+			return PlayfabLeaderboardSystem.GetGlobalLeaderboard(sceneName);
 		}
-
 
 		private static void SetScoreToGothicChurch(string statName, int time)
 		{
