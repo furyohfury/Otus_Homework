@@ -1,44 +1,26 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
+using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class GameRepository : IGameRepository
+	public sealed class NetworkGameRepository : IGameRepository, IInitializable
 	{
 		public IReadOnlyDictionary<string, string> GameState => _gameState;
-
-		private const string SAVE_FILE_NAME = "Savefile.json";
-		private static string SaveFilePath => string.Concat(Application.persistentDataPath, "/", SAVE_FILE_NAME);
 		private Dictionary<string, string> _gameState = new();
+
+		public void Initialize()
+		{
+			_gameState = new Dictionary<string, string>();
+		}
 
 		public void LoadState()
 		{
-			if (File.Exists(SaveFilePath))
-			{
-				var savedState = File.ReadAllText(SaveFilePath);
-				_gameState = JsonConvert.DeserializeObject<Dictionary<string, string>>(savedState, new JsonSerializerSettings
-				                                                                                   {
-					                                                                                   ReferenceLoopHandling =
-						                                                                                   ReferenceLoopHandling.Ignore
-					                                                                                   , TypeNameHandling = TypeNameHandling.Objects
-				                                                                                   });
-			}
-			else
-			{
-				_gameState = new Dictionary<string, string>();
-			}
 		}
 
 		public void SaveState()
 		{
-			var serializedState = JsonConvert.SerializeObject(_gameState, new JsonSerializerSettings
-			                                                              {
-				                                                              ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-				                                                              , TypeNameHandling = TypeNameHandling.Objects
-			                                                              });
-			File.WriteAllText(SaveFilePath, serializedState);
 		}
 
 		public T GetData<T>()
