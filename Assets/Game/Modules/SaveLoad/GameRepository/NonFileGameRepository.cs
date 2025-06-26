@@ -44,7 +44,7 @@ namespace SaveLoad
 			}
 
 			value = default;
-			Debug.LogWarning($"Couldn't get data of {typeof(T).FullName} from save repository");
+			Debug.LogWarning($"Couldn't get data of {typeof(T).Name} from save repository");
 			return false;
 		}
 

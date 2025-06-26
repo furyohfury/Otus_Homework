@@ -77,8 +77,7 @@ namespace Game
 
 			var result = results
 			             .OrderBy(result => result)
-			             .FirstOrDefault(result => result != TimeSpan.Zero)
-			             .Milliseconds;
+			             .FirstOrDefault(result => result != TimeSpan.Zero);
 			if (result != default)
 			{
 				PlayfabManager.SetScoreToLevel(levelStatName, result);

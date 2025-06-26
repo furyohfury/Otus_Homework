@@ -38,16 +38,26 @@ namespace SaveLoad
 		{
 			for (int i = 0, length = data.Count; i < length; i++)
 			{
-				var playfabLevelName = _playfabLevelNames.PlayfabStatisticName[data[i].Name];
-				TimeSpan serverResultForLevel = await PlayfabManager.GetResultForLevel(playfabLevelName);
-
 				List<TimeSpan> savedResults = data[i].Results;
 				if (savedResults == null)
 				{
-					savedResults = new List<TimeSpan>() { serverResultForLevel };
+					savedResults = new List<TimeSpan>();
 				}
 
-				service.SetResult(data[i].Name, savedResults);
+				var playfabLevelName = _playfabLevelNames.PlayfabStatisticName[data[i].Name];
+				try
+				{
+					TimeSpan serverResultForLevel = await PlayfabManager.GetResultForLevel(playfabLevelName);
+					savedResults.Add(serverResultForLevel);
+				}
+				catch
+				{
+					// ignored
+				}
+				finally
+				{
+					service.SetResult(data[i].Name, savedResults);
+				}
 			}
 		}
 
@@ -57,10 +67,20 @@ namespace SaveLoad
 			for (int i = 0, length = levelNames.Length; i < length; i++)
 			{
 				var playfabLevelName = _playfabLevelNames.PlayfabStatisticName[levelNames[i]];
-				TimeSpan serverResultForLevel = await PlayfabManager.GetResultForLevel(playfabLevelName);
-
-				var results = new List<TimeSpan>() { serverResultForLevel };
-				service.SetResult(levelNames[i], results);
+				var results = new List<TimeSpan>();
+				try
+				{
+					TimeSpan serverResultForLevel = await PlayfabManager.GetResultForLevel(playfabLevelName);
+					results.Add(serverResultForLevel);
+				}
+				catch
+				{
+					// ignored
+				}
+				finally
+				{
+					service.SetResult(levelNames[i], results);
+				}
 			}
 		}
 	}

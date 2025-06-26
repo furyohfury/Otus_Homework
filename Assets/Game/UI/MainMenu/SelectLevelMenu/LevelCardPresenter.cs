@@ -51,7 +51,7 @@ namespace UI
 
 		private void InitCupAndBestTime()
 		{
-			if (_savedResults == null)
+			if (_savedResults == null || _savedResults.Count <= 0)
 			{
 				return;
 			}

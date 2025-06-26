@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ObservableCollections;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -32,7 +33,13 @@ namespace Game
 
 		public void SetLeaderboard(IList<TimeSpan> times)
 		{
-			for (int i = 0, count = _times.Count; i < count; i++)
+			if (times == null)
+			{
+				return;
+			}
+			
+			var length = Mathf.Min(_times.Count, times.Count);
+			for (int i = 0; i < length; i++)
 			{
 				_times[i] = times[i];
 			}

@@ -34,9 +34,14 @@ namespace PlayFabSystem
 			return PlayfabLeaderboardSystem.GetGlobalLeaderboard(sceneName);
 		}
 
-		public static void SetScoreToLevel(string level, int time)
+		// public static void SetScoreToLevel(string level, int time)
+		// {
+		// 	PlayfabLeaderboardSystem.SetScoreToLevel(level, time);
+		// }
+		
+		public static void SetScoreToLevel(string level, TimeSpan time)
 		{
-			PlayfabLeaderboardSystem.SetScoreToLevel(level, time);
+			PlayfabLeaderboardSystem.SetScoreToLevel(level, time.Ticks);
 		}
 
 		public static UniTask<TimeSpan> GetResultForLevel(string level)
