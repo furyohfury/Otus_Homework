@@ -198,7 +198,7 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""ed84f7c5-2a93-4419-8e27-951784e6c4f3"",
-                    ""path"": ""<XInputController>/leftStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XboxGamepad"",
@@ -220,7 +220,7 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""9c5f4932-cf6d-4409-a3ec-a69aa07140fb"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XboxGamepad"",
@@ -242,7 +242,7 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""31376f97-32ad-4a2d-b498-4c352365a153"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XboxGamepad"",
@@ -264,7 +264,7 @@ namespace Game
                 {
                     ""name"": """",
                     ""id"": ""f0673289-c86e-4f5c-9ff2-b9789ac92a62"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XboxGamepad"",
