@@ -6,7 +6,7 @@ using Zenject;
 
 namespace SaveLoad
 {
-	public sealed class AbilityCardsSaveLoader : SaveLoader<IEnumerable<AbilityCardData>, AbilityCardsService>
+	public sealed class AbilityCardsSaveLoader : SaveLoader<AbilityCardData[], AbilityCardsService>
 	{
 		private readonly SceneEntity _prefab;
 		private readonly AbilityCardConfigs _abilityCardConfigs;
@@ -18,7 +18,7 @@ namespace SaveLoad
 			_abilityCardConfigs = abilityCardConfigs;
 		}
 
-		protected override IEnumerable<AbilityCardData> ConvertToData(AbilityCardsService service)
+		protected override AbilityCardData[] ConvertToData(AbilityCardsService service)
 		{
 			var abilityCards = service.GetAbilityCards();
 			AbilityCardData[] data = new AbilityCardData[abilityCards.Count];
@@ -39,21 +39,20 @@ namespace SaveLoad
 			return data;
 		}
 
-		protected override void SetupData(AbilityCardsService service, IEnumerable<AbilityCardData> data)
+		protected override void SetupData(AbilityCardsService service, AbilityCardData[] data)
 		{
 			List<IEntity> sceneCards = service.GetAbilityCards().ToList();
-			var dataArray = data.ToArray();
 
 			foreach (IEntity sceneCard in sceneCards)
 			{
-				bool cardIsSaved = dataArray.Any(cardData => cardData.InstanceID == sceneCard.InstanceId);
+				bool cardIsSaved = data.Any(cardData => cardData.InstanceID == sceneCard.InstanceId);
 				if (cardIsSaved == false)
 				{
 					DestroyCard(sceneCard);
 				}
 			}
 
-			foreach (AbilityCardData cardData in dataArray)
+			foreach (AbilityCardData cardData in data)
 			{
 				var existingCard = sceneCards.SingleOrDefault(card => card.InstanceId == cardData.InstanceID);
 				if (existingCard != default)

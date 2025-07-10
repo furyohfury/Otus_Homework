@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SaveLoad
 {
-	public sealed class EnemiesSaveLoader : SaveLoader<IEnumerable<EnemyData>, EnemyService>
+	public sealed class EnemiesSaveLoader : SaveLoader<EnemyData[], EnemyService>
 	{
 		private readonly Dictionary<string, SceneEntity> _prefabs;
 
@@ -15,10 +15,11 @@ namespace SaveLoad
 			_prefabs = prefabs;
 		}
 
-		protected override IEnumerable<EnemyData> ConvertToData(EnemyService service)
+		protected override EnemyData[] ConvertToData(EnemyService service)
 		{
 			var enemies = service.GetEnemies(true);
-			var saveData = new List<EnemyData>(enemies.Count);
+			var saveData = new EnemyData[enemies.Count];
+			int index = 0;
 			foreach (var enemy in enemies)
 			{
 				Transform enemyTransform = enemy.GetVisualTransform();
@@ -32,14 +33,13 @@ namespace SaveLoad
 					enemyTransform.position,
 					enemyTransform.rotation,
 					enemyHealth);
-
-				saveData.Add(enemyData);
+				saveData[index++] = enemyData;
 			}
 
 			return saveData;
 		}
 
-		protected override void SetupData(EnemyService service, IEnumerable<EnemyData> data)
+		protected override void SetupData(EnemyService service, EnemyData[] data)
 		{
 			IReadOnlyCollection<IEntity> sceneEnemies = service.GetEnemies(true);
 			if (sceneEnemies == null || sceneEnemies.Count <= 0)

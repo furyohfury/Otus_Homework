@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SaveLoad
 {
-	public sealed class LevelEntitiesSaveLoader : SaveLoader<IEnumerable<LevelEntityData>, LevelEntitiesService>
+	public sealed class LevelEntitiesSaveLoader : SaveLoader<LevelEntityData[], LevelEntitiesService>
 	{
 		private readonly Dictionary<string, SceneEntity> _prefabs;
 
@@ -15,7 +15,7 @@ namespace SaveLoad
 			_prefabs = prefabs;
 		}
 
-		protected override IEnumerable<LevelEntityData> ConvertToData(LevelEntitiesService service)
+		protected override LevelEntityData[] ConvertToData(LevelEntitiesService service)
 		{
 			IReadOnlyList<IEntity> entities = service.GetLevelEntities();
 			LevelEntityData[] data = new LevelEntityData[entities.Count];
@@ -35,29 +35,28 @@ namespace SaveLoad
 			return data;
 		}
 
-		protected override void SetupData(LevelEntitiesService service, IEnumerable<LevelEntityData> data)
+		protected override void SetupData(LevelEntitiesService service, LevelEntityData[] data)
 		{
 			var sceneEntities = service.GetLevelEntities().ToArray();
-			IEnumerable<LevelEntityData> levelEntityDatas = data.ToArray();
 
 			foreach (var sceneEntity in sceneEntities)
 			{
-				if (levelEntityDatas.Any(entityData => entityData.InstanceId == sceneEntity.InstanceId) == false)
+				if (data.Any(entityData => entityData.InstanceId == sceneEntity.InstanceId) == false)
 				{
 					DestroyEntity(sceneEntity);
 				}
 			}
 
-			foreach (var entityData in levelEntityDatas)
+			for (int i = 0, count = data.Length; i < count; i++)
 			{
-				var sceneEntity = sceneEntities.SingleOrDefault(sceneEnemy => sceneEnemy.InstanceId == entityData.InstanceId);
+				var sceneEntity = sceneEntities.SingleOrDefault(sceneEnemy => sceneEnemy.InstanceId == data[i].InstanceId);
 				if (sceneEntity == default)
 				{
-					CreateNewEntity(entityData, service.Container);
+					CreateNewEntity(data[i], service.Container);
 				}
 				else
 				{
-					SetupExistingEntity(sceneEntity, entityData);
+					SetupExistingEntity(sceneEntity, data[i]);
 				}
 			}
 		}
