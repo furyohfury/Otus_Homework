@@ -22,27 +22,17 @@ namespace Game
 			}
 		}
 
-		public static Vector2 RightStickDirection
-		{
-			get
-			{
-				if (Gamepad.current == null)
-				{
-					return Vector2.zero;
-				}
-
-				var val = Gamepad.current.rightStick.ReadValue();
-				return val.normalized;
-			}
-		}
+		public Vector2 RightStickDirection => _rightStickDirection;
 
 		public event Action<Vector2> OnMove;
 		public event Action OnJumped;
 		public event Action OnAttacked;
 		public event Action OnAbilityUsed;
+		public event Action<Vector2> OnAimed;
 		public event Action OnPaused;
 
 		private readonly InputControls _inputControls;
+		private Vector2 _rightStickDirection;
 		private bool _attackPressed;
 
 		[Inject]
@@ -102,6 +92,13 @@ namespace Game
 			{
 				OnPaused?.Invoke();
 			}
+		}
+
+		void InputControls.IGameplayActions.OnAim(InputAction.CallbackContext context)
+		{
+			var aim = context.ReadValue<Vector2>();
+			OnAimed?.Invoke(aim);
+			_rightStickDirection = aim;
 		}
 
 		public void Dispose()
