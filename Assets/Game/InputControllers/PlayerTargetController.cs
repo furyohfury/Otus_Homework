@@ -5,75 +5,61 @@ using Zenject;
 
 namespace Game
 {
-	public sealed class PlayerTargetController : IInitializable, IGameTickable
+	public sealed class PlayerTargetController : IInitializable
 	{
 		private readonly PlayerService _playerService;
 		private readonly Camera _camera;
-		private CurrentDevice _currentDevice = CurrentDevice.Mouse;
-		private Vector2 _mouseCachedPos;
-		private Vector2 _gamepadRightStickCachedDirection;
+		private readonly InputReader _inputReader;
 
-		public PlayerTargetController(Camera camera, PlayerService playerService)
+		public PlayerTargetController(Camera camera, PlayerService playerService, InputReader inputReader)
 		{
 			_camera = camera;
 			_playerService = playerService;
+			_inputReader = inputReader;
 		}
 
 		public void Initialize()
 		{
 			var playerEntity = _playerService.Player;
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
 			AddMouseCursorAsTarget(playerEntity);
-		}
-
-		public void Tick(float deltaTime)
-		{
-			var rightStickDirection = InputReader.RightStickDirection;
-			if (_currentDevice == CurrentDevice.Gamepad && InputReader.MousePosition != _mouseCachedPos)
-			{
-				_currentDevice = CurrentDevice.Mouse;
-				AddMouseCursorAsTarget(_playerService.Player);
-			}
-			else if (_currentDevice == CurrentDevice.Mouse && rightStickDirection != _gamepadRightStickCachedDirection)
-			{
-				_currentDevice = CurrentDevice.Gamepad;
-				AddGamepadStickAsTarget(_playerService.Player);
-			}
-
-			_mouseCachedPos = InputReader.MousePosition;
-			if (rightStickDirection != Vector2.zero)
-			{
-				_gamepadRightStickCachedDirection = rightStickDirection;
-			}
+#endif
+#if UNITY_ANDROID
+			AddRightStickAsTarget(playerEntity);
+#endif
 		}
 
 		private void AddMouseCursorAsTarget(IEntity playerEntity)
 		{
 			var target = new BaseFunction<Vector2>(GetMouseWorldPosition);
-			if (playerEntity.AddTarget(target) == false)
-			{
-				playerEntity.SetTarget(target);
-			}
+			SetTargetToEntity(playerEntity, target);
 		}
 
-		private void AddGamepadStickAsTarget(IEntity playerEntity)
+		private void AddRightStickAsTarget(IEntity player)
 		{
-			var target = new BaseFunction<Vector2>(GetRightStickPos);
-			if (playerEntity.AddTarget(target) == false)
-			{
-				playerEntity.SetTarget(target);
-			}
+			Vector2 lastValidTarget = Vector2.zero;
+
+			var target = new BaseFunction<Vector2>(
+				() =>
+				{
+					var stickDirection = _inputReader.RightStickDirection;
+
+					if (stickDirection != Vector2.zero)
+					{
+						lastValidTarget = (Vector2)player.GetVisualTransform().position + stickDirection * 100f;
+					}
+
+					return lastValidTarget;
+				});
+			SetTargetToEntity(player, target);
 		}
 
-		private Vector2 GetRightStickPos()
+		private static void SetTargetToEntity(IEntity entity, BaseFunction<Vector2> target)
 		{
-			var rightStickDirection = InputReader.RightStickDirection * 5;
-			Debug.Log(rightStickDirection);
-			if (rightStickDirection != Vector2.zero)
+			if (entity.AddTarget(target) == false)
 			{
-				return (Vector2)_playerService.Player.GetVisualTransform().position + rightStickDirection;
+				entity.SetTarget(target);
 			}
-
-			return (Vector2)_playerService.Player.GetVisualTransform().position + _gamepadRightStickCachedDirection;
 		}
 
 		private Vector2 GetMouseWorldPosition()
@@ -86,12 +72,6 @@ namespace Game
 				cameraOffset);
 
 			return _camera.ScreenToWorldPoint(mouseOffsetPosition);
-		}
-
-		private enum CurrentDevice
-		{
-			Mouse
-			, Gamepad
 		}
 	}
 }
