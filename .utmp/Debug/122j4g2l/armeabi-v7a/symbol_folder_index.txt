@@ -1,0 +1,1 @@
+E:\Programs\Unity\Projects\Otus_Homework\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\build\intermediates\cxx\Debug\122j4g2l\obj\armeabi-v7a
