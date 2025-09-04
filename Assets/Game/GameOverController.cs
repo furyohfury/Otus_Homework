@@ -1,9 +1,11 @@
 using System;
+using EventBus;
+using Game.EventBus;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace EventBus
+namespace Game
 {
 	public sealed class GameOverController : IInitializable, IDisposable
 	{

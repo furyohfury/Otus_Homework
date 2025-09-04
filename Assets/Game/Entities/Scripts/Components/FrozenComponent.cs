@@ -1,7 +1,8 @@
 using System;
+using Entities;
 using UnityEngine;
 
-namespace Entities
+namespace EventBus
 {
 	[Serializable]
 	public sealed class FrozenComponent : IComponent

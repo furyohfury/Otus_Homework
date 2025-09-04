@@ -1,20 +1,18 @@
 using Entities;
+using EventBus;
 
-namespace EventBus
+public sealed class CurrentHeroService
 {
-	public sealed class CurrentHeroService
+	public HeroEntity CurrentHero { get; private set; }
+	public Player CurrentPlayer { get; private set; }
+
+	public void SetCurrentHero(HeroEntity heroEntity)
 	{
-		public HeroEntity CurrentHero { get; private set; }
-		public Player CurrentPlayer { get; private set; }
+		CurrentHero = heroEntity;
+	}
 
-		public void SetCurrentHero(HeroEntity heroEntity)
-		{
-			CurrentHero = heroEntity;
-		}
-
-		public void SetCurrentPlayer(Player player)
-		{
-			CurrentPlayer = player;
-		}
+	public void SetCurrentPlayer(Player player)
+	{
+		CurrentPlayer = player;
 	}
 }

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace EventBus
 {
-	public sealed class EndOfTurnTask : EventTask
+	public sealed class EndOfTurnTask : EventTask // TODO works before destroyed
 	{
 		private readonly CurrentHeroService _currentHeroService;
 		private readonly EventBus _eventBus;

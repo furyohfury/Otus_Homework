@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using EventBus;
+using UnityEngine;
 using Zenject;
 
-namespace EventBus
+namespace Entities
 {
 	public sealed class FireProjectileVisualHandler : BaseHandler<FireProjectileVisualEvent>
 	{
@@ -9,7 +10,7 @@ namespace EventBus
 		private readonly Transform _worldTransform;
 
 		[Inject]
-		public FireProjectileVisualHandler(EventBus eventBus, VisualPipeline visualPipeline,
+		public FireProjectileVisualHandler(EventBus.EventBus eventBus, VisualPipeline visualPipeline,
 			Transform worldTransform) :
 			base(eventBus)
 		{

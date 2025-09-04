@@ -47,7 +47,7 @@ namespace EventBus
 			else
 			{
 				_eventBus.RaiseEvent(new AttackEvent(currentHero,
-					hero.GetComponent<HeroEntity>()));
+					hero.GetComponent<HeroEntity>())); // TODO getcomp is cringe but works for now
 			}
 
 			Finish();

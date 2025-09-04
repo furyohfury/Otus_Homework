@@ -26,11 +26,11 @@ namespace EventBus
 
 			if (Random.value > evt.Probability && availableTargets.Count <= 1)
 			{
-				EventBus.RaiseEvent(new AttackEvent(currentHero, evt.InitialTarget.GetComponent<Entity>()));
+				EventBus.RaiseEvent(new AttackEvent(currentHero, evt.InitialTarget.GetComponent<HeroEntity>()));
 			}
 			else
 			{
-				Entity newTarget;
+				HeroEntity newTarget;
 				do
 				{
 					var index = Random.Range(0, availableTargets.Count - 1);

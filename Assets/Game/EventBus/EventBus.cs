@@ -43,6 +43,7 @@ namespace EventBus
 
 			_isRunning = true;
 
+			// var key = typeof(TEvent);
 			var key = evt.GetType();
 			Debug.Log($"Raise event {key.Name}");
 
