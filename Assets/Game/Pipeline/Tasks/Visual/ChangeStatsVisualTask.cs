@@ -1,5 +1,8 @@
+using System;
+using System.Threading.Tasks;
 using Entities;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace EventBus
 {
@@ -14,7 +17,7 @@ namespace EventBus
 			_audioPlayer = audioPlayer;
 		}
 
-		protected override void OnRun()
+		protected override async void OnRun()
 		{
 			Debug.Log("ChangeStatsVisualTask OnRun");
 			var stats = _target.GetData<StatsComponent>();
@@ -29,7 +32,9 @@ namespace EventBus
 				if (clips != null)
 				{
 					var randomIndex = Random.Range(0, clips.Length);
-					_audioPlayer.PlaySound(clips[randomIndex]);
+					var clip = clips[randomIndex];
+					_audioPlayer.PlaySound(clip);
+					await Task.Delay(TimeSpan.FromSeconds(clip.length));
 				}
 			}
 

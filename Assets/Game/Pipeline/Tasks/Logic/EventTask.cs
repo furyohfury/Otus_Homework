@@ -17,7 +17,6 @@ namespace EventBus
 			if (_onComplete is not null)
 			{
 				_onComplete.Invoke();
-				// _onComplete = null;
 			}
 
 			OnFinish();
